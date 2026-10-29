@@ -3,6 +3,7 @@
 import {
   bagiPeran, cekPemenang, MAX_PEMAIN, tambahSkor, tebakanBenar, urutanBicara, validasiSetup, type Rng,
 } from '../game';
+import { cekPetunjuk, MAKS_PETUNJUK } from '../petunjuk';
 import type { Pemain } from '../types';
 import {
   BATAS_OFFLINE_MS, VERSI_PROTOKOL,
@@ -148,6 +149,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
         siap: [],
         urutan: [],
         giliran: 0,
+        petunjuk: [],
         suara: {},
         kandidat: [],
         putaranVote: 1,
@@ -168,17 +170,25 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (!g || g.fase !== 'kata') return tetap();
       return { state: keDiskusi(state, g.ronde, rng) };
     }
-    case 'selesaiBicara':
+    case 'petunjuk': {
+      if (!g || g.fase !== 'diskusi') return tetap('Belum waktunya mengetik petunjuk.');
+      if (g.urutan[g.giliran] !== dari) return tetap('Belum giliranmu mengetik petunjuk.');
+      if (g.petunjuk.some((e) => e.pemain === dari && e.ronde === g.ronde)) return tetap('Kamu sudah mengirim petunjuk di ronde ini.');
+      const cek = cekPetunjuk(aksi.teks, kataMilik(g, dari), g.petunjuk.map((e) => e.teks));
+      // Galat hanya dikirim ke pengirim (lewat `tolak`); state tidak berubah sehingga tidak ada yang disiarkan.
+      if ('galat' in cek) return tetap(cek.galat);
+      return { state: majuGiliran(state, { pemain: dari, ronde: g.ronde, teks: cek.teks, waktu: ctx.now }) };
+    }
+    case 'sudahBicara':
     case 'lewatiGiliran': {
       if (!g || g.fase !== 'diskusi' || g.giliran >= g.urutan.length) return tetap();
-      if (aksi.jenis === 'selesaiBicara' && g.urutan[g.giliran] !== dari) return tetap();
-      return { state: { ...state, game: { ...g, giliran: g.giliran + 1 } } };
+      if (aksi.jenis === 'sudahBicara' && g.urutan[g.giliran] !== dari) return tetap('Belum giliranmu.');
+      // Sudah bicara (pemain sendiri) atau dilewati host: giliran dianggap selesai, tidak ada entri di riwayat.
+      return { state: majuGiliran(state, null) };
     }
     case 'mulaiVote': {
       if (!g || g.fase !== 'diskusi') return tetap();
-      return {
-        state: { ...state, game: { ...g, fase: 'vote', suara: {}, kandidat: pesertaHidup(g), putaranVote: 1, hasilVote: null } },
-      };
+      return { state: keVote(state) };
     }
     case 'vote': {
       if (!g || g.fase !== 'vote') return tetap();
@@ -217,6 +227,25 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
     }
   }
   return tetap();
+}
+
+/** Kata rahasia pemain (null untuk Mr. White). Hanya dipakai di host untuk validasi petunjuk. */
+function kataMilik(g: GameOnline, id: string): string | null {
+  const peran = g.peran[id];
+  return peran === 'civilian' ? g.pasangan.civilian : peran === 'undercover' ? g.pasangan.undercover : null;
+}
+
+/** Catat petunjuk (jika ada), pindah ke pemain berikutnya, dan otomatis ke voting setelah giliran terakhir. */
+function majuGiliran(state: StateHost, entri: GameOnline['petunjuk'][number] | null): StateHost {
+  const g = state.game as GameOnline;
+  const petunjuk = entri ? [...g.petunjuk, entri] : g.petunjuk;
+  const baru = { ...state, game: { ...g, petunjuk, giliran: g.giliran + 1 } };
+  return baru.game.giliran >= g.urutan.length ? keVote(baru) : baru;
+}
+
+function keVote(state: StateHost): StateHost {
+  const g = state.game as GameOnline;
+  return { ...state, game: { ...g, fase: 'vote', suara: {}, kandidat: pesertaHidup(g), putaranVote: 1, hasilVote: null } };
 }
 
 /** Pemain yang satu-satunya kandidatnya adalah dirinya sendiri tidak bisa vote (kasus tepi). */
@@ -342,6 +371,7 @@ function gameView(g: GameOnline, id: string): GameView {
     siap: g.siap,
     urutan: g.urutan,
     giliran: g.giliran,
+    petunjuk: g.petunjuk,
     sudahVote: Object.keys(g.suara),
     pilihanSaya: g.suara[id] ?? null,
     kandidat: g.kandidat,
@@ -370,6 +400,7 @@ export function pulihkanStateHost(raw: unknown, now: number): StateHost | null {
   if (!s.pemain.some((p) => p.id === s.hostId)) return null;
   return {
     ...s,
+    game: s.game ? { ...s.game, petunjuk: Array.isArray(s.game.petunjuk) ? s.game.petunjuk : [] } : null,
     pemain: s.pemain.map((p) => ({ ...p, online: p.id === s.hostId, terakhir: now })),
     seq: s.seq + 1,
   };
@@ -386,13 +417,15 @@ export function rapikanAksiPemain(x: unknown): AksiPemain | null {
   const a = x as Record<string, unknown>;
   switch (a.jenis) {
     case 'siap':
-    case 'selesaiBicara':
+    case 'sudahBicara':
     case 'keluar':
       return { jenis: a.jenis };
     case 'vote':
       return typeof a.target === 'string' ? { jenis: 'vote', target: a.target } : null;
     case 'tebak':
       return typeof a.teks === 'string' ? { jenis: 'tebak', teks: a.teks.slice(0, 60) } : null;
+    case 'petunjuk':
+      return typeof a.teks === 'string' ? { jenis: 'petunjuk', teks: a.teks.slice(0, MAKS_PETUNJUK * 4) } : null;
     default:
       return null;
   }

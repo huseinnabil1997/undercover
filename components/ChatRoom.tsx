@@ -15,9 +15,12 @@ function gerakDikurangi(): boolean {
   return typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export function ChatRoom({ pesan, saya, kirim, galat }: {
+export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
   pesan: PesanChat[];
   saya: string;
+  /** Draf pesan, disimpan di induk agar pesan yang ditolak host bisa dikembalikan ke kolom input. */
+  teks: string;
+  ubahTeks: (t: string) => void;
   /** Kirim teks; false jika gagal (alasannya masuk ke `galat`). */
   kirim: (teks: string) => boolean;
   /** Alasan terakhir pesan ditolak (mis. terlalu cepat), ditampilkan di panel. */
@@ -25,7 +28,6 @@ export function ChatRoom({ pesan, saya, kirim, galat }: {
 }) {
   const [fase, setFase] = useState<'tutup' | 'buka' | 'menutup'>('tutup');
   const [dibaca, setDibaca] = useState<string | null>(null);
-  const [teks, setTeks] = useState('');
   const tombolRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const daftarRef = useRef<HTMLOListElement>(null);
@@ -85,7 +87,8 @@ export function ChatRoom({ pesan, saya, kirim, galat }: {
   const kirimForm = (e: FormEvent) => {
     e.preventDefault();
     if (!teks.trim()) return;
-    if (kirimTeks(teks)) setTeks('');
+    // Kolom hanya dikosongkan jika pesan lolos cek (termasuk rate limit di klien).
+    if (kirimTeks(teks)) ubahTeks('');
     panelRef.current?.querySelector<HTMLInputElement>('input')?.focus({ preventScroll: true });
   };
 
@@ -174,7 +177,7 @@ export function ChatRoom({ pesan, saya, kirim, galat }: {
             <form className="chat-form" onSubmit={kirimForm}>
               <input
                 value={teks}
-                onChange={(e) => setTeks(Array.from(e.target.value).slice(0, MAKS_PANJANG_CHAT).join(''))}
+                onChange={(e) => ubahTeks(Array.from(e.target.value).slice(0, MAKS_PANJANG_CHAT).join(''))}
                 placeholder="Tulis pesan..."
                 aria-label="Tulis pesan"
                 enterKeyHint="send"

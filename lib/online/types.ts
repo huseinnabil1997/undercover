@@ -1,10 +1,11 @@
 // Tipe state dan pesan untuk mode online (host = sumber state otoritatif, topologi bintang).
 import type { Komposisi } from '../game';
 import type { PesanChat } from './chat';
+import type { EntriPetunjuk } from '../petunjuk';
 import type { PasanganKata, Pemenang, Peran } from '../types';
 
-/** Versi 2: menambah chat room. Klien versi lama ditolak dengan pesan "muat ulang". */
-export const VERSI_PROTOKOL = 2;
+/** Versi 3: diskusi dengan petunjuk ketik (versi 2 menambah chat). Klien versi lama ditolak dengan pesan "muat ulang". */
+export const VERSI_PROTOKOL = 3;
 export const INTERVAL_PING_MS = 3000;
 /** Pemain dianggap offline jika host tidak menerima pesan apa pun selama ini. */
 export const BATAS_OFFLINE_MS = 10000;
@@ -42,6 +43,8 @@ export interface GameOnline {
   siap: string[];
   urutan: string[];
   giliran: number;
+  /** Riwayat petunjuk semua ronde di game ini (publik untuk semua pemain). */
+  petunjuk: EntriPetunjuk[];
   /** Voter id ke target id. */
   suara: Record<string, string>;
   kandidat: string[];
@@ -70,7 +73,9 @@ export interface StateHost {
 /** Aksi yang boleh dikirim pemain mana pun (dari HP masing-masing). */
 export type AksiPemain =
   | { jenis: 'siap' }
-  | { jenis: 'selesaiBicara' }
+  | { jenis: 'petunjuk'; teks: string }
+  /** Pemain giliran sudah memberi petunjuk secara lisan: giliran maju tanpa entri riwayat. */
+  | { jenis: 'sudahBicara' }
   | { jenis: 'vote'; target: string }
   | { jenis: 'tebak'; teks: string }
   | { jenis: 'keluar' };
@@ -122,6 +127,8 @@ export interface GameView {
   siap: string[];
   urutan: string[];
   giliran: number;
+  /** Riwayat petunjuk (hanya id pemain, ronde, teks; tanpa kata rahasia). */
+  petunjuk: EntriPetunjuk[];
   /** Siapa saja yang sudah vote (tanpa isi pilihannya). */
   sudahVote: string[];
   pilihanSaya: string | null;
@@ -157,7 +164,8 @@ export type PesanKeHost =
 export type PesanKeKlien =
   | { t: 'view'; view: ViewPemain }
   /** `chat: true` jika yang ditolak adalah pesan chat (ditampilkan di panel chat, bukan toast). */
-  | { t: 'tolak'; alasan: string; chat?: boolean }
+  /** `petunjuk: true` jika yang ditolak adalah petunjuk (ditampilkan di bawah kolom petunjuk). `teks` = isi chat yang ditolak, dikembalikan ke pengirim. */
+  | { t: 'tolak'; alasan: string; chat?: boolean; petunjuk?: boolean; teks?: string }
   | { t: 'pong' }
   | { t: 'chat'; pesan: PesanChat }
   | { t: 'riwayatChat'; pesan: PesanChat[] };

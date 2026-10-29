@@ -21,12 +21,19 @@ Live: https://huseinnabil1997.github.io/undercover/
 3. Host mengatur jumlah Undercover, Mr. White, dan kategori, lalu memulai. Pemain yang datang saat game berjalan menjadi penonton
    dan otomatis ikut di game berikutnya.
 4. Setiap HP hanya menerima katanya sendiri. Peran baru dibuka saat pemain tereliminasi atau di akhir game.
-5. Diskusi mengikuti urutan bicara (pemain menekan **Selesai bicara**, host bisa melewati giliran), lalu voting dari HP masing-masing
+5. **Petunjuk ketik**: sesuai urutan giliran, pemain yang sedang giliran mengetik satu petunjuk (maksimal 30 karakter) di HP-nya,
+   sementara pemain lain melihat "Menunggu [nama] mengetik...". Host memvalidasi petunjuk: harus giliran pengirim, belum mengirim di ronde itu,
+   tidak sama dengan atau memuat kata rahasia pengirim (tanpa beda huruf besar/kecil, spasi, dan tanda baca), dan belum pernah dipakai di game itu.
+   Galat hanya dikirim ke pemain itu. Tombol **Sudah bicara** menyelesaikan giliran tanpa mencatat apa pun ke riwayat.
+   Host bisa **Lewati giliran** pemain yang tidak merespons, atau **Mulai voting sekarang**.
+6. **Riwayat petunjuk** tampil di semua HP pada layar petunjuk, voting, dan hasil akhir: per pemain (R1, R2, ...) atau per ronde,
+   dengan tanda dan peran untuk pemain yang sudah tereliminasi. Riwayat disimpan di state host, jadi pemain yang reconnect tetap menerimanya.
+7. Setelah semua pemain hidup mendapat giliran, voting dimulai otomatis dari HP masing-masing
    dengan progres suara live. Hasil keluar otomatis saat semua suara masuk, atau saat host menutup voting.
-6. **Aturan seri**: jika suara terbanyak seri, ada vote ulang sekali hanya antara yang seri.
+8. **Aturan seri**: jika suara terbanyak seri, ada vote ulang sekali hanya antara yang seri.
    Jika masih seri (atau tidak ada suara sama sekali), tidak ada yang tereliminasi dan game lanjut ke ronde berikutnya.
-7. Mr. White yang tereliminasi menebak kata Civilian dari HP-nya sendiri (host bisa melewati jika dia tidak merespons).
-8. Layar menang tampil di semua HP, lalu host bisa **Main lagi** atau kembali ke lobby. Skor room disimpan per nama.
+9. Mr. White yang tereliminasi menebak kata Civilian dari HP-nya sendiri (host bisa melewati jika dia tidak merespons).
+10. Layar menang tampil di semua HP, lalu host bisa **Main lagi** atau kembali ke lobby. Skor room disimpan per nama.
 
 ### Cara kerja dan batasan (jujur)
 
@@ -54,8 +61,11 @@ Live: https://huseinnabil1997.github.io/undercover/
 2. Oper HP ke setiap pemain. Pemain menekan tombol untuk melihat kata, lalu menutupnya sebelum mengoper.
    - **Civilian** mendapat kata A, **Undercover** mendapat kata B yang mirip. Keduanya tidak diberi tahu perannya.
    - **Mr. White** tidak mendapat kata dan melihat "Kamu Mr. White".
-3. Diskusi sesuai urutan bicara acak (pembicara pertama bukan Mr. White), dengan timer opsional.
-4. Voting untuk mengeliminasi satu pemain, lalu peran pemain itu dibuka.
+3. Petunjuk sesuai urutan giliran acak (giliran pertama bukan Mr. White): layar menampilkan "Giliran [nama]: ketik petunjukmu".
+   Pemain mengetik petunjuknya (aturan validasi sama dengan mode online), atau menekan **Sudah bicara** untuk menyelesaikan giliran
+   tanpa mencatat petunjuk, lalu HP dioper ke pemain berikutnya. Setelah giliran terakhir, voting dimulai otomatis.
+4. Voting (dengan timer opsional dan riwayat petunjuk) untuk mengeliminasi satu pemain, lalu peran pemain itu dibuka.
+   Riwayat petunjuk juga tampil di layar hasil akhir.
    Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.
 5. Civilian menang jika semua Undercover dan Mr. White tereliminasi.
    Penyusup menang jika jumlah penyusup tersisa sama atau lebih banyak dari Civilian (termasuk saat tinggal 2 pemain).

@@ -189,8 +189,8 @@ describe('diskusi dan giliran', () => {
     s = jalan(s, { jenis: 'mulaiDiskusi', dari: 'h' });
     const [a, b] = s.game!.urutan;
     expect(s.game!.peran[a]).not.toBe('mrwhite');
-    expect(reduceHost(s, { jenis: 'selesaiBicara', dari: b }, ctx()).state.game!.giliran).toBe(0);
-    s = jalan(s, { jenis: 'selesaiBicara', dari: a });
+    expect(reduceHost(s, { jenis: 'sudahBicara', dari: b }, ctx()).state.game!.giliran).toBe(0);
+    s = jalan(s, { jenis: 'sudahBicara', dari: a });
     expect(s.game!.giliran).toBe(1);
     s = jalan(s, { jenis: 'lewatiGiliran', dari: 'h' });
     expect(s.game!.giliran).toBe(2);

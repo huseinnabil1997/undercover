@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault,
   MAX_PEMAIN, MIN_PEMAIN, namaDefault, tambahSkor, tebakanBenar, urutanBicara,
@@ -9,14 +9,16 @@ import {
 import { rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PasanganKata, Pemain, Pemenang } from '@/lib/types';
+import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
 import { useDialog } from './Modal';
+import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
 import { angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, Stepper } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 
 type Fase =
   | { jenis: 'serah'; idx: number; terbuka: boolean }
-  | { jenis: 'diskusi'; ronde: number; urutan: number[] }
+  | { jenis: 'diskusi'; ronde: number; urutan: number[]; giliran: number }
   | { jenis: 'vote'; ronde: number; pilih: number | null }
   | { jenis: 'terungkap'; ronde: number; idx: number; tebakan: 'belum' | 'salah' }
   | { jenis: 'hasil'; pemenang: Pemenang; tebakanMrWhite?: string };
@@ -25,6 +27,8 @@ interface Permainan {
   pemain: Pemain[];
   pasangan: PasanganKata;
   fase: Fase;
+  /** Petunjuk yang sudah diketik. `pemain` berisi indeks pemain sebagai string. */
+  petunjuk: EntriPetunjuk[];
 }
 
 type Layar = 'setup' | 'caramain' | 'skor' | 'main';
@@ -87,7 +91,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
       simpan(KUNCI.kategori, kategori);
       simpan(KUNCI.timer, timer);
       setNama(bersih);
-      setGame({ pemain: bagiPeran(bersih, komposisi), pasangan, fase: { jenis: 'serah', idx: 0, terbuka: false } });
+      setGame({ pemain: bagiPeran(bersih, komposisi), pasangan, fase: { jenis: 'serah', idx: 0, terbuka: false }, petunjuk: [] });
       setLayar('main');
     } catch {
       setGalatMuat('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
@@ -106,7 +110,19 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
   function lanjutSetelahEliminasi(pemain: Pemain[], ronde: number) {
     const pemenang = cekPemenang(pemain);
     if (pemenang) return selesai(pemain, pemenang);
-    setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'diskusi', ronde: ronde + 1, urutan: urutanBicara(pemain) } } : g));
+    setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'diskusi', ronde: ronde + 1, urutan: urutanBicara(pemain), giliran: 0 } } : g));
+  }
+
+  /** Selesaikan giliran saat ini (dengan petunjuk, atau tanpa entri untuk Sudah bicara / Lewati), lalu otomatis ke voting setelah giliran terakhir. */
+  function majuGiliran(teks: string | null) {
+    setGame((g) => {
+      if (!g || g.fase.jenis !== 'diskusi') return g;
+      const f = g.fase;
+      const petunjuk = teks === null ? g.petunjuk : [...g.petunjuk, { pemain: String(f.urutan[f.giliran]), ronde: f.ronde, teks, waktu: Date.now() }];
+      const giliran = f.giliran + 1;
+      const fase: Fase = giliran >= f.urutan.length ? { jenis: 'vote', ronde: f.ronde, pilih: null } : { ...f, giliran };
+      return { ...g, petunjuk, fase };
+    });
   }
 
   async function resetSkor() {
@@ -235,6 +251,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
             else setGame((g) => (g && g.fase.jenis === 'terungkap' ? { ...g, fase: { ...g.fase, tebakan: 'salah' } } : g));
           }}
           onLanjut={(ronde) => lanjutSetelahEliminasi(game.pemain, ronde)}
+          onGiliran={majuGiliran}
           onMainLagi={mulai}
           onAturUlang={() => {
             setGame(null);
@@ -262,14 +279,23 @@ interface PropsMain {
   onEliminasi: (idx: number, ronde: number) => void;
   onTebak: (teks: string) => void;
   onLanjut: (ronde: number) => void;
+  onGiliran: (teks: string | null) => void;
   onMainLagi: () => void;
   onAturUlang: () => void;
   memuat: boolean;
   skor: Record<string, number>;
 }
 
-function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMainLagi, onAturUlang, memuat, skor }: PropsMain) {
+function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat, skor }: PropsMain) {
   const { pemain, pasangan, fase } = game;
+  const riwayat = (tampilPeran: boolean, giliran?: number) => (
+    <RiwayatPetunjuk
+      pemain={pemain.map((p, i) => ({ kunci: String(i), nama: p.nama, hidup: p.hidup, peran: tampilPeran || !p.hidup ? p.peran : undefined }))}
+      entri={game.petunjuk}
+      giliran={giliran === undefined ? null : String(giliran)}
+      ronde={fase.jenis === 'diskusi' || fase.jenis === 'vote' || fase.jenis === 'terungkap' ? fase.ronde : Math.max(1, ...game.petunjuk.map((e) => e.ronde))}
+    />
+  );
 
   if (fase.jenis === 'serah') {
     const p = pemain[fase.idx];
@@ -296,14 +322,14 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMai
               ) : (
                 <>
                   <h1 className="kata">Kamu Mr. White</h1>
-                  <p className="catatan">Kamu tidak mendapat kata. Dengarkan petunjuk pemain lain dan berbaurlah.</p>
+                  <p className="catatan">Kamu tidak mendapat kata. Baca petunjuk pemain lain dan berbaurlah.</p>
                 </>
               )}
               <button
                 className="utama"
                 onClick={() =>
                   terakhir
-                    ? setFase({ jenis: 'diskusi', ronde: 1, urutan: urutanBicara(pemain) })
+                    ? setFase({ jenis: 'diskusi', ronde: 1, urutan: urutanBicara(pemain), giliran: 0 })
                     : setFase({ jenis: 'serah', idx: fase.idx + 1, terbuka: false })
                 }
               >
@@ -317,25 +343,7 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMai
   }
 
   if (fase.jenis === 'diskusi') {
-    return (
-      <section className="tumpuk">
-        <div className="kartu">
-          <h2>Ronde {fase.ronde}: Diskusi</h2>
-          <p className="catatan">Bergiliran sebutkan satu petunjuk tentang kata kamu, sesuai urutan berikut.</p>
-          <ol className="urutan">
-            {fase.urutan.map((i, k) => (
-              <li key={i}>
-                <span className="nomor">{k + 1}</span> {pemain[i].nama}
-              </li>
-            ))}
-          </ol>
-        </div>
-        {timer > 0 && <Timer key={fase.ronde} detik={timer} />}
-        <div className="aksi-bawah">
-          <button className="utama" onClick={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })}>Mulai voting</button>
-        </div>
-      </section>
-    );
+    return <GiliranPetunjuk key={`${fase.ronde}-${fase.giliran}`} game={game} fase={fase} onGiliran={onGiliran} onVote={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })} riwayat={riwayat(false, fase.urutan[fase.giliran])} />;
   }
 
   if (fase.jenis === 'vote') {
@@ -343,7 +351,7 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMai
       <section className="tumpuk">
         <div className="kartu">
           <h2>Ronde {fase.ronde}: Voting</h2>
-          <p className="catatan">Diskusikan lalu pilih satu pemain yang paling dicurigai untuk dieliminasi.</p>
+          <p className="catatan">Baca riwayat petunjuk, diskusikan, lalu pilih satu pemain yang paling dicurigai untuk dieliminasi.</p>
           <div className="pilih-pemain">
             {pemain.map((p, i) =>
               p.hidup ? (
@@ -354,11 +362,12 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMai
             )}
           </div>
         </div>
+        {timer > 0 && <Timer key={fase.ronde} detik={timer} />}
+        {riwayat(false)}
         <div className="aksi-bawah">
           <button className="utama bahaya" disabled={fase.pilih === null} onClick={() => fase.pilih !== null && onEliminasi(fase.pilih, fase.ronde)}>
             {fase.pilih === null ? 'Pilih pemain dulu' : `Eliminasi ${pemain[fase.pilih].nama}`}
           </button>
-          <button className="kedua" onClick={() => setFase({ jenis: 'diskusi', ronde: fase.ronde, urutan: urutanBicara(pemain) })}>Kembali ke diskusi</button>
         </div>
       </section>
     );
@@ -410,9 +419,54 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onMai
           ))}
         </ul>
       </div>
+      {riwayat(true)}
       <div className="aksi-bawah">
         <button className="utama" onClick={onMainLagi} disabled={memuat}>{memuat ? 'Menyiapkan kata...' : 'Main lagi (pemain sama)'}</button>
         <button className="kedua" onClick={onAturUlang}>Atur ulang</button>
+      </div>
+    </section>
+  );
+}
+
+function GiliranPetunjuk({ game, fase, onGiliran, onVote, riwayat }: {
+  game: Permainan;
+  fase: Extract<Fase, { jenis: 'diskusi' }>;
+  onGiliran: (teks: string | null) => void;
+  onVote: () => void;
+  riwayat: ReactNode;
+}) {
+  const [galat, setGalat] = useState<string | null>(null);
+  const idx = fase.urutan[fase.giliran];
+  const p = game.pemain[idx];
+  const kirim = (teks: string) => {
+    const r = cekPetunjuk(teks, kataUntuk(p, game.pasangan), game.petunjuk.map((e) => e.teks));
+    if ('galat' in r) setGalat(r.galat);
+    else onGiliran(r.teks);
+  };
+  return (
+    <section className="tumpuk">
+      <div className="kartu">
+        <h2>Ronde {fase.ronde}: Petunjuk</h2>
+        <p className="catatan">Oper HP sesuai urutan. Tiap pemain mengetik satu petunjuk tentang katanya tanpa menyebut katanya.</p>
+        <ol className="urutan">
+          {fase.urutan.map((i, k) => (
+            <li key={i} className={k < fase.giliran ? 'selesai' : k === fase.giliran ? 'sekarang' : ''}>
+              <span className="nomor">{k < fase.giliran ? '✓' : k + 1}</span> {game.pemain[i].nama}
+            </li>
+          ))}
+        </ol>
+      </div>
+      <FormPetunjuk
+        judul={`Giliran ${p.nama}: ketik petunjukmu`}
+        galat={galat}
+        onUbah={() => setGalat(null)}
+        onKirim={kirim}
+        onSudahBicara={() => onGiliran(null)}
+      />
+      {riwayat}
+      <div className="aksi-bawah">
+        <button className="kedua" onClick={() => onGiliran(null)}>Lewati giliran {p.nama}</button>
+        <button className="kedua" onClick={onVote}>Mulai voting sekarang</button>
       </div>
     </section>
   );
@@ -507,8 +561,8 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         <ol>
           <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai main.</li>
           <li>Oper HP ke setiap pemain. Tekan untuk melihat kata, hafalkan, lalu tutup sebelum mengoper.</li>
-          <li>Diskusi: sesuai urutan, setiap pemain menyebut satu petunjuk tentang katanya tanpa menyebut kata itu.</li>
-          <li>Voting: pilih satu pemain yang paling dicurigai. Perannya langsung dibuka.</li>
+          <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
+          <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka.</li>
           <li>Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.</li>
         </ol>
         <h3>Menang</h3>
@@ -519,7 +573,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         <h3>Main Online</h3>
         <ul>
           <li>Satu orang membuat room dan menjadi host. Pemain lain gabung dengan kode, link, atau QR.</li>
-          <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu bicara bergiliran sesuai urutan di layar.</li>
+          <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] mengetik... dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
           <li>Voting dilakukan dari HP masing-masing. Jika suara terbanyak seri, ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
           <li>HP host harus tetap membuka halaman selama permainan.</li>
         </ul>

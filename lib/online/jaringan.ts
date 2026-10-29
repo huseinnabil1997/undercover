@@ -2,7 +2,7 @@
 // Topologi bintang: setiap pemain tersambung langsung ke HP host. Broker publik 0.peerjs.com
 // hanya dipakai untuk saling menemukan (signaling); isi permainan lewat koneksi P2P.
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
-import { buatStateChat, gabungChat, terimaChat, type PesanChat } from './chat';
+import { buatStateChat, gabungChat, GALAT_CHAT_CEPAT, lajuKlien, terimaChat, type PesanChat } from './chat';
 import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
 import { peerIdHost } from './room';
 import {
@@ -155,7 +155,8 @@ export class HostRoom {
     if (pesan.t === 'chat') {
       this.dispatch({ jenis: 'terlihat', id });
       const tolak = this.prosesChat(id, pesan.teks);
-      if (tolak) this.kirim(conn, { t: 'tolak', alasan: tolak, chat: true });
+      // Teks dikembalikan ke pengirim agar bisa dimasukkan lagi ke kolom input.
+      if (tolak) this.kirim(conn, { t: 'tolak', alasan: tolak, chat: true, ...(typeof pesan.teks === 'string' ? { teks: pesan.teks.slice(0, 400) } : {}) });
       return;
     }
     if (pesan.t === 'aksi') {
@@ -163,7 +164,8 @@ export class HostRoom {
       const aksi = rapikanAksiPemain(pesan.aksi);
       if (!aksi) return;
       const r = reduceHost(this.state, { ...aksi, dari: id }, { now: Date.now() });
-      if (r.tolak) this.kirim(conn, { t: 'tolak', alasan: r.tolak });
+      // Galat petunjuk (mis. memuat kata rahasia) hanya dikirim ke pengirimnya.
+      if (r.tolak) this.kirim(conn, { t: 'tolak', alasan: r.tolak, ...(aksi.jenis === 'petunjuk' ? { petunjuk: true } : {}) });
       this.terapkan(r.state, r.diam);
     }
   }
@@ -227,7 +229,9 @@ export interface PendengarKlien {
   onStatus: (s: StatusJaringan, info?: string) => void;
   onTolak: (alasan: string, saatGabung: boolean) => void;
   onChat?: (pesan: PesanChat[]) => void;
-  onTolakChat?: (alasan: string) => void;
+  /** Pesan chat ditolak host; `teks` adalah isi pesan yang ditolak (untuk dikembalikan ke kolom input). */
+  onTolakChat?: (alasan: string, teks?: string) => void;
+  onTolakPetunjuk?: (alasan: string) => void;
 }
 
 export class KlienRoom {
@@ -240,6 +244,7 @@ export class KlienRoom {
   private timer: ReturnType<typeof setInterval> | null = null;
   private jadwalUlang: ReturnType<typeof setTimeout> | null = null;
   private chat: PesanChat[] = [];
+  private lajuChat: number[] = [];
 
   constructor(
     private kode: string,
@@ -332,7 +337,8 @@ export class KlienRoom {
           this.dengar.onChat?.(baru);
         }
       } else if (p.t === 'tolak') {
-        if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan);
+        if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan, typeof p.teks === 'string' ? p.teks : undefined);
+        else if (p.petunjuk && this.dengar.onTolakPetunjuk) this.dengar.onTolakPetunjuk(p.alasan);
         else this.dengar.onTolak(p.alasan, !this.sudahView);
       }
     });
@@ -363,10 +369,14 @@ export class KlienRoom {
     }
   }
 
-  kirimChat(teks: string): boolean {
-    if (!this.conn?.open) return false;
+  /** Kirim chat. Mengembalikan alasan gagal (belum tersambung / terlalu cepat), atau undefined jika terkirim. */
+  kirimChat(teks: string): string | undefined {
+    if (!this.conn?.open) return 'Belum tersambung ke host. Coba lagi sebentar.';
+    const laju = lajuKlien(this.lajuChat, Date.now());
+    if (!laju) return GALAT_CHAT_CEPAT;
+    this.lajuChat = laju;
     this.kirimMentah({ t: 'chat', teks });
-    return true;
+    return undefined;
   }
 
   kirim(aksi: AksiPemain): boolean {

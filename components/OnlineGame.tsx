@@ -18,6 +18,7 @@ import {
   angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, useDaftarKeluar,
 } from './ui';
 import { ChatRoom } from './ChatRoom';
+import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
 import { useDialog } from './Modal';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -44,6 +45,8 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
   const [memuat, setMemuat] = useState(false);
   const [chat, setChat] = useState<PesanChat[]>([]);
   const [galatChat, setGalatChat] = useState<string | null>(null);
+  const [draftChat, setDraftChat] = useState('');
+  const [galatPetunjuk, setGalatPetunjuk] = useState<string | null>(null);
   const hostRef = useRef<HostRoom | null>(null);
   const klienRef = useRef<KlienRoom | null>(null);
 
@@ -119,7 +122,12 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
         else tampilkan(alasan);
       },
       onChat: setChat,
-      onTolakChat: setGalatChat,
+      onTolakChat: (alasan, teks) => {
+        setGalatChat(alasan);
+        // Kembalikan pesan yang ditolak ke kolom input, kecuali pengguna sudah mengetik pesan baru.
+        if (teks) setDraftChat((d) => (d.trim() ? d : teks));
+      },
+      onTolakPetunjuk: setGalatPetunjuk,
     });
     klienRef.current = klien;
     void klien.mulai();
@@ -132,9 +140,13 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
   const aksi = useCallback(
     (a: AksiUi) => {
       if (!sesi) return;
+      const petunjuk = a.jenis === 'petunjuk' || a.jenis === 'sudahBicara';
+      if (petunjuk) setGalatPetunjuk(null);
       if (hostRef.current) {
         const t = hostRef.current.dispatch({ ...a, dari: sesi.id } as Aksi);
-        if (t) tampilkan(t);
+        // Galat petunjuk tampil di bawah kolom input, bukan sebagai toast.
+        if (t && petunjuk) setGalatPetunjuk(t);
+        else if (t) tampilkan(t);
       } else if (klienRef.current) {
         if (!klienRef.current.kirim(a as AksiPemain)) tampilkan('Belum tersambung ke host. Coba lagi sebentar.');
       }
@@ -145,7 +157,8 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
   const kirimChat = useCallback((teks: string): boolean => {
     let galat: string | undefined;
     if (hostRef.current) galat = hostRef.current.kirimChat(teks);
-    else if (!klienRef.current?.kirimChat(teks)) galat = 'Belum tersambung ke host. Coba lagi sebentar.';
+    else if (klienRef.current) galat = klienRef.current.kirimChat(teks);
+    else galat = 'Belum tersambung ke host. Coba lagi sebentar.';
     setGalatChat(galat ?? null);
     return !galat;
   }, []);
@@ -206,7 +219,7 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
           </span>
         </div>
         <div className="aksi-kepala">
-          {view && <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} />}
+          {view && <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} teks={draftChat} ubahTeks={setDraftChat} />}
           <button className="kecil" onClick={keluar}>{sesi.host ? 'Tutup room' : 'Keluar'}</button>
         </div>
       </header>
@@ -223,7 +236,10 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
           </div>
         </section>
       ) : (
-        <Ruang view={view} host={sesi.host} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan} />
+        <Ruang
+          view={view} host={sesi.host} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan}
+          galatPetunjuk={galatPetunjuk} hapusGalatPetunjuk={() => setGalatPetunjuk(null)}
+        />
       )}
     </main>
   );
@@ -329,6 +345,8 @@ interface PropsRuang {
   mulaiGame: () => void;
   memuat: boolean;
   tampilkan: (t: string) => void;
+  galatPetunjuk: string | null;
+  hapusGalatPetunjuk: () => void;
 }
 
 function Ruang(props: PropsRuang) {
@@ -541,7 +559,7 @@ function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas
     <>
       <p className="sub">{saya}, kata kamu:</p>
       {g.kata ? <h1 className="kata">{g.kata}</h1> : <h1 className="kata">Kamu Mr. White</h1>}
-      {!g.kata && <p className="catatan">Kamu tidak mendapat kata. Dengarkan petunjuk pemain lain dan berbaurlah.</p>}
+      {!g.kata && <p className="catatan">Kamu tidak mendapat kata. Baca petunjuk pemain lain dan berbaurlah.</p>}
       <button className="kedua" onClick={() => setLihat(false)}>Tutup kartu</button>
     </>
   );
@@ -584,6 +602,19 @@ function pesertaDari(view: ViewPemain): PemainView[] {
   return view.pemain.filter((p) => p.ikut);
 }
 
+/** Riwayat petunjuk yang terlihat semua pemain (petunjuk memang publik; tidak memuat kata rahasia siapa pun). */
+function Riwayat({ view, g }: { view: ViewPemain; g: GameView }) {
+  const giliran = g.fase === 'diskusi' && g.giliran < g.urutan.length ? g.urutan[g.giliran] : null;
+  return (
+    <RiwayatPetunjuk
+      pemain={pesertaDari(view).map((p) => ({ kunci: p.id, nama: p.nama, hidup: p.hidup, peran: p.peran, saya: p.id === view.saya }))}
+      entri={g.petunjuk}
+      giliran={giliran}
+      ronde={g.ronde}
+    />
+  );
+}
+
 function FaseKata({ view, g, host, aksi }: PropsFase) {
   const peserta = pesertaDari(view);
   const sudah = g.siap.includes(view.saya);
@@ -611,14 +642,15 @@ function FaseKata({ view, g, host, aksi }: PropsFase) {
   );
 }
 
-function Diskusi({ view, g, host, aksi }: PropsFase) {
+function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: PropsFase) {
   const giliranId = g.giliran < g.urutan.length ? g.urutan[g.giliran] : null;
   const selesai = giliranId === null;
+  const sayaGiliran = giliranId === view.saya;
   return (
     <section className="tumpuk">
       <div className="kartu">
         <h2>Ronde {g.ronde}: Diskusi</h2>
-        <p className="catatan">Sesuai urutan, sebutkan satu petunjuk tentang kata kamu tanpa menyebut katanya.</p>
+        <p className="catatan">Sesuai urutan, tiap pemain mengetik satu petunjuk tentang katanya tanpa menyebut katanya. Petunjuk langsung muncul di riwayat semua pemain.</p>
         <ol className="urutan">
           {g.urutan.map((id, k) => {
             const p = view.pemain.find((x) => x.id === id);
@@ -632,28 +664,29 @@ function Diskusi({ view, g, host, aksi }: PropsFase) {
           })}
         </ol>
       </div>
-      {giliranId === view.saya ? (
-        <div className="kartu sorot muncul" role="status">
-          <h2>Giliran kamu!</h2>
-          <p className="catatan">Sebutkan satu petunjuk dengan suara, lalu tekan Selesai bicara.</p>
-        </div>
+      {sayaGiliran ? (
+        <FormPetunjuk
+          judul="Giliran kamu: ketik petunjukmu"
+          galat={galatPetunjuk}
+          onUbah={() => { if (galatPetunjuk) hapusGalatPetunjuk(); }}
+          onKirim={(teks) => aksi({ jenis: 'petunjuk', teks })}
+          onSudahBicara={() => aksi({ jenis: 'sudahBicara' })}
+        />
       ) : (
         <p className="menunggu" role="status">
-          {selesai ? 'Semua sudah bicara. Host akan memulai voting.' : `Sekarang giliran ${namaDari(view, giliranId)}.`}
+          {selesai ? 'Semua sudah mendapat giliran. Menuju voting...' : `Menunggu ${namaDari(view, giliranId)} mengetik...`}
         </p>
       )}
+      <Riwayat view={view} g={g} />
       {g.hidup ? <KataSaya view={view} g={g} ringkas /> : <p className="catatan tengah-teks">Kamu sudah tereliminasi. Tetap boleh menonton.</p>}
-      <div className="aksi-bawah">
-        {giliranId === view.saya && <button className="utama" onClick={() => aksi({ jenis: 'selesaiBicara' })}>Selesai bicara</button>}
-        {host && (
-          <>
-            {giliranId && giliranId !== view.saya && (
-              <button className="kedua" onClick={() => aksi({ jenis: 'lewatiGiliran' })}>Lewati giliran {namaDari(view, giliranId)}</button>
-            )}
-            <button className={selesai ? 'utama' : 'kedua'} onClick={() => aksi({ jenis: 'mulaiVote' })}>Mulai voting</button>
-          </>
-        )}
-      </div>
+      {host && (
+        <div className="aksi-bawah">
+          {giliranId && giliranId !== view.saya && (
+            <button className="kedua" onClick={() => aksi({ jenis: 'lewatiGiliran' })}>Lewati giliran {namaDari(view, giliranId)}</button>
+          )}
+          <button className="kedua" onClick={() => aksi({ jenis: 'mulaiVote' })}>Mulai voting sekarang</button>
+        </div>
+      )}
     </section>
   );
 }
@@ -701,6 +734,7 @@ function Voting({ view, g, host, aksi }: PropsFase) {
         </ul>
         <p className="catatan">Hasil keluar otomatis setelah semua suara masuk. {ATURAN_SERI}</p>
       </div>
+      <Riwayat view={view} g={g} />
       {host && (
         <div className="aksi-bawah">
           <button className="kedua" onClick={() => aksi({ jenis: 'tutupVote' })}>Tutup voting sekarang</button>
@@ -799,6 +833,7 @@ function Penonton({ view, g }: PropsFase) {
         <p>Permainan sedang berjalan (ronde {g.ronde}, {fase[g.fase] ?? g.fase}).</p>
         <p className="catatan">Kamu otomatis ikut di permainan berikutnya.</p>
       </div>
+      {g.petunjuk.length > 0 && <Riwayat view={view} g={g} />}
       <DaftarPemain view={view} host={false} aksi={() => undefined} />
     </section>
   );
@@ -840,6 +875,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
           ))}
         </ul>
       </div>
+      <Riwayat view={view} g={g} />
       <div className="aksi-bawah">
         {host ? (
           <>

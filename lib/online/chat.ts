@@ -43,6 +43,18 @@ export function rapikanTeksChat(x: unknown): string | null {
   return Array.from(bersih).slice(0, MAKS_PANJANG_CHAT).join('');
 }
 
+export const GALAT_CHAT_CEPAT = 'Terlalu cepat mengirim pesan. Tunggu sebentar.';
+
+/**
+ * Rate limit di sisi klien, dicek SEBELUM pesan dikirim dan kolom input dikosongkan, dengan aturan yang sama
+ * seperti di host. Mengembalikan riwayat waktu kirim yang baru, atau null jika harus ditolak.
+ */
+export function lajuKlien(riwayat: readonly number[], now: number): number[] | null {
+  const baru = riwayat.filter((t) => now - t < LIMIT_CHAT.jendelaMs);
+  if (baru.length >= LIMIT_CHAT.jumlah) return null;
+  return [...baru, now];
+}
+
 export interface HasilChat {
   state: StateChat;
   pesan?: PesanChat;
@@ -64,7 +76,7 @@ export function terimaChat(
   if (!teks) return { state: s };
   const baru = (s.laju[pengirim.id] ?? []).filter((t) => now - t < LIMIT_CHAT.jendelaMs);
   if (baru.length >= LIMIT_CHAT.jumlah) {
-    return { state: s, tolak: 'Terlalu cepat mengirim pesan. Tunggu sebentar.' };
+    return { state: s, tolak: GALAT_CHAT_CEPAT };
   }
   const urut = s.urut + 1;
   const pesan: PesanChat = { id: `${now.toString(36)}-${urut}`, dari: pengirim.id, nama: pengirim.nama, teks, waktu: now };
