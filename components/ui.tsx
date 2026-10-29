@@ -14,13 +14,17 @@ export const JUDUL_MENANG: Record<Pemenang, string> = {
   mrwhite: 'Mr. White menang!',
 };
 
-/** Tanda merek: lingkaran hijau dengan topeng mata. */
+/** Tanda merek: sosok penyusup hijau bertopi fedora dan bertopeng, sama dengan ilustrasi beranda dan favicon. */
 export function Tanda({ ukuran = 28 }: { ukuran?: number }) {
   return (
-    <svg className="tanda" width={ukuran} height={ukuran} viewBox="0 0 32 32" aria-hidden focusable="false">
-      <circle cx="16" cy="16" r="16" fill="#1ed760" />
-      <rect x="6" y="13.5" width="8.5" height="5" rx="2.5" fill="#000" />
-      <rect x="17.5" y="13.5" width="8.5" height="5" rx="2.5" fill="#000" />
+    <svg className="tanda" width={ukuran} height={ukuran} viewBox="2.75 4.5 58.5 58.5" aria-hidden focusable="false">
+      <path fill="#1ed760" d="M32 18C42.5 18 47.5 24.5 47.5 32.5C47.5 38.5 45 41.5 43.5 44.5C48.5 48.5 51.5 53 51.5 57C51.5 61.5 47 62.5 32 62.5C17 62.5 12.5 61.5 12.5 57C12.5 53 15.5 48.5 20.5 44.5C19 41.5 16.5 38.5 16.5 32.5C16.5 24.5 21.5 18 32 18Z" />
+      <path fill="#000" d="M18 30.5C18 28.5 19.5 27.5 21.5 27.5C25 27.5 28.5 29 32 29C35.5 29 39 27.5 42.5 27.5C44.5 27.5 46 28.5 46 30.5V35C46 37.5 44.5 38.5 42 38.5C38.5 38.5 35.5 36.8 32 36.8C28.5 36.8 25.5 38.5 22 38.5C19.5 38.5 18 37.5 18 35Z" />
+      <ellipse fill="#1ed760" cx="25.2" cy="33" rx="4.3" ry="2.6" />
+      <ellipse fill="#1ed760" cx="38.8" cy="33" rx="4.3" ry="2.6" />
+      <path fill="#3a3a3a" d="M20.5 20V10C20.5 7 23 5 26 5.5C28.5 6 30 7.5 32 7.5C34 7.5 35.5 6 38 5.5C41 5 43.5 7 43.5 10V20Z" />
+      <rect fill="#1ed760" x="20.5" y="14.5" width="23" height="4.5" />
+      <ellipse fill="#3a3a3a" cx="32" cy="20.5" rx="21.5" ry="3.6" />
     </svg>
   );
 }

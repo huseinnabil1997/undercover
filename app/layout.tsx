@@ -10,14 +10,16 @@ const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 export const metadata: Metadata = {
   title: 'Undercover: Tebak Kata',
   description: 'Game tebak kata Undercover: main online dengan HP masing-masing atau bergiliran dalam satu HP. Tanpa login, tanpa server game.',
-  manifest: `${BASE}/manifest.webmanifest`,
+  manifest: `${BASE}/manifest.webmanifest?v=2`,
+  // ?v=2 memaksa peramban memuat ulang ikon lama yang tersimpan di cache.
   icons: {
     icon: [
-      { url: `${BASE}/favicon.ico`, sizes: '16x16 32x32 48x48' },
-      { url: `${BASE}/icon.svg`, type: 'image/svg+xml' },
+      { url: `${BASE}/favicon.ico?v=2`, sizes: '16x16 32x32 48x48' },
+      { url: `${BASE}/icon.svg?v=2`, type: 'image/svg+xml' },
     ],
-    apple: { url: `${BASE}/apple-touch-icon.png`, sizes: '180x180' },
+    apple: { url: `${BASE}/apple-touch-icon.png?v=2`, sizes: '180x180' },
   },
+
   appleWebApp: { capable: true, title: 'Undercover', statusBarStyle: 'black-translucent' },
 };
 
