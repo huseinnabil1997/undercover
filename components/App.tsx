@@ -27,6 +27,8 @@ function modeRiwayat(state: unknown): Mode | null {
   return m === 'beranda' || m === 'online' || m === 'offline' ? m : null;
 }
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 export default function App() {
   return (
     <DialogProvider>
@@ -128,15 +130,18 @@ function Isi() {
         <p className="sub">Tebak kata. Cari penyusup.</p>
       </div>
       <div className="ilustrasi">
-        {/* Ekspor statis tanpa optimasi gambar Next, jadi pakai img biasa. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/undercover-hero.webp`}
-          alt="Ilustrasi empat pemain, satu di antaranya penyusup bertopeng hijau"
-          width={600}
-          height={366}
-          decoding="async"
-        />
+        {/* Animasi: WebP utama, GIF cadangan. Bila gerak dikurangi, tampilkan bingkai diam (PNG). */}
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcSet={`${BASE}/hero-static.png`} />
+          <source type="image/webp" srcSet={`${BASE}/hero-anim.webp`} />
+          <img
+            src={`${BASE}/hero-anim.gif`}
+            alt="Ilustrasi empat pemain, satu di antaranya penyusup bertopeng hijau"
+            width={480}
+            height={308}
+            decoding="async"
+          />
+        </picture>
       </div>
       <div className="pilihan">
         <button className="utama" onClick={() => masuk('online')}>Online</button>
