@@ -179,7 +179,6 @@ describe('filter view per pemain (tidak ada kebocoran kata/peran)', () => {
     const akhir = viewUntuk(s, uc);
     expect(akhir.pemain.every((p) => p.peran)).toBe(true);
     expect(akhir.game!.hasil!.pasangan.civilian).toBe(KATA_C);
-    expect(s.skor['Pemain 1'] ?? s.skor.Host).toBeDefined();
   });
 });
 
@@ -273,8 +272,6 @@ describe('Mr. White', () => {
     const menang = jalan(s, { jenis: 'tebak', dari: mw, teks: `  ${KATA_C.toLowerCase()} ` });
     expect(menang.game!.fase).toBe('hasil');
     expect(menang.game!.pemenang).toBe('mrwhite');
-    const nama = menang.pemain.find((p) => p.id === mw)!.nama;
-    expect(menang.skor[nama]).toBe(6);
   });
 
   it('tebakan salah membuat permainan berlanjut, host bisa melewati tebakan', () => {
@@ -337,19 +334,16 @@ describe('koneksi, reconnect, dan host refresh', () => {
 });
 
 describe('main lagi', () => {
-  it('host bisa memulai lagi dari layar hasil dengan pemain yang sama, skor dipertahankan', () => {
+  it('host bisa memulai lagi dari layar hasil dengan pemain yang sama', () => {
     let s = mulai(5, { undercover: 1, mrWhite: 0 });
     s = jalan(s, { jenis: 'mulaiDiskusi', dari: 'h' }, { jenis: 'mulaiVote', dari: 'h' });
     const [uc] = idDenganPeran(s, 'undercover');
     for (const id of s.game!.peserta) s = jalan(s, { jenis: 'vote', dari: id, target: id === uc ? s.game!.peserta.find((x) => x !== uc)! : uc });
     s = jalan(s, { jenis: 'lanjut', dari: 'h' });
     expect(s.game!.fase).toBe('hasil');
-    const skor = s.skor;
-    expect(Object.values(skor).reduce((a, b) => a + b, 0)).toBe(8);
     s = jalan(s, { jenis: 'mulai', pasangan: { civilian: 'A', undercover: 'B', sumber: 'x' }, dari: 'h' });
     expect(s.game!.fase).toBe('kata');
     expect(s.game!.ronde).toBe(1);
-    expect(s.skor).toEqual(skor);
     expect(pemainGame(s).every((p) => p.hidup)).toBe(true);
   });
 });

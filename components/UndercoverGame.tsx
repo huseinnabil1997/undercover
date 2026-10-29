@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault,
-  MAX_PEMAIN, MIN_PEMAIN, namaDefault, tambahSkor, tebakanBenar, urutanBicara,
+  MAX_PEMAIN, MIN_PEMAIN, namaDefault, tebakanBenar, urutanBicara,
   rapikanPanjangKata, validasiSetup, type Komposisi,
 } from '@/lib/game';
-import { PESAN_TANPA_SATU_KATA, rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
+import { kategoriTersimpan, PESAN_TANPA_SATU_KATA, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PanjangKata, PasanganKata, Pemain, Pemenang } from '@/lib/types';
 import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
 import { useDialog } from './Modal';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
-import { angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Stepper, Tanda } from './ui';
+import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Stepper, TombolMenu, type Penjaga } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 
@@ -31,7 +31,7 @@ interface Permainan {
   petunjuk: EntriPetunjuk[];
 }
 
-type Layar = 'setup' | 'caramain' | 'skor' | 'main';
+type Layar = 'setup' | 'caramain' | 'main';
 
 function namaAwal(): string[] {
   const n = baca<string[]>(KUNCI.nama, []);
@@ -46,23 +46,36 @@ function komposisiAwal(jumlah: number): Komposisi {
   return k && validasiSetup(nama, k).length === 0 ? k : komposisiDefault(jumlah);
 }
 
-function kategoriAwal(): string[] {
-  const valid = rapikanKategori(baca<unknown>(KUNCI.kategori, null));
-  return valid.length > 0 ? valid : SEMUA_KATEGORI;
-}
-
-export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }) {
+export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda?: () => void; daftarPenjaga?: (p: Penjaga | null) => void }) {
   const dialog = useDialog();
   const [layar, setLayar] = useState<Layar>('setup');
   const [nama, setNama] = useState<string[]>(namaAwal);
   const [komposisi, setKomposisi] = useState<Komposisi>(() => komposisiAwal(namaAwal().length));
-  const [kategori, setKategori] = useState<string[]>(kategoriAwal);
+  const [kategori, setKategori] = useState<string[]>(kategoriTersimpan);
   const [timer, setTimer] = useState<number>(() => baca<number>(KUNCI.timer, 0));
   const [panjangKata, setPanjangKata] = useState<PanjangKata>(() => rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)));
-  const [skor, setSkor] = useState<Record<string, number>>(() => baca(KUNCI.skor, {}));
   const [game, setGame] = useState<Permainan | null>(null);
   const [memuat, setMemuat] = useState(false);
   const [galatMuat, setGalatMuat] = useState<string | null>(null);
+
+  // Pilihan kategori langsung disimpan, jadi kategori yang dibuang tetap dibuang di kunjungan berikutnya.
+  useEffect(() => simpan(KUNCI.kategori, kategori), [kategori]);
+
+  // Kembali ke menu saat permainan berjalan harus dikonfirmasi lewat modal.
+  const penjaga = useCallback(async () => {
+    if (layar !== 'main' || !game) return true;
+    return dialog.konfirmasi({
+      judul: 'Kembali ke menu?',
+      pesan: 'Permainan ini dihentikan dan kamu kembali ke menu Lokal atau Online.',
+      ok: 'Ke menu',
+      batal: 'Lanjut',
+      bahaya: true,
+    });
+  }, [layar, game, dialog]);
+  useEffect(() => {
+    daftarPenjaga?.(penjaga);
+    return () => daftarPenjaga?.(null);
+  }, [penjaga, daftarPenjaga]);
 
   const galat = useMemo(() => {
     const g = validasiSetup(nama, komposisi);
@@ -104,9 +117,6 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
   }
 
   function selesai(pemain: Pemain[], pemenang: Pemenang, tebakanMrWhite?: string) {
-    const baru = tambahSkor(skor, pemain, pemenang);
-    setSkor(baru);
-    simpan(KUNCI.skor, baru);
     setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'hasil', pemenang, tebakanMrWhite } } : g));
   }
 
@@ -128,32 +138,13 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
     });
   }
 
-  async function resetSkor() {
-    const ya = await dialog.konfirmasi({
-      judul: 'Hapus skor?',
-      pesan: 'Semua skor yang tersimpan di HP ini akan dihapus. Tindakan ini tidak bisa dibatalkan.',
-      ok: 'Hapus',
-      bahaya: true,
-    });
-    if (!ya) return;
-    setSkor({});
-    simpan(KUNCI.skor, {});
-  }
-
   return (
     <main className="wadah">
       <header className="kepala">
-        <button
-          className="logo"
-          onClick={() => (layar === 'main' ? undefined : layar === 'setup' && onBeranda ? onBeranda() : setLayar('setup'))}
-          aria-label={layar === 'setup' && onBeranda ? 'Undercover, kembali ke beranda' : 'Undercover'}
-        >
-          <Tanda /> Undercover
-        </button>
+        {onBeranda && <TombolMenu onClick={onBeranda} />}
         {layar !== 'main' ? (
           <nav className="navigasi">
             <button className={layar === 'caramain' ? 'aktif' : ''} onClick={() => setLayar(layar === 'caramain' ? 'setup' : 'caramain')}>Aturan</button>
-            <button className={layar === 'skor' ? 'aktif' : ''} onClick={() => setLayar(layar === 'skor' ? 'setup' : 'skor')}>Skor</button>
           </nav>
         ) : (
           <button
@@ -161,7 +152,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
             onClick={async () => {
               const ya = await dialog.konfirmasi({
                 judul: 'Akhiri permainan?',
-                pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan. Skor ronde ini tidak dihitung.',
+                pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan.',
                 ok: 'Akhiri',
                 batal: 'Lanjut',
                 bahaya: true,
@@ -178,8 +169,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
       </header>
 
       {layar === 'caramain' && <CaraMain onTutup={() => setLayar('setup')} />}
-      {layar === 'skor' && <PapanSkor skor={skor} onReset={resetSkor} onTutup={() => setLayar('setup')} />}
-
+      
       {layar === 'setup' && (
         <section className="tumpuk masuk">
           <div className="kartu">
@@ -263,7 +253,6 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
             setLayar('setup');
           }}
           memuat={memuat}
-          skor={skor}
         />
         </div>
       )}
@@ -288,10 +277,9 @@ interface PropsMain {
   onMainLagi: () => void;
   onAturUlang: () => void;
   memuat: boolean;
-  skor: Record<string, number>;
 }
 
-function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat, skor }: PropsMain) {
+function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat }: PropsMain) {
   const { pemain, pasangan, fase } = game;
   const riwayat = (tampilPeran: boolean, giliran?: number) => (
     <RiwayatPetunjuk
@@ -416,7 +404,6 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
             <li key={i} className={p.hidup ? '' : 'mati'}>
               <span>{p.nama}</span>
               <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>
-              <span className="poin">{angka(skor[p.nama] ?? 0)} poin</span>
             </li>
           ))}
         </ul>
@@ -523,31 +510,6 @@ function Timer({ detik }: { detik: number }) {
   );
 }
 
-function PapanSkor({ skor, onReset, onTutup }: { skor: Record<string, number>; onReset: () => void; onTutup: () => void }) {
-  const daftar = Object.entries(skor).sort((a, b) => b[1] - a[1]);
-  return (
-    <section className="tumpuk">
-      <div className="kartu">
-        <h2>Skor</h2>
-        <p className="catatan">Civilian +2, Mr. White +6, Undercover +10. Tersimpan di HP ini.</p>
-        {daftar.length === 0 ? (
-          <p className="catatan">Kosong</p>
-        ) : (
-          <ol className="daftar-hasil">
-            {daftar.map(([n, s]) => (
-              <li key={n}><span>{n}</span><span className="poin">{angka(s)} poin</span></li>
-            ))}
-          </ol>
-        )}
-      </div>
-      <div className="aksi-bawah">
-        <button className="utama" onClick={onTutup}>Kembali</button>
-        {daftar.length > 0 && <button className="kedua" onClick={onReset}>Hapus</button>}
-      </div>
-    </section>
-  );
-}
-
 function CaraMain({ onTutup }: { onTutup: () => void }) {
   return (
     <section className="tumpuk">
@@ -580,7 +542,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Voting dilakukan dari HP masing-masing. Jika suara terbanyak seri, ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
           <li>HP host harus tetap membuka halaman selama permainan.</li>
         </ul>
-        <p className="catatan">Semua data (nama, skor, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>
+        <p className="catatan">Semua data (nama, pengaturan, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>
       </div>
       <div className="aksi-bawah">
         <button className="utama" onClick={onTutup}>Oke</button>

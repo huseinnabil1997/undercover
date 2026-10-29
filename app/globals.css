@@ -22,7 +22,7 @@
   --r-dalam: 8px;
   --r-luar: calc(var(--r-dalam) + 8px);
   --pil: 999px;
-  --font: 'Circular', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font: var(--font-figtree), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
 }
 
@@ -40,7 +40,7 @@ body {
   min-height: 100dvh;
 }
 
-h1, h2, h3 { letter-spacing: -0.02em; }
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
 
 button, input { font: inherit; color: inherit; }
 
@@ -72,6 +72,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--teks); outl
   background: transparent; font-size: 0.9rem; font-weight: 700; white-space: nowrap;
 }
 .navigasi button.aktif { background: var(--teks); color: var(--dasar); border-color: var(--teks); }
+.tombol-menu { display: inline-flex; align-items: center; gap: 6px; padding: 0 16px 0 12px; }
+.tombol-menu span { font-size: 1.35rem; line-height: 1; margin-top: -2px; }
+.kiri-kepala { display: flex; align-items: center; gap: 10px; min-width: 0; }
 
 /* --------------------------------- Struktur --------------------------------- */
 .tumpuk { display: flex; flex-direction: column; gap: 12px; }
@@ -90,7 +93,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--teks); outl
 .baris-judul h2 { margin: 0; }
 
 .kepala-fase { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-.kepala-fase h2 { margin: 0; font-size: 1.6rem; font-weight: 900; }
+.kepala-fase h2 { margin: 0; font-size: 1.6rem; font-weight: 800; }
 .ronde { color: var(--redup); font-size: 0.85rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .catatan { color: var(--redup); font-size: 0.875rem; margin: 8px 0 0; }
@@ -158,8 +161,8 @@ p.galat { padding-left: 16px; }
 .kedua { background: transparent; border: 1px solid var(--garis-kuat); color: var(--teks); }
 .kedua:hover:not(:disabled) { border-color: var(--teks); }
 
-.nama-besar { font-size: 2.25rem; font-weight: 900; margin: 0; word-break: break-word; }
-.kata { font-size: 2.25rem; font-weight: 900; margin: 4px 0; color: var(--aksen); word-break: break-word; }
+.nama-besar { font-size: 2.25rem; font-weight: 800; margin: 0; word-break: break-word; }
+.kata { font-size: 2.25rem; font-weight: 800; margin: 4px 0; color: var(--aksen); word-break: break-word; }
 .rahasia { box-shadow: inset 0 0 0 2px var(--aksen); }
 
 .urutan { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-direction: column; }
@@ -180,7 +183,7 @@ p.galat { padding-left: 16px; }
 .pemain.pilih { border-color: var(--teks); background: var(--teks); color: var(--dasar); }
 
 .timer { text-align: center; }
-.waktu { display: block; font-size: 3.25rem; font-weight: 900; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.waktu { display: block; font-size: 3.25rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .timer.habis .waktu { color: var(--merah); }
 .baris-tombol { display: flex; gap: 8px; margin-top: 8px; }
 .baris-tombol .kedua, .baris-tombol .utama { min-height: 48px; }
@@ -205,7 +208,6 @@ p.galat { padding-left: 16px; }
 .lencana.civilian { background: var(--aksen); color: var(--dasar); }
 .lencana.undercover { background: var(--merah); color: var(--dasar); }
 .lencana.mrwhite { background: var(--teks); color: var(--dasar); }
-.poin { color: var(--redup); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
 
 @media (min-width: 600px) {
   .wadah { padding-top: 32px; }
@@ -213,12 +215,19 @@ p.galat { padding-left: 16px; }
 
 /* ------------------------------ Beranda & online ------------------------------ */
 .beranda {
-  display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
   min-height: 100dvh; padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
 }
-.pahlawan { display: flex; flex-direction: column; gap: 12px; margin-top: 18dvh; }
-.pahlawan h1 { margin: 0; font-size: clamp(2.75rem, 14vw, 3.75rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+.pahlawan { display: flex; flex-direction: column; gap: 12px; margin-top: clamp(12px, 6dvh, 64px); }
+.pahlawan h1 { margin: 0; font-size: clamp(2.75rem, 14vw, 3.75rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .pahlawan .sub { font-size: 1.05rem; }
+.ilustrasi { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+/* Lebar mengecil di layar pendek supaya tombol tetap terlihat tanpa gulir. */
+.ilustrasi img { display: block; width: min(320px, 100%, max(140px, calc((100dvh - 420px) * 1.64))); height: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .ilustrasi img { animation: ilustrasi-muncul 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both; }
+}
+@keyframes ilustrasi-muncul { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: none; } }
 .pilihan { display: flex; flex-direction: column; gap: 12px; }
 .pilihan .utama, .pilihan .kedua { min-height: 56px; font-size: 1.1rem; }
 .tengah-teks { text-align: center; }
@@ -250,7 +259,7 @@ p.galat { padding-left: 16px; }
 
 .undangan { text-align: center; }
 .kode-besar {
-  margin: 4px 0 8px; font-size: 3rem; font-weight: 900; letter-spacing: 0.2em; padding-left: 0.2em;
+  margin: 4px 0 8px; font-size: 3rem; font-weight: 800; letter-spacing: 0.2em; padding-left: 0.2em;
   font-variant-numeric: tabular-nums;
 }
 .undangan .baris-tombol { flex-wrap: wrap; }

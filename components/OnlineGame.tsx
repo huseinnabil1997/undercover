@@ -4,7 +4,7 @@
 // mengirim view yang sudah difilter (kata milik pemain itu sendiri) ke setiap pemain.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
-import { PESAN_TANPA_SATU_KATA, rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
+import { kategoriTersimpan, PESAN_TANPA_SATU_KATA, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
@@ -15,7 +15,7 @@ import {
 } from '@/lib/online/sesi';
 import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, Pengaturan, StateHost, ViewPemain } from '@/lib/online/types';
 import {
-  angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Tanda, useDaftarKeluar,
+  AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
 } from './ui';
 import { ChatRoom } from './ChatRoom';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
@@ -35,7 +35,11 @@ const TEKS_STATUS: Record<StatusJaringan, string> = {
 
 type AksiUi = AksiPemain | AksiKhususHost;
 
-export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string | null; onBeranda: () => void }) {
+export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
+  kodeAwal: string | null;
+  onBeranda: () => void;
+  daftarPenjaga?: (p: Penjaga | null) => void;
+}) {
   const dialog = useDialog();
   const [sesi, setSesi] = useState<SesiOnline | null>(() => bacaSesi('tab'));
   const [view, setView] = useState<ViewPemain | null>(null);
@@ -81,10 +85,7 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
         ? (pulih as StateHost)
         : buatStateHost(sesi.kode, sesi.id, sesi.nama, {
           komposisi: komposisiDefault(MIN_PEMAIN),
-          kategori: (() => {
-            const k = rapikanKategori(baca<unknown>(KUNCI.kategori, null));
-            return k.length > 0 ? k : SEMUA_KATEGORI;
-          })(),
+          kategori: kategoriTersimpan(),
           panjangKata: rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)),
         }, Date.now());
       simpanStateHost(awal);
@@ -180,19 +181,28 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
     }
   }, [aksi, tampilkan, dialog]);
 
-  async function keluar() {
-    if (!sesi) return;
+  // Kembali ke menu dari room: konfirmasi, lalu putuskan PeerJS dan hapus sesi tersimpan agar tidak gabung ulang otomatis.
+  const penjaga = useCallback(async () => {
+    if (!sesi) return true;
     const ya = await dialog.konfirmasi(
       sesi.host
         ? { judul: 'Tutup room?', pesan: `Room ${sesi.kode} ditutup dan semua pemain akan terputus.`, ok: 'Tutup', bahaya: true }
         : { judul: 'Keluar dari room?', pesan: 'Kamu bisa gabung lagi dengan kode yang sama selama room masih dibuka.', ok: 'Keluar', bahaya: true },
     );
-    if (!ya) return;
+    if (!ya) return false;
     if (sesi.host) hapusStateHost();
-    else aksi({ jenis: 'keluar' });
-    // Beri waktu pesan keluar terkirim sebelum koneksi ditutup.
-    window.setTimeout(() => keluarSesi(), sesi.host ? 0 : 150);
-  }
+    else {
+      aksi({ jenis: 'keluar' });
+      // Beri waktu pesan keluar terkirim sebelum koneksi ditutup.
+      await new Promise((r) => window.setTimeout(r, 150));
+    }
+    keluarSesi();
+    return true;
+  }, [sesi, dialog, aksi, keluarSesi]);
+  useEffect(() => {
+    daftarPenjaga?.(penjaga);
+    return () => daftarPenjaga?.(null);
+  }, [penjaga, daftarPenjaga]);
 
   if (!sesi) {
     return (
@@ -213,17 +223,18 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
   return (
     <main className="wadah">
       <header className="kepala">
-        <div className="info-room">
-          <Tanda ukuran={24} />
+        <div className="kiri-kepala">
+          <TombolMenu onClick={onBeranda} />
+          <div className="info-room">
           <span className="kode-kecil" aria-label={`Kode room ${sesi.kode}`}>{sesi.kode}</span>
           <span className={`status ${status.s}`} role="status">
             <span className="titik" aria-hidden />
             {TEKS_STATUS[status.s]}
           </span>
+          </div>
         </div>
         <div className="aksi-kepala">
           {view && <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} teks={draftChat} ubahTeks={setDraftChat} />}
-          <button className="kecil" onClick={keluar}>{sesi.host ? 'Tutup' : 'Keluar'}</button>
         </div>
       </header>
 
@@ -278,8 +289,8 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
   return (
     <main className="wadah">
       <header className="kepala">
-        <button className="logo" onClick={onBeranda}><Tanda /> Undercover</button>
-        <button className="kecil" onClick={onBeranda}>Beranda</button>
+        <TombolMenu onClick={onBeranda} />
+        <span className="logo"><Tanda /> Undercover</span>
       </header>
       <section className="tumpuk masuk">
         <div className="kepala-fase"><h2>Online</h2></div>
@@ -420,7 +431,6 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
       />
       <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} panjangKata={panjangKata} />
       <PilihPanjangKata nilai={panjangKata} onUbah={aturPanjangKata} nonaktif={!host} />
-      <Skor view={view} />
       {galat.length > 0 && (
         <ul className="galat" role="alert">
           {galat.map((x) => <li key={x}>{x}</li>)}
@@ -535,22 +545,6 @@ function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; a
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-function Skor({ view }: { view: ViewPemain }) {
-  const daftar = Object.entries(view.skor).sort((a, b) => b[1] - a[1]);
-  if (daftar.length === 0) return null;
-  return (
-    <div className="kartu">
-      <h2>Skor</h2>
-      <ol className="daftar-hasil">
-        {daftar.map(([n, s]) => (
-          <li key={n}><span>{n}</span><span className="poin">{angka(s)} poin</span></li>
-        ))}
-      </ol>
-      <p className="catatan">Civilian +2, Mr. White +6, Undercover +10</p>
     </div>
   );
 }
@@ -875,7 +869,6 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
             <li key={p.id} className={`${p.hidup ? '' : 'mati'} muncul`} style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
               <span>{p.nama}</span>
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
-              <span className="poin">{angka(view.skor[p.nama] ?? 0)} poin</span>
             </li>
           ))}
         </ul>

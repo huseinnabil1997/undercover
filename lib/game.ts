@@ -132,25 +132,6 @@ export function tebakanBenar(tebakan: string, kataCivilian: string): boolean {
   return t.length > 0 && t === normalisasiTebakan(kataCivilian);
 }
 
-/** Pemain yang termasuk tim pemenang. */
-export function timPemenang(pemain: readonly Pemain[], pemenang: Pemenang): Pemain[] {
-  if (pemenang === 'civilian') return pemain.filter((p) => p.peran === 'civilian');
-  if (pemenang === 'mrwhite') return pemain.filter((p) => p.peran === 'mrwhite');
-  return pemain.filter((p) => p.peran !== 'civilian');
-}
-
-export const POIN_MENANG: Record<Peran, number> = { civilian: 2, undercover: 10, mrwhite: 6 };
-
-export function tambahSkor(
-  skor: Readonly<Record<string, number>>,
-  pemain: readonly Pemain[],
-  pemenang: Pemenang,
-): Record<string, number> {
-  const baru = { ...skor };
-  for (const p of timPemenang(pemain, pemenang)) baru[p.nama] = (baru[p.nama] ?? 0) + POIN_MENANG[p.peran];
-  return baru;
-}
-
 /* -------------------------------- Bank kata -------------------------------- */
 
 export function kombinasi2(n: number): number {

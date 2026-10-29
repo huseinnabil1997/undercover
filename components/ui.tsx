@@ -123,6 +123,18 @@ export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas
   );
 }
 
+/** Dipanggil sebelum kembali ke menu. Hasil false berarti batal (mis. pengguna menolak di modal). */
+export type Penjaga = () => Promise<boolean>;
+
+/** Tombol pil kiri atas untuk kembali ke menu pilih Lokal atau Online. */
+export function TombolMenu({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" className="kecil tombol-menu" onClick={onClick} aria-label="Kembali ke menu Lokal atau Online">
+      <span aria-hidden>‹</span> Menu
+    </button>
+  );
+}
+
 const PILIHAN_PANJANG: { id: PanjangKata; label: string }[] = [
   { id: 'satu', label: 'Satu kata' },
   { id: 'bebas', label: 'Boleh lebih' },

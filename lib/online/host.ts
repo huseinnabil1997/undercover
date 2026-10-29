@@ -1,7 +1,7 @@
 // Reducer murni untuk host mode online. Host memegang state lengkap (termasuk semua kata dan peran),
 // lalu mengirim view yang sudah difilter ke setiap pemain (lihat viewUntuk).
 import {
-  bagiPeran, cekPemenang, MAX_PEMAIN, tambahSkor, tebakanBenar, urutanBicara, validasiSetup, type Rng,
+  bagiPeran, cekPemenang, MAX_PEMAIN, tebakanBenar, urutanBicara, validasiSetup, type Rng,
 } from '../game';
 import { cekPetunjuk, MAKS_PETUNJUK } from '../petunjuk';
 import type { Pemain } from '../types';
@@ -37,7 +37,6 @@ export function buatStateHost(kode: string, hostId: string, namaHost: string, pe
     pemain: [{ id: hostId, nama: rapikanNama(namaHost) || 'Host', online: true, terakhir: now }],
     pengaturan,
     game: null,
-    skor: {},
     seq: 1,
   };
 }
@@ -318,8 +317,7 @@ function tutupVoting(state: StateHost): StateHost {
 
 function selesai(state: StateHost, pemenang: NonNullable<GameOnline['pemenang']>, tebakanMrWhite?: string): StateHost {
   const g = state.game as GameOnline;
-  const skor = tambahSkor(state.skor, pemainGame(state), pemenang);
-  return { ...state, skor, game: { ...g, fase: 'hasil', pemenang, tebakanMrWhite } };
+  return { ...state, game: { ...g, fase: 'hasil', pemenang, tebakanMrWhite } };
 }
 
 /* ------------------------------- Filter view ------------------------------- */
@@ -352,7 +350,6 @@ export function viewUntuk(state: StateHost, id: string): ViewPemain {
     hostId: state.hostId,
     pemain,
     pengaturan: state.pengaturan,
-    skor: state.skor,
     game: g ? gameView(g, id) : null,
   };
 }

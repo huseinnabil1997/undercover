@@ -67,7 +67,6 @@ export interface StateHost {
   pemain: PemainOnline[];
   pengaturan: Pengaturan;
   game: GameOnline | null;
-  skor: Record<string, number>;
   /** Naik setiap state berubah, dipakai klien untuk mengabaikan view lama. */
   seq: number;
 }
@@ -151,7 +150,6 @@ export interface ViewPemain {
   hostId: string;
   pemain: PemainView[];
   pengaturan: Pengaturan;
-  skor: Record<string, number>;
   game: GameView | null;
 }
 

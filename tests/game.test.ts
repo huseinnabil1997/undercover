@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault, maksPenyusup, MAX_PEMAIN, MIN_PEMAIN,
-  namaDefault, tambahSkor, tebakanBenar, urutanBicara, validasiSetup,
+  namaDefault, tebakanBenar, urutanBicara, validasiSetup,
 } from '../lib/game';
 import type { Pemain, Peran } from '../lib/types';
 
@@ -130,11 +130,3 @@ describe('tebakan Mr. White', () => {
   });
 });
 
-describe('skor', () => {
-  it('menambah poin untuk tim pemenang', () => {
-    const pemain = [p('civilian', true, 'A'), p('undercover', false, 'B'), p('mrwhite', true, 'C')];
-    expect(tambahSkor({ A: 1 }, pemain, 'civilian')).toEqual({ A: 3 });
-    expect(tambahSkor({}, pemain, 'penyusup')).toEqual({ B: 10, C: 6 });
-    expect(tambahSkor({}, pemain, 'mrwhite')).toEqual({ C: 6 });
-  });
-});

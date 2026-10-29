@@ -32,6 +32,12 @@ export function rapikanKategori(k: unknown): string[] {
   return Array.isArray(k) ? k.filter((x): x is string => typeof x === 'string' && SEMUA_KATEGORI.includes(x)) : [];
 }
 
+/** Pilihan kategori tersimpan. Bawaan (belum pernah disimpan atau kosong): semua kategori, termasuk Klasik. */
+export function kategoriTersimpan(): string[] {
+  const k = rapikanKategori(baca<unknown>(KUNCI.kategori, null));
+  return k.length > 0 ? k : [...SEMUA_KATEGORI];
+}
+
 /**
  * Pilih pasangan sesuai filter panjang kata. Jika mode 'satu' tidak punya kandidat sama sekali,
  * jatuh ke mode 'bebas' dan `cadangan` bernilai true agar UI bisa memberi tahu pemain.
