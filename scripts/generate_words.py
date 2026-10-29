@@ -32,7 +32,7 @@ for fn in os.listdir(src):
         elif line.startswith('# '):
             cid, name = [p.strip() for p in line[2:].split('|')]
         elif line and subs:
-            subs[-1]['kata'] += [w.strip() for w in line.split(',') if w.strip()]
+            subs[-1]['kata'] += [w.strip() for w in line.split(',') if w.strip() and ' ' not in w.strip()]
     for s in subs:
         seen, clean = set(), []
         for w in s['kata']:
