@@ -1,43 +1,7 @@
-# minuman | Minuman
+﻿# minuman | Minuman
 ## Kopi & Teh
-Milo, Latte, Mocha, Frappe, Affogato, Espresso, Ovaltine, Americano, Macchiato, Ristretto, Cappuccino, Air, Teh, Kopi, Susu, Jus, Soda, Cola
-Sprite, Fanta, Yogurt, Yakult, Matcha, Coldbrew, Cortado, Lungo, Doppio, Frappuccino, Milkshake, Smoothie, Mocktail, Limonade, Squash, Granita, Slush, Float
-Sundae, Boba, Cendol, Dawet, Kolak, Sekoteng, Bandrek, Bajigur, Wedang, Jahe, Kencur, Kunyit, Serai, Pandan, Kapulaga, Cengkeh, Adas, Pala
-Jamu, Sinom, Pahitan, Cincau, Selasih, Madu, Sirup, Tonic, Gingerale, Rootbeer, Isotonik, Energy, Cocoa, Eggnog, Punch, Toddy, Robusta, Arabika
-Liberika, Excelsa, Sencha, Gyokuro, Hojicha, Genmai, Chai, Masala, Rooibos, Hibiscus, Lavender, Mate, Yerba, Assam, Ceylon, Darjeeling, Keemun, Oolong
-Jasmine, Rosella, Chamomile, Peppermint, EarlGrey, Piccolo, Breve, RedEye, BlackEye, Flatwhite, BirPletok, STMJ, ThaiTea, MilkTea, BubbleTea, EsJeruk, EsCampur, EsTeler
-EsKelapa, EsBuah, EsAlpukat, EsMangga, EsMelon, EsCokelat, EsVanila, EsDoger, EsPuter, EsKrim, EsLilin, EsKepal, EsBlewah, EsKuwut, EsPisang, EsTape, EsDurian, EsNangka
-EsSirsak, GingerBeer, Kombucha, Kefir, Lassi, Ayran, Horchata, Sangria, Spritzer, Negro, Mojito, Margarita, Daiquiri, Pina, Cosmo, Manhattan, Martini, Whiskey
-Vodka, Rum, Tequila, Brandy, Cognac, Sake, Soju, Shochu, Baijiu, Arak, Tuak, Ciu, Sopi, Moke, Saguer, Matahari, Bulan, Bintang
-Planet, Komet, Meteor, Galaksi, Semesta, Awan, Hujan, Salju, Es, Kabut, Embun, Angin, Badai, Topan, Petir, Kilat, Pelangi, Gunung
-Bukit, Lembah, Dataran, Gurun, Hutan, Rimba, Belukar, Padang, Sabana, Rawa, Pantai, Pesisir, Teluk, Selat, Samudra, Laut, Danau, Sungai
-Gua, Goa, Karst, Delta, Muara, Pulau, Semenanjung, Tanjung, Nusa, Benua, Negara, Kota, Desa, Kampung, Dusun, Kabupaten, Provinsi, Kecamatan
-Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan, Terowongan, Bandara, Stasiun, Pelabuhan, Terminal, Halte, Pasar
+Espresso, Americano, Cappuccino, Latte, Macchiato, Mocha, Affogato, Ristretto, Frappe, Ovaltine, Milo, Kopi, Teh, Arabika, Robusta, Liberika, Ekselsa, Tubruk, Doppio, Lungo, Cortado, Dalgona, Mochaccino, Matcha, Oolong, Kamomil, Chai, Boba, Hojicha, Sencha, Genmaicha, Rooibos, Kombucha, Darjeeling, Kafein, Krimer, Ampas, Roasting, Sangrai, Grinder, Cupping, Cokelat, Luwak, Excelsa, Chemex, Roaster, Krema, Pu-Erh, Poci, Teko, Cangkir, Sachet, Decaf, Tanin, Seduhan, Ngopi
 ## Minuman Segar & Es
-Kefir, Kolak, Limun, Yakult, Lemonade, Air, Teh, Kopi, Susu, Jus, Soda, Cola, Sprite, Fanta, Yogurt, Matcha, Latte, Espresso
-Americano, Cappuccino, Mocha, Macchiato, Affogato, Coldbrew, Cortado, Ristretto, Lungo, Doppio, Frappuccino, Milkshake, Smoothie, Mocktail, Limonade, Squash, Frappe, Granita
-Slush, Float, Sundae, Boba, Cendol, Dawet, Sekoteng, Bandrek, Bajigur, Wedang, Jahe, Kencur, Kunyit, Serai, Pandan, Kapulaga, Cengkeh, Adas
-Pala, Jamu, Sinom, Pahitan, Cincau, Selasih, Madu, Sirup, Tonic, Gingerale, Rootbeer, Isotonik, Energy, Cocoa, Eggnog, Punch, Toddy, Robusta
-Arabika, Liberika, Excelsa, Sencha, Gyokuro, Hojicha, Genmai, Chai, Masala, Rooibos, Hibiscus, Lavender, Mate, Yerba, Assam, Ceylon, Darjeeling, Keemun
-Oolong, Jasmine, Rosella, Chamomile, Peppermint, EarlGrey, Piccolo, Breve, RedEye, BlackEye, Flatwhite, BirPletok, STMJ, ThaiTea, MilkTea, BubbleTea, EsJeruk, EsCampur
-EsTeler, EsKelapa, EsBuah, EsAlpukat, EsMangga, EsMelon, EsCokelat, EsVanila, EsDoger, EsPuter, EsKrim, EsLilin, EsKepal, EsBlewah, EsKuwut, EsPisang, EsTape, EsDurian
-EsNangka, EsSirsak, GingerBeer, Kombucha, Lassi, Ayran, Horchata, Sangria, Spritzer, Negro, Mojito, Margarita, Daiquiri, Pina, Cosmo, Manhattan, Martini, Whiskey
-Vodka, Rum, Tequila, Brandy, Cognac, Sake, Soju, Shochu, Baijiu, Arak, Tuak, Ciu, Sopi, Moke, Saguer, Matahari, Bulan, Bintang
-Planet, Komet, Meteor, Galaksi, Semesta, Awan, Hujan, Salju, Es, Kabut, Embun, Angin, Badai, Topan, Petir, Kilat, Pelangi, Gunung
-Bukit, Lembah, Dataran, Gurun, Hutan, Rimba, Belukar, Padang, Sabana, Rawa, Pantai, Pesisir, Teluk, Selat, Samudra, Laut, Danau, Sungai
-Gua, Goa, Karst, Delta, Muara, Pulau, Semenanjung, Tanjung, Nusa, Benua, Negara, Kota, Desa, Kampung, Dusun, Kabupaten, Provinsi, Kecamatan
-Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan, Terowongan, Bandara, Stasiun, Pelabuhan, Terminal, Halte, Pasar
+Limun, Lemonade, Kefir, Kolak, Cendol, Dawet, Cincau, Jus, Smoothie, Milkshake, Soda, Sirup, Degan, Bingsu, Kakigori, Slushie, Sorbet, Gelato, Mojito, Mocktail, Isotonik, Susu, Doger, Kopyor, Kuwut, Cola, Yoghurt, Lassi, Boba, Granita, Float, Punch, Squash, Nata, Kolang-Kaling, Selasih, Agar-Agar, Jeli
 ## Minuman Tradisional & Hangat
-STMJ, Legen, Ronde, Sinom, Angsle, Lahang, Saraba, Serbat, Bajigur, Bandrek, Sarabba, Sekoteng, Temulawak, Air, Teh, Kopi, Susu, Jus
-Soda, Cola, Sprite, Fanta, Yogurt, Yakult, Matcha, Latte, Espresso, Americano, Cappuccino, Mocha, Macchiato, Affogato, Coldbrew, Cortado, Ristretto, Lungo
-Doppio, Frappuccino, Milkshake, Smoothie, Mocktail, Limonade, Squash, Frappe, Granita, Slush, Float, Sundae, Boba, Cendol, Dawet, Kolak, Wedang, Jahe
-Kencur, Kunyit, Serai, Pandan, Kapulaga, Cengkeh, Adas, Pala, Jamu, Pahitan, Cincau, Selasih, Madu, Sirup, Tonic, Gingerale, Rootbeer, Isotonik
-Energy, Cocoa, Eggnog, Punch, Toddy, Robusta, Arabika, Liberika, Excelsa, Sencha, Gyokuro, Hojicha, Genmai, Chai, Masala, Rooibos, Hibiscus, Lavender
-Mate, Yerba, Assam, Ceylon, Darjeeling, Keemun, Oolong, Jasmine, Rosella, Chamomile, Peppermint, EarlGrey, Piccolo, Breve, RedEye, BlackEye, Flatwhite, BirPletok
-ThaiTea, MilkTea, BubbleTea, EsJeruk, EsCampur, EsTeler, EsKelapa, EsBuah, EsAlpukat, EsMangga, EsMelon, EsCokelat, EsVanila, EsDoger, EsPuter, EsKrim, EsLilin, EsKepal
-EsBlewah, EsKuwut, EsPisang, EsTape, EsDurian, EsNangka, EsSirsak, GingerBeer, Kombucha, Kefir, Lassi, Ayran, Horchata, Sangria, Spritzer, Negro, Mojito, Margarita
-Daiquiri, Pina, Cosmo, Manhattan, Martini, Whiskey, Vodka, Rum, Tequila, Brandy, Cognac, Sake, Soju, Shochu, Baijiu, Arak, Tuak, Ciu
-Sopi, Moke, Saguer, Matahari, Bulan, Bintang, Planet, Komet, Meteor, Galaksi, Semesta, Awan, Hujan, Salju, Es, Kabut, Embun, Angin
-Badai, Topan, Petir, Kilat, Pelangi, Gunung, Bukit, Lembah, Dataran, Gurun, Hutan, Rimba, Belukar, Padang, Sabana, Rawa, Pantai, Pesisir
-Teluk, Selat, Samudra, Laut, Danau, Sungai, Gua, Goa, Karst, Delta, Muara, Pulau, Semenanjung, Tanjung, Nusa, Benua, Negara, Kota
-Desa, Kampung, Dusun, Kabupaten, Provinsi, Kecamatan, Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan, Terowongan
+Bajigur, Bandrek, Sekoteng, Ronde, Angsle, Sarabba, Temulawak, Sinom, Serbat, STMJ, Legen, Lahang, Jamu, Wedang, Tuak, Brem, Secang, Lempuyang, Uwuh, Kolak, Pahitan, Brotowali, Cemue, Badeg, Saguer, Arak, Ciu, Tape, Pokak, Kakao

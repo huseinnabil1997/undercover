@@ -4,6 +4,38 @@ import { PASANGAN_KLASIK } from '../data/klasik';
 import { ambilDuaKata, catatRiwayat, jumlahKombinasiMeta, kombinasi2, kunciPasangan, pilihPasangan } from '../lib/game';
 import type { Kategori } from '../lib/types';
 
+// Subkategori nama (tokoh, judul, merek, tempat) boleh lebih dari satu kata.
+const SUBKAT_NAMA = new Set([
+  'Hero Mobile Legends',
+  'Item & Istilah Mobile Legends',
+  'Hero Dota 2',
+  'Karakter Genshin Impact',
+  'Agen Valorant',
+  'Hero Honor of Kings',
+  'Pokemon',
+  'Karakter Anime',
+  'Judul Anime',
+  'Istilah Anime',
+  'Karakter Film & Superhero',
+  'Film Hollywood',
+  'Film Indonesia',
+  'Film Animasi Disney & Pixar',
+  'Serial TV & Drama',
+  'Atlet & Pesepak Bola',
+  'Klub Sepak Bola',
+  'Tokoh Sejarah Indonesia',
+  'Penyanyi & Band Indonesia',
+  'Penyanyi & Grup Dunia',
+  'Provinsi',
+  'Aplikasi & Media Sosial',
+  'Merek Mobil & Motor',
+  'Kota & Kabupaten',
+  'Kota Dunia',
+  'Negara',
+  'Judul Game Populer',
+  'Tempat Wisata Indonesia',
+]);
+
 async function muatSemua(): Promise<Kategori[]> {
   return Promise.all(META_KATEGORI.map(async (m) => (await PEMUAT_KATEGORI[m.id]()).default));
 }
@@ -40,6 +72,30 @@ describe('bank kata', () => {
           expect(w).not.toMatch(/[\u2014|]/);
         }
       }
+    }
+  });
+
+  it('kata umum satu kata (tanpa spasi, tanpa CamelCase), nama boleh lebih dari satu kata', async () => {
+    let nama = 0;
+    for (const k of await muatSemua()) {
+      for (const s of k.subkategori) {
+        if (SUBKAT_NAMA.has(s.nama)) {
+          nama++;
+          continue;
+        }
+        for (const w of s.kata) {
+          expect(w, `${k.id}/${s.nama}`).not.toMatch(/\s/);
+          expect(w, `${k.id}/${s.nama}`).not.toMatch(/[a-z][A-Z]/);
+        }
+      }
+    }
+    expect(nama).toBe(SUBKAT_NAMA.size);
+  });
+
+  it('pasangan klasik satu kata', () => {
+    for (const [a, b] of PASANGAN_KLASIK) {
+      expect(a).not.toMatch(/\s/);
+      expect(b).not.toMatch(/\s/);
     }
   });
 

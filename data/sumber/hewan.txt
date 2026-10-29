@@ -1,57 +1,9 @@
-# hewan | Hewan
+﻿# hewan | Hewan
 ## Mamalia
-Gnu, Owa, Yak, Ajag, Anoa, Ibex, Kera, Kuda, Kudu, Lynx, Paus, Puma, Rusa, Sapi, Unta, Babun, Badak, Bagal
-Beruk, Bison, Codot, Dingo, Domba, Gajah, Gazel, Hyena, Koala, Lemur, Llama, Luwak, Moose, Okapi, Panda, Pesut, Rakun, Rubah
-Singa, Sloth, Tapir, Tikus, Tupai, Zebra, Alpaka, Anjing, Bajing, Beluga, Bonobo, Dugong, Duyung, Ekidna, Ferret, Gorila, Impala, Jaguar
-Kalong, Kancil, Kerbau, Kijang, Kucing, Kukang, Kuskus, Landak, Lutung, Marmut, Mencit, Monyet, Muncak, Musang, Oposum, Possum, Sigung, Walabi
-Walrus, Wombat, Antelop, Banteng, Beruang, Celurut, Cheetah, Hamster, Harimau, Jerapah, Kambing, Kanguru, Keledai, Kelinci, Linsang, Manatee, Mandril, Meerkat
-Narwhal, Siamang, Tarsius, Terwelu, Armadilo, Bekantan, Cerpelai, Garangan, Hedgehog, Kungkang, Mongoose, Pelanduk, Platipus, Serigala, Simpanse, Binturong, Kelelawar, Menjangan
-Orangutan, Chinchilla, Tenggiling, Lumba-Lumba, Trenggiling, Berang-Berang, Macan, Leopard, Coyote, Platypus, Babi, Celeng, Alpaca, Hipopotamus, Orca, BerangBerang, Armadillo, Baboon
-Macaque, Gerbil, Squirrel, Chipmunk, Mole, Shrew, Muskox, Reindeer, Elk, Caribou, Elang, Rajawali, Falcon, Hawk, Alap, BurungHantu, Owl, Gagak
-Crow, Raven, Jalak, Beo, Kakaktua, Nuri, Lovebird, Kenari, Parkit, Merpati, Dara, Pipit, Gelatik, Murai, Kutilang, Cenderawasih, Kasuari, Kiwi
-Penguin, Pelican, Bangau, Stork, Heron, Ibis, Flamingo, Angsa, Bebek, Itik, Entog, Ayam, Kalkun, Puyuh, Merak, Peacock, Pheasant, Quail
-Grouse, Ikan, Hiu, Pari, Salmon, Tuna, Tongkol, Kakap, Nila, Gurame, Lele, Patin, Bandeng, Sarden, Makarel, Kod, Trout, Carp
-Koi, Cupang, Guppy, Molly, Neon, Discus, Arwana, Lobster, Udang, Kepiting, Rajungan, Tirams, Remis, Siput, Keong, Cumi, Gurita, Sotong
-Jellyfish, Ubur, BintangLaut, BulutangkisLaut, Teripang, Anemon, Koral, Polip, Sponge, Kupu, Ngengat, Capung, Lalat, Nyamuk
+Kucing, Anjing, Harimau, Singa, Jaguar, Cheetah, Puma, Lynx, Serigala, Rubah, Ajag, Hyena, Beruang, Panda, Rakun, Musang, Luwak, Garangan, Berang-Berang, Linsang, Binturong, Gajah, Badak, Jerapah, Zebra, Kuda, Keledai, Bagal, Unta, Llama, Alpaka, Sapi, Kerbau, Banteng, Anoa, Bison, Yak, Domba, Kambing, Kijang, Rusa, Kancil, Pelanduk, Antelop, Gazel, Moose, Babirusa, Tapir, Trenggiling, Landak, Kelinci, Terwelu, Tikus, Mencit, Tupai, Bajing, Hamster, Marmut, Chinchilla, Kelelawar, Kalong, Codot, Monyet, Kera, Lutung, Bekantan, Orangutan, Gorila, Simpanse, Bonobo, Owa, Siamang, Tarsius, Kukang, Beruk, Yaki, Babun, Mandril, Kanguru, Walabi, Koala, Wombat, Kuskus, Oposum, Platipus, Ekidna, Sigung, Cerpelai, Paus, Lumba-Lumba, Pesut, Dugong, Walrus, Manatee, Narwhal, Beluga, Armadilo, Sloth, Lemur, Meerkat, Okapi, Gnu, Impala, Kudu, Muncak, Celurut, Hedgehog, Ferret, Dingo, Menjangan, Ibex, Babi, Celeng, Leopard, Serval, Karakal, Oryx, Springbok, Gaur, Quokka, Orca, Bobcat, Koyote, Kapusin, Marmoset, Tamarin, Gerbil, Kapibara, Mamut, Poni, Karibu, Sambar, Bulldog, Pudel, Chihuahua, Husky, Dalmatian, Beagle, Pomeranian, Rottweiler, Doberman, Labrador, Herder, Pitbull, Corgi, Shih-Tzu, Pug, Dachshund, Samoyed, Anggora, Persia, Sphynx, Ragdoll, Mustang, Etawa, Merino, Jerboa, Macan, Citah, Ocelot, Hiena, Teledu, Biri-Biri, Wildebeest, Oriks, Ibeks, Chinchila, Kubung, Napu
 ## Burung
-Beo, Emu, Ayam, Itik, Kuau, Nuri, Angsa, Bebek, Betet, Camar, Elang, Entok, Gagak, Jalak, Kacer, Maleo, Mamoa, Merak
-Murai, Pipit, Pleci, Puter, Puyuh, Sirtu, Sriti, Takur, Walet, Wambi, Bangau, Blekok, Bondol, Cangak, Cendet, Ciblek, Emprit, Gereja
-Gosong, Julang, Kalkun, Kenari, Kucica, Kuntul, Mandar, Manyar, Parkit, Pentet, Poksai, Tempua, Trinil, Trucuk, Belibis, Cekakak, Celepuk, Derkuku
-Enggang, Gelatik, Kapinis, Kasuari, Kipasan, Kolibri, Merpati, Pelatuk, Pelikan, Penguin, Perkici, Pinguin, Prenjak, Sikatan, Tekukur, Albatros, Flamingo, Kacamata
-Kakaktua, Kepodang, Kutilang, Lovebird, Perkutut, Rajawali, Rangkong, Sempidan, Alap-Alap, Cicakrowo, Cendrawasih, Cenderawasih, Layang-Layang, Kucing, Anjing, Harimau, Singa, Macan
-Cheetah, Leopard, Jaguar, Lynx, Puma, Serigala, Coyote, Rubah, Hyena, Beruang, Panda, Koala, Kanguru, Wombat, Platypus, Gajah, Badak, Kuda
-Zebra, Keledai, Tapir, Babi, Celeng, Rusa, Kijang, Menjangan, Antelop, Gazelle, Banteng, Kerbau, Sapi, Domba, Kambing, Unta, Llama, Alpaca
-Jerapah, Okapi, Hipopotamus, Walrus, Lumba, Paus, Orca, Dugong, Manatee, Berang, Landak, Trenggiling, Armadillo, Kuskus, Monyet, Bekantan, Orangutan, Gorila
-Simpanse, Bonobo, Baboon, Macaque, Tarsius, Kelinci, Marmut, Hamster, Gerbil, Chinchilla, Squirrel, Tupai, Chipmunk, Bajing, Tikus, Mole, Shrew, Bison
-Yak, Muskox, Reindeer, Elk, Moose, Caribou, Falcon, Hawk, AlapAlap, BurungHantu, Owl, Crow, Raven, Dara, Kiwi, Pelican, Stork, Heron
-Entog, Peacock, Pheasant, Quail, Grouse, Hiu, Pari, Salmon, Tuna, Tongkol, Kakap, Kerapu, Nila, Gurame, Lele, Patin, Bandeng, Sarden
-Makarel, Kod, Trout, Carp, Koi, Cupang, Guppy, Molly, Neon, Discus, Arwana, Lobster, Udang, Kepiting, Rajungan, Kerang, Tirams, Remis
-Siput, Keong, Cumi, Gurita, Sotong, Jellyfish, Ubur, BintangLaut, BulutangkisLaut, Teripang, Anemon, Koral, Polip, Sponge
+Ayam, Bebek, Angsa, Entok, Kalkun, Puyuh, Merpati, Perkutut, Tekukur, Derkuku, Elang, Rajawali, Alap-Alap, Celepuk, Gagak, Beo, Jalak, Murai, Kacer, Kenari, Lovebird, Parkit, Kakaktua, Nuri, Perkici, Betet, Merak, Cenderawasih, Rangkong, Julang, Enggang, Kasuari, Emu, Pinguin, Bangau, Kuntul, Blekok, Cangak, Pelikan, Flamingo, Camar, Albatros, Walet, Sriti, Layang-Layang, Pipit, Gereja, Emprit, Bondol, Kutilang, Kepodang, Kolibri, Pelatuk, Takur, Cekakak, Trucukan, Prenjak, Ciblek, Cendet, Pentet, Kacamata, Pleci, Kapinis, Itik, Belibis, Mandar, Ayam-Ayaman, Gelatik, Manyar, Tempua, Kipasan, Sikatan, Kucica, Poksai, Wambi, Maleo, Mamoa, Gosong, Kuau, Sempidan, Puter, Cucakrowo, Trinil, Branjangan, Anis, Kondor, Hering, Pegar, Bekisar, Cemani, Pelung, Serama, Punai, Pergam, Ibis, Bluwok, Cikalang, Tukan, Makaw, Srigunting, Kirik-Kirik, Kedasih, Bubut, Sepah, Cinenen, Decu, Gemak, Kowak, Kokokan, Kangkok, Ruak-Ruak, Kangkareng, Kiwi, Pecuk, Cerek, Kedidi, Pekaka, Wiwik, Serak, Beluk, Cabak, Walik, Delimukan, Tledekan, Bentet, Nasar, Perling
 ## Ikan & Hewan Air
-Buaya, Bulus, Katak, Kodok, Penyu, Remis, Tiram, Udang, Berudu, Gurita, Karang, Kerang, Sotong, Lobster, Simping, Aligator, Kelomang, Kepiting
-Rajungan, Teripang, Cumi-Cumi, Kura-Kura, Labi-Labi, Senyulong, Ubur-Ubur, Salamander, Kucing, Anjing, Harimau, Singa, Macan, Cheetah, Leopard, Jaguar, Lynx, Puma
-Serigala, Coyote, Rubah, Hyena, Beruang, Panda, Koala, Kanguru, Wombat, Platypus, Gajah, Badak, Kuda, Zebra, Keledai, Tapir, Babi, Celeng
-Rusa, Kijang, Menjangan, Antelop, Gazelle, Banteng, Kerbau, Sapi, Domba, Kambing, Unta, Llama, Alpaca, Jerapah, Okapi, Hipopotamus, Walrus, Lumba
-Paus, Orca, Dugong, Manatee, Berang, Landak, Trenggiling, Armadillo, Kuskus, Monyet, Bekantan, Orangutan, Gorila, Simpanse, Bonobo, Baboon, Macaque, Lemur
-Tarsius, Kelinci, Marmut, Hamster, Gerbil, Chinchilla, Squirrel, Tupai, Chipmunk, Bajing, Tikus, Mole, Shrew, Bison, Yak, Muskox, Reindeer, Elk
-Moose, Caribou, Elang, Rajawali, Falcon, Hawk, Alap, BurungHantu, Owl, Gagak, Crow, Raven, Jalak, Beo, Kakaktua, Nuri, Lovebird, Kenari
-Parkit, Merpati, Dara, Pipit, Gelatik, Murai, Kutilang, Cenderawasih, Kasuari, Kiwi, Penguin, Pelican, Bangau, Stork, Heron, Ibis, Flamingo, Angsa
-Bebek, Itik, Entog, Ayam, Kalkun, Puyuh, Merak, Peacock, Pheasant, Quail, Grouse, Ikan, Hiu, Pari, Salmon, Tuna, Tongkol, Kakap
-Kerapu, Nila, Gurame, Lele, Patin, Bandeng, Sarden, Makarel, Trout, Carp, Koi, Cupang, Guppy, Molly, Neon, Discus, Arwana, Siput
-Keong, Jellyfish, BintangLaut, BulutangkisLaut, Anemon, Koral, Polip, Sponge, Kupu, Ngengat, Capung, Lalat, Nyamuk, Lebah, Tawon, Semut, Rayap, Kecoa
-Belalang, Jangkrik, Tonggeret, Kunang, Kumbang, Kepik, Walang, Laba, Kalajengking, Lipan, KakiSeribu, Cacing, Lintah, Planaria, Hydra, Amoeba, Paramecium, Newt
-Axolotl, Kadal, Cicak, Tokek, Biawak, Komodo, Iguana, Chameleon, Alligator, Caiman, Gharial, Ular, Piton, Sanca
+Gurita, Cumi-Cumi, Sotong, Udang, Lobster, Kepiting, Rajungan, Kelomang, Kerang, Tiram, Remis, Simping, Teripang, Ubur-Ubur, Karang, Penyu, Kura-Kura, Labi-Labi, Bulus, Katak, Kodok, Berudu, Salamander, Buaya, Aligator, Senyulong, Lele, Nila, Gurame, Mujair, Patin, Bandeng, Tongkol, Tuna, Cakalang, Kakap, Kerapu, Baronang, Bawal, Gabus, Toman, Belut, Sidat, Tawes, Nilem, Betok, Sepat, Tambakan, Wader, Lundu, Baung, Jelawat, Arwana, Koi, Koki, Cupang, Guppy, Molly, Platy, Manfish, Discus, Louhan, Botia, Sapu-Sapu, Tetra, Hiu, Pari, Marlin, Todak, Layaran, Tenggiri, Kembung, Selar, Layang, Teri, Lemuru, Tembang, Sarden, Makarel, Salmon, Kuwe, Kurisi, Swanggi, Napoleon, Giru, Julung, Belanak, Sembilang, Gulamah, Manyung, Senangin, Layur, Petek, Buntal, Belida, Semah, Bilih, Betutu, Lencam, Kurau, Kuniran, Tembakul, Anemon, Kima, Lokan, Abalon, Gonggong, Rebon, Windu, Vaname, Yuyu, Nautilus, Axolotl, Krill, Plankton, Mas, Neon, Oskar, Kijing, Cumi, Spons, Trout, Kod, Haring, Barakuda, Julung-Julung, Peperek, Terubuk, Lais, Tapah, Kakatua, Morai, Belangkas, Kecebong
 ## Serangga & Hewan Kecil
-Agas, Kutu, Ular, Ulat, Cicak, Gegat, Kadal, Keong, Kepik, Lalat, Laron, Lebah, Luing, Pacet, Rayap, Semut, Siput, Tawon
-Tokek, Biawak, Cacing, Caplak, Capung, Iguana, Kecoak, Komodo, Lintah, Nyamuk, Rengit, Tomcat, Tungau, Wereng, Bekicot, Bunglon, Gangsir, Kumbang
-Ngengat, Belalang, Jangkrik, Kelabang, Kepinding, Kepompong, Kupu-Kupu, Laba-Laba, Tarantula, Tonggeret, Salamander, Undur-Undur, Kalajengking, Gajah-Gajahan, Kunang-Kunang, Kucing, Anjing, Harimau
-Singa, Macan, Cheetah, Leopard, Jaguar, Lynx, Puma, Serigala, Coyote, Rubah, Hyena, Beruang, Panda, Koala, Kanguru, Wombat, Platypus, Badak
-Kuda, Zebra, Keledai, Tapir, Babi, Celeng, Rusa, Kijang, Menjangan, Antelop, Gazelle, Banteng, Kerbau, Sapi, Domba, Kambing, Unta, Llama
-Alpaca, Jerapah, Okapi, Hipopotamus, Walrus, Lumba, Paus, Orca, Dugong, Manatee, Berang, Landak, Trenggiling, Armadillo, Kuskus, Monyet, Bekantan, Orangutan
-Gorila, Simpanse, Bonobo, Baboon, Macaque, Lemur, Tarsius, Kelinci, Marmut, Hamster, Gerbil, Chinchilla, Squirrel, Tupai, Chipmunk, Bajing, Tikus, Mole
-Shrew, Bison, Yak, Muskox, Reindeer, Elk, Moose, Caribou, Elang, Rajawali, Falcon, Hawk, Alap, BurungHantu, Owl, Gagak, Crow, Raven
-Jalak, Beo, Kakaktua, Nuri, Lovebird, Kenari, Parkit, Merpati, Dara, Pipit, Gelatik, Murai, Kutilang, Cenderawasih, Kasuari, Kiwi, Penguin, Pelican
-Bangau, Stork, Heron, Ibis, Flamingo, Angsa, Bebek, Itik, Entog, Ayam, Kalkun, Puyuh, Merak, Peacock, Pheasant, Quail, Grouse, Ikan
-Hiu, Pari, Salmon, Tuna, Tongkol, Kakap, Kerapu, Nila, Gurame, Lele, Patin, Bandeng, Sarden, Makarel, Kod, Trout, Carp, Koi
-Cupang, Guppy, Molly, Neon, Discus, Arwana, Lobster, Udang, Kepiting, Rajungan, Kerang, Tirams, Remis, Cumi, Gurita, Sotong, Jellyfish, Ubur
-BintangLaut, BulutangkisLaut, Teripang, Anemon, Koral, Polip, Sponge, KunangKunang, Walang, Lipan, KakiSeribu, Planaria, Hydra, Amoeba
+Semut, Rayap, Lebah, Tawon, Kumbang, Kepik, Kunang-Kunang, Kupu-Kupu, Ngengat, Capung, Belalang, Jangkrik, Gangsir, Tonggeret, Kecoak, Lalat, Nyamuk, Kutu, Tungau, Caplak, Laba-Laba, Kalajengking, Kelabang, Luing, Ulat, Kepompong, Cacing, Lintah, Pacet, Siput, Bekicot, Keong, Kepinding, Wereng, Gajah-Gajahan, Undur-Undur, Tomcat, Laron, Gegat, Rengit, Agas, Tarantula, Cicak, Tokek, Kadal, Bunglon, Komodo, Iguana, Ular, Kwangwung, Tabuhan, Rangrang, Kroto, Tuma, Pinjal, Belatung, Orong-Orong, Mantis, Ketonggeng, Kobra, Piton, Weling, Welang, Mamba, Soa-Soa, Bengkarung, Uret, Klanceng, Larva, Garengpung, Lipan, Luwing, Anggang-Anggang, Kalacemeti, Jentik, Nimfa, Pupa, Kinjeng, Lundi

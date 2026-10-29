@@ -9,6 +9,19 @@ Pemakaian: python scripts/generate_words.py <folder-sumber>
 """
 import json, os, re, sys
 
+# Subkategori berisi nama (tokoh, judul, merek, tempat) boleh lebih dari satu kata.
+# Subkategori kata umum wajib satu kata: tanpa spasi dan tanpa CamelCase tempelan.
+NAMA_SUBKAT = {
+    'Hero Mobile Legends', 'Item & Istilah Mobile Legends', 'Hero Dota 2', 'Karakter Genshin Impact',
+    'Agen Valorant', 'Hero Honor of Kings', 'Pokemon', 'Karakter Anime', 'Judul Anime', 'Istilah Anime',
+    'Karakter Film & Superhero', 'Film Hollywood', 'Film Indonesia', 'Film Animasi Disney & Pixar',
+    'Serial TV & Drama', 'Atlet & Pesepak Bola', 'Klub Sepak Bola', 'Tokoh Sejarah Indonesia',
+    'Penyanyi & Band Indonesia', 'Penyanyi & Grup Dunia', 'Provinsi', 'Aplikasi & Media Sosial',
+    'Merek Mobil & Motor', 'Kota & Kabupaten', 'Kota Dunia', 'Negara', 'Judul Game Populer',
+    'Tempat Wisata Indonesia',
+}
+CAMEL = re.compile(r'[a-z][A-Z]')
+
 src = sys.argv[1]
 out = os.path.join(os.path.dirname(__file__), '..', 'data', 'words')
 os.makedirs(out, exist_ok=True)
@@ -25,15 +38,19 @@ for fn in os.listdir(src):
         continue
     cid = name = None
     subs = []
-    for line in open(os.path.join(src, fn), encoding='utf-8'):
+    for line in open(os.path.join(src, fn), encoding='utf-8-sig'):
         line = line.strip()
         if line.startswith('## '):
             subs.append({'nama': line[3:].strip(), 'kata': []})
         elif line.startswith('# '):
             cid, name = [p.strip() for p in line[2:].split('|')]
         elif line and subs:
-            subs[-1]['kata'] += [w.strip() for w in line.split(',') if w.strip() and ' ' not in w.strip()]
+            subs[-1]['kata'] += [w.strip() for w in line.split(',') if w.strip()]
     for s in subs:
+        if s['nama'] not in NAMA_SUBKAT:
+            salah = [w for w in s['kata'] if ' ' in w or CAMEL.search(w)]
+            if salah:
+                sys.exit(f"{fn} / {s['nama']}: kata umum harus satu kata: {', '.join(salah[:10])}")
         seen, clean = set(), []
         for w in s['kata']:
             w = re.sub(r'\s+', ' ', w)

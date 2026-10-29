@@ -1,57 +1,9 @@
-# makanan | Makanan
+﻿# makanan | Makanan
 ## Masakan Nusantara
-Kolo, Urap, Botok, Buras, Burgo, Cilok, Cilor, Cimol, Gudeg, Kalio, Kebab, Kikil, Konro, Lakso, Lawar, Lepet, Lotek, Misoa
-Misro, Model, Rabeg, Rawon, Sepat, Sroto, Tauto, Timlo, Bakmoy, Capcay, Cireng, Combro, Docang, Gangan, Kaledo, Krecek, Laksan, Lemang
-Papeda, Pempek, Seblak, Siomay, Tekwan, Batagor, Ilabulo, Karedok, Ketupat, Lontong, Naniura, Rendang, Saksang, Bebalung, Brenebon, Brongkos, Gorengan, Ketoprak
-Tinutuan, Tongseng, Arem-Arem, Fuyunghai, Gado-Gado, Kohu-Kohu, Otak-Otak, Pallubasa, Tengkleng, Serombotan, Celimpungan, Gulai, Dendeng, Soto, Coto, Semur, Empal, Pecel
-Lengko, Beulangong, Catemak, Mangut, Orek, Oseng, Martabak, Lumpia, Risoles, Pastel, Kroket, Panada, Jalangkote, Klepon, Getuk, Tiwul, Gatot, Lemper
-Nagasari, Wajik, Jenang, Dodol, Serabi, Surabi, Apem, Pukis, Cucur, Lapis, Bika, Wingko, Bakpia, Yangko, Geplak, Jadah, Cenil, Lupis
-Clorot, Grontol, Gandos, Ongol, Rempeyek, Semprong, Gapit, Nastar, Kastengel, Semprit, Sagon, Kue, Bolu, Donat, Croissant, Brownies, Cheesecake, Puding
-Jeli, Bakso, Basreng, Makaroni, Ramen, Spageti, Fettucine, Lasagna, Dimsum, Hakau, Gyoza, Wonton, Bakpao, Mantau, Kuotie, Sushi, Onigiri, Takoyaki
-Okonomiyaki, Pizza, Burger, Hotdog, Sandwich, Steak, Katsu, Teriyaki, Yakiniku, Bulgogi, Shawarma, Risotto, Omelet, Nugget, Sosis, Kornet, Abon, Chikuwa
-Odeng, Tteokbokki, Kimbab, Tempura, Sashimi, Yakitori, Karaage, Sate, Sop, Sayur, Tumis, Cah, Pepes, Bakar, Rebus, Panggang, Kukus, Bumbu
-Sambal, Terasi, Matah, Bajak, Roa, Pete, Rica, Woku, Arsik, Gohu, Fufu, Nasi, Mi, Bihun, Kwetiau, Soun, Bubur, Keripik
-Kerupuk, Rengginang, Emping, Kuaci, Popcorn, Permen, Wafer, Biskuit, Kukis, Roti, Churros, Marshmallow, Granola, Sereal, Pilus, Lanting, Sumpia, Cakwe
-Odading, Crepes, Corndog, Pentol, Sempol, Gehu, Weci, Heci, Getas, Gemblong, Opak, Bipang, Jipang, Enting
+Rendang, Kalio, Konro, Pallubasa, Rawon, Brongkos, Tongseng, Tengkleng, Gudeg, Krecek, Rabeg, Gado-Gado, Karedok, Ketoprak, Lotek, Tinutuan, Papeda, Pempek, Tekwan, Celimpungan, Laksan, Botok, Naniura, Saksang, Kohu-Kohu, Capcay, Kikil, Gangan, Seblak, Fuyunghai, Bakmoy, Misoa, Buras, Lemang, Ketupat, Lontong, Arem-Arem, Lepet, Combro, Misro, Gorengan, Cireng, Cilok, Cimol, Cilor, Batagor, Siomay, Otak-Otak, Kebab, Urap, Lawar, Serombotan, Sroto, Tauto, Docang, Bebalung, Sepat, Kolo, Kaledo, Ilabulo, Timlo, Lakso, Burgo, Brenebon, Soto, Sate, Gulai, Opor, Pecel, Rujak, Pepes, Lodeh, Asem-Asem, Sop, Perkedel, Tempe, Tahu, Bacem, Balado, Semur, Rica-Rica, Woku, Tinorangsak, Mangut, Brengkes, Pindang, Pallumara, Coto, Kapurung, Sinonggi, Betutu, Plecing, Ares, Liwet, Kebuli, Biryani, Bubur, Lalapan, Trancam, Asinan, Tumis, Bakwan, Mendoan, Empal, Gepuk, Dendeng, Abon, Babat, Gohu, Arsik, Se'i, Pecak, Krengsengan, Bistik, Galantin, Rolade, Laksa, Rames, Sambal, Uduk, Tumpeng, Oseng-Oseng, Cah, Jeroan, Pesmol, Acar, Serundeng, Pucung, Iga, Sengkel, Tetelan, Gecok, Peda, Jambal, Ebi, Terasi, Petis, Tauco, Oncom, Gembus, Dage, Bongko, Gimbal, Pelas, Buntil, Bobor, Kemplang, Tempoyak, Penyet, Geprek, Kremes
 ## Mi, Bakso & Olahan
-Gyoza, Hakau, Odeng, Pizza, Ramen, Sosis, Sushi, Bakpao, Burger, Dimsum, Hotdog, Kimbab, Kornet, Kuotie, Mantau, Nugget, Omelet, Wonton
-Bulgogi, Chikuwa, Lasagna, Onigiri, Risotto, Spageti, Fishball, Makaroni, Sandwich, Shawarma, Sukiyaki, Takoyaki, Yakiniku, Fettucine, Tteokbokki, Okonomiyaki, Shabu-Shabu, Rendang
-Gulai, Kalio, Dendeng, Rawon, Soto, Coto, Konro, Pallubasa, Gudeg, Krecek, Tongseng, Tengkleng, Semur, Empal, Rabeg, Pecel, Ketoprak, Lotek
-Urap, Lawar, Seblak, Pempek, Tekwan, Model, Laksan, Papeda, Tinutuan, Saksang, Kaledo, Ilabulo, Timlo, Tauto, Sroto, Docang, Lengko, Beulangong
-Catemak, Kolo, Bebalung, Sepat, Brenebon, Mangut, Orek, Oseng, Capcay, Fuyunghai, Bakmoy, Martabak, Lumpia, Risoles, Pastel, Kroket, Panada, Jalangkote
-Klepon, Getuk, Tiwul, Gatot, Lemper, Nagasari, Wajik, Jenang, Dodol, Serabi, Surabi, Apem, Pukis, Cucur, Lapis, Bika, Wingko, Bakpia
-Yangko, Geplak, Jadah, Cenil, Lupis, Clorot, Grontol, Gandos, Ongol, Rempeyek, Semprong, Gapit, Nastar, Kastengel, Semprit, Sagon, Kue, Bolu
-Donat, Croissant, Brownies, Cheesecake, Puding, Jeli, Gorengan, Cireng, Cilok, Cimol, Cilor, Batagor, Siomay, Bakso, Basreng, Steak, Katsu, Teriyaki
-Kebab, Abon, Tempura, Sashimi, Yakitori, Karaage, Sate, Sop, Sayur, Tumis, Cah, Pepes, Botok, Bakar, Rebus, Panggang, Kukus, Bumbu
-Sambal, Terasi, Matah, Bajak, Roa, Pete, Rica, Woku, Arsik, Naniura, Gohu, Kohu, Fufu, Nasi, Mi, Bihun, Kwetiau, Soun
-Misoa, Ketupat, Lontong, Buras, Lemang, Arem, Lepet, Bubur, Keripik, Kerupuk, Rengginang, Emping, Kuaci, Popcorn, Permen, Wafer, Biskuit, Kukis
-Roti, Churros, Marshmallow, Granola, Sereal, Pilus, Lanting, Sumpia, Cakwe, Odading, Crepes, Corndog, Pentol, Sempol, Gehu, Weci, Heci, Getas
-Gemblong, Opak, Bipang, Jipang, Enting, Kipang, Sale, Manisan, Rujak, Asinan, Tempe, Tahu, Oncom, Tape
+Ramen, Spageti, Makaroni, Fettucine, Lasagna, Dimsum, Hakau, Bakpao, Mantau, Kuotie, Gyoza, Wonton, Sosis, Nugget, Kornet, Fishball, Chikuwa, Odeng, Tteokbokki, Kimbab, Sushi, Onigiri, Takoyaki, Okonomiyaki, Pizza, Burger, Hotdog, Sandwich, Yakiniku, Shabu-Shabu, Sukiyaki, Bulgogi, Shawarma, Risotto, Omelet, Bakso, Mi, Bihun, Kwetiau, Soun, Bakmi, Lomie, Ifumi, Pangsit, Cuanki, Udon, Soba, Ramyeon, Pho, Japchae, Jajangmyeon, Yakisoba, Pasta, Penne, Fusilli, Ravioli, Linguine, Carbonara, Bolognese, Gnocchi, Tortellini, Ham, Bacon, Salami, Pepperoni, Surimi, Kamaboko, Crabstick, Tempura, Katsu, Karaage, Teriyaki, Yakitori, Gyudon, Sashimi, Tamagoyaki, Ceker, Bibimbap, Kimchi, Samgyeopsal, Dakgalbi, Taco, Burrito, Nachos, Quesadilla, Falafel, Steak, Paella, Somen, Misoa, Mihun, Fettuccine, Pesto, Marinara, Cilok, Siomay, Batagor, Pempek, Tekwan, Otak-Otak, Dendeng, Abon, Kimbap, Lumpia, Mandu, Oyakodon, Katsudon, Donburi, Jjampong, Naengmyeon, Laksa, Tomyam, Capcay, Fuyunghai, Koloke, Enchilada, Kebab
 ## Kue Tradisional
-Opak, Cenil, Dodol, Gatot, Getuk, Jadah, Lupis, Tiwul, Wajik, Bakpia, Gandos, Geplak, Jenang, Klepon, Kroket, Lemper, Panada, Pastel
-Serabi, Surabi, Yangko, Grontol, Risoles, Nagasari, Onde-Onde, Jalangkote, Rendang, Gulai, Kalio, Dendeng, Rawon, Soto, Coto, Konro, Pallubasa, Gudeg
-Krecek, Tongseng, Tengkleng, Semur, Empal, Rabeg, Pecel, Ketoprak, Lotek, Urap, Lawar, Seblak, Pempek, Tekwan, Model, Laksan, Papeda, Tinutuan
-Saksang, Kaledo, Ilabulo, Timlo, Tauto, Sroto, Docang, Lengko, Beulangong, Catemak, Kolo, Bebalung, Sepat, Brenebon, Mangut, Orek, Oseng, Capcay
-Fuyunghai, Bakmoy, Martabak, Lumpia, Apem, Pukis, Cucur, Lapis, Bika, Wingko, Clorot, Ongol, Rempeyek, Semprong, Gapit, Nastar, Kastengel, Semprit
-Sagon, Kue, Bolu, Donat, Croissant, Brownies, Cheesecake, Puding, Jeli, Gorengan, Cireng, Cilok, Cimol, Cilor, Batagor, Siomay, Bakso, Basreng
-Makaroni, Ramen, Spageti, Fettucine, Lasagna, Dimsum, Hakau, Gyoza, Wonton, Bakpao, Mantau, Kuotie, Sushi, Onigiri, Takoyaki, Okonomiyaki, Pizza, Burger
-Hotdog, Sandwich, Steak, Katsu, Teriyaki, Yakiniku, Bulgogi, Kebab, Shawarma, Risotto, Omelet, Nugget, Sosis, Kornet, Abon, Chikuwa, Odeng, Tteokbokki
-Kimbab, Tempura, Sashimi, Yakitori, Karaage, Sate, Sop, Sayur, Tumis, Cah, Pepes, Botok, Bakar, Rebus, Panggang, Kukus, Bumbu, Sambal
-Terasi, Matah, Bajak, Roa, Pete, Rica, Woku, Arsik, Naniura, Gohu, Kohu, Fufu, Nasi, Mi, Bihun, Kwetiau, Soun, Misoa
-Ketupat, Lontong, Buras, Lemang, Arem, Lepet, Bubur, Keripik, Kerupuk, Rengginang, Emping, Kuaci, Popcorn, Permen, Wafer, Biskuit, Kukis, Roti
-Churros, Marshmallow, Granola, Sereal, Pilus, Lanting, Sumpia, Cakwe, Odading, Crepes, Corndog, Pentol, Sempol, Gehu, Weci, Heci, Getas, Gemblong
-Bipang, Jipang, Enting, Kipang, Sale, Manisan, Rujak, Asinan, Tempe, Tahu, Oncom, Tape, Singkong, Ubi
+Klepon, Onde-Onde, Serabi, Getuk, Tiwul, Gatot, Lemper, Nagasari, Wajik, Jenang, Dodol, Kroket, Panada, Jalangkote, Lupis, Cenil, Bakpia, Yangko, Geplak, Jadah, Opak, Gandos, Grontol, Lapis, Bolu, Apem, Putu, Cucur, Clorot, Mendut, Bugis, Talam, Pukis, Carabikang, Wingko, Lempok, Kastengel, Nastar, Semprit, Sagon, Bangkit, Mochi, Ongol-Ongol, Candil, Sengkulun, Awug, Bingka, Jongkong, Pancong, Rangi, Gandasturi, Pepe, Dongkal, Barongko, Klappertaart, Lalampa, Apang, Bagea, Timphan, Adee, Bhoi, Lapek, Pinyaram, Galamai, Ombus-Ombus, Pai, Kicak, Uli, Wajit, Tape, Bika, Semprong, Pia, Ampyang, Jipang, Lemang, Lepet, Lontong, Ketupat, Buras, Arem-Arem, Sumping, Bandros, Leker, Gapit
 ## Camilan & Jajanan
-Gehu, Heci, Jeli, Weci, Cakwe, Chiki, Donat, Getas, Kuaci, Kukis, Pilus, Wafer, Bipang, Crepes, Gulali, Jipang, Pentol, Permen
-Sempol, Sereal, Sumpia, Basreng, Biskuit, Churros, Corndog, Granola, Keciput, Lanting, Odading, Ote-Ote, Popcorn, Yoghurt, Brownies, Gemblong, Agar-Agar, Croissant
-Cheesecake, Rengginang, Marshmallow, Enting-Enting, Rendang, Gulai, Kalio, Dendeng, Rawon, Soto, Coto, Konro, Pallubasa, Gudeg, Krecek, Tongseng, Tengkleng, Semur
-Empal, Rabeg, Pecel, Ketoprak, Lotek, Urap, Lawar, Seblak, Pempek, Tekwan, Model, Laksan, Papeda, Tinutuan, Saksang, Kaledo, Ilabulo, Timlo
-Tauto, Sroto, Docang, Lengko, Beulangong, Catemak, Kolo, Bebalung, Sepat, Brenebon, Mangut, Orek, Oseng, Capcay, Fuyunghai, Bakmoy, Martabak, Lumpia
-Risoles, Pastel, Kroket, Panada, Jalangkote, Klepon, Getuk, Tiwul, Gatot, Lemper, Nagasari, Wajik, Jenang, Dodol, Serabi, Surabi, Apem, Pukis
-Cucur, Lapis, Bika, Wingko, Bakpia, Yangko, Geplak, Jadah, Cenil, Lupis, Clorot, Grontol, Gandos, Ongol, Rempeyek, Semprong, Gapit, Nastar
-Kastengel, Semprit, Sagon, Kue, Bolu, Puding, Gorengan, Cireng, Cilok, Cimol, Cilor, Batagor, Siomay, Bakso, Makaroni, Ramen, Spageti, Fettucine
-Lasagna, Dimsum, Hakau, Gyoza, Wonton, Bakpao, Mantau, Kuotie, Sushi, Onigiri, Takoyaki, Okonomiyaki, Pizza, Burger, Hotdog, Sandwich, Steak, Katsu
-Teriyaki, Yakiniku, Bulgogi, Kebab, Shawarma, Risotto, Omelet, Nugget, Sosis, Kornet, Abon, Chikuwa, Odeng, Tteokbokki, Kimbab, Tempura, Sashimi, Yakitori
-Karaage, Sate, Sop, Sayur, Tumis, Cah, Pepes, Botok, Bakar, Rebus, Panggang, Kukus, Bumbu, Sambal, Terasi, Matah, Bajak, Roa
-Pete, Rica, Woku, Arsik, Naniura, Gohu, Kohu, Fufu, Nasi, Mi, Bihun, Kwetiau, Soun, Misoa, Ketupat, Lontong, Buras, Lemang
-Arem, Lepet, Bubur, Keripik, Kerupuk, Emping, Roti, Opak, Kipang, Sale, Manisan, Rujak, Asinan, Tempe
+Rengginang, Basreng, Kuaci, Popcorn, Permen, Wafer, Biskuit, Kukis, Donat, Churros, Croissant, Brownies, Cheesecake, Agar-Agar, Jeli, Gulali, Sempol, Ote-Ote, Gehu, Lanting, Pilus, Keciput, Enting-Enting, Bipang, Getas, Gemblong, Sumpia, Cakwe, Odading, Crepes, Corndog, Pentol, Chiki, Marshmallow, Yoghurt, Granola, Sereal, Kerupuk, Keripik, Rempeyek, Emping, Cokelat, Lolipop, Martabak, Roti, Lumpia, Molen, Puding, Leker, Waffle, Pancake, Muffin, Cupcake, Tiramisu, Macaron, Eclair, Bomboloni, Dorayaki, Taiyaki, Marning, Rambak, Tela-Tela, Manisan, Sus, Makaroni, Cireng, Cilok, Cimol, Cilor, Cipuk, Seblak, Batagor, Siomay, Pempek, Otak-Otak, Gorengan, Combro, Misro, Bakwan, Risol, Risoles, Pastel, Kroket, Sosis, Nugget, Opak, Kemplang, Krecek, Sukro, Takoyaki, Okonomiyaki, Dimsum, Hakau, Pangsit, Kebab, Sandwich, Burger, Hotdog, Pizza, Jasuke, Cilung, Arumanis, Gelato, Kraker, Pretzel, Nachos, Sale, Asinan, Rujak, Maklor, Gejrot, Doclang, Dodol, Pukis, Bakpao, Panada, Jalangkote

@@ -1,43 +1,7 @@
-# buah-sayur | Buah & Sayur
+﻿# buah-sayur | Buah & Sayur
 ## Buah-Buahan
-Ara, Lai, Pir, Tin, Apel, Buni, Ceri, Duku, Kiwi, Leci, Maja, Pace, Plum, Sawo, Arbei, Duwet, Jeruk, Juwet
-Kepel, Kurma, Kweni, Limau, Matoa, Melon, Mundu, Nanas, Rukem, Salak, Sukun, Talok, Anggur, Bacang, Bisbul, Blewah, Carica, Delima
-Durian, Kecapi, Kelapa, Kemang, Kersen, Kismis, Mangga, Murbei, Nangka, Pepaya, Persik, Pisang, Sentul, Sirsak, Zaitun, Alpukat, Aprikot, Bluberi
-Kawista, Kesemek, Kokosan, Langsat, Manggis, Markisa, Menteng, Rasberi, Siwalan, Srikaya, Cempedak, Ciplukan, Gandaria, Jamblang, Lengkeng, Mengkudu, Nektarin, Rambutan
-Semangka, Stroberi, Belimbing, Blueberry, Kedondong, Lobi-Lobi, Raspberry, Tamarillo, Grapefruit, Kolang-Kaling, Matahari, Bulan, Bintang, Planet, Komet, Meteor, Galaksi, Semesta
-Awan, Hujan, Salju, Es, Kabut, Embun, Angin, Badai, Topan, Petir, Kilat, Pelangi, Gunung, Bukit, Lembah, Gurun, Hutan, Rimba
-Belukar, Padang, Sabana, Rawa, Pantai, Pesisir, Teluk, Selat, Samudra, Laut, Danau, Sungai, AirTerjun, Gua, Goa, Karst, Delta, Pulau
-Semenanjung, Tanjung, Nusa, Benua, Kota, Desa, Kampung, Dusun, Kabupaten, Provinsi, Kecamatan, Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan
-Terowongan, Stasiun, Pelabuhan, Terminal, Halte, Pasar, Mall, Plaza, Supermarket, Minimarket, Toko, Warung, Kios, Stall, Restoran, Kafe, Kedai, Bakery
-Butik, Salon, Barbershop, Spa, Gym, Studio, Bioskop, Teater, Museum, Galeri, Perpustakaan, Sekolah, Kampus, Universitas, Akademi, Pesantren, Madrasah, Kantor
-Gedung, Hotel, Motel, Inn, Resort, Villa, Apartemen, Kondominium, Rumah, Asrama, Mess, Pabrik, Workshop, Gudang, Depot, Parkir, Lapangan, Stadion
-Arena, Kolam, Taman, Kebun, Arboretum, Zoo, Akuarium, Observatorium, Laboratorium, Klinik, Puskesmas, Apotek, Pos, Bank, ATM, Markas, Pangkalan, Barrack
-Pengadilan, Kejaksaan, Notaris, Advokat, Hakim, Polisi, Marinir, Pilot, Pramugari, Kurir, Ojek, Becak, Bajaj, Bemo
+Apel, Pir, Jeruk, Pisang, Mangga, Kweni, Kemang, Bacang, Pepaya, Semangka, Melon, Blewah, Nanas, Anggur, Kismis, Stroberi, Bluberi, Rasberi, Ceri, Kiwi, Alpukat, Durian, Lai, Cempedak, Nangka, Sukun, Sirsak, Srikaya, Manggis, Rambutan, Leci, Lengkeng, Duku, Langsat, Kokosan, Salak, Belimbing, Kedondong, Markisa, Delima, Kurma, Zaitun, Kelapa, Kolang-Kaling, Sawo, Matoa, Kepel, Menteng, Gandaria, Mundu, Kesemek, Tin, Murbei, Ciplukan, Juwet, Buni, Kersen, Talok, Kecapi, Sentul, Mengkudu, Pace, Maja, Bisbul, Kawista, Lobi-Lobi, Rukem, Kemunting, Tamarillo, Carica, Ara, Arbei, Plum, Persik, Aprikot, Nektarin, Grapefruit, Limau, Jambu, Manalagi, Cavendish, Barangan, Lemon, Mandarin, Pomelo, Kalamansi, Keprok, Pitaya, Montong, Kranberi, Goji, Gowok, Kupa, Kepundung, Rambai, Kapulasan, Binjai, Kasturi, Wani, Ceremai, Kenitu, Rukam, Kalumpang, Lontar, Aren, Pinang, Asam, Kumquat, Tampoi, Nam-Nam, Terap, Pedada
 ## Sayuran
-Bit, Kol, Dill, Gori, Jahe, Kale, Koro, Okra, Paku, Pare, Basil, Bayam, Bligo, Garut, Kucai, Lobak, Oyong, Pakis
-Petai, Serai, Suweg, Talas, Tauge, Thyme, Timun, Tomat, Buncis, Caisim, Endive, Gadung, Gambas, Genjer, Jagung, Kailan, Kencur, Kluwak
-Kluwih, Kundur, Kunyit, Leunca, Pakcoy, Porang, Rebung, Selada, Terong, Wortel, Zukini, Arugula, Edamame, Ganyong, Gembili, Kecipir, Kemangi, Kenikir
-Kentang, Lamtoro, Lompong, Melinjo, Oregano, Paprika, Rimbang, Seledri, Takokak, Jalapeno, Kangkung, Kecambah, Lengkuas, Rosemary, Singkong, Artichoke, Asparagus, Bengkuang
-Iles-Iles, Peterseli, Romanesco, Temulawak, Kecombrang, Matahari, Bulan, Bintang, Planet, Komet, Meteor, Galaksi, Semesta, Awan, Hujan, Salju, Es, Kabut
-Embun, Angin, Badai, Topan, Petir, Kilat, Pelangi, Gunung, Bukit, Lembah, Dataran, Gurun, Hutan, Belukar, Padang, Sabana, Rawa, Pantai
-Pesisir, Teluk, Selat, Samudra, Laut, Danau, Sungai, AirTerjun, Gua, Goa, Karst, Delta, Muara, Pulau, Semenanjung, Tanjung, Nusa, Benua
-Negara, Kota, Desa, Kampung, Dusun, Kabupaten, Provinsi, Kecamatan, Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan, Terowongan, Bandara, Stasiun
-Pelabuhan, Terminal, Halte, Pasar, Mall, Plaza, Supermarket, Minimarket, Toko, Warung, Kios, Stall, Restoran, Kafe, Kedai, Bakery, Butik, Salon
-Barbershop, Gym, Studio, Bioskop, Teater, Museum, Galeri, Perpustakaan, Kampus, Universitas, Akademi, Pesantren, Madrasah, Kantor, Gedung, Menara, Hotel, Motel
-Inn, Resort, Villa, Apartemen, Kondominium, Rumah, Kos, Asrama, Mess, Pabrik, Workshop, Gudang, Depot, Garasi, Parkir, Pelataran, Lapangan, Stadion
-Arena, Taman, Kebun, Arboretum, Zoo, Akuarium, Observatorium, Laboratorium, Klinik, Puskesmas, Apotek, Balai, Pos, Bank, ATM, Markas, Pangkalan, Barrack
-Pengadilan, Kejaksaan, Notaris, Advokat, Pengacara, Hakim, Polisi, Tentara, Marinir, Pilot, Pramugari, Sopir, Kurir, Ojek
+Bayam, Kangkung, Pakcoy, Caisim, Kailan, Brokoli, Selada, Seledri, Kucai, Wortel, Lobak, Bit, Kentang, Singkong, Talas, Gadung, Gembili, Ganyong, Garut, Bengkuang, Suweg, Porang, Iles-Iles, Zukini, Terong, Leunca, Takokak, Tomat, Paprika, Jagung, Buncis, Edamame, Kecipir, Koro, Petai, Jengkol, Pare, Oyong, Gambas, Kluwih, Gori, Rebung, Pakis, Paku, Genjer, Kenikir, Kemangi, Tauge, Kecambah, Asparagus, Artichoke, Okra, Kale, Arugula, Melinjo, Lamtoro, Kluwak, Peterseli, Dill, Rosemary, Thyme, Basil, Oregano, Serai, Lengkuas, Jahe, Kunyit, Kencur, Temulawak, Kecombrang, Rimbang, Kundur, Jalapeno, Romanesco, Lompong, Sawi, Katuk, Labu, Cabai, Rawit, Kedelai, Kapri, Ercis, Lentil, Ubi, Uwi, Kimpul, Jamur, Shiitake, Enoki, Prei, Turi, Beluntas, Lembayung, Terubuk, Kacang, Bawang, Kubis, Mentimun, Kara, Kelor, Pucuk, Poh-Pohan, Polong, Siomak, Tewel, Sukun
 ## Bumbu & Rempah
-Ebi, Adas, Budu, Cuka, Madu, Pala, Ragi, Calok, Garam, Micin, Oncom, Petis, Rusip, Sumac, Tauco, Wijen, Jintan, Kemiri
-Kluwek, Merica, Santan, Terasi, Vanili, Bekasam, Cengkeh, Gelatin, Mayones, Mentega, Mustard, Saffron, Kapulaga, Ketumbar, Margarin, Tempoyak, Andaliman, Dabu-Dabu
-Serundeng, Matahari, Bulan, Bintang, Planet, Komet, Meteor, Galaksi, Semesta, Awan, Hujan, Salju, Es, Kabut, Embun, Angin, Badai, Topan
-Petir, Kilat, Pelangi, Gunung, Bukit, Lembah, Dataran, Gurun, Hutan, Rimba, Belukar, Padang, Sabana, Rawa, Pantai, Pesisir, Teluk, Selat
-Samudra, Laut, Danau, Sungai, AirTerjun, Gua, Goa, Karst, Delta, Muara, Pulau, Semenanjung, Tanjung, Nusa, Benua, Negara, Kota, Desa
-Kampung, Dusun, Kabupaten, Provinsi, Kecamatan, Kelurahan, RW, RT, Jalan, Gang, Lorong, Jembatan, Terowongan, Bandara, Stasiun, Pelabuhan, Terminal, Halte
-Pasar, Mall, Plaza, Supermarket, Minimarket, Toko, Warung, Kios, Stall, Restoran, Kafe, Kedai, Bakery, Butik, Salon, Barbershop, Spa, Gym
-Studio, Bioskop, Teater, Museum, Galeri, Perpustakaan, Sekolah, Kampus, Universitas, Akademi, Pesantren, Madrasah, Kantor, Gedung, Menara, Hotel, Motel, Inn
-Resort, Villa, Apartemen, Kondominium, Rumah, Kos, Asrama, Mess, Pabrik, Workshop, Gudang, Depot, Garasi, Parkir, Pelataran, Lapangan, Stadion, Arena
-Kolam, Taman, Kebun, Arboretum, Zoo, Akuarium, Observatorium, Laboratorium, Klinik, Puskesmas, Apotek, Balai, Pos, Bank, ATM, Markas, Pangkalan, Barrack
-Pengadilan, Kejaksaan, Notaris, Advokat, Pengacara, Hakim, Polisi, Tentara, Marinir, Pilot, Pramugari, Sopir, Kurir, Ojek, Becak, Bajaj, Bemo, Angkot
-Bus, Truk, Pickup, Sedan, SUV, MPV, Hatchback, Coupe, Convertible, Motor, Skuter, Moped, Sepeda, Kereta, KRL, MRT, LRT, Monorel
-Trem, Kapal, Feri, Yacht, Perahu, Sampan, Rakit, Kano, Kayak, Jetski, Pesawat, Helikopter, Drone, BalonDirigible
+Garam, Merica, Ketumbar, Jintan, Adas, Pala, Kapulaga, Kemiri, Kluwek, Terasi, Petis, Mayones, Mustard, Cuka, Mentega, Margarin, Santan, Micin, Wijen, Serundeng, Tauco, Oncom, Andaliman, Vanili, Saffron, Sumac, Tempoyak, Bekasam, Cincalok, Rusip, Budu, Calok, Dabu-Dabu, Ragi, Madu, Gelatin, Ebi, Kecap, Saus, Sambal, Kaldu, Gula, Minyak, Tepung, Terigu, Maizena, Tapioka, Fuli, Salam, Pandan, Selasih, Mint, Angkak, Wasabi, Miso, Kari, Pewarna, Asam, Gochujang, Pesto, Lada, Kunyit, Jahe, Lengkuas, Kencur, Temulawak, Serai, Cengkih, Pekak, Kecombrang, Penyedap, Bombai, Seledri, Cabai, Rawit, Paprika, Oregano, Basil, Kemangi, Rosemary, Timi, Peterseli, Dill, Masala, Esens, Secang, Kedawung, Kemukus
