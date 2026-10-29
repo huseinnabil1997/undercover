@@ -3,7 +3,7 @@ import type { Kategori } from '../../lib/types';
 
 const kategori: Kategori = {
  "id": "hiburan",
- "nama": "Film & Hiburan",
+ "nama": "TV & Hiburan",
  "subkategori": [
   {
    "nama": "Film, TV & Hiburan Umum",

@@ -2,7 +2,7 @@
   "name": "undercover",
   "version": "0.1.0",
   "private": true,
-  "description": "Game tebak kata Undercover, mode pass-and-play dalam satu HP.",
+  "description": "Game tebak kata Undercover: main online realtime (P2P) atau pass-and-play di satu HP.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,11 +14,14 @@
   },
   "dependencies": {
     "next": "16.4.3",
+    "peerjs": "1.5.5",
+    "qrcode": "1.5.4",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/node": "^22",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

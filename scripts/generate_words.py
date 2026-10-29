@@ -17,7 +17,7 @@ def slug(s):
     return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
 order = ['makanan', 'minuman', 'hewan', 'buah-sayur', 'profesi', 'tempat', 'kendaraan', 'olahraga',
-         'benda-rumah', 'elektronik', 'pakaian', 'alam', 'tubuh', 'hobi', 'musik', 'hiburan',
+         'benda-rumah', 'elektronik', 'pakaian', 'alam', 'tubuh', 'hobi', 'musik', 'hiburan', 'film', 'anime', 'game',
          'daerah', 'budaya', 'sekolah', 'negara']
 cats = {}
 for fn in os.listdir(src):

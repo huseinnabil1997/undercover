@@ -5,7 +5,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 export const metadata: Metadata = {
   title: 'Undercover: Tebak Kata',
-  description: 'Game tebak kata Undercover untuk dimainkan bergiliran dalam satu HP. Tanpa login, tanpa server.',
+  description: 'Game tebak kata Undercover: main online dengan HP masing-masing atau bergiliran dalam satu HP. Tanpa login, tanpa server game.',
   manifest: `${BASE}/manifest.webmanifest`,
   icons: { icon: `${BASE}/icon.svg`, apple: `${BASE}/icon.svg` },
   appleWebApp: { capable: true, title: 'Undercover', statusBarStyle: 'black-translucent' },

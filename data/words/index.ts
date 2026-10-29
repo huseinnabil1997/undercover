@@ -264,12 +264,105 @@ export const META_KATEGORI: KategoriMeta[] = [
  },
  {
   "id": "hiburan",
-  "nama": "Film & Hiburan",
+  "nama": "TV & Hiburan",
   "subkategori": [
    {
     "id": "hiburan--film-tv-hiburan-umum",
     "nama": "Film, TV & Hiburan Umum",
     "jumlahKata": 287
+   }
+  ]
+ },
+ {
+  "id": "film",
+  "nama": "Film",
+  "subkategori": [
+   {
+    "id": "film--film-hollywood",
+    "nama": "Film Hollywood",
+    "jumlahKata": 122
+   },
+   {
+    "id": "film--film-indonesia",
+    "nama": "Film Indonesia",
+    "jumlahKata": 89
+   },
+   {
+    "id": "film--karakter-film-superhero",
+    "nama": "Karakter Film & Superhero",
+    "jumlahKata": 123
+   },
+   {
+    "id": "film--film-animasi-disney-pixar",
+    "nama": "Film Animasi Disney & Pixar",
+    "jumlahKata": 101
+   }
+  ]
+ },
+ {
+  "id": "anime",
+  "nama": "Anime",
+  "subkategori": [
+   {
+    "id": "anime--judul-anime",
+    "nama": "Judul Anime",
+    "jumlahKata": 122
+   },
+   {
+    "id": "anime--karakter-anime",
+    "nama": "Karakter Anime",
+    "jumlahKata": 198
+   },
+   {
+    "id": "anime--istilah-anime",
+    "nama": "Istilah Anime",
+    "jumlahKata": 101
+   }
+  ]
+ },
+ {
+  "id": "game",
+  "nama": "Game",
+  "subkategori": [
+   {
+    "id": "game--judul-game-populer",
+    "nama": "Judul Game Populer",
+    "jumlahKata": 156
+   },
+   {
+    "id": "game--hero-mobile-legends",
+    "nama": "Hero Mobile Legends",
+    "jumlahKata": 133
+   },
+   {
+    "id": "game--item-istilah-mobile-legends",
+    "nama": "Item & Istilah Mobile Legends",
+    "jumlahKata": 127
+   },
+   {
+    "id": "game--hero-dota-2",
+    "nama": "Hero Dota 2",
+    "jumlahKata": 126
+   },
+   {
+    "id": "game--karakter-genshin-impact",
+    "nama": "Karakter Genshin Impact",
+    "jumlahKata": 103
+   },
+   {
+    "id": "game--agen-valorant",
+    "nama": "Agen Valorant",
+    "jumlahKata": 28
+   },
+   {
+    "id": "game--hero-honor-of-kings",
+    "nama": "Hero Honor of Kings",
+    "jumlahKata": 113
+   },
+   {
+    "id": "game--pokemon",
+    "nama": "Pokemon",
+    "jumlahKata": 168
    }
   ]
  },
@@ -356,6 +449,9 @@ export const PEMUAT_KATEGORI: Record<string, () => Promise<{ default: Kategori }
   'hobi': () => import('./hobi'),
   'musik': () => import('./musik'),
   'hiburan': () => import('./hiburan'),
+  'film': () => import('./film'),
+  'anime': () => import('./anime'),
+  'game': () => import('./game'),
   'daerah': () => import('./daerah'),
   'budaya': () => import('./budaya'),
   'sekolah': () => import('./sekolah'),
