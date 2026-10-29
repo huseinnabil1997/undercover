@@ -249,7 +249,19 @@ const kategori: Kategori = {
     "Kacamata Hitam",
     "Kacamata Baca",
     "Kacamata Renang",
-    "Kacamata Minus"
+    "Kacamata Minus",
+    "Kaos Polo",
+    "Kaos Oblong",
+    "Kaos Kaki",
+    "Kaos Dalam",
+    "Crop Top",
+    "Cardigan",
+    "Sweater",
+    "Hanbok",
+    "Cheongsam",
+    "Wetsuit",
+    "Baret",
+    "Beanie"
    ],
    "id": "pakaian--pakaian"
   },

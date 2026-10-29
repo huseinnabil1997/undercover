@@ -7,7 +7,7 @@
   "scope": "/undercover/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#120e22",
-  "theme_color": "#120e22",
+  "background_color": "#121212",
+  "theme_color": "#121212",
   "icons": [{ "src": "/undercover/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

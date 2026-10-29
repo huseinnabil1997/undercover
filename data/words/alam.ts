@@ -285,7 +285,19 @@ const kategori: Kategori = {
     "Pohon Kapuk",
     "Pohon Sengon",
     "Pohon Pule",
-    "Pohon Bodhi"
+    "Pohon Bodhi",
+    "Tata Surya",
+    "Merkurius",
+    "Venus",
+    "Mars",
+    "Jupiter",
+    "Saturnus",
+    "Uranus",
+    "Neptunus",
+    "Pluto",
+    "Oasis",
+    "Palung",
+    "Goa"
    ],
    "id": "alam--alam-geografi-cuaca"
   },

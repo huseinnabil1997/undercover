@@ -396,7 +396,14 @@ const kategori: Kategori = {
     "Olahraga Rutin",
     "Tidur Cukup",
     "Cuci Tangan",
-    "Hand Sanitizer"
+    "Hand Sanitizer",
+    "Rubella",
+    "Disentri",
+    "Kolera",
+    "Hipertensi",
+    "Stroke",
+    "Serangan Jantung",
+    "Glaukoma"
    ],
    "id": "tubuh--penyakit-kesehatan"
   }

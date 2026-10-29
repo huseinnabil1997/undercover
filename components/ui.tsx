@@ -14,6 +14,27 @@ export const JUDUL_MENANG: Record<Pemenang, string> = {
   mrwhite: 'Mr. White menang!',
 };
 
+/** Tanda merek: lingkaran hijau dengan topeng mata. */
+export function Tanda({ ukuran = 28 }: { ukuran?: number }) {
+  return (
+    <svg className="tanda" width={ukuran} height={ukuran} viewBox="0 0 32 32" aria-hidden focusable="false">
+      <circle cx="16" cy="16" r="16" fill="#1ed760" />
+      <rect x="6" y="13.5" width="8.5" height="5" rx="2.5" fill="#000" />
+      <rect x="17.5" y="13.5" width="8.5" height="5" rx="2.5" fill="#000" />
+    </svg>
+  );
+}
+
+/** Judul fase: satu kata besar dan nomor ronde di kanan. */
+export function KepalaFase({ judul, ronde }: { judul: string; ronde?: number }) {
+  return (
+    <div className="kepala-fase">
+      <h2>{judul}</h2>
+      {ronde !== undefined && <span className="ronde">Ronde {ronde}</span>}
+    </div>
+  );
+}
+
 export const angka = (n: number) => n.toLocaleString('id-ID');
 
 export function Stepper({ nilai, min, max, onUbah, label }: { nilai: number; min: number; max: number; onUbah: (d: number) => void; label: string }) {
@@ -46,7 +67,7 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
     <div className="kartu">
       <div className="baris-judul">
         <h2>Peran</h2>
-        {!nonaktif && <button className="kecil" onClick={onOtomatis}>Atur otomatis</button>}
+        {!nonaktif && <button className="kecil" onClick={onOtomatis}>Auto</button>}
       </div>
       <div className="peran-baris">
         <span>Civilian</span>
@@ -60,7 +81,7 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
         <span>Mr. White</span>
         {nilai('mrWhite', 'Mr. White')}
       </div>
-      <p className="catatan">Civilian harus lebih banyak dari gabungan Undercover dan Mr. White.</p>
+      <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White.</p>
     </div>
   );
 }
@@ -71,9 +92,9 @@ export function PilihKategori({ kategori, onUbah, nonaktif }: { kategori: string
   return (
     <div className="kartu">
       <div className="baris-judul">
-        <h2>Kategori kata</h2>
+        <h2>Kategori</h2>
         {!nonaktif && (
-          <button className="kecil" onClick={() => onUbah(semua ? [] : SEMUA_KATEGORI)}>{semua ? 'Kosongkan' : 'Pilih semua'}</button>
+          <button className="kecil" onClick={() => onUbah(semua ? [] : SEMUA_KATEGORI)}>{semua ? 'Kosong' : 'Semua'}</button>
         )}
       </div>
       <div className="chip-grup">
@@ -94,7 +115,7 @@ export function PilihKategori({ kategori, onUbah, nonaktif }: { kategori: string
         })}
       </div>
       <p className="catatan">
-        <strong>{angka(totalKombinasi(kategori))}</strong> kombinasi pasangan kata tersedia dari {kategori.length} kategori.
+        <strong>{angka(totalKombinasi(kategori))}</strong> pasangan kata
       </p>
     </div>
   );
@@ -115,7 +136,7 @@ export function KartuBalik({ terbuka, depan, belakang, rahasia = true }: { terbu
 
 /** Konfeti CSS ringan (tanpa library). Disembunyikan jika pengguna memilih kurangi animasi. */
 export function Konfeti({ jumlah = 40 }: { jumlah?: number }) {
-  const warna = ['#f5c542', '#3ccf8e', '#ff5d73', '#5ab0ff', '#ffffff', '#b58cff'];
+  const warna = ['#1ed760', '#ffffff', '#f3727f', '#2e77d0', '#b3b3b3'];
   return (
     <div className="konfeti" aria-hidden>
       {Array.from({ length: jumlah }, (_, i) => {

@@ -24,14 +24,14 @@ export function FormPetunjuk({ judul, galat, onKirim, onSudahBicara, onUbah }: {
   return (
     <form className="kartu sorot form-petunjuk muncul" onSubmit={kirim}>
       <h2>{judul}</h2>
-      <p className="catatan">Ketik satu kata atau frasa pendek tentang katamu, tanpa menyebut katanya. Tombol Sudah bicara menyelesaikan giliranmu tanpa mencatat petunjuk.</p>
+      <p className="catatan">Satu petunjuk tanpa menyebut katamu.</p>
       <input
         value={teks}
         onChange={(e) => {
           setTeks(Array.from(e.target.value).slice(0, MAKS_PETUNJUK).join(''));
           onUbah?.();
         }}
-        placeholder="Ketik petunjuk..."
+        placeholder="Petunjuk"
         aria-label="Petunjuk"
         aria-invalid={!!galat}
         aria-describedby="info-petunjuk"
@@ -41,10 +41,10 @@ export function FormPetunjuk({ judul, galat, onKirim, onSudahBicara, onUbah }: {
         autoFocus
       />
       <p id="info-petunjuk" className={galat ? 'galat-petunjuk' : 'catatan nol'} role={galat ? 'alert' : undefined}>
-        {galat ?? `Maksimal ${MAKS_PETUNJUK} karakter${sisa <= 10 ? ` (sisa ${sisa})` : ''}.`}
+        {galat ?? `Maks ${MAKS_PETUNJUK} karakter${sisa <= 10 ? `, sisa ${sisa}` : ''}`}
       </p>
       <div className="baris-petunjuk">
-        <button type="submit" className="utama" disabled={!teks.trim()}>Kirim petunjuk</button>
+        <button type="submit" className="utama" disabled={!teks.trim()}>Kirim</button>
         <button type="button" className="kedua" onClick={onSudahBicara}>Sudah bicara</button>
       </div>
     </form>
@@ -73,10 +73,10 @@ export function RiwayatPetunjuk({ pemain, entri, giliran, ronde }: {
   return (
     <section className="kartu riwayat-petunjuk" aria-labelledby="judul-riwayat">
       <div className="baris-judul">
-        <h2 id="judul-riwayat">Riwayat petunjuk</h2>
+        <h2 id="judul-riwayat">Riwayat</h2>
         <div className="chip-grup kecil-tombol" role="group" aria-label="Tampilan riwayat">
-          <button type="button" className={`chip ${mode === 'pemain' ? 'pilih' : ''}`} aria-pressed={mode === 'pemain'} onClick={() => setMode('pemain')}>Per pemain</button>
-          <button type="button" className={`chip ${mode === 'ronde' ? 'pilih' : ''}`} aria-pressed={mode === 'ronde'} onClick={() => setMode('ronde')}>Per ronde</button>
+          <button type="button" className={`chip ${mode === 'pemain' ? 'pilih' : ''}`} aria-pressed={mode === 'pemain'} onClick={() => setMode('pemain')}>Pemain</button>
+          <button type="button" className={`chip ${mode === 'ronde' ? 'pilih' : ''}`} aria-pressed={mode === 'ronde'} onClick={() => setMode('ronde')}>Ronde</button>
         </div>
       </div>
       {mode === 'pemain' ? (
@@ -89,7 +89,7 @@ export function RiwayatPetunjuk({ pemain, entri, giliran, ronde }: {
                   <span className="riwayat-nama">{p.nama}{p.saya && <em> (kamu)</em>}</span>
                   {!p.hidup && <span className="lencana off">Tereliminasi</span>}
                   {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
-                  {giliran === p.kunci && <span className="lencana host">Mengetik...</span>}
+                  {giliran === p.kunci && <span className="lencana host">Mengetik</span>}
                 </div>
                 {milik.length === 0 ? (
                   <p className="riwayat-kosong">Belum ada petunjuk.</p>

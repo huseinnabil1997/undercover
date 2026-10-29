@@ -9,7 +9,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "makanan--masakan-nusantara",
     "nama": "Masakan Nusantara",
-    "jumlahKata": 390
+    "jumlahKata": 436
    },
    {
     "id": "makanan--mi-bakso-olahan",
@@ -56,22 +56,22 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "hewan--mamalia",
     "nama": "Mamalia",
-    "jumlahKata": 185
+    "jumlahKata": 191
    },
    {
     "id": "hewan--burung",
     "nama": "Burung",
-    "jumlahKata": 142
+    "jumlahKata": 150
    },
    {
     "id": "hewan--ikan-hewan-air",
     "nama": "Ikan & Hewan Air",
-    "jumlahKata": 134
+    "jumlahKata": 135
    },
    {
     "id": "hewan--serangga-hewan-kecil",
     "nama": "Serangga & Hewan Kecil",
-    "jumlahKata": 107
+    "jumlahKata": 108
    }
   ]
  },
@@ -82,12 +82,12 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "buah-sayur--buah-buahan",
     "nama": "Buah-Buahan",
-    "jumlahKata": 227
+    "jumlahKata": 229
    },
    {
     "id": "buah-sayur--sayuran",
     "nama": "Sayuran",
-    "jumlahKata": 203
+    "jumlahKata": 205
    },
    {
     "id": "buah-sayur--bumbu-rempah",
@@ -103,7 +103,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "profesi--pekerjaan-profesi",
     "nama": "Pekerjaan & Profesi",
-    "jumlahKata": 359
+    "jumlahKata": 391
    }
   ]
  },
@@ -114,7 +114,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "tempat--tempat-umum-bangunan",
     "nama": "Tempat Umum & Bangunan",
-    "jumlahKata": 264
+    "jumlahKata": 268
    },
    {
     "id": "tempat--ruangan",
@@ -130,12 +130,17 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "kendaraan--kendaraan",
     "nama": "Kendaraan",
-    "jumlahKata": 216
+    "jumlahKata": 218
    },
    {
     "id": "kendaraan--jalan-perjalanan",
     "nama": "Jalan & Perjalanan",
     "jumlahKata": 178
+   },
+   {
+    "id": "kendaraan--merek-mobil-motor",
+    "nama": "Merek Mobil & Motor",
+    "jumlahKata": 86
    }
   ]
  },
@@ -146,12 +151,22 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "olahraga--cabang-olahraga-istilah",
     "nama": "Cabang Olahraga & Istilah",
-    "jumlahKata": 276
+    "jumlahKata": 283
    },
    {
     "id": "olahraga--permainan-tradisional-modern",
     "nama": "Permainan Tradisional & Modern",
     "jumlahKata": 200
+   },
+   {
+    "id": "olahraga--atlet-pesepak-bola",
+    "nama": "Atlet & Pesepak Bola",
+    "jumlahKata": 95
+   },
+   {
+    "id": "olahraga--klub-sepak-bola",
+    "nama": "Klub Sepak Bola",
+    "jumlahKata": 77
    }
   ]
  },
@@ -162,7 +177,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "benda-rumah--perabot-perlengkapan-rumah",
     "nama": "Perabot & Perlengkapan Rumah",
-    "jumlahKata": 232
+    "jumlahKata": 245
    },
    {
     "id": "benda-rumah--peralatan-dapur",
@@ -178,12 +193,17 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "elektronik--perangkat-elektronik",
     "nama": "Perangkat Elektronik",
-    "jumlahKata": 215
+    "jumlahKata": 233
    },
    {
     "id": "elektronik--alat-perkakas",
     "nama": "Alat & Perkakas",
-    "jumlahKata": 168
+    "jumlahKata": 177
+   },
+   {
+    "id": "elektronik--aplikasi-media-sosial",
+    "nama": "Aplikasi & Media Sosial",
+    "jumlahKata": 67
    }
   ]
  },
@@ -194,7 +214,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "pakaian--pakaian",
     "nama": "Pakaian",
-    "jumlahKata": 242
+    "jumlahKata": 254
    },
    {
     "id": "pakaian--aksesori-perhiasan",
@@ -210,7 +230,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "alam--alam-geografi-cuaca",
     "nama": "Alam, Geografi & Cuaca",
-    "jumlahKata": 278
+    "jumlahKata": 290
    },
    {
     "id": "alam--bunga-tanaman",
@@ -231,7 +251,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "tubuh--penyakit-kesehatan",
     "nama": "Penyakit & Kesehatan",
-    "jumlahKata": 215
+    "jumlahKata": 222
    }
   ]
  },
@@ -242,7 +262,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "hobi--hobi-aktivitas",
     "nama": "Hobi & Aktivitas",
-    "jumlahKata": 284
+    "jumlahKata": 318
    }
   ]
  },
@@ -259,6 +279,16 @@ export const META_KATEGORI: KategoriMeta[] = [
     "id": "musik--genre-dunia-musik",
     "nama": "Genre & Dunia Musik",
     "jumlahKata": 190
+   },
+   {
+    "id": "musik--penyanyi-band-indonesia",
+    "nama": "Penyanyi & Band Indonesia",
+    "jumlahKata": 112
+   },
+   {
+    "id": "musik--penyanyi-grup-dunia",
+    "nama": "Penyanyi & Grup Dunia",
+    "jumlahKata": 121
    }
   ]
  },
@@ -280,12 +310,12 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "film--film-hollywood",
     "nama": "Film Hollywood",
-    "jumlahKata": 122
+    "jumlahKata": 180
    },
    {
     "id": "film--film-indonesia",
     "nama": "Film Indonesia",
-    "jumlahKata": 89
+    "jumlahKata": 115
    },
    {
     "id": "film--karakter-film-superhero",
@@ -296,6 +326,11 @@ export const META_KATEGORI: KategoriMeta[] = [
     "id": "film--film-animasi-disney-pixar",
     "nama": "Film Animasi Disney & Pixar",
     "jumlahKata": 101
+   },
+   {
+    "id": "film--serial-tv-drama",
+    "nama": "Serial TV & Drama",
+    "jumlahKata": 89
    }
   ]
  },
@@ -306,12 +341,12 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "anime--judul-anime",
     "nama": "Judul Anime",
-    "jumlahKata": 122
+    "jumlahKata": 136
    },
    {
     "id": "anime--karakter-anime",
     "nama": "Karakter Anime",
-    "jumlahKata": 198
+    "jumlahKata": 221
    },
    {
     "id": "anime--istilah-anime",
@@ -327,7 +362,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "game--judul-game-populer",
     "nama": "Judul Game Populer",
-    "jumlahKata": 156
+    "jumlahKata": 187
    },
    {
     "id": "game--hero-mobile-legends",
@@ -362,7 +397,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "game--pokemon",
     "nama": "Pokemon",
-    "jumlahKata": 168
+    "jumlahKata": 248
    }
   ]
  },
@@ -373,7 +408,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "daerah--kota-kabupaten",
     "nama": "Kota & Kabupaten",
-    "jumlahKata": 488
+    "jumlahKata": 506
    },
    {
     "id": "daerah--provinsi",
@@ -383,7 +418,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "daerah--tempat-wisata-indonesia",
     "nama": "Tempat Wisata Indonesia",
-    "jumlahKata": 202
+    "jumlahKata": 212
    }
   ]
  },
@@ -395,6 +430,11 @@ export const META_KATEGORI: KategoriMeta[] = [
     "id": "budaya--seni-tradisi-budaya",
     "nama": "Seni, Tradisi & Budaya",
     "jumlahKata": 324
+   },
+   {
+    "id": "budaya--tokoh-sejarah-indonesia",
+    "nama": "Tokoh Sejarah Indonesia",
+    "jumlahKata": 59
    }
   ]
  },
@@ -426,7 +466,7 @@ export const META_KATEGORI: KategoriMeta[] = [
    {
     "id": "negara--kota-dunia",
     "nama": "Kota Dunia",
-    "jumlahKata": 97
+    "jumlahKata": 160
    }
   ]
  }

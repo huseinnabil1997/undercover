@@ -234,7 +234,9 @@ const kategori: Kategori = {
     "Jeruk Garut",
     "Jeruk Kintamani",
     "Jeruk Gerga",
-    "Jeruk Soe"
+    "Jeruk Soe",
+    "Blueberry",
+    "Raspberry"
    ],
    "id": "buah-sayur--buah-buahan"
   },
@@ -443,7 +445,9 @@ const kategori: Kategori = {
     "Selada Laut",
     "Lumut Laut",
     "Bunga Kol",
-    "Bunga Bawang"
+    "Bunga Bawang",
+    "Bawang Bombai",
+    "Lompong"
    ],
    "id": "buah-sayur--sayuran"
   },

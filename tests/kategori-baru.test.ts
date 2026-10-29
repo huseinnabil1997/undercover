@@ -49,6 +49,7 @@ describe('kategori Anime, Film, Game', () => {
       'Film Indonesia',
       'Karakter Film & Superhero',
       'Film Animasi Disney & Pixar',
+      'Serial TV & Drama',
     ]);
   });
 });

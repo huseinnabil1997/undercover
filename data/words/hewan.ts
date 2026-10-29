@@ -192,7 +192,13 @@ const kategori: Kategori = {
     "Kelinci Lop",
     "Hedgehog",
     "Sugar Glider",
-    "Ferret"
+    "Ferret",
+    "Kungkang",
+    "Dingo",
+    "Menjangan",
+    "Ibex",
+    "Possum",
+    "Duyung"
    ],
    "id": "hewan--mamalia"
   },
@@ -340,7 +346,15 @@ const kategori: Kategori = {
     "Burung Dodo",
     "Burung Merak Putih",
     "Burung Gelatik Batu",
-    "Burung Sesap Madu"
+    "Burung Sesap Madu",
+    "Serak Jawa",
+    "Cendrawasih",
+    "Cucak Rawa",
+    "Cucak Ijo",
+    "Puter",
+    "Penguin",
+    "Cicakrowo",
+    "Trinil"
    ],
    "id": "hewan--burung"
   },
@@ -480,7 +494,8 @@ const kategori: Kategori = {
     "Ikan Bilih",
     "Ikan Bada",
     "Ikan Bontosani",
-    "Ikan Cakalang Asap"
+    "Ikan Cakalang Asap",
+    "Ikan Piranha"
    ],
    "id": "hewan--ikan-hewan-air"
   },
@@ -593,7 +608,8 @@ const kategori: Kategori = {
     "Kura-Kura Darat",
     "Kodok Bangkong",
     "Katak Pohon",
-    "Katak Hijau"
+    "Katak Hijau",
+    "Salamander"
    ],
    "id": "hewan--serangga-hewan-kecil"
   }

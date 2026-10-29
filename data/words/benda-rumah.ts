@@ -239,7 +239,20 @@ const kategori: Kategori = {
     "Tempat Payung",
     "Rak Sandal",
     "Sandal Rumah",
-    "Sendal Jepit"
+    "Sendal Jepit",
+    "Bean Bag",
+    "Ottoman",
+    "Dipan",
+    "Seprai",
+    "Vitrase",
+    "Lampu Dinding",
+    "Kap Lampu",
+    "Pigura",
+    "Pengharum Ruangan",
+    "Stop Kontak",
+    "Kabel Rol",
+    "Saklar",
+    "Bohlam"
    ],
    "id": "benda-rumah--perabot-perlengkapan-rumah"
   },

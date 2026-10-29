@@ -119,7 +119,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
         aria-expanded={terbuka}
         aria-label={belum > 0 ? `Chat, ${belum} pesan belum dibaca` : 'Chat'}
       >
-        <span aria-hidden>💬</span><span className="teks-chat">Chat</span>
+        Chat
         {belum > 0 && <span className="badge-chat" aria-hidden>{belum > 9 ? '9+' : belum}</span>}
       </button>
 
@@ -137,7 +137,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
             onKeyDown={tombolKeyboard}
           >
             <div className="chat-kepala">
-              <h2 id={judulId}>Chat room</h2>
+              <h2 id={judulId}>Chat</h2>
               <button className="kecil" onClick={tutup} aria-label="Tutup chat">Tutup</button>
             </div>
 
@@ -152,7 +152,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
               }}
             >
               {pesan.length === 0 && (
-                <li className="chat-kosong">Belum ada pesan. Sapa yang lain! Chat hanya tersimpan selama room dibuka.</li>
+                <li className="chat-kosong">Belum ada pesan. Hilang saat room ditutup.</li>
               )}
               {pesan.map((p) => {
                 const milikku = p.dari === saya;
@@ -178,8 +178,8 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
               <input
                 value={teks}
                 onChange={(e) => ubahTeks(Array.from(e.target.value).slice(0, MAKS_PANJANG_CHAT).join(''))}
-                placeholder="Tulis pesan..."
-                aria-label="Tulis pesan"
+                placeholder="Pesan"
+                aria-label="Pesan"
                 enterKeyHint="send"
                 autoComplete="off"
               />

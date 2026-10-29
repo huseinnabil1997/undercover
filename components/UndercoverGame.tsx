@@ -12,7 +12,7 @@ import type { PasanganKata, Pemain, Pemenang } from '@/lib/types';
 import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
 import { useDialog } from './Modal';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
-import { angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, Stepper } from './ui';
+import { angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, Stepper, Tanda } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 
@@ -127,9 +127,9 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
 
   async function resetSkor() {
     const ya = await dialog.konfirmasi({
-      judul: 'Atur ulang skor?',
+      judul: 'Hapus skor?',
       pesan: 'Semua skor yang tersimpan di HP ini akan dihapus. Tindakan ini tidak bisa dibatalkan.',
-      ok: 'Hapus skor',
+      ok: 'Hapus',
       bahaya: true,
     });
     if (!ya) return;
@@ -145,11 +145,11 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
           onClick={() => (layar === 'main' ? undefined : layar === 'setup' && onBeranda ? onBeranda() : setLayar('setup'))}
           aria-label={layar === 'setup' && onBeranda ? 'Undercover, kembali ke beranda' : 'Undercover'}
         >
-          <span aria-hidden>🕵️</span> Undercover
+          <Tanda /> Undercover
         </button>
         {layar !== 'main' ? (
           <nav className="navigasi">
-            <button className={layar === 'caramain' ? 'aktif' : ''} onClick={() => setLayar(layar === 'caramain' ? 'setup' : 'caramain')}>Cara main</button>
+            <button className={layar === 'caramain' ? 'aktif' : ''} onClick={() => setLayar(layar === 'caramain' ? 'setup' : 'caramain')}>Aturan</button>
             <button className={layar === 'skor' ? 'aktif' : ''} onClick={() => setLayar(layar === 'skor' ? 'setup' : 'skor')}>Skor</button>
           </nav>
         ) : (
@@ -160,7 +160,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
                 judul: 'Akhiri permainan?',
                 pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan. Skor ronde ini tidak dihitung.',
                 ok: 'Akhiri',
-                batal: 'Lanjut main',
+                batal: 'Lanjut',
                 bahaya: true,
               });
               if (ya) {
@@ -212,12 +212,12 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
 
           <div className="kartu">
             <div className="baris-judul">
-              <h2>Timer diskusi</h2>
+              <h2>Timer</h2>
             </div>
             <div className="chip-grup">
               {PILIHAN_TIMER.map((d) => (
                 <button key={d} className={`chip ${timer === d ? 'pilih' : ''}`} aria-pressed={timer === d} onClick={() => setTimer(d)}>
-                  {d === 0 ? 'Tanpa timer' : `${d / 60 >= 1 && d % 60 === 0 ? `${d / 60} menit` : `${d} detik`}`}
+                  {d === 0 ? 'Mati' : `${d / 60 >= 1 && d % 60 === 0 ? `${d / 60} menit` : `${d} detik`}`}
                 </button>
               ))}
             </div>
@@ -231,7 +231,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
           {galatMuat && <p className="galat" role="alert">{galatMuat}</p>}
           <div className="aksi-bawah">
             <button className="utama" disabled={galat.length > 0 || memuat} onClick={mulai}>
-              {memuat ? 'Menyiapkan kata...' : 'Mulai main'}
+              {memuat ? 'Memuat' : 'Mulai'}
             </button>
           </div>
         </section>
@@ -303,26 +303,26 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
     const terakhir = fase.idx === pemain.length - 1;
     return (
       <section className="tumpuk tengah">
-        <p className="langkah">Pemain {fase.idx + 1} dari {pemain.length}</p>
+        <p className="langkah">{fase.idx + 1}/{pemain.length}</p>
         <KartuBalik
           terbuka={fase.terbuka}
           depan={
             <>
-              <p className="sub">Berikan HP ke</p>
+              <p className="sub">Oper ke</p>
               <h1 className="nama-besar">{p.nama}</h1>
-              <p className="catatan">Pastikan pemain lain tidak melihat layar.</p>
-              <button className="utama" onClick={() => setFase({ ...fase, terbuka: true })}>Lihat kata saya</button>
+              <p className="catatan">Jangan sampai terlihat pemain lain.</p>
+              <button className="utama" onClick={() => setFase({ ...fase, terbuka: true })}>Lihat</button>
             </>
           }
           belakang={
             <>
-              <p className="sub">{p.nama}, kata kamu:</p>
+              <p className="sub">{p.nama}</p>
               {kata ? (
                 <h1 className="kata">{kata}</h1>
               ) : (
                 <>
-                  <h1 className="kata">Kamu Mr. White</h1>
-                  <p className="catatan">Kamu tidak mendapat kata. Baca petunjuk pemain lain dan berbaurlah.</p>
+                  <h1 className="kata">Mr. White</h1>
+                  <p className="catatan">Kamu tanpa kata. Berbaurlah.</p>
                 </>
               )}
               <button
@@ -333,7 +333,7 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
                     : setFase({ jenis: 'serah', idx: fase.idx + 1, terbuka: false })
                 }
               >
-                {terakhir ? 'Tutup dan mulai diskusi' : 'Tutup dan lanjut'}
+                {terakhir ? 'Diskusi' : 'Lanjut'}
               </button>
             </>
           }
@@ -350,8 +350,7 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
     return (
       <section className="tumpuk">
         <div className="kartu">
-          <h2>Ronde {fase.ronde}: Voting</h2>
-          <p className="catatan">Baca riwayat petunjuk, diskusikan, lalu pilih satu pemain yang paling dicurigai untuk dieliminasi.</p>
+          <KepalaFase judul="Vote" ronde={fase.ronde} />
           <div className="pilih-pemain">
             {pemain.map((p, i) =>
               p.hidup ? (
@@ -366,7 +365,7 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
         {riwayat(false)}
         <div className="aksi-bawah">
           <button className="utama bahaya" disabled={fase.pilih === null} onClick={() => fase.pilih !== null && onEliminasi(fase.pilih, fase.ronde)}>
-            {fase.pilih === null ? 'Pilih pemain dulu' : `Eliminasi ${pemain[fase.pilih].nama}`}
+            {fase.pilih === null ? 'Pilih' : `Eliminasi ${pemain[fase.pilih].nama}`}
           </button>
         </div>
       </section>
@@ -378,13 +377,13 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
     return (
       <section className="tumpuk tengah">
         <div className={`kartu besar peran-${p.peran}`}>
-          <p className="sub">{p.nama} tereliminasi. Perannya:</p>
+          <p className="sub">{p.nama} tereliminasi</p>
           <h1 className="kata ungkap">{NAMA_PERAN[p.peran]}</h1>
           {p.peran === 'mrwhite' && fase.tebakan === 'belum' ? (
             <TebakMrWhite nama={p.nama} onTebak={onTebak} />
           ) : (
             <>
-              {fase.tebakan === 'salah' && <p className="catatan">Tebakan Mr. White salah. Permainan berlanjut.</p>}
+              {fase.tebakan === 'salah' && <p className="catatan">Tebakan salah.</p>}
               <button className="utama" onClick={() => onLanjut(fase.ronde)}>Lanjut</button>
             </>
           )}
@@ -398,17 +397,15 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
       <Konfeti />
       <div className={`kartu besar menang-${fase.pemenang} muncul`}>
         <h1 className="kata ungkap">{JUDUL_MENANG[fase.pemenang]}</h1>
-        {fase.pemenang === 'mrwhite' && <p className="catatan">Mr. White menebak kata Civilian dengan benar: “{fase.tebakanMrWhite}”.</p>}
-        {fase.pemenang === 'penyusup' && <p className="catatan">Undercover dan Mr. White berhasil bertahan.</p>}
-        {fase.pemenang === 'civilian' && <p className="catatan">Semua Undercover dan Mr. White sudah tertangkap.</p>}
+        {fase.pemenang === 'mrwhite' && <p className="catatan">Tebakan benar: “{fase.tebakanMrWhite}”</p>}
         <div className="kata-hasil">
-          <div><span>Kata Civilian</span><strong>{pasangan.civilian}</strong></div>
-          <div><span>Kata Undercover</span><strong>{pasangan.undercover}</strong></div>
+          <div><span>Civilian</span><strong>{pasangan.civilian}</strong></div>
+          <div><span>Undercover</span><strong>{pasangan.undercover}</strong></div>
         </div>
         <p className="catatan kecil-teks">Sumber: {pasangan.sumber}</p>
       </div>
       <div className="kartu">
-        <h2>Peran semua pemain</h2>
+        <h2>Peran</h2>
         <ul className="daftar-hasil">
           {pemain.map((p, i) => (
             <li key={i} className={p.hidup ? '' : 'mati'}>
@@ -421,8 +418,8 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
       </div>
       {riwayat(true)}
       <div className="aksi-bawah">
-        <button className="utama" onClick={onMainLagi} disabled={memuat}>{memuat ? 'Menyiapkan kata...' : 'Main lagi (pemain sama)'}</button>
-        <button className="kedua" onClick={onAturUlang}>Atur ulang</button>
+        <button className="utama" onClick={onMainLagi} disabled={memuat}>{memuat ? 'Memuat' : 'Ulang'}</button>
+        <button className="kedua" onClick={onAturUlang}>Atur</button>
       </div>
     </section>
   );
@@ -446,8 +443,7 @@ function GiliranPetunjuk({ game, fase, onGiliran, onVote, riwayat }: {
   return (
     <section className="tumpuk">
       <div className="kartu">
-        <h2>Ronde {fase.ronde}: Petunjuk</h2>
-        <p className="catatan">Oper HP sesuai urutan. Tiap pemain mengetik satu petunjuk tentang katanya tanpa menyebut katanya.</p>
+        <KepalaFase judul="Diskusi" ronde={fase.ronde} />
         <ol className="urutan">
           {fase.urutan.map((i, k) => (
             <li key={i} className={k < fase.giliran ? 'selesai' : k === fase.giliran ? 'sekarang' : ''}>
@@ -457,7 +453,7 @@ function GiliranPetunjuk({ game, fase, onGiliran, onVote, riwayat }: {
         </ol>
       </div>
       <FormPetunjuk
-        judul={`Giliran ${p.nama}: ketik petunjukmu`}
+        judul={`Giliran ${p.nama}`}
         galat={galat}
         onUbah={() => setGalat(null)}
         onKirim={kirim}
@@ -465,8 +461,10 @@ function GiliranPetunjuk({ game, fase, onGiliran, onVote, riwayat }: {
       />
       {riwayat}
       <div className="aksi-bawah">
-        <button className="kedua" onClick={() => onGiliran(null)}>Lewati giliran {p.nama}</button>
-        <button className="kedua" onClick={onVote}>Mulai voting sekarang</button>
+        <div className="baris-tombol">
+          <button className="kedua" onClick={() => onGiliran(null)}>Skip</button>
+          <button className="kedua" onClick={onVote}>Vote</button>
+        </div>
       </div>
     </section>
   );
@@ -482,8 +480,8 @@ function TebakMrWhite({ nama, onTebak }: { nama: string; onTebak: (t: string) =>
         if (teks.trim()) onTebak(teks);
       }}
     >
-      <label htmlFor="tebakan">{nama}, tebak kata Civilian. Kalau benar, Mr. White menang!</label>
-      <input id="tebakan" value={teks} onChange={(e) => setTeks(e.target.value)} autoComplete="off" autoCapitalize="off" placeholder="Ketik tebakan" />
+      <label htmlFor="tebakan">{nama}, tebak kata Civilian. Benar berarti menang.</label>
+      <input id="tebakan" value={teks} onChange={(e) => setTeks(e.target.value)} autoComplete="off" autoCapitalize="off" placeholder="Tebakan" />
       <button className="utama" type="submit" disabled={!teks.trim()}>Tebak</button>
     </form>
   );
@@ -512,10 +510,10 @@ function Timer({ detik }: { detik: number }) {
     <div className={`kartu timer ${sisa === 0 ? 'habis' : ''}`}>
       <output className="waktu" aria-live="off">{mm}:{ss}</output>
       <div className="baris-tombol">
-        {sisa > 0 && <button className="kedua" onClick={() => setJalan((j) => !j)}>{jalan ? 'Jeda' : 'Mulai timer'}</button>}
-        <button className="kedua" onClick={() => { setJalan(false); setSisa(detik); }}>Ulangi</button>
+        {sisa > 0 && <button className="kedua" onClick={() => setJalan((j) => !j)}>{jalan ? 'Jeda' : 'Mulai'}</button>}
+        <button className="kedua" onClick={() => { setJalan(false); setSisa(detik); }}>Ulang</button>
       </div>
-      {sisa === 0 && <p className="catatan">Waktu habis!</p>}
+      {sisa === 0 && <p className="catatan">Habis</p>}
     </div>
   );
 }
@@ -525,10 +523,10 @@ function PapanSkor({ skor, onReset, onTutup }: { skor: Record<string, number>; o
   return (
     <section className="tumpuk">
       <div className="kartu">
-        <h2>Skor kumulatif</h2>
-        <p className="catatan">Tersimpan di HP ini saja. Civilian menang: +2, Mr. White menang: +6, Undercover menang: +10.</p>
+        <h2>Skor</h2>
+        <p className="catatan">Civilian +2, Mr. White +6, Undercover +10. Tersimpan di HP ini.</p>
         {daftar.length === 0 ? (
-          <p>Belum ada skor. Selesaikan satu permainan dulu.</p>
+          <p className="catatan">Kosong</p>
         ) : (
           <ol className="daftar-hasil">
             {daftar.map(([n, s]) => (
@@ -539,7 +537,7 @@ function PapanSkor({ skor, onReset, onTutup }: { skor: Record<string, number>; o
       </div>
       <div className="aksi-bawah">
         <button className="utama" onClick={onTutup}>Kembali</button>
-        {daftar.length > 0 && <button className="kedua" onClick={onReset}>Hapus skor</button>}
+        {daftar.length > 0 && <button className="kedua" onClick={onReset}>Hapus</button>}
       </div>
     </section>
   );
@@ -549,8 +547,8 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
   return (
     <section className="tumpuk">
       <div className="kartu teks">
-        <h2>Cara main</h2>
-        <p>Undercover dimainkan 3 sampai 20 orang. Pilih Main di Satu HP (HP dioper bergiliran) atau Main Online (setiap pemain memakai HP sendiri lewat kode room).</p>
+        <h2>Aturan</h2>
+        <p>Undercover dimainkan 3 sampai 20 orang. Pilih Lokal (satu HP dioper bergiliran) atau Online (setiap pemain memakai HP sendiri lewat kode room).</p>
         <h3>Peran</h3>
         <ul>
           <li><strong>Civilian</strong>: mayoritas, semua mendapat kata yang sama.</li>
@@ -559,7 +557,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         </ul>
         <h3>Alur</h3>
         <ol>
-          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai main.</li>
+          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai.</li>
           <li>Oper HP ke setiap pemain. Tekan untuk melihat kata, hafalkan, lalu tutup sebelum mengoper.</li>
           <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
           <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka.</li>
@@ -570,17 +568,17 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Civilian menang jika semua Undercover dan Mr. White tereliminasi.</li>
           <li>Penyusup (Undercover dan Mr. White) menang jika jumlah mereka yang tersisa sama atau lebih banyak dari Civilian, termasuk saat tinggal 2 pemain.</li>
         </ul>
-        <h3>Main Online</h3>
+        <h3>Online</h3>
         <ul>
           <li>Satu orang membuat room dan menjadi host. Pemain lain gabung dengan kode, link, atau QR.</li>
-          <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] mengetik... dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
+          <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
           <li>Voting dilakukan dari HP masing-masing. Jika suara terbanyak seri, ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
           <li>HP host harus tetap membuka halaman selama permainan.</li>
         </ul>
         <p className="catatan">Semua data (nama, skor, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>
       </div>
       <div className="aksi-bawah">
-        <button className="utama" onClick={onTutup}>Mengerti</button>
+        <button className="utama" onClick={onTutup}>Oke</button>
       </div>
     </section>
   );

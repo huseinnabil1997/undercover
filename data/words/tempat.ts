@@ -271,7 +271,11 @@ const kategori: Kategori = {
     "Perumahan",
     "Kompleks",
     "Cluster",
-    "Pinggir Kota"
+    "Pinggir Kota",
+    "Pos Polisi",
+    "Kedai Kopi",
+    "Hostel",
+    "Pemakaman"
    ],
    "id": "tempat--tempat-umum-bangunan"
   },

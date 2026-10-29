@@ -495,7 +495,25 @@ const kategori: Kategori = {
     "Puncak",
     "Dogiyai",
     "Intan Jaya",
-    "Deiyai"
+    "Deiyai",
+    "Batubara",
+    "Labuhanbatu",
+    "Pematangsiantar",
+    "Tanjungbalai",
+    "Sawahlunto",
+    "Siak",
+    "Dumai",
+    "Batanghari",
+    "Pangkalpinang",
+    "Tanjungpinang",
+    "Gunungkidul",
+    "Karangasem",
+    "Kotabaru",
+    "Banjarbaru",
+    "Mahakam Ulu",
+    "Tolitoli",
+    "Pangkep",
+    "Sidrap"
    ],
    "id": "daerah--kota-kabupaten"
   },
@@ -747,7 +765,17 @@ const kategori: Kategori = {
     "Pantai Natsepa",
     "Gunung Gamalama",
     "Pulau Kei",
-    "Pantai Ngurbloat"
+    "Pantai Ngurbloat",
+    "Istana Pagaruyung",
+    "Taka Bonerate",
+    "Tegalalang",
+    "Kraton Yogyakarta",
+    "Kampung Naga",
+    "Kampung Bena",
+    "Pantai Nihiwatu",
+    "Bukit Tinggi",
+    "Sianjur Mula-Mula",
+    "Air Terjun Sipiso-Piso"
    ],
    "id": "daerah--tempat-wisata-indonesia"
   }
