@@ -222,6 +222,8 @@ p.galat { padding-left: 16px; }
 .pahlawan h1 { margin: 0; font-size: clamp(2.75rem, 14vw, 3.75rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .pahlawan .sub { font-size: 1.05rem; }
 .ilustrasi { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+/* picture tidak ikut tata letak supaya img menjadi anak flex langsung dan berada di tengah. */
+.ilustrasi picture { display: contents; }
 /* Lebar mengecil di layar pendek supaya tombol tetap terlihat tanpa gulir. */
 .ilustrasi img { display: block; width: min(320px, 100%, max(140px, calc((100dvh - 420px) * 1.56))); height: auto; }
 @media (prefers-reduced-motion: no-preference) {
