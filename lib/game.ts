@@ -1,6 +1,6 @@
 // Logika murni permainan Undercover. Tidak menyentuh DOM, localStorage, maupun React,
 // sehingga mudah diuji. Semua keacakan memakai fungsi `rng` yang bisa disuntikkan.
-import type { Kategori, KategoriMeta, PasanganKata, Pemain, Pemenang, Peran } from './types';
+import type { Kategori, KategoriMeta, PanjangKata, PasanganKata, Pemain, Pemenang, Peran } from './types';
 
 export type Rng = () => number;
 
@@ -174,8 +174,50 @@ export function ambilDuaKata(kata: readonly string[], rng: Rng = Math.random): [
   return [kata[i], kata[j]];
 }
 
+/* ------------------------------ Panjang kata ------------------------------ */
+
+export const PANJANG_KATA_DEFAULT: PanjangKata = 'satu';
+
+export function rapikanPanjangKata(x: unknown): PanjangKata {
+  return x === 'bebas' || x === 'satu' ? x : PANJANG_KATA_DEFAULT;
+}
+
+/** Kata tanpa spasi (tanda hubung seperti Kupu-Kupu tetap dihitung satu kata). */
+export function satuKata(w: string): boolean {
+  return !/\s/.test(w.trim());
+}
+
+/** Galat khusus: tidak ada pasangan yang lolos filter panjang kata. */
+export class TanpaPasanganError extends Error {
+  constructor() {
+    super('Tidak ada pasangan satu kata di kategori yang dipilih.');
+    this.name = 'TanpaPasanganError';
+  }
+}
+
+/**
+ * Saring kandidat sesuai panjang kata. Mode 'satu' membuang kata berspasi per subkategori,
+ * lalu melewati subkategori yang tersisa kurang dari 2 kata dan pasangan Klasik yang berspasi.
+ */
+export function saringPanjangKata(
+  kategori: readonly Kategori[],
+  klasik: ReadonlyArray<readonly [string, string]>,
+  mode: PanjangKata,
+): { kategori: Kategori[]; klasik: Array<readonly [string, string]> } {
+  if (mode === 'bebas') return { kategori: [...kategori], klasik: [...klasik] };
+  const k = kategori
+    .map((kat) => ({
+      ...kat,
+      subkategori: kat.subkategori.map((s) => ({ ...s, kata: s.kata.filter(satuKata) })).filter((s) => s.kata.length >= 2),
+    }))
+    .filter((kat) => kat.subkategori.length > 0);
+  return { kategori: k, klasik: klasik.filter(([a, b]) => satuKata(a) && satuKata(b)) };
+}
+
 export interface OpsiPasangan {
   kategori: readonly Kategori[];
+  /** Filter panjang kata. Bawaan 'bebas' (semua kata). */
+  panjangKata?: PanjangKata;
   klasik?: ReadonlyArray<readonly [string, string]>;
   /** Kunci pasangan yang baru dipakai (lihat kunciPasangan). */
   riwayat?: ReadonlySet<string> | readonly string[];
@@ -193,9 +235,14 @@ export interface OpsiPasangan {
 export function pilihPasangan(opsi: OpsiPasangan): PasanganKata {
   const rng = opsi.rng ?? Math.random;
   const riwayat = opsi.riwayat instanceof Set ? opsi.riwayat : new Set(opsi.riwayat ?? []);
-  const kategori = opsi.kategori.filter((k) => k.subkategori.some((s) => s.kata.length >= 2));
-  const klasik = opsi.klasik ?? [];
-  if (kategori.length === 0 && klasik.length === 0) throw new Error('Tidak ada kategori kata yang dipilih.');
+  const mode = opsi.panjangKata ?? 'bebas';
+  const disaring = saringPanjangKata(opsi.kategori, opsi.klasik ?? [], mode);
+  const kategori = disaring.kategori.filter((k) => k.subkategori.some((s) => s.kata.length >= 2));
+  const klasik = disaring.klasik;
+  if (kategori.length === 0 && klasik.length === 0) {
+    if (mode === 'satu' && (opsi.kategori.length > 0 || (opsi.klasik ?? []).length > 0)) throw new TanpaPasanganError();
+    throw new Error('Tidak ada kategori kata yang dipilih.');
+  }
   const peluangKlasik = kategori.length === 0 ? 1 : klasik.length === 0 ? 0 : (opsi.peluangKlasik ?? 0.3);
   const maks = opsi.maksPercobaan ?? 50;
 

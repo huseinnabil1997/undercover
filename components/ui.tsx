@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { maksPenyusup, type Komposisi } from '@/lib/game';
 import { PILIHAN_KATEGORI, SEMUA_KATEGORI, totalKombinasi } from '@/lib/bankKata';
-import type { Pemenang, Peran } from '@/lib/types';
+import type { PanjangKata, Pemenang, Peran } from '@/lib/types';
 
 export const NAMA_PERAN: Record<Peran, string> = { civilian: 'Civilian', undercover: 'Undercover', mrwhite: 'Mr. White' };
 
@@ -87,7 +87,9 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
 }
 
 /** Kartu pilihan kategori kata. */
-export function PilihKategori({ kategori, onUbah, nonaktif }: { kategori: string[]; onUbah: (k: string[]) => void; nonaktif?: boolean }) {
+export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas' }: {
+  kategori: string[]; onUbah: (k: string[]) => void; nonaktif?: boolean; panjangKata?: PanjangKata;
+}) {
   const semua = kategori.length === SEMUA_KATEGORI.length;
   return (
     <div className="kartu">
@@ -115,7 +117,39 @@ export function PilihKategori({ kategori, onUbah, nonaktif }: { kategori: string
         })}
       </div>
       <p className="catatan">
-        <strong>{angka(totalKombinasi(kategori))}</strong> pasangan kata
+        <strong>{angka(totalKombinasi(kategori, panjangKata))}</strong> pasangan kata
+      </p>
+    </div>
+  );
+}
+
+const PILIHAN_PANJANG: { id: PanjangKata; label: string }[] = [
+  { id: 'satu', label: 'Satu kata' },
+  { id: 'bebas', label: 'Boleh lebih' },
+];
+
+/** Kontrol segmen pil untuk filter panjang kata. */
+export function PilihPanjangKata({ nilai, onUbah, nonaktif }: { nilai: PanjangKata; onUbah: (p: PanjangKata) => void; nonaktif?: boolean }) {
+  return (
+    <div className="kartu">
+      <div className="baris-judul">
+        <h2>Panjang kata</h2>
+      </div>
+      <div className="segmen" role="group" aria-label="Panjang kata">
+        {PILIHAN_PANJANG.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            aria-pressed={nilai === p.id}
+            disabled={nonaktif}
+            onClick={() => onUbah(p.id)}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <p className="catatan">
+        {nilai === 'satu' ? 'Hanya pasangan tanpa spasi, misal Kopi dan Teh.' : 'Boleh lebih dari satu kata, misal Es Teh.'}
       </p>
     </div>
   );

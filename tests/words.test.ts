@@ -4,7 +4,7 @@ import { PASANGAN_KLASIK } from '../data/klasik';
 import { ambilDuaKata, catatRiwayat, jumlahKombinasiMeta, kombinasi2, kunciPasangan, pilihPasangan } from '../lib/game';
 import type { Kategori } from '../lib/types';
 
-// Subkategori nama (tokoh, judul, merek, tempat) boleh lebih dari satu kata.
+// Subkategori nama (tokoh, judul, merek, tempat) boleh memakai CamelCase.
 const SUBKAT_NAMA = new Set([
   'Hero Mobile Legends',
   'Item & Istilah Mobile Legends',
@@ -57,6 +57,7 @@ describe('bank kata', () => {
     semua.forEach((k, i) => {
       expect(k.id).toBe(META_KATEGORI[i].id);
       expect(k.subkategori.map((s) => s.kata.length)).toEqual(META_KATEGORI[i].subkategori.map((s) => s.jumlahKata));
+      expect(k.subkategori.map((s) => s.kata.filter((w) => !/\s/.test(w)).length)).toEqual(META_KATEGORI[i].subkategori.map((s) => s.jumlahSatuKata));
     });
   });
 
@@ -75,7 +76,7 @@ describe('bank kata', () => {
     }
   });
 
-  it('kata umum satu kata (tanpa spasi, tanpa CamelCase), nama boleh lebih dari satu kata', async () => {
+  it('kata umum tanpa CamelCase tempelan (kecuali merek), semua subkategori nama ada', async () => {
     let nama = 0;
     for (const k of await muatSemua()) {
       for (const s of k.subkategori) {
@@ -84,12 +85,21 @@ describe('bank kata', () => {
           continue;
         }
         for (const w of s.kata) {
-          expect(w, `${k.id}/${s.nama}`).not.toMatch(/\s/);
-          expect(w, `${k.id}/${s.nama}`).not.toMatch(/[a-z][A-Z]/);
+          expect(w.replace(/TikTok|YouTube|WhatsApp|iPhone|iPad|PlayStation/g, ''), `${k.id}/${s.nama}`).not.toMatch(/[a-z][A-Z]/);
+          expect(w, `${k.id}/${s.nama}`).not.toMatch(/\s{2,}/);
         }
       }
     }
     expect(nama).toBe(SUBKAT_NAMA.size);
+  });
+
+  it('tidak ada duplikat yang hanya beda spasi atau tanda hubung dalam satu subkategori', async () => {
+    for (const k of await muatSemua()) {
+      for (const s of k.subkategori) {
+        const kunci = s.kata.map((w) => w.toLowerCase().replace(/[-\s]+/g, ' '));
+        expect(new Set(kunci).size, `${k.id}/${s.nama}`).toBe(kunci.length);
+      }
+    }
   });
 
   it('pasangan klasik satu kata', () => {

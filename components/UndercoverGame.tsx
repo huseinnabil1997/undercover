@@ -4,15 +4,15 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault,
   MAX_PEMAIN, MIN_PEMAIN, namaDefault, tambahSkor, tebakanBenar, urutanBicara,
-  validasiSetup, type Komposisi,
+  rapikanPanjangKata, validasiSetup, type Komposisi,
 } from '@/lib/game';
-import { rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
+import { PESAN_TANPA_SATU_KATA, rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
-import type { PasanganKata, Pemain, Pemenang } from '@/lib/types';
+import type { PanjangKata, PasanganKata, Pemain, Pemenang } from '@/lib/types';
 import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
 import { useDialog } from './Modal';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
-import { angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, Stepper, Tanda } from './ui';
+import { angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Stepper, Tanda } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 
@@ -58,6 +58,7 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
   const [komposisi, setKomposisi] = useState<Komposisi>(() => komposisiAwal(namaAwal().length));
   const [kategori, setKategori] = useState<string[]>(kategoriAwal);
   const [timer, setTimer] = useState<number>(() => baca<number>(KUNCI.timer, 0));
+  const [panjangKata, setPanjangKata] = useState<PanjangKata>(() => rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)));
   const [skor, setSkor] = useState<Record<string, number>>(() => baca(KUNCI.skor, {}));
   const [game, setGame] = useState<Permainan | null>(null);
   const [memuat, setMemuat] = useState(false);
@@ -84,15 +85,17 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
     setMemuat(true);
     setGalatMuat(null);
     try {
-      const pasangan = await siapkanPasangan(kategori);
+      const { pasangan, cadangan } = await siapkanPasangan(kategori, panjangKata);
       const bersih = nama.map((n) => n.trim());
       simpan(KUNCI.nama, bersih);
       simpan(KUNCI.komposisi, komposisi);
       simpan(KUNCI.kategori, kategori);
       simpan(KUNCI.timer, timer);
+      simpan(KUNCI.panjangKata, panjangKata);
       setNama(bersih);
       setGame({ pemain: bagiPeran(bersih, komposisi), pasangan, fase: { jenis: 'serah', idx: 0, terbuka: false }, petunjuk: [] });
       setLayar('main');
+      if (cadangan) void dialog.info({ judul: 'Pasangan satu kata tidak ada', pesan: PESAN_TANPA_SATU_KATA });
     } catch {
       setGalatMuat('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
     } finally {
@@ -208,7 +211,9 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
             onOtomatis={() => setKomposisi(komposisiDefault(nama.length))}
           />
 
-          <PilihKategori kategori={kategori} onUbah={setKategori} />
+          <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} />
+
+          <PilihPanjangKata nilai={panjangKata} onUbah={setPanjangKata} />
 
           <div className="kartu">
             <div className="baris-judul">

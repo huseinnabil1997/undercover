@@ -5,6 +5,7 @@ export const KUNCI = {
   nama: 'nama',
   komposisi: 'komposisi',
   kategori: 'kategori',
+  panjangKata: 'panjangKata',
   timer: 'timer',
   riwayat: 'riwayatPasangan',
   skor: 'skor',

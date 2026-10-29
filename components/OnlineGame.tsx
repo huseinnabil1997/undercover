@@ -3,8 +3,8 @@
 // Mode online: setiap pemain memakai HP sendiri. HP host memegang state lengkap dan hanya
 // mengirim view yang sudah difilter (kata milik pemain itu sendiri) ke setiap pemain.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { komposisiDefault, MIN_PEMAIN, validasiSetup, type Komposisi } from '@/lib/game';
-import { rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
+import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
+import { PESAN_TANPA_SATU_KATA, rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
@@ -13,9 +13,9 @@ import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online
 import {
   bacaSesi, bacaStateHostMentah, buatToken, hapusSesi, hapusStateHost, simpanSesi, simpanStateHost, type SesiOnline,
 } from '@/lib/online/sesi';
-import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, StateHost, ViewPemain } from '@/lib/online/types';
+import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, Pengaturan, StateHost, ViewPemain } from '@/lib/online/types';
 import {
-  angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, Tanda, useDaftarKeluar,
+  angka, AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Tanda, useDaftarKeluar,
 } from './ui';
 import { ChatRoom } from './ChatRoom';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
@@ -85,6 +85,7 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
             const k = rapikanKategori(baca<unknown>(KUNCI.kategori, null));
             return k.length > 0 ? k : SEMUA_KATEGORI;
           })(),
+          panjangKata: rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)),
         }, Date.now());
       simpanStateHost(awal);
       const host = new HostRoom(awal, {
@@ -168,14 +169,16 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
     if (!host) return;
     setMemuat(true);
     try {
-      const pasangan = await siapkanPasangan(host.state.pengaturan.kategori);
+      const { kategori, panjangKata } = host.state.pengaturan;
+      const { pasangan, cadangan } = await siapkanPasangan(kategori, rapikanPanjangKata(panjangKata));
       aksi({ jenis: 'mulai', pasangan });
+      if (cadangan) void dialog.info({ judul: 'Pasangan satu kata tidak ada', pesan: PESAN_TANPA_SATU_KATA });
     } catch {
       tampilkan('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
     } finally {
       setMemuat(false);
     }
-  }, [aksi, tampilkan]);
+  }, [aksi, tampilkan, dialog]);
 
   async function keluar() {
     if (!sesi) return;
@@ -369,6 +372,9 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const online = view.pemain.filter((p) => p.online);
   const [manual, setManual] = useState(false);
   const { komposisi, kategori } = view.pengaturan;
+  const panjangKata = rapikanPanjangKata(view.pengaturan.panjangKata);
+  const atur = (p: Partial<Pengaturan>) =>
+    aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi, kategori, panjangKata, ...p } });
   const galat = useMemo(() => {
     const g = validasiSetup(online.map((p) => p.nama), komposisi);
     if (kategori.length === 0) g.push('Pilih minimal 1 kategori kata.');
@@ -381,17 +387,21 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
     if (!host || manual) return;
     const k = komposisiDefault(Math.max(MIN_PEMAIN, jumlah));
     if (k.undercover !== komposisi.undercover || k.mrWhite !== komposisi.mrWhite) {
-      aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi: k, kategori } });
+      aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi: k, kategori, panjangKata } });
     }
-  }, [host, manual, jumlah, komposisi, kategori, aksi]);
+  }, [host, manual, jumlah, komposisi, kategori, panjangKata, aksi]);
 
   const aturKomposisi = (k: Komposisi) => {
     setManual(true);
-    aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi: k, kategori } });
+    atur({ komposisi: k });
   };
   const aturKategori = (k: string[]) => {
     simpan(KUNCI.kategori, k);
-    aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi, kategori: k } });
+    atur({ kategori: k });
+  };
+  const aturPanjangKata = (p: typeof panjangKata) => {
+    simpan(KUNCI.panjangKata, p);
+    atur({ panjangKata: p });
   };
 
   return (
@@ -405,10 +415,11 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
         onUbah={aturKomposisi}
         onOtomatis={() => {
           setManual(false);
-          aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi: komposisiDefault(Math.max(MIN_PEMAIN, jumlah)), kategori } });
+          atur({ komposisi: komposisiDefault(Math.max(MIN_PEMAIN, jumlah)) });
         }}
       />
-      <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} />
+      <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} panjangKata={panjangKata} />
+      <PilihPanjangKata nilai={panjangKata} onUbah={aturPanjangKata} nonaktif={!host} />
       <Skor view={view} />
       {galat.length > 0 && (
         <ul className="galat" role="alert">

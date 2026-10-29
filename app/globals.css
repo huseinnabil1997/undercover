@@ -130,6 +130,15 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--teks); outl
 }
 .chip.pilih { background: var(--teks); color: var(--dasar); font-weight: 700; }
 
+.segmen { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: var(--permukaan-2); border-radius: var(--pil); }
+.segmen button {
+  min-height: 40px; padding: 0 12px; border: 0; border-radius: var(--pil);
+  background: transparent; color: var(--redup); font-size: 0.9rem; font-weight: 700;
+}
+.segmen button[aria-pressed='true'] { background: var(--teks); color: var(--dasar); }
+.segmen button:disabled { cursor: default; }
+.segmen button:disabled[aria-pressed='false'] { opacity: 0.4; }
+
 .galat { margin: 0; padding: 12px 16px 12px 32px; background: var(--permukaan); border-left: 3px solid var(--merah); border-radius: var(--r-dalam); color: var(--teks); font-size: 0.92rem; }
 p.galat { padding-left: 16px; }
 

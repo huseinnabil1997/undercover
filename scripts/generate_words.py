@@ -9,8 +9,9 @@ Pemakaian: python scripts/generate_words.py <folder-sumber>
 """
 import json, os, re, sys
 
-# Subkategori berisi nama (tokoh, judul, merek, tempat) boleh lebih dari satu kata.
-# Subkategori kata umum wajib satu kata: tanpa spasi dan tanpa CamelCase tempelan.
+# Semua kata boleh lebih dari satu kata. Subkategori nama (tokoh, judul, merek, tempat)
+# boleh memakai CamelCase; subkategori kata umum ditolak bila ada CamelCase tempelan
+# (misal EsTeh), kecuali merek di CAMEL_OK.
 NAMA_SUBKAT = {
     'Hero Mobile Legends', 'Item & Istilah Mobile Legends', 'Hero Dota 2', 'Karakter Genshin Impact',
     'Agen Valorant', 'Hero Honor of Kings', 'Pokemon', 'Karakter Anime', 'Judul Anime', 'Istilah Anime',
@@ -21,6 +22,7 @@ NAMA_SUBKAT = {
     'Tempat Wisata Indonesia',
 }
 CAMEL = re.compile(r'[a-z][A-Z]')
+CAMEL_OK = re.compile(r'TikTok|YouTube|WhatsApp|iPhone|iPad|PlayStation')
 
 src = sys.argv[1]
 out = os.path.join(os.path.dirname(__file__), '..', 'data', 'words')
@@ -48,9 +50,9 @@ for fn in os.listdir(src):
             subs[-1]['kata'] += [w.strip() for w in line.split(',') if w.strip()]
     for s in subs:
         if s['nama'] not in NAMA_SUBKAT:
-            salah = [w for w in s['kata'] if ' ' in w or CAMEL.search(w)]
+            salah = [w for w in s['kata'] if CAMEL.search(CAMEL_OK.sub('', w))]
             if salah:
-                sys.exit(f"{fn} / {s['nama']}: kata umum harus satu kata: {', '.join(salah[:10])}")
+                sys.exit(f"{fn} / {s['nama']}: CamelCase tempelan: {', '.join(salah[:10])}")
         seen, clean = set(), []
         for w in s['kata']:
             w = re.sub(r'\s+', ' ', w)
@@ -73,7 +75,8 @@ meta = []
 for cid in ids:
     c = cats[cid]
     meta.append({'id': cid, 'nama': c['nama'],
-                 'subkategori': [{'id': s['id'], 'nama': s['nama'], 'jumlahKata': len(s['kata'])} for s in c['subkategori']]})
+                 'subkategori': [{'id': s['id'], 'nama': s['nama'], 'jumlahKata': len(s['kata']),
+                                  'jumlahSatuKata': sum(1 for w in s['kata'] if not re.search(r'\s', w))} for s in c['subkategori']]})
 with open(os.path.join(out, 'index.ts'), 'w', encoding='utf-8', newline='\n') as f:
     f.write('// Berkas ini dihasilkan oleh scripts/generate_words.py. Jangan diedit manual.\n')
     f.write("import type { Kategori, KategoriMeta } from '../../lib/types';\n\n")

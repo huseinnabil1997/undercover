@@ -16,7 +16,12 @@ export interface SubkategoriMeta {
   id: string;
   nama: string;
   jumlahKata: number;
+  /** Jumlah kata tanpa spasi (dipakai mode Satu kata). */
+  jumlahSatuKata: number;
 }
+
+/** Filter panjang kata: hanya kata tanpa spasi, atau boleh lebih dari satu kata. */
+export type PanjangKata = 'satu' | 'bebas';
 
 export interface KategoriMeta {
   id: string;

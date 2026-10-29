@@ -2,7 +2,7 @@
 import type { Komposisi } from '../game';
 import type { PesanChat } from './chat';
 import type { EntriPetunjuk } from '../petunjuk';
-import type { PasanganKata, Pemenang, Peran } from '../types';
+import type { PanjangKata, PasanganKata, Pemenang, Peran } from '../types';
 
 /** Versi 3: diskusi dengan petunjuk ketik (versi 2 menambah chat). Klien versi lama ditolak dengan pesan "muat ulang". */
 export const VERSI_PROTOKOL = 3;
@@ -22,6 +22,8 @@ export interface PemainOnline {
 export interface Pengaturan {
   komposisi: Komposisi;
   kategori: string[];
+  /** Filter panjang kata pilihan host. Kosong (state lama) berarti 'satu'. */
+  panjangKata?: PanjangKata;
 }
 
 export type FaseOnline = 'kata' | 'diskusi' | 'vote' | 'terungkap' | 'hasil';
