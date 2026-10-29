@@ -1,0 +1,13 @@
+{
+  "name": "Undercover: Tebak Kata",
+  "short_name": "Undercover",
+  "description": "Game tebak kata Undercover, main bergiliran dalam satu HP.",
+  "lang": "id",
+  "start_url": "/undercover/",
+  "scope": "/undercover/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#120e22",
+  "theme_color": "#120e22",
+  "icons": [{ "src": "/undercover/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
