@@ -1,8 +1,10 @@
 // Tipe state dan pesan untuk mode online (host = sumber state otoritatif, topologi bintang).
 import type { Komposisi } from '../game';
+import type { PesanChat } from './chat';
 import type { PasanganKata, Pemenang, Peran } from '../types';
 
-export const VERSI_PROTOKOL = 1;
+/** Versi 2: menambah chat room. Klien versi lama ditolak dengan pesan "muat ulang". */
+export const VERSI_PROTOKOL = 2;
 export const INTERVAL_PING_MS = 3000;
 /** Pemain dianggap offline jika host tidak menerima pesan apa pun selama ini. */
 export const BATAS_OFFLINE_MS = 10000;
@@ -149,9 +151,13 @@ export interface ViewPemain {
 export type PesanKeHost =
   | { t: 'halo'; v: number; id: string; nama: string; token: string }
   | { t: 'ping' }
-  | { t: 'aksi'; aksi: AksiPemain };
+  | { t: 'aksi'; aksi: AksiPemain }
+  | { t: 'chat'; teks: string };
 
 export type PesanKeKlien =
   | { t: 'view'; view: ViewPemain }
-  | { t: 'tolak'; alasan: string }
-  | { t: 'pong' };
+  /** `chat: true` jika yang ditolak adalah pesan chat (ditampilkan di panel chat, bukan toast). */
+  | { t: 'tolak'; alasan: string; chat?: boolean }
+  | { t: 'pong' }
+  | { t: 'chat'; pesan: PesanChat }
+  | { t: 'riwayatChat'; pesan: PesanChat[] };

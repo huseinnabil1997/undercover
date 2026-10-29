@@ -8,6 +8,7 @@ import { rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
+import type { PesanChat } from '@/lib/online/chat';
 import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online/room';
 import {
   bacaSesi, bacaStateHostMentah, buatToken, hapusSesi, hapusStateHost, simpanSesi, simpanStateHost, type SesiOnline,
@@ -16,6 +17,7 @@ import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, StateHost,
 import {
   angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, useDaftarKeluar,
 } from './ui';
+import { ChatRoom } from './ChatRoom';
 import { useDialog } from './Modal';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -40,6 +42,8 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
   const [galatMasuk, setGalatMasuk] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [memuat, setMemuat] = useState(false);
+  const [chat, setChat] = useState<PesanChat[]>([]);
+  const [galatChat, setGalatChat] = useState<string | null>(null);
   const hostRef = useRef<HostRoom | null>(null);
   const klienRef = useRef<KlienRoom | null>(null);
 
@@ -58,6 +62,8 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
     hapusSesi();
     setSesi(null);
     setView(null);
+    setChat([]);
+    setGalatChat(null);
     setGalatMasuk(alasan ?? null);
   }, []);
 
@@ -90,6 +96,7 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
             setSesi({ ...sesi, kode: buatKodeRoom() });
           }
         },
+        onChat: setChat,
       });
       hostRef.current = host;
       void host.mulai();
@@ -111,6 +118,8 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
         if (saatGabung) keluarSesi(alasan);
         else tampilkan(alasan);
       },
+      onChat: setChat,
+      onTolakChat: setGalatChat,
     });
     klienRef.current = klien;
     void klien.mulai();
@@ -132,6 +141,14 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
     },
     [sesi, tampilkan],
   );
+
+  const kirimChat = useCallback((teks: string): boolean => {
+    let galat: string | undefined;
+    if (hostRef.current) galat = hostRef.current.kirimChat(teks);
+    else if (!klienRef.current?.kirimChat(teks)) galat = 'Belum tersambung ke host. Coba lagi sebentar.';
+    setGalatChat(galat ?? null);
+    return !galat;
+  }, []);
 
   const mulaiGame = useCallback(async () => {
     const host = hostRef.current;
@@ -188,7 +205,10 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
             {TEKS_STATUS[status.s]}
           </span>
         </div>
-        <button className="kecil" onClick={keluar}>{sesi.host ? 'Tutup room' : 'Keluar'}</button>
+        <div className="aksi-kepala">
+          {view && <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} />}
+          <button className="kecil" onClick={keluar}>{sesi.host ? 'Tutup room' : 'Keluar'}</button>
+        </div>
       </header>
 
       {toast && <p className="toast" role="alert">{toast}</p>}

@@ -2,6 +2,7 @@
 // Topologi bintang: setiap pemain tersambung langsung ke HP host. Broker publik 0.peerjs.com
 // hanya dipakai untuk saling menemukan (signaling); isi permainan lewat koneksi P2P.
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
+import { buatStateChat, gabungChat, terimaChat, type PesanChat } from './chat';
 import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
 import { peerIdHost } from './room';
 import {
@@ -34,6 +35,8 @@ export interface PendengarHost {
   onState: (s: StateHost) => void;
   onStatus: (s: StatusJaringan, info?: string) => void;
   onTolak?: (alasan: string) => void;
+  /** Daftar chat terbaru (maks 50) setiap ada pesan baru. */
+  onChat?: (pesan: PesanChat[]) => void;
 }
 
 export class HostRoom {
@@ -44,12 +47,15 @@ export class HostRoom {
   private timer: ReturnType<typeof setInterval> | null = null;
   private selesai = false;
   private percobaan = 0;
+  /** Chat hanya di memori: hilang saat room ditutup atau HP host refresh. */
+  private chat = buatStateChat();
 
   constructor(public state: StateHost, private dengar: PendengarHost) {}
 
   async mulai(): Promise<void> {
     this.dengar.onStatus('menyambung');
     this.dengar.onState(this.state);
+    this.dengar.onChat?.(this.chat.pesan);
     this.timer = setInterval(() => this.dispatch({ jenis: 'tick' }), 2000);
     await this.sambung();
   }
@@ -135,6 +141,8 @@ export class HostRoom {
       this.pemilikKoneksi.set(conn, pesan.id);
       this.terkirim.delete(pesan.id);
       this.terapkan(r.state, r.diam);
+      // Pemain yang baru gabung atau tersambung ulang mendapat riwayat chat singkat.
+      this.kirim(conn, { t: 'riwayatChat', pesan: this.chat.pesan });
       return;
     }
     const id = this.pemilikKoneksi.get(conn);
@@ -142,6 +150,12 @@ export class HostRoom {
     if (pesan.t === 'ping') {
       this.dispatch({ jenis: 'terlihat', id });
       this.kirim(conn, { t: 'pong' });
+      return;
+    }
+    if (pesan.t === 'chat') {
+      this.dispatch({ jenis: 'terlihat', id });
+      const tolak = this.prosesChat(id, pesan.teks);
+      if (tolak) this.kirim(conn, { t: 'tolak', alasan: tolak, chat: true });
       return;
     }
     if (pesan.t === 'aksi') {
@@ -152,6 +166,23 @@ export class HostRoom {
       if (r.tolak) this.kirim(conn, { t: 'tolak', alasan: r.tolak });
       this.terapkan(r.state, r.diam);
     }
+  }
+
+  /** Validasi lalu relay satu pesan chat ke semua pemain yang tersambung. Mengembalikan alasan jika ditolak. */
+  private prosesChat(dari: string, teks: unknown): string | undefined {
+    const p = this.state.pemain.find((x) => x.id === dari);
+    const r = terimaChat(this.chat, p && { id: p.id, nama: p.nama }, teks, Date.now());
+    if (r.tolak) return r.tolak;
+    if (!r.pesan) return undefined;
+    this.chat = r.state;
+    this.dengar.onChat?.(this.chat.pesan);
+    for (const conn of this.koneksi.values()) this.kirim(conn, { t: 'chat', pesan: r.pesan });
+    return undefined;
+  }
+
+  /** Chat dari HP host sendiri. */
+  kirimChat(teks: string): string | undefined {
+    return this.prosesChat(this.state.hostId, teks);
   }
 
   /** Aksi dari host sendiri (UI di HP host) atau sistem. */
@@ -195,6 +226,8 @@ export interface PendengarKlien {
   onView: (v: ViewPemain) => void;
   onStatus: (s: StatusJaringan, info?: string) => void;
   onTolak: (alasan: string, saatGabung: boolean) => void;
+  onChat?: (pesan: PesanChat[]) => void;
+  onTolakChat?: (alasan: string) => void;
 }
 
 export class KlienRoom {
@@ -206,6 +239,7 @@ export class KlienRoom {
   private sudahView = false;
   private timer: ReturnType<typeof setInterval> | null = null;
   private jadwalUlang: ReturnType<typeof setTimeout> | null = null;
+  private chat: PesanChat[] = [];
 
   constructor(
     private kode: string,
@@ -290,8 +324,16 @@ export class KlienRoom {
           this.dengar.onStatus('tersambung');
           this.dengar.onView(p.view);
         }
+      } else if (p.t === 'chat' || p.t === 'riwayatChat') {
+        const masuk: unknown[] = p.t === 'chat' ? [p.pesan] : Array.isArray(p.pesan) ? p.pesan : [];
+        const baru = gabungChat(this.chat, masuk);
+        if (baru !== this.chat) {
+          this.chat = baru;
+          this.dengar.onChat?.(baru);
+        }
       } else if (p.t === 'tolak') {
-        this.dengar.onTolak(p.alasan, !this.sudahView);
+        if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan);
+        else this.dengar.onTolak(p.alasan, !this.sudahView);
       }
     });
     const putus = () => {
@@ -319,6 +361,12 @@ export class KlienRoom {
     } catch {
       // abaikan, akan tersambung ulang
     }
+  }
+
+  kirimChat(teks: string): boolean {
+    if (!this.conn?.open) return false;
+    this.kirimMentah({ t: 'chat', teks });
+    return true;
   }
 
   kirim(aksi: AksiPemain): boolean {
