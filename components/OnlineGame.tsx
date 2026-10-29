@@ -16,6 +16,7 @@ import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, StateHost,
 import {
   angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, useDaftarKeluar,
 } from './ui';
+import { useDialog } from './Modal';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 const KUNCI_NAMA_ONLINE = 'online:nama';
@@ -32,6 +33,7 @@ const TEKS_STATUS: Record<StatusJaringan, string> = {
 type AksiUi = AksiPemain | AksiKhususHost;
 
 export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string | null; onBeranda: () => void }) {
+  const dialog = useDialog();
   const [sesi, setSesi] = useState<SesiOnline | null>(() => bacaSesi('tab'));
   const [view, setView] = useState<ViewPemain | null>(null);
   const [status, setStatus] = useState<{ s: StatusJaringan; info?: string }>({ s: 'menyambung' });
@@ -145,10 +147,14 @@ export default function OnlineGame({ kodeAwal, onBeranda }: { kodeAwal: string |
     }
   }, [aksi, tampilkan]);
 
-  function keluar() {
+  async function keluar() {
     if (!sesi) return;
-    const pesan = sesi.host ? 'Tutup room ini? Semua pemain akan terputus.' : 'Keluar dari room ini?';
-    if (!window.confirm(pesan)) return;
+    const ya = await dialog.konfirmasi(
+      sesi.host
+        ? { judul: 'Tutup room?', pesan: `Room ${sesi.kode} ditutup dan semua pemain akan terputus.`, ok: 'Tutup room', bahaya: true }
+        : { judul: 'Keluar dari room?', pesan: 'Kamu bisa gabung lagi dengan kode yang sama selama room masih dibuka.', ok: 'Keluar', bahaya: true },
+    );
+    if (!ya) return;
     if (sesi.host) hapusStateHost();
     else aksi({ jenis: 'keluar' });
     // Beri waktu pesan keluar terkirim sebelum koneksi ditutup.
@@ -388,6 +394,7 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
 }
 
 function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: string) => void }) {
+  const dialog = useDialog();
   const link = `${window.location.origin}${BASE}/?room=${kode}`;
   const [qr, setQr] = useState<string | null>(null);
   const [tampilQr, setTampilQr] = useState(false);
@@ -407,7 +414,12 @@ function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: strin
       await navigator.clipboard.writeText(link);
       tampilkan('Link room disalin.');
     } catch {
-      window.prompt('Salin link ini:', link);
+      await dialog.info({
+        judul: 'Salin link room',
+        pesan: 'Browser tidak mengizinkan salin otomatis. Tekan lama teks di bawah lalu pilih Salin.',
+        teksSalin: link,
+        ok: 'Selesai',
+      });
     }
   }
 
@@ -440,6 +452,7 @@ function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: strin
 }
 
 function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void }) {
+  const dialog = useDialog();
   const daftar = useDaftarKeluar(view.pemain, (p) => p.id);
   return (
     <div className="kartu">
@@ -460,7 +473,15 @@ function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; a
             {host && !p.host && !keluar && (
               <button
                 className="kecil mini"
-                onClick={() => window.confirm(`Keluarkan ${p.nama} dari room?`) && aksi({ jenis: 'keluarkan', id: p.id })}
+                onClick={async () => {
+                  const ya = await dialog.konfirmasi({
+                    judul: `Keluarkan ${p.nama}?`,
+                    pesan: `${p.nama} akan dikeluarkan dari room ini.`,
+                    ok: 'Keluarkan',
+                    bahaya: true,
+                  });
+                  if (ya) aksi({ jenis: 'keluarkan', id: p.id });
+                }}
                 aria-label={`Keluarkan ${p.nama}`}
               >
                 Keluarkan

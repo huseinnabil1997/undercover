@@ -291,6 +291,43 @@ button:active:not(:disabled) { transform: scale(0.96); }
   100% { opacity: 0; transform: translateY(105vh) rotate(540deg); }
 }
 
+/* Dialog in-app (pengganti popup bawaan browser). Mobile: sheet dari bawah; layar lebar: di tengah. */
+.dialog-latar {
+  position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center;
+  padding: 12px calc(env(safe-area-inset-right) + 12px) calc(env(safe-area-inset-bottom) + 12px) calc(env(safe-area-inset-left) + 12px);
+  background: rgba(8, 6, 18, 0.72); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  animation: dialog-latar-masuk 200ms ease-out both;
+}
+.dialog-latar.tutup { animation: dialog-latar-keluar 160ms ease-in both; pointer-events: none; }
+.dialog-panel {
+  width: 100%; max-width: 440px; max-height: calc(100dvh - 24px); overflow: auto; outline: none;
+  background: var(--kartu); border: 1px solid var(--garis); border-radius: 22px; padding: 22px 18px 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); animation: dialog-naik 200ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.dialog-panel.bahaya { border-color: rgba(255, 93, 115, 0.55); }
+.dialog-latar.tutup .dialog-panel { animation: dialog-turun 160ms ease-in both; }
+.dialog-panel h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.dialog-pesan { margin: 0; color: var(--redup); }
+.dialog-label { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; font-weight: 700; }
+.dialog-input {
+  width: 100%; min-height: 50px; margin-top: 12px; border-radius: 12px; border: 1px solid var(--garis);
+  background: var(--kartu-2); padding: 0 14px; font-size: 1rem;
+}
+.dialog-label .dialog-input { margin-top: 0; font-weight: 400; }
+.dialog-tombol { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; margin-top: 18px; }
+.dialog-tombol .utama, .dialog-tombol .kedua { min-height: 52px; font-size: 1rem; }
+@media (min-width: 520px) {
+  .dialog-latar { align-items: center; }
+  .dialog-panel { animation-name: dialog-skala-masuk; }
+  .dialog-latar.tutup .dialog-panel { animation-name: dialog-skala-keluar; }
+}
+@keyframes dialog-latar-masuk { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dialog-latar-keluar { from { opacity: 1; } to { opacity: 0; } }
+@keyframes dialog-naik { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes dialog-turun { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(16px) scale(0.98); } }
+@keyframes dialog-skala-masuk { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes dialog-skala-keluar { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(0.96); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important;

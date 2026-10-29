@@ -9,6 +9,7 @@ import {
 import { rapikanKategori, SEMUA_KATEGORI, siapkanPasangan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PasanganKata, Pemain, Pemenang } from '@/lib/types';
+import { useDialog } from './Modal';
 import { angka, AturPeran, JUDUL_MENANG, KartuBalik, Konfeti, NAMA_PERAN, PilihKategori, Stepper } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
@@ -47,6 +48,7 @@ function kategoriAwal(): string[] {
 }
 
 export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }) {
+  const dialog = useDialog();
   const [layar, setLayar] = useState<Layar>('setup');
   const [nama, setNama] = useState<string[]>(namaAwal);
   const [komposisi, setKomposisi] = useState<Komposisi>(() => komposisiAwal(namaAwal().length));
@@ -107,8 +109,14 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
     setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'diskusi', ronde: ronde + 1, urutan: urutanBicara(pemain) } } : g));
   }
 
-  function resetSkor() {
-    if (!window.confirm('Hapus semua skor yang tersimpan di HP ini?')) return;
+  async function resetSkor() {
+    const ya = await dialog.konfirmasi({
+      judul: 'Atur ulang skor?',
+      pesan: 'Semua skor yang tersimpan di HP ini akan dihapus. Tindakan ini tidak bisa dibatalkan.',
+      ok: 'Hapus skor',
+      bahaya: true,
+    });
+    if (!ya) return;
     setSkor({});
     simpan(KUNCI.skor, {});
   }
@@ -131,8 +139,15 @@ export default function UndercoverGame({ onBeranda }: { onBeranda?: () => void }
         ) : (
           <button
             className="kecil"
-            onClick={() => {
-              if (window.confirm('Akhiri permainan ini dan kembali ke pengaturan?')) {
+            onClick={async () => {
+              const ya = await dialog.konfirmasi({
+                judul: 'Akhiri permainan?',
+                pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan. Skor ronde ini tidak dihitung.',
+                ok: 'Akhiri',
+                batal: 'Lanjut main',
+                bahaya: true,
+              });
+              if (ya) {
                 setGame(null);
                 setLayar('setup');
               }

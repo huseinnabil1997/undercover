@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { kodeDariUrl } from '@/lib/online/room';
 import { bacaSesi } from '@/lib/online/sesi';
+import { DialogProvider } from './Modal';
 import OnlineGame from './OnlineGame';
 import UndercoverGame from './UndercoverGame';
 
@@ -17,6 +18,14 @@ function modeAwal(): { mode: Mode; kode: string | null } {
 }
 
 export default function App() {
+  return (
+    <DialogProvider>
+      <Isi />
+    </DialogProvider>
+  );
+}
+
+function Isi() {
   const [awal] = useState(modeAwal);
   const [mode, setMode] = useState<Mode>(awal.mode);
 
