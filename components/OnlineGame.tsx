@@ -11,7 +11,8 @@ import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan'
 import type { PesanChat } from '@/lib/online/chat';
 import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online/room';
 import {
-  bacaSesi, bacaStateHostMentah, buatToken, hapusSesi, hapusStateHost, simpanSesi, simpanStateHost, type SesiOnline,
+  bacaSesi, bacaStateHostMentah, bolehTawarkanLanjut, buatToken, DETAK_AKTIF_MS, hapusSesi, hapusStateHost, lepasAktif,
+  sesiDipakaiHalamanLain, simpanSesi, simpanStateHost, tandaiAktif, type SesiOnline,
 } from '@/lib/online/sesi';
 import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, Pengaturan, StateHost, ViewPemain } from '@/lib/online/types';
 import {
@@ -41,7 +42,11 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   daftarPenjaga?: (p: Penjaga | null) => void;
 }) {
   const dialog = useDialog();
-  const [sesi, setSesi] = useState<SesiOnline | null>(() => bacaSesi('tab'));
+  // Tab hasil "duplikat" ikut menyalin sessionStorage; jangan pakai id yang masih aktif di tab asal.
+  const [sesi, setSesi] = useState<SesiOnline | null>(() => {
+    const s = bacaSesi('tab');
+    return s && !sesiDipakaiHalamanLain(s.id) ? s : null;
+  });
   const [view, setView] = useState<ViewPemain | null>(null);
   const [status, setStatus] = useState<{ s: StatusJaringan; info?: string }>({ s: 'menyambung' });
   const [galatMasuk, setGalatMasuk] = useState<string | null>(null);
@@ -61,18 +66,34 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     return () => window.clearTimeout(id);
   }, [toast]);
 
-  const keluarSesi = useCallback((alasan?: string) => {
+  const keluarSesi = useCallback((alasan?: string, hanyaTab = false) => {
     hostRef.current?.hentikan();
     klienRef.current?.hentikan();
     hostRef.current = null;
     klienRef.current = null;
-    hapusSesi();
+    hapusSesi(hanyaTab);
     setSesi(null);
     setView(null);
     setChat([]);
     setGalatChat(null);
     setGalatMasuk(alasan ?? null);
   }, []);
+
+  // Tandai sesi ini sedang dipakai halaman ini, agar tab lain tidak menawarkan "Lanjut" dengan id yang sama.
+  useEffect(() => {
+    if (!sesi) return;
+    const id = sesi.id;
+    tandaiAktif(id);
+    const detak = window.setInterval(() => tandaiAktif(id), DETAK_AKTIF_MS);
+    // Saat halaman dimuat ulang atau ditutup, lepas tanda agar sesi bisa langsung dilanjutkan.
+    const lepas = () => lepasAktif(id);
+    window.addEventListener('pagehide', lepas);
+    return () => {
+      window.clearInterval(detak);
+      window.removeEventListener('pagehide', lepas);
+      lepasAktif(id);
+    };
+  }, [sesi]);
 
   // Sambungkan sesuai sesi (host atau pemain). Dibersihkan saat sesi berganti atau komponen ditutup.
   useEffect(() => {
@@ -130,6 +151,8 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
         if (teks) setDraftChat((d) => (d.trim() ? d : teks));
       },
       onTolakPetunjuk: setGalatPetunjuk,
+      // Salinan sesi di perangkat dibiarkan: kemungkinan milik tab lain yang baru mengambil alih.
+      onDiganti: (alasan) => keluarSesi(alasan, true),
     });
     klienRef.current = klien;
     void klien.mulai();
@@ -269,7 +292,10 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
 }) {
   const [nama, setNama] = useState(() => baca<string>(KUNCI_NAMA_ONLINE, ''));
   const [kode, setKode] = useState(kodeAwal ?? '');
-  const [lanjut] = useState(() => bacaSesi('perangkat'));
+  const [lanjut] = useState(() => {
+    const s = bacaSesi('perangkat');
+    return s && bolehTawarkanLanjut(s, kodeAwal, sesiDipakaiHalamanLain(s.id)) ? s : null;
+  });
   const namaBersih = rapikanNama(nama);
   const kodeBersih = rapikanKode(kode);
 

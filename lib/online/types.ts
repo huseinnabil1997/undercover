@@ -165,7 +165,8 @@ export type PesanKeKlien =
   | { t: 'view'; view: ViewPemain }
   /** `chat: true` jika yang ditolak adalah pesan chat (ditampilkan di panel chat, bukan toast). */
   /** `petunjuk: true` jika yang ditolak adalah petunjuk (ditampilkan di bawah kolom petunjuk). `teks` = isi chat yang ditolak, dikembalikan ke pengirim. */
-  | { t: 'tolak'; alasan: string; chat?: boolean; petunjuk?: boolean; teks?: string }
+  /** `ganti: true` jika id pemain ini baru saja dipakai koneksi lain (tab atau HP lain): klien berhenti, tidak menyambung ulang. */
+  | { t: 'tolak'; alasan: string; chat?: boolean; petunjuk?: boolean; teks?: string; ganti?: boolean }
   | { t: 'pong' }
   | { t: 'chat'; pesan: PesanChat }
   | { t: 'riwayatChat'; pesan: PesanChat[] };

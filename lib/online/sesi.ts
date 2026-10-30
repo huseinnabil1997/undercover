@@ -14,6 +14,12 @@ export interface SesiOnline {
 
 const KUNCI_SESI = 'undercover:online:sesi';
 const KUNCI_HOST = 'undercover:online:host';
+const PREFIX_AKTIF = 'undercover:online:aktif:';
+/** Tab yang masih memakai sesi memperbarui tanda aktif setiap DETAK_AKTIF_MS. */
+export const DETAK_AKTIF_MS = 2000;
+export const BATAS_AKTIF_MS = 6000;
+/** Id halaman ini. Dibuat per muat halaman, jadi tidak ikut tersalin saat tab diduplikasi. */
+export const ID_HALAMAN = Math.random().toString(36).slice(2, 12);
 /** Sesi yang lebih tua dari ini tidak ditawarkan lagi. */
 export const UMUR_SESI_MS = 6 * 60 * 60 * 1000;
 
@@ -49,11 +55,47 @@ export function simpanSesi(s: SesiOnline): void {
   }, undefined);
 }
 
-export function hapusSesi(): void {
+/** `hanyaTab`: hapus sesi tab ini saja; salinan perangkat dibiarkan (mungkin milik tab lain yang masih aktif). */
+export function hapusSesi(hanyaTab = false): void {
   aman(() => {
     window.sessionStorage.removeItem(KUNCI_SESI);
-    window.localStorage.removeItem(KUNCI_SESI);
+    if (!hanyaTab) window.localStorage.removeItem(KUNCI_SESI);
   }, undefined);
+}
+
+/** Tanda bahwa halaman ini sedang memakai sesi pemain `id`. */
+export function tandaiAktif(id: string, now = Date.now()): void {
+  aman(() => window.localStorage.setItem(PREFIX_AKTIF + id, JSON.stringify({ halaman: ID_HALAMAN, waktu: now })), undefined);
+}
+
+export function lepasAktif(id: string): void {
+  aman(() => {
+    const raw = window.localStorage.getItem(PREFIX_AKTIF + id);
+    if (raw && JSON.parse(raw)?.halaman === ID_HALAMAN) window.localStorage.removeItem(PREFIX_AKTIF + id);
+  }, undefined);
+}
+
+/** Murni: apakah tanda aktif `raw` menunjukkan sesi masih dipakai halaman lain. */
+export function aktifDiHalamanLain(raw: unknown, halaman: string, now: number): boolean {
+  if (!raw || typeof raw !== 'object') return false;
+  const t = raw as { halaman?: unknown; waktu?: unknown };
+  return typeof t.halaman === 'string' && t.halaman !== halaman && typeof t.waktu === 'number' && now - t.waktu < BATAS_AKTIF_MS;
+}
+
+export function sesiDipakaiHalamanLain(id: string, now = Date.now()): boolean {
+  return aman(() => {
+    const raw = window.localStorage.getItem(PREFIX_AKTIF + id);
+    return aktifDiHalamanLain(raw ? JSON.parse(raw) : null, ID_HALAMAN, now);
+  }, false);
+}
+
+/**
+ * Tombol "Lanjut" hanya untuk kembali ke sesi yang tidak sedang terbuka di tab lain, dan hanya untuk room
+ * yang sama dengan link undangan (jika ada). Tanpa ini tab kedua bisa memakai id pemain yang sama.
+ */
+export function bolehTawarkanLanjut(lanjut: SesiOnline | null, kodeAwal: string | null, dipakaiLain: boolean): boolean {
+  if (!lanjut || dipakaiLain) return false;
+  return !kodeAwal || kodeAwal === lanjut.kode;
 }
 
 export function simpanStateHost(s: StateHost): void {

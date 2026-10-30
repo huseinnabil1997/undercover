@@ -22,6 +22,9 @@ export const OPSI_PEER: PeerOptions = {
 export const BATAS_SENYAP_HOST_MS = 8000;
 const JEDA_ULANG_MS = 2500;
 
+/** Dikirim ke koneksi lama saat id pemain yang sama tersambung dari tab atau HP lain. */
+export const PESAN_SESI_DIGANTI = 'Sesi ini sekarang dipakai di tab atau HP lain. Untuk ikut sebagai pemain baru, gabung dengan nama berbeda.';
+
 export type StatusJaringan = 'menyambung' | 'tersambung' | 'menyambungUlang' | 'hostTidakAda' | 'idDipakai' | 'gagal';
 
 async function buatPeer(id?: string): Promise<PeerT> {
@@ -135,7 +138,10 @@ export class HostRoom {
       const lama = this.koneksi.get(pesan.id);
       if (lama && lama !== conn) {
         this.pemilikKoneksi.delete(lama);
-        lama.close();
+        // Beri tahu koneksi lama agar berhenti. Tanpa ini dua tab dengan id sama saling menendang
+        // (tersambung ulang bergantian) sehingga pemain lain terlihat tidak bisa masuk.
+        this.kirim(lama, { t: 'tolak', alasan: PESAN_SESI_DIGANTI, ganti: true });
+        lama.close({ flush: true });
       }
       this.koneksi.set(pesan.id, conn);
       this.pemilikKoneksi.set(conn, pesan.id);
@@ -232,6 +238,8 @@ export interface PendengarKlien {
   /** Pesan chat ditolak host; `teks` adalah isi pesan yang ditolak (untuk dikembalikan ke kolom input). */
   onTolakChat?: (alasan: string, teks?: string) => void;
   onTolakPetunjuk?: (alasan: string) => void;
+  /** Id ini diambil alih koneksi lain (tab atau HP lain). Klien sudah dihentikan. */
+  onDiganti?: (alasan: string) => void;
 }
 
 export class KlienRoom {
@@ -337,6 +345,12 @@ export class KlienRoom {
           this.dengar.onChat?.(baru);
         }
       } else if (p.t === 'tolak') {
+        if (p.ganti) {
+          this.hentikan();
+          if (this.dengar.onDiganti) this.dengar.onDiganti(p.alasan);
+          else this.dengar.onTolak(p.alasan, true);
+          return;
+        }
         if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan, typeof p.teks === 'string' ? p.teks : undefined);
         else if (p.petunjuk && this.dengar.onTolakPetunjuk) this.dengar.onTolakPetunjuk(p.alasan);
         else this.dengar.onTolak(p.alasan, !this.sudahView);
