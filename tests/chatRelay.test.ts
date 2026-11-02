@@ -4,14 +4,15 @@ import { HostRoom } from '../lib/online/jaringan';
 import type { PesanChat } from '../lib/online/chat';
 import { VERSI_PROTOKOL, type PesanKeHost, type PesanKeKlien } from '../lib/online/types';
 
-// Koneksi palsu: cukup untuk menguji relay di HostRoom tanpa WebRTC.
+// Saluran palsu: cukup untuk menguji relay chat di HostRoom tanpa WebRTC maupun MQTT.
 function koneksiPalsu() {
   return {
+    jalur: 'langsung' as const,
     open: true,
     terkirim: [] as PesanKeKlien[],
-    send(p: PesanKeKlien) { this.terkirim.push(p); },
-    close() { this.open = false; },
-    on() {},
+    terbuka() { return this.open; },
+    kirim(p: PesanKeKlien) { this.terkirim.push(p); },
+    tutup() { this.open = false; },
   };
 }
 type Palsu = ReturnType<typeof koneksiPalsu>;

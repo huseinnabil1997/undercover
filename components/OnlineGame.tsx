@@ -8,6 +8,7 @@ import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasanga
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
+import { paksaRelayDari, teksJalur } from '@/lib/online/jalur';
 import { BATAS_MENYAMBUNG_MS, pesanMacet, sudahMacet } from '@/lib/online/macet';
 import type { PesanChat } from '@/lib/online/chat';
 import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online/room';
@@ -118,6 +119,12 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       ubahStatus(s, info, baru);
       baru = false;
     };
+    let paksaRelay = false;
+    try {
+      paksaRelay = paksaRelayDari(window.location.search, window.localStorage.getItem('online:jalur'));
+    } catch {
+      // localStorage bisa diblokir; abaikan
+    }
     if (sesi.host) {
       const pulih = pulihkanStateHost(bacaStateHostMentah(), Date.now());
       const dipulihkan = !!pulih && pulih.kode === sesi.kode && pulih.hostId === sesi.id;
@@ -143,7 +150,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           }
         },
         onChat: setChat,
-      });
+      }, { paksaRelay });
       hostRef.current = host;
       void host.mulai();
       return () => {
@@ -173,7 +180,11 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       onTolakPetunjuk: setGalatPetunjuk,
       // Salinan sesi di perangkat dibiarkan: kemungkinan milik tab lain yang baru mengambil alih.
       onDiganti: (alasan) => keluarSesi(alasan, true),
-    });
+      // Jalur relay mendapat jatah waktu penuh sebelum layar "Coba lagi" muncul.
+      onJalur: () => {
+        baru = true;
+      },
+    }, { paksaRelay });
     klienRef.current = klien;
     void klien.mulai();
     return () => {
@@ -292,6 +303,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           <span className={`status ${status.s}`} role="status">
             <span className="titik" aria-hidden />
             {TEKS_STATUS[status.s]}
+            {!sesi.host && status.s === 'tersambung' && (status.info === 'relay' || status.info === 'langsung') && <span className="jalur">· {teksJalur(status.info)}</span>}
           </span>
           </div>
         </div>

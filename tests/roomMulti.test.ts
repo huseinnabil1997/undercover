@@ -48,14 +48,14 @@ describe('reducer room: banyak pemain', () => {
 
 // Koneksi palsu dengan handler, agar 'close' bisa disimulasikan.
 function koneksiPalsu() {
-  const handler: Record<string, Array<() => void>> = {};
+  const handler: Record<string, Array<(x?: unknown) => void>> = {};
   return {
     open: true,
     terkirim: [] as PesanKeKlien[],
     send(p: PesanKeKlien) { this.terkirim.push(p); },
     close() { this.open = false; },
-    on(ev: string, fn: () => void) { (handler[ev] ??= []).push(fn); },
-    picu(ev: string) { for (const fn of handler[ev] ?? []) fn(); },
+    on(ev: string, fn: (x?: unknown) => void) { (handler[ev] ??= []).push(fn); },
+    picu(ev: string, x?: unknown) { for (const fn of handler[ev] ?? []) fn(x); },
   };
 }
 type Palsu = ReturnType<typeof koneksiPalsu>;
@@ -63,11 +63,11 @@ type Palsu = ReturnType<typeof koneksiPalsu>;
 function siapkanHost() {
   let state: StateHost = awal();
   const host = new HostRoom(state, { onState: (s) => { state = s; }, onStatus: () => {} });
-  const priv = host as unknown as { terimaKoneksi(c: Palsu): void; terimaPesan(c: Palsu, p: PesanKeHost): void };
+  const priv = host as unknown as { terimaKoneksi(c: Palsu): void };
   const sambung = (id: string, nama: string, token = `tok-${id}`) => {
     const c = koneksiPalsu();
     priv.terimaKoneksi(c);
-    priv.terimaPesan(c, { t: 'halo', v: VERSI_PROTOKOL, id, nama, token });
+    c.picu('data', { t: 'halo', v: VERSI_PROTOKOL, id, nama, token } satisfies PesanKeHost);
     return c;
   };
   return { sambung, state: () => state };

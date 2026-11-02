@@ -1,10 +1,15 @@
-// Lapisan jaringan WebRTC (PeerJS) untuk mode online. Hanya berjalan di browser.
-// Topologi bintang: setiap pemain tersambung langsung ke HP host. Broker publik 0.peerjs.com
-// hanya dipakai untuk saling menemukan (signaling); isi permainan lewat koneksi P2P.
+// Lapisan jaringan mode online. Hanya berjalan di browser.
+// Topologi bintang: setiap pemain tersambung ke HP host lewat salah satu jalur:
+// - "Langsung": WebRTC P2P (PeerJS). Broker publik 0.peerjs.com hanya untuk saling menemukan (signaling).
+// - "Lewat relay": beberapa broker MQTT publik (lihat relay.ts), saat jalur langsung tidak bisa terbuka.
+// Host mendengarkan kedua jalur sejak awal; logika room (gabung, ambil alih sesi, chat) sama untuk keduanya.
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
 import { buatStateChat, gabungChat, GALAT_CHAT_CEPAT, lajuKlien, terimaChat, type PesanChat } from './chat';
 import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
 import { CEK_NEGOSIASI_MS, ICE_SERVERS, nasibNegosiasi, TUNGGU_AWAL_MS } from './ice';
+import { BATAS_SENYAP_RELAY_MS, perluRelay, statusHostGabungan, ULANG_HALO_RELAY_MS, type Jalur } from './jalur';
+import type { Broker, PembuatSoket } from './mqtt';
+import { BROKER_RELAY, buatIdRelay, RelayMulti, topikHost, topikKlien, turunkanKunciRoom, type AmplopKeHost, type KunciRoom } from './relay';
 import { peerIdHost } from './room';
 import {
   INTERVAL_PING_MS, VERSI_PROTOKOL,
@@ -26,6 +31,37 @@ export const PESAN_SESI_DIGANTI = 'Sesi ini sekarang dipakai di tab atau HP lain
 
 export type StatusJaringan = 'menyambung' | 'tersambung' | 'menyambungUlang' | 'hostTidakAda' | 'idDipakai' | 'gagal';
 
+/** Satu jalur ke satu pemain, dilihat dari host. Sama untuk koneksi langsung maupun relay. */
+export interface Saluran {
+  readonly jalur: Jalur;
+  terbuka(): boolean;
+  kirim(p: PesanKeKlien): void;
+  tutup(): void;
+}
+
+function saluranPeer(conn: DataConnection): Saluran {
+  return {
+    jalur: 'langsung',
+    terbuka: () => conn.open,
+    kirim: (p) => {
+      try {
+        if (conn.open) void conn.send(p);
+      } catch {
+        // Koneksi sedang putus; akan dikirim ulang saat tersambung lagi.
+      }
+    },
+    tutup: () => conn.close({ flush: true }),
+  };
+}
+
+export interface OpsiJaringan {
+  /** Lewati WebRTC sama sekali (uji/diagnosis jalur relay). */
+  paksaRelay?: boolean;
+  /** Untuk pengujian: daftar broker dan pembuat soket tiruan. */
+  broker?: Broker[];
+  buatSoket?: PembuatSoket;
+}
+
 async function buatPeer(id?: string): Promise<PeerT> {
   const { Peer } = await import('peerjs');
   return id ? new Peer(id, OPSI_PEER) : new Peer(OPSI_PEER);
@@ -43,8 +79,13 @@ export interface PendengarHost {
 
 export class HostRoom {
   private peer: PeerT | null = null;
-  private koneksi = new Map<string, DataConnection>();
-  private pemilikKoneksi = new Map<DataConnection, string>();
+  private koneksi = new Map<string, Saluran>();
+  private pemilikKoneksi = new Map<Saluran, string>();
+  private relay: RelayMulti | null = null;
+  private kunciRelay: KunciRoom | null = null;
+  private saluranRelay = new Map<string, { s: Saluran; terakhir: number }>();
+  private statusLangsung: { s: StatusJaringan; info?: string } = { s: 'menyambung' };
+  private brokerRelay = 0;
   private terkirim = new Map<string, number>();
   private timer: ReturnType<typeof setInterval> | null = null;
   private selesai = false;
@@ -52,14 +93,76 @@ export class HostRoom {
   /** Chat hanya di memori: hilang saat room ditutup atau HP host refresh. */
   private chat = buatStateChat();
 
-  constructor(public state: StateHost, private dengar: PendengarHost) {}
+  constructor(public state: StateHost, private dengar: PendengarHost, private opsi: OpsiJaringan = {}) {}
 
   async mulai(): Promise<void> {
     this.dengar.onStatus('menyambung');
     this.dengar.onState(this.state);
     this.dengar.onChat?.(this.chat.pesan);
-    this.timer = setInterval(() => this.dispatch({ jenis: 'tick' }), 2000);
-    await this.sambung();
+    this.timer = setInterval(() => {
+      this.kedaluwarsaRelay();
+      this.dispatch({ jenis: 'tick' });
+    }, 2000);
+    void this.mulaiRelay();
+    if (!this.opsi.paksaRelay) await this.sambung();
+  }
+
+  /** Status ke UI: room terbuka bila jalur langsung ATAU minimal satu broker relay siap. */
+  private ubahLangsung(s: StatusJaringan, info?: string): void {
+    this.statusLangsung = { s, info };
+    this.laporStatus();
+  }
+
+  private laporStatus(): void {
+    if (this.selesai) return;
+    const s = statusHostGabungan(this.statusLangsung.s, this.brokerRelay);
+    this.dengar.onStatus(s, s === this.statusLangsung.s ? this.statusLangsung.info : undefined);
+  }
+
+  /** Dengarkan topik host di semua broker relay sejak awal, agar pemain bisa gabung walau WebRTC/PeerJS mati. */
+  private async mulaiRelay(): Promise<void> {
+    const kunci = await turunkanKunciRoom(this.state.kode);
+    if (this.selesai) return;
+    this.kunciRelay = kunci;
+    this.relay = new RelayMulti(kunci, (isi) => this.terimaRelay(isi), (n) => {
+      this.brokerRelay = n;
+      this.laporStatus();
+    }, this.opsi.broker ?? BROKER_RELAY, this.opsi.buatSoket);
+    this.relay.mulai(topikHost(kunci));
+  }
+
+  private terimaRelay(isi: unknown): void {
+    const a = isi as AmplopKeHost;
+    if (!a || typeof a !== 'object' || typeof a.f !== 'string' || !/^[0-9a-f]{8,32}$/.test(a.f)) return;
+    let e = this.saluranRelay.get(a.f);
+    if (a.tutup) {
+      e?.s.tutup();
+      return;
+    }
+    if (!e) {
+      const rid = a.f;
+      const relay = this.relay;
+      const kunci = this.kunciRelay;
+      if (!relay || !kunci) return;
+      const s: Saluran = {
+        jalur: 'relay',
+        terbuka: () => this.saluranRelay.get(rid)?.s === s && this.brokerRelay > 0,
+        kirim: (p) => void relay.kirim(topikKlien(kunci, rid), { d: p }),
+        tutup: () => {
+          if (this.saluranRelay.get(rid)?.s === s) this.saluranRelay.delete(rid);
+          this.lepasSaluran(s);
+        },
+      };
+      e = { s, terakhir: 0 };
+      this.saluranRelay.set(rid, e);
+    }
+    e.terakhir = Date.now();
+    this.terimaPesan(e.s, a.d as PesanKeHost);
+  }
+
+  private kedaluwarsaRelay(): void {
+    const t = Date.now();
+    for (const e of [...this.saluranRelay.values()]) if (t - e.terakhir > BATAS_SENYAP_RELAY_MS) e.s.tutup();
   }
 
   private async sambung(): Promise<void> {
@@ -72,12 +175,12 @@ export class HostRoom {
     this.peer = peer;
     peer.on('open', () => {
       this.percobaan = 0;
-      this.dengar.onStatus('tersambung');
+      this.ubahLangsung('tersambung');
     });
     peer.on('connection', (conn) => this.terimaKoneksi(conn));
     peer.on('disconnected', () => {
       if (this.selesai || peer.destroyed) return;
-      this.dengar.onStatus('menyambungUlang');
+      this.ubahLangsung('menyambungUlang');
       setTimeout(() => !this.selesai && !peer.destroyed && peer.reconnect(), 1000);
     });
     peer.on('error', (err) => {
@@ -86,41 +189,40 @@ export class HostRoom {
         // Biasanya id lama (sebelum refresh) belum dilepas broker. Coba klaim lagi sebentar lagi.
         peer.destroy();
         this.percobaan++;
-        this.dengar.onStatus('idDipakai', String(this.percobaan));
+        this.ubahLangsung('idDipakai', String(this.percobaan));
         setTimeout(() => void this.sambung(), Math.min(10000, 2000 + this.percobaan * 1000));
       } else if (err.type === 'network' || err.type === 'server-error' || err.type === 'socket-error' || err.type === 'socket-closed') {
-        this.dengar.onStatus('menyambungUlang', err.type);
+        this.ubahLangsung('menyambungUlang', err.type);
         if (peer.disconnected && !peer.destroyed) setTimeout(() => !this.selesai && !peer.destroyed && peer.reconnect(), JEDA_ULANG_MS);
       } else if (err.type === 'browser-incompatible') {
-        this.dengar.onStatus('gagal', 'Browser ini tidak mendukung WebRTC.');
+        this.ubahLangsung('gagal', 'Browser ini tidak mendukung WebRTC.');
       }
     });
   }
 
   private terimaKoneksi(conn: DataConnection): void {
-    conn.on('data', (data) => this.terimaPesan(conn, data as PesanKeHost));
-    const tutup = () => {
-      const id = this.pemilikKoneksi.get(conn);
-      this.pemilikKoneksi.delete(conn);
-      if (id && this.koneksi.get(id) === conn) {
-        this.koneksi.delete(id);
-        this.terkirim.delete(id);
-        this.dispatch({ jenis: 'putus', id });
-      }
-    };
-    conn.on('close', tutup);
-    conn.on('error', tutup);
+    const s = saluranPeer(conn);
+    conn.on('data', (data) => this.terimaPesan(s, data as PesanKeHost));
+    conn.on('close', () => this.lepasSaluran(s));
+    conn.on('error', () => this.lepasSaluran(s));
   }
 
-  private kirim(conn: DataConnection, pesan: PesanKeKlien): void {
-    try {
-      if (conn.open) void conn.send(pesan);
-    } catch {
-      // Koneksi sedang putus; akan dikirim ulang saat tersambung lagi.
+  /** Saluran tertutup (putus, pemain keluar, atau diganti). Pemain ditandai putus hanya jika ini saluran aktifnya. */
+  private lepasSaluran(s: Saluran): void {
+    const id = this.pemilikKoneksi.get(s);
+    this.pemilikKoneksi.delete(s);
+    if (id && this.koneksi.get(id) === s) {
+      this.koneksi.delete(id);
+      this.terkirim.delete(id);
+      this.dispatch({ jenis: 'putus', id });
     }
   }
 
-  private terimaPesan(conn: DataConnection, pesan: PesanKeHost): void {
+  private kirim(s: Saluran, pesan: PesanKeKlien): void {
+    s.kirim(pesan);
+  }
+
+  private terimaPesan(conn: Saluran, pesan: PesanKeHost): void {
     if (!pesan || typeof pesan !== 'object') return;
     if (pesan.t === 'halo') {
       if (pesan.v !== VERSI_PROTOKOL) {
@@ -131,7 +233,7 @@ export class HostRoom {
       const r = reduceHost(this.state, { jenis: 'gabung', id: pesan.id, nama: String(pesan.nama ?? ''), token: String(pesan.token ?? '') }, { now: Date.now() });
       if (r.tolak) {
         this.kirim(conn, { t: 'tolak', alasan: r.tolak });
-        setTimeout(() => conn.close(), 500);
+        setTimeout(() => conn.tutup(), 500);
         return;
       }
       const lama = this.koneksi.get(pesan.id);
@@ -140,7 +242,7 @@ export class HostRoom {
         // Beri tahu koneksi lama agar berhenti. Tanpa ini dua tab dengan id sama saling menendang
         // (tersambung ulang bergantian) sehingga pemain lain terlihat tidak bisa masuk.
         this.kirim(lama, { t: 'tolak', alasan: PESAN_SESI_DIGANTI, ganti: true });
-        lama.close({ flush: true });
+        lama.tutup();
       }
       this.koneksi.set(pesan.id, conn);
       this.pemilikKoneksi.set(conn, pesan.id);
@@ -213,7 +315,7 @@ export class HostRoom {
   /** Kirim view terbaru ke setiap pemain yang belum menerima seq ini (hanya kata miliknya sendiri). */
   private kirimSemua(): void {
     for (const [id, conn] of this.koneksi) {
-      if (this.terkirim.get(id) === this.state.seq || !conn.open) continue;
+      if (this.terkirim.get(id) === this.state.seq || !conn.terbuka()) continue;
       this.terkirim.set(id, this.state.seq);
       this.kirim(conn, { t: 'view', view: viewUntuk(this.state, id) });
     }
@@ -222,7 +324,8 @@ export class HostRoom {
   hentikan(): void {
     this.selesai = true;
     if (this.timer) clearInterval(this.timer);
-    for (const c of this.koneksi.values()) c.close();
+    for (const c of this.koneksi.values()) c.tutup();
+    this.relay?.hentikan();
     this.peer?.destroy();
   }
 }
@@ -239,6 +342,8 @@ export interface PendengarKlien {
   onTolakPetunjuk?: (alasan: string) => void;
   /** Id ini diambil alih koneksi lain (tab atau HP lain). Klien sudah dihentikan. */
   onDiganti?: (alasan: string) => void;
+  /** Jalur berpindah (mis. dari langsung ke relay). */
+  onJalur?: (j: Jalur) => void;
 }
 
 export class KlienRoom {
@@ -252,42 +357,122 @@ export class KlienRoom {
   private jadwalUlang: ReturnType<typeof setTimeout> | null = null;
   private chat: PesanChat[] = [];
   private lajuChat: number[] = [];
+  private mulaiMs = 0;
+  /** Jalur aktif. Sekali pindah ke relay, sesi ini tetap di relay (Coba lagi memulai dari jalur langsung). */
+  jalur: Jalur = 'langsung';
+  private relay: RelayMulti | null = null;
+  private kunciRelay: KunciRoom | null = null;
+  private readonly rid = buatIdRelay();
+  private haloRelayTerakhir = 0;
 
   constructor(
     private kode: string,
     private identitas: { id: string; nama: string; token: string },
     private dengar: PendengarKlien,
+    private opsi: OpsiJaringan = {},
   ) {}
 
   async mulai(): Promise<void> {
     this.dengar.onStatus('menyambung');
-    const peer = await buatPeer();
-    if (this.selesai) {
+    this.mulaiMs = Date.now();
+    this.timer = setInterval(() => this.detak(), INTERVAL_PING_MS);
+    if (perluRelay({ lamaMs: 0, adaView: false, paksaRelay: this.opsi.paksaRelay })) {
+      void this.keRelay();
+      return;
+    }
+    let peer: PeerT;
+    try {
+      peer = await buatPeer();
+    } catch {
+      void this.keRelay();
+      return;
+    }
+    if (this.selesai || this.jalur === 'relay') {
       peer.destroy();
       return;
     }
     this.peer = peer;
     peer.on('open', () => this.hubungi());
     peer.on('disconnected', () => {
-      if (!this.selesai && !peer.destroyed) setTimeout(() => !this.selesai && !peer.destroyed && peer.reconnect(), 1000);
+      if (!this.selesai && !peer.destroyed && this.jalur === 'langsung') setTimeout(() => !this.selesai && !peer.destroyed && peer.reconnect(), 1000);
     });
     peer.on('error', (err) => {
-      if (this.selesai) return;
-      if (err.type === 'peer-unavailable') {
+      if (this.selesai || this.jalur === 'relay') return;
+      if (perluRelay({ lamaMs: this.lamaTanpaHost(), galat: err.type, adaView: !!this.conn?.open })) {
+        void this.keRelay();
+      } else if (err.type === 'peer-unavailable') {
         this.dengar.onStatus('hostTidakAda');
         this.ulangNanti(3000);
-      } else if (err.type === 'browser-incompatible') {
-        this.dengar.onStatus('gagal', 'Browser ini tidak mendukung WebRTC.');
       } else {
         this.dengar.onStatus('menyambungUlang', err.type);
         this.ulangNanti(JEDA_ULANG_MS);
       }
     });
-    this.timer = setInterval(() => this.detak(), INTERVAL_PING_MS);
+  }
+
+  /** Lama tanpa data dari host sejak mulai atau pesan terakhir. */
+  private lamaTanpaHost(): number {
+    return Date.now() - Math.max(this.mulaiMs, this.terakhirDengar);
+  }
+
+  private terbuka(): boolean {
+    if (this.jalur === 'relay') return !!this.relay && this.relay.jumlah() > 0 && this.sudahView && Date.now() - this.terakhirDengar < BATAS_SENYAP_HOST_MS;
+    return !!this.conn?.open;
+  }
+
+  /** Pindah ke jalur relay MQTT: tutup PeerJS, turunkan kunci room, dengarkan topik sendiri, kirim salam ke host. */
+  private async keRelay(): Promise<void> {
+    if (this.jalur === 'relay' || this.selesai) return;
+    this.jalur = 'relay';
+    if (this.jadwalUlang) clearTimeout(this.jadwalUlang);
+    this.jadwalUlang = null;
+    const conn = this.conn;
+    this.conn = null;
+    conn?.close();
+    this.peer?.destroy();
+    this.peer = null;
+    this.sudahView = false;
+    this.dengar.onJalur?.('relay');
+    this.dengar.onStatus('menyambung', 'relay');
+    const kunci = await turunkanKunciRoom(this.kode);
+    if (this.selesai) return;
+    this.kunciRelay = kunci;
+    this.relay = new RelayMulti(kunci, (isi) => {
+      const d = (isi as { d?: unknown } | null)?.d;
+      if (d && typeof d === 'object') this.terima(d as PesanKeKlien);
+    }, (n) => {
+      if (this.selesai) return;
+      if (n > 0 && !this.sudahView) this.haloRelay(true);
+      if (n === 0) this.dengar.onStatus('menyambungUlang', 'relay-putus');
+    }, this.opsi.broker ?? BROKER_RELAY, this.opsi.buatSoket);
+    this.relay.mulai(topikKlien(kunci, this.rid));
+  }
+
+  private haloRelay(segera = false): void {
+    const t = Date.now();
+    if (!segera && t - this.haloRelayTerakhir < ULANG_HALO_RELAY_MS) return;
+    this.haloRelayTerakhir = t;
+    this.kirimMentah({ t: 'halo', v: VERSI_PROTOKOL, ...this.identitas });
   }
 
   private detak(): void {
     if (this.selesai) return;
+    if (this.jalur === 'relay') {
+      if (!this.relay || this.relay.jumlah() === 0) return;
+      if (!this.sudahView || Date.now() - this.terakhirDengar > BATAS_SENYAP_HOST_MS) {
+        // Belum dijawab atau host diam: ulangi salam (host memperlakukannya sebagai sambung ulang).
+        if (this.sudahView) {
+          this.sudahView = false;
+          this.dengar.onStatus('menyambungUlang', 'relay');
+        } else if (Date.now() - this.mulaiMs > BATAS_SENYAP_HOST_MS * 2) {
+          this.dengar.onStatus('hostTidakAda', 'relay');
+        }
+        this.haloRelay();
+      } else {
+        this.kirimMentah({ t: 'ping' });
+      }
+      return;
+    }
     if (this.conn?.open) {
       this.kirimMentah({ t: 'ping' });
       if (Date.now() - this.terakhirDengar > BATAS_SENYAP_HOST_MS) {
@@ -297,11 +482,14 @@ export class KlienRoom {
         this.conn = null;
         this.ulangNanti(500);
       }
+    } else if (perluRelay({ lamaMs: this.lamaTanpaHost(), adaView: false })) {
+      // Jalur langsung belum juga terbuka: jangan biarkan pemain menunggu, pakai relay.
+      void this.keRelay();
     }
   }
 
   private ulangNanti(ms: number): void {
-    if (this.jadwalUlang || this.selesai) return;
+    if (this.jadwalUlang || this.selesai || this.jalur === 'relay') return;
     this.jadwalUlang = setTimeout(() => {
       this.jadwalUlang = null;
       this.hubungi();
@@ -310,7 +498,7 @@ export class KlienRoom {
 
   private hubungi(): void {
     const peer = this.peer;
-    if (this.selesai || !peer || peer.destroyed) return;
+    if (this.selesai || !peer || peer.destroyed || this.jalur === 'relay') return;
     if (peer.disconnected) {
       peer.reconnect();
       return;
@@ -321,39 +509,13 @@ export class KlienRoom {
     this.conn = conn;
     this.sudahView = false;
     conn.on('open', () => {
+      if (conn !== this.conn) return;
       this.terakhirDengar = Date.now();
       this.kirimMentah({ t: 'halo', v: VERSI_PROTOKOL, ...this.identitas });
     });
     conn.on('data', (data) => {
       if (conn !== this.conn) return;
-      this.terakhirDengar = Date.now();
-      const p = data as PesanKeKlien;
-      if (p.t === 'view') {
-        // Setelah tersambung ulang, terima view pertama apa pun (host bisa saja baru dipulihkan).
-        if (!this.sudahView || p.view.seq >= this.seq) {
-          this.sudahView = true;
-          this.seq = p.view.seq;
-          this.dengar.onStatus('tersambung');
-          this.dengar.onView(p.view);
-        }
-      } else if (p.t === 'chat' || p.t === 'riwayatChat') {
-        const masuk: unknown[] = p.t === 'chat' ? [p.pesan] : Array.isArray(p.pesan) ? p.pesan : [];
-        const baru = gabungChat(this.chat, masuk);
-        if (baru !== this.chat) {
-          this.chat = baru;
-          this.dengar.onChat?.(baru);
-        }
-      } else if (p.t === 'tolak') {
-        if (p.ganti) {
-          this.hentikan();
-          if (this.dengar.onDiganti) this.dengar.onDiganti(p.alasan);
-          else this.dengar.onTolak(p.alasan, true);
-          return;
-        }
-        if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan, typeof p.teks === 'string' ? p.teks : undefined);
-        else if (p.petunjuk && this.dengar.onTolakPetunjuk) this.dengar.onTolakPetunjuk(p.alasan);
-        else this.dengar.onTolak(p.alasan, !this.sudahView);
-      }
+      this.terima(data as PesanKeKlien);
     });
     const putus = () => {
       if (conn !== this.conn || this.selesai) return;
@@ -381,7 +543,45 @@ export class KlienRoom {
     setTimeout(periksa, TUNGGU_AWAL_MS);
   }
 
+  /** Pesan dari host, lewat jalur mana pun. */
+  private terima(p: PesanKeKlien): void {
+    if (this.selesai || !p || typeof p !== 'object') return;
+    this.terakhirDengar = Date.now();
+    if (p.t === 'view') {
+      if (!p.view || typeof p.view.seq !== 'number') return;
+      // Setelah tersambung ulang, terima view pertama apa pun (host bisa saja baru dipulihkan).
+      // Di jalur relay, view lama yang datang terlambat dari broker lain diabaikan lewat seq.
+      if (!this.sudahView || p.view.seq >= this.seq) {
+        this.sudahView = true;
+        this.seq = p.view.seq;
+        this.dengar.onStatus('tersambung', this.jalur);
+        this.dengar.onView(p.view);
+      }
+    } else if (p.t === 'chat' || p.t === 'riwayatChat') {
+      const masuk: unknown[] = p.t === 'chat' ? [p.pesan] : Array.isArray(p.pesan) ? p.pesan : [];
+      const baru = gabungChat(this.chat, masuk);
+      if (baru !== this.chat) {
+        this.chat = baru;
+        this.dengar.onChat?.(baru);
+      }
+    } else if (p.t === 'tolak') {
+      if (p.ganti) {
+        this.hentikan();
+        if (this.dengar.onDiganti) this.dengar.onDiganti(p.alasan);
+        else this.dengar.onTolak(p.alasan, true);
+        return;
+      }
+      if (p.chat && this.dengar.onTolakChat) this.dengar.onTolakChat(p.alasan, typeof p.teks === 'string' ? p.teks : undefined);
+      else if (p.petunjuk && this.dengar.onTolakPetunjuk) this.dengar.onTolakPetunjuk(p.alasan);
+      else this.dengar.onTolak(p.alasan, !this.sudahView);
+    }
+  }
+
   private kirimMentah(p: PesanKeHost): void {
+    if (this.jalur === 'relay') {
+      if (this.relay && this.kunciRelay) void this.relay.kirim(topikHost(this.kunciRelay), { f: this.rid, d: p } satisfies AmplopKeHost);
+      return;
+    }
     try {
       if (this.conn?.open) void this.conn.send(p);
     } catch {
@@ -391,7 +591,7 @@ export class KlienRoom {
 
   /** Kirim chat. Mengembalikan alasan gagal (belum tersambung / terlalu cepat), atau undefined jika terkirim. */
   kirimChat(teks: string): string | undefined {
-    if (!this.conn?.open) return 'Belum tersambung ke host. Coba lagi sebentar.';
+    if (!this.terbuka()) return 'Belum tersambung ke host. Coba lagi sebentar.';
     const laju = lajuKlien(this.lajuChat, Date.now());
     if (!laju) return GALAT_CHAT_CEPAT;
     this.lajuChat = laju;
@@ -400,12 +600,19 @@ export class KlienRoom {
   }
 
   kirim(aksi: AksiPemain): boolean {
-    if (!this.conn?.open) return false;
+    if (!this.terbuka()) return false;
     this.kirimMentah({ t: 'aksi', aksi });
     return true;
   }
 
   hentikan(): void {
+    if (!this.selesai && this.jalur === 'relay' && this.relay && this.kunciRelay) {
+      // Beri tahu host agar pemain langsung ditandai keluar (tanpa menunggu batas senyap).
+      const relay = this.relay;
+      void relay.kirim(topikHost(this.kunciRelay), { f: this.rid, d: null, tutup: true } satisfies AmplopKeHost).finally(() => setTimeout(() => relay.hentikan(), 300));
+    } else {
+      this.relay?.hentikan();
+    }
     this.selesai = true;
     if (this.timer) clearInterval(this.timer);
     if (this.jadwalUlang) clearTimeout(this.jadwalUlang);

@@ -11,6 +11,8 @@ export function sudahMacet(status: StatusJaringan, sejak: number, sekarang: numb
 
 const PESAN_INTERNET = 'Server penghubung belum bisa dijangkau. Periksa koneksi internet lalu coba lagi.';
 const PESAN_P2P = 'Belum bisa tersambung ke HP host. Jaringan ini mungkin memblokir koneksi antar HP. Coba data seluler atau Wi-Fi lain, atau minta host membuka ulang room.';
+const PESAN_RELAY = 'Host belum menjawab, termasuk lewat jalur relay. Pastikan HP host masih membuka room ini (layar menyala) dan kodenya benar.';
+const PESAN_RELAY_PUTUS = 'Server relay belum bisa dijangkau. Periksa koneksi internet lalu coba lagi.';
 
 /** Pesan yang ditampilkan saat macet, sesuai status jaringan terakhir. */
 export function pesanMacet(host: boolean, kode: string, status: StatusJaringan, info?: string): string {
@@ -21,6 +23,8 @@ export function pesanMacet(host: boolean, kode: string, status: StatusJaringan, 
     }
     return `Room ${kode} belum bisa dibuka. ${PESAN_INTERNET}`;
   }
+  if (info === 'relay-putus') return PESAN_RELAY_PUTUS;
+  if (info === 'relay') return `Room ${kode}: ${PESAN_RELAY}`;
   if (status === 'hostTidakAda') {
     return `Room ${kode} tidak ditemukan. Mungkin host sudah menutup room, HP host terkunci, atau kodenya salah.`;
   }
