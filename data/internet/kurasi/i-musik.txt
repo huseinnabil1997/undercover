@@ -1,0 +1,44 @@
+# i-musik | Musik & Hiburan
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Biola / Suling
+Lukis / Pahat = Melukis / Memahat
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Gitar / Ukulele
+Piano / Keyboard Musik
+Drum / Rebana
+Biola / Cello
+Seruling / Klarinet
+Saksofon / Terompet
+Film / Acara TV
+Novel / Komik
+Lagu / Rap
+Karaoke / Opera
+Video Game / Board Game
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Gitar Listrik / Bass
+Drum / Simbal
+Seruling / Saksofon
+Terompet / Harmonika
+Lukisan / Patung
+Film / Drama
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+gitar / biola = Gitar / Biola
+angklung / gamelan = Angklung / Gamelan
+wayang / topeng = Wayang / Topeng
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Violin / Cello = Biola / Selo
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Guitar / Bass = Gitar / Bass
+Piano / Synth = Piano / Synthesizer

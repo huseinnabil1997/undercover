@@ -16,3 +16,56 @@ rayon / polyester = Rayon / Poliester
 velvet / satin = Beludru / Satin
 cotton / linen = Katun / Linen
 Wool / cashmere = Wol / Kasmir
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Baju / Kaos
+Celana / Rok
+Jas / Tuksedo
+Sarung / Selimut
+Topi / Peci
+Dasi / Sabuk
+Kaos Kaki / Sarung Tangan
+Sepatu Bot / Sepatu Kets
+Kacamata / Lensa Kontak
+Syal / Kerudung
+Benang / Jarum
+Kancing / Resleting
+Kapas / Dakron
+Sutra / Katun
+Wol / Kulit
+Batik / Tenun
+Kebaya / Baju Kurung
+Singlet / Kaos Dalam
+Celana Dalam / Boxer
+Legging / Stocking
+Piyama / Daster
+Kerah / Lengan
+Pita / Renda
+Sisir / Jepitan Rambut
+Ikat Rambut / Bando
+Berlian / Mutiara
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Kemeja / Jaket
+Celana / Celana Pendek
+Gaun / Rok
+Kaus Kaki / Sarung Tangan
+Cincin / Gelang
+Kalung / Anting
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Kemeja / Kaos
+Jas / Jaket
+Dasi / Syall = Dasi / Syal
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+baju / celana = Baju / Celana
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Shirt / Jacket = Kemeja / Jaket
+Shoes / Socks = Sepatu / Kaus Kaki

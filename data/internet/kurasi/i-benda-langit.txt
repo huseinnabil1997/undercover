@@ -9,3 +9,47 @@ rainbow / aurora = Pelangi / Aurora
 moon / galaxy = Bulan / Galaksi
 sun / star = Matahari / Bintang
 thunder / lightning = Guntur / Petir
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Bintang / Langit
+Kilat / Petir
+Angin / Badai
+Pelangi / Kilat
+Embun / Salju
+Dingin / Sejuk
+Cerah / Mendung
+Asap / Debu
+Fajar / Senja
+Siang / Malam
+Pagi / Sore
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Hujan / Salju
+Musim Semi / Musim Panas
+Musim Gugur / Musim Dingin
+Pagi / Siang
+Sore / Malam
+Subuh / Senja
+Topan / Badai Salju
+Musim Hujan / Musim Kemarau
+Kabut Tipis / Kabut Asap
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Angin / Awan
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+UFO / Satellite = UFO / Satelit
+Earth / Mars = Bumi / Mars
+Venus / Jupiter = Venus / Jupiter
+Saturn / Neptune = Saturnus / Neptunus
+Pluto / Mercury = Pluto / Merkurius
+Summer / Winter = Musim Panas / Musim Dingin
+Spring / Autumn = Musim Semi / Musim Gugur
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Cloud / Mist = Awan / Kabut

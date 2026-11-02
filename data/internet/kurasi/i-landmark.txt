@@ -75,3 +75,7 @@ Versailles / Windsor Castle = Istana Versailles / Kastil Windsor
 Burj Al Arab / Palm Jumeirah = Burj Al Arab / Palm Jumeirah
 Mount Vesuvius / Mount Etna = Gunung Vesuvius / Gunung Etna
 Taj Mahal / Red Fort = Taj Mahal / Benteng Merah
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+prambanan / borobudur = Prambanan / Borobudur

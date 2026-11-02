@@ -30,8 +30,13 @@ export interface Pengaturan {
 
 export type FaseOnline = 'kata' | 'diskusi' | 'vote' | 'terungkap' | 'hasil';
 
+/** Target vote khusus untuk abstain (Lewati). Id pemain selalu diawali huruf 'p', jadi tidak bisa bentrok. */
+export const SUARA_LEWATI = '-';
+
 export interface HasilVote {
   hitung: Record<string, number>;
+  /** Jumlah pemain yang memilih Lewati (opsional agar tetap cocok dengan host versi lama). */
+  lewati?: number;
   /** Pemain yang seri suara terbanyak (kosong jika tidak seri). */
   seri: string[];
   keputusan: 'eliminasi' | 'voteUlang' | 'tanpaEliminasi';
@@ -49,7 +54,7 @@ export interface GameOnline {
   giliran: number;
   /** Riwayat petunjuk semua ronde di game ini (publik untuk semua pemain). */
   petunjuk: EntriPetunjuk[];
-  /** Voter id ke target id. */
+  /** Voter id ke target id, atau SUARA_LEWATI untuk abstain. */
   suara: Record<string, string>;
   kandidat: string[];
   putaranVote: 1 | 2;
@@ -79,6 +84,7 @@ export type AksiPemain =
   | { jenis: 'petunjuk'; teks: string }
   /** Pemain giliran sudah memberi petunjuk secara lisan: giliran maju tanpa entri riwayat. */
   | { jenis: 'sudahBicara' }
+  /** target berisi id kandidat, atau SUARA_LEWATI untuk abstain. */
   | { jenis: 'vote'; target: string }
   | { jenis: 'tebak'; teks: string }
   | { jenis: 'keluar' };

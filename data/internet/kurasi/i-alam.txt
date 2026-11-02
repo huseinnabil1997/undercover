@@ -17,3 +17,57 @@ flood / drought = Banjir / Kemarau
 tsunami / volcano = Tsunami / Gunung Meletus
 volcano / earthquake = Gunung Meletus / Gempa Bumi
 tornado / hurricane = Tornado / Badai
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Tanah / Pasir
+Batu / Kayu
+Lembah / Jurang
+Hutan / Kebun
+Sawah / Ladang
+Pantai / Pesisir
+Ombak / Arus
+Pasang / Surut
+Rawa / Empang
+Air Terjun / Mata Air
+Air Mancur / Kolam
+Gempa / Tsunami
+Banjir / Longsor
+Karang / Batu Kali
+Gurun / Sabana
+Kawah / Puncak
+Lereng / Kaki Gunung
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Gunung Berapi / Geyser
+Rumput / Lumut
+Pasir / Kerikil
+Batu / Karang
+Berlian / Kristal
+Kekeringan / Banjir
+Air Terjun / Jeram
+Tebing / Jurang
+Gua / Tambang
+Padang Rumput / Sawah
+Oasis / Waduk
+Terumbu / Atol
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Kayu / Bambu
+Tanah / Lumpur
+Hutan Bakau / Hutan Hujan
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+hutan / savana = Hutan / Sabana
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Smoke / Fire = Asap / Api
+Ash / Dust = Abu / Debu
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Desert / Beach = Gurun / Pantai

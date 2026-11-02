@@ -19,9 +19,15 @@ const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 type Fase =
   | { jenis: 'serah'; idx: number; terbuka: boolean }
   | { jenis: 'diskusi'; ronde: number; urutan: number[]; giliran: number }
+  /** pilih: indeks pemain, LEWATI_LOKAL untuk abstain, atau null jika belum memilih. */
   | { jenis: 'vote'; ronde: number; pilih: number | null }
   | { jenis: 'terungkap'; ronde: number; idx: number; tebakan: 'belum' | 'salah' }
+  /** Vote dilewati: tidak ada yang tereliminasi, lanjut ronde berikutnya. */
+  | { jenis: 'aman'; ronde: number }
   | { jenis: 'hasil'; pemenang: Pemenang; tebakanMrWhite?: string };
+
+/** Pilihan vote untuk melewati eliminasi di mode satu HP. */
+const LEWATI_LOKAL = -1;
 
 interface Permainan {
   pemain: Pemain[];
@@ -363,14 +369,40 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
                 </button>
               ) : null,
             )}
+            <button
+              className={`pemain lewati ${fase.pilih === LEWATI_LOKAL ? 'pilih' : ''}`}
+              aria-pressed={fase.pilih === LEWATI_LOKAL}
+              onClick={() => setFase({ ...fase, pilih: LEWATI_LOKAL })}
+            >
+              Lewati
+            </button>
           </div>
+          <p className="catatan">Lewati: tidak ada yang keluar ronde ini.</p>
         </div>
         {timer > 0 && <Timer key={fase.ronde} detik={timer} />}
         {riwayat(false)}
         <div className="aksi-bawah">
-          <button className="utama bahaya" disabled={fase.pilih === null} onClick={() => fase.pilih !== null && onEliminasi(fase.pilih, fase.ronde)}>
-            {fase.pilih === null ? 'Pilih' : `Eliminasi ${pemain[fase.pilih].nama}`}
-          </button>
+          {fase.pilih === LEWATI_LOKAL ? (
+            <button className="utama" onClick={() => setFase({ jenis: 'aman', ronde: fase.ronde })}>
+              Lewati vote
+            </button>
+          ) : (
+            <button className="utama bahaya" disabled={fase.pilih === null} onClick={() => fase.pilih !== null && onEliminasi(fase.pilih, fase.ronde)}>
+              {fase.pilih === null ? 'Pilih' : `Eliminasi ${pemain[fase.pilih].nama}`}
+            </button>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  if (fase.jenis === 'aman') {
+    return (
+      <section className="tumpuk tengah">
+        <div className="kartu besar muncul">
+          <h1 className="kata">Aman</h1>
+          <p className="catatan">Vote dilewati. Tidak ada yang tereliminasi. Lanjut ke ronde berikutnya.</p>
+          <button className="utama" onClick={() => onLanjut(fase.ronde)}>Lanjut</button>
         </div>
       </section>
     );
@@ -538,7 +570,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai.</li>
           <li>Oper HP ke setiap pemain. Tekan untuk melihat kata, hafalkan, lalu tutup sebelum mengoper.</li>
           <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
-          <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka.</li>
+          <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka. Pilih Lewati jika belum yakin: tidak ada yang keluar dan permainan lanjut ke ronde berikutnya.</li>
           <li>Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.</li>
         </ol>
         <h3>Menang</h3>
@@ -550,7 +582,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         <ul>
           <li>Satu orang membuat room dan menjadi host. Pemain lain gabung dengan kode, link, atau QR.</li>
           <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
-          <li>Voting dilakukan dari HP masing-masing. Jika suara terbanyak seri, ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
+          <li>Voting dilakukan dari HP masing-masing. Setiap pemain boleh memilih Lewati (abstain); Lewati tidak menambah suara siapa pun dan tetap dihitung sudah vote. Jika Lewati lebih banyak dari suara terbanyak, atau tidak ada suara untuk siapa pun, tidak ada yang tereliminasi. Jika suara terbanyak seri (termasuk seri dengan Lewati), ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
           <li>HP host harus tetap membuka halaman selama permainan.</li>
         </ul>
         <p className="catatan">Semua data (nama, pengaturan, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>

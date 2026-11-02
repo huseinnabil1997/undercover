@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan, tebakSumber } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
-import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
+import { alasanTanpaEliminasi, buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
 import { modeRelayDari, paksaRelayDari, teksDiagnosa, teksJalur } from '@/lib/online/jalur';
 import type { ModeRelay } from '@/lib/online/relay';
@@ -17,7 +17,7 @@ import {
   bacaSesi, bacaStateHostMentah, bersihkanAktifBasi, bolehTawarkanLanjut, buatToken, DETAK_AKTIF_MS, hapusSesi, hapusStateHost, lepasAktif,
   sesiDipakaiHalamanLain, simpanSesi, simpanStateHost, tandaiAktif, type SesiOnline,
 } from '@/lib/online/sesi';
-import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, Pengaturan, StateHost, ViewPemain } from '@/lib/online/types';
+import { SUARA_LEWATI, type Aksi, type AksiKhususHost, type AksiPemain, type GameView, type PemainView, type Pengaturan, type StateHost, type ViewPemain } from '@/lib/online/types';
 import {
   AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
 } from './ui';
@@ -825,7 +825,7 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
   );
 }
 
-const ATURAN_SERI = 'Seri: vote ulang sekali. Masih seri: tidak ada yang keluar.';
+const ATURAN_SERI = 'Lewati tidak menambah suara siapa pun. Lewati terbanyak: tidak ada yang keluar. Seri: vote ulang sekali. Masih seri: tidak ada yang keluar.';
 
 function Voting({ view, g, host, aksi }: PropsFase) {
   const hidup = pesertaDari(view).filter((p) => p.hidup);
@@ -836,9 +836,11 @@ function Voting({ view, g, host, aksi }: PropsFase) {
       <div className="kartu">
         <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} />
         {g.putaranVote === 2 ? (
-          <p className="catatan">Seri: {g.kandidat.map((id) => namaDari(view, id)).join(' dan ')}. Masih seri berarti tidak ada yang keluar.</p>
+          <p className="catatan">
+            Seri: {[...g.kandidat.map((id) => namaDari(view, id)), ...(g.kandidat.length === 1 ? ['Lewati'] : [])].join(' dan ')}. Masih seri berarti tidak ada yang keluar.
+          </p>
         ) : (
-          <p className="catatan">Pilih yang paling mencurigakan. Bisa diganti.</p>
+          <p className="catatan">Pilih yang paling mencurigakan, atau Lewati. Bisa diganti.</p>
         )}
         {bisaVote ? (
           <div className="pilih-pemain">
@@ -852,6 +854,13 @@ function Voting({ view, g, host, aksi }: PropsFase) {
                 {namaDari(view, id)}
               </button>
             ))}
+            <button
+              className={`pemain lewati ${g.pilihanSaya === SUARA_LEWATI ? 'pilih' : ''}`}
+              aria-pressed={g.pilihanSaya === SUARA_LEWATI}
+              onClick={() => aksi({ jenis: 'vote', target: SUARA_LEWATI })}
+            >
+              Lewati
+            </button>
           </div>
         ) : (
           <p className="menunggu">{g.hidup ? 'Kamu tidak ikut vote ulang ini.' : 'Tereliminasi'}</p>
@@ -881,7 +890,8 @@ function Voting({ view, g, host, aksi }: PropsFase) {
 function RekapSuara({ view, g }: { view: ViewPemain; g: GameView }) {
   if (!g.hasilVote) return null;
   const daftar = Object.entries(g.hasilVote.hitung).sort((a, b) => b[1] - a[1]);
-  const maks = Math.max(1, ...daftar.map(([, n]) => n));
+  const lewati = g.hasilVote.lewati ?? 0;
+  const maks = Math.max(1, lewati, ...daftar.map(([, n]) => n));
   return (
     <div className="kartu">
       <h2>Suara</h2>
@@ -893,9 +903,32 @@ function RekapSuara({ view, g }: { view: ViewPemain; g: GameView }) {
             <strong>{n}</strong>
           </li>
         ))}
+        {lewati > 0 && (
+          <li className="rekap-lewati">
+            <span className="nama">Lewati</span>
+            <span className="bar"><span style={{ width: `${(lewati / maks) * 100}%` }} /></span>
+            <strong>{lewati}</strong>
+          </li>
+        )}
       </ul>
     </div>
   );
+}
+
+function teksAman(view: ViewPemain, g: GameView): string {
+  const h = g.hasilVote;
+  const alasan = h ? alasanTanpaEliminasi(h) : 'kosong';
+  if (h && alasan === 'seri') {
+    const nama = h.seri.map((id) => namaDari(view, id));
+    const max = Math.max(0, ...Object.values(h.hitung));
+    if ((h.lewati ?? 0) === max) nama.push('Lewati');
+    return `Suara masih seri setelah vote ulang (${nama.join(', ')}).`;
+  }
+  if (h && alasan === 'lewati') {
+    const ada = Object.values(h.hitung).some((n) => n > 0);
+    return ada ? `Lewati paling banyak dipilih (${h.lewati}).` : 'Semua memilih Lewati.';
+  }
+  return 'Tidak ada suara yang masuk.';
 }
 
 function Terungkap({ view, g, host, aksi }: PropsFase) {
@@ -906,9 +939,7 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
         <div className="kartu besar muncul">
           <h1 className="kata">Aman</h1>
           <p className="catatan">
-            {g.hasilVote && g.hasilVote.seri.length > 0
-              ? `Suara masih seri setelah vote ulang (${g.hasilVote.seri.map((id) => namaDari(view, id)).join(', ')}).`
-              : 'Tidak ada suara yang masuk.'}{' '}
+            {teksAman(view, g)}{' '}
             Lanjut ke ronde berikutnya.
           </p>
         </div>

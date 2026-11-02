@@ -107,3 +107,74 @@ Gryffindor / Slytherin = Gryffindor / Slytherin
 Autobot / Decepticon = Autobot / Decepticon
 Pokemon / Digimon = Pokemon / Digimon
 Barbie / Bratz = Barbie / Bratz
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Televisi / Monitor
+Radio / Speaker
+Handphone / Tablet
+Laptop / Komputer
+Kamera / Drone
+Printer / Scanner
+Baterai / Aki
+Powerbank / Charger
+Flashdisk / Harddisk
+Wifi / Bluetooth
+Modem / Router
+Smartwatch / Gelang Pintar
+Headset / Earphone
+Website / Aplikasi
+Email / Surat
+Internet / Sinyal
+Database / Server
+Software / Hardware
+Chip / Prosesor
+Layar Sentuh / Tombol
+Microphone / Speaker = Mikrofon / Speaker
+Satelit / Antena
+Kabel Lan / Kabel Optik = Kabel LAN / Kabel Optik
+Stop Kontak / Steker
+Sekring / Saklar
+Robot / Mesin
+Laser / Sinar X
+Update / Install
+Klik / Ketuk
+Scroll / Geser
+Password / Pin = Password / PIN
+Akun / Profil
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Email / SMS
+USB / Charger
+Hard Disk / SSD
+Proyektor / Smartboard
+Jam Pintar / Pelacak Kebugaran
+E-book / Audiobook
+Blog / Vlog
+Browser / Mesin Pencari
+Password / Username
+Algoritma / Kode
+Database / Spreadsheet
+Server / Cloud Storage
+Hashtag / Emoji
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Baterai / Charger
+Remote / Joystick
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+gojek / grab = Gojek / Grab
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Keyboard / Controller = Keyboard / Stik Game
+Mouse / Trackpad = Mouse / Trackpad
+FIFA / PES = FIFA / PES
+GTA / Red Dead = GTA / Red Dead
+LoL / Dota = League of Legends / Dota
+Overwatch / Valorant = Overwatch / Valorant
+Candy Crush / Clash Royale = Candy Crush / Clash Royale
+Among Us / Werewolf = Among Us / Werewolf

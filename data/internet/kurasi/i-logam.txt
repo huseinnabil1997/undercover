@@ -1,4 +1,4 @@
-# i-logam | Logam
+# i-logam | Logam & Permata
 # Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Materials".
 @ ck:Materials_11
 copper / brass = Tembaga / Kuningan
@@ -7,3 +7,9 @@ iron / steel = Besi / Baja
 gold / silver = Emas / Perak
 copper / bronze = Tembaga / Perunggu
 lead / zinc = Timbal / Seng
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Diamond / Ruby = Berlian / Rubi
+Emerald / Sapphire = Zamrud / Safir
+Pearl / Opal = Mutiara / Opal

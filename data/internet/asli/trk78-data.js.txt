@@ -1,0 +1,66 @@
+const DATABASE = {
+    fr: {
+        "Nature et animaux": [
+            ["Chien", "Loup"], ["Chat", "Tigre"], ["Aigle", "Faucon"], ["Requin", "Dauphin"], ["Abeille", "Guêpe"],
+            ["Fourmi", "Termite"], ["Lion", "Panthère"], ["Cheval", "Âne"], ["Poule", "Dinde"], ["Canard", "Oie"],
+            ["Grenouille", "Crapaud"], ["Serpent", "Lézard"], ["Tortue", "Escargot"], ["Baleine", "Cachalot"], ["Saumon", "Truite"],
+            ["Rose", "Tulipe"], ["Chêne", "Sapin"], ["Pomme", "Poire"], ["Banane", "Plantain"], ["Fraise", "Framboise"],
+            ["Orange", "Clémentine"], ["Citron", "Pamplemousse"], ["Tomate", "Poivron"], ["Carotte", "Radis"], ["Pomme de terre", "Patate douce"],
+            ["Océan", "Mer"], ["Rivière", "Fleuve"], ["Lac", "Étang"], ["Pluie", "Neige"], ["Vent", "Tempête"],
+            ["Soleil", "Lune"], ["Nuage", "Brume"], ["Montagne", "Colline"], ["Désert", "Plage"], ["Forêt", "Jungle"],
+            ["Volcan", "Geyser"], ["Grotte", "Caverne"], ["Île", "Presqu'île"], ["Sable", "Terre"], ["Rocher", "Pierre"],
+            ["Herbe", "Mousse"], ["Feuille", "Pétale"], ["Branche", "Racine"], ["Cactus", "Palmier"], ["Bambou", "Roseau"],
+            ["Girafe", "Zèbre"], ["Éléphant", "Rhinocéros"], ["Singe", "Gorille"], ["Ours", "Panda"], ["Kangourou", "Koala"]
+        ],
+        "Sports et loisirs": [
+            ["Football", "Rugby"], ["Tennis", "Badminton"], ["Basket", "Volley"], ["Ping-pong", "Tennis"], ["Judo", "Karaté"],
+            ["Boxe", "Lutte"], ["Ski", "Snowboard"], ["Natation", "Plongée"], ["Vélo", "Moto"], ["Course", "Marche"],
+            ["Golf", "Minigolf"], ["Baseball", "Cricket"], ["Hockey", "Patinage"], ["Escalade", "Randonnée"], ["Surf", "Skateboard"],
+            ["Gymnastique", "Danse"], ["Yoga", "Pilates"], ["Pêche", "Chasse"], ["Échecs", "Dames"], ["Poker", "Belote"],
+            ["Cinéma", "Théâtre"], ["Livre", "Magazine"], ["Peinture", "Dessin"], ["Musique", "Chant"], ["Guitare", "Basse"],
+            ["Piano", "Synthé"], ["Batterie", "Tam-tam"], ["Violon", "Violoncelle"], ["Concert", "Festival"], ["Musée", "Galerie"],
+            ["Cuisine", "Pâtisserie"], ["Restaurant", "Bar"], ["Discothèque", "Bar"], ["Plage", "Piscine"], ["Camping", "Hôtel"],
+            ["Voyage", "Excursion"], ["Photo", "Vidéo"], ["Jardinage", "Bricolage"], ["Coudre", "Tricoter"], ["Billard", "Bowling"],
+            ["Fléchettes", "Tir à l'arc"], ["Parachutisme", "Saut à l'élastique"], ["Karting", "Formule 1"], ["Marathon", "Sprint"], ["Haltère", "Barre"],
+            ["Tapis", "Parquet"], ["Stade", "Arène"], ["Arbitre", "Juge"], ["Médaille", "Coupe"]
+        ],
+        "Jeux-vidéos": [
+            ["Mario", "Luigi"], ["Zelda", "Link"], ["Sonic", "Tails"], ["Pikachu", "Dracaufeu"], ["PlayStation", "Xbox"],
+            ["Clavier", "Manette"], ["Souris", "Trackpad"], ["Écran", "Télévision"], ["Casque", "Écouteurs"], ["Chaise", "Fauteuil"],
+            ["Minecraft", "Roblox"], ["Fortnite", "PUBG"], ["Call of Duty", "Battlefield"], ["FIFA", "PES"], ["GTA", "Red Dead"],
+            ["LoL", "Dota"], ["Overwatch", "Valorant"], ["Tetris", "Pac-Man"], ["Candy Crush", "Clash Royale"], ["Among Us", "Loup-Garou"],
+            ["Boss", "Monstre"], ["Niveau", "Monde"], ["Vie", "Santé"], ["Mana", "Énergie"], ["Épée", "Hache"],
+            ["Bouclier", "Armure"], ["Potion", "Sort"], ["Mage", "Sorcier"], ["Guerrier", "Chevalier"], ["Archer", "Chasseur"],
+            ["Zombie", "Squelette"], ["Dragon", "Wyvern"], ["Vaisseau", "Fusée"], ["Voiture", "Kart"], ["Circuit", "Piste"],
+            ["Glitch", "Bug"], ["Lag", "Freeze"], ["Noob", "Pro"], ["Cheater", "Hacker"], ["Skin", "Costume"],
+            ["Streamer", "Youtuber"], ["Discord", "Skype"], ["Twitch", "YouTube"], ["Speedrun", "Let's Play"], ["Démo", "Bêta"],
+            ["Serveur", "Réseau"], ["Solo", "Multijoueur"], ["Coop", "Versus"], ["RPG", "MMO"], ["FPS", "TPS"]
+        ]
+    },
+    en: {
+        "Nature & Animals": [
+            ["Dog", "Wolf"], ["Cat", "Tiger"], ["Eagle", "Falcon"], ["Shark", "Dolphin"], ["Bee", "Wasp"],
+            ["Ant", "Termite"], ["Lion", "Panther"], ["Horse", "Donkey"], ["Chicken", "Turkey"], ["Duck", "Goose"],
+            ["Frog", "Toad"], ["Snake", "Lizard"], ["Turtle", "Snail"], ["Whale", "Sperm Whale"], ["Salmon", "Trout"],
+            ["Rose", "Tulip"], ["Oak", "Pine"], ["Apple", "Pear"], ["Banana", "Plantain"], ["Strawberry", "Raspberry"],
+            ["Orange", "Tangerine"], ["Lemon", "Grapefruit"], ["Tomato", "Pepper"], ["Carrot", "Radish"], ["Potato", "Sweet Potato"],
+            ["Ocean", "Sea"], ["River", "Stream"], ["Lake", "Pond"], ["Rain", "Snow"], ["Wind", "Storm"],
+            ["Sun", "Moon"], ["Cloud", "Mist"], ["Mountain", "Hill"], ["Desert", "Beach"], ["Forest", "Jungle"],
+            ["Volcano", "Geyser"], ["Cave", "Cavern"], ["Island", "Peninsula"], ["Sand", "Earth"], ["Rock", "Stone"]
+        ],
+        "Sports & Hobbies": [
+            ["Football", "Rugby"], ["Tennis", "Badminton"], ["Basketball", "Volleyball"], ["Judo", "Karate"], ["Boxing", "Wrestling"],
+            ["Skiing", "Snowboarding"], ["Swimming", "Diving"], ["Bike", "Motorcycle"], ["Running", "Walking"], ["Golf", "Minigolf"],
+            ["Baseball", "Cricket"], ["Hockey", "Skating"], ["Climbing", "Hiking"], ["Surfing", "Skateboarding"], ["Gymnastics", "Dancing"],
+            ["Yoga", "Pilates"], ["Fishing", "Hunting"], ["Chess", "Checkers"], ["Poker", "Blackjack"], ["Cinema", "Theater"],
+            ["Painting", "Drawing"], ["Music", "Singing"], ["Guitar", "Bass"], ["Piano", "Synth"], ["Drums", "Percussion"]
+        ],
+        "Video Games": [
+            ["Mario", "Luigi"], ["Zelda", "Link"], ["Sonic", "Tails"], ["Pikachu", "Charizard"], ["PlayStation", "Xbox"],
+            ["Keyboard", "Controller"], ["Mouse", "Trackpad"], ["Screen", "TV"], ["Headset", "Earphones"], ["Chair", "Seat"],
+            ["Minecraft", "Roblox"], ["Fortnite", "PUBG"], ["Call of Duty", "Battlefield"], ["FIFA", "PES"], ["GTA", "Red Dead"],
+            ["LoL", "Dota"], ["Overwatch", "Valorant"], ["Tetris", "Pac-Man"], ["Candy Crush", "Clash Royale"], ["Among Us", "Werewolf"],
+            ["Boss", "Monster"], ["Level", "World"], ["Life", "Health"], ["Mana", "Energy"], ["Sword", "Axe"]
+        ]
+    }
+};

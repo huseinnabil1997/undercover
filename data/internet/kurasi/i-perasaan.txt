@@ -1,0 +1,11 @@
+# i-perasaan | Perasaan
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Bahagia / Bersemangat
+Sedih / Kesepian
+Takut / Gugup
+Terkejut / Tercengang
+Bangga / Percaya Diri
+Iri / Cemburu
+Lelah / Mengantuk

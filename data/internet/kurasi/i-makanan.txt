@@ -30,3 +30,164 @@ Smoothie / juice = Smoothie / Jus
 pizza / lasagna = Pizza / Lasagna
 sandwich / hamburger = Sandwich / Hamburger
 dumplings / wonton = Pangsit / Siomay
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Nasi Goreng / Nasi Uduk
+Bakso / Soto
+Sate Ayam / Sate Kambing
+Rendang / Semur
+Ketupat / Lontong
+Tempe / Tahu
+Sambal / Saus
+Kerupuk / Emping
+Kecap Manis / Kecap Asin
+Minyak Goreng / Mentega
+Santan / Susu
+Bubur Ayam / Bubur Sumsum
+Martabak Telur / Martabak Manis
+Pempek / Otak-otak
+Siomay / Batagor
+Mie Ayam / Mie Bakso
+Rawon / Gulai
+Pecel / Gado-gado
+Pepes / Botok
+Susu / Yogurt
+Sirup / Madu
+Es Jeruk / Es Lemon
+Cendol / Dawet
+Bubur Kacang Ijo / Bubur Ketan Hitam
+Kolak / Wedang Ronde
+Kue Lapis / Kue Lumpur
+Klepon / Onde-onde
+Bolu / Lapis Legit
+Serabi / Apem
+Roti Tawar / Roti Gandum
+Donat / Pukis
+Bakpao / Mantau
+Pisang Goreng / Singkong Rebus
+Keripik / Pilus
+Kacang Rebus / Jagung Bakar
+Keju / Cokelat
+Selai / Mereses = Selai / Meses
+Sosis / Nugget
+Bakwan / Mendoan
+Lumpia / Risoles
+Nasi Kuning / Nasi Liwet
+Telor Dadar / Telor Ceplok = Telur Dadar / Telur Ceplok
+Ayam Bakar / Bebek Goreng
+Ikan Bakar / Ikan Goreng
+Sup Ayam / Sayur Asem
+Capcay / Tumis
+Perkedel / Bakwan Jagung
+Kwetiau / Bihun
+Soun / Mie Goreng
+Es Serut / Es Puter
+Dodol / Wajik
+Rengginang / Opak
+Kue Cucur / Kue Ape
+Nastar / Kastengel
+Putri Salju / Lidah Kucing
+Sempol / Cilok
+Cimol / Cireng
+Tahu Sumedang / Tahu Putih
+Nangka / Sukun
+Rujak Buah / Asinan
+Es Pisang Ijo / Es Teler
+Es Kelapa / Es Dawet
+Kue Cubit / Kue Pancong
+Bika Ambon / Kue Bingka
+Manis / Gurih
+Asin / Pahit
+Pedas / Asam
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Pisang / Pisang Raja
+Jeruk / Jeruk Mandarin
+Lemon / Jeruk Nipis
+Semangka / Melon
+Anggur / Kismis
+Stroberi / Raspberry
+Ceri / Plum
+Blueberry / Blackberry
+Persik / Aprikot
+Kelapa / Almond
+Alpukat / Mentimun
+Tomat / Paprika
+Wortel / Ubi Jalar
+Kentang / Ubi
+Brokoli / Kembang Kol
+Selada / Kubis
+Bayam / Kangkung
+Jagung / Gandum
+Roti / Bagel
+Pizza / Calzone
+Burger / Sandwich
+Hot Dog / Sosis
+Ramen / Udon
+Kue / Pie
+Kue Kering / Biskuit
+Donat / Muffin
+Cokelat / Permen
+Es Krim / Sorbet
+Pancake / Wafel
+Keju / Mentega
+Sushi / Sashimi
+Steak / Iga
+Telur / Omelet
+Sup / Soto
+Salad / Gado-gado
+Kentang Goreng / Keripik
+Popcorn / Nachos
+Croissant / Pretzel
+Bacon / Ham
+Taco / Burrito
+Kari / Rendang
+Lasagna / Moussaka
+Risotto / Paella
+Kebab / Gyro
+Lumpia / Martabak
+Bubur / Havermut
+Granola / Sereal
+Puding / Custard
+Cheesecake / Tiramisu
+Brownies / Fudge
+Karamel / Tofi
+Permen Karet / Agar-agar
+Marshmallow / Meringue
+Bubble Tea / Milkshake
+Limun / Es Teh
+Espresso / Latte
+Cappuccino / Mocha
+Saus Tomat / Mustar
+Minyak Zaitun / Minyak Sayur
+Nasi Goreng / Mie Goreng
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Es Krim / Gelato
+Kopi Hitam / Latte
+Teh Hijau / Teh Tarik
+Nasi Putih / Nasi Kuning
+Rendang / Opor
+Gudeg / Rawon
+Sambal Terasi / Sambal Matah
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+nasi / mie = Nasi / Mie
+rendang / gulai = Rendang / Gulai
+sate / bakso = Sate / Bakso
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Milk / Cream = Susu / Krim
+Juice / Soda = Jus / Soda
+Water / Ice = Air / Es
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Lemon / Grapefruit = Lemon / Jeruk Bali
+Carrot / Radish = Wortel / Lobak
+Potato / Sweet Potato = Kentang / Ubi Jalar

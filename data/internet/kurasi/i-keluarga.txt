@@ -8,3 +8,21 @@ mother in law / father in law = Ibu Mertua / Bapak Mertua
 son / daughter = Anak Laki-Laki / Anak Perempuan
 aunt / uncle = Tante / Om
 family / relatives = Keluarga / Kerabat
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Kakak / Adik
+Paman / Bibi
+Suami / Istri
+Sepupu / Keponakan
+Cucu / Cicit
+Mertua / Menantu
+Teman / Sahabat
+Tamu / Tuan Rumah
+Bayi / Balita
+Anak / Remaja
+Pemuda / Orang Tua
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Child / Adult = Anak / Orang Dewasa

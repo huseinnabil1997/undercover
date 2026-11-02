@@ -1,0 +1,37 @@
+# i-fantasi | Fantasi & Dongeng
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Penyihir / Dukun
+Nenek Sihir / Peri
+Ksatria / Samurai
+Naga / Phoenix
+Unicorn / Pegasus
+Zombi / Ghoul
+Hantu / Arwah
+Putri Duyung / Sirene
+Elf / Kurcaci
+Goblin / Troll
+Robot / Cyborg
+Alien / UFO
+Pahlawan Super / Penjahat
+Bajak Laut / Viking
+Koboi / Perampok
+Jin / Roh
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Robot / Alien
+Pahlawan / Penjahat
+Raja / Ratu
+Pangeran / Putri
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+King / Queen = Raja / Ratu
+Shield / Armor = Perisai / Baju Zirah
+Bow / Arrow = Busur / Anak Panah
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Sword / Axe = Pedang / Kapak

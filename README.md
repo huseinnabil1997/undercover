@@ -4,6 +4,7 @@ Game tebak kata **Undercover** dengan dua mode:
 
 - **Main Online**: setiap pemain memakai HP sendiri, tersambung realtime peer-to-peer (WebRTC lewat PeerJS).
 - **Main di Satu HP**: pass-and-play, satu HP dioper bergiliran (tetap bisa dipakai tanpa internet setelah halaman terbuka).
+  Saat voting, kelompok bisa memilih **Lewati**: tidak ada yang tereliminasi dan permainan lanjut ke ronde berikutnya.
 
 Dibuat dengan Next.js (App Router, static export) dan di-deploy ke GitHub Pages.
 
@@ -30,8 +31,11 @@ Live: https://huseinnabil1997.github.io/undercover/
    dengan tanda dan peran untuk pemain yang sudah tereliminasi. Riwayat disimpan di state host, jadi pemain yang reconnect tetap menerimanya.
 7. Setelah semua pemain hidup mendapat giliran, voting dimulai otomatis dari HP masing-masing
    dengan progres suara live. Hasil keluar otomatis saat semua suara masuk, atau saat host menutup voting.
-8. **Aturan seri**: jika suara terbanyak seri, ada vote ulang sekali hanya antara yang seri.
-   Jika masih seri (atau tidak ada suara sama sekali), tidak ada yang tereliminasi dan game lanjut ke ronde berikutnya.
+8. **Lewati (abstain)**: setiap pemain boleh memilih **Lewati** saat voting (juga saat vote ulang). Lewati dihitung
+   sudah vote, tetapi tidak menambah suara siapa pun. Jika Lewati lebih banyak dari suara terbanyak, atau tidak ada suara
+   untuk siapa pun, tidak ada yang tereliminasi. Rekap suara menampilkan jumlah Lewati.
+   **Aturan seri**: jika suara terbanyak seri (termasuk seri dengan Lewati), ada vote ulang sekali hanya antara yang seri.
+   Jika masih seri, tidak ada yang tereliminasi dan game lanjut ke ronde berikutnya.
 9. Mr. White yang tereliminasi menebak kata Civilian dari HP-nya sendiri (host bisa melewati jika dia tidak merespons).
 10. Layar menang tampil di semua HP, lalu host bisa **Main lagi** atau kembali ke lobby. Skor room disimpan per nama.
 
@@ -76,9 +80,14 @@ Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr
 
 Di layar pengaturan (mode satu HP dan online) ada pilihan **Sumber kata**:
 
-- **Internet** (bawaan): 905 pasangan kata di 19 kategori, diambil dari proyek terbuka
-  MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), dan CK-Arena (Apache-2.0),
-  lalu diterjemahkan dan dikurasi manual ke bahasa Indonesia. Rincian lisensi ada di [ATRIBUSI.md](ATRIBUSI.md).
+- **Internet** (bawaan): 1810 pasangan kata di 30 kategori, diambil dari game Undercover publik di GitHub,
+  lalu diterjemahkan (bila perlu) dan dikurasi manual ke bahasa Indonesia:
+  - berlisensi terbuka: MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), CK-Arena (Apache-2.0),
+    sqiprasanna/mr-white-undercover (MIT), trk78/undercover-plus (MIT);
+  - repo publik tanpa berkas lisensi (daftar kata berbahasa Indonesia): chud-lori/ethok, DaengWithAI/undercover-indonesia,
+    Egi-Pebriyawan/game-undercover-indonesia, arisandi95/undercover-game-indonesia.
+
+  Rincian sumber, lisensi, dan jumlah pasangan per sumber ada di [ATRIBUSI.md](ATRIBUSI.md).
 - **Kamus kita**: bank kata buatan sendiri (lihat di bawah).
 
 Setiap sumber punya daftar kategori sendiri, dan pilihan kategori disimpan terpisah per sumber.

@@ -1,0 +1,107 @@
+# i-rumah | Rumah & Dapur
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Talenan / Parutan
+Ulekan / Cobek
+Sodet / Centong
+Teko / Termos
+Serbet / Tisu
+Spons / Sabut
+Kompor / Oven
+Blender / Mixer
+Dispenser / Pompa Air
+Tutup Panci / Nampan
+Rak Piring / Tudung Saji
+Ember / Gayung
+Botol / Jar
+Parut / Kupasan
+Saringan / Corong
+Timbangan / Meteran
+Panggangan / Tungku
+Mug / Sloki
+Kuali / Dandang
+Pembuka Botol / Pembuka Kaleng
+Kantung Plastik / Tas Belanja
+Korek Api / Pemantik
+Lilin / Obor
+Arang / Kayu Bakar
+Baskom / Tampah
+Loyang / Cetakan
+Sapu / Pel
+Sapu Lidi / Sapu Ijuk
+Ember / Baskom
+Bak Mandi / Kolam
+Handuk / Keset
+Sabun / Sampo
+Sikat Gigi / Odol
+Cermin / Sisir
+Setrika / Vakum
+Kipas Angin / AC
+Bantal / Guling
+Selimut / Sprei
+Gorden / Tirai
+Karpet / Keset Kaki
+Lemari / Rak
+Lampu / Senter
+Payung / Jas Hujan
+Sandal / Sepatu
+Dompet / Tas
+Kunci / Gembok
+Tembok / Lantai
+Atap / Plafon
+Kalender / Buku
+Hanger / Jepitan
+Tali / Kabel
+Deterjen / Pewangi
+Obat Nyamuk / Kapur Barus
+Tong Sampah / Kantong Plastik
+Sikat / Spons
+Karung / Peti
+Meteran / Timbangan Badan
+Pigura / Lukisan
+Vas Bunga / Pot
+Peniti / Klip
+Kelambu / Kawat Nyamuk
+Pipa / Kran = Pipa / Keran
+Handuk / Sprei
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Pemanas / Perapian
+Cermin / Jendela
+Sofa / Kursi
+Kasur / Hammock
+Meja / Meja Belajar
+Kulkas / Freezer
+Microwave / Air Fryer
+Mesin Cuci Piring / Mesin Cuci Baju
+Pengering / Setrika
+Pel / Kemoceng
+Teko / Mesin Kopi
+Rice Cooker / Presto
+Bel Pintu / Jam Weker
+Shower / Bak Mandi
+Wastafel / Keran
+Toilet / Bidet
+Handuk / Lap
+Sikat Gigi / Pasta Gigi
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Kasur / Tikar
+Piring / Mangkok = Piring / Mangkuk
+Kulkas / Mesin Cuci
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+ranjang / sofa = Ranjang / Sofa
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Chair / Stool = Kursi / Bangku
+Bed / Couch = Kasur / Sofa
+Curtain / Blind = Gorden / Kerai
+Cup / Mug = Cangkir / Mug
+Oven / Stove = Oven / Kompor
+Brush / Comb = Sikat / Sisir

@@ -22,3 +22,67 @@ apartment / condo = Apartemen / Kondominium
 pillow / cushion = Bantal / Bantal Sofa
 sculpture / statue = Pahatan / Patung
 clock / watch = Jam Dinding / Jam Tangan
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Klakson / Bel
+Bus / Angkot
+Kereta Api / KRL
+MRT / LRT
+Kapal Laut / Perahu
+Ojek / Taksi
+Kapal Selam / Sekoci
+Truk Tangki / Truk Bak
+Klakson / Sirine = Klakson / Sirene
+Ban / Velg
+Setir / Stang
+Rem / Gas
+Spion / Knalpot
+Mesin / Aki
+Bensin / Solar
+Helm / Sabuk Pengaman
+Jendela Mobil / Pintu Mobil
+Bagasi / Kabin
+Jangkar / Layar
+Rel / Aspal
+Paspor / Visa
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Bus / Van
+Kapal Selam / Yacht
+Roket / Satelit
+Skateboard / Skuter
+Ambulans / Mobil Damkar
+Mobil Polisi / Motor Patroli
+Traktor / Buldoser
+Tank / Jip
+Kapal Layar / Kano
+Balon Udara / Glider
+Jet Ski / Papan Selancar
+Segway / Hoverboard
+Kamera / Handycam
+Kacamata / Kacamata Hitam
+Tas / Ransel
+Dompet / Tas Tangan
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Mobil / Motor
+Kamera / Teleskop
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+kamera / binocular = Kamera / Teropong
+transjakarta / mrt = TransJakarta / MRT
+koran / brochure = Koran / Brosur
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Sword / Knife = Pedang / Pisau
+Subway / Tram = Kereta Bawah Tanah / Trem
+Rocket / Shuttle = Roket / Pesawat Ulang-alik
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Bike / Motorcycle = Sepeda / Motor

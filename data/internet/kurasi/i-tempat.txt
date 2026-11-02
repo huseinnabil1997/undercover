@@ -98,3 +98,70 @@ Stadium / Arena = Stadion / Arena
 Bus Stop / Taxi Stand = Halte Bus / Pangkalan Taksi
 Lighthouse / Observatory = Mercusuar / Observatorium
 Factory / Warehouse = Pabrik / Gudang
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Rumah / Gedung
+Kantor / Sekolah
+Toko / Warung
+Pasar / Mall
+Rumah Sakit / Puskesmas
+Hotel / Apartemen
+Jembatan / Flyover
+Terowongan / Underpass
+Terminal / Stasiun
+Bandara / Pelabuhan
+Halte / Pos Ronda
+Taman / Alun-alun
+Stadion / Lapangan
+Semen / Pasir
+Batu Bata / Batako
+Kayu / Besi
+Cat / Tinner = Cat / Thinner
+Pondasi / Tiang = Fondasi / Tiang
+Pagar / Gerbang
+Trotoar / Got
+Balkon / Teras
+Gudang / Garasi
+Genteng / Seng
+Kaca / Cermin
+Keramik / Marmer
+Pintu Besi / Pintu Kayu
+Engsel / Grendel
+Kran Air / Pralon = Keran Air / Pralon
+Lampu Jalan / Tiang Listrik
+Zebra Cross / Rambu
+Bundaran / Pertigaan
+Trotoar / Bahu Jalan
+Wastafel / Closet = Wastafel / Kloset
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Hotel / Losmen
+Gym / Stadion
+Bank / ATM
+Supermarket / Mall
+Kantor / Studio
+Peternakan / Ladang
+Kedutaan / Konsulat
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Rumah / Apartemen
+Bandara / Stasiun
+Pasar / Supermarket
+Kantor / Bank
+Hotel / Vila
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+pasar / toko = Pasar / Toko
+kebun binatang / aquarium = Kebun Binatang / Akuarium
+indomaret / alfamart = Indomaret / Alfamart
+kamar / halaman = Kamar / Halaman
+garasi / terras = Garasi / Teras
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Tower / Building = Menara / Gedung
+Bank / Vault = Bank / Brankas

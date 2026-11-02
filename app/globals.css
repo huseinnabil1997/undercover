@@ -181,6 +181,9 @@ p.galat { padding-left: 16px; }
   font-weight: 700; padding: 6px; word-break: break-word;
 }
 .pemain.pilih { border-color: var(--teks); background: var(--teks); color: var(--dasar); }
+.pemain.lewati { grid-column: 1 / -1; min-height: 48px; background: transparent; border: 2px dashed var(--garis-kuat); color: var(--redup); font-weight: 600; }
+.pemain.lewati.pilih { border-style: solid; border-color: var(--teks); background: var(--teks); color: var(--dasar); }
+.rekap li.rekap-lewati .nama { font-style: italic; }
 
 .timer { text-align: center; }
 .waktu { display: block; font-size: 3.25rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }

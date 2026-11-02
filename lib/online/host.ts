@@ -6,7 +6,7 @@ import {
 import { cekPetunjuk, MAKS_PETUNJUK } from '../petunjuk';
 import type { Pemain } from '../types';
 import {
-  BATAS_OFFLINE_MS, VERSI_PROTOKOL,
+  BATAS_OFFLINE_MS, SUARA_LEWATI, VERSI_PROTOKOL,
   type Aksi, type AksiPemain, type GameOnline, type GameView, type HasilVote, type Pengaturan, type StateHost, type ViewPemain,
 } from './types';
 
@@ -193,7 +193,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (!g || g.fase !== 'vote') return tetap();
       if (!g.peserta.includes(dari) || !g.hidup[dari]) return tetap('Hanya pemain yang masih hidup yang bisa vote.');
       if (aksi.target === dari) return tetap('Tidak bisa memilih diri sendiri.');
-      if (!g.kandidat.includes(aksi.target)) return tetap('Pilihan tidak valid.');
+      if (aksi.target !== SUARA_LEWATI && !g.kandidat.includes(aksi.target)) return tetap('Pilihan tidak valid.');
       const suara = { ...g.suara, [dari]: aksi.target };
       const baru = { ...state, game: { ...g, suara } };
       const semua = pesertaHidup(g).every((id) => suara[id] !== undefined || bisaVoteKosong(g, id));
@@ -274,20 +274,31 @@ function keDiskusi(state: StateHost, ronde: number, rng: Rng): StateHost {
 }
 
 /**
- * Hitung suara. Aturan seri:
- * - Putaran 1 seri: vote ulang hanya antara pemain yang seri (semua pemain hidup tetap memilih).
- * - Putaran 2 masih seri, atau tidak ada suara sama sekali: tidak ada yang tereliminasi, lanjut ronde berikutnya.
+ * Hitung suara. Aturan:
+ * - Lewati (abstain) tidak menambah suara siapa pun, tetapi dihitung sebagai pilihan tersendiri.
+ * - Tidak ada suara untuk pemain mana pun, atau Lewati lebih banyak dari suara terbanyak: tidak ada yang tereliminasi.
+ * - Putaran 1 seri (termasuk seri dengan Lewati): vote ulang hanya antara pemain yang seri; semua pemain hidup tetap memilih dan tetap boleh Lewati.
+ * - Putaran 2 masih seri: tidak ada yang tereliminasi, lanjut ronde berikutnya.
  */
 export function hitungSuara(g: GameOnline): HasilVote {
   const hitung: Record<string, number> = Object.fromEntries(g.kandidat.map((id) => [id, 0]));
+  let lewati = 0;
   for (const [pemilih, target] of Object.entries(g.suara)) {
-    if (g.hidup[pemilih] && target in hitung) hitung[target]++;
+    if (!g.hidup[pemilih]) continue;
+    if (target === SUARA_LEWATI) lewati++;
+    else if (target in hitung) hitung[target]++;
   }
   const maks = Math.max(0, ...Object.values(hitung));
-  if (maks === 0) return { hitung, seri: [], keputusan: 'tanpaEliminasi' };
+  if (maks === 0 || lewati > maks) return { hitung, lewati, seri: [], keputusan: 'tanpaEliminasi' };
   const atas = g.kandidat.filter((id) => hitung[id] === maks);
-  if (atas.length === 1) return { hitung, seri: [], keputusan: 'eliminasi' };
-  return { hitung, seri: atas, keputusan: g.putaranVote === 1 ? 'voteUlang' : 'tanpaEliminasi' };
+  if (atas.length === 1 && lewati < maks) return { hitung, lewati, seri: [], keputusan: 'eliminasi' };
+  return { hitung, lewati, seri: atas, keputusan: g.putaranVote === 1 ? 'voteUlang' : 'tanpaEliminasi' };
+}
+
+/** Alasan voting tanpa eliminasi, untuk teks di layar. */
+export function alasanTanpaEliminasi(h: HasilVote): 'seri' | 'lewati' | 'kosong' {
+  if (h.seri.length > 0) return 'seri';
+  return (h.lewati ?? 0) > 0 ? 'lewati' : 'kosong';
 }
 
 function tutupVoting(state: StateHost): StateHost {

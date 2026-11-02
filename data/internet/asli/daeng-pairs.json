@@ -1,0 +1,2274 @@
+[
+ {
+  "c": "Nasi Goreng",
+  "u": "Nasi Uduk"
+ },
+ {
+  "c": "Bakso",
+  "u": "Soto"
+ },
+ {
+  "c": "Sate Ayam",
+  "u": "Sate Kambing"
+ },
+ {
+  "c": "Rendang",
+  "u": "Semur"
+ },
+ {
+  "c": "Ketupat",
+  "u": "Lontong"
+ },
+ {
+  "c": "Tempe",
+  "u": "Tahu"
+ },
+ {
+  "c": "Sambal",
+  "u": "Saus"
+ },
+ {
+  "c": "Kerupuk",
+  "u": "Emping"
+ },
+ {
+  "c": "Garam",
+  "u": "Gula"
+ },
+ {
+  "c": "Kecap Manis",
+  "u": "Kecap Asin"
+ },
+ {
+  "c": "Minyak Goreng",
+  "u": "Mentega"
+ },
+ {
+  "c": "Santan",
+  "u": "Susu"
+ },
+ {
+  "c": "Bubur Ayam",
+  "u": "Bubur Sumsum"
+ },
+ {
+  "c": "Martabak Telur",
+  "u": "Martabak Manis"
+ },
+ {
+  "c": "Pempek",
+  "u": "Otak-otak"
+ },
+ {
+  "c": "Siomay",
+  "u": "Batagor"
+ },
+ {
+  "c": "Mie Ayam",
+  "u": "Mie Bakso"
+ },
+ {
+  "c": "Rawon",
+  "u": "Gulai"
+ },
+ {
+  "c": "Pecel",
+  "u": "Gado-gado"
+ },
+ {
+  "c": "Pepes",
+  "u": "Botok"
+ },
+ {
+  "c": "Kopi",
+  "u": "Teh"
+ },
+ {
+  "c": "Susu",
+  "u": "Yogurt"
+ },
+ {
+  "c": "Sirup",
+  "u": "Madu"
+ },
+ {
+  "c": "Air Putih",
+  "u": "Air Mineral"
+ },
+ {
+  "c": "Es Jeruk",
+  "u": "Es Lemon"
+ },
+ {
+  "c": "Cendol",
+  "u": "Dawet"
+ },
+ {
+  "c": "Bubur Kacang Ijo",
+  "u": "Bubur Ketan Hitam"
+ },
+ {
+  "c": "Kolak",
+  "u": "Wedang Ronde"
+ },
+ {
+  "c": "Kue Lapis",
+  "u": "Kue Lumpur"
+ },
+ {
+  "c": "Klepon",
+  "u": "Onde-onde"
+ },
+ {
+  "c": "Bolu",
+  "u": "Lapis Legit"
+ },
+ {
+  "c": "Serabi",
+  "u": "Apem"
+ },
+ {
+  "c": "Roti Tawar",
+  "u": "Roti Gandum"
+ },
+ {
+  "c": "Donat",
+  "u": "Pukis"
+ },
+ {
+  "c": "Bakpao",
+  "u": "Mantau"
+ },
+ {
+  "c": "Pisang Goreng",
+  "u": "Singkong Rebus"
+ },
+ {
+  "c": "Keripik",
+  "u": "Pilus"
+ },
+ {
+  "c": "Kacang Rebus",
+  "u": "Jagung Bakar"
+ },
+ {
+  "c": "Keju",
+  "u": "Cokelat"
+ },
+ {
+  "c": "Selai",
+  "u": "Mereses"
+ },
+ {
+  "c": "Sosis",
+  "u": "Nugget"
+ },
+ {
+  "c": "Bakwan",
+  "u": "Mendoan"
+ },
+ {
+  "c": "Lumpia",
+  "u": "Risoles"
+ },
+ {
+  "c": "Nasi Kuning",
+  "u": "Nasi Liwet"
+ },
+ {
+  "c": "Telor Dadar",
+  "u": "Telor Ceplok"
+ },
+ {
+  "c": "Ayam Bakar",
+  "u": "Bebek Goreng"
+ },
+ {
+  "c": "Ikan Bakar",
+  "u": "Ikan Goreng"
+ },
+ {
+  "c": "Sup Ayam",
+  "u": "Sayur Asem"
+ },
+ {
+  "c": "Capcay",
+  "u": "Tumis"
+ },
+ {
+  "c": "Perkedel",
+  "u": "Bakwan Jagung"
+ },
+ {
+  "c": "Urap",
+  "u": "Trancam"
+ },
+ {
+  "c": "Kwetiau",
+  "u": "Bihun"
+ },
+ {
+  "c": "Soun",
+  "u": "Mie Goreng"
+ },
+ {
+  "c": "Es Serut",
+  "u": "Es Puter"
+ },
+ {
+  "c": "Dodol",
+  "u": "Wajik"
+ },
+ {
+  "c": "Rengginang",
+  "u": "Opak"
+ },
+ {
+  "c": "Kue Cucur",
+  "u": "Kue Ape"
+ },
+ {
+  "c": "Nastar",
+  "u": "Kastengel"
+ },
+ {
+  "c": "Putri Salju",
+  "u": "Lidah Kucing"
+ },
+ {
+  "c": "Sempol",
+  "u": "Cilok"
+ },
+ {
+  "c": "Cimol",
+  "u": "Cireng"
+ },
+ {
+  "c": "Tahu Sumedang",
+  "u": "Tahu Putih"
+ },
+ {
+  "c": "Nangka",
+  "u": "Sukun"
+ },
+ {
+  "c": "Rujak Buah",
+  "u": "Asinan"
+ },
+ {
+  "c": "Es Pisang Ijo",
+  "u": "Es Teler"
+ },
+ {
+  "c": "Es Kelapa",
+  "u": "Es Dawet"
+ },
+ {
+  "c": "Kue Cubit",
+  "u": "Kue Pancong"
+ },
+ {
+  "c": "Bika Ambon",
+  "u": "Kue Bingka"
+ },
+ {
+  "c": "Piring",
+  "u": "Mangkuk"
+ },
+ {
+  "c": "Sendok",
+  "u": "Garpu"
+ },
+ {
+  "c": "Gelas",
+  "u": "Cangkir"
+ },
+ {
+  "c": "Wajan",
+  "u": "Panci"
+ },
+ {
+  "c": "Pisau",
+  "u": "Gunting"
+ },
+ {
+  "c": "Talenan",
+  "u": "Parutan"
+ },
+ {
+  "c": "Ulekan",
+  "u": "Cobek"
+ },
+ {
+  "c": "Sodet",
+  "u": "Centong"
+ },
+ {
+  "c": "Teko",
+  "u": "Termos"
+ },
+ {
+  "c": "Serbet",
+  "u": "Tisu"
+ },
+ {
+  "c": "Spons",
+  "u": "Sabut"
+ },
+ {
+  "c": "Kompor",
+  "u": "Oven"
+ },
+ {
+  "c": "Blender",
+  "u": "Mixer"
+ },
+ {
+  "c": "Magic Com",
+  "u": "Rice Cooker"
+ },
+ {
+  "c": "Dispenser",
+  "u": "Pompa Air"
+ },
+ {
+  "c": "Kulkas",
+  "u": "Lemari Es"
+ },
+ {
+  "c": "Tutup Panci",
+  "u": "Nampan"
+ },
+ {
+  "c": "Rak Piring",
+  "u": "Tudung Saji"
+ },
+ {
+  "c": "Ember",
+  "u": "Gayung"
+ },
+ {
+  "c": "Botol",
+  "u": "Jar"
+ },
+ {
+  "c": "Parut",
+  "u": "Kupasan"
+ },
+ {
+  "c": "Saringan",
+  "u": "Corong"
+ },
+ {
+  "c": "Timbangan",
+  "u": "Meteran"
+ },
+ {
+  "c": "Panggangan",
+  "u": "Tungku"
+ },
+ {
+  "c": "Mug",
+  "u": "Sloki"
+ },
+ {
+  "c": "Tatakan",
+  "u": "Alas"
+ },
+ {
+  "c": "Toples",
+  "u": "Wadah"
+ },
+ {
+  "c": "Kuali",
+  "u": "Dandang"
+ },
+ {
+  "c": "Pembuka Botol",
+  "u": "Pembuka Kaleng"
+ },
+ {
+  "c": "Koret",
+  "u": "Sikat Dapur"
+ },
+ {
+  "c": "Kantung Plastik",
+  "u": "Tas Belanja"
+ },
+ {
+  "c": "Klakson",
+  "u": "Bel"
+ },
+ {
+  "c": "Korek Api",
+  "u": "Pemantik"
+ },
+ {
+  "c": "Lilin",
+  "u": "Obor"
+ },
+ {
+  "c": "Arang",
+  "u": "Kayu Bakar"
+ },
+ {
+  "c": "Sumbu",
+  "u": "Minyak"
+ },
+ {
+  "c": "Baskom",
+  "u": "Tampah"
+ },
+ {
+  "c": "Bakul",
+  "u": "Tenong"
+ },
+ {
+  "c": "Kukusan",
+  "u": "Sarangan"
+ },
+ {
+  "c": "Loyang",
+  "u": "Cetakan"
+ },
+ {
+  "c": "Sapu",
+  "u": "Pel"
+ },
+ {
+  "c": "Kemoceng",
+  "u": "Kemoceng Bulu"
+ },
+ {
+  "c": "Sapu Lidi",
+  "u": "Sapu Ijuk"
+ },
+ {
+  "c": "Ember",
+  "u": "Baskom"
+ },
+ {
+  "c": "Gayung",
+  "u": "Ciduk"
+ },
+ {
+  "c": "Bak Mandi",
+  "u": "Kolam"
+ },
+ {
+  "c": "Handuk",
+  "u": "Keset"
+ },
+ {
+  "c": "Sabun",
+  "u": "Sampo"
+ },
+ {
+  "c": "Sikat Gigi",
+  "u": "Odol"
+ },
+ {
+  "c": "Cermin",
+  "u": "Sisir"
+ },
+ {
+  "c": "Setrika",
+  "u": "Vakum"
+ },
+ {
+  "c": "Kipas Angin",
+  "u": "AC"
+ },
+ {
+  "c": "Bantal",
+  "u": "Guling"
+ },
+ {
+  "c": "Kasur",
+  "u": "Sofa"
+ },
+ {
+  "c": "Selimut",
+  "u": "Sprei"
+ },
+ {
+  "c": "Gorden",
+  "u": "Tirai"
+ },
+ {
+  "c": "Karpet",
+  "u": "Keset Kaki"
+ },
+ {
+  "c": "Lemari",
+  "u": "Rak"
+ },
+ {
+  "c": "Meja",
+  "u": "Kursi"
+ },
+ {
+  "c": "Lampu",
+  "u": "Senter"
+ },
+ {
+  "c": "Payung",
+  "u": "Jas Hujan"
+ },
+ {
+  "c": "Sandal",
+  "u": "Sepatu"
+ },
+ {
+  "c": "Dompet",
+  "u": "Tas"
+ },
+ {
+  "c": "Koper",
+  "u": "Ransel"
+ },
+ {
+  "c": "Kunci",
+  "u": "Gembok"
+ },
+ {
+  "c": "Jendela",
+  "u": "Pintu"
+ },
+ {
+  "c": "Tembok",
+  "u": "Lantai"
+ },
+ {
+  "c": "Atap",
+  "u": "Plafon"
+ },
+ {
+  "c": "Jam Dinding",
+  "u": "Jam Tangan"
+ },
+ {
+  "c": "Kalender",
+  "u": "Buku"
+ },
+ {
+  "c": "Hanger",
+  "u": "Jepitan"
+ },
+ {
+  "c": "Tali",
+  "u": "Kabel"
+ },
+ {
+  "c": "Deterjen",
+  "u": "Pewangi"
+ },
+ {
+  "c": "Obat Nyamuk",
+  "u": "Kapur Barus"
+ },
+ {
+  "c": "Tong Sampah",
+  "u": "Kantong Plastik"
+ },
+ {
+  "c": "Sikat",
+  "u": "Spons"
+ },
+ {
+  "c": "Cairan Pembersih",
+  "u": "Pencuci Piring"
+ },
+ {
+  "c": "Karung",
+  "u": "Peti"
+ },
+ {
+  "c": "Kardus",
+  "u": "Kotak"
+ },
+ {
+  "c": "Paku",
+  "u": "Baut"
+ },
+ {
+  "c": "Palu",
+  "u": "Obeng"
+ },
+ {
+  "c": "Tang",
+  "u": "Gergaji"
+ },
+ {
+  "c": "Meteran",
+  "u": "Timbangan Badan"
+ },
+ {
+  "c": "Pigura",
+  "u": "Lukisan"
+ },
+ {
+  "c": "Vas Bunga",
+  "u": "Pot"
+ },
+ {
+  "c": "Asbak",
+  "u": "Korek Kuping"
+ },
+ {
+  "c": "Peniti",
+  "u": "Klip"
+ },
+ {
+  "c": "Sajadah",
+  "u": "Mukena"
+ },
+ {
+  "c": "Kelambu",
+  "u": "Kawat Nyamuk"
+ },
+ {
+  "c": "Pipa",
+  "u": "Kran"
+ },
+ {
+  "c": "Televisi",
+  "u": "Monitor"
+ },
+ {
+  "c": "Radio",
+  "u": "Speaker"
+ },
+ {
+  "c": "Handphone",
+  "u": "Tablet"
+ },
+ {
+  "c": "Laptop",
+  "u": "Komputer"
+ },
+ {
+  "c": "Kamera",
+  "u": "Drone"
+ },
+ {
+  "c": "Printer",
+  "u": "Scanner"
+ },
+ {
+  "c": "Proyektor",
+  "u": "Layar"
+ },
+ {
+  "c": "Baterai",
+  "u": "Aki"
+ },
+ {
+  "c": "Powerbank",
+  "u": "Charger"
+ },
+ {
+  "c": "Mouse",
+  "u": "Keyboard"
+ },
+ {
+  "c": "Flashdisk",
+  "u": "Harddisk"
+ },
+ {
+  "c": "Wifi",
+  "u": "Bluetooth"
+ },
+ {
+  "c": "Modem",
+  "u": "Router"
+ },
+ {
+  "c": "Smartwatch",
+  "u": "Gelang Pintar"
+ },
+ {
+  "c": "Headset",
+  "u": "Earphone"
+ },
+ {
+  "c": "Kabel Data",
+  "u": "Flashdisk"
+ },
+ {
+  "c": "Website",
+  "u": "Aplikasi"
+ },
+ {
+  "c": "Email",
+  "u": "Surat"
+ },
+ {
+  "c": "Internet",
+  "u": "Sinyal"
+ },
+ {
+  "c": "Database",
+  "u": "Server"
+ },
+ {
+  "c": "Software",
+  "u": "Hardware"
+ },
+ {
+  "c": "Chip",
+  "u": "Prosesor"
+ },
+ {
+  "c": "Layar Sentuh",
+  "u": "Tombol"
+ },
+ {
+  "c": "Microphone",
+  "u": "Speaker"
+ },
+ {
+  "c": "Satelit",
+  "u": "Antena"
+ },
+ {
+  "c": "Kabel Lan",
+  "u": "Kabel Optik"
+ },
+ {
+  "c": "Stop Kontak",
+  "u": "Steker"
+ },
+ {
+  "c": "Sekring",
+  "u": "Saklar"
+ },
+ {
+  "c": "Digital",
+  "u": "Analog"
+ },
+ {
+  "c": "Robot",
+  "u": "Mesin"
+ },
+ {
+  "c": "Dinamit",
+  "u": "Bom"
+ },
+ {
+  "c": "Laser",
+  "u": "Sinar X"
+ },
+ {
+  "c": "Voltase",
+  "u": "Watt"
+ },
+ {
+  "c": "Kapasitas",
+  "u": "Durasi"
+ },
+ {
+  "c": "Memori",
+  "u": "Penyimpanan"
+ },
+ {
+  "c": "Update",
+  "u": "Install"
+ },
+ {
+  "c": "Klik",
+  "u": "Ketuk"
+ },
+ {
+  "c": "Scroll",
+  "u": "Geser"
+ },
+ {
+  "c": "Password",
+  "u": "Pin"
+ },
+ {
+  "c": "Akun",
+  "u": "Profil"
+ },
+ {
+  "c": "Rumah",
+  "u": "Gedung"
+ },
+ {
+  "c": "Kantor",
+  "u": "Sekolah"
+ },
+ {
+  "c": "Toko",
+  "u": "Warung"
+ },
+ {
+  "c": "Masjid",
+  "u": "Gereja"
+ },
+ {
+  "c": "Pasar",
+  "u": "Mall"
+ },
+ {
+  "c": "Rumah Sakit",
+  "u": "Puskesmas"
+ },
+ {
+  "c": "Hotel",
+  "u": "Apartemen"
+ },
+ {
+  "c": "Pabrik",
+  "u": "Gudang"
+ },
+ {
+  "c": "Jembatan",
+  "u": "Flyover"
+ },
+ {
+  "c": "Jalan Tol",
+  "u": "Jalan Raya"
+ },
+ {
+  "c": "Terowongan",
+  "u": "Underpass"
+ },
+ {
+  "c": "Terminal",
+  "u": "Stasiun"
+ },
+ {
+  "c": "Bandara",
+  "u": "Pelabuhan"
+ },
+ {
+  "c": "Halte",
+  "u": "Pos Ronda"
+ },
+ {
+  "c": "Taman",
+  "u": "Alun-alun"
+ },
+ {
+  "c": "Stadion",
+  "u": "Lapangan"
+ },
+ {
+  "c": "Semen",
+  "u": "Pasir"
+ },
+ {
+  "c": "Batu Bata",
+  "u": "Batako"
+ },
+ {
+  "c": "Kayu",
+  "u": "Besi"
+ },
+ {
+  "c": "Cat",
+  "u": "Tinner"
+ },
+ {
+  "c": "Pondasi",
+  "u": "Tiang"
+ },
+ {
+  "c": "Pagar",
+  "u": "Gerbang"
+ },
+ {
+  "c": "Trotoar",
+  "u": "Got"
+ },
+ {
+  "c": "Tangga",
+  "u": "Lift"
+ },
+ {
+  "c": "Balkon",
+  "u": "Teras"
+ },
+ {
+  "c": "Dapur",
+  "u": "Kamar Mandi"
+ },
+ {
+  "c": "Gudang",
+  "u": "Garasi"
+ },
+ {
+  "c": "Genteng",
+  "u": "Seng"
+ },
+ {
+  "c": "Kaca",
+  "u": "Cermin"
+ },
+ {
+  "c": "Keramik",
+  "u": "Marmer"
+ },
+ {
+  "c": "Pintu Besi",
+  "u": "Pintu Kayu"
+ },
+ {
+  "c": "Engsel",
+  "u": "Grendel"
+ },
+ {
+  "c": "Kran Air",
+  "u": "Pralon"
+ },
+ {
+  "c": "Lampu Jalan",
+  "u": "Tiang Listrik"
+ },
+ {
+  "c": "Zebra Cross",
+  "u": "Rambu"
+ },
+ {
+  "c": "Bundaran",
+  "u": "Pertigaan"
+ },
+ {
+  "c": "Trotoar",
+  "u": "Bahu Jalan"
+ },
+ {
+  "c": "Wastafel",
+  "u": "Closet"
+ },
+ {
+  "c": "Bak Kontrol",
+  "u": "Gorong-gorong"
+ },
+ {
+  "c": "Blower",
+  "u": "Ventilasi"
+ },
+ {
+  "c": "Baju",
+  "u": "Kaos"
+ },
+ {
+  "c": "Celana",
+  "u": "Rok"
+ },
+ {
+  "c": "Kemeja",
+  "u": "Blus"
+ },
+ {
+  "c": "Jaket",
+  "u": "Mantel"
+ },
+ {
+  "c": "Jas",
+  "u": "Tuksedo"
+ },
+ {
+  "c": "Sarung",
+  "u": "Selimut"
+ },
+ {
+  "c": "Handuk",
+  "u": "Sprei"
+ },
+ {
+  "c": "Topi",
+  "u": "Peci"
+ },
+ {
+  "c": "Dasi",
+  "u": "Sabuk"
+ },
+ {
+  "c": "Kaos Kaki",
+  "u": "Sarung Tangan"
+ },
+ {
+  "c": "Sepatu",
+  "u": "Sandal"
+ },
+ {
+  "c": "Sepatu Bot",
+  "u": "Sepatu Kets"
+ },
+ {
+  "c": "Tas",
+  "u": "Dompet"
+ },
+ {
+  "c": "Kacamata",
+  "u": "Lensa Kontak"
+ },
+ {
+  "c": "Syal",
+  "u": "Kerudung"
+ },
+ {
+  "c": "Mukena",
+  "u": "Jilbab"
+ },
+ {
+  "c": "Benang",
+  "u": "Jarum"
+ },
+ {
+  "c": "Kancing",
+  "u": "Resleting"
+ },
+ {
+  "c": "Kain",
+  "u": "Kertas"
+ },
+ {
+  "c": "Kapas",
+  "u": "Dakron"
+ },
+ {
+  "c": "Sutra",
+  "u": "Katun"
+ },
+ {
+  "c": "Wol",
+  "u": "Kulit"
+ },
+ {
+  "c": "Batik",
+  "u": "Tenun"
+ },
+ {
+  "c": "Kebaya",
+  "u": "Baju Kurung"
+ },
+ {
+  "c": "Singlet",
+  "u": "Kaos Dalam"
+ },
+ {
+  "c": "Celana Dalam",
+  "u": "Boxer"
+ },
+ {
+  "c": "Legging",
+  "u": "Stocking"
+ },
+ {
+  "c": "Piyama",
+  "u": "Daster"
+ },
+ {
+  "c": "Handuk Mandi",
+  "u": "Handuk Kecil"
+ },
+ {
+  "c": "Kerah",
+  "u": "Lengan"
+ },
+ {
+  "c": "Saku",
+  "u": "Kancing Jepret"
+ },
+ {
+  "c": "Pita",
+  "u": "Renda"
+ },
+ {
+  "c": "Masker",
+  "u": "Cadar"
+ },
+ {
+  "c": "Apron",
+  "u": "Celemek"
+ },
+ {
+  "c": "Jas Hujan",
+  "u": "Payung"
+ },
+ {
+  "c": "Ember",
+  "u": "Baskom"
+ },
+ {
+  "c": "Sisir",
+  "u": "Jepitan Rambut"
+ },
+ {
+  "c": "Ikat Rambut",
+  "u": "Bando"
+ },
+ {
+  "c": "Emas",
+  "u": "Perak"
+ },
+ {
+  "c": "Berlian",
+  "u": "Mutiara"
+ },
+ {
+  "c": "Buku Tulis",
+  "u": "Buku Gambar"
+ },
+ {
+  "c": "Pensil",
+  "u": "Pulpen"
+ },
+ {
+  "c": "Penghapus",
+  "u": "Tip-ex"
+ },
+ {
+  "c": "Tipex",
+  "u": "Kertas"
+ },
+ {
+  "c": "Penggaris",
+  "u": "Busur"
+ },
+ {
+  "c": "Jangka",
+  "u": "Serutan"
+ },
+ {
+  "c": "Map",
+  "u": "Amplop"
+ },
+ {
+  "c": "Tinta",
+  "u": "Cat Air"
+ },
+ {
+  "c": "Meja Belajar",
+  "u": "Kursi Belajar"
+ },
+ {
+  "c": "Papan Tulis",
+  "u": "Whiteboard"
+ },
+ {
+  "c": "Kapur",
+  "u": "Spidol"
+ },
+ {
+  "c": "Penghapus Papan",
+  "u": "Kemoceng"
+ },
+ {
+  "c": "Tas Sekolah",
+  "u": "Ransel"
+ },
+ {
+  "c": "Seragam",
+  "u": "Baju Olahraga"
+ },
+ {
+  "c": "Topi Sekolah",
+  "u": "Dasi Sekolah"
+ },
+ {
+  "c": "Sabuk Sekolah",
+  "u": "Kaos Kaki Putih"
+ },
+ {
+  "c": "Ijazah",
+  "u": "Rapor"
+ },
+ {
+  "c": "Absensi",
+  "u": "Jurnal"
+ },
+ {
+  "c": "Kurikulum",
+  "u": "Silabus"
+ },
+ {
+  "c": "Ujian",
+  "u": "Ulangan"
+ },
+ {
+  "c": "Guru",
+  "u": "Dosen"
+ },
+ {
+  "c": "Murid",
+  "u": "Mahasiswa"
+ },
+ {
+  "c": "Kelas",
+  "u": "Laboratorium"
+ },
+ {
+  "c": "Perpustakaan",
+  "u": "Kantin"
+ },
+ {
+  "c": "Istirahat",
+  "u": "Masuk Sekolah"
+ },
+ {
+  "c": "Upacara",
+  "u": "Olahraga"
+ },
+ {
+  "c": "Ekstrakurikuler",
+  "u": "Kursus"
+ },
+ {
+  "c": "Beasiswa",
+  "u": "Donasi"
+ },
+ {
+  "c": "Tugas",
+  "u": "Pr"
+ },
+ {
+  "c": "Kelulusan",
+  "u": "Wisuda"
+ },
+ {
+  "c": "Semester",
+  "u": "Caturwulan"
+ },
+ {
+  "c": "Matematika",
+  "u": "Fisika"
+ },
+ {
+  "c": "Biologi",
+  "u": "Kimia"
+ },
+ {
+  "c": "Sejarah",
+  "u": "Geografi"
+ },
+ {
+  "c": "Bahasa",
+  "u": "Sastra"
+ },
+ {
+  "c": "Kesenian",
+  "u": "Olahraga"
+ },
+ {
+  "c": "Skripsi",
+  "u": "Tesis"
+ },
+ {
+  "c": "Seminar",
+  "u": "Workshop"
+ },
+ {
+  "c": "Gelar",
+  "u": "Pangkat"
+ },
+ {
+  "c": "Piagam",
+  "u": "Piala"
+ },
+ {
+  "c": "Dokter",
+  "u": "Perawat"
+ },
+ {
+  "c": "Bidan",
+  "u": "Apoteker"
+ },
+ {
+  "c": "Polisi",
+  "u": "Tentara"
+ },
+ {
+  "c": "Satpam",
+  "u": "Hansip"
+ },
+ {
+  "c": "Pilot",
+  "u": "Masinis"
+ },
+ {
+  "c": "Nahkoda",
+  "u": "Sopir"
+ },
+ {
+  "c": "Masinis",
+  "u": "Kernet"
+ },
+ {
+  "c": "Petani",
+  "u": "Nelayan"
+ },
+ {
+  "c": "Tukang Kayu",
+  "u": "Tukang Besi"
+ },
+ {
+  "c": "Arsitek",
+  "u": "Kontraktor"
+ },
+ {
+  "c": "Koki",
+  "u": "Pelayan"
+ },
+ {
+  "c": "Artis",
+  "u": "Penyanyi"
+ },
+ {
+  "c": "Penulis",
+  "u": "Wartawan"
+ },
+ {
+  "c": "Editor",
+  "u": "Desainer"
+ },
+ {
+  "c": "Programmer",
+  "u": "Analis"
+ },
+ {
+  "c": "Bos",
+  "u": "Karyawan"
+ },
+ {
+  "c": "Direktur",
+  "u": "Manajer"
+ },
+ {
+  "c": "Sekretaris",
+  "u": "Bendahara"
+ },
+ {
+  "c": "Ketua",
+  "u": "Wakil"
+ },
+ {
+  "c": "Anggota",
+  "u": "Pengurus"
+ },
+ {
+  "c": "Presiden",
+  "u": "Gubernur"
+ },
+ {
+  "c": "Walikota",
+  "u": "Bupati"
+ },
+ {
+  "c": "Camat",
+  "u": "Lurah"
+ },
+ {
+  "c": "Hakim",
+  "u": "Jaksa"
+ },
+ {
+  "c": "Pengacara",
+  "u": "Notaris"
+ },
+ {
+  "c": "Atlet",
+  "u": "Wasit"
+ },
+ {
+  "c": "Pelatih",
+  "u": "Manajer Tim"
+ },
+ {
+  "c": "Pedagang",
+  "u": "Sales"
+ },
+ {
+  "c": "Tukang Becak",
+  "u": "Ojek"
+ },
+ {
+  "c": "Montir",
+  "u": "Teknisi"
+ },
+ {
+  "c": "Penjahit",
+  "u": "Tukang Cukur"
+ },
+ {
+  "c": "Kurir",
+  "u": "Posmen"
+ },
+ {
+  "c": "Buruh",
+  "u": "Kuli"
+ },
+ {
+  "c": "Penyapu Jalan",
+  "u": "Tukang Sampah"
+ },
+ {
+  "c": "Dukun",
+  "u": "Paranormal"
+ },
+ {
+  "c": "Ustadz",
+  "u": "Pendeta"
+ },
+ {
+  "c": "Astronot",
+  "u": "Ilmuwan"
+ },
+ {
+  "c": "Detektif",
+  "u": "Spy"
+ },
+ {
+  "c": "Pengawal",
+  "u": "Bodyguard"
+ },
+ {
+  "c": "Relawan",
+  "u": "Donatur"
+ },
+ {
+  "c": "Matahari",
+  "u": "Bulan"
+ },
+ {
+  "c": "Bintang",
+  "u": "Langit"
+ },
+ {
+  "c": "Awan",
+  "u": "Kabut"
+ },
+ {
+  "c": "Hujan",
+  "u": "Gerimis"
+ },
+ {
+  "c": "Kilat",
+  "u": "Petir"
+ },
+ {
+  "c": "Angin",
+  "u": "Badai"
+ },
+ {
+  "c": "Tanah",
+  "u": "Pasir"
+ },
+ {
+  "c": "Batu",
+  "u": "Kayu"
+ },
+ {
+  "c": "Gunung",
+  "u": "Bukit"
+ },
+ {
+  "c": "Lembah",
+  "u": "Jurang"
+ },
+ {
+  "c": "Hutan",
+  "u": "Kebun"
+ },
+ {
+  "c": "Sawah",
+  "u": "Ladang"
+ },
+ {
+  "c": "Sungai",
+  "u": "Danau"
+ },
+ {
+  "c": "Laut",
+  "u": "Samudra"
+ },
+ {
+  "c": "Pantai",
+  "u": "Pesisir"
+ },
+ {
+  "c": "Pulau",
+  "u": "Benua"
+ },
+ {
+  "c": "Ombak",
+  "u": "Arus"
+ },
+ {
+  "c": "Pasang",
+  "u": "Surut"
+ },
+ {
+  "c": "Pelangi",
+  "u": "Kilat"
+ },
+ {
+  "c": "Embun",
+  "u": "Salju"
+ },
+ {
+  "c": "Gua",
+  "u": "Terowongan Alam"
+ },
+ {
+  "c": "Rawa",
+  "u": "Empang"
+ },
+ {
+  "c": "Air Terjun",
+  "u": "Mata Air"
+ },
+ {
+  "c": "Air Mancur",
+  "u": "Kolam"
+ },
+ {
+  "c": "Gempa",
+  "u": "Tsunami"
+ },
+ {
+  "c": "Banjir",
+  "u": "Longsor"
+ },
+ {
+  "c": "Kemarau",
+  "u": "Kekeringan"
+ },
+ {
+  "c": "Panas",
+  "u": "Terik"
+ },
+ {
+  "c": "Dingin",
+  "u": "Sejuk"
+ },
+ {
+  "c": "Cerah",
+  "u": "Mendung"
+ },
+ {
+  "c": "Guntur",
+  "u": "Glego"
+ },
+ {
+  "c": "Asap",
+  "u": "Debu"
+ },
+ {
+  "c": "Karang",
+  "u": "Batu Kali"
+ },
+ {
+  "c": "Gurun",
+  "u": "Sabana"
+ },
+ {
+  "c": "Kawah",
+  "u": "Puncak"
+ },
+ {
+  "c": "Lereng",
+  "u": "Kaki Gunung"
+ },
+ {
+  "c": "Fajar",
+  "u": "Senja"
+ },
+ {
+  "c": "Siang",
+  "u": "Malam"
+ },
+ {
+  "c": "Pagi",
+  "u": "Sore"
+ },
+ {
+  "c": "Waktu",
+  "u": "Jam"
+ },
+ {
+  "c": "Kucing",
+  "u": "Anjing"
+ },
+ {
+  "c": "Ayam",
+  "u": "Bebek"
+ },
+ {
+  "c": "Burung",
+  "u": "Kelelawar"
+ },
+ {
+  "c": "Sapi",
+  "u": "Kerbau"
+ },
+ {
+  "c": "Kambing",
+  "u": "Domba"
+ },
+ {
+  "c": "Kuda",
+  "u": "Keledai"
+ },
+ {
+  "c": "Gajah",
+  "u": "Badak"
+ },
+ {
+  "c": "Harimau",
+  "u": "Singa"
+ },
+ {
+  "c": "Ular",
+  "u": "Cacing"
+ },
+ {
+  "c": "Cicak",
+  "u": "Tokek"
+ },
+ {
+  "c": "Tikus",
+  "u": "Hamster"
+ },
+ {
+  "c": "Kelinci",
+  "u": "Marmut"
+ },
+ {
+  "c": "Monyet",
+  "u": "Kera"
+ },
+ {
+  "c": "Ikan",
+  "u": "Udang"
+ },
+ {
+  "c": "Kepiting",
+  "u": "Lobster"
+ },
+ {
+  "c": "Kura-kura",
+  "u": "Penyu"
+ },
+ {
+  "c": "Nyamuk",
+  "u": "Lalat"
+ },
+ {
+  "c": "Lebah",
+  "u": "Tawon"
+ },
+ {
+  "c": "Semut",
+  "u": "Rayap"
+ },
+ {
+  "c": "Kupu-kupu",
+  "u": "Capung"
+ },
+ {
+  "c": "Laba-laba",
+  "u": "Kalajengking"
+ },
+ {
+  "c": "Kodok",
+  "u": "Katak"
+ },
+ {
+  "c": "Buaya",
+  "u": "Biawak"
+ },
+ {
+  "c": "Paus",
+  "u": "Lumba-lumba"
+ },
+ {
+  "c": "Hiu",
+  "u": "Pari"
+ },
+ {
+  "c": "Gurita",
+  "u": "Cumi-cumi"
+ },
+ {
+  "c": "Ubur-ubur",
+  "u": "Bintang Laut"
+ },
+ {
+  "c": "Elang",
+  "u": "Garuda"
+ },
+ {
+  "c": "Merpati",
+  "u": "Tekukur"
+ },
+ {
+  "c": "Burung Hantu",
+  "u": "Gagak"
+ },
+ {
+  "c": "Beo",
+  "u": "Nuri"
+ },
+ {
+  "c": "Rusa",
+  "u": "Kijang"
+ },
+ {
+  "c": "Beruang",
+  "u": "Panda"
+ },
+ {
+  "c": "Zebra",
+  "u": "Zerapah"
+ },
+ {
+  "c": "Kanguru",
+  "u": "Koala"
+ },
+ {
+  "c": "Unta",
+  "u": "Gajah"
+ },
+ {
+  "c": "Babi",
+  "u": "Hutan"
+ },
+ {
+  "c": "Siput",
+  "u": "Bekicot"
+ },
+ {
+  "c": "Belalang",
+  "u": "Jangkrik"
+ },
+ {
+  "c": "Kutu",
+  "u": "Ulat"
+ },
+ {
+  "c": "Pohon",
+  "u": "Semak"
+ },
+ {
+  "c": "Rumput",
+  "u": "Ilalang"
+ },
+ {
+  "c": "Bunga",
+  "u": "Daun"
+ },
+ {
+  "c": "Akar",
+  "u": "Batang"
+ },
+ {
+  "c": "Ranting",
+  "u": "Dahan"
+ },
+ {
+  "c": "Buah",
+  "u": "Biji"
+ },
+ {
+  "c": "Kelapa",
+  "u": "Sawit"
+ },
+ {
+  "c": "Pisang",
+  "u": "Pepaya"
+ },
+ {
+  "c": "Mangga",
+  "u": "Jambu"
+ },
+ {
+  "c": "Jeruk",
+  "u": "Apel"
+ },
+ {
+  "c": "Padi",
+  "u": "Jagung"
+ },
+ {
+  "c": "Gandum",
+  "u": "Kedelai"
+ },
+ {
+  "c": "Bambu",
+  "u": "Rotan"
+ },
+ {
+  "c": "Mawar",
+  "u": "Melati"
+ },
+ {
+  "c": "Anggrek",
+  "u": "Tulip"
+ },
+ {
+  "c": "Kaktus",
+  "u": "Lidah Buaya"
+ },
+ {
+  "c": "Jamur",
+  "u": "Lumut"
+ },
+ {
+  "c": "Sawi",
+  "u": "Bayam"
+ },
+ {
+  "c": "Kangkung",
+  "u": "Genjer"
+ },
+ {
+  "c": "Wortel",
+  "u": "Kentang"
+ },
+ {
+  "c": "Cabai",
+  "u": "Tomat"
+ },
+ {
+  "c": "Bawang",
+  "u": "Jahe"
+ },
+ {
+  "c": "Kunyit",
+  "u": "Lengkuas"
+ },
+ {
+  "c": "Singkong",
+  "u": "Ubi"
+ },
+ {
+  "c": "Talenta",
+  "u": "Bunga Bakung"
+ },
+ {
+  "c": "Pinus",
+  "u": "Cemara"
+ },
+ {
+  "c": "Jati",
+  "u": "Mahoni"
+ },
+ {
+  "c": "Karet",
+  "u": "Koppi"
+ },
+ {
+  "c": "Teh",
+  "u": "Cengkeh"
+ },
+ {
+  "c": "Kenanga",
+  "u": "Kamboja"
+ },
+ {
+  "c": "Motor",
+  "u": "Sepeda"
+ },
+ {
+  "c": "Mobil",
+  "u": "Truk"
+ },
+ {
+  "c": "Bus",
+  "u": "Angkot"
+ },
+ {
+  "c": "Kereta Api",
+  "u": "KRL"
+ },
+ {
+  "c": "MRT",
+  "u": "LRT"
+ },
+ {
+  "c": "Pesawat",
+  "u": "Helikopter"
+ },
+ {
+  "c": "Kapal Laut",
+  "u": "Perahu"
+ },
+ {
+  "c": "Becak",
+  "u": "Bajaj"
+ },
+ {
+  "c": "Delman",
+  "u": "Dokar"
+ },
+ {
+  "c": "Ojek",
+  "u": "Taksi"
+ },
+ {
+  "c": "Kapal Selam",
+  "u": "Sekoci"
+ },
+ {
+  "c": "Truk Tangki",
+  "u": "Truk Bak"
+ },
+ {
+  "c": "Klakson",
+  "u": "Sirine"
+ },
+ {
+  "c": "Ban",
+  "u": "Velg"
+ },
+ {
+  "c": "Setir",
+  "u": "Stang"
+ },
+ {
+  "c": "Rem",
+  "u": "Gas"
+ },
+ {
+  "c": "Spion",
+  "u": "Knalpot"
+ },
+ {
+  "c": "Mesin",
+  "u": "Aki"
+ },
+ {
+  "c": "Bensin",
+  "u": "Solar"
+ },
+ {
+  "c": "Helm",
+  "u": "Sabuk Pengaman"
+ },
+ {
+  "c": "Jendela Mobil",
+  "u": "Pintu Mobil"
+ },
+ {
+  "c": "Bagasi",
+  "u": "Kabin"
+ },
+ {
+  "c": "Sayap Pesawat",
+  "u": "Ekor"
+ },
+ {
+  "c": "Jangkar",
+  "u": "Layar"
+ },
+ {
+  "c": "Stasiun",
+  "u": "Terminal"
+ },
+ {
+  "c": "Bandara",
+  "u": "Pelabuhan"
+ },
+ {
+  "c": "Halte",
+  "u": "Hangar"
+ },
+ {
+  "c": "Rel",
+  "u": "Aspal"
+ },
+ {
+  "c": "Tiket",
+  "u": "Karcis"
+ },
+ {
+  "c": "Paspor",
+  "u": "Visa"
+ },
+ {
+  "c": "Sepak Bola",
+  "u": "Futsal"
+ },
+ {
+  "c": "Basket",
+  "u": "Voli"
+ },
+ {
+  "c": "Badminton",
+  "u": "Tenis"
+ },
+ {
+  "c": "Renang",
+  "u": "Selam"
+ },
+ {
+  "c": "Lari",
+  "u": "Jalan Cepat"
+ },
+ {
+  "c": "Catur",
+  "u": "Karambol"
+ },
+ {
+  "c": "Gitar",
+  "u": "Piano"
+ },
+ {
+  "c": "Biola",
+  "u": "Suling"
+ },
+ {
+  "c": "Lukis",
+  "u": "Pahat"
+ },
+ {
+  "c": "Masak",
+  "u": "Jahit"
+ },
+ {
+  "c": "Mancing",
+  "u": "Berburu"
+ },
+ {
+  "c": "Kemah",
+  "u": "Piknik"
+ },
+ {
+  "c": "Karaoke",
+  "u": "Nonton"
+ },
+ {
+  "c": "Baca",
+  "u": "Tulis"
+ },
+ {
+  "c": "Game",
+  "u": "Puzzle"
+ },
+ {
+  "c": "Karate",
+  "u": "Silat"
+ },
+ {
+  "c": "Sepeda",
+  "u": "Skuter"
+ },
+ {
+  "c": "Skateboard",
+  "u": "Sepatu Roda"
+ },
+ {
+  "c": "Gym",
+  "u": "Yoga"
+ },
+ {
+  "c": "Senam",
+  "u": "Tari"
+ },
+ {
+  "c": "Panas",
+  "u": "Hangat"
+ },
+ {
+  "c": "Dingin",
+  "u": "Sejuk"
+ },
+ {
+  "c": "Manis",
+  "u": "Gurih"
+ },
+ {
+  "c": "Asin",
+  "u": "Pahit"
+ },
+ {
+  "c": "Pedas",
+  "u": "Asam"
+ },
+ {
+  "c": "Besar",
+  "u": "Luas"
+ },
+ {
+  "c": "Kecil",
+  "u": "Sempit"
+ },
+ {
+  "c": "Tinggi",
+  "u": "Panjang"
+ },
+ {
+  "c": "Berat",
+  "u": "Keras"
+ },
+ {
+  "c": "Ringan",
+  "u": "Empuk"
+ },
+ {
+  "c": "Cepat",
+  "u": "Kilat"
+ },
+ {
+  "c": "Lambat",
+  "u": "Pelan"
+ },
+ {
+  "c": "Bersih",
+  "u": "Rapi"
+ },
+ {
+  "c": "Kotor",
+  "u": "Jorok"
+ },
+ {
+  "c": "Pintar",
+  "u": "Cerdas"
+ },
+ {
+  "c": "Rajin",
+  "u": "Giat"
+ },
+ {
+  "c": "Marah",
+  "u": "Kesal"
+ },
+ {
+  "c": "Senang",
+  "u": "Bahagia"
+ },
+ {
+  "c": "Sedih",
+  "u": "Duka"
+ },
+ {
+  "c": "Takut",
+  "u": "Cemas"
+ },
+ {
+  "c": "Berani",
+  "u": "Nekat"
+ },
+ {
+  "c": "Lucu",
+  "u": "Konyol"
+ },
+ {
+  "c": "Murah",
+  "u": "Diskon"
+ },
+ {
+  "c": "Mahal",
+  "u": "Langka"
+ },
+ {
+  "c": "Wangi",
+  "u": "Harum"
+ },
+ {
+  "c": "Bau",
+  "u": "Busuk"
+ },
+ {
+  "c": "Terang",
+  "u": "Silau"
+ },
+ {
+  "c": "Gelap",
+  "u": "Suram"
+ },
+ {
+  "c": "Muda",
+  "u": "Baru"
+ },
+ {
+  "c": "Tua",
+  "u": "Lama"
+ },
+ {
+  "c": "Ayah",
+  "u": "Ibu"
+ },
+ {
+  "c": "Kakak",
+  "u": "Adik"
+ },
+ {
+  "c": "Kakek",
+  "u": "Nenek"
+ },
+ {
+  "c": "Paman",
+  "u": "Bibi"
+ },
+ {
+  "c": "Suami",
+  "u": "Istri"
+ },
+ {
+  "c": "Sepupu",
+  "u": "Keponakan"
+ },
+ {
+  "c": "Cucu",
+  "u": "Cicit"
+ },
+ {
+  "c": "Mertua",
+  "u": "Menantu"
+ },
+ {
+  "c": "Teman",
+  "u": "Sahabat"
+ },
+ {
+  "c": "Tetangga",
+  "u": "Warga"
+ },
+ {
+  "c": "Guru",
+  "u": "Murid"
+ },
+ {
+  "c": "Bos",
+  "u": "Bawahan"
+ },
+ {
+  "c": "Tamu",
+  "u": "Tuan Rumah"
+ },
+ {
+  "c": "Musuh",
+  "u": "Lawan"
+ },
+ {
+  "c": "Bayi",
+  "u": "Balita"
+ },
+ {
+  "c": "Anak",
+  "u": "Remaja"
+ },
+ {
+  "c": "Pemuda",
+  "u": "Orang Tua"
+ },
+ {
+  "c": "Laki-laki",
+  "u": "Perempuan"
+ },
+ {
+  "c": "Pria",
+  "u": "Wanita"
+ },
+ {
+  "c": "Manusia",
+  "u": "Orang"
+ }
+]

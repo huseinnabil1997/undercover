@@ -19,3 +19,14 @@ marker / highlighter = Spidol / Stabilo
 stapler / clip = Stapler / Penjepit Kertas
 notepad / notebook = Notes / Buku Tulis
 marker / crayon = Spidol / Krayon
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Paku / Baut
+Palu / Obeng
+Tang / Gergaji
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Screwdriver / Wrench = Obeng / Kunci Inggris
+Saw / Drill = Gergaji / Bor

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Bangun data kata "Internet" dari file kurasi.
 
-Sumber mentah (berlisensi bebas) ada di data/internet/asli/, terjemahan dan
-kurasi manual ada di data/internet/kurasi/*.txt. Skrip ini memastikan setiap
+Sumber mentah ada di data/internet/asli/ (lisensi tiap sumber dicatat di
+ATRIBUSI.md), terjemahan dan kurasi manual ada di data/internet/kurasi/*.txt.
+Baris kurasi berbentuk 'A / B = TA / TB', atau 'A / B' bila sumbernya sudah
+berbahasa Indonesia dan dipakai apa adanya. Skrip ini memastikan setiap
 pasangan asli benar-benar ada di sumbernya, menolak terjemahan kembar dan
 duplikat, lalu menulis data/internet/index.ts dan data/internet/pasangan.ts.
 
@@ -11,6 +13,7 @@ Pemakaian: python scripts/generate_internet.py [--cek]
 import json
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 AKAR = Path(__file__).resolve().parent.parent
@@ -22,13 +25,37 @@ LABEL_SUMBER = {
     "masjv": "MASJV/undercover-game (MIT)",
     "antebrl": "antebrl/undercover-word-game (MIT)",
     "ck": "CK-Arena (Apache-2.0)",
+    "sqiprasanna": "sqiprasanna/mr-white-undercover (MIT)",
+    "trk78": "trk78/undercover-plus (MIT)",
+    "ethok": "chud-lori/ethok (tanpa lisensi)",
+    "daeng": "DaengWithAI/undercover-indonesia (tanpa lisensi)",
+    "egi": "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
+    "arisandi": "arisandi95/undercover-game-indonesia (tanpa lisensi)",
 }
 
 POLA_PASANGAN = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\]')
 
 
+def normal(s):
+    """Huruf kecil, tanpa diakritik, spasi dirapikan: 'Crème' == 'creme'."""
+    s = unicodedata.normalize("NFKD", s.strip())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", s).casefold()
+
+
 def kunci(a, b):
-    return frozenset((a.strip().casefold(), b.strip().casefold()))
+    """Kunci pasangan tak berurutan, jadi 'A / B' sama dengan 'B / A'."""
+    return frozenset((normal(a), normal(b)))
+
+
+def blok_bahasa(teks, kode):
+    """Ambil isi blok 'kode: [' atau 'kode: {' sampai blok bahasa berikutnya."""
+    m = re.search(r"^\s*" + kode + r":\s*[\[{]", teks, re.M)
+    if not m:
+        raise SystemExit(f"blok bahasa '{kode}' tidak ditemukan")
+    sisa = teks[m.end():]
+    n = re.search(r"^\s*[a-z]{2}:\s*[\[{]", sisa, re.M)
+    return sisa[:n.start()] if n else sisa
 
 
 def muat_sumber(nama):
@@ -46,6 +73,31 @@ def muat_sumber(nama):
     elif jenis == "ck":
         teks = (ASLI / "ck-arena" / f"{sub}.json").read_text(encoding="utf-8")
         for a, b in POLA_PASANGAN.findall(teks):
+            hasil.add(kunci(a, b))
+    elif jenis == "sqiprasanna":
+        teks = (ASLI / "sqiprasanna-script.js.txt").read_text(encoding="utf-8")
+        for a, b in POLA_PASANGAN.findall(teks):
+            hasil.add(kunci(a, b))
+    elif jenis == "trk78":
+        teks = (ASLI / "trk78-data.js.txt").read_text(encoding="utf-8")
+        for a, b in POLA_PASANGAN.findall(blok_bahasa(teks, "en")):
+            hasil.add(kunci(a, b))
+    elif jenis == "ethok":
+        teks = (ASLI / "ethok-words.js.txt").read_text(encoding="utf-8")
+        for a, b in POLA_PASANGAN.findall(blok_bahasa(teks, "id")):
+            hasil.add(kunci(a, b))
+    elif jenis == "daeng":
+        for p in json.loads((ASLI / "daeng-pairs.json").read_text(encoding="utf-8")):
+            hasil.add(kunci(p["c"], p["u"]))
+    elif jenis == "egi":
+        teks = (ASLI / "egi-seed_words.py.txt").read_text(encoding="utf-8")
+        teks = teks[teks.index("pairs = ["):]
+        teks = teks[:teks.index("\n]")]
+        for a, b in re.findall(r'\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\)', teks):
+            hasil.add(kunci(a, b))
+    elif jenis == "arisandi":
+        teks = (ASLI / "arisandi95-DatabaseSeeder.php.txt").read_text(encoding="utf-8")
+        for a, b in re.findall(r"\[\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'[a-z]+'\s*\]", teks):
             hasil.add(kunci(a, b))
     else:
         raise SystemExit(f"Sumber tidak dikenal: {nama}")
@@ -81,15 +133,15 @@ def baca_kurasi(berkas):
         if sumber is None:
             raise SystemExit(f"{berkas.name}:{no}: baris '@ sumber' belum ada")
         try:
-            asli, terjemahan = baris.split(" = ")
+            asli, _, terjemahan = baris.partition(" = ")
             a, b = [x.strip() for x in asli.split(" / ")]
-            ta, tb = [x.strip() for x in terjemahan.split(" / ")]
+            ta, tb = [x.strip() for x in (terjemahan or asli).split(" / ")]
         except ValueError:
-            raise SystemExit(f"{berkas.name}:{no}: format harus 'A / B = TA / TB': {baris}")
+            raise SystemExit(f"{berkas.name}:{no}: format harus 'A / B = TA / TB' atau 'A / B': {baris}")
         if kunci(a, b) not in cache[sumber]:
             galat.append(f"{berkas.name}:{no}: pasangan asli tidak ada di {sumber}: {a} / {b}")
             continue
-        pasangan.append((ta, tb, f"{berkas.name}:{no}"))
+        pasangan.append((ta, tb, f"{berkas.name}:{no}", sumber.split(":")[0]))
     return kategori, pasangan, galat
 
 
@@ -102,6 +154,7 @@ def main():
     semua = []
     galat = []
     terlihat = {}
+    per_sumber = {}
     # Kategori umum (Campuran, Lain-lain) diproses terakhir supaya duplikat
     # tetap tinggal di kategori yang lebih spesifik.
     umum = ("i-campuran.txt", "i-lain.txt")
@@ -110,7 +163,7 @@ def main():
         kat, pasangan, g = baca_kurasi(berkas)
         galat.extend(g)
         bersih = []
-        for ta, tb, lokasi in pasangan:
+        for ta, tb, lokasi, src in pasangan:
             if ta.casefold() == tb.casefold():
                 galat.append(f"{lokasi}: terjemahan kembar: {ta} / {tb}")
                 continue
@@ -122,6 +175,7 @@ def main():
                 print(f"  lewati duplikat {lokasi}: {ta} / {tb} (sudah di {terlihat[k]})")
                 continue
             terlihat[k] = lokasi
+            per_sumber[src] = per_sumber.get(src, 0) + 1
             bersih.append([ta, tb])
         kat["pasangan"] = bersih
         semua.append(kat)
@@ -140,6 +194,8 @@ def main():
         total += n
         print(f"{k['id']:<22} {k['nama']:<26} {n:>4} pasangan ({s} satu kata)")
     print(f"TOTAL {total} pasangan di {len(semua)} kategori")
+    for src, n in per_sumber.items():
+        print(f"  {LABEL_SUMBER[src]}: {n} pasangan")
     if cek:
         return
     meta = [

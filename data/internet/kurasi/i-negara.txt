@@ -85,3 +85,10 @@ Cuba / Puerto Rico = Kuba / Puerto Riko
 Kenya / Tanzania = Kenya / Tanzania
 Italy / Greece = Italia / Yunani
 France / Belgium = Prancis / Belgia
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Amerika / Kanada
+Prancis / Italia
+Filipina / Singapura
+Meksiko / Kuba

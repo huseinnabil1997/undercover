@@ -13,3 +13,71 @@ surfing / windsurfing = Selancar / Selancar Angin
 yo-yo / boomerang = Yoyo / Bumerang
 frisbee / ball = Frisbee / Bola
 kite / parachute = Layangan / Parasut
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Sepak Bola / Futsal
+Badminton / Tenis
+Renang / Selam
+Lari / Jalan Cepat
+Catur / Karambol
+Mancing / Berburu = Memancing / Berburu
+Kemah / Piknik
+Game / Puzzle = Game / Puzzle
+Karate / Silat
+Gym / Yoga
+Senam / Tari
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Sepatu Roda / Sepatu Es
+Sepak Bola / Rugby
+Golf / Boling
+Tinju / Gulat
+Karate / Judo
+Ski / Snowboarding
+Selancar / Kitesurfing
+Bersepeda / Sepeda Gunung
+Yoga / Pilates
+Catur / Dam
+Panahan / Dart
+Anggar / Kendo
+Berlayar / Mendayung
+Panjat Tebing / Mendaki
+Senam / Balet
+Puzzle / Rubik
+Lego / Action Figure
+Boneka / Teddy Bear
+Mobil Mainan / Pesawat Mainan
+Layangan / Yoyo
+Kelereng / Gasing
+Hula Hoop / Lompat Tali
+Frisbee / Bumerang
+Pistol Air / Pistol Nerf
+Trampolin / Istana Balon
+Ayunan / Perosotan
+Jungkat-jungkit / Komidi Putar
+Lilin Mainan / Slime
+Balon / Gelembung Sabun
+Buku Mewarnai / Buku Stiker
+Dadu / Kartu Remi
+Petak Umpet / Kejar-kejaran
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Bola Basket / Bola Voli
+Golf / Biliar
+Catur / Kartu
+Ludo / Monopoli
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Racket / Bat = Raket / Pemukul
+Ski / Sled = Ski / Kereta Luncur
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Running / Walking = Lari / Jalan Kaki
+Golf / Minigolf = Golf / Mini Golf
+Surfing / Skateboarding = Selancar / Skateboard
+Gymnastics / Dancing = Senam / Menari

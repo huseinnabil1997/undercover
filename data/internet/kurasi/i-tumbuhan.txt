@@ -1,0 +1,45 @@
+# i-tumbuhan | Tumbuhan
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Rumput / Ilalang
+Bunga / Daun
+Akar / Batang
+Ranting / Dahan
+Buah / Biji
+Kelapa / Sawit
+Pisang / Pepaya
+Mangga / Jambu
+Padi / Jagung
+Gandum / Kedelai
+Bambu / Rotan
+Mawar / Melati
+Anggrek / Tulip
+Kaktus / Lidah Buaya
+Jamur / Lumut
+Sawi / Bayam
+Kangkung / Genjer
+Wortel / Kentang
+Cabai / Tomat
+Bawang / Jahe
+Kunyit / Lengkuas
+Singkong / Ubi
+Jati / Mahoni
+Teh / Cengkeh
+Kenanga / Kamboja
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Pohon Palem / Pohon Pinus
+Pohon Oak / Pohon Mapel
+Bambu / Kaktus
+Jamur / Ragi
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Flower / Bush = Bunga / Semak
+Grass / Leaf = Rumput / Daun
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Oak / Pine = Pohon Ek / Pohon Pinus

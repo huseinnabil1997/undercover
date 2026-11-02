@@ -15,3 +15,100 @@ lion / rhino = Singa / Badak
 toad / frog = Kodok / Katak
 turtle / tortoise = Penyu / Kura-Kura
 moth / butterfly = Ngengat / Kupu-Kupu
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Ayam / Bebek
+Burung / Kelelawar
+Sapi / Kerbau
+Kambing / Domba
+Kuda / Keledai
+Ular / Cacing
+Cicak / Tokek
+Tikus / Hamster
+Kelinci / Marmut
+Monyet / Kera
+Ikan / Udang
+Kepiting / Lobster
+Nyamuk / Lalat
+Lebah / Tawon
+Semut / Rayap
+Kupu-kupu / Capung
+Laba-laba / Kalajengking
+Buaya / Biawak
+Paus / Lumba-lumba
+Hiu / Pari
+Gurita / Cumi-cumi
+Ubur-ubur / Bintang Laut
+Elang / Garuda
+Merpati / Tekukur
+Burung Hantu / Gagak
+Beo / Nuri
+Rusa / Kijang
+Beruang / Panda
+Zebra / Zerapah = Zebra / Jerapah
+Kanguru / Koala
+Unta / Gajah
+Siput / Bekicot
+Belalang / Jangkrik
+Kutu / Ulat
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Kucing / Harimau
+Singa / Macan Tutul
+Babi / Babi Hutan
+Kelinci / Hamster
+Tikus / Tikus Got
+Rubah / Anjing Liar
+Monyet / Simpanse
+Gorila / Orangutan
+Elang / Rajawali
+Burung Beo / Kenari
+Ayam Kampung / Bebek
+Merpati / Dara
+Merak / Flamingo
+Paus / Orca
+Udang / Udang Galah
+Kumbang / Kunang-kunang
+Capung / Nyamuk
+Ikan / Belut
+Ikan Mas / Koi
+Angsa / Bebek Liar
+Unta / Lama = Unta / Llama
+Kuda Nil / Walrus
+Landak / Trenggiling
+Tupai / Bajing
+Rakun / Sigung
+Berang-berang / Musang
+Iguana / Tokek
+Bunglon / Komodo
+Kobra / Piton
+Bangau / Kuntul
+Kolibri / Pipit
+Pelatuk / Kutilang
+Ikan Pari / Manta
+Piranha / Barakuda
+Burung Unta / Kasuari
+Jaguar / Macan Kumbang
+Gagak / Murai
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Burung Hantu / Elang
+Sapi / Kambing
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Bear / Wolf = Beruang / Serigala
+Monkey / Gorilla = Monyet / Gorila
+Parrot / Pigeon = Beo / Merpati
+Turtle / Frog = Kura-kura / Katak
+Ant / Bee = Semut / Lebah
+Beetle / Cricket = Kumbang / Jangkrik
+
+# Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
+@ trk78
+Lion / Panther = Singa / Macan Kumbang
+Turtle / Snail = Kura-kura / Siput
+Salmon / Trout = Ikan Salmon / Ikan Trout

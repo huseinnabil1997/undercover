@@ -1,0 +1,63 @@
+# i-sekolah | Sekolah & Kantor
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Buku Tulis / Buku Gambar
+Penghapus / Tip-ex = Penghapus / Tipe-X
+Penggaris / Busur
+Jangka / Serutan
+Map / Amplop
+Tinta / Cat Air
+Meja Belajar / Kursi Belajar
+Kapur / Spidol
+Penghapus Papan / Kemoceng
+Tas Sekolah / Ransel
+Seragam / Baju Olahraga
+Ijazah / Rapor
+Kurikulum / Silabus
+Ujian / Ulangan
+Murid / Mahasiswa
+Kelas / Laboratorium
+Perpustakaan / Kantin
+Upacara / Olahraga
+Ekstrakurikuler / Kursus
+Beasiswa / Donasi
+Kelulusan / Wisuda
+Semester / Caturwulan
+Matematika / Fisika
+Biologi / Kimia
+Sejarah / Geografi
+Bahasa / Sastra
+Kesenian / Olahraga
+Skripsi / Tesis
+Seminar / Workshop
+Gelar / Pangkat
+Piagam / Piala
+Guru / Murid
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Buku / Majalah
+Buku Catatan / Diari
+Stapler / Klip Kertas
+Penggaris / Busur Derajat
+Lem / Selotip
+Gunting / Cutter
+Kalkulator / Sempoa
+Map / Binder
+Kalender / Agenda
+Rautan / Pembolong Kertas
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Oksigen / Karbon Dioksida = Oksigen / Karbon Dioksida
+Atom / Molekul
+Sel / Jaringan
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Science / History = IPA / Sejarah
+English / Spanish = Bahasa Inggris / Bahasa Spanyol
+French / German = Bahasa Prancis / Bahasa Jerman
+Latin / Greek = Bahasa Latin / Bahasa Yunani
+Map / Globe = Peta / Globe

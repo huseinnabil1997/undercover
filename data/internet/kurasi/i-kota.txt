@@ -1,0 +1,19 @@
+# i-kota | Kota & Pulau
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Tokyo / Osaka
+Jakarta / Bandung
+Bangkok / Kuala Lumpur
+Dubai / Abu Dhabi
+Seoul / Busan
+Beijing / Shanghai
+Madrid / Barcelona
+Berlin / Munich
+Toronto / Montreal
+Hong Kong / Makau
+Istanbul / Ankara
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+bali / lombok = Bali / Lombok

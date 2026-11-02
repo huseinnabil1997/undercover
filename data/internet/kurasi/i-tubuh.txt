@@ -1,0 +1,43 @@
+# i-tubuh | Tubuh Manusia
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Kepala / Tengkorak
+Rambut / Jenggot
+Mata / Alis
+Hidung / Mulut
+Telinga / Pipi
+Gigi / Lidah
+Bibir / Dagu
+Leher / Bahu
+Lengan / Siku
+Tangan / Pergelangan Tangan
+Jari / Jempol
+Dada / Punggung
+Perut / Pusar
+Pinggul / Pinggang
+Kaki / Paha
+Lutut / Pergelangan Kaki
+Telapak Kaki / Jari Kaki
+Jantung / Paru-paru
+Otak / Tulang Belakang
+Hati / Ginjal
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Otak / Jantung
+Paru-paru / Hati
+Lambung / Usus
+Tulang / Otot
+Darah / Saraf
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+mata / telinga = Mata / Telinga
+tangan / kaki = Tangan / Kaki
+rambut / kuku = Rambut / Kuku
+gigi / taring = Gigi / Taring
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Skin / Hair = Kulit / Rambut

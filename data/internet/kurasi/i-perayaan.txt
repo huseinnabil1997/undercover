@@ -1,0 +1,19 @@
+# i-perayaan | Perayaan & Acara
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Tahun Baru / Thanksgiving
+Hari Valentine / Hari Jadi
+Ulang Tahun / Pernikahan
+Wisuda / Prom
+Baby Shower / Bridal Shower
+Piknik / BBQ
+Parade / Maraton
+Karnaval / Pasar Malam
+Kembang Api / Kembang Pijar
+Ramadan / Idul Fitri
+Imlek / Cap Go Meh
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Konser / Pesta

@@ -12,12 +12,17 @@ import type { PanjangKata, PasanganKata, SumberKata } from './types';
 export const SUMBER_DEFAULT: SumberKata = 'internet';
 
 export const PILIHAN_SUMBER: { id: SumberKata; nama: string; keterangan: string }[] = [
-  { id: 'internet', nama: 'Internet', keterangan: 'Pasangan kata dari game Undercover open source, diterjemahkan ke bahasa Indonesia.' },
+  { id: 'internet', nama: 'Internet', keterangan: 'Pasangan kata dari game Undercover publik di GitHub, dikurasi dan diterjemahkan ke bahasa Indonesia.' },
   { id: 'kamus', nama: 'Kamus kita', keterangan: 'Kamus buatan sendiri: kata populer Indonesia, dipasangkan acak per subkategori.' },
 ];
 
+/** Semua sumber kata Internet beserta lisensinya, diambil dari data supaya selalu sinkron. */
+export const DAFTAR_SUMBER_INTERNET: string[] = [...new Set(KATEGORI_INTERNET.flatMap((k) => k.sumber))].sort((a, b) =>
+  a.localeCompare(b, 'id', { sensitivity: 'base' }),
+);
+
 /** Kredit sumber kata Internet (ditampilkan di UI). */
-export const KREDIT_SUMBER_INTERNET = 'MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), CK-Arena (Apache-2.0)';
+export const KREDIT_SUMBER_INTERNET = DAFTAR_SUMBER_INTERNET.join(', ');
 
 export function rapikanSumber(x: unknown): SumberKata {
   return x === 'internet' || x === 'kamus' ? x : SUMBER_DEFAULT;

@@ -1,0 +1,81 @@
+# i-profesi | Profesi
+
+# Kurasi dari DaengWithAI/undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ daeng
+Bidan / Apoteker
+Polisi / Tentara
+Satpam / Hansip
+Pilot / Masinis
+Nahkoda / Sopir = Nakhoda / Sopir
+Masinis / Kernet
+Tukang Kayu / Tukang Besi
+Arsitek / Kontraktor
+Koki / Pelayan
+Artis / Penyanyi
+Penulis / Wartawan
+Editor / Desainer
+Programmer / Analis
+Bos / Karyawan
+Direktur / Manajer
+Sekretaris / Bendahara
+Ketua / Wakil
+Anggota / Pengurus
+Presiden / Gubernur
+Walikota / Bupati
+Camat / Lurah
+Hakim / Jaksa
+Pengacara / Notaris
+Atlet / Wasit
+Pelatih / Manajer Tim
+Pedagang / Sales
+Tukang Becak / Ojek
+Montir / Teknisi
+Penjahit / Tukang Cukur
+Kurir / Posmen
+Buruh / Kuli
+Penyapu Jalan / Tukang Sampah
+Dukun / Paranormal
+Astronot / Ilmuwan
+Detektif / Spy = Detektif / Mata-mata
+Relawan / Donatur
+
+# Kurasi dari chud-lori/ethok (tanpa lisensi), daftar bahasa Indonesia.
+@ ethok
+Pengacara / Hakim
+Polisi / Detektif
+Pemadam Kebakaran / Paramedis
+Pilot / Pramugari
+Tentara / Pelaut
+Petani / Peternak
+Programmer / Desainer
+Seniman / Musisi
+Aktor / Sutradara
+Atlet / Pelatih
+Dokter Gigi / Ortodontis
+Montir / Tukang Listrik
+Tukang Ledeng / Tukang Kayu
+Ilmuwan / Peneliti
+Akuntan / Bankir
+CEO / Manajer
+Sekretaris / Resepsionis
+Petugas Kebersihan / Tukang Kebun
+Barista / Bartender
+Pelayan / Kasir
+Penjahit / Perancang Busana
+Penata Rambut / Tukang Cukur
+Dokter Hewan / Penjaga Kebun Binatang
+Pustakawan / Arsiparis
+Astronot / Astronom
+Pesulap / Badut
+Fotografer / Videografer
+DJ / Produser
+Influencer / Kreator Konten
+
+# Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ egi
+Artis / Model
+
+# Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
+@ arisandi
+pilot / nahkoda = Pilot / Nakhoda
+detektif / mata-mata = Detektif / Mata-mata

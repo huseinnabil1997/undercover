@@ -1,0 +1,11 @@
+# i-warna-bentuk | Warna & Bentuk
+
+# Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
+@ sqiprasanna
+Blue / Cyan = Biru / Toska
+Red / Orange = Merah / Oranye
+Yellow / Gold = Kuning / Emas
+Square / Rectangle = Persegi / Persegi Panjang
+Circle / Oval = Lingkaran / Oval
+Triangle / Pyramid = Segitiga / Piramida
+Star / Diamond = Bintang / Belah Ketupat
