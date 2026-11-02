@@ -58,10 +58,10 @@ describe('penanda tab aktif kedaluwarsa', () => {
 });
 
 describe('konfigurasi ICE', () => {
-  it('tetap menyertakan relay TURN (config PeerJS mengganti default, bukan menggabung)', async () => {
+  it('PeerJS memakai daftar ICE_SERVERS: STUN saja, tanpa TURN peerjs yang mati', async () => {
     const { OPSI_PEER } = await import('../lib/online/jaringan');
     const urls = (OPSI_PEER.config?.iceServers ?? []).flatMap((s: { urls: string | string[] }) => (Array.isArray(s.urls) ? s.urls : [s.urls]));
     expect(urls.some((u: string) => u.startsWith('stun:'))).toBe(true);
-    expect(urls.some((u: string) => u.startsWith('turn:'))).toBe(true);
+    expect(urls.some((u: string) => u.includes('turn.peerjs.com'))).toBe(false);
   });
 });

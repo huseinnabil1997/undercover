@@ -4,25 +4,17 @@
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
 import { buatStateChat, gabungChat, GALAT_CHAT_CEPAT, lajuKlien, terimaChat, type PesanChat } from './chat';
 import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
+import { CEK_NEGOSIASI_MS, ICE_SERVERS, nasibNegosiasi, TUNGGU_AWAL_MS } from './ice';
 import { peerIdHost } from './room';
 import {
   INTERVAL_PING_MS, VERSI_PROTOKOL,
   type Aksi, type AksiPemain, type PesanKeHost, type PesanKeKlien, type StateHost, type ViewPemain,
 } from './types';
 
-/** Hanya STUN Google (gratis). Tanpa TURN, sebagian jaringan (NAT simetris, kantor, operator seluler tertentu) bisa gagal tersambung. */
+/** Hanya STUN publik gratis (lihat ice.ts). `config` PeerJS MENGGANTI default-nya, jadi daftar ini lengkap. */
 export const OPSI_PEER: PeerOptions = {
   debug: 0,
-  config: {
-    // `config` PeerJS MENGGANTI default-nya (tidak digabung). Dulu hanya STUN, sehingga relay TURN gratis bawaan PeerJS
-    // ikut hilang dan pemain di jaringan lain (NAT simetris/CGNAT) tidak pernah tersambung. Relay ini best-effort:
-    // hanya dipakai bila koneksi langsung gagal.
-    iceServers: [
-      { urls: 'stun:stun.l.google.com:19302' },
-      { urls: 'stun:stun1.l.google.com:19302' },
-      { urls: ['turn:eu-0.turn.peerjs.com:3478', 'turn:us-0.turn.peerjs.com:3478'], username: 'peerjs', credential: 'peerjsp' },
-    ],
-  },
+  config: { iceServers: ICE_SERVERS },
 };
 
 /** Klien menganggap host hilang jika tidak ada pesan selama ini, lalu menyambung ulang. */
@@ -371,15 +363,22 @@ export class KlienRoom {
     };
     conn.on('close', putus);
     conn.on('error', putus);
-    // Jika koneksi tidak pernah terbuka (mis. ICE gagal), coba lagi.
-    setTimeout(() => {
-      if (conn === this.conn && !conn.open && !this.selesai) {
-        conn.close();
-        this.conn = null;
-        this.dengar.onStatus('menyambungUlang', 'timeout');
-        this.ulangNanti(500);
+    // Jika koneksi tidak pernah terbuka, coba lagi. Tapi jangan memutus negosiasi ICE yang masih berjalan
+    // (jaringan seluler bisa butuh lebih dari 12 detik); hanya ulang bila gagal, macet total, atau lewat batas keras.
+    const mulaiNego = Date.now();
+    const periksa = () => {
+      if (conn !== this.conn || conn.open || this.selesai) return;
+      const ice = conn.peerConnection?.iceConnectionState;
+      if (nasibNegosiasi(ice, Date.now() - mulaiNego) === 'tunggu') {
+        setTimeout(periksa, CEK_NEGOSIASI_MS);
+        return;
       }
-    }, 12000);
+      conn.close();
+      this.conn = null;
+      this.dengar.onStatus('menyambungUlang', 'timeout');
+      this.ulangNanti(500);
+    };
+    setTimeout(periksa, TUNGGU_AWAL_MS);
   }
 
   private kirimMentah(p: PesanKeHost): void {
