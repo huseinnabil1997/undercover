@@ -1,0 +1,309 @@
+{
+  "id": "naruto",
+  "name": "Naruto",
+  "emoji": "🍥",
+  "version": 2,
+  "subthemes": [
+    {
+      "id": "sub_egj3ut",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Naruto",
+          "imposteur": "Sasuke",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Naruto",
+          "imposteur_en": "Sasuke"
+        },
+        {
+          "civil": "Sakura",
+          "imposteur": "Ino",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sakura",
+          "imposteur_en": "Ino"
+        },
+        {
+          "civil": "Kakashi",
+          "imposteur": "Yamato",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kakashi",
+          "imposteur_en": "Yamato"
+        },
+        {
+          "civil": "Itachi",
+          "imposteur": "Shisui",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Itachi",
+          "imposteur_en": "Shisui"
+        },
+        {
+          "civil": "Gaara",
+          "imposteur": "Rock Lee",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gaara",
+          "imposteur_en": "Rock Lee"
+        },
+        {
+          "civil": "Jiraya",
+          "imposteur": "Orochimaru",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Jiraiya",
+          "imposteur_en": "Orochimaru"
+        },
+        {
+          "civil": "Tsunade",
+          "imposteur": "Shizune",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Tsunade",
+          "imposteur_en": "Shizune"
+        },
+        {
+          "civil": "Madara",
+          "imposteur": "Hashirama",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Madara",
+          "imposteur_en": "Hashirama"
+        },
+        {
+          "civil": "Pain",
+          "imposteur": "Nagato",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Pain",
+          "imposteur_en": "Nagato"
+        },
+        {
+          "civil": "Hinata",
+          "imposteur": "Neji",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hinata",
+          "imposteur_en": "Neji"
+        },
+        {
+          "civil": "Shikamaru",
+          "imposteur": "Choji",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Shikamaru",
+          "imposteur_en": "Choji"
+        },
+        {
+          "civil": "Obito",
+          "imposteur": "Kakashi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Obito",
+          "imposteur_en": "Kakashi"
+        },
+        {
+          "civil": "Minato",
+          "imposteur": "Hiruzen",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Minato",
+          "imposteur_en": "Hiruzen"
+        },
+        {
+          "civil": "Killer Bee",
+          "imposteur": "Yugito",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Killer Bee",
+          "imposteur_en": "Yugito"
+        },
+        {
+          "civil": "Kabuto",
+          "imposteur": "Kimimaro",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Kabuto",
+          "imposteur_en": "Kimimaro"
+        }
+      ]
+    },
+    {
+      "id": "sub_71dj5n",
+      "name": "Jutsus & Techniques",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Rasengan",
+          "imposteur": "Chidori",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Rasengan",
+          "imposteur_en": "Chidori"
+        },
+        {
+          "civil": "Sharingan",
+          "imposteur": "Byakugan",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sharingan",
+          "imposteur_en": "Byakugan"
+        },
+        {
+          "civil": "Sharingan",
+          "imposteur": "Rinnegan",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sharingan",
+          "imposteur_en": "Rinnegan"
+        },
+        {
+          "civil": "Multiclonage",
+          "imposteur": "Transformation",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Shadow Clone",
+          "imposteur_en": "Transformation Jutsu"
+        },
+        {
+          "civil": "Amaterasu",
+          "imposteur": "Tsukuyomi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Amaterasu",
+          "imposteur_en": "Tsukuyomi"
+        },
+        {
+          "civil": "Susanoo",
+          "imposteur": "Amaterasu",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Susanoo",
+          "imposteur_en": "Amaterasu"
+        },
+        {
+          "civil": "Mode Ermite",
+          "imposteur": "Mode Kyūbi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Sage Mode",
+          "imposteur_en": "Nine-Tails Mode"
+        },
+        {
+          "civil": "Edo Tensei",
+          "imposteur": "Kuchiyose",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Edo Tensei",
+          "imposteur_en": "Summoning Jutsu"
+        },
+        {
+          "civil": "Kamui",
+          "imposteur": "Kotoamatsukami",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Kamui",
+          "imposteur_en": "Kotoamatsukami"
+        },
+        {
+          "civil": "Katon",
+          "imposteur": "Suiton",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Fire Style",
+          "imposteur_en": "Water Style"
+        }
+      ]
+    },
+    {
+      "id": "sub_cnd8ib",
+      "name": "Villages, Bijuu & Akatsuki",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Konoha",
+          "imposteur": "Suna",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Konoha",
+          "imposteur_en": "Suna"
+        },
+        {
+          "civil": "Kirigakure",
+          "imposteur": "Kumogakure",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Kirigakure",
+          "imposteur_en": "Kumogakure"
+        },
+        {
+          "civil": "Kyūbi",
+          "imposteur": "Hachibi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Nine-Tails",
+          "imposteur_en": "Eight-Tails"
+        },
+        {
+          "civil": "Akatsuki",
+          "imposteur": "Anbu",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Akatsuki",
+          "imposteur_en": "Anbu"
+        },
+        {
+          "civil": "Deidara",
+          "imposteur": "Sasori",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Deidara",
+          "imposteur_en": "Sasori"
+        },
+        {
+          "civil": "Hidan",
+          "imposteur": "Kakuzu",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Hidan",
+          "imposteur_en": "Kakuzu"
+        },
+        {
+          "civil": "Kisame",
+          "imposteur": "Itachi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Kisame",
+          "imposteur_en": "Itachi"
+        },
+        {
+          "civil": "Hokage",
+          "imposteur": "Kazekage",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hokage",
+          "imposteur_en": "Kazekage"
+        },
+        {
+          "civil": "Genin",
+          "imposteur": "Chunin",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Genin",
+          "imposteur_en": "Chunin"
+        },
+        {
+          "civil": "L'Équipe 7",
+          "imposteur": "L'Équipe Gai",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Team 7",
+          "imposteur_en": "Team Guy"
+        }
+      ]
+    }
+  ]
+}

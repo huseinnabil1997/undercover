@@ -43,3 +43,47 @@ Grass / Leaf = Rumput / Daun
 # Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
 @ trk78
 Oak / Pine = Pohon Ek / Pohon Pinus
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Petal / Leaf = Kelopak / Daun
+Seed / Root = Biji / Akar
+Bamboo / Grass = Bambu / Rumput
+Cactus / Thorn = Kaktus / Duri
+Branch / Twig = Dahan / Ranting
+Bark / Log = Kulit Kayu / Batang Kayu
+Vine / Grass = Tanaman Merambat / Rumput
+Harvest / Crop = Panen / Tanaman
+Seed / Grain = Biji / Butir Padi
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Tree / Plant = Pohon / Tanaman
+Flower / Leaf = Bunga / Daun
+Cactus / Aloe Vera = Kaktus / Lidah Buaya
+Mushroom / Fungus = Jamur / Lumut
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Rose / Tulipe = Mawar / Tulip
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Sunflower / Marigold = Bunga Matahari / Marigold
+Lily / Lotus = Lili / Teratai
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Grass / Moss = Rumput / Lumut
+Root / Stem = Akar / Batang
+Tree / Shrub = Pohon / Semak
+Flower / Weed = Bunga / Rumput Liar
+Leaf / Branch = Daun / Ranting
+Seed / Sprout = Biji / Tunas
+Seaweed / Algae = Rumput Laut / Ganggang
+Acorn / Pinecone = Biji Ek / Buah Pinus
+Fungus / Mold = Jamur / Kapang
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+月季 / 玫瑰 = Mawar / Bunga Kertas

@@ -98,12 +98,16 @@ Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr
 
 Di layar pengaturan (mode satu HP dan online) ada pilihan **Sumber kata**:
 
-- **Internet** (bawaan): 1810 pasangan kata di 30 kategori, diambil dari game Undercover publik di GitHub,
-  lalu diterjemahkan (bila perlu) dan dikurasi manual ke bahasa Indonesia:
+- **Internet** (bawaan): 3766 pasangan kata di 32 kategori (termasuk Game serta Anime & Animasi), diambil dari game
+  Undercover publik di GitHub, lalu diterjemahkan (bila perlu) dan dikurasi manual ke bahasa Indonesia:
   - berlisensi terbuka: MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), CK-Arena (Apache-2.0),
-    sqiprasanna/mr-white-undercover (MIT), trk78/undercover-plus (MIT);
-  - repo publik tanpa berkas lisensi (daftar kata berbahasa Indonesia): chud-lori/ethok, DaengWithAI/undercover-indonesia,
-    Egi-Pebriyawan/game-undercover-indonesia, arisandi95/undercover-game-indonesia.
+    sqiprasanna/mr-white-undercover (MIT), trk78/undercover-plus (MIT), srinath987/Undercover-clone (MIT),
+    VM1235/undercover-word-game (MIT), ChairGamertag87/undercover (MIT), Nidroz/undercover (MIT),
+    zhengyi-yang/WhoIsTheSpy (MIT), xuqssq/whois-undercover-game (MIT);
+  - repo publik tanpa berkas lisensi: chud-lori/ethok, DaengWithAI/undercover-indonesia,
+    Egi-Pebriyawan/game-undercover-indonesia, arisandi95/undercover-game-indonesia, tejasdasari06/Imposter-game,
+    Schluby/Undercover, Bipash2002/undercover, Deepak-Ajay-Dubey/word-spy, ArashadDodhiya/UnderCoverGame,
+    AmazinAmazon/Undercover, jishnurajendran/undercover.
 
   Rincian sumber, lisensi, dan jumlah pasangan per sumber ada di [ATRIBUSI.md](ATRIBUSI.md).
 - **Kamus kita**: bank kata buatan sendiri (lihat di bawah).

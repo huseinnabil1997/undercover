@@ -1,0 +1,436 @@
+{
+  "id": "harry_potter",
+  "name": "Harry Potter",
+  "emoji": "🧙",
+  "version": 3,
+  "subthemes": [
+    {
+      "id": "sub_zf3dy7",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Harry Potter",
+          "imposteur": "Ron Weasley",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Harry Potter",
+          "imposteur_en": "Ron Weasley"
+        },
+        {
+          "civil": "Hermione",
+          "imposteur": "Luna Lovegood",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hermione",
+          "imposteur_en": "Luna Lovegood"
+        },
+        {
+          "civil": "Dumbledore",
+          "imposteur": "McGonagall",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Dumbledore",
+          "imposteur_en": "McGonagall"
+        },
+        {
+          "civil": "Voldemort",
+          "imposteur": "Bellatrix",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Voldemort",
+          "imposteur_en": "Bellatrix"
+        },
+        {
+          "civil": "Rogue",
+          "imposteur": "Lupin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Snape",
+          "imposteur_en": "Lupin"
+        },
+        {
+          "civil": "Drago Malefoy",
+          "imposteur": "Crabbe",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Draco Malfoy",
+          "imposteur_en": "Crabbe"
+        },
+        {
+          "civil": "Hagrid",
+          "imposteur": "Rusard",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hagrid",
+          "imposteur_en": "Filch"
+        },
+        {
+          "civil": "Sirius Black",
+          "imposteur": "Remus Lupin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sirius Black",
+          "imposteur_en": "Remus Lupin"
+        },
+        {
+          "civil": "Dobby",
+          "imposteur": "Kreattur",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Dobby",
+          "imposteur_en": "Kreacher"
+        },
+        {
+          "civil": "Ginny",
+          "imposteur": "Cho Chang",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ginny",
+          "imposteur_en": "Cho Chang"
+        },
+        {
+          "civil": "Fred",
+          "imposteur": "George",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Fred",
+          "imposteur_en": "George"
+        },
+        {
+          "civil": "Ombrage",
+          "imposteur": "Lockhart",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Umbridge",
+          "imposteur_en": "Lockhart"
+        },
+        {
+          "civil": "Maugrey",
+          "imposteur": "Kingsley",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Mad-Eye Moody",
+          "imposteur_en": "Kingsley"
+        },
+        {
+          "civil": "Cedric Diggory",
+          "imposteur": "Viktor Krum",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Cedric Diggory",
+          "imposteur_en": "Viktor Krum"
+        },
+        {
+          "civil": "Barty Croupton Jr.",
+          "imposteur": "Maugrey",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Barty Crouch Jr.",
+          "imposteur_en": "Mad-Eye Moody"
+        },
+        {
+          "civil": "Rita Skeeter",
+          "imposteur": "Sibylle Trelawney",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Rita Skeeter",
+          "imposteur_en": "Sibyll Trelawney"
+        },
+        {
+          "civil": "Fleur Delacour",
+          "imposteur": "Gabrielle Delacour",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Fleur Delacour",
+          "imposteur_en": "Gabrielle Delacour"
+        }
+      ]
+    },
+    {
+      "id": "sub_aecuez",
+      "name": "Sorts & Potions",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Expelliarmus",
+          "imposteur": "Stupefix",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Expelliarmus",
+          "imposteur_en": "Stupefy"
+        },
+        {
+          "civil": "Avada Kedavra",
+          "imposteur": "Doloris",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Avada Kedavra",
+          "imposteur_en": "Crucio"
+        },
+        {
+          "civil": "Wingardium Leviosa",
+          "imposteur": "Lumos",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Wingardium Leviosa",
+          "imposteur_en": "Lumos"
+        },
+        {
+          "civil": "Expecto Patronum",
+          "imposteur": "Riddikulus",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Expecto Patronum",
+          "imposteur_en": "Riddikulus"
+        },
+        {
+          "civil": "Sortilège d'Imperium",
+          "imposteur": "Sortilège de Confusion",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Imperio",
+          "imposteur_en": "Confundus"
+        },
+        {
+          "civil": "Polynectar",
+          "imposteur": "Felix Felicis",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Polyjuice Potion",
+          "imposteur_en": "Felix Felicis"
+        },
+        {
+          "civil": "Sectumsempra",
+          "imposteur": "Levicorpus",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Sectumsempra",
+          "imposteur_en": "Levicorpus"
+        },
+        {
+          "civil": "Alohomora",
+          "imposteur": "Accio",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Alohomora",
+          "imposteur_en": "Accio"
+        },
+        {
+          "civil": "Wingardium Leviosa",
+          "imposteur": "Reparo",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Wingardium Leviosa",
+          "imposteur_en": "Reparo"
+        },
+        {
+          "civil": "Amortentia",
+          "imposteur": "Veritaserum",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Amortentia",
+          "imposteur_en": "Veritaserum"
+        },
+        {
+          "civil": "Occlumancie",
+          "imposteur": "Légilimencie",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Occlumency",
+          "imposteur_en": "Legilimency"
+        }
+      ]
+    },
+    {
+      "id": "sub_t7ioqb",
+      "name": "Lieux & Maisons",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Gryffondor",
+          "imposteur": "Serpentard",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Gryffindor",
+          "imposteur_en": "Slytherin"
+        },
+        {
+          "civil": "Poufsouffle",
+          "imposteur": "Serdaigle",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hufflepuff",
+          "imposteur_en": "Ravenclaw"
+        },
+        {
+          "civil": "Poudlard",
+          "imposteur": "Beauxbâtons",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hogwarts",
+          "imposteur_en": "Beauxbatons"
+        },
+        {
+          "civil": "Le Chemin de Traverse",
+          "imposteur": "Pré-au-Lard",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Diagon Alley",
+          "imposteur_en": "Hogsmeade"
+        },
+        {
+          "civil": "La Grande Salle",
+          "imposteur": "La Salle sur Demande",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Great Hall",
+          "imposteur_en": "Room of Requirement"
+        },
+        {
+          "civil": "Gringotts",
+          "imposteur": "Le Ministère de la Magie",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gringotts",
+          "imposteur_en": "Ministry of Magic"
+        },
+        {
+          "civil": "Le Terrier",
+          "imposteur": "Square Grimmaurd",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "The Burrow",
+          "imposteur_en": "Grimmauld Place"
+        },
+        {
+          "civil": "La Forêt Interdite",
+          "imposteur": "Le Lac Noir",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Forbidden Forest",
+          "imposteur_en": "Black Lake"
+        },
+        {
+          "civil": "Azkaban",
+          "imposteur": "Sainte-Mangouste",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Azkaban",
+          "imposteur_en": "St Mungo's"
+        },
+        {
+          "civil": "Le Poudlard Express",
+          "imposteur": "Le Magicobus",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Hogwarts Express",
+          "imposteur_en": "Knight Bus"
+        },
+        {
+          "civil": "La Cabane Hurlante",
+          "imposteur": "La Tour d'Astronomie",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Shrieking Shack",
+          "imposteur_en": "Astronomy Tower"
+        }
+      ]
+    },
+    {
+      "id": "sub_5gy47h",
+      "name": "Créatures & Objets magiques",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Détraqueur",
+          "imposteur": "Épouvantard",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Dementor",
+          "imposteur_en": "Boggart"
+        },
+        {
+          "civil": "Hippogriffe",
+          "imposteur": "Sombral",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hippogriff",
+          "imposteur_en": "Thestral"
+        },
+        {
+          "civil": "Basilic",
+          "imposteur": "Acromantule",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Basilisk",
+          "imposteur_en": "Acromantula"
+        },
+        {
+          "civil": "Vif d'or",
+          "imposteur": "Cognard",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Golden Snitch",
+          "imposteur_en": "Bludger"
+        },
+        {
+          "civil": "Horcruxe",
+          "imposteur": "Reliques de la Mort",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Horcrux",
+          "imposteur_en": "Deathly Hallows"
+        },
+        {
+          "civil": "La Cape d'Invisibilité",
+          "imposteur": "La Carte du Maraudeur",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Invisibility Cloak",
+          "imposteur_en": "Marauder's Map"
+        },
+        {
+          "civil": "La Baguette de Sureau",
+          "imposteur": "Le Choixpeau magique",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Elder Wand",
+          "imposteur_en": "Sorting Hat"
+        },
+        {
+          "civil": "Le Vif d'or",
+          "imposteur": "Le Souaffle",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Golden Snitch",
+          "imposteur_en": "Quaffle"
+        },
+        {
+          "civil": "La Pierre Philosophale",
+          "imposteur": "La Coupe de Feu",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Philosopher's Stone",
+          "imposteur_en": "Goblet of Fire"
+        },
+        {
+          "civil": "Norbert",
+          "imposteur": "Aragog",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Norbert",
+          "imposteur_en": "Aragog"
+        },
+        {
+          "civil": "Le Retourneur de Temps",
+          "imposteur": "Le Miroir du Riséd",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Time-Turner",
+          "imposteur_en": "Mirror of Erised"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+# i-game | Game
+# Pasangan video game, game daring, dan permainan kartu.
+
+# Dipindah dari kategori Film & Teknologi atau Campuran.
+@ masjv:popculture
+Pokémon / Yu-Gi-Oh = Pokemon / Yu-Gi-Oh
+Minecraft / Roblox = Minecraft / Roblox
+PlayStation / Xbox = PlayStation / Xbox
+Fortnite / PUBG = Fortnite / PUBG
+GTA / Call of Duty = GTA / Call of Duty
+Mario / Sonic = Mario / Sonic
+Zelda / Link = Zelda / Link
+Tetris / Pac-Man = Tetris / Pac-Man
+Apex Legends / Valorant = Apex Legends / Valorant
+Candy Crush / Angry Birds = Candy Crush / Angry Birds
+Pokemon / Digimon = Pokemon / Digimon
+
+# Dipindah dari kategori Film & Teknologi atau Campuran.
+@ trk78
+Keyboard / Controller = Keyboard / Stik Game
+FIFA / PES = FIFA / PES
+GTA / Red Dead = GTA / Red Dead
+LoL / Dota = League of Legends / Dota
+Overwatch / Valorant = Overwatch / Valorant
+Candy Crush / Clash Royale = Candy Crush / Clash Royale
+Among Us / Werewolf = Among Us / Werewolf
+
+# Dipindah dari kategori Film & Teknologi atau Campuran.
+@ antebrl
+Mario / Luigi = Mario / Luigi
+Sonic / Tails = Sonic / Tails
+Pac-Man / Tetris = Pac-Man / Tetris
+Fortnite / Minecraft = Fortnite / Minecraft
+Call of Duty / Battlefield = Call of Duty / Battlefield
+UNO / Monopoly = UNO / Monopoli
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Riddle / Puzzle = Teka-teki / Puzzle
+Bowling / Darts = Bowling / Dart
+Doll / Puppet = Boneka / Wayang
+Dice / Coin = Dadu / Koin
+Joke / Riddle = Lelucon / Teka-teki
+Chase / Escape = Kejar / Kabur
+Clue / Hint = Petunjuk / Clue
+Escape / Hide = Kabur / Sembunyi
+Steal / Cheat = Mencuri / Curang
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+The Legend of Zelda / Final Fantasy = The Legend of Zelda / Final Fantasy
+World of Warcraft / Final Fantasy XIV = World of Warcraft / Final Fantasy XIV
+Street Fighter / Mortal Kombat = Street Fighter / Mortal Kombat
+Halo / Gears of War = Halo / Gears of War
+The Sims / Second Life = The Sims / Second Life
+Uncharted / Tomb Raider = Uncharted / Tomb Raider
+Cyberpunk 2077 / Watch Dogs = Cyberpunk 2077 / Watch Dogs
+Resident Evil / Silent Hill = Resident Evil / Silent Hill
+Dark Souls / Elden Ring = Dark Souls / Elden Ring
+Just Dance / Guitar Hero = Just Dance / Guitar Hero
+Metal Gear Solid / Splinter Cell = Metal Gear Solid / Splinter Cell
+Genshin Impact / Honkai Star Rail = Genshin Impact / Honkai Star Rail
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Chess / Carrom = Catur / Karambol
+Ludo / Snakes and Ladders = Ludo / Ular Tangga
+Monopoly / Business Game = Monopoli / Business Game
+Cards / Uno = Kartu Remi / Uno
+Carrom / Snooker = Karambol / Snooker
+Billiards / Pool = Biliar / Pool
+Chess King / Chess Queen = Raja Catur / Ratu Catur
+Checkmate / Stalemate = Skakmat / Remis
+Catan / Risk = Catan / Risk
+Catan / Clue = Catan / Clue
+Catan / Ticket to Ride = Catan / Ticket to Ride
+Poker / Rummy = Poker / Remi
+Charades / Truth or Dare = Tebak Gaya / Truth or Dare
+Word Chain / Anagram = Sambung Kata / Anagram
+Puzzle / Rubik's Cube = Puzzle / Kubus Rubik
+Marbles / Cards = Kelereng / Kartu
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Fast and Furious / Need for Speed = Fast and Furious / Need for Speed
+League of Legends / Dota 2 = League of Legends / Dota 2
+Assassin's Creed / Far Cry = Assassin's Creed / Far Cry
+Animal Crossing / Stardew Valley = Animal Crossing / Stardew Valley
+Red Dead Redemption / GTA = Red Dead Redemption / GTA
+Among Us / Fall Guys = Among Us / Fall Guys
+Tetris / Candy Crush = Tetris / Candy Crush
+FIFA / PES = FIFA / eFootball
+GTA / Watch Dogs = GTA / Watch Dogs
+Zelda / Elden Ring = Zelda / Elden Ring
+Valorant / CS2 = Valorant / CS2
+Overwatch / Apex Legends = Overwatch / Apex Legends
+The Witcher / Skyrim = The Witcher / Skyrim
+God of War / Devil May Cry = God of War / Devil May Cry
+Mario Kart / Crash Team Racing = Mario Kart / Crash Team Racing
+Dark Souls / Bloodborne = Dark Souls / Bloodborne
+The Last of Us / Uncharted = The Last of Us / Uncharted
+Rocket League / Fall Guys = Rocket League / Fall Guys
+Cyberpunk 2077 / Deus Ex = Cyberpunk 2077 / Deus Ex
+Hollow Knight / Ori = Hollow Knight / Ori
+Clash Royale / Clash of Clans = Clash Royale / Clash of Clans
+Chrono Trigger / Final Fantasy VI = Chrono Trigger / Final Fantasy VI
+Metal Gear Solid / Silent Hill = Metal Gear Solid / Silent Hill
+Pikachu / Raichu = Pikachu / Raichu
+Kratos / Dante = Kratos / Dante
+Master Chief / Doom Slayer = Master Chief / Doom Slayer
+Kirby / Yoshi = Kirby / Yoshi
+Bowser / Donkey Kong = Bowser / Donkey Kong
+Pac-Man / Bomberman = Pac-Man / Bomberman
+Solid Snake / Sam Fisher = Solid Snake / Sam Fisher
+Ganondorf / Bowser = Ganondorf / Bowser
+Aloy / Lara Croft = Aloy / Lara Croft
+Ellie / Clementine = Ellie / Clementine
+2B / A2 = 2B / A2
+Jin Sakai / Ezio = Jin Sakai / Ezio
+Cloud / Squall = Cloud / Squall
+Nintendo Switch / Steam Deck = Nintendo Switch / Steam Deck
+PS5 / Xbox Series X = PS5 / Xbox Series X
+Game Boy / PSP = Game Boy / PSP
+Nintendo 64 / GameCube = Nintendo 64 / GameCube
+Wii / Kinect = Wii / Kinect
+Joystick / Volant = Joystick / Setir Game
+Sega Mega Drive / Super Nintendo = Sega Genesis / Super Nintendo
+Twitch / YouTube Gaming = Twitch / YouTube Gaming
+Discord / TeamSpeak = Discord / TeamSpeak
+Game Boy Advance / Nintendo DS = Game Boy Advance / Nintendo DS
+Oculus Quest / PlayStation VR = Oculus Quest / PlayStation VR
+Arcade / Flipper = Arcade / Pinball
+Atari / Commodore = Atari / Commodore
+Cartouche / CD-ROM = Kaset Game / CD Game
+Écran gaming / Télévision = Monitor Gaming / Televisi
+RTX / Radeon = RTX / Radeon
+Joy-Con / DualSense = Joy-Con / DualSense
+PC Gamer / Console = PC Gaming / Konsol
+Boss / Mob = Bos / Monster
+Checkpoint / Spawn = Checkpoint / Spawn
+Loot / Butin = Loot / Drop
+Niveau / Map = Level / Peta
+Speedrun / No Hit = Speedrun / No Hit Run
+Game Over / Victory Royale = Game Over / Victory Royale
+DLC / Mod = DLC / Mod
+Respawn / Reset = Respawn / Reset
+Combo / Counter = Combo / Counter
+Easter Egg / Glitch = Easter Egg / Glitch
+Quête / Mission = Quest / Misi
+XP / Or = XP / Gold
+Lag / FPS Drop = Lag / FPS Drop
+GG / EZ = GG / EZ
+Buff / Nerf = Buff / Nerf
+Cooldown / Recharge = Cooldown / Reload
+Sandbox / Open World = Sandbox / Open World
+PvP / PvE = PvP / PvE
+Skin / Emote = Skin / Emote
+Camp / Rush = Camping / Rush
+Hardcore / Permadeath = Hardcore / Permadeath
+Matchmaking / Lobby = Matchmaking / Lobby
+Tutoriel / Didacticiel = Tutorial / Walkthrough
+New Game Plus / Roguelike = New Game Plus / Roguelike
+Yasuo / Yone = Yasuo / Yone
+Garen / Darius = Garen / Darius
+Vi / Jinx = Vi / Jinx
+Nasus / Renekton = Nasus / Renekton
+Shen / Zed = Shen / Zed
+Morgana / Kayle = Morgana / Kayle
+Rakan / Xayah = Rakan / Xayah
+Teemo / Tristana = Teemo / Tristana
+Blitzcrank / Thresh = Blitzcrank / Thresh
+Maître Yi / Wukong = Master Yi / Wukong
+Ahri / Evelynn = Ahri / Evelynn
+Demacia / Noxus = Demacia / Noxus
+Piltover / Zaun = Piltover / Zaun
+Faker / Chovy = Faker / Chovy
+Baron / Dragon = Baron Nashor / Dragon
+Flash / Fantôme = Flash / Ghost
+Buff rouge / Buff bleu = Red Buff / Blue Buff
+Tourelle / Inhibiteur = Turret / Inhibitor
+Sbire / Sbire canon = Minion / Cannon Minion
+zombie / squelette = Zombie / Skeleton
+creeper / enderman = Creeper / Enderman
+vache / cochon = Sapi Minecraft / Babi Minecraft
+villageois / pillageois = Villager / Pillager
+squelette / wither squelette = Skeleton / Wither Skeleton
+blaze / ghast = Blaze / Ghast
+slime / cube de magma = Slime / Magma Cube
+zombie / noyé = Zombie / Drowned
+golem de fer / golem de neige = Iron Golem / Snow Golem
+wither / Ender Dragon = Wither / Ender Dragon
+Herobrine / Notch = Herobrine / Notch
+piglin / piglin zombifié = Piglin / Zombified Piglin
+épée en fer / épée en diamant = Pedang Besi / Pedang Berlian
+pioche / hache = Beliung / Kapak
+casque / plastron = Helm / Baju Zirah
+seau d'eau / seau de lave = Ember Air / Ember Lava
+pomme dorée / pomme dorée enchantée = Golden Apple / Enchanted Golden Apple
+perle de l'Ender / œil de l'Ender = Ender Pearl / Eye of Ender
+bouclier / totem d'immortalité = Perisai / Totem of Undying
+élytres / carapace de tortue = Elytra / Turtle Shell
+pierre / cobblestone = Batu / Cobblestone
+établi / four = Crafting Table / Furnace
+minerai de fer / minerai de diamant = Bijih Besi / Bijih Berlian
+coffre / ender chest = Chest / Ender Chest
+obsidienne / bedrock = Obsidian / Bedrock
+enclume / meule = Anvil / Grindstone
+le Nether / l'End = Nether / The End
+donjon / mine abandonnée = Dungeon / Mineshaft
+forteresse du Nether / bastion = Nether Fortress / Bastion
+forêt carmin / forêt déformée = Crimson Forest / Warped Forest
+piston / piston collant = Piston / Sticky Piston
+levier / bouton = Tuas / Tombol
+répéteur / comparateur = Repeater / Comparator
+distributeur / dropper = Dispenser / Dropper
+Dream / Technoblade = Dream / Technoblade
+MrBeast / PewDiePie = MrBeast / PewDiePie
+Hypixel / 2b2t = Hypixel / 2b2t
+Bulbizarre / Salamèche = Bulbasaur / Charmander
+Salamèche / Carapuce = Charmander / Squirtle
+Dracaufeu / Tortank = Charizard / Blastoise
+Évoli / Aquali = Eevee / Vaporeon
+Mewtwo / Mew = Mewtwo / Mew
+Chenipan / Aspicot = Caterpie / Weedle
+Magicarpe / Léviator = Magikarp / Gyarados
+Miaouss / Persian = Meowth / Persian
+Ectoplasma / Fantominus = Gengar / Gastly
+Roucool / Rattata = Pidgey / Rattata
+Onix / Racaillou = Onix / Geodude
+Artikodin / Sulfura = Articuno / Moltres
+Lugia / Ho-Oh = Lugia / Ho-Oh
+Rayquaza / Groudon = Rayquaza / Groudon
+Dialga / Palkia = Dialga / Palkia
+Dracaufeu / Dracolosse = Charizard / Dragonite
+Lucario / Zoroark = Lucario / Zoroark
+Méga-Évolution / Gigamax = Mega Evolution / Gigantamax
+Zacian / Zamazenta = Zacian / Zamazenta
+Sacha / Ondine = Ash / Misty
+Team Rocket / Team Aqua = Team Rocket / Team Aqua
+Pokéball / Hyper Ball = Poke Ball / Ultra Ball
+Type Feu / Type Eau = Tipe Api / Tipe Air
+Type Plante / Type Insecte = Tipe Rumput / Tipe Serangga
+Arène / Ligue Pokémon = Gym / Liga Pokemon
+Potion / Super Potion = Potion / Super Potion
+Dresseur / Champion d'Arène = Trainer / Gym Leader
+Professeur Chen / Professeur Sorbier = Profesor Oak / Profesor Birch
+Centre Pokémon / Boutique Pokémon = Pokemon Center / Poke Mart
+Ganon / Ganondorf = Ganon / Ganondorf
+Navi / Midna = Navi / Midna
+Triforce / Master Sword = Triforce / Master Sword
+Rubis / Quartiers de cœur = Rupee / Heart Piece
+Boomerang / Grappin = Bumerang / Hookshot
+Zora / Goron = Zora / Goron
+Breath of the Wild / Tears of the Kingdom = Breath of the Wild / Tears of the Kingdom
+Ocarina of Time / Majora's Mask = Ocarina of Time / Majora's Mask
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Steam / Epic Games = Steam / Epic Games
+Billiards / Cue Stick = Biliar / Stik Biliar
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Chess / Checkers = Catur / Dam
+Nintendo / Sega = Nintendo / Sega
+Ryu / Ken = Ryu / Ken
+Lara Croft / Nathan Drake = Lara Croft / Nathan Drake
+Steve / Alex = Steve / Alex
+Crash Bandicoot / Spyro = Crash Bandicoot / Spyro
+Arthur Morgan / John Marston = Arthur Morgan / John Marston
+Sephiroth / Cloud = Sephiroth / Cloud
+Scorpion / Sub-Zero = Scorpion / Sub-Zero
+Ezio / Altair = Ezio / Altair
+Master Chief / Arbiter = Master Chief / Arbiter
+Kratos / Atreus = Kratos / Atreus
+Geralt / Ciri = Geralt / Ciri
+Cloud / Zack = Cloud / Zack
+Nathan Drake / Sully = Nathan Drake / Sully
+Donkey Kong / Diddy Kong = Donkey Kong / Diddy Kong
+Pac-Man / Ms. Pac-Man = Pac-Man / Ms. Pac-Man
+Bowser / Dr. Eggman = Bowser / Dr. Eggman
+Solid Snake / Big Boss = Solid Snake / Big Boss
+Trevor / Michael = Trevor / Michael
+Doom Slayer / Duke Nukem = Doom Slayer / Duke Nukem
+Chell / Wheatley = Chell / Wheatley
+Sans / Papyrus = Sans / Papyrus
+Leon Kennedy / Chris Redfield = Leon Kennedy / Chris Redfield
+Jill Valentine / Claire Redfield = Jill Valentine / Claire Redfield
+Mega Man / Proto Man = Mega Man / Proto Man
+Sub-Zero / Noob Saibot = Sub-Zero / Noob Saibot
+Kirby / Meta Knight = Kirby / Meta Knight
+Samus / Dark Samus = Samus / Dark Samus
+Sora / Riku = Sora / Riku
+Agent 47 / Sam Fisher = Agent 47 / Sam Fisher
+Creeper / Zombie = Creeper / Zombie
+Pacman / Ghost = Pac-Man / Hantu
+Goku / Ryu = Goku / Ryu
+Rayman / Globox = Rayman / Globox
+Sackboy / Astro Bot = Sackboy / Astro Bot
+Jak / Daxter = Jak / Daxter
+Ratchet / Clank = Ratchet / Clank
+Table Tennis / Air Hockey = Tenis Meja / Air Hockey
+Bowling / Billiards = Bowling / Biliar
+Handball / Dodgeball = Bola Tangan / Bola Kasti
+Lego / Play-Doh = Lego / Play-Doh
+Pikachu / Eevee = Pikachu / Eevee
+Spyro / Sparx = Spyro / Sparx
+Enderman / Nether Portal = Enderman / Portal Nether
+Fallout Boy / Vault Boy = Fallout Boy / Vault Boy
+Alucard / Simon Belmont = Alucard / Simon Belmont
+Astro Bot / Clank = Astro Bot / Clank
+
+# Terjemahan dan kurasi dari VM1235/undercover-word-game.
+@ vm1235
+Lego / Playmobil = Lego / Playmobil
+Blackjack / Poker = Blackjack / Poker

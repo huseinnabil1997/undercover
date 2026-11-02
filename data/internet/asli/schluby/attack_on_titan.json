@@ -1,0 +1,230 @@
+{
+  "id": "attack_on_titan",
+  "name": "L'Attaque des Titans",
+  "emoji": "🗡️",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Eren Jaeger",
+          "imposteur": "Mikasa Ackerman",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Eren Jaeger",
+          "imposteur_en": "Mikasa Ackerman"
+        },
+        {
+          "civil": "Armin Arlert",
+          "imposteur": "Jean Kirstein",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Armin Arlert",
+          "imposteur_en": "Jean Kirstein"
+        },
+        {
+          "civil": "Levi Ackerman",
+          "imposteur": "Erwin Smith",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Levi Ackerman",
+          "imposteur_en": "Erwin Smith"
+        },
+        {
+          "civil": "Reiner Braun",
+          "imposteur": "Bertolt Hoover",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Reiner Braun",
+          "imposteur_en": "Bertolt Hoover"
+        },
+        {
+          "civil": "Sasha Blouse",
+          "imposteur": "Connie Springer",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Sasha Blouse",
+          "imposteur_en": "Connie Springer"
+        },
+        {
+          "civil": "Historia Reiss",
+          "imposteur": "Ymir",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Historia Reiss",
+          "imposteur_en": "Ymir"
+        },
+        {
+          "civil": "Annie Leonhart",
+          "imposteur": "Reiner Braun",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Annie Leonhart",
+          "imposteur_en": "Reiner Braun"
+        },
+        {
+          "civil": "Hange Zoë",
+          "imposteur": "Erwin Smith",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hange Zoë",
+          "imposteur_en": "Erwin Smith"
+        },
+        {
+          "civil": "Zeke Jaeger",
+          "imposteur": "Eren Jaeger",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Zeke Jaeger",
+          "imposteur_en": "Eren Jaeger"
+        },
+        {
+          "civil": "Levi Ackerman",
+          "imposteur": "Mikasa Ackerman",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Levi Ackerman",
+          "imposteur_en": "Mikasa Ackerman"
+        },
+        {
+          "civil": "Armin Arlert",
+          "imposteur": "Eren Jaeger",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Armin Arlert",
+          "imposteur_en": "Eren Jaeger"
+        },
+        {
+          "civil": "Jean Kirstein",
+          "imposteur": "Connie Springer",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Jean Kirstein",
+          "imposteur_en": "Connie Springer"
+        },
+        {
+          "civil": "Grisha Jaeger",
+          "imposteur": "Zeke Jaeger",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Grisha Jaeger",
+          "imposteur_en": "Zeke Jaeger"
+        },
+        {
+          "civil": "Historia Reiss",
+          "imposteur": "Mikasa Ackerman",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Historia Reiss",
+          "imposteur_en": "Mikasa Ackerman"
+        }
+      ]
+    },
+    {
+      "id": "titans_univers",
+      "name": "Titans & Univers",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Titan Colossal",
+          "imposteur": "Titan Cuirassé",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Colossal Titan",
+          "imposteur_en": "Armored Titan"
+        },
+        {
+          "civil": "Titan Femelle",
+          "imposteur": "Titan Bestial",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Female Titan",
+          "imposteur_en": "Beast Titan"
+        },
+        {
+          "civil": "Titan d'Attaque",
+          "imposteur": "Titan Fondateur",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Attack Titan",
+          "imposteur_en": "Founding Titan"
+        },
+        {
+          "civil": "Titan Marteau de Guerre",
+          "imposteur": "Titan Mâchoire",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "War Hammer Titan",
+          "imposteur_en": "Jaw Titan"
+        },
+        {
+          "civil": "Titan Cuirassé",
+          "imposteur": "Titan Charrette",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Armored Titan",
+          "imposteur_en": "Cart Titan"
+        },
+        {
+          "civil": "Bataillon d'Exploration",
+          "imposteur": "Police Militaire",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Survey Corps",
+          "imposteur_en": "Military Police"
+        },
+        {
+          "civil": "Mur Maria",
+          "imposteur": "Mur Rose",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Wall Maria",
+          "imposteur_en": "Wall Rose"
+        },
+        {
+          "civil": "Mur Rose",
+          "imposteur": "Mur Sina",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Wall Rose",
+          "imposteur_en": "Wall Sina"
+        },
+        {
+          "civil": "Paradis",
+          "imposteur": "Marley",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Paradis Island",
+          "imposteur_en": "Marley"
+        },
+        {
+          "civil": "Garnison",
+          "imposteur": "Police Militaire",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Garrison",
+          "imposteur_en": "Military Police"
+        },
+        {
+          "civil": "Bataillon d'Exploration",
+          "imposteur": "Garnison",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Survey Corps",
+          "imposteur_en": "Garrison"
+        },
+        {
+          "civil": "Shiganshina",
+          "imposteur": "Mur Maria",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Shiganshina District",
+          "imposteur_en": "Wall Maria"
+        }
+      ]
+    }
+  ]
+}

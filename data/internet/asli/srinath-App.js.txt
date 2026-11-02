@@ -1,0 +1,1232 @@
+import { StatusBar } from 'expo-status-bar';
+import { useMemo, useState } from 'react';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StatusBar as RNStatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+
+const MIN_PLAYERS = 3;
+const MAX_PLAYERS = 12;
+const WORD_PAIRS = (() => {
+  const seenPairs = new Set();
+
+  return [
+  { civilian: 'Pizza', undercover: 'Burger' },
+  { civilian: 'Burger', undercover: 'Sandwich' },
+  { civilian: 'Pasta', undercover: 'Noodles' },
+  { civilian: 'Taco', undercover: 'Burrito' },
+  { civilian: 'Pancake', undercover: 'Waffle' },
+  { civilian: 'Donut', undercover: 'Bagel' },
+  { civilian: 'Ice Cream', undercover: 'Popsicle' },
+  { civilian: 'Chocolate', undercover: 'Candy' },
+  { civilian: 'Apple', undercover: 'Pear' },
+  { civilian: 'Bread', undercover: 'Bun' },
+  { civilian: 'Fries', undercover: 'Chips' },
+  { civilian: 'Chips', undercover: 'Biscuit' },
+  { civilian: 'Croissant', undercover: 'Baguette' },
+  { civilian: 'Lemon', undercover: 'Orange' },
+  { civilian: 'Strawberry', undercover: 'Blue Berry' },
+  { civilian: 'Milk', undercover: 'Cream' },
+  { civilian: 'Lassi', undercover: 'Butter Milk' },
+  { civilian: 'Smoothie', undercover: 'Milkshake' },
+  { civilian: 'Cocktail', undercover: 'Mocktail' },
+  { civilian: 'Beer', undercover: 'Whisky' },
+  { civilian: 'Coca Cola', undercover: 'Sprite' },
+  { civilian: 'Tea', undercover: 'Coffee' },
+  { civilian: 'Matcha', undercover: 'Green Tea' },
+  { civilian: 'Lemonade', undercover: 'Orange Juice' },
+  { civilian: 'Lion', undercover: 'Tiger' },
+  { civilian: 'Crocodile', undercover: 'Swamp' },
+  { civilian: 'Frog', undercover: 'Lizard' },
+  { civilian: 'Horse', undercover: 'Donkey' },
+  { civilian: 'Eagle', undercover: 'Crow' },
+  { civilian: 'Rabbit', undercover: 'Mongoose' },
+  { civilian: 'Bee', undercover: 'Wasp' },
+  { civilian: 'Butterfly', undercover: 'Moth' },
+  { civilian: 'Mouse', undercover: 'Cat' },
+  { civilian: 'Fox', undercover: 'Wolf' },
+  { civilian: 'Octopus', undercover: 'Squid' },
+  { civilian: 'Crab', undercover: 'Scorpion' },
+  { civilian: 'Dog', undercover: 'Wolf' },
+  { civilian: 'Cat', undercover: 'Tiger' },
+  { civilian: 'Shark', undercover: 'Dolphin' },
+  { civilian: 'Bear', undercover: 'Panda' },
+  { civilian: 'Goat', undercover: 'Sheep' },
+  { civilian: 'Zebra', undercover: 'Horse' },
+  { civilian: 'Giraffe', undercover: 'Camel' },
+  { civilian: 'Whale', undercover: 'Shark' },
+  { civilian: 'Mountain', undercover: 'Cliff' },
+  { civilian: 'City', undercover: 'Town' },
+  { civilian: 'Library', undercover: 'Bookstore' },
+  { civilian: 'Cinema', undercover: 'Projector' },
+  { civilian: 'Hotel', undercover: 'Restaurant' },
+  { civilian: 'Park', undercover: 'Garden' },
+  { civilian: 'Restaurant', undercover: 'Bar' },
+  { civilian: 'Subway', undercover: 'Platform' },
+  { civilian: 'Cabin', undercover: 'Cubicle' },
+  { civilian: 'Church', undercover: 'Temple' },
+  { civilian: 'Beach', undercover: 'Lake' },
+  { civilian: 'Beach', undercover: 'Pool' },
+  { civilian: 'Body building', undercover: 'Yoga' },
+  { civilian: 'Airport', undercover: 'Train Station' },
+  { civilian: 'Bakery', undercover: 'Cafe' },
+  { civilian: 'Aquarium', undercover: 'Zoo' },
+  { civilian: 'Island', undercover: 'Peninsula' },
+  { civilian: 'Cave', undercover: 'Mine' },
+  { civilian: 'Desert', undercover: 'Beach' },
+  { civilian: 'Football', undercover: 'Rugby' },
+  { civilian: 'Tennis', undercover: 'Badminton' },
+  { civilian: 'Boxing', undercover: 'Karate' },
+  { civilian: 'Swimming', undercover: 'Diving' },
+  { civilian: 'Skiing', undercover: 'Skating' },
+  { civilian: 'Golf', undercover: 'Hockey' },
+  { civilian: 'Football', undercover: 'Goalpost' },
+  { civilian: 'Surfing', undercover: 'Boating' },
+  { civilian: 'Skateboard', undercover: 'Rollerblade' },
+  { civilian: 'Wrestling', undercover: 'Judo' },
+  { civilian: 'Karate', undercover: 'Taekwondo' },
+  { civilian: 'Yoga', undercover: 'Pilates' },
+  { civilian: 'Billiards', undercover: 'Cue Stick' },
+  { civilian: 'Basketball', undercover: 'Volleyball' },
+  { civilian: 'Cricket', undercover: 'Baseball' },
+  { civilian: 'Chess', undercover: 'Checkers' },
+  { civilian: 'Archery', undercover: 'Darts' },
+  { civilian: 'Google', undercover: 'Bing' },
+  { civilian: 'Netflix', undercover: 'Disney+' },
+  { civilian: 'Instagram', undercover: 'Snapchat' },
+  { civilian: 'Twitter', undercover: 'Threads' },
+  { civilian: 'WhatsApp', undercover: 'Telegram' },
+  { civilian: 'PlayStation', undercover: 'Xbox' },
+  { civilian: 'Bitcoin', undercover: 'Ethereum' },
+  { civilian: 'MacBook', undercover: 'ChromeBook' },
+  { civilian: 'Chrome', undercover: 'Firefox' },
+  { civilian: 'Spotify', undercover: 'YouTube Music' },
+  { civilian: 'Zoom', undercover: 'Teams' },
+  { civilian: 'Uber', undercover: 'Rapido' },
+  { civilian: 'Airbnb', undercover: 'MakemyTrip' },
+  { civilian: 'Steam', undercover: 'Epic Games' },
+  { civilian: 'Fortnite', undercover: 'PUBG' },
+  { civilian: 'Router', undercover: 'Wi-Fi' },
+  { civilian: 'Headphones', undercover: 'Earbuds' },
+  { civilian: 'iPhone', undercover: 'Android' },
+  { civilian: 'YouTube', undercover: 'TikTok' },
+  { civilian: 'Facebook', undercover: 'LinkedIn' },
+  { civilian: 'Reddit', undercover: 'Quora' },
+  { civilian: 'Discord', undercover: 'Slack' },
+  { civilian: 'Nintendo', undercover: 'Sega' },
+  { civilian: 'Minecraft', undercover: 'Roblox' },
+  { civilian: 'Wi-Fi', undercover: 'Bluetooth' },
+  { civilian: 'Monitor', undercover: 'Television' },
+  { civilian: 'River', undercover: 'Stream' },
+  { civilian: 'Ocean', undercover: 'Coral Reef' },
+  { civilian: 'Tornado', undercover: 'Hurricane' },
+  { civilian: 'Rose', undercover: 'Tulip' },
+  { civilian: 'Sunflower', undercover: 'Marigold' },
+  { civilian: 'Lily', undercover: 'Lotus' },
+  { civilian: 'Thunder', undercover: 'Lightning' },
+  { civilian: 'Fog', undercover: 'Lighthouse' },
+  { civilian: 'Canyon', undercover: 'Valley' },
+  { civilian: 'Rain', undercover: 'Snow' },
+  { civilian: 'Cactus', undercover: 'Aloe vera' },
+  { civilian: 'Earthquake', undercover: 'Landslide' },
+  { civilian: 'Aurora', undercover: 'Eclipse' },
+  { civilian: 'Sun', undercover: 'Moon' },
+  { civilian: 'Venus', undercover: 'Mars' },
+  { civilian: 'Pen', undercover: 'Pencil' },
+  { civilian: 'Guitar', undercover: 'Ukulele' },
+  { civilian: 'Piano', undercover: 'Keyboard' },
+  { civilian: 'Clock', undercover: 'Watch' },
+  { civilian: 'DSLR Camera', undercover: 'Phone Camera' },
+  { civilian: 'Chair', undercover: 'Stool' },
+  { civilian: 'Sofa', undercover: 'Living Room' },
+  { civilian: 'Pillow', undercover: 'Cushion' },
+  { civilian: 'Lamp', undercover: 'Lantern' },
+  { civilian: 'Scissors', undercover: 'Paper Cutter' },
+  { civilian: 'Mug', undercover: 'Coaster' },
+  { civilian: 'Bowl', undercover: 'Plate' },
+  { civilian: 'Bottle', undercover: 'Flask' },
+  { civilian: 'Umbrella', undercover: 'Rain Coat' },
+  { civilian: 'Piggy Bank', undercover: 'Purse' },
+  { civilian: 'Glasses', undercover: 'Lens' },
+  { civilian: 'Necklace', undercover: 'Bracelet' },
+  { civilian: 'Trophy', undercover: 'Medal' },
+  { civilian: 'Telescope', undercover: 'Binoculars' },
+  { civilian: 'Flute', undercover: 'Trumpet' },
+  { civilian: 'Violin', undercover: 'Guitar' },
+  { civilian: 'Phone', undercover: 'Tablet' },
+  { civilian: 'Laptop', undercover: 'Desktop' },
+  { civilian: 'Book', undercover: 'Magazine' },
+  { civilian: 'Backpack', undercover: 'Suitcase' },
+  { civilian: 'Mirror', undercover: 'Window' },
+  { civilian: 'Bicycle', undercover: 'Motorbike' },
+  { civilian: 'Bed', undercover: 'Mattress' },
+  { civilian: 'Door', undercover: 'Gate' },
+  { civilian: 'Key', undercover: 'Lock' },
+  { civilian: 'Rope', undercover: 'Cable' },
+  { civilian: 'Fork', undercover: 'Spoon' },
+  { civilian: 'Teacher', undercover: 'Blackboard' },
+  { civilian: 'Chef', undercover: 'Baker' },
+  { civilian: 'Author', undercover: 'Journalist' },
+  { civilian: 'Surgeon', undercover: 'Anesthesiologist' },
+  { civilian: 'Carpenter', undercover: 'Plumber' },
+  { civilian: 'Barber', undercover: 'Razor' },
+  { civilian: 'Florist', undercover: 'Gardener' },
+  { civilian: 'Photographer', undercover: 'Tripod' },
+  { civilian: 'Sculptor', undercover: 'Potter' },
+  { civilian: 'Dancer', undercover: 'Choreographer' },
+  { civilian: 'King', undercover: 'Minister' },
+  { civilian: 'Doctor', undercover: 'Nurse' },
+  { civilian: 'Firefighter', undercover: 'Police Officer' },
+  { civilian: 'Lawyer', undercover: 'Judge' },
+  { civilian: 'Singer', undercover: 'Rapper' },
+  { civilian: 'Actor', undercover: 'Comedian' },
+  { civilian: 'Engineer', undercover: 'Architect' },
+  { civilian: 'Plumber', undercover: 'Electrician' },
+  { civilian: 'Director', undercover: 'Producer' },
+  { civilian: 'Athlete', undercover: 'Coach' },
+  { civilian: 'Spy', undercover: 'Binoculars' },
+  { civilian: 'Spider-Man', undercover: 'Superman' },
+  { civilian: 'Pokémon', undercover: 'Slugterra' },
+  { civilian: 'Superman', undercover: 'Captain America' },
+  { civilian: 'Joker', undercover: 'Thanos' },
+  { civilian: 'Inception', undercover: 'Interstellar' },
+  { civilian: 'Toy Story', undercover: 'Cars' },
+  { civilian: 'The Lion King', undercover: 'The Jungle Book' },
+  { civilian: 'Breaking Bad', undercover: 'Better Call Saul' },
+  { civilian: 'Friends', undercover: 'How I Met Your Mother' },
+  { civilian: 'The Simpsons', undercover: 'Family Guy' },
+  { civilian: 'Batman', undercover: 'Iron Man' },
+  { civilian: 'Mario', undercover: 'Sonic' },
+  { civilian: 'Thor', undercover: 'Hulk' },
+  { civilian: 'Stranger Things', undercover: 'Dark' },
+  { civilian: 'Harry Potter', undercover: 'Lord of the Rings' },
+  { civilian: 'Titanic', undercover: 'Avatar' },
+  { civilian: 'Tea', undercover: 'Coffee' },
+  { civilian: 'Roti', undercover: 'Rice' },
+  { civilian: 'Idli', undercover: 'Vada' },
+  { civilian: 'Samosa', undercover: 'Pakora' },
+  { civilian: 'Dosa', undercover: 'Upma' },
+  { civilian: 'Biryani', undercover: 'Noodles' },
+  { civilian: 'Chutney', undercover: 'Pickle' },
+  { civilian: 'Paneer', undercover: 'Egg' },
+  { civilian: 'Biscuit', undercover: 'Namkeen' },
+  { civilian: 'Juice', undercover: 'Lassi' },
+  { civilian: 'Mango', undercover: 'Coconut' },
+  { civilian: 'Potato', undercover: 'Onion' },
+  { civilian: 'Lemon', undercover: 'Chilli' },
+  { civilian: 'Milk', undercover: 'Curd' },
+  { civilian: 'Dal', undercover: 'Sabzi' },
+  { civilian: 'Spoon', undercover: 'Fork' },
+  { civilian: 'Plate', undercover: 'Glass' },
+  { civilian: 'Knife', undercover: 'Scissors' },
+  { civilian: 'Bottle', undercover: 'Lunchbox' },
+  { civilian: 'Bucket', undercover: 'Broom' },
+  { civilian: 'Bed', undercover: 'Sofa' },
+  { civilian: 'Pillow', undercover: 'Blanket' },
+  { civilian: 'Chair', undercover: 'Table' },
+  { civilian: 'Door', undercover: 'Window' },
+  { civilian: 'Lock', undercover: 'Key' },
+  { civilian: 'Fan', undercover: 'Bulb' },
+  { civilian: 'Fridge', undercover: 'Washing Machine' },
+  { civilian: 'Stove', undercover: 'Microwave' },
+  { civilian: 'Tap', undercover: 'Shower' },
+  { civilian: 'Soap', undercover: 'Towel' },
+  { civilian: 'Shampoo', undercover: 'Comb' },
+  { civilian: 'Toothbrush', undercover: 'Soap' },
+  { civilian: 'Mirror', undercover: 'Comb' },
+  { civilian: 'Curtain', undercover: 'Carpet' },
+  { civilian: 'Balcony', undercover: 'Terrace' },
+  { civilian: 'Shirt', undercover: 'Jeans' },
+  { civilian: 'Kurta', undercover: 'Saree' },
+  { civilian: 'Shoes', undercover: 'Socks' },
+  { civilian: 'Belt', undercover: 'Wallet' },
+  { civilian: 'Cap', undercover: 'Sunglasses' },
+  { civilian: 'Ring', undercover: 'Necklace' },
+  { civilian: 'Watch', undercover: 'Bracelet' },
+  { civilian: 'Bag', undercover: 'Wallet' },
+  { civilian: 'Umbrella', undercover: 'Raincoat' },
+  { civilian: 'Bus', undercover: 'Train' },
+  { civilian: 'Auto', undercover: 'Bus' },
+  { civilian: 'Bike', undercover: 'Car' },
+  { civilian: 'Metro', undercover: 'Auto' },
+  { civilian: 'Cycle', undercover: 'Scooter' },
+  { civilian: 'Road', undercover: 'Footpath' },
+  { civilian: 'Bridge', undercover: 'Tunnel' },
+  { civilian: 'Station', undercover: 'Airport' },
+  { civilian: 'Ticket', undercover: 'Passport' },
+  { civilian: 'Helmet', undercover: 'Seatbelt' },
+  { civilian: 'Petrol', undercover: 'Diesel' },
+  { civilian: 'School', undercover: 'Hospital' },
+  { civilian: 'Teacher', undercover: 'Student' },
+  { civilian: 'Pen', undercover: 'Eraser' },
+  { civilian: 'Book', undercover: 'Pencil' },
+  { civilian: 'Blackboard', undercover: 'Chalk' },
+  { civilian: 'Classroom', undercover: 'Playground' },
+  { civilian: 'Homework', undercover: 'Holiday' },
+  { civilian: 'Principal', undercover: 'Student' },
+  { civilian: 'Library', undercover: 'Playground' },
+  { civilian: 'Doctor', undercover: 'Patient' },
+  { civilian: 'Nurse', undercover: 'Medicine' },
+  { civilian: 'Hospital', undercover: 'Ambulance' },
+  { civilian: 'Tablet', undercover: 'Injection' },
+  { civilian: 'Dentist', undercover: 'Toothbrush' },
+  { civilian: 'Barber', undercover: 'Comb' },
+  { civilian: 'Police', undercover: 'Thief' },
+  { civilian: 'Judge', undercover: 'Lawyer' },
+  { civilian: 'Driver', undercover: 'Passenger' },
+  { civilian: 'Shopkeeper', undercover: 'Customer' },
+  { civilian: 'Waiter', undercover: 'Customer' },
+  { civilian: 'Farmer', undercover: 'Tractor' },
+  { civilian: 'Tailor', undercover: 'Shirt' },
+  { civilian: 'Electrician', undercover: 'Bulb' },
+  { civilian: 'Plumber', undercover: 'Tap' },
+  { civilian: 'Guard', undercover: 'Gate' },
+  { civilian: 'Phone', undercover: 'Laptop' },
+  { civilian: 'Keyboard', undercover: 'Mouse' },
+  { civilian: 'Charger', undercover: 'Battery' },
+  { civilian: 'Camera', undercover: 'Mobile' },
+  { civilian: 'Wi-Fi', undercover: 'Bluetooth' },
+  { civilian: 'WhatsApp', undercover: 'YouTube' },
+  { civilian: 'Instagram', undercover: 'WhatsApp' },
+  { civilian: 'Call', undercover: 'Message' },
+  { civilian: 'Photo', undercover: 'Selfie' },
+  { civilian: 'TV', undercover: 'Radio' },
+  { civilian: 'Cricket', undercover: 'Badminton' },
+  { civilian: 'Bat', undercover: 'Ball' },
+  { civilian: 'Football', undercover: 'Goalpost' },
+  { civilian: 'Cricket', undercover: 'Umpire' },
+  { civilian: 'Stadium', undercover: 'Playground' },
+  { civilian: 'Rain', undercover: 'Umbrella' },
+  { civilian: 'Sun', undercover: 'Sunglasses' },
+  { civilian: 'River', undercover: 'Boat' },
+  { civilian: 'Temple', undercover: 'Bell' },
+  { civilian: 'Wedding', undercover: 'Birthday' },
+  { civilian: 'Pillow', undercover: 'Blanket' },
+  { civilian: 'Balcony', undercover: 'Window' },
+  { civilian: 'Curtain', undercover: 'Door' },
+  { civilian: 'Mirror', undercover: 'Camera' },
+  { civilian: 'Comb', undercover: 'Razor' },
+  { civilian: 'Soap', undercover: 'Shampoo' },
+  { civilian: 'Toothbrush', undercover: 'Mouthwash' },
+  { civilian: 'Bucket', undercover: 'Shower' },
+  { civilian: 'Towel', undercover: 'Handkerchief' },
+  { civilian: 'Fridge', undercover: 'Microwave' },
+  { civilian: 'Kettle', undercover: 'Thermos' },
+  { civilian: 'Plate', undercover: 'Tiffin' },
+  { civilian: 'Spoon', undercover: 'Fork' },
+  { civilian: 'Bottle', undercover: 'Flask' },
+  { civilian: 'Chutney', undercover: 'Pickle' },
+  { civilian: 'Roti', undercover: 'Rice' },
+  { civilian: 'Dosa', undercover: 'Paratha' },
+  { civilian: 'Tea', undercover: 'Soup' },
+  { civilian: 'Biscuit', undercover: 'Namkeen' },
+  { civilian: 'Paneer', undercover: 'Egg' },
+  { civilian: 'Helmet', undercover: 'Seatbelt' },
+  { civilian: 'Platform', undercover: 'Bus Stop' },
+  { civilian: 'Metro', undercover: 'Elevator' },
+  { civilian: 'Ticket', undercover: 'Token' },
+  { civilian: 'Petrol Pump', undercover: 'Parking' },
+  { civilian: 'Auto', undercover: 'Scooter' },
+  { civilian: 'Bridge', undercover: 'Tunnel' },
+  { civilian: 'Footpath', undercover: 'Platform' },
+  { civilian: 'School', undercover: 'Library' },
+  { civilian: 'Blackboard', undercover: 'Notebook' },
+  { civilian: 'Principal', undercover: 'Monitor' },
+  { civilian: 'Homework', undercover: 'Exam' },
+  { civilian: 'Pen', undercover: 'Chalk' },
+  { civilian: 'Hospital', undercover: 'Pharmacy' },
+  { civilian: 'Doctor', undercover: 'Pharmacist' },
+  { civilian: 'Ambulance', undercover: 'Police Van' },
+  { civilian: 'Tablet', undercover: 'Bandage' },
+  { civilian: 'ATM', undercover: 'Bank' },
+  { civilian: 'Wallet', undercover: 'Locker' },
+  { civilian: 'Receipt', undercover: 'Ticket' },
+  { civilian: 'Charger', undercover: 'Power Bank' },
+  { civilian: 'Wi-Fi', undercover: 'Bluetooth' },
+  { civilian: 'Screenshot', undercover: 'Photograph' },
+  { civilian: 'Keyboard', undercover: 'Remote' },
+  { civilian: 'Password', undercover: 'OTP' },
+  { civilian: 'WhatsApp', undercover: 'Email' },
+  { civilian: 'Stadium', undercover: 'Theatre' },
+  { civilian: 'Umpire', undercover: 'Goalkeeper' },
+  { civilian: 'Umbrella', undercover: 'Sunglasses' },
+  { civilian: 'Wedding', undercover: 'Festival' },
+  ].filter(({ civilian, undercover }) => {
+    const normalizedCivilian = civilian.trim().toLocaleLowerCase();
+    const normalizedUndercover = undercover.trim().toLocaleLowerCase();
+
+    if (normalizedCivilian === normalizedUndercover) {
+      return false;
+    }
+
+    const pairKey = `${normalizedCivilian}::${normalizedUndercover}`;
+    if (seenPairs.has(pairKey)) {
+      return false;
+    }
+
+    seenPairs.add(pairKey);
+    return true;
+  });
+})();
+const initialPlayers = Array.from({ length: 4 }, (_, index) => ({
+  id: String(index),
+  name: '',
+}));
+
+const newPlayer = () => ({ id: `${Date.now()}-${Math.random()}`, name: '' });
+
+function shuffleArray(items) {
+  const array = [...items];
+
+  for (let index = array.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [array[index], array[swapIndex]] = [array[swapIndex], array[index]];
+  }
+
+  return array;
+}
+
+function createRound(playerNames, undercoverCount) {
+  const wordPair = WORD_PAIRS[Math.floor(Math.random() * WORD_PAIRS.length)];
+  const playerIndexes = shuffleArray(playerNames.map((_, index) => index));
+  const mrWhiteCandidates = playerIndexes.filter((index) => index !== 0);
+  const mrWhiteIndex = mrWhiteCandidates[Math.floor(Math.random() * mrWhiteCandidates.length)];
+  const remainingIndexes = playerIndexes.filter((index) => index !== mrWhiteIndex);
+  const undercoverIndexes = new Set(shuffleArray(remainingIndexes).slice(0, undercoverCount));
+
+  return {
+    players: playerNames.map((name, index) => {
+      const isUndercover = undercoverIndexes.has(index);
+      const isMrWhite = index === mrWhiteIndex;
+      return {
+        name,
+        role: isMrWhite ? 'Mr. White' : isUndercover ? 'Undercover' : 'Civilian',
+        word: isMrWhite ? null : isUndercover ? wordPair.undercover : wordPair.civilian,
+      };
+    }),
+  };
+}
+
+function Header({ label, onBack }) {
+  return (
+    <View style={styles.header}>
+      <Pressable accessibilityLabel="Go back" hitSlop={10} onPress={onBack} style={styles.backButton}>
+        <Text style={styles.backText}>‹</Text>
+      </Pressable>
+      <Text style={styles.headerLabel}>{label}</Text>
+      <View style={styles.headerSpacer} />
+    </View>
+  );
+}
+
+function RoleCount({ label, detail, value, onDecrease, onIncrease, decreaseDisabled, increaseDisabled }) {
+  return (
+    <View style={styles.roleCountRow}>
+      <View style={styles.roleCountCopy}>
+        <Text style={styles.roleCountLabel}>{label}</Text>
+        <Text style={styles.roleCountDetail}>{detail}</Text>
+      </View>
+      <View style={styles.stepper}>
+        <Pressable disabled={decreaseDisabled} onPress={onDecrease} style={[styles.stepperButton, decreaseDisabled && styles.disabledControl]}>
+          <Text style={styles.stepperText}>−</Text>
+        </Pressable>
+        <Text style={styles.stepperValue}>{value}</Text>
+        <Pressable disabled={increaseDisabled} onPress={onIncrease} style={[styles.stepperButton, increaseDisabled && styles.disabledControl]}>
+          <Text style={styles.stepperText}>+</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
+export default function App() {
+  const [screen, setScreen] = useState('welcome');
+  const [players, setPlayers] = useState(initialPlayers);
+  const [savedPlayers, setSavedPlayers] = useState([]);
+  const [round, setRound] = useState(null);
+  const [handoffIndex, setHandoffIndex] = useState(0);
+  const [secretVisible, setSecretVisible] = useState(false);
+  const [wordCheckIndex, setWordCheckIndex] = useState(null);
+  const [isEasyMode, setIsEasyMode] = useState(false);
+  const [voteTarget, setVoteTarget] = useState(null);
+  const [eliminatedNames, setEliminatedNames] = useState([]);
+  const [undercoverCount, setUndercoverCount] = useState(1);
+  const [mrWhiteGuess, setMrWhiteGuess] = useState('');
+  const [mrWhiteGuessedCorrectly, setMrWhiteGuessedCorrectly] = useState(false);
+
+  const names = useMemo(() => players.map(({ name }) => name.trim()), [players]);
+  const filledNames = names.filter(Boolean);
+  const duplicateNames = new Set(filledNames.map((name) => name.toLocaleLowerCase())).size !== filledNames.length;
+  const canContinue = filledNames.length === players.length && !duplicateNames;
+  const civilianCount = Math.max(savedPlayers.length - undercoverCount - 1, 0);
+  const maxUndercoverCount = Math.max(savedPlayers.length - 2, 1);
+
+  const updateName = (id, name) => {
+    setPlayers((current) => current.map((player) => (player.id === id ? { ...player, name } : player)));
+  };
+
+  const removePlayer = (id) => {
+    if (players.length > MIN_PLAYERS) {
+      setPlayers((current) => current.filter((player) => player.id !== id));
+    }
+  };
+
+  const savePlayers = () => {
+    if (canContinue) {
+      setSavedPlayers(filledNames);
+      setUndercoverCount(filledNames.length >= 10 ? 3 : filledNames.length >= 6 ? 2 : 1);
+      setScreen('lobby');
+    }
+  };
+
+  const startRound = () => {
+    setRound(createRound(savedPlayers, undercoverCount));
+    setHandoffIndex(0);
+    setSecretVisible(false);
+    setWordCheckIndex(null);
+    setVoteTarget(null);
+    setEliminatedNames([]);
+    setMrWhiteGuess('');
+    setMrWhiteGuessedCorrectly(false);
+    setScreen('handoff');
+  };
+
+  const passPhone = () => {
+    setSecretVisible(false);
+    if (handoffIndex === round.players.length - 1) {
+      setScreen('discussion');
+      return;
+    }
+    setHandoffIndex((current) => current + 1);
+  };
+
+  const startVoting = () => {
+    setVoteTarget(null);
+    setScreen('vote');
+  };
+
+  const finishVoting = () => {
+    if (voteTarget) {
+      if (voteTarget.role === 'Mr. White') {
+        setMrWhiteGuess('');
+        setScreen('whiteGuess');
+        return;
+      }
+      setEliminatedNames((current) => [...current, voteTarget.name]);
+      setScreen('result');
+    }
+  };
+
+  const submitMrWhiteGuess = () => {
+    const civilianWord = round.players.find((player) => player.role === 'Civilian').word;
+    const wasCorrect = mrWhiteGuess.trim().toLocaleLowerCase() === civilianWord.toLocaleLowerCase();
+    setMrWhiteGuessedCorrectly(wasCorrect);
+    setEliminatedNames((current) => [...current, voteTarget.name]);
+    setScreen('result');
+  };
+
+  const adjustUndercoverCount = (change) => {
+    setUndercoverCount((current) => Math.min(Math.max(current + change, 1), maxUndercoverCount));
+  };
+
+  const handleEasyModePress = () => {
+    setIsEasyMode((current) => !current);
+  };
+
+  if (screen === 'handoff' && round) {
+    const currentPlayer = round.players[handoffIndex];
+    const isLastPlayer = handoffIndex === round.players.length - 1;
+
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <View style={styles.page}>
+          <Header
+            label={`PLAYER ${handoffIndex + 1} OF ${round.players.length}`}
+            onBack={() => { setRound(null); setScreen('lobby'); }}
+          />
+
+          <View style={styles.progressRow}>
+            {round.players.map((player, index) => (
+              <View key={player.name} style={styles.progressItem}>
+                <View style={[
+                  styles.progressDot,
+                  index < handoffIndex && styles.progressDotDone,
+                  index === handoffIndex && styles.progressDotActive,
+                ]} />
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.handoffHero}>
+            <Text style={styles.eyebrow}>PRIVATE TURN</Text>
+            <Text style={styles.screenTitle}>Pass the phone to{`\n`}{currentPlayer.name}.</Text>
+            <Text style={[styles.bodyText, styles.centered]}>Make sure nobody else can see the screen.</Text>
+          </View>
+
+          <View style={styles.secretCard}>
+            {secretVisible ? (
+              currentPlayer.role === 'Mr. White' ? (
+                <>
+                  <View style={[styles.roleBadge, styles.mrWhiteBadge]}>
+                    <Text style={[styles.roleBadgeText, styles.mrWhiteBadgeText]}>MR. WHITE</Text>
+                  </View>
+                  <Text style={styles.secretLabel}>YOUR ROLE</Text>
+                  <Text style={styles.mrWhiteWord}>No word.</Text>
+                  <Text style={styles.secretHint}>Listen closely, blend in, and survive. If voted out, you get one guess at the Civilian word.</Text>
+                </>
+              ) : (
+                <>
+                  { isEasyMode &&
+                  (<View style={[
+                    styles.roleBadge,
+                    currentPlayer.role === 'Undercover' ? styles.undercoverBadge : styles.civilianBadge,
+                  ]}>
+                    <Text style={styles.roleBadgeText}>{currentPlayer.role.toUpperCase()}</Text>
+                  </View>)}
+                  <Text style={styles.secretLabel}>YOUR SECRET WORD</Text>
+                  <Text adjustsFontSizeToFit numberOfLines={1} style={styles.secretWord}>{currentPlayer.word}</Text>
+                  <Text style={styles.secretHint}>
+                    {currentPlayer.role === 'Undercover'
+                      ? 'Blend in. Your word is close, but not the same.'
+                      : 'Find the player whose clues do not quite fit.'}
+                  </Text>
+                </>
+              )
+            ) : (
+              <>
+                <View style={styles.lockIcon}><Text style={styles.lockText}>⌁</Text></View>
+                <Text style={styles.lockTitle}>Your secret is hidden.</Text>
+                <Text style={styles.lockBody}>Only {currentPlayer.name} should reveal it.</Text>
+              </>
+            )}
+          </View>
+
+          {secretVisible ? (
+            <Pressable onPress={passPhone} style={styles.primaryButton}>
+              <Text style={styles.primaryText}>{isLastPlayer ? 'Hide & begin game' : `Hide & pass to ${round.players[handoffIndex + 1].name}`}</Text>
+              <Text style={styles.primaryArrow}>→</Text>
+            </Pressable>
+          ) : (
+            <Pressable onPress={() => setSecretVisible(true)} style={styles.primaryButton}>
+              <Text style={styles.primaryText}>Reveal my secret</Text>
+              <Text style={styles.primaryArrow}>→</Text>
+            </Pressable>
+          )}
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'discussion' && round) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <Header label="ROUND IN PROGRESS" onBack={() => { setRound(null); setScreen('lobby'); }} />
+          <View style={styles.discussionHero}>
+            <View style={styles.discussionMark}><Text style={styles.discussionMarkText}>!</Text></View>
+            <Text style={styles.eyebrow}>EVERYONE HAS A SECRET</Text>
+            <Text style={styles.screenTitle}>Start the discussion.</Text>
+            <Text style={[styles.bodyText, styles.centered]}>Take turns giving a clue for your word. Do not say the word itself.</Text>
+          </View>
+
+          <View style={styles.rulesCard}>
+            <Text style={styles.sectionLabel}>THE QUICK RULES</Text>
+            <View style={styles.ruleRow}><Text style={styles.ruleNumber}>1</Text><Text style={styles.ruleText}>Give one short clue each turn.</Text></View>
+            <View style={styles.ruleRow}><Text style={styles.ruleNumber}>2</Text><Text style={styles.ruleText}>Listen for clues that feel out of place.</Text></View>
+            <View style={styles.ruleRow}><Text style={styles.ruleNumber}>3</Text><Text style={styles.ruleText}>Discuss, then vote for one player.</Text></View>
+          </View>
+
+          {wordCheckIndex === null ? (
+            <Pressable onPress={() => setWordCheckIndex(-1)} style={styles.wordCheckButton}>
+              <Text style={styles.wordCheckButtonText}>Forgot your word?</Text>
+              <Text style={styles.wordCheckButtonArrow}>→</Text>
+            </Pressable>
+          ) : (
+            <View style={styles.wordCheckCard}>
+              <Text style={styles.sectionLabel}>PRIVATE WORD CHECK</Text>
+              {wordCheckIndex === -1 ? (
+                <>
+                  <Text style={styles.wordCheckPrompt}>Who needs to check?</Text>
+                  <View style={styles.wordCheckPlayerList}>
+                    {round.players.map((player, index) => (
+                      <Pressable key={player.name} onPress={() => setWordCheckIndex(index)} style={styles.wordCheckPlayerButton}>
+                        <Text style={styles.wordCheckPlayerText}>{player.name}</Text>
+                        <Text style={styles.wordCheckButtonArrow}>→</Text>
+                      </Pressable>
+                    ))}
+                  </View>
+                </>
+              ) : (
+                <>
+                  <Text style={styles.wordCheckPlayerName}>{round.players[wordCheckIndex].name}</Text>
+                  <Text style={styles.secretLabel}>YOUR SECRET WORD</Text>
+                  <Text adjustsFontSizeToFit numberOfLines={1} style={styles.secretWord}>
+                    {round.players[wordCheckIndex].word || 'No word'}
+                  </Text>
+                  <Pressable onPress={() => setWordCheckIndex(-1)} style={styles.wordCheckChangeButton}>
+                    <Text style={styles.wordCheckChangeText}>Check another player</Text>
+                  </Pressable>
+                </>
+              )}
+              <Pressable onPress={() => setWordCheckIndex(null)} style={styles.wordCheckCloseButton}>
+                <Text style={styles.wordCheckCloseText}>Hide word check</Text>
+              </Pressable>
+            </View>
+          )}
+
+          <View style={styles.discussionFooter}>
+            <Text style={styles.discussionStatus}>DISCUSSION IS LIVE</Text>
+            <Text style={styles.discussionNote}>When the group agrees, cast one vote.</Text>
+          </View>
+          <Pressable onPress={startVoting} style={styles.primaryButton}>
+            <Text style={styles.primaryText}>Start voting</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'vote' && round) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <Header label="GROUP VOTE" onBack={() => setScreen('discussion')} />
+
+          <View style={styles.titleBlock}>
+            <Text style={styles.eyebrow}>MAKE ONE CHOICE</Text>
+            <Text style={styles.screenTitle}>Who is Undercover?</Text>
+            <Text style={styles.bodyText}>Discuss together, then select the player the group wants to eliminate.</Text>
+          </View>
+
+          <View style={styles.voteList}>
+            {round.players.filter((player) => !eliminatedNames.includes(player.name)).map((player, index) => {
+              const selected = voteTarget?.name === player.name;
+              return (
+                <Pressable
+                  key={player.name}
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected }}
+                  onPress={() => setVoteTarget(player)}
+                  style={[styles.voteRow, selected && styles.voteRowSelected]}
+                >
+                  <Text style={styles.voteIndex}>{String(index + 1).padStart(2, '0')}</Text>
+                  <Text style={styles.voteName}>{player.name}</Text>
+                  <View style={[styles.voteCircle, selected && styles.voteCircleSelected]}>
+                    {selected && <Text style={styles.voteCheck}>✓</Text>}
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          <Text style={styles.voteHint}>
+            {voteTarget ? `${voteTarget.name} will be revealed to everyone.` : 'Choose one player to continue.'}
+          </Text>
+          <Pressable disabled={!voteTarget} onPress={finishVoting} style={[styles.primaryButton, !voteTarget && styles.primaryDisabled]}>
+            <Text style={styles.primaryText}>{voteTarget ? `Eliminate ${voteTarget.name}` : 'Choose a player'}</Text>
+            <Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'whiteGuess' && round && voteTarget) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+          <Header label="MR. WHITE'S GUESS" onBack={() => setScreen('vote')} />
+
+          <View style={styles.guessHero}>
+            <View style={styles.whiteMark}><Text style={styles.whiteMarkText}>?</Text></View>
+            <Text style={styles.eyebrow}>ONE FINAL CHANCE</Text>
+            <Text style={styles.screenTitle}>Guess the Civilian word.</Text>
+            <Text style={[styles.bodyText, styles.centered]}>Get it exactly right and Mr. White wins the whole game.</Text>
+          </View>
+
+          <View style={styles.guessCard}>
+            <Text style={styles.guessLabel}>YOUR GUESS</Text>
+            <TextInput
+              accessibilityLabel="Mr. White's word guess"
+              autoCapitalize="words"
+              autoCorrect={false}
+              maxLength={30}
+              onChangeText={setMrWhiteGuess}
+              onSubmitEditing={submitMrWhiteGuess}
+              placeholder="Type the word"
+              placeholderTextColor="#827A91"
+              returnKeyType="done"
+              style={styles.guessInput}
+              value={mrWhiteGuess}
+            />
+            <Text style={styles.guessHint}>Letter case does not matter.</Text>
+          </View>
+
+          <Pressable disabled={!mrWhiteGuess.trim()} onPress={submitMrWhiteGuess} style={[styles.primaryButton, !mrWhiteGuess.trim() && styles.primaryDisabled]}>
+            <Text style={styles.primaryText}>Lock in guess</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'result' && round && voteTarget) {
+    const activePlayers = round.players.filter((player) => !eliminatedNames.includes(player.name));
+    const activeUndercovers = activePlayers.filter((player) => player.role === 'Undercover');
+    const activeCivilians = activePlayers.filter((player) => player.role === 'Civilian');
+    const activeMrWhite = activePlayers.find((player) => player.role === 'Mr. White');
+    const undercovers = round.players.filter((player) => player.role === 'Undercover');
+    const mrWhite = round.players.find((player) => player.role === 'Mr. White');
+    const mrWhiteWon = mrWhiteGuessedCorrectly || (Boolean(activeMrWhite) && activePlayers.filter((player) => player.role !== 'Mr. White').length === 0);
+    const civiliansWon = activeUndercovers.length === 0 && !activeMrWhite;
+    const undercoversWon = activeCivilians.length === 0 && !activeMrWhite;
+    const gameOver = mrWhiteWon || civiliansWon || undercoversWon;
+    const eliminatedUndercover = voteTarget.role === 'Undercover';
+    const eliminatedMrWhite = voteTarget.role === 'Mr. White';
+    const winner = mrWhiteWon ? 'MR. WHITE WINS' : civiliansWon ? 'CIVILIANS WIN' : 'UNDERCOVER WINS';
+
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <View style={styles.resultTop}><Text style={styles.brandName}>UNDERCOVER</Text><Text style={styles.resultRound}>{gameOver ? 'ROUND OVER' : 'PLAYER OUT'}</Text></View>
+
+          <View style={styles.resultHero}>
+            <View style={[styles.resultMark, mrWhiteWon ? styles.whiteWinMark : eliminatedUndercover ? styles.winMark : styles.lossMark]}>
+              <Text style={styles.resultMarkText}>{mrWhiteWon || eliminatedUndercover ? '✓' : '!'}</Text>
+            </View>
+            <Text style={[styles.resultEyebrow, mrWhiteWon ? styles.mrWhiteWinner : eliminatedUndercover ? styles.civilianWinner : styles.undercoverWinner]}>
+              {gameOver ? winner : `${voteTarget.role.toUpperCase()} ELIMINATED`}
+            </Text>
+            <Text style={styles.resultTitle}>
+              {gameOver
+                ? mrWhiteWon ? 'Mr. White wins.' : civiliansWon ? 'You found them all.' : 'The Undercover team got away.'
+                : `${voteTarget.name} is out.`}
+            </Text>
+            <Text style={[styles.bodyText, styles.centered]}>
+              {gameOver
+                ? mrWhiteWon
+                  ? mrWhiteGuessedCorrectly
+                    ? 'Mr. White guessed the Civilian word correctly.'
+                    : 'Every other player has been eliminated.'
+                  : civiliansWon
+                    ? 'Every Undercover player and Mr. White have been eliminated.'
+                    : 'Every Civilian player and Mr. White have been eliminated.'
+                : eliminatedMrWhite
+                  ? 'Mr. White missed the Civilian word and is out.'
+                  : eliminatedUndercover
+                  ? `${activeUndercovers.length} Undercover player${activeUndercovers.length === 1 ? '' : 's'} remain.`
+                  : `${activeCivilians.length} Civilian player${activeCivilians.length === 1 ? '' : 's'} remain.`}
+            </Text>
+          </View>
+
+          {gameOver ? (
+            <View style={styles.revealCard}>
+              <Text style={styles.sectionLabel}>THE REVEAL</Text>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>UNDERCOVER TEAM</Text>
+                <Text style={styles.revealValue}>{undercovers.map((player) => player.name).join(', ')}</Text>
+              </View>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>MR. WHITE</Text>
+                <Text style={styles.revealValue}>{mrWhite.name}</Text>
+              </View>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>THEIR WORD</Text>
+                <Text style={styles.revealValue}>{undercovers[0].word}</Text>
+              </View>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>CIVILIAN WORD</Text>
+                <Text style={styles.revealValue}>{round.players.find((player) => player.role === 'Civilian').word}</Text>
+              </View>
+            </View>
+          ) : (
+            <View style={styles.revealCard}>
+              <Text style={styles.sectionLabel}>PLAYERS LEFT</Text>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>CIVILIANS</Text>
+                <Text style={styles.revealValue}>{activeCivilians.length}</Text>
+              </View>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>UNDERCOVER</Text>
+                <Text style={styles.revealValue}>{activeUndercovers.length}</Text>
+              </View>
+              <View style={styles.revealRow}>
+                <Text style={styles.revealLabel}>MR. WHITE</Text>
+                <Text style={styles.revealValue}>{activeMrWhite ? '1' : '0'}</Text>
+              </View>
+            </View>
+          )}
+
+          <Pressable onPress={gameOver ? startRound : () => setScreen('discussion')} style={[styles.primaryButton, styles.resultPrimaryButton]}>
+            <Text style={styles.primaryText}>{gameOver ? 'Play another round' : 'Continue discussion'}</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+          <Pressable onPress={() => { setRound(null); setVoteTarget(null); setScreen('lobby'); }} style={styles.textButton}>
+            <Text style={styles.textButtonLabel}>{gameOver ? 'Back to room' : 'End game'}</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'setup') {
+    const hint = duplicateNames
+      ? 'Each player needs a different name.'
+      : !canContinue
+        ? 'Enter a name for every player.'
+        : 'Everyone is ready.';
+
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
+          <Header label="STEP 1 OF 3" onBack={() => setScreen('welcome')} />
+
+          <View style={styles.titleBlock}>
+            <Text style={styles.eyebrow}>ROUND SETUP</Text>
+            <Text style={styles.screenTitle}>Who is playing?</Text>
+            <Text style={styles.bodyText}>Add everyone sharing this phone. Names stay only on this device.</Text>
+          </View>
+
+          <View style={styles.listHeading}>
+            <Text style={styles.sectionLabel}>PLAYERS</Text>
+            <Text style={styles.count}>{players.length} / {MAX_PLAYERS}</Text>
+          </View>
+
+          <View style={styles.playerList}>
+            {players.map((player, index) => (
+              <View key={player.id} style={styles.playerRow}>
+                <View style={styles.numberBadge}><Text style={styles.numberText}>{index + 1}</Text></View>
+                <TextInput
+                  accessibilityLabel={`Player ${index + 1} name`}
+                  autoCapitalize="words"
+                  autoCorrect={false}
+                  maxLength={24}
+                  onChangeText={(name) => updateName(player.id, name)}
+                  placeholder={`Player ${index + 1}`}
+                  placeholderTextColor="#827A91"
+                  style={styles.input}
+                  value={player.name}
+                />
+                <Pressable
+                  accessibilityLabel={`Remove player ${index + 1}`}
+                  disabled={players.length === MIN_PLAYERS}
+                  hitSlop={8}
+                  onPress={() => removePlayer(player.id)}
+                  style={[styles.removeButton, players.length === MIN_PLAYERS && styles.disabledControl]}
+                >
+                  <Text style={styles.removeText}>×</Text>
+                </Pressable>
+              </View>
+            ))}
+          </View>
+
+          <Pressable
+            disabled={players.length === MAX_PLAYERS}
+            onPress={() => setPlayers((current) => [...current, newPlayer()])}
+            style={[styles.addButton, players.length === MAX_PLAYERS && styles.disabledControl]}
+          >
+            <Text style={styles.addIcon}>+</Text><Text style={styles.addText}>Add player</Text>
+          </Pressable>
+
+          <Text style={styles.hint}>{hint}</Text>
+          <Pressable disabled={!canContinue} onPress={savePlayers} style={[styles.primaryButton, !canContinue && styles.primaryDisabled]}>
+            <Text style={styles.primaryText}>Continue</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'lobby') {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="light" />
+        <ScrollView contentContainerStyle={styles.lobbyScrollContent} showsVerticalScrollIndicator={false}>
+          <Header label="ROUND SETUP" onBack={() => setScreen('setup')} />
+          <View style={styles.lobbyHero}>
+            <View style={styles.check}><Text style={styles.checkText}>✓</Text></View>
+            <Text style={styles.eyebrow}>PLAYERS SAVED</Text>
+            <Text style={styles.screenTitle}>The room is ready.</Text>
+            <Text style={[styles.bodyText, styles.centered]}>Pass the phone around only when the game tells you to.</Text>
+          </View>
+
+          <View style={styles.rosterCard}>
+            <View style={styles.rosterHeader}>
+              <Text style={styles.sectionLabel}>PLAYING THIS ROUND</Text>
+              <Text style={styles.count}>{savedPlayers.length}</Text>
+            </View>
+            {savedPlayers.map((name, index) => (
+              <View key={name} style={styles.rosterRow}>
+                <Text style={styles.rosterIndex}>{String(index + 1).padStart(2, '0')}</Text>
+                <Text style={styles.rosterName}>{name}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.roleConfigCard}>
+            <View style={styles.roleConfigHeader}>
+              <Text style={styles.sectionLabel}>GAME ROLES</Text>
+              <Text style={styles.roleConfigTotal}>{savedPlayers.length} total</Text>
+            </View>
+            <RoleCount
+              label="CIVILIANS"
+              detail="share the main word"
+              value={civilianCount}
+              onDecrease={() => adjustUndercoverCount(1)}
+              onIncrease={() => adjustUndercoverCount(-1)}
+              decreaseDisabled={undercoverCount >= maxUndercoverCount}
+              increaseDisabled={undercoverCount === 1}
+            />
+            <RoleCount
+              label="UNDERCOVER"
+              detail="receive a related word"
+              value={undercoverCount}
+              onDecrease={() => adjustUndercoverCount(-1)}
+              onIncrease={() => adjustUndercoverCount(1)}
+              decreaseDisabled={undercoverCount === 1}
+              increaseDisabled={undercoverCount >= maxUndercoverCount}
+            />
+            <View style={styles.roleCountRow}>
+              <View style={styles.roleCountCopy}>
+                <Text style={styles.roleCountLabel}>MR. WHITE</Text>
+                <Text style={styles.roleCountDetail}>gets no word</Text>
+              </View>
+              <View style={styles.fixedRole}><Text style={styles.fixedRoleText}>1 · FIXED</Text></View>
+            </View>
+          </View>
+          <Pressable
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: isEasyMode }}
+            onPress={handleEasyModePress}
+            style={styles.easyModeRow}
+          >
+            <View style={[styles.easyModeCheckbox, isEasyMode && styles.easyModeCheckboxChecked]}>
+              {isEasyMode && <View style={styles.easyModeCheckboxDot} />}
+            </View>
+            <Text style={styles.easyModeLabel}>Easy Mode</Text>
+          </Pressable>
+
+          <Pressable onPress={startRound} style={[styles.primaryButton, styles.lobbyPrimaryButton]}>
+            <Text style={styles.primaryText}>Deal secret roles</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+          <Pressable onPress={() => setScreen('setup')} style={styles.textButton}><Text style={styles.textButtonLabel}>Edit players</Text></Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="light" />
+      <View style={styles.page}>
+        <View style={styles.topBar}>
+          <View style={styles.brand}><View style={styles.brandMark}><Text style={styles.brandMarkText}>U</Text></View><Text style={styles.brandName}>UNDERCOVER</Text></View>
+          <View style={styles.offline}><View style={styles.dot} /><Text style={styles.offlineText}>OFFLINE</Text></View>
+        </View>
+
+        <View style={styles.welcomeHero}>
+          <Text style={styles.eyebrow}>THE SOCIAL DEDUCTION GAME</Text>
+          <Text style={styles.welcomeTitle}>Find the one{`\n`}who does not belong.</Text>
+          <Text style={styles.bodyText}>Same phone. Secret words. Bad alibis.</Text>
+        </View>
+
+        <View style={styles.preview}>
+          <View style={[styles.avatar, styles.avatarLeft]}><Text style={styles.avatarText}>●</Text></View>
+          <View style={[styles.avatar, styles.avatarMiddle]}><Text style={styles.avatarText}>?</Text></View>
+          <View style={[styles.avatar, styles.avatarRight]}><Text style={styles.avatarText}>●</Text></View>
+          <Text style={styles.previewCaption}>SOMEONE HAS A DIFFERENT WORD</Text>
+        </View>
+
+        <View style={styles.welcomeFooter}>
+          <View style={styles.detailRow}><Text style={styles.sectionLabel}>LOCAL PLAY</Text><Text style={styles.detailValue}>3–12 players</Text></View>
+          <Pressable onPress={() => setScreen('setup')} style={styles.primaryButton}>
+            <Text style={styles.primaryText}>New game</Text><Text style={styles.primaryArrow}>→</Text>
+          </Pressable>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const STATUS_BAR_HEIGHT = RNStatusBar.currentHeight ?? 0;
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#171321',
+    paddingTop: STATUS_BAR_HEIGHT + 8,
+  },
+  page: { flex: 1, paddingHorizontal: 24, paddingTop: 12, paddingBottom: 25 },
+  scrollContent: { flexGrow: 1, paddingHorizontal: 24, paddingTop: 12, paddingBottom: 25 },
+  lobbyScrollContent: { flexGrow: 1, paddingHorizontal: 24, paddingTop: 12, paddingBottom: 25 },
+  topBar: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  brand: { alignItems: 'center', flexDirection: 'row', gap: 8 },
+  brandMark: { alignItems: 'center', backgroundColor: '#F6BD60', borderRadius: 9, height: 28, justifyContent: 'center', width: 28 },
+  brandMarkText: { color: '#231D30', fontSize: 16, fontWeight: '900' },
+  brandName: { color: '#FAF8FF', fontSize: 14, fontWeight: '800', letterSpacing: 1.5 },
+  offline: { alignItems: 'center', backgroundColor: '#252033', borderRadius: 99, flexDirection: 'row', gap: 6, paddingHorizontal: 10, paddingVertical: 7 },
+  dot: { backgroundColor: '#65D6A7', borderRadius: 4, height: 7, width: 7 },
+  offlineText: { color: '#B8B1C8', fontSize: 10, fontWeight: '800', letterSpacing: 0.8 },
+  eyebrow: { color: '#F6BD60', fontSize: 11, fontWeight: '800', letterSpacing: 1.35 },
+  welcomeHero: { marginTop: 54 },
+  welcomeTitle: { color: '#FAF8FF', fontSize: 39, fontWeight: '800', letterSpacing: -1.8, lineHeight: 44, marginTop: 13, marginBottom: 15 },
+  bodyText: { color: '#B8B1C8', fontSize: 15, lineHeight: 22 },
+  preview: { alignItems: 'center', backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 28, borderWidth: 1, height: 210, justifyContent: 'center', marginTop: 42, overflow: 'hidden' },
+  avatar: { alignItems: 'center', borderRadius: 99, height: 76, justifyContent: 'center', position: 'absolute', top: 48, width: 76 },
+  avatarLeft: { backgroundColor: '#6E5BA5', left: 55 },
+  avatarMiddle: { backgroundColor: '#F6BD60', height: 90, top: 34, width: 90, zIndex: 1 },
+  avatarRight: { backgroundColor: '#3D9B8A', right: 55 },
+  avatarText: { color: '#171321', fontSize: 28, fontWeight: '800' },
+  previewCaption: { bottom: 23, color: '#B8B1C8', fontSize: 10, fontWeight: '800', letterSpacing: 1, position: 'absolute' },
+  welcomeFooter: { marginTop: 'auto' },
+  detailRow: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 },
+  detailValue: { color: '#D4CFDF', fontSize: 13, fontWeight: '700' },
+  primaryButton: { alignItems: 'center', backgroundColor: '#F6BD60', borderRadius: 16, flexDirection: 'row', justifyContent: 'center', minHeight: 60 },
+  primaryDisabled: { backgroundColor: '#51495E' },
+  primaryText: { color: '#211B2D', fontSize: 16, fontWeight: '900' },
+  primaryArrow: { color: '#211B2D', fontSize: 23, marginLeft: 9, marginTop: -2 },
+  header: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  backButton: { alignItems: 'center', backgroundColor: '#252033', borderRadius: 16, height: 40, justifyContent: 'center', width: 40 },
+  headerSpacer: { height: 40, width: 40 },
+  backText: { color: '#FAF8FF', fontSize: 32, fontWeight: '300', lineHeight: 35, marginTop: -4 },
+  headerLabel: { color: '#817A91', fontSize: 10, fontWeight: '900', letterSpacing: 1.2 },
+  progressRow: { flexDirection: 'row', gap: 6, marginTop: 24 },
+  progressItem: { flex: 1 },
+  progressDot: { backgroundColor: '#31273F', borderRadius: 99, height: 5 },
+  progressDotDone: { backgroundColor: '#65D6A7' },
+  progressDotActive: { backgroundColor: '#F6BD60' },
+  handoffHero: { alignItems: 'center', marginTop: 38 },
+  secretCard: { alignItems: 'center', backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 24, borderWidth: 1, justifyContent: 'center', marginBottom: 22, marginTop: 29, minHeight: 255, padding: 24 },
+  lockIcon: { alignItems: 'center', backgroundColor: '#31273F', borderRadius: 28, height: 56, justifyContent: 'center', width: 56 },
+  lockText: { color: '#F6BD60', fontSize: 32, fontWeight: '900', marginTop: -7 },
+  lockTitle: { color: '#FAF8FF', fontSize: 20, fontWeight: '800', marginTop: 17 },
+  lockBody: { color: '#AAA2BB', fontSize: 14, marginTop: 8, textAlign: 'center' },
+  roleBadge: { borderRadius: 99, paddingHorizontal: 11, paddingVertical: 7 },
+  civilianBadge: { backgroundColor: '#2B5A4A' },
+  undercoverBadge: { backgroundColor: '#684061' },
+  mrWhiteBadge: { backgroundColor: '#D9D4E2' },
+  roleBadgeText: { color: '#FAF8FF', fontSize: 10, fontWeight: '900', letterSpacing: 1.1 },
+  mrWhiteBadgeText: { color: '#211B2D' },
+  secretLabel: { color: '#9A92AB', fontSize: 10, fontWeight: '900', letterSpacing: 1.2, marginTop: 25 },
+  secretWord: { color: '#F6BD60', fontSize: 38, fontWeight: '800', letterSpacing: -1.4, marginTop: 8, maxWidth: '100%' },
+  mrWhiteWord: { color: '#FAF8FF', fontSize: 38, fontWeight: '800', letterSpacing: -1.4, marginTop: 8 },
+  secretHint: { color: '#B8B1C8', fontSize: 13, lineHeight: 19, marginTop: 18, textAlign: 'center' },
+  titleBlock: { marginTop: 42 },
+  screenTitle: { color: '#FAF8FF', fontSize: 34, fontWeight: '800', letterSpacing: -1.4, marginBottom: 12, marginTop: 11 },
+  listHeading: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 11, marginTop: 34 },
+  sectionLabel: { color: '#817A91', fontSize: 11, fontWeight: '800', letterSpacing: 1.2 },
+  count: { color: '#F6BD60', fontSize: 13, fontWeight: '800' },
+  playerList: { gap: 9 },
+  playerRow: { alignItems: 'center', backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 15, borderWidth: 1, flexDirection: 'row', minHeight: 59, paddingHorizontal: 12 },
+  numberBadge: { alignItems: 'center', backgroundColor: '#31273F', borderRadius: 10, height: 32, justifyContent: 'center', width: 32 },
+  numberText: { color: '#B8B1C8', fontSize: 12, fontWeight: '800' },
+  input: { color: '#FAF8FF', flex: 1, fontSize: 16, fontWeight: '700', marginLeft: 12, paddingVertical: 12 },
+  removeButton: { alignItems: 'center', backgroundColor: '#30263F', borderRadius: 11, height: 31, justifyContent: 'center', width: 31 },
+  removeText: { color: '#D4CFDF', fontSize: 22, fontWeight: '300', lineHeight: 25, marginTop: -2 },
+  disabledControl: { opacity: 0.3 },
+  addButton: { alignItems: 'center', borderColor: '#504260', borderRadius: 15, borderStyle: 'dashed', borderWidth: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 14, minHeight: 53 },
+  addIcon: { color: '#F6BD60', fontSize: 22, marginRight: 7 },
+  addText: { color: '#D4CFDF', fontSize: 14, fontWeight: '800' },
+  hint: { color: '#9A92AB', fontSize: 12, fontWeight: '600', marginBottom: 16, marginTop: 14, textAlign: 'center' },
+  lobbyHero: { alignItems: 'center', marginTop: 42 },
+  check: { alignItems: 'center', backgroundColor: '#2B5A4A', borderRadius: 28, height: 56, justifyContent: 'center', marginBottom: 20, width: 56 },
+  checkText: { color: '#90EDC6', fontSize: 28, fontWeight: '800' },
+  centered: { textAlign: 'center' },
+  rosterCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginTop: 31, overflow: 'hidden' },
+  rosterHeader: { alignItems: 'center', backgroundColor: '#292134', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 13 },
+  rosterRow: { alignItems: 'center', borderColor: '#30263F', borderTopWidth: 1, flexDirection: 'row', minHeight: 47, paddingHorizontal: 16 },
+  rosterIndex: { color: '#817A91', fontSize: 11, fontWeight: '800', width: 36 },
+  rosterName: { color: '#FAF8FF', fontSize: 15, fontWeight: '700' },
+  roleConfigCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginTop: 16, overflow: 'hidden', paddingTop: 15 },
+  roleConfigHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, paddingBottom: 12 },
+  roleConfigTotal: { color: '#F6BD60', fontSize: 12, fontWeight: '800' },
+  easyModeRow: { alignItems: 'center', flexDirection: 'row', marginTop: 16, paddingVertical: 8, justifyContent: 'center' },
+  easyModeCheckbox: { alignItems: 'center', backgroundColor: '#1D1825', borderColor: '#5A5068', borderRadius: 6, borderWidth: 2, height: 20, justifyContent: 'center', width: 20 },
+  easyModeCheckboxChecked: { backgroundColor: '#F6BD60', borderColor: '#F6BD60' },
+  easyModeCheckboxDot: { backgroundColor: '#211B2D', borderRadius: 3, height: 8, width: 8 },
+  easyModeLabel: { color: '#FAF8FF', fontSize: 15, fontWeight: '800', marginLeft: 12 },
+  roleCountRow: { alignItems: 'center', borderColor: '#30263F', borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', minHeight: 68, paddingHorizontal: 16 },
+  roleCountCopy: { flex: 1 },
+  roleCountLabel: { color: '#FAF8FF', fontSize: 13, fontWeight: '800', letterSpacing: 0.5 },
+  roleCountDetail: { color: '#9A92AB', fontSize: 12, marginTop: 3 },
+  stepper: { alignItems: 'center', flexDirection: 'row', gap: 10 },
+  stepperButton: { alignItems: 'center', backgroundColor: '#31273F', borderRadius: 10, height: 31, justifyContent: 'center', width: 31 },
+  stepperText: { color: '#FAF8FF', fontSize: 19, fontWeight: '500', lineHeight: 21 },
+  stepperValue: { color: '#F6BD60', fontSize: 16, fontWeight: '900', textAlign: 'center', width: 18 },
+  fixedRole: { backgroundColor: '#31273F', borderRadius: 9, paddingHorizontal: 10, paddingVertical: 7 },
+  fixedRoleText: { color: '#D4CFDF', fontSize: 10, fontWeight: '900', letterSpacing: 0.7 },
+  nextCard: { backgroundColor: '#292134', borderRadius: 18, marginTop: 16, padding: 17 },
+  nextTitle: { color: '#FAF8FF', fontSize: 17, fontWeight: '800', marginTop: 5 },
+  nextBody: { color: '#AAA2BB', fontSize: 13, lineHeight: 19, marginTop: 4 },
+  lobbyPrimaryButton: { marginTop: 16 },
+  discussionHero: { alignItems: 'center', marginTop: 45 },
+  discussionMark: { alignItems: 'center', backgroundColor: '#684061', borderRadius: 28, height: 56, justifyContent: 'center', marginBottom: 21, width: 56 },
+  discussionMarkText: { color: '#F6BD60', fontSize: 29, fontWeight: '900' },
+  rulesCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginTop: 31, overflow: 'hidden', paddingTop: 15 },
+  ruleRow: { alignItems: 'center', borderColor: '#30263F', borderTopWidth: 1, flexDirection: 'row', minHeight: 60, paddingHorizontal: 16 },
+  ruleNumber: { color: '#F6BD60', fontSize: 13, fontWeight: '900', width: 31 },
+  ruleText: { color: '#D4CFDF', flex: 1, fontSize: 14, fontWeight: '600', lineHeight: 19 },
+  wordCheckButton: { alignItems: 'center', borderColor: '#504260', borderRadius: 15, borderWidth: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 16, minHeight: 52 },
+  wordCheckButtonText: { color: '#D4CFDF', fontSize: 14, fontWeight: '800' },
+  wordCheckButtonArrow: { color: '#F6BD60', fontSize: 20, marginLeft: 8, marginTop: -2 },
+  wordCheckCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginTop: 16, padding: 16 },
+  wordCheckPrompt: { color: '#FAF8FF', fontSize: 17, fontWeight: '800', marginTop: 12 },
+  wordCheckPlayerList: { gap: 8, marginTop: 12 },
+  wordCheckPlayerButton: { alignItems: 'center', backgroundColor: '#292134', borderRadius: 12, flexDirection: 'row', justifyContent: 'space-between', minHeight: 46, paddingHorizontal: 13 },
+  wordCheckPlayerText: { color: '#FAF8FF', flex: 1, fontSize: 14, fontWeight: '700' },
+  wordCheckPlayerName: { color: '#FAF8FF', fontSize: 20, fontWeight: '800', marginTop: 12 },
+  wordCheckChangeButton: { alignSelf: 'center', marginTop: 16, padding: 4 },
+  wordCheckChangeText: { color: '#D4CFDF', fontSize: 12, fontWeight: '700' },
+  wordCheckCloseButton: { alignSelf: 'center', marginTop: 14, padding: 4 },
+  wordCheckCloseText: { color: '#9A92AB', fontSize: 12, fontWeight: '700' },
+  discussionFooter: { alignItems: 'center', marginTop: 'auto', paddingBottom: 6 },
+  discussionStatus: { color: '#65D6A7', fontSize: 11, fontWeight: '900', letterSpacing: 1.3 },
+  discussionNote: { color: '#817A91', fontSize: 12, marginTop: 8 },
+  voteList: { gap: 9, marginTop: 31 },
+  voteRow: { alignItems: 'center', backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 16, borderWidth: 1, flexDirection: 'row', minHeight: 64, paddingHorizontal: 16 },
+  voteRowSelected: { backgroundColor: '#2B2437', borderColor: '#F6BD60' },
+  voteIndex: { color: '#817A91', fontSize: 11, fontWeight: '800', width: 36 },
+  voteName: { color: '#FAF8FF', flex: 1, fontSize: 16, fontWeight: '800' },
+  voteCircle: { borderColor: '#5A5068', borderRadius: 99, borderWidth: 1, height: 24, width: 24 },
+  voteCircleSelected: { alignItems: 'center', backgroundColor: '#F6BD60', borderColor: '#F6BD60', justifyContent: 'center' },
+  voteCheck: { color: '#211B2D', fontSize: 15, fontWeight: '900', marginTop: -1 },
+  voteHint: { color: '#9A92AB', fontSize: 12, fontWeight: '600', marginBottom: 16, marginTop: 14, textAlign: 'center' },
+  guessHero: { alignItems: 'center', marginTop: 45 },
+  whiteMark: { alignItems: 'center', backgroundColor: '#D9D4E2', borderRadius: 28, height: 56, justifyContent: 'center', marginBottom: 21, width: 56 },
+  whiteMarkText: { color: '#211B2D', fontSize: 28, fontWeight: '900' },
+  guessCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginBottom: 18, marginTop: 31, padding: 18 },
+  guessLabel: { color: '#817A91', fontSize: 10, fontWeight: '900', letterSpacing: 1.1 },
+  guessInput: { borderBottomColor: '#625873', borderBottomWidth: 1, color: '#FAF8FF', fontSize: 21, fontWeight: '800', marginTop: 10, paddingBottom: 10, paddingTop: 4 },
+  guessHint: { color: '#9A92AB', fontSize: 12, marginTop: 11 },
+  resultTop: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', minHeight: 40 },
+  resultRound: { color: '#817A91', fontSize: 10, fontWeight: '900', letterSpacing: 1.2 },
+  resultHero: { alignItems: 'center', marginTop: 45 },
+  resultMark: { alignItems: 'center', borderRadius: 32, height: 64, justifyContent: 'center', marginBottom: 21, width: 64 },
+  winMark: { backgroundColor: '#2B5A4A' },
+  lossMark: { backgroundColor: '#684061' },
+  whiteWinMark: { backgroundColor: '#D9D4E2' },
+  resultMarkText: { color: '#FAF8FF', fontSize: 31, fontWeight: '900' },
+  resultEyebrow: { fontSize: 11, fontWeight: '900', letterSpacing: 1.35 },
+  civilianWinner: { color: '#90EDC6' },
+  undercoverWinner: { color: '#F6BD60' },
+  mrWhiteWinner: { color: '#FAF8FF' },
+  resultTitle: { color: '#FAF8FF', fontSize: 33, fontWeight: '800', letterSpacing: -1.4, marginBottom: 12, marginTop: 11, textAlign: 'center' },
+  revealCard: { backgroundColor: '#211B2D', borderColor: '#30263F', borderRadius: 20, borderWidth: 1, marginTop: 31, overflow: 'hidden', paddingTop: 15 },
+  revealRow: { alignItems: 'center', borderColor: '#30263F', borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', minHeight: 54, paddingHorizontal: 16 },
+  revealLabel: { color: '#817A91', fontSize: 10, fontWeight: '900', letterSpacing: 0.7 },
+  revealValue: { color: '#FAF8FF', fontSize: 15, fontWeight: '800', maxWidth: '54%', textAlign: 'right' },
+  resultPrimaryButton: { marginTop: 18 },
+  textButton: { alignItems: 'center', justifyContent: 'center', marginTop: 8, minHeight: 50 },
+  textButtonLabel: { color: '#D4CFDF', fontSize: 14, fontWeight: '800' },
+});

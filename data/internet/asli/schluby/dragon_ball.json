@@ -1,0 +1,277 @@
+{
+  "id": "dragon_ball",
+  "name": "Dragon Ball",
+  "emoji": "🐉",
+  "version": 2,
+  "subthemes": [
+    {
+      "id": "sub_1z11xo",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Goku",
+          "imposteur": "Vegeta",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Goku",
+          "imposteur_en": "Vegeta"
+        },
+        {
+          "civil": "Gohan",
+          "imposteur": "Goten",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gohan",
+          "imposteur_en": "Goten"
+        },
+        {
+          "civil": "Piccolo",
+          "imposteur": "Dende",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Piccolo",
+          "imposteur_en": "Dende"
+        },
+        {
+          "civil": "Krilin",
+          "imposteur": "Yamcha",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Krillin",
+          "imposteur_en": "Yamcha"
+        },
+        {
+          "civil": "Trunks",
+          "imposteur": "Goten",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Trunks",
+          "imposteur_en": "Goten"
+        },
+        {
+          "civil": "Freezer",
+          "imposteur": "Cell",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Frieza",
+          "imposteur_en": "Cell"
+        },
+        {
+          "civil": "Cell",
+          "imposteur": "Buu",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Cell",
+          "imposteur_en": "Buu"
+        },
+        {
+          "civil": "Bulma",
+          "imposteur": "Chichi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Bulma",
+          "imposteur_en": "Chichi"
+        },
+        {
+          "civil": "Beerus",
+          "imposteur": "Whis",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Beerus",
+          "imposteur_en": "Whis"
+        },
+        {
+          "civil": "Broly",
+          "imposteur": "Bardock",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Broly",
+          "imposteur_en": "Bardock"
+        },
+        {
+          "civil": "Tortue Géniale",
+          "imposteur": "Kaio",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Master Roshi",
+          "imposteur_en": "King Kai"
+        },
+        {
+          "civil": "Tenshinhan",
+          "imposteur": "Chaozu",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Tien",
+          "imposteur_en": "Chiaotzu"
+        },
+        {
+          "civil": "Jiren",
+          "imposteur": "Hit",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Jiren",
+          "imposteur_en": "Hit"
+        },
+        {
+          "civil": "Zamasu",
+          "imposteur": "Black Goku",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Zamasu",
+          "imposteur_en": "Goku Black"
+        },
+        {
+          "civil": "Majin Vegeta",
+          "imposteur": "Vegeta",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Majin Vegeta",
+          "imposteur_en": "Vegeta"
+        }
+      ]
+    },
+    {
+      "id": "sub_b5zkhv",
+      "name": "Transformations & Techniques",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Super Saiyan",
+          "imposteur": "Super Saiyan God",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Super Saiyan",
+          "imposteur_en": "Super Saiyan God"
+        },
+        {
+          "civil": "Kamehameha",
+          "imposteur": "Galick Gun",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kamehameha",
+          "imposteur_en": "Galick Gun"
+        },
+        {
+          "civil": "Genkidama",
+          "imposteur": "Final Flash",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Spirit Bomb",
+          "imposteur_en": "Final Flash"
+        },
+        {
+          "civil": "Ultra Instinct",
+          "imposteur": "Super Saiyan Blue",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ultra Instinct",
+          "imposteur_en": "Super Saiyan Blue"
+        },
+        {
+          "civil": "Téléportation",
+          "imposteur": "Kaioken",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Instant Transmission",
+          "imposteur_en": "Kaioken"
+        },
+        {
+          "civil": "Fusion",
+          "imposteur": "Potara",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Fusion",
+          "imposteur_en": "Potara"
+        },
+        {
+          "civil": "Gotenks",
+          "imposteur": "Vegito",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Gotenks",
+          "imposteur_en": "Vegito"
+        },
+        {
+          "civil": "Oozaru",
+          "imposteur": "Super Saiyan 4",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Great Ape",
+          "imposteur_en": "Super Saiyan 4"
+        },
+        {
+          "civil": "Makankosappo",
+          "imposteur": "Masenko",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Special Beam Cannon",
+          "imposteur_en": "Masenko"
+        }
+      ]
+    },
+    {
+      "id": "sub_jd5sbt",
+      "name": "Univers & Objets",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Boules de Cristal",
+          "imposteur": "Shenron",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Dragon Balls",
+          "imposteur_en": "Shenron"
+        },
+        {
+          "civil": "Shenron",
+          "imposteur": "Porunga",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Shenron",
+          "imposteur_en": "Porunga"
+        },
+        {
+          "civil": "Namek",
+          "imposteur": "Planète Vegeta",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Namek",
+          "imposteur_en": "Planet Vegeta"
+        },
+        {
+          "civil": "Saiyan",
+          "imposteur": "Namek",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Saiyan",
+          "imposteur_en": "Namekian"
+        },
+        {
+          "civil": "Le Tournoi du Pouvoir",
+          "imposteur": "Le Tenkaichi Budokai",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Tournament of Power",
+          "imposteur_en": "World Martial Arts Tournament"
+        },
+        {
+          "civil": "La Salle de l'Esprit et du Temps",
+          "imposteur": "Le Palais de Dieu",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Hyperbolic Time Chamber",
+          "imposteur_en": "Kami's Lookout"
+        },
+        {
+          "civil": "Le Kaïoshin",
+          "imposteur": "Le Roi Enma",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Supreme Kai",
+          "imposteur_en": "King Yemma"
+        }
+      ]
+    }
+  ]
+}

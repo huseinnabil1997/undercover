@@ -112,3 +112,136 @@ Beetle / Cricket = Kumbang / Jangkrik
 Lion / Panther = Singa / Macan Kumbang
 Turtle / Snail = Kura-kura / Siput
 Salmon / Trout = Ikan Salmon / Ikan Trout
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Peacock / Chameleon = Merak / Bunglon
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+cow / bull = Sapi / Banteng
+chicken / duck = Ayam / Bebek
+dolphin / seal = Lumba-lumba / Anjing Laut
+ant / spider = Semut / Laba-laba
+bee / hornet = Lebah / Tawon Vespa
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Cat / Tiger = Kucing / Harimau
+Lion / Leopard = Singa / Macan Tutul
+Bear / Panda = Beruang / Panda
+Zebra / Horse = Zebra / Kuda
+Camel / Giraffe = Unta / Jerapah
+Eagle / Hawk = Elang / Rajawali
+Cobra / Python = Kobra / Piton
+Pig / Boar = Babi / Babi Hutan
+Crow / Pigeon = Gagak / Merpati
+Hen / Rooster = Ayam Betina / Ayam Jago
+Crocodile / Lizard = Buaya / Kadal
+Whale / Seal = Paus / Anjing Laut
+Ant / Worm = Semut / Cacing
+Snail / Slug = Siput / Siput Telanjang
+Hamster / Rabbit = Hamster / Kelinci
+Deer / Goat = Rusa / Kambing
+Hyena / Wolf = Hyena / Serigala
+Starfish / Crab = Bintang Laut / Kepiting
+Kangaroo / Rabbit = Kanguru / Kelinci
+Raccoon / Fox = Rakun / Rubah
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Elephant / Rhinoceros = Gajah / Badak
+Dauphin / Baleine = Lumba-lumba / Paus
+Aigle / Faucon = Elang / Alap-alap
+Loup / Renard = Serigala / Rubah
+Cheval / Ane = Kuda / Keledai
+Girafe / Zebre = Jerapah / Zebra
+Hibou / Chouette = Burung Hantu / Burung Serak
+Serpent / Lezard = Ular / Kadal
+Papillon / Libellule = Kupu-kupu / Capung
+Kangourou / Wallaby = Kanguru / Walabi
+Gorille / Chimpanze = Gorila / Simpanse
+Ours / Panda = Beruang / Panda
+Perroquet / Perruche = Beo / Parkit
+Ecureuil / Herisson = Tupai / Landak
+Tortue / Escargot = Kura-kura / Siput
+Abeille / Guepe = Lebah / Tawon
+Grenouille / Crapaud = Katak / Kodok
+Corbeau / Pie = Gagak / Murai
+Chameau / Cheval = Unta / Kuda
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Cow / Buffalo = Sapi / Kerbau
+Horse / Donkey = Kuda / Keledai
+Goat / Sheep = Kambing / Domba
+Penguin / Seal = Penguin / Anjing Laut
+Peacock / Parrot = Merak / Beo
+Pigeon / Dove = Merpati / Burung Dara
+Eagle / Falcon = Elang / Alap-alap
+Cheetah / Leopard = Cheetah / Macan Tutul
+Crab / Lobster = Kepiting / Lobster
+Mosquito / Fly = Nyamuk / Lalat
+Ant / Termite = Semut / Rayap
+Spider / Scorpion = Laba-laba / Kalajengking
+Octopus / Squid = Gurita / Cumi-cumi
+Squid / Jellyfish = Cumi-cumi / Ubur-ubur
+Flamingo / Ostrich = Flamingo / Burung Unta
+Ostrich / Emu = Burung Unta / Emu
+
+# Terjemahan dan kurasi dari jishnurajendran/undercover.
+@ jishnu
+Bison / Buffalo = Bison / Kerbau
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Gorilla / Chimpanzee = Gorila / Simpanse
+Panther / Leopard = Macan Kumbang / Macan Tutul
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Chat / Chien = Kucing / Anjing
+Lion / Tigre = Singa / Harimau
+Requin / Dauphin = Hiu / Lumba-lumba
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Frog / Lizard = Katak / Kadal
+Mouse / Cat = Tikus / Kucing
+Eagle / Crow = Elang / Gagak
+Rabbit / Mongoose = Kelinci / Luwak
+Crab / Scorpion = Kepiting / Kalajengking
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Rabbit / Hare = Kelinci / Terwelu
+Panda / Koala = Panda / Koala
+Bee / Wasp = Lebah / Tawon
+Penguin / Puffin = Penguin / Puffin
+Squirrel / Chipmunk = Tupai / Bajing
+Beaver / Otter = Berang-berang / Linsang
+Moose / Elk = Rusa Moose / Rusa Elk
+Cat / Panther = Kucing / Macan Kumbang
+Fox / Jackal = Rubah / Serigala
+Deer / Antelope = Rusa / Antelop
+Monkey / Chimpanzee = Monyet / Simpanse
+Gorilla / Orangutan = Gorila / Orangutan
+Zebra / Okapi = Zebra / Okapi
+Whale / Orca = Paus / Orca
+Swan / Flamingo = Angsa / Flamingo
+Parrot / Cockatoo = Beo / Kakatua
+Hippo / Rhino = Kuda Nil / Badak
+Hyena / Wild Dog = Hyena / Anjing Liar
+Bear / Grizzly = Beruang / Grizzly
+Seal / Sea Lion = Anjing Laut / Singa Laut
+Hamster / Guinea Pig = Hamster / Marmut
+Ferret / Weasel = Musang / Cerpelai
+Raven / Crow = Gagak / Burung Raven
+Turkey / Peacock = Kalkun / Merak
+Koala / Sloth = Koala / Kukang
+Platypus / Echidna = Platipus / Ekidna
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+蜜蜂 / 蝴蝶 = Lebah / Kupu-kupu
+蝴蝶 / 飞蛾 = Kupu-kupu / Ngengat

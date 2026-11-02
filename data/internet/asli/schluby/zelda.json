@@ -1,0 +1,228 @@
+{
+  "id": "zelda",
+  "name": "The Legend of Zelda",
+  "emoji": "🗡️",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Link",
+          "imposteur": "Zelda",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Link",
+          "imposteur_en": "Zelda"
+        },
+        {
+          "civil": "Ganon",
+          "imposteur": "Ganondorf",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Ganon",
+          "imposteur_en": "Ganondorf"
+        },
+        {
+          "civil": "Link",
+          "imposteur": "Impa",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Link",
+          "imposteur_en": "Impa"
+        },
+        {
+          "civil": "Navi",
+          "imposteur": "Midna",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Navi",
+          "imposteur_en": "Midna"
+        },
+        {
+          "civil": "Zant",
+          "imposteur": "Ganondorf",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Zant",
+          "imposteur_en": "Ganondorf"
+        },
+        {
+          "civil": "Riju",
+          "imposteur": "Urbosa",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Riju",
+          "imposteur_en": "Urbosa"
+        },
+        {
+          "civil": "Groose",
+          "imposteur": "Link",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Groose",
+          "imposteur_en": "Link"
+        },
+        {
+          "civil": "Tingle",
+          "imposteur": "Majora",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Tingle",
+          "imposteur_en": "Majora"
+        }
+      ]
+    },
+    {
+      "id": "objets",
+      "name": "Objets & Reliques",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Triforce",
+          "imposteur": "Master Sword",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Triforce",
+          "imposteur_en": "Master Sword"
+        },
+        {
+          "civil": "Rubis",
+          "imposteur": "Quartiers de cœur",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Rupees",
+          "imposteur_en": "Heart Pieces"
+        },
+        {
+          "civil": "Bouclier Héros",
+          "imposteur": "Épée Kokiri",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hero's Shield",
+          "imposteur_en": "Kokiri Sword"
+        },
+        {
+          "civil": "Boomerang",
+          "imposteur": "Grappin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Boomerang",
+          "imposteur_en": "Hookshot"
+        },
+        {
+          "civil": "Bombes",
+          "imposteur": "Flèches de feu",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Bombs",
+          "imposteur_en": "Fire Arrows"
+        }
+      ]
+    },
+    {
+      "id": "lieux",
+      "name": "Lieux & Peuples",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Hylien",
+          "imposteur": "Gerudo",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hylian",
+          "imposteur_en": "Gerudo"
+        },
+        {
+          "civil": "Zora",
+          "imposteur": "Goron",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Zora",
+          "imposteur_en": "Goron"
+        },
+        {
+          "civil": "Château d'Hyrule",
+          "imposteur": "Mont de la Mort",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hyrule Castle",
+          "imposteur_en": "Death Mountain"
+        },
+        {
+          "civil": "Hyrule",
+          "imposteur": "Termina",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hyrule",
+          "imposteur_en": "Termina"
+        },
+        {
+          "civil": "Village Cocorico",
+          "imposteur": "Forêt de Faron",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kakariko Village",
+          "imposteur_en": "Faron Woods"
+        },
+        {
+          "civil": "Îles célestes",
+          "imposteur": "Les Profondeurs",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sky Islands",
+          "imposteur_en": "The Depths"
+        }
+      ]
+    },
+    {
+      "id": "jeux",
+      "name": "Jeux de la licence",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Breath of the Wild",
+          "imposteur": "Tears of the Kingdom",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Breath of the Wild",
+          "imposteur_en": "Tears of the Kingdom"
+        },
+        {
+          "civil": "Ocarina of Time",
+          "imposteur": "Majora's Mask",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ocarina of Time",
+          "imposteur_en": "Majora's Mask"
+        },
+        {
+          "civil": "Wind Waker",
+          "imposteur": "Skyward Sword",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Wind Waker",
+          "imposteur_en": "Skyward Sword"
+        },
+        {
+          "civil": "A Link to the Past",
+          "imposteur": "Link's Awakening",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "A Link to the Past",
+          "imposteur_en": "Link's Awakening"
+        },
+        {
+          "civil": "Twilight Princess",
+          "imposteur": "Minish Cap",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Twilight Princess",
+          "imposteur_en": "The Minish Cap"
+        }
+      ]
+    }
+  ]
+}

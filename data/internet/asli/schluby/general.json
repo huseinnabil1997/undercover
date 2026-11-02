@@ -1,0 +1,2775 @@
+{
+  "id": "general",
+  "name": "Général",
+  "emoji": "🌍",
+  "version": 3,
+  "subthemes": [
+    {
+      "id": "animaux",
+      "name": "Animaux",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Chat",
+          "imposteur": "Chien",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Lion",
+          "imposteur": "Tigre",
+          "difficulty": 2,
+          "niche": 1
+        },
+        {
+          "civil": "Requin",
+          "imposteur": "Dauphin",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "perroquet",
+          "imposteur": "corbeau",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "parrot",
+          "imposteur_en": "crow"
+        },
+        {
+          "civil": "requin",
+          "imposteur": "baleine",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "shark",
+          "imposteur_en": "whale"
+        },
+        {
+          "civil": "loup",
+          "imposteur": "tigre",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "wolf",
+          "imposteur_en": "tiger"
+        },
+        {
+          "civil": "éléphant",
+          "imposteur": "girafe",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "elephant",
+          "imposteur_en": "giraffe"
+        },
+        {
+          "civil": "tigre",
+          "imposteur": "lion",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "tiger",
+          "imposteur_en": "lion"
+        },
+        {
+          "civil": "serpent",
+          "imposteur": "lézard",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "snake",
+          "imposteur_en": "lizard"
+        },
+        {
+          "civil": "renard",
+          "imposteur": "coyote",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "fox",
+          "imposteur_en": "coyote"
+        },
+        {
+          "civil": "abeille",
+          "imposteur": "papillon",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "bee",
+          "imposteur_en": "butterfly"
+        },
+        {
+          "civil": "oie",
+          "imposteur": "canard",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "goose",
+          "imposteur_en": "duck"
+        },
+        {
+          "civil": "éléphant",
+          "imposteur": "mammouth",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "elephant",
+          "imposteur_en": "mammouth"
+        },
+        {
+          "civil": "lion",
+          "imposteur": "rhinocéros",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "lion",
+          "imposteur_en": "rhino"
+        },
+        {
+          "civil": "crapaud",
+          "imposteur": "grenouille",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "toad",
+          "imposteur_en": "frog"
+        },
+        {
+          "civil": "tortue",
+          "imposteur": "tortue de terre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "turtle",
+          "imposteur_en": "tortoise"
+        },
+        {
+          "civil": "papillon de nuit",
+          "imposteur": "papillon",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "moth",
+          "imposteur_en": "butterfly"
+        }
+      ]
+    },
+    {
+      "id": "nourriture",
+      "name": "Nourriture",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Pizza",
+          "imposteur": "Quiche",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Avocat",
+          "imposteur": "Concombre",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Chocolat",
+          "imposteur": "Caramel",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Café",
+          "imposteur": "Thé",
+          "difficulty": 3,
+          "niche": 1
+        }
+      ]
+    },
+    {
+      "id": "loisirs",
+      "name": "Loisirs & Sport",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Football",
+          "imposteur": "Rugby",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Cinéma",
+          "imposteur": "Théâtre",
+          "difficulty": 3,
+          "niche": 2
+        },
+        {
+          "civil": "Guitare",
+          "imposteur": "Basse",
+          "difficulty": 2,
+          "niche": 2
+        },
+        {
+          "civil": "Plage",
+          "imposteur": "Piscine",
+          "difficulty": 3,
+          "niche": 1
+        }
+      ]
+    },
+    {
+      "id": "metiers",
+      "name": "Métiers",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Boulanger",
+          "imposteur": "Pâtissier",
+          "difficulty": 2,
+          "niche": 1
+        },
+        {
+          "civil": "Médecin",
+          "imposteur": "Infirmier",
+          "difficulty": 3,
+          "niche": 1
+        }
+      ]
+    },
+    {
+      "id": "imaginaire",
+      "name": "Imaginaire & Nature",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Vampire",
+          "imposteur": "Zombie",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Soleil",
+          "imposteur": "Lune",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Rose",
+          "imposteur": "Tulipe",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "Neige",
+          "imposteur": "Grêle",
+          "difficulty": 3,
+          "niche": 2
+        },
+        {
+          "civil": "Montagne",
+          "imposteur": "Colline",
+          "difficulty": 3,
+          "niche": 2
+        },
+        {
+          "civil": "Château",
+          "imposteur": "Manoir",
+          "difficulty": 3,
+          "niche": 2
+        },
+        {
+          "civil": "Avion",
+          "imposteur": "Hélicoptère",
+          "difficulty": 3,
+          "niche": 1
+        },
+        {
+          "civil": "galaxie",
+          "imposteur": "nébuleuse",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "galaxy",
+          "imposteur_en": "nebula"
+        },
+        {
+          "civil": "trou noir",
+          "imposteur": "supernova",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "blackhole",
+          "imposteur_en": "supernova"
+        },
+        {
+          "civil": "étoile",
+          "imposteur": "comète",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "star",
+          "imposteur_en": "comet"
+        },
+        {
+          "civil": "astéroïde",
+          "imposteur": "météore",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "asteroid",
+          "imposteur_en": "meteor"
+        },
+        {
+          "civil": "arc-en-ciel",
+          "imposteur": "aurore",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "rainbow",
+          "imposteur_en": "aurora"
+        },
+        {
+          "civil": "lune",
+          "imposteur": "galaxie",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "moon",
+          "imposteur_en": "galaxy"
+        },
+        {
+          "civil": "nébuleuse",
+          "imposteur": "soleil",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "nebula",
+          "imposteur_en": "sun"
+        },
+        {
+          "civil": "soleil",
+          "imposteur": "étoile",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "sun",
+          "imposteur_en": "star"
+        },
+        {
+          "civil": "tonnerre",
+          "imposteur": "foudre",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "thunder",
+          "imposteur_en": "lightning"
+        }
+      ]
+    },
+    {
+      "id": "sub_q1ho8s",
+      "name": "Adjectif",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "heureux",
+          "imposteur": "joyeux",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "happy",
+          "imposteur_en": "joyful"
+        },
+        {
+          "civil": "en colère",
+          "imposteur": "furieux",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "angry",
+          "imposteur_en": "furious"
+        },
+        {
+          "civil": "triste",
+          "imposteur": "mélancolique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sad",
+          "imposteur_en": "melancholic"
+        },
+        {
+          "civil": "grand",
+          "imposteur": "énorme",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "big",
+          "imposteur_en": "enormous"
+        },
+        {
+          "civil": "rapide",
+          "imposteur": "véloce",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "fast",
+          "imposteur_en": "swift"
+        },
+        {
+          "civil": "lent",
+          "imposteur": "paresseux",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "slow",
+          "imposteur_en": "sluggish"
+        },
+        {
+          "civil": "froid",
+          "imposteur": "frais",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "cold",
+          "imposteur_en": "chilly"
+        },
+        {
+          "civil": "chaud",
+          "imposteur": "brûlant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "hot",
+          "imposteur_en": "scorching"
+        },
+        {
+          "civil": "intelligent",
+          "imposteur": "astucieux",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "smart",
+          "imposteur_en": "clever"
+        },
+        {
+          "civil": "bête",
+          "imposteur": "sans indice",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dumb",
+          "imposteur_en": "clueless"
+        },
+        {
+          "civil": "effrayé",
+          "imposteur": "terrifié",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "scared",
+          "imposteur_en": "terrified"
+        },
+        {
+          "civil": "calme",
+          "imposteur": "silencieux",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "quiet",
+          "imposteur_en": "silent"
+        },
+        {
+          "civil": "brillant",
+          "imposteur": "lumineux",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "bright",
+          "imposteur_en": "luminous"
+        },
+        {
+          "civil": "sombre",
+          "imposteur": "lugubre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dark",
+          "imposteur_en": "gloomy"
+        },
+        {
+          "civil": "fort",
+          "imposteur": "puissant",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "strong",
+          "imposteur_en": "mighty"
+        },
+        {
+          "civil": "doux",
+          "imposteur": "duveteux",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "soft",
+          "imposteur_en": "fluffy"
+        },
+        {
+          "civil": "dur",
+          "imposteur": "rigide",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "hard",
+          "imposteur_en": "rigid"
+        },
+        {
+          "civil": "amer",
+          "imposteur": "âcre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "bitter",
+          "imposteur_en": "acrid"
+        },
+        {
+          "civil": "salé",
+          "imposteur": "saumâtre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "salty",
+          "imposteur_en": "briny"
+        },
+        {
+          "civil": "épicé",
+          "imposteur": "piquant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "spicy",
+          "imposteur_en": "pungent"
+        },
+        {
+          "civil": "propre",
+          "imposteur": "immaculé",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "clean",
+          "imposteur_en": "spotless"
+        },
+        {
+          "civil": "sale",
+          "imposteur": "crasseux",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dirty",
+          "imposteur_en": "filthy"
+        },
+        {
+          "civil": "mouillé",
+          "imposteur": "trempé",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "wet",
+          "imposteur_en": "soaked"
+        },
+        {
+          "civil": "sec",
+          "imposteur": "aride",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dry",
+          "imposteur_en": "arid"
+        },
+        {
+          "civil": "lisse",
+          "imposteur": "élégant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "smooth",
+          "imposteur_en": "sleek"
+        },
+        {
+          "civil": "rugueux",
+          "imposteur": "grossier",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "rough",
+          "imposteur_en": "coarse"
+        },
+        {
+          "civil": "jeune",
+          "imposteur": "juvénile",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "young",
+          "imposteur_en": "youthful"
+        },
+        {
+          "civil": "vieux",
+          "imposteur": "antique",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "old",
+          "imposteur_en": "ancient"
+        },
+        {
+          "civil": "neuf",
+          "imposteur": "immaculé",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "new",
+          "imposteur_en": "pristine"
+        },
+        {
+          "civil": "drôle",
+          "imposteur": "hilarant",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "funny",
+          "imposteur_en": "hilarious"
+        },
+        {
+          "civil": "sérieux",
+          "imposteur": "solennel",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "serious",
+          "imposteur_en": "solemn"
+        },
+        {
+          "civil": "simple",
+          "imposteur": "basique",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "simple",
+          "imposteur_en": "basic"
+        },
+        {
+          "civil": "complexe",
+          "imposteur": "intriqué",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "complex",
+          "imposteur_en": "intricate"
+        },
+        {
+          "civil": "calme",
+          "imposteur": "serein",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "calm",
+          "imposteur_en": "serene"
+        },
+        {
+          "civil": "chaotique",
+          "imposteur": "tumultueux",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "chaotic",
+          "imposteur_en": "tumultuous"
+        },
+        {
+          "civil": "gentil",
+          "imposteur": "compatissant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "kind",
+          "imposteur_en": "compassionate"
+        },
+        {
+          "civil": "méchant",
+          "imposteur": "rancunier",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "mean",
+          "imposteur_en": "spiteful"
+        },
+        {
+          "civil": "poli",
+          "imposteur": "courtois",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "polite",
+          "imposteur_en": "courteous"
+        },
+        {
+          "civil": "généreux",
+          "imposteur": "charitable",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "generous",
+          "imposteur_en": "charitable"
+        },
+        {
+          "civil": "égoïste",
+          "imposteur": "avide",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "selfish",
+          "imposteur_en": "greedy"
+        },
+        {
+          "civil": "honnête",
+          "imposteur": "sincère",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "honest",
+          "imposteur_en": "truthful"
+        },
+        {
+          "civil": "malhonnête",
+          "imposteur": "trompeur",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dishonest",
+          "imposteur_en": "deceptive"
+        },
+        {
+          "civil": "loyal",
+          "imposteur": "fidèle",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "loyal",
+          "imposteur_en": "faithful"
+        },
+        {
+          "civil": "déloyal",
+          "imposteur": "traître",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "disloyal",
+          "imposteur_en": "treacherous"
+        },
+        {
+          "civil": "patient",
+          "imposteur": "tolérant",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "patient",
+          "imposteur_en": "tolerant"
+        },
+        {
+          "civil": "impatient",
+          "imposteur": "agité",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "impatient",
+          "imposteur_en": "restless"
+        },
+        {
+          "civil": "flexible",
+          "imposteur": "adaptable",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "flexible",
+          "imposteur_en": "adaptable"
+        },
+        {
+          "civil": "têtu",
+          "imposteur": "obstiné",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "stubborn",
+          "imposteur_en": "obstinate"
+        },
+        {
+          "civil": "curieux",
+          "imposteur": "indiscret",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "curious",
+          "imposteur_en": "inquisitive"
+        },
+        {
+          "civil": "ennuyé",
+          "imposteur": "apathique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "bored",
+          "imposteur_en": "apathetic"
+        },
+        {
+          "civil": "confiant",
+          "imposteur": "sûr de soi",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "confident",
+          "imposteur_en": "self-assured"
+        },
+        {
+          "civil": "créatif",
+          "imposteur": "imaginatif",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "creative",
+          "imposteur_en": "imaginative"
+        },
+        {
+          "civil": "pratique",
+          "imposteur": "pragmatique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "practical",
+          "imposteur_en": "pragmatic"
+        },
+        {
+          "civil": "optimiste",
+          "imposteur": "plein d'espoir",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "optimistic",
+          "imposteur_en": "hopeful"
+        },
+        {
+          "civil": "pessimiste",
+          "imposteur": "cynique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "pessimistic",
+          "imposteur_en": "cynical"
+        },
+        {
+          "civil": "réaliste",
+          "imposteur": "ancré",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "realistic",
+          "imposteur_en": "grounded"
+        },
+        {
+          "civil": "idéaliste",
+          "imposteur": "utopique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "idealistic",
+          "imposteur_en": "utopian"
+        },
+        {
+          "civil": "énergique",
+          "imposteur": "pétillant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "energetic",
+          "imposteur_en": "vivacious"
+        },
+        {
+          "civil": "fatigué",
+          "imposteur": "épuisé",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "tired",
+          "imposteur_en": "exhausted"
+        },
+        {
+          "civil": "malade",
+          "imposteur": "souffrant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sick",
+          "imposteur_en": "ailing"
+        },
+        {
+          "civil": "sûr",
+          "imposteur": "sécurisé",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "safe",
+          "imposteur_en": "secure"
+        },
+        {
+          "civil": "cher",
+          "imposteur": "coûteux",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "expensive",
+          "imposteur_en": "costly"
+        },
+        {
+          "civil": "moderne",
+          "imposteur": "contemporain",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "modern",
+          "imposteur_en": "contemporary"
+        },
+        {
+          "civil": "traditionnel",
+          "imposteur": "vieux jeu",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "traditional",
+          "imposteur_en": "old-fashioned"
+        },
+        {
+          "civil": "chic",
+          "imposteur": "orné",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "fancy",
+          "imposteur_en": "ornate"
+        },
+        {
+          "civil": "sobre",
+          "imposteur": "austère",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "plain",
+          "imposteur_en": "austere"
+        },
+        {
+          "civil": "coloré",
+          "imposteur": "vibrant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "colorful",
+          "imposteur_en": "vibrant"
+        },
+        {
+          "civil": "chaud",
+          "imposteur": "confortable",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "warm",
+          "imposteur_en": "toasty"
+        },
+        {
+          "civil": "mystérieux",
+          "imposteur": "énigmatique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "mysterious",
+          "imposteur_en": "enigmatic"
+        },
+        {
+          "civil": "évident",
+          "imposteur": "flagrant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "obvious",
+          "imposteur_en": "blatant"
+        },
+        {
+          "civil": "commun",
+          "imposteur": "omniprésent",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "common",
+          "imposteur_en": "ubiquitous"
+        },
+        {
+          "civil": "léger",
+          "imposteur": "vaporeux",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "light",
+          "imposteur_en": "feathery"
+        },
+        {
+          "civil": "lourd",
+          "imposteur": "pesant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "heavy",
+          "imposteur_en": "weighty"
+        },
+        {
+          "civil": "grand",
+          "imposteur": "imposant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "tall",
+          "imposteur_en": "towering"
+        },
+        {
+          "civil": "court",
+          "imposteur": "trapu",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "short",
+          "imposteur_en": "stubby"
+        },
+        {
+          "civil": "large",
+          "imposteur": "vaste",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "wide",
+          "imposteur_en": "expansive"
+        },
+        {
+          "civil": "étroit",
+          "imposteur": "mince",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "narrow",
+          "imposteur_en": "slim"
+        },
+        {
+          "civil": "frais",
+          "imposteur": "croquant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "fresh",
+          "imposteur_en": "crisp"
+        },
+        {
+          "civil": "ressasié",
+          "imposteur": "renfermé",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "stale",
+          "imposteur_en": "musty"
+        },
+        {
+          "civil": "naturel",
+          "imposteur": "organique",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "natural",
+          "imposteur_en": "organic"
+        },
+        {
+          "civil": "artificiel",
+          "imposteur": "synthétique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "artificial",
+          "imposteur_en": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sub_p0oh7p",
+      "name": "Adverbe",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "rapidement",
+          "imposteur": "promptement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "quickly",
+          "imposteur_en": "swiftly"
+        },
+        {
+          "civil": "silencieusement",
+          "imposteur": "calmement",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "silently",
+          "imposteur_en": "quietly"
+        },
+        {
+          "civil": "heureusement",
+          "imposteur": "joyeusement",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "happily",
+          "imposteur_en": "joyfully"
+        },
+        {
+          "civil": "en colère",
+          "imposteur": "furieusement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "angrily",
+          "imposteur_en": "furiously"
+        },
+        {
+          "civil": "tristement",
+          "imposteur": "lugubrement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sadly",
+          "imposteur_en": "mournfully"
+        },
+        {
+          "civil": "bravement",
+          "imposteur": "courageusement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "bravely",
+          "imposteur_en": "courageously"
+        },
+        {
+          "civil": "ardemment",
+          "imposteur": "enthousiasmement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "eagerly",
+          "imposteur_en": "enthusiastically"
+        },
+        {
+          "civil": "soudainement",
+          "imposteur": "brusquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "suddenly",
+          "imposteur_en": "abruptly"
+        },
+        {
+          "civil": "poliment",
+          "imposteur": "courtoisement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "politely",
+          "imposteur_en": "courteously"
+        },
+        {
+          "civil": "nerveusement",
+          "imposteur": "anxieusement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "nervously",
+          "imposteur_en": "anxiously"
+        },
+        {
+          "civil": "correctement",
+          "imposteur": "précisément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "correctly",
+          "imposteur_en": "accurately"
+        },
+        {
+          "civil": "clairement",
+          "imposteur": "distinctement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "clearly",
+          "imposteur_en": "distinctly"
+        },
+        {
+          "civil": "facilement",
+          "imposteur": "sans effort",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "easily",
+          "imposteur_en": "effortlessly"
+        },
+        {
+          "civil": "généreusement",
+          "imposteur": "abondamment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "generously",
+          "imposteur_en": "lavishly"
+        },
+        {
+          "civil": "honnêtement",
+          "imposteur": "sincèrement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "honestly",
+          "imposteur_en": "truthfully"
+        },
+        {
+          "civil": "gentiment",
+          "imposteur": "compatissant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "kindly",
+          "imposteur_en": "compassionately"
+        },
+        {
+          "civil": "paresseusement",
+          "imposteur": "oisivement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "lazily",
+          "imposteur_en": "idly"
+        },
+        {
+          "civil": "proprement",
+          "imposteur": "soigneusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "neatly",
+          "imposteur_en": "tidily"
+        },
+        {
+          "civil": "ouvertement",
+          "imposteur": "publiquement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "openly",
+          "imposteur_en": "publicly"
+        },
+        {
+          "civil": "patiemment",
+          "imposteur": "toléramment",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "patiently",
+          "imposteur_en": "tolerantly"
+        },
+        {
+          "civil": "rugueusement",
+          "imposteur": "durement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "roughly",
+          "imposteur_en": "harshly"
+        },
+        {
+          "civil": "facilement",
+          "imposteur": "couramment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "smoothly",
+          "imposteur_en": "fluently"
+        },
+        {
+          "civil": "chaleureusement",
+          "imposteur": "affectueusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "warmly",
+          "imposteur_en": "affectionately"
+        },
+        {
+          "civil": "sagement",
+          "imposteur": "prudemment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "wisely",
+          "imposteur_en": "prudently"
+        },
+        {
+          "civil": "vivement",
+          "imposteur": "énergiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "briskly",
+          "imposteur_en": "energetically"
+        },
+        {
+          "civil": "calmement",
+          "imposteur": "sereinement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "calmly",
+          "imposteur_en": "serenely"
+        },
+        {
+          "civil": "froidement",
+          "imposteur": "glacialement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "coldly",
+          "imposteur_en": "frigidly"
+        },
+        {
+          "civil": "confiante",
+          "imposteur": "assurément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "confidently",
+          "imposteur_en": "assuredly"
+        },
+        {
+          "civil": "diligemment",
+          "imposteur": "industrieusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "diligently",
+          "imposteur_en": "industriously"
+        },
+        {
+          "civil": "élégamment",
+          "imposteur": "gracieusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "elegantly",
+          "imposteur_en": "gracefully"
+        },
+        {
+          "civil": "férocement",
+          "imposteur": "intensément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "fiercely",
+          "imposteur_en": "intensely"
+        },
+        {
+          "civil": "librement",
+          "imposteur": "libéralement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "freely",
+          "imposteur_en": "liberally"
+        },
+        {
+          "civil": "avec gratitude",
+          "imposteur": "avec reconnaissance",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "gratefully",
+          "imposteur_en": "thankfully"
+        },
+        {
+          "civil": "à la hâte",
+          "imposteur": "précipitamment",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "hastily",
+          "imposteur_en": "hurriedly"
+        },
+        {
+          "civil": "innocemment",
+          "imposteur": "naïvement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "innocently",
+          "imposteur_en": "naively"
+        },
+        {
+          "civil": "jalousement",
+          "imposteur": "envieusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "jealously",
+          "imposteur_en": "enviously"
+        },
+        {
+          "civil": "joyeusement",
+          "imposteur": "gaiement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "jovially",
+          "imposteur_en": "merrily"
+        },
+        {
+          "civil": "vivement",
+          "imposteur": "ardemment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "keenly",
+          "imposteur_en": "eagerly"
+        },
+        {
+          "civil": "avec bienveillance",
+          "imposteur": "bienveillamment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "kindheartedly",
+          "imposteur_en": "benevolently"
+        },
+        {
+          "civil": "avec amour",
+          "imposteur": "tendrement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "lovingly",
+          "imposteur_en": "tenderly"
+        },
+        {
+          "civil": "gaiement",
+          "imposteur": "joyeusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "merrily",
+          "imposteur_en": "jubilantly"
+        },
+        {
+          "civil": "mystérieusement",
+          "imposteur": "énigmatiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "mysteriously",
+          "imposteur_en": "enigmatic"
+        },
+        {
+          "civil": "naturellement",
+          "imposteur": "organiquement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "naturally",
+          "imposteur_en": "organically"
+        },
+        {
+          "civil": "obéissamment",
+          "imposteur": "docilement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "obediently",
+          "imposteur_en": "compliantly"
+        },
+        {
+          "civil": "bizarrement",
+          "imposteur": "étrangement",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "oddly",
+          "imposteur_en": "strangely"
+        },
+        {
+          "civil": "passionnément",
+          "imposteur": "ardemment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "passionately",
+          "imposteur_en": "ardently"
+        },
+        {
+          "civil": "paisiblement",
+          "imposteur": "tranquillement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "peacefully",
+          "imposteur_en": "tranquilly"
+        },
+        {
+          "civil": "joyeusement",
+          "imposteur": "espièglement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "playfully",
+          "imposteur_en": "friskily"
+        },
+        {
+          "civil": "fièrement",
+          "imposteur": "arrogamment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "proudly",
+          "imposteur_en": "arrogantly"
+        },
+        {
+          "civil": "silencieusement",
+          "imposteur": "à voix basse",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "quietly",
+          "imposteur_en": "hushedly"
+        },
+        {
+          "civil": "imprudemment",
+          "imposteur": "témérairement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "recklessly",
+          "imposteur_en": "rashly"
+        },
+        {
+          "civil": "respectueusement",
+          "imposteur": "déféremment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "respectfully",
+          "imposteur_en": "deferentially"
+        },
+        {
+          "civil": "en toute sécurité",
+          "imposteur": "en sécurité",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "safely",
+          "imposteur_en": "securely"
+        },
+        {
+          "civil": "sensiblement",
+          "imposteur": "délicatement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sensitively",
+          "imposteur_en": "delicately"
+        },
+        {
+          "civil": "nettement",
+          "imposteur": "aiguement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sharply",
+          "imposteur_en": "acutely"
+        },
+        {
+          "civil": "sincèrement",
+          "imposteur": "authentiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sincerely",
+          "imposteur_en": "genuinely"
+        },
+        {
+          "civil": "habilement",
+          "imposteur": "expertement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "skillfully",
+          "imposteur_en": "expertly"
+        },
+        {
+          "civil": "solennellement",
+          "imposteur": "gravement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "solemnly",
+          "imposteur_en": "gravely"
+        },
+        {
+          "civil": "strictement",
+          "imposteur": "rigoureusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "strictly",
+          "imposteur_en": "rigorously"
+        },
+        {
+          "civil": "têtu",
+          "imposteur": "obstinément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "stubbornly",
+          "imposteur_en": "obstinate"
+        },
+        {
+          "civil": "avec succès",
+          "imposteur": "triomphalement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "successfully",
+          "imposteur_en": "triumphantly"
+        },
+        {
+          "civil": "suspect",
+          "imposteur": "méfiant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "suspiciously",
+          "imposteur_en": "distrustfully"
+        },
+        {
+          "civil": "doucement",
+          "imposteur": "agréablement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "sweetly",
+          "imposteur_en": "pleasantly"
+        },
+        {
+          "civil": "pensivement",
+          "imposteur": "attentivement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "thoughtfully",
+          "imposteur_en": "considerately"
+        },
+        {
+          "civil": "étroitement",
+          "imposteur": "fermement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "tightly",
+          "imposteur_en": "firmly"
+        },
+        {
+          "civil": "véritablement",
+          "imposteur": "factuellement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "truthfully",
+          "imposteur_en": "factually"
+        },
+        {
+          "civil": "inopinément",
+          "imposteur": "étonnamment",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "unexpectedly",
+          "imposteur_en": "surprisingly"
+        },
+        {
+          "civil": "urgemment",
+          "imposteur": "impérativement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "urgently",
+          "imposteur_en": "imperatively"
+        },
+        {
+          "civil": "vaguement",
+          "imposteur": "indistinctement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "vaguely",
+          "imposteur_en": "indistinctly"
+        },
+        {
+          "civil": "victorieusement",
+          "imposteur": "triomphalement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "victoriously",
+          "imposteur_en": "conqueringly"
+        },
+        {
+          "civil": "violemment",
+          "imposteur": "puissamment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "violently",
+          "imposteur_en": "forcefully"
+        },
+        {
+          "civil": "cordialement",
+          "imposteur": "amicalement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "cordially",
+          "imposteur_en": "amicably"
+        },
+        {
+          "civil": "volontiers",
+          "imposteur": "volontairement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "willingly",
+          "imposteur_en": "voluntarily"
+        },
+        {
+          "civil": "judicieusement",
+          "imposteur": "sagement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "judiciously",
+          "imposteur_en": "sensibly"
+        },
+        {
+          "civil": "inquiète",
+          "imposteur": "anxieusement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "worriedly",
+          "imposteur_en": "apprehensively"
+        },
+        {
+          "civil": "avec zèle",
+          "imposteur": "ardemment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "zealously",
+          "imposteur_en": "fervently"
+        },
+        {
+          "civil": "exubéramment",
+          "imposteur": "énergiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "exuberantly",
+          "imposteur_en": "vivacious"
+        },
+        {
+          "civil": "exhaustivement",
+          "imposteur": "complètement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "exhaustively",
+          "imposteur_en": "thoroughly"
+        },
+        {
+          "civil": "frénétiquement",
+          "imposteur": "sauvement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "frantically",
+          "imposteur_en": "wildly"
+        },
+        {
+          "civil": "gracieusement",
+          "imposteur": "élégamment",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "gracefully",
+          "imposteur_en": "elegantly"
+        },
+        {
+          "civil": "hésitant",
+          "imposteur": "incertain",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "hesitantly",
+          "imposteur_en": "uncertainly"
+        },
+        {
+          "civil": "incessamment",
+          "imposteur": "continuellement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "incessantly",
+          "imposteur_en": "continuously"
+        },
+        {
+          "civil": "sciemment",
+          "imposteur": "intentionnellement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "knowingly",
+          "imposteur_en": "intentionally"
+        },
+        {
+          "civil": "léthargiquement",
+          "imposteur": "lentement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "lethargically",
+          "imposteur_en": "sluggishly"
+        },
+        {
+          "civil": "méticuleusement",
+          "imposteur": "précisément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "meticulously",
+          "imposteur_en": "precisely"
+        },
+        {
+          "civil": "nonchalamment",
+          "imposteur": "décontracté",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "nonchalantly",
+          "imposteur_en": "casually"
+        },
+        {
+          "civil": "perpétuellement",
+          "imposteur": "inlassablement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "perpetually",
+          "imposteur_en": "endlessly"
+        },
+        {
+          "civil": "bizarrement",
+          "imposteur": "interrogateur",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "quizzically",
+          "imposteur_en": "questioningly"
+        },
+        {
+          "civil": "ravie",
+          "imposteur": "extatique",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "rapturously",
+          "imposteur_en": "ecstatically"
+        },
+        {
+          "civil": "sauvement",
+          "imposteur": "brutalement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "savagely",
+          "imposteur_en": "brutally"
+        },
+        {
+          "civil": "tactueusement",
+          "imposteur": "diplomatiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "tactfully",
+          "imposteur_en": "diplomatically"
+        },
+        {
+          "civil": "sans vergogne",
+          "imposteur": "éhontément",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "unabashedly",
+          "imposteur_en": "shamelessly"
+        },
+        {
+          "civil": "vigoureusement",
+          "imposteur": "énergiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "vigorously",
+          "imposteur_en": "energetically"
+        },
+        {
+          "civil": "mélancolique",
+          "imposteur": "nostalgiquement",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "wistfully",
+          "imposteur_en": "longingly"
+        }
+      ]
+    },
+    {
+      "id": "sub_3hpw1i",
+      "name": "Verbes",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "courir",
+          "imposteur": "courir à toute vitesse",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "run",
+          "imposteur_en": "sprint"
+        },
+        {
+          "civil": "marcher",
+          "imposteur": "se promener",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "walk",
+          "imposteur_en": "stroll"
+        },
+        {
+          "civil": "manger",
+          "imposteur": "dévorer",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "eat",
+          "imposteur_en": "devour"
+        },
+        {
+          "civil": "boire",
+          "imposteur": "siroter",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "drink",
+          "imposteur_en": "sip"
+        },
+        {
+          "civil": "regarder",
+          "imposteur": "jeter un coup d'oeil",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "look",
+          "imposteur_en": "glance"
+        },
+        {
+          "civil": "parler",
+          "imposteur": "chuchoter",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "speak",
+          "imposteur_en": "whisper"
+        },
+        {
+          "civil": "sauter",
+          "imposteur": "bondir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "jump",
+          "imposteur_en": "leap"
+        },
+        {
+          "civil": "jeter",
+          "imposteur": "lancer doucement",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "throw",
+          "imposteur_en": "toss"
+        },
+        {
+          "civil": "pousser",
+          "imposteur": "bousculer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "push",
+          "imposteur_en": "shove"
+        },
+        {
+          "civil": "tirer",
+          "imposteur": "tirer d'un coup sec",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "pull",
+          "imposteur_en": "tug"
+        },
+        {
+          "civil": "grimper",
+          "imposteur": "escalader",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "climb",
+          "imposteur_en": "scale"
+        },
+        {
+          "civil": "cuisiner",
+          "imposteur": "faire cuire au four",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "cook",
+          "imposteur_en": "bake"
+        },
+        {
+          "civil": "écrire",
+          "imposteur": "gribouiller",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "write",
+          "imposteur_en": "scribble"
+        },
+        {
+          "civil": "lire",
+          "imposteur": "parcourir des yeux",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "read",
+          "imposteur_en": "skim"
+        },
+        {
+          "civil": "rire",
+          "imposteur": "ricaner",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "laugh",
+          "imposteur_en": "chuckle"
+        },
+        {
+          "civil": "pleurer",
+          "imposteur": "sangloter",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "cry",
+          "imposteur_en": "sob"
+        },
+        {
+          "civil": "dormir",
+          "imposteur": "faire une sieste",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "sleep",
+          "imposteur_en": "nap"
+        },
+        {
+          "civil": "se réveiller",
+          "imposteur": "réveiller",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "wake",
+          "imposteur_en": "rouse"
+        },
+        {
+          "civil": "conduire",
+          "imposteur": "faire une virée",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "drive",
+          "imposteur_en": "cruise"
+        },
+        {
+          "civil": "voler",
+          "imposteur": "monter en flèche",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "fly",
+          "imposteur_en": "soar"
+        },
+        {
+          "civil": "nager",
+          "imposteur": "pagayer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "swim",
+          "imposteur_en": "paddle"
+        },
+        {
+          "civil": "chanter",
+          "imposteur": "fredonner",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "sing",
+          "imposteur_en": "hum"
+        },
+        {
+          "civil": "danser",
+          "imposteur": "tournoyer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "dance",
+          "imposteur_en": "twirl"
+        },
+        {
+          "civil": "se battre",
+          "imposteur": "se bagarrer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "fight",
+          "imposteur_en": "brawl"
+        },
+        {
+          "civil": "se disputer",
+          "imposteur": "débattre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "argue",
+          "imposteur_en": "debate"
+        },
+        {
+          "civil": "demander",
+          "imposteur": "se renseigner",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "ask",
+          "imposteur_en": "inquire"
+        },
+        {
+          "civil": "répondre",
+          "imposteur": "répondre à",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "answer",
+          "imposteur_en": "respond"
+        },
+        {
+          "civil": "acheter",
+          "imposteur": "acheter aux enchères",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "buy",
+          "imposteur_en": "purchase"
+        },
+        {
+          "civil": "vendre",
+          "imposteur": "vendre aux enchères",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "sell",
+          "imposteur_en": "auction"
+        },
+        {
+          "civil": "casser",
+          "imposteur": "fracasser",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "break",
+          "imposteur_en": "smash"
+        },
+        {
+          "civil": "nettoyer",
+          "imposteur": "frotter",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "clean",
+          "imposteur_en": "scrub"
+        },
+        {
+          "civil": "laver",
+          "imposteur": "rincer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "wash",
+          "imposteur_en": "rinse"
+        },
+        {
+          "civil": "sécher",
+          "imposteur": "déshydrater",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dry",
+          "imposteur_en": "dehydrate"
+        },
+        {
+          "civil": "chauffer",
+          "imposteur": "bouillir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "heat",
+          "imposteur_en": "boil"
+        },
+        {
+          "civil": "refroidir",
+          "imposteur": "geler",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "cool",
+          "imposteur_en": "freeze"
+        },
+        {
+          "civil": "grandir",
+          "imposteur": "cultiver",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "grow",
+          "imposteur_en": "cultivate"
+        },
+        {
+          "civil": "rétrécir",
+          "imposteur": "compresser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "shrink",
+          "imposteur_en": "compress"
+        },
+        {
+          "civil": "enseigner",
+          "imposteur": "instruire",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "teach",
+          "imposteur_en": "instruct"
+        },
+        {
+          "civil": "apprendre",
+          "imposteur": "mémoriser",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "learn",
+          "imposteur_en": "memorize"
+        },
+        {
+          "civil": "penser",
+          "imposteur": "méditer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "think",
+          "imposteur_en": "ponder"
+        },
+        {
+          "civil": "savoir",
+          "imposteur": "reconnaître",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "know",
+          "imposteur_en": "recognize"
+        },
+        {
+          "civil": "oublier",
+          "imposteur": "négliger",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "forget",
+          "imposteur_en": "overlook"
+        },
+        {
+          "civil": "se souvenir",
+          "imposteur": "se rappeler",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "remember",
+          "imposteur_en": "recall"
+        },
+        {
+          "civil": "créer",
+          "imposteur": "inventer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "create",
+          "imposteur_en": "invent"
+        },
+        {
+          "civil": "détruire",
+          "imposteur": "démolir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "destroy",
+          "imposteur_en": "demolish"
+        },
+        {
+          "civil": "bâtir",
+          "imposteur": "construire",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "build",
+          "imposteur_en": "construct"
+        },
+        {
+          "civil": "creuser",
+          "imposteur": "excaver",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "dig",
+          "imposteur_en": "excavate"
+        },
+        {
+          "civil": "chercher",
+          "imposteur": "sillonner",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "search",
+          "imposteur_en": "scour"
+        },
+        {
+          "civil": "trouver",
+          "imposteur": "découvrir",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "find",
+          "imposteur_en": "discover"
+        },
+        {
+          "civil": "perdre",
+          "imposteur": "égarer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "lose",
+          "imposteur_en": "misplace"
+        },
+        {
+          "civil": "se cacher",
+          "imposteur": "dissimuler",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "hide",
+          "imposteur_en": "conceal"
+        },
+        {
+          "civil": "révéler",
+          "imposteur": "exposer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "reveal",
+          "imposteur_en": "expose"
+        },
+        {
+          "civil": "ouvrir",
+          "imposteur": "déverrouiller",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "open",
+          "imposteur_en": "unlock"
+        },
+        {
+          "civil": "fermer",
+          "imposteur": "sceller",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "close",
+          "imposteur_en": "seal"
+        },
+        {
+          "civil": "commencer",
+          "imposteur": "initier",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "start",
+          "imposteur_en": "initiate"
+        },
+        {
+          "civil": "finir",
+          "imposteur": "terminer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "end",
+          "imposteur_en": "terminate"
+        },
+        {
+          "civil": "continuer",
+          "imposteur": "persister",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "continue",
+          "imposteur_en": "persist"
+        },
+        {
+          "civil": "arrêter",
+          "imposteur": "interrompre",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "stop",
+          "imposteur_en": "halt"
+        },
+        {
+          "civil": "bouger",
+          "imposteur": "relocaliser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "move",
+          "imposteur_en": "relocate"
+        },
+        {
+          "civil": "rester",
+          "imposteur": "demeurer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "stay",
+          "imposteur_en": "remain"
+        },
+        {
+          "civil": "changer",
+          "imposteur": "altérer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "change",
+          "imposteur_en": "alter"
+        },
+        {
+          "civil": "améliorer",
+          "imposteur": "rehausser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "improve",
+          "imposteur_en": "enhance"
+        },
+        {
+          "civil": "empirer",
+          "imposteur": "détériorer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "worsen",
+          "imposteur_en": "deteriorate"
+        },
+        {
+          "civil": "aider",
+          "imposteur": "assister",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "help",
+          "imposteur_en": "assist"
+        },
+        {
+          "civil": "entraver",
+          "imposteur": "obstruer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "hinder",
+          "imposteur_en": "obstruct"
+        },
+        {
+          "civil": "soutenir",
+          "imposteur": "renforcer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "support",
+          "imposteur_en": "bolster"
+        },
+        {
+          "civil": "s'opposer",
+          "imposteur": "résister",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "oppose",
+          "imposteur_en": "resist"
+        },
+        {
+          "civil": "gagner",
+          "imposteur": "triompher",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "win",
+          "imposteur_en": "triumph"
+        },
+        {
+          "civil": "perdre",
+          "imposteur": "renoncer à",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "lose",
+          "imposteur_en": "forfeit"
+        },
+        {
+          "civil": "jouer",
+          "imposteur": "folâtrer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "play",
+          "imposteur_en": "frolic"
+        },
+        {
+          "civil": "travailler",
+          "imposteur": "trimer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "work",
+          "imposteur_en": "labor"
+        },
+        {
+          "civil": "se reposer",
+          "imposteur": "se prélasser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "rest",
+          "imposteur_en": "lounge"
+        },
+        {
+          "civil": "voyager",
+          "imposteur": "faire un périple",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "travel",
+          "imposteur_en": "journey"
+        },
+        {
+          "civil": "explorer",
+          "imposteur": "s'aventurer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "explore",
+          "imposteur_en": "venture"
+        },
+        {
+          "civil": "s'échapper",
+          "imposteur": "fuir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "escape",
+          "imposteur_en": "flee"
+        },
+        {
+          "civil": "chasser",
+          "imposteur": "poursuivre",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "chase",
+          "imposteur_en": "pursue"
+        },
+        {
+          "civil": "attraper",
+          "imposteur": "capturer",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "catch",
+          "imposteur_en": "capture"
+        },
+        {
+          "civil": "relâcher",
+          "imposteur": "libérer",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "release",
+          "imposteur_en": "free"
+        },
+        {
+          "civil": "rassembler",
+          "imposteur": "collectionner",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "gather",
+          "imposteur_en": "collect"
+        },
+        {
+          "civil": "rejoindre",
+          "imposteur": "unir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "join",
+          "imposteur_en": "unite"
+        },
+        {
+          "civil": "séparer",
+          "imposteur": "diviser",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "separate",
+          "imposteur_en": "divide"
+        },
+        {
+          "civil": "tomber",
+          "imposteur": "descendre en flèche",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "fall",
+          "imposteur_en": "descend"
+        },
+        {
+          "civil": "tourner",
+          "imposteur": "pivoter",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "turn",
+          "imposteur_en": "rotate"
+        },
+        {
+          "civil": "tordre",
+          "imposteur": "se contorsionner",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "twist",
+          "imposteur_en": "contort"
+        },
+        {
+          "civil": "plier",
+          "imposteur": "fléchir",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "bend",
+          "imposteur_en": "flex"
+        },
+        {
+          "civil": "étirer",
+          "imposteur": "étendre",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "stretch",
+          "imposteur_en": "extend"
+        },
+        {
+          "civil": "presser",
+          "imposteur": "compresser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "squeeze",
+          "imposteur_en": "compress"
+        },
+        {
+          "civil": "lever",
+          "imposteur": "hisser",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "lift",
+          "imposteur_en": "hoist"
+        },
+        {
+          "civil": "lâcher",
+          "imposteur": "s'effondrer",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "drop",
+          "imposteur_en": "plummet"
+        },
+        {
+          "civil": "livrer",
+          "imposteur": "expédier",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "deliver",
+          "imposteur_en": "dispatch"
+        },
+        {
+          "civil": "recevoir",
+          "imposteur": "obtenir",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "receive",
+          "imposteur_en": "obtain"
+        },
+        {
+          "civil": "envoyer",
+          "imposteur": "transmettre",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "send",
+          "imposteur_en": "transmit"
+        },
+        {
+          "civil": "couper",
+          "imposteur": "trancher",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "cut",
+          "imposteur_en": "slice"
+        },
+        {
+          "civil": "couper",
+          "imposteur": "couper en dés",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "chop",
+          "imposteur_en": "dice"
+        },
+        {
+          "civil": "remuer",
+          "imposteur": "fouetter",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "stir",
+          "imposteur_en": "whisk"
+        }
+      ]
+    },
+    {
+      "id": "sub_nxnsx1",
+      "name": "Objet",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "tasse",
+          "imposteur": "bol",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "cup",
+          "imposteur_en": "bowl"
+        },
+        {
+          "civil": "chaise",
+          "imposteur": "table",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "chair",
+          "imposteur_en": "table"
+        },
+        {
+          "civil": "aspirateur",
+          "imposteur": "balai",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "vacuum",
+          "imposteur_en": "broom"
+        },
+        {
+          "civil": "voiture",
+          "imposteur": "bus",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "car",
+          "imposteur_en": "bus"
+        },
+        {
+          "civil": "bateau",
+          "imposteur": "navire",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "boat",
+          "imposteur_en": "ship"
+        },
+        {
+          "civil": "vélo",
+          "imposteur": "scooter",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "bike",
+          "imposteur_en": "scooter"
+        },
+        {
+          "civil": "avion",
+          "imposteur": "hélicoptère",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "plane",
+          "imposteur_en": "helicopter"
+        },
+        {
+          "civil": "camion",
+          "imposteur": "voiture",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "truck",
+          "imposteur_en": "car"
+        },
+        {
+          "civil": "train",
+          "imposteur": "métro",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "train",
+          "imposteur_en": "subway"
+        },
+        {
+          "civil": "table",
+          "imposteur": "bureau",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "table",
+          "imposteur_en": "desk"
+        },
+        {
+          "civil": "cabinet",
+          "imposteur": "armoire",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "cabinet",
+          "imposteur_en": "wardrobe"
+        },
+        {
+          "civil": "tabouret",
+          "imposteur": "banc",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "stool",
+          "imposteur_en": "bench"
+        },
+        {
+          "civil": "fourchette",
+          "imposteur": "cuillère",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "fork",
+          "imposteur_en": "spoon"
+        },
+        {
+          "civil": "lit",
+          "imposteur": "oreiller",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "bed",
+          "imposteur_en": "pillow"
+        },
+        {
+          "civil": "lampe",
+          "imposteur": "ampoule",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "lamp",
+          "imposteur_en": "lightbulb"
+        },
+        {
+          "civil": "appareil photo",
+          "imposteur": "objectif",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "camera",
+          "imposteur_en": "lens"
+        },
+        {
+          "civil": "lit",
+          "imposteur": "matelas",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "bed",
+          "imposteur_en": "mattress"
+        },
+        {
+          "civil": "oreiller",
+          "imposteur": "coussin",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "pillow",
+          "imposteur_en": "cushion"
+        },
+        {
+          "civil": "sculpture",
+          "imposteur": "statue",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "sculpture",
+          "imposteur_en": "statue"
+        },
+        {
+          "civil": "horloge",
+          "imposteur": "montre",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "clock",
+          "imposteur_en": "watch"
+        },
+        {
+          "civil": "manteau",
+          "imposteur": "veste",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "coat",
+          "imposteur_en": "jacket"
+        },
+        {
+          "civil": "chaussettes",
+          "imposteur": "bas",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "socks",
+          "imposteur_en": "stockings"
+        },
+        {
+          "civil": "chemise",
+          "imposteur": "chemisier",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "shirt",
+          "imposteur_en": "blouse"
+        },
+        {
+          "civil": "chapeau",
+          "imposteur": "casquette",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "hat",
+          "imposteur_en": "cap"
+        },
+        {
+          "civil": "laine",
+          "imposteur": "soie",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "wool",
+          "imposteur_en": "silk"
+        },
+        {
+          "civil": "jeans",
+          "imposteur": "pantalon",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "jeans",
+          "imposteur_en": "pants"
+        },
+        {
+          "civil": "résistance",
+          "imposteur": "condensateur",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "resistor",
+          "imposteur_en": "capacitor"
+        },
+        {
+          "civil": "voltmètre",
+          "imposteur": "ampèremètre",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "voltmeter",
+          "imposteur_en": "ammeter"
+        },
+        {
+          "civil": "tension",
+          "imposteur": "courant",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "voltage",
+          "imposteur_en": "current"
+        },
+        {
+          "civil": "lumière",
+          "imposteur": "ampoule",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "light",
+          "imposteur_en": "bulb"
+        }
+      ]
+    }
+  ]
+}

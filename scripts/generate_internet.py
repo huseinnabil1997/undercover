@@ -31,9 +31,43 @@ LABEL_SUMBER = {
     "daeng": "DaengWithAI/undercover-indonesia (tanpa lisensi)",
     "egi": "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
     "arisandi": "arisandi95/undercover-game-indonesia (tanpa lisensi)",
+    "deepak": "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+    "tejas": "tejasdasari06/Imposter-game (tanpa lisensi)",
+    "bipash": "Bipash2002/undercover (tanpa lisensi)",
+    "arashad": "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+    "srinath": "srinath987/Undercover-clone (MIT)",
+    "vm1235": "VM1235/undercover-word-game (MIT)",
+    "jishnu": "jishnurajendran/undercover (tanpa lisensi)",
+    "amazin": "AmazinAmazon/Undercover (tanpa lisensi)",
+    "schluby": "Schluby/Undercover (tanpa lisensi)",
+    "chair": "ChairGamertag87/undercover (MIT)",
+    "nidroz": "Nidroz/undercover (MIT)",
+    "zhengyi": "zhengyi-yang/WhoIsTheSpy (MIT)",
+    "xuqssq": "xuqssq/whois-undercover-game (MIT)",
 }
 
 POLA_PASANGAN = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\]')
+TEKS_KUTIP = r"""["']([^"'\n]{1,60})["']"""
+
+
+def pasangan_objek(teks, ka, kb):
+    """Pasangan dari objek JS {ka: 'x', kb: 'y'} (urutan kunci bebas)."""
+    hasil = []
+    for m in re.finditer(r"\{[^{}]{0,600}\}", teks):
+        o = m.group(0)
+        a = re.search(r"[\"']?(?:" + ka + r")[\"']?\s*:\s*" + TEKS_KUTIP, o)
+        b = re.search(r"[\"']?(?:" + kb + r")[\"']?\s*:\s*" + TEKS_KUTIP, o)
+        if a and b:
+            hasil.append((a.group(1), b.group(1)))
+    return hasil
+
+
+def baca_asli(nama):
+    return (ASLI / nama).read_text(encoding="utf-8")
+
+
+def json_asli(nama):
+    return json.loads(baca_asli(nama))
 
 
 def normal(s):
@@ -99,6 +133,59 @@ def muat_sumber(nama):
         teks = (ASLI / "arisandi95-DatabaseSeeder.php.txt").read_text(encoding="utf-8")
         for a, b in re.findall(r"\[\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'[a-z]+'\s*\]", teks):
             hasil.add(kunci(a, b))
+    elif jenis == "deepak":
+        for a, b in pasangan_objek(baca_asli("deepak-fallbackWords.ts.txt"), "civilian", "undercover"):
+            hasil.add(kunci(a, b))
+        for p in json_asli("deepak-curatedWords.json"):
+            hasil.add(kunci(p["civilian"], p["undercover"]))
+    elif jenis == "tejas":
+        for a, b in pasangan_objek(baca_asli("tejas-wordPairs.ts.txt"), "crew", "imposter"):
+            hasil.add(kunci(a, b))
+    elif jenis == "bipash":
+        for a, b in pasangan_objek(baca_asli("bipash-wordpairs.js.txt"), "civilian", "undercover"):
+            hasil.add(kunci(a, b))
+    elif jenis == "arashad":
+        for p in json_asli("arashad-word-pairs.json"):
+            hasil.add(kunci(p["citizen"], p["undercover"]))
+    elif jenis == "srinath":
+        for a, b in pasangan_objek(baca_asli("srinath-App.js.txt"), "civilian", "undercover"):
+            hasil.add(kunci(a, b))
+    elif jenis == "vm1235":
+        for a, b in re.findall(r"\[\s*" + TEKS_KUTIP + r"\s*,\s*" + TEKS_KUTIP + r"\s*\]",
+                               baca_asli("vm1235-wordPairs-en.ts.txt")):
+            hasil.add(kunci(a, b))
+    elif jenis == "jishnu":
+        for baris in baca_asli("jishnu-words.txt").splitlines():
+            m = re.match(r'\["([^"]+)"+,\s*"([^"]+)"\]', baris)
+            if m:
+                hasil.add(kunci(*m.groups()))
+    elif jenis == "amazin":
+        for p in json_asli("amazin-words_en.json"):
+            hasil.add(kunci(p["citizen"], p["undercover"]))
+    elif jenis == "schluby":
+        # Sumber berbahasa Prancis; versi Inggris (civil_en) ikut dimuat.
+        for berkas in sorted((ASLI / "schluby").glob("*.json")):
+            for s in json.loads(berkas.read_text(encoding="utf-8"))["subthemes"]:
+                for p in s["pairs"]:
+                    hasil.add(kunci(p["civil"], p["imposteur"]))
+                    if p.get("civil_en") and p.get("imposteur_en"):
+                        hasil.add(kunci(p["civil_en"], p["imposteur_en"]))
+    elif jenis == "chair":
+        for tema in json_asli("chair-undercover_paires.json")["themes"]:
+            for p in tema["paires"]:
+                hasil.add(kunci(p["civil"], p["undercover"]))
+    elif jenis == "nidroz":
+        teks = baca_asli("nidroz-words.js.txt")
+        for a, b in pasangan_objek(teks[teks.index("en: ["):], "civilian", "impostor"):
+            hasil.add(kunci(a, b))
+    elif jenis == "zhengyi":
+        for baris in baca_asli("zhengyi-words-500.txt").splitlines():
+            if "," in baris:
+                a, b = baris.split(",", 1)
+                hasil.add(kunci(a, b))
+    elif jenis == "xuqssq":
+        for p in json_asli("xuqssq-words.json"):
+            hasil.add(kunci(p["common"], p["undercover"]))
     else:
         raise SystemExit(f"Sumber tidak dikenal: {nama}")
     return hasil

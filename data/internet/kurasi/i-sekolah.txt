@@ -61,3 +61,138 @@ English / Spanish = Bahasa Inggris / Bahasa Spanyol
 French / German = Bahasa Prancis / Bahasa Jerman
 Latin / Greek = Bahasa Latin / Bahasa Yunani
 Map / Globe = Peta / Globe
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Origami / Graffiti = Origami / Grafiti
+Pencil / ruler = Pensil / Penggaris
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+book / magazine = Buku / Majalah
+newspaper / article = Koran / Artikel
+pencil / crayon = Pensil / Krayon
+book / novel = Buku / Novel
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Teacher / Student = Guru / Murid
+Science / Maths = IPA / Matematika
+History / Geography = Sejarah / Geografi
+Book / Diary = Buku / Buku Harian
+Class / Lecture = Kelas / Kuliah
+Homework / Project = PR / Proyek
+Board / Screen = Papan Tulis / Layar Proyektor
+Bell / Alarm = Bel / Alarm
+Report / Essay = Laporan / Esai
+Ruler / Scale = Penggaris / Timbangan
+Atlas / Map = Atlas / Peta
+Diploma / Certificate = Ijazah / Sertifikat
+Story / Poem = Cerita / Puisi
+Power / Energy = Daya / Energi
+Paper / Page = Kertas / Halaman
+Ink / Paint = Tinta / Cat
+Art / Drawing = Seni / Gambar
+Tuition / Class = Les / Kelas
+Notice / Result = Pengumuman / Hasil Ujian
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Stylo / Crayon = Pulpen / Pensil
+Livre / Journal = Buku / Koran
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Book / Notebook = Buku / Buku Tulis
+Ruler / Compass = Penggaris / Jangka
+Chalk / Marker = Kapur / Spidol
+Exam / Test = Ujian / Kuis
+File / Folder = File / Folder
+Classroom / Library = Kelas / Perpustakaan
+Marks / Grade = Nilai / Rapor
+Read / Write = Membaca / Menulis
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+résistance / condensateur = Resistor / Kapasitor
+voltmètre / ampèremètre = Voltmeter / Amperemeter
+tension / courant = Tegangan / Arus
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Teacher / Blackboard = Guru / Papan Tulis
+Pen / Eraser = Pulpen / Penghapus
+Book / Pencil = Buku / Pensil
+Blackboard / Chalk = Papan Tulis / Kapur
+Classroom / Playground = Ruang Kelas / Lapangan
+Homework / Holiday = PR / Libur
+Principal / Student = Kepala Sekolah / Murid
+Library / Playground = Perpustakaan / Lapangan
+Blackboard / Notebook = Papan Tulis / Buku Tulis
+Principal / Monitor = Kepala Sekolah / Ketua Kelas
+Homework / Exam = PR / Ujian
+Pen / Chalk = Pulpen / Kapur
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Atom / Molecule = Atom / Molekul
+Cell / Tissue = Sel / Jaringan
+Liquid / Gas = Cair / Gas
+Microscope / Telescope = Mikroskop / Teleskop
+Magnet / Compass = Magnet / Kompas
+Gravity / Magnetism = Gravitasi / Magnet
+Archaeology / Palaeontology = Arkeologi / Paleontologi
+Artifact / Fossil = Artefak / Fosil
+Renaissance / Enlightenment = Renaisans / Pencerahan
+World War I / World War II = Perang Dunia I / Perang Dunia II
+Cold War / Space Race = Perang Dingin / Perlombaan Antariksa
+Electron / Proton = Elektron / Proton
+Neutron / Nucleus = Neutron / Inti Atom
+DNA / RNA = DNA / RNA
+Gene / Chromosome = Gen / Kromosom
+Protein / Enzyme = Protein / Enzim
+Hormone / Vitamin = Hormon / Vitamin
+Acid / Base = Asam / Basa
+Plasma / Gas = Plasma / Gas
+Gravity / Inertia = Gravitasi / Inersia
+Force / Energy = Gaya / Energi
+Velocity / Acceleration = Kecepatan / Percepatan
+Mass / Weight = Massa / Berat
+Density / Volume = Massa Jenis / Volume
+Temperature / Heat = Suhu / Kalor
+Light / Laser = Cahaya / Laser
+Sound / Ultrasound = Suara / Ultrasonik
+Electricity / Magnetism = Listrik / Magnet
+Fusion / Fission = Fusi / Fisi
+Equation / Formula = Persamaan / Rumus
+Fraction / Decimal = Pecahan / Desimal
+Percentage / Ratio = Persen / Rasio
+Algebra / Geometry = Aljabar / Geometri
+Calculus / Trigonometry = Kalkulus / Trigonometri
+Theorem / Proof = Teorema / Pembuktian
+Matrix / Vector = Matriks / Vektor
+Graph / Chart = Grafik / Diagram
+Statistics / Probability = Statistika / Peluang
+Theory / Hypothesis = Teori / Hipotesis
+Experiment / Observation = Eksperimen / Observasi
+Beaker / Flask = Gelas Kimia / Labu Erlenmeyer
+Pipette / Syringe = Pipet / Suntikan
+Thermometer / Barometer = Termometer / Barometer
+Oxygen / Nitrogen = Oksigen / Nitrogen
+Hydrogen / Helium = Hidrogen / Helium
+Carbon / Silicon = Karbon / Silikon
+Evolution / Adaptation = Evolusi / Adaptasi
+Photosynthesis / Respiration = Fotosintesis / Respirasi
+Write / Draw = Menulis / Menggambar
+
+# Terjemahan dan kurasi dari xuqssq/whois-undercover-game.
+@ xuqssq
+白板 / 黑板 = Papan Tulis Putih / Papan Tulis Hitam
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+作文 / 论文 = Karangan / Skripsi
+同学 / 同桌 = Teman Sekelas / Teman Sebangku
+三角板 / 直尺 = Penggaris Segitiga / Penggaris Lurus
+动物 / 植物 = Hewan / Tumbuhan
+班主任 / 辅导员 = Wali Kelas / Dosen Wali

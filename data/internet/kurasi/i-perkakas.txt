@@ -30,3 +30,41 @@ Tang / Gergaji
 @ sqiprasanna
 Screwdriver / Wrench = Obeng / Kunci Inggris
 Saw / Drill = Gergaji / Bor
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+cement / concrete = Semen / Beton
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Rope / Chain = Tali / Rantai
+Needle / Pin = Jarum / Peniti
+Ladder / Rope = Tangga / Tali
+Net / Trap = Jaring / Perangkap
+Lever / Switch = Tuas / Saklar
+Build / Fix = Membangun / Memperbaiki
+Brick / Stone = Bata / Batu
+Cement / Sand = Semen / Pasir
+Wood / Timber = Kayu / Balok
+Tractor / Plough = Traktor / Bajak
+Khukuri / Knife = Golok / Pisau
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Marteau / Tournevis = Palu / Obeng
+Ciseaux / Cutter = Gunting / Cutter
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Nail / Screw = Paku / Sekrup
+Paint / Brush = Cat / Kuas
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Scissors / Paper Cutter = Gunting / Cutter
+Rope / Cable = Tali / Kabel
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Scissors / Shears = Gunting / Gunting Dahan
+Hammer / Mallet = Palu / Palu Kayu

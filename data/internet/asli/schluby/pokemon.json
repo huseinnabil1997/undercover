@@ -1,0 +1,301 @@
+{
+  "id": "pokemon",
+  "name": "Pokémon",
+  "emoji": "⚡",
+  "version": 2,
+  "subthemes": [
+    {
+      "id": "sub_ddb2sm",
+      "name": "Pokémon Gen 1",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Pikachu",
+          "imposteur": "Raichu",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Pikachu",
+          "imposteur_en": "Raichu"
+        },
+        {
+          "civil": "Bulbizarre",
+          "imposteur": "Salamèche",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Bulbasaur",
+          "imposteur_en": "Charmander"
+        },
+        {
+          "civil": "Salamèche",
+          "imposteur": "Carapuce",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Charmander",
+          "imposteur_en": "Squirtle"
+        },
+        {
+          "civil": "Dracaufeu",
+          "imposteur": "Tortank",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Charizard",
+          "imposteur_en": "Blastoise"
+        },
+        {
+          "civil": "Évoli",
+          "imposteur": "Aquali",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Eevee",
+          "imposteur_en": "Vaporeon"
+        },
+        {
+          "civil": "Mewtwo",
+          "imposteur": "Mew",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mewtwo",
+          "imposteur_en": "Mew"
+        },
+        {
+          "civil": "Chenipan",
+          "imposteur": "Aspicot",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Caterpie",
+          "imposteur_en": "Weedle"
+        },
+        {
+          "civil": "Magicarpe",
+          "imposteur": "Léviator",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Magikarp",
+          "imposteur_en": "Gyarados"
+        },
+        {
+          "civil": "Miaouss",
+          "imposteur": "Persian",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Meowth",
+          "imposteur_en": "Persian"
+        },
+        {
+          "civil": "Ectoplasma",
+          "imposteur": "Fantominus",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gengar",
+          "imposteur_en": "Gastly"
+        },
+        {
+          "civil": "Roucool",
+          "imposteur": "Rattata",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Pidgey",
+          "imposteur_en": "Rattata"
+        },
+        {
+          "civil": "Onix",
+          "imposteur": "Racaillou",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Onix",
+          "imposteur_en": "Geodude"
+        },
+        {
+          "civil": "Artikodin",
+          "imposteur": "Sulfura",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Articuno",
+          "imposteur_en": "Moltres"
+        },
+        {
+          "civil": "Ossatueur",
+          "imposteur": "Osselait",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Marowak",
+          "imposteur_en": "Cubone"
+        }
+      ]
+    },
+    {
+      "id": "sub_juderf",
+      "name": "Légendaires & autres gens",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Lugia",
+          "imposteur": "Ho-Oh",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Lugia",
+          "imposteur_en": "Ho-Oh"
+        },
+        {
+          "civil": "Rayquaza",
+          "imposteur": "Groudon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Rayquaza",
+          "imposteur_en": "Groudon"
+        },
+        {
+          "civil": "Dialga",
+          "imposteur": "Palkia",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Dialga",
+          "imposteur_en": "Palkia"
+        },
+        {
+          "civil": "Arceus",
+          "imposteur": "Giratina",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Arceus",
+          "imposteur_en": "Giratina"
+        },
+        {
+          "civil": "Dracaufeu",
+          "imposteur": "Dracolosse",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Charizard",
+          "imposteur_en": "Dragonite"
+        },
+        {
+          "civil": "Lucario",
+          "imposteur": "Zoroark",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Lucario",
+          "imposteur_en": "Zoroark"
+        },
+        {
+          "civil": "Goupix d'Alola",
+          "imposteur": "Goupix",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Alolan Vulpix",
+          "imposteur_en": "Vulpix"
+        },
+        {
+          "civil": "Méga-Évolution",
+          "imposteur": "Gigamax",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Mega Evolution",
+          "imposteur_en": "Gigantamax"
+        },
+        {
+          "civil": "Darkrai",
+          "imposteur": "Cresselia",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Darkrai",
+          "imposteur_en": "Cresselia"
+        },
+        {
+          "civil": "Zacian",
+          "imposteur": "Zamazenta",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Zacian",
+          "imposteur_en": "Zamazenta"
+        }
+      ]
+    },
+    {
+      "id": "sub_9oh2zt",
+      "name": "Dresseurs, Types & Univers",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Sacha",
+          "imposteur": "Ondine",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Ash",
+          "imposteur_en": "Misty"
+        },
+        {
+          "civil": "Team Rocket",
+          "imposteur": "Team Aqua",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Team Rocket",
+          "imposteur_en": "Team Aqua"
+        },
+        {
+          "civil": "Pokéball",
+          "imposteur": "Hyper Ball",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Poké Ball",
+          "imposteur_en": "Ultra Ball"
+        },
+        {
+          "civil": "Type Feu",
+          "imposteur": "Type Eau",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Fire Type",
+          "imposteur_en": "Water Type"
+        },
+        {
+          "civil": "Type Plante",
+          "imposteur": "Type Insecte",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Grass Type",
+          "imposteur_en": "Bug Type"
+        },
+        {
+          "civil": "Arène",
+          "imposteur": "Ligue Pokémon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gym",
+          "imposteur_en": "Pokémon League"
+        },
+        {
+          "civil": "Potion",
+          "imposteur": "Super Potion",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Potion",
+          "imposteur_en": "Super Potion"
+        },
+        {
+          "civil": "Dresseur",
+          "imposteur": "Champion d'Arène",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Trainer",
+          "imposteur_en": "Gym Leader"
+        },
+        {
+          "civil": "Professeur Chen",
+          "imposteur": "Professeur Sorbier",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Professor Oak",
+          "imposteur_en": "Professor Birch"
+        },
+        {
+          "civil": "Centre Pokémon",
+          "imposteur": "Boutique Pokémon",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Pokémon Center",
+          "imposteur_en": "Poké Mart"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "id": "lotr",
+  "name": "Seigneur des Anneaux",
+  "emoji": "💍",
+  "version": 3,
+  "subthemes": [
+    {
+      "id": "sub_jjl7i3",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Frodon",
+          "imposteur": "Sam",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Frodo",
+          "imposteur_en": "Sam"
+        },
+        {
+          "civil": "Gandalf",
+          "imposteur": "Saroumane",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Gandalf",
+          "imposteur_en": "Saruman"
+        },
+        {
+          "civil": "Aragorn",
+          "imposteur": "Boromir",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Aragorn",
+          "imposteur_en": "Boromir"
+        },
+        {
+          "civil": "Legolas",
+          "imposteur": "Gimli",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Legolas",
+          "imposteur_en": "Gimli"
+        },
+        {
+          "civil": "Gollum",
+          "imposteur": "Sméagol",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Gollum",
+          "imposteur_en": "Sméagol"
+        },
+        {
+          "civil": "Merry",
+          "imposteur": "Pippin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Merry",
+          "imposteur_en": "Pippin"
+        },
+        {
+          "civil": "Sauron",
+          "imposteur": "Saroumane",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Sauron",
+          "imposteur_en": "Saruman"
+        },
+        {
+          "civil": "Bilbon",
+          "imposteur": "Frodon",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Bilbo",
+          "imposteur_en": "Frodo"
+        },
+        {
+          "civil": "Arwen",
+          "imposteur": "Galadriel",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Arwen",
+          "imposteur_en": "Galadriel"
+        },
+        {
+          "civil": "Elrond",
+          "imposteur": "Thranduil",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Elrond",
+          "imposteur_en": "Thranduil"
+        },
+        {
+          "civil": "Théoden",
+          "imposteur": "Denethor",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Théoden",
+          "imposteur_en": "Denethor"
+        },
+        {
+          "civil": "Éowyn",
+          "imposteur": "Éomer",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Éowyn",
+          "imposteur_en": "Éomer"
+        },
+        {
+          "civil": "Le Roi-Sorcier",
+          "imposteur": "Nazgûl",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Witch-king",
+          "imposteur_en": "Nazgûl"
+        },
+        {
+          "civil": "Faramir",
+          "imposteur": "Boromir",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Faramir",
+          "imposteur_en": "Boromir"
+        },
+        {
+          "civil": "Grima",
+          "imposteur": "Saroumane",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Grima Wormtongue",
+          "imposteur_en": "Saruman"
+        },
+        {
+          "civil": "Tom Bombadil",
+          "imposteur": "Barbebois",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Tom Bombadil",
+          "imposteur_en": "Treebeard"
+        }
+      ]
+    },
+    {
+      "id": "sub_xlek8p",
+      "name": "Lieux de la Terre du Milieu",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "La Comté",
+          "imposteur": "Le Mordor",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "The Shire",
+          "imposteur_en": "Mordor"
+        },
+        {
+          "civil": "Fondcombe",
+          "imposteur": "Lothlórien",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Rivendell",
+          "imposteur_en": "Lothlórien"
+        },
+        {
+          "civil": "Minas Tirith",
+          "imposteur": "Minas Morgul",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Minas Tirith",
+          "imposteur_en": "Minas Morgul"
+        },
+        {
+          "civil": "Le Gouffre de Helm",
+          "imposteur": "Isengard",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Helm's Deep",
+          "imposteur_en": "Isengard"
+        },
+        {
+          "civil": "La Moria",
+          "imposteur": "Erebor",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Moria",
+          "imposteur_en": "Erebor"
+        },
+        {
+          "civil": "Le Mont Destin",
+          "imposteur": "Barad-dûr",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mount Doom",
+          "imposteur_en": "Barad-dûr"
+        },
+        {
+          "civil": "Edoras",
+          "imposteur": "Gondor",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Edoras",
+          "imposteur_en": "Gondor"
+        },
+        {
+          "civil": "Bree",
+          "imposteur": "Hobbitebourg",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Bree",
+          "imposteur_en": "Hobbiton"
+        },
+        {
+          "civil": "Les Marais des Morts",
+          "imposteur": "La Forêt de Fangorn",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Dead Marshes",
+          "imposteur_en": "Fangorn Forest"
+        },
+        {
+          "civil": "Cirith Ungol",
+          "imposteur": "La Porte Noire",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Cirith Ungol",
+          "imposteur_en": "Black Gate"
+        }
+      ]
+    },
+    {
+      "id": "sub_kiburx",
+      "name": "Races & Objets",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Hobbit",
+          "imposteur": "Nain",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hobbit",
+          "imposteur_en": "Dwarf"
+        },
+        {
+          "civil": "Elfe",
+          "imposteur": "Homme",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Elf",
+          "imposteur_en": "Man"
+        },
+        {
+          "civil": "Orque",
+          "imposteur": "Uruk-hai",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Orc",
+          "imposteur_en": "Uruk-hai"
+        },
+        {
+          "civil": "Ent",
+          "imposteur": "Troll",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Ent",
+          "imposteur_en": "Troll"
+        },
+        {
+          "civil": "L'Anneau Unique",
+          "imposteur": "Les Trois Anneaux",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "One Ring",
+          "imposteur_en": "Three Rings"
+        },
+        {
+          "civil": "Dard",
+          "imposteur": "Andúril",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Sting",
+          "imposteur_en": "Andúril"
+        },
+        {
+          "civil": "Le Palantír",
+          "imposteur": "Le Phial de Galadriel",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Palantír",
+          "imposteur_en": "Phial of Galadriel"
+        },
+        {
+          "civil": "Le Mithril",
+          "imposteur": "L'Arkenstone",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mithril",
+          "imposteur_en": "Arkenstone"
+        },
+        {
+          "civil": "Lembas",
+          "imposteur": "Pipe-weed",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Lembas",
+          "imposteur_en": "Pipe-weed"
+        },
+        {
+          "civil": "Aigles géants",
+          "imposteur": "Nazgûl ailés",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Great Eagles",
+          "imposteur_en": "Fell Beasts"
+        }
+      ]
+    },
+    {
+      "id": "sub_4jkkzw",
+      "name": "Silmarillion (très niche)",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Melkor",
+          "imposteur": "Morgoth",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Melkor",
+          "imposteur_en": "Morgoth"
+        },
+        {
+          "civil": "Fëanor",
+          "imposteur": "Fingolfin",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Fëanor",
+          "imposteur_en": "Fingolfin"
+        },
+        {
+          "civil": "Beren",
+          "imposteur": "Lúthien",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Beren",
+          "imposteur_en": "Lúthien"
+        },
+        {
+          "civil": "Túrin Turambar",
+          "imposteur": "Húrin",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Túrin Turambar",
+          "imposteur_en": "Húrin"
+        },
+        {
+          "civil": "Les Silmarils",
+          "imposteur": "Les Deux Arbres",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "The Silmarils",
+          "imposteur_en": "Two Trees of Valinor"
+        },
+        {
+          "civil": "Valar",
+          "imposteur": "Maiar",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Valar",
+          "imposteur_en": "Maiar"
+        },
+        {
+          "civil": "Gondolin",
+          "imposteur": "Nargothrond",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Gondolin",
+          "imposteur_en": "Nargothrond"
+        },
+        {
+          "civil": "Númenor",
+          "imposteur": "Valinor",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Númenor",
+          "imposteur_en": "Valinor"
+        },
+        {
+          "civil": "Glaurung",
+          "imposteur": "Ancalagon",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Glaurung",
+          "imposteur_en": "Ancalagon"
+        },
+        {
+          "civil": "Eärendil",
+          "imposteur": "Elwing",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Eärendil",
+          "imposteur_en": "Elwing"
+        },
+        {
+          "civil": "Thingol",
+          "imposteur": "Melian",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Thingol",
+          "imposteur_en": "Melian"
+        },
+        {
+          "civil": "Ungoliant",
+          "imposteur": "Arachne",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Ungoliant",
+          "imposteur_en": "Shelob"
+        }
+      ]
+    }
+  ]
+}

@@ -191,3 +191,248 @@ Water / Ice = Air / Es
 Lemon / Grapefruit = Lemon / Jeruk Bali
 Carrot / Radish = Wortel / Lobak
 Potato / Sweet Potato = Kentang / Ubi Jalar
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Pineapple / Cactus = Nanas / Kaktus
+Banana / Lemon = Pisang / Lemon
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+orange / lemon = Jeruk / Lemon
+coffee / espresso = Kopi / Espresso
+butter / margarine = Mentega / Margarin
+orange / tangerine = Jeruk / Jeruk Keprok
+tomato / pepper = Tomat / Paprika
+lettuce / cabbage = Selada / Kubis
+corn / wheat = Jagung / Gandum
+cake / tart = Kue / Tart
+pie / pastry = Pai / Pastri
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Potato / Carrot = Kentang / Wortel
+Rice / Bread = Nasi / Roti
+Milk / Water = Susu / Air
+Egg / Meat = Telur / Daging
+Fish / Chicken = Ikan / Ayam
+Tomato / Chili = Tomat / Cabai
+Butter / Cream = Mentega / Krim
+Cheese / Yogurt = Keju / Yoghurt
+Soup / Curry = Sup / Kari
+Biscuit / Cracker = Biskuit / Kerupuk
+Corn / Pea = Jagung / Kacang Polong
+Mushroom / Spinach = Jamur / Bayam
+Walnut / Peanut = Kenari / Kacang Tanah
+Ginger / Pepper = Jahe / Lada
+Mustard / Sauce = Mustard / Saus
+Steak / Chop = Steak / Iga
+Shrimp / Crab = Udang / Kepiting
+Sandwich / Toast = Sandwich / Roti Bakar
+Porridge / Cereal = Bubur / Sereal
+Raisin / Date = Kismis / Kurma
+Papaya / Guava = Pepaya / Jambu
+Kiwi / Pear = Kiwi / Pir
+Melon / Pumpkin = Melon / Labu
+Broccoli / Cabbage = Brokoli / Kubis
+Beetroot / Radish = Bit / Lobak
+Tea / Milk = Teh / Susu
+Momo / Chowmein = Momo / Mi Goreng
+Samosa / Pakoda = Samosa / Pakora
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Ramen / Pho = Ramen / Pho
+Croissant / Pain au chocolat = Croissant / Roti Cokelat
+Couscous / Tajine = Couscous / Tajine
+Pad Thai / Nouilles sautees = Pad Thai / Kwetiau Goreng
+Curry / Tikka Masala = Kari / Tikka Masala
+Fondue / Raclette = Fondue / Raclette
+Baguette / Pain de mie = Baguette / Roti Tawar
+Falafel / Houmous = Falafel / Hummus
+Lasagnes / Cannellonis = Lasagna / Cannelloni
+Sashimi / Ceviche = Sashimi / Ceviche
+Dim sum / Nems = Dim Sum / Lumpia
+Empanadas / Samoussas = Empanada / Samosa
+Gaufre / Crepe = Wafel / Crepes
+Bibimbap / Sushi = Bibimbap / Sushi
+Poutine / Fish and chips = Poutine / Fish and Chips
+Guacamole / Salsa = Guacamole / Salsa
+Big Mac / Whopper = Big Mac / Whopper
+Nuggets / Tenders = Nugget / Chicken Tender
+Hot-dog / Sandwich = Hot Dog / Sandwich
+Kebab / Panini = Kebab / Panini
+Donut / Beignet = Donat / Roti Goreng
+Nachos / Tortillas = Nachos / Tortilla
+Onion rings / Frites = Onion Ring / Kentang Goreng
+Glace / Sorbet = Es Krim / Sorbet
+Barbecue / Grillades = Barbeku / Panggangan
+Wrap / Sandwich = Wrap / Sandwich
+Bagel / Muffin anglais = Bagel / English Muffin
+Churros / Beignets = Churros / Donat
+Cheeseburger / Chicken burger = Cheeseburger / Burger Ayam
+Fanta / Sprite = Fanta / Sprite
+Chewing-gum / Bonbon = Permen Karet / Permen
+Barre chocolatee / Barre cereale = Cokelat Batang / Granola Bar
+Milkshake / Frappe = Milkshake / Frappe
+Jus d'orange / Jus de pomme = Jus Jeruk / Jus Apel
+Chocolat chaud / Cafe au lait = Cokelat Panas / Kopi Susu
+Eau gazeuse / Eau plate = Air Soda / Air Mineral
+The glace / Cafe glace = Es Teh / Es Kopi
+Sirop / Grenadine = Sirup / Sirup Delima
+Kombucha / Kefir = Kombucha / Kefir
+Pomme / Poire = Apel / Pir
+Banane / Plantain = Pisang / Pisang Tanduk
+Fraise / Framboise = Stroberi / Raspberry
+Orange / Mandarine = Jeruk / Jeruk Mandarin
+Citron / Citron vert = Lemon / Jeruk Nipis
+Carotte / Navet = Wortel / Lobak
+Courgette / Aubergine = Zukini / Terong
+Pomme de terre / Patate douce = Kentang / Ubi
+Ananas / Mangue = Nanas / Mangga
+Cerise / Prune = Ceri / Plum
+Melon / Pasteque = Melon / Semangka
+Kiwi / Fruit de la passion = Kiwi / Markisa
+Brocoli / Chou-fleur = Brokoli / Kembang Kol
+Epinard / Salade = Bayam / Selada
+Oignon / Echalote = Bawang Bombay / Bawang Merah
+Ail / Gingembre = Bawang Putih / Jahe
+Champignon / Truffe = Jamur / Truffle
+Concombre / Cornichon = Mentimun / Acar
+Peche / Abricot = Persik / Aprikot
+Avocat / Olive = Alpukat / Zaitun
+Petit pois / Haricot vert = Kacang Polong / Buncis
+Radis / Betterave = Lobak / Bit
+Figue / Datte = Ara / Kurma
+Tarte aux pommes / Tarte au citron = Pai Apel / Pai Lemon
+Eclair / Religieuse = Eclair / Sus
+Macaron / Meringue = Macaron / Meringue
+Brownie / Fondant au chocolat = Brownies / Lava Cake
+Mille-feuille / Paris-Brest = Mille-feuille / Paris-Brest
+Creme brulee / Flan = Creme Brulee / Puding Karamel
+Madeleine / Financier = Madeleine / Financier
+Profiterole / Choux a la creme = Profiterol / Kue Sus
+Foret noire / Fraisier = Black Forest / Kue Stroberi
+Cookie / Sable = Cookie / Kue Mentega
+Gateau au yaourt / Quatre-quarts = Kue Yogurt / Pound Cake
+Crepe suzette / Gaufre liegeoise = Crepe Suzette / Wafel Liege
+Tarte tatin / Crumble = Tarte Tatin / Crumble
+Glace vanille / Sorbet citron = Es Krim Vanila / Sorbet Lemon
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Milk / Curd = Susu / Yoghurt
+Banana / Mango = Pisang / Mangga
+Potato / Onion = Kentang / Bawang
+Chocolate / Candy = Cokelat / Permen
+Cake / Cookie = Kue / Kukis
+Honey / Jam = Madu / Selai
+Soup / Stew = Sup / Semur
+Salad / Coleslaw = Salad / Gado-gado
+Cappuccino / Latte = Cappuccino / Latte
+Grapes / Raisins = Anggur / Kismis
+Cashew / Almond = Kacang Mete / Almond
+Tiramisu / Panna Cotta = Tiramisu / Puding
+Cook / Bake = Memasak / Memanggang
+Spinach / Lettuce = Bayam / Selada
+Mango / Papaya = Mangga / Pepaya
+Cherry / Strawberry = Ceri / Stroberi
+Lemon / Lime = Lemon / Jeruk Nipis
+Bread / Bun = Roti Tawar / Roti Bun
+Pretzel / Breadstick = Pretzel / Stik Roti
+Shawarma / Kebab = Shawarma / Kebab
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Pizza / Flatbread = Pizza / Roti Pipih
+Sushi / Maki = Sushi / Maki
+Brownie / Blondie = Brownies / Blondies
+Cheesecake / Key lime pie = Cheesecake / Pai Jeruk Nipis
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Café / Thé = Kopi / Teh
+Pizza / Quiche = Pizza / Quiche
+Avocat / Concombre = Alpukat / Mentimun
+Chocolat / Caramel = Cokelat / Karamel
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Cocktail / Mocktail = Koktail / Mocktail
+Ice Cream / Popsicle = Es Krim / Es Loli
+Fries / Chips = Kentang Goreng / Keripik
+Chips / Biscuit = Keripik / Biskuit
+Croissant / Baguette = Croissant / Baguette
+Strawberry / Blue Berry = Stroberi / Blueberry
+Lassi / Butter Milk = Lassi / Susu Mentega
+Coca Cola / Sprite = Coca-Cola / Sprite
+Matcha / Green Tea = Matcha / Teh Hijau
+Lemonade / Orange Juice = Limun / Jus Jeruk
+Idli / Vada = Idli / Vada
+Samosa / Pakora = Samosa / Bakwan
+Dosa / Upma = Dosa / Martabak
+Biryani / Noodles = Biryani / Mi
+Paneer / Egg = Paneer / Telur
+Mango / Coconut = Mangga / Kelapa
+Lemon / Chilli = Lemon / Cabai
+Dosa / Paratha = Dosa / Paratha
+Tea / Soup = Teh / Sup
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Potato / Yam = Kentang / Ubi
+Spinach / Kale = Bayam / Kangkung
+Fruit / Berry = Buah / Beri
+Butter / Cheese = Mentega / Keju
+Honey / Syrup = Madu / Sirup
+Chocolate / Fudge = Cokelat / Fudge
+Ice Cream / Gelato = Es Krim / Gelato
+Rice / Quinoa = Nasi / Quinoa
+Peach / Nectarine = Persik / Aprikot
+Jam / Jelly = Selai / Jeli
+Egg / Tofu = Telur / Tahu
+Hot Dog / Sausage = Hot Dog / Sosis
+Watermelon / Cantaloupe = Semangka / Blewah
+Peanut / Almond = Kacang Tanah / Almond
+Walnut / Pecan = Kenari / Pecan
+Carrot / Parsnip = Wortel / Lobak
+Broccoli / Cauliflower = Brokoli / Kembang Kol
+Waffle / Crepe = Wafel / Krep
+Croissant / Danish = Croissant / Danish
+Bagel / Muffin = Bagel / Muffin
+Soda / Lemonade = Soda / Limun
+Espresso / Cappuccino = Espresso / Cappuccino
+Pasta / Lasagna = Pasta / Lasagna
+McDonalds / Burger King = McDonald's / Burger King
+Starbucks / Dunkin = Starbucks / Dunkin
+Red Bull / Monster = Red Bull / Monster
+KFC / Popeyes = KFC / Popeyes
+Domino’s / Pizza Hut = Domino's / Pizza Hut
+
+# Terjemahan dan kurasi dari VM1235/undercover-word-game.
+@ vm1235
+Baguette / Ciabatta = Baguette / Ciabatta
+Hot Dog / Bratwurst = Hot Dog / Bratwurst
+
+# Terjemahan dan kurasi dari xuqssq/whois-undercover-game.
+@ xuqssq
+红茶 / 绿茶 = Teh Hitam / Teh Hijau
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+油条 / 麻花 = Cakwe / Roti Goreng
+小笼包 / 灌汤包 = Pangsit Kukus / Siomay
+提子 / 葡萄 = Anggur Hijau / Anggur Merah
+涮肉 / 烤肉 = Shabu-shabu / Barbeku
+薯片 / 饼干 = Keripik Kentang / Biskuit
+牛奶 / 豆浆 = Susu / Susu Kedelai
+榴莲 / 菠萝蜜 = Durian / Nangka
+橘子 / 橙子 = Jeruk Mandarin / Jeruk Manis
+芥末 / 辣椒 = Mustard / Cabai
+鸡蛋 / 鸭蛋 = Telur Ayam / Telur Bebek
+汉堡包 / 肉夹馍 = Burger / Roti Isi
+哈密瓜 / 西瓜 = Melon / Semangka
+蛋糕 / 面包 = Kue / Roti
+冰棍 / 雪糕 = Es Lilin / Es Krim
+包子 / 饺子 = Bakpao / Pangsit
+棒棒糖 / 泡泡糖 = Lolipop / Permen Karet

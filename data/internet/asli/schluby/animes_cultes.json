@@ -1,0 +1,262 @@
+{
+  "id": "animes_cultes",
+  "name": "Animés Cultes",
+  "emoji": "💎",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "series",
+      "name": "Séries",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Death Note",
+          "imposteur": "Monster",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Death Note",
+          "imposteur_en": "Monster"
+        },
+        {
+          "civil": "Code Geass",
+          "imposteur": "Neon Genesis Evangelion",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Code Geass",
+          "imposteur_en": "Neon Genesis Evangelion"
+        },
+        {
+          "civil": "Vinland Saga",
+          "imposteur": "Berserk",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Vinland Saga",
+          "imposteur_en": "Berserk"
+        },
+        {
+          "civil": "Cowboy Bebop",
+          "imposteur": "Samurai Champloo",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Cowboy Bebop",
+          "imposteur_en": "Samurai Champloo"
+        },
+        {
+          "civil": "Chainsaw Man",
+          "imposteur": "Tokyo Ghoul",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Chainsaw Man",
+          "imposteur_en": "Tokyo Ghoul"
+        },
+        {
+          "civil": "Steins;Gate",
+          "imposteur": "Erased",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Steins;Gate",
+          "imposteur_en": "Erased"
+        },
+        {
+          "civil": "Made in Abyss",
+          "imposteur": "Frieren",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Made in Abyss",
+          "imposteur_en": "Frieren"
+        },
+        {
+          "civil": "Mob Psycho 100",
+          "imposteur": "One Punch Man",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Mob Psycho 100",
+          "imposteur_en": "One Punch Man"
+        },
+        {
+          "civil": "Berserk",
+          "imposteur": "Claymore",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Berserk",
+          "imposteur_en": "Claymore"
+        },
+        {
+          "civil": "Death Note",
+          "imposteur": "Steins;Gate",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Death Note",
+          "imposteur_en": "Steins;Gate"
+        },
+        {
+          "civil": "Cowboy Bebop",
+          "imposteur": "Trigun",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Cowboy Bebop",
+          "imposteur_en": "Trigun"
+        },
+        {
+          "civil": "Erased",
+          "imposteur": "The Promised Neverland",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Erased",
+          "imposteur_en": "The Promised Neverland"
+        },
+        {
+          "civil": "Tokyo Ghoul",
+          "imposteur": "Parasyte",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Tokyo Ghoul",
+          "imposteur_en": "Parasyte"
+        },
+        {
+          "civil": "Violet Evergarden",
+          "imposteur": "Your Lie in April",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Violet Evergarden",
+          "imposteur_en": "Your Lie in April"
+        }
+      ]
+    },
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Near",
+          "imposteur": "Mello",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Near",
+          "imposteur_en": "Mello"
+        },
+        {
+          "civil": "Ryuk",
+          "imposteur": "Rem",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Ryuk",
+          "imposteur_en": "Rem"
+        },
+        {
+          "civil": "C.C.",
+          "imposteur": "Kallen Kozuki",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "C.C.",
+          "imposteur_en": "Kallen Kozuki"
+        },
+        {
+          "civil": "Rei Ayanami",
+          "imposteur": "Asuka Langley",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Rei Ayanami",
+          "imposteur_en": "Asuka Langley"
+        },
+        {
+          "civil": "Gendo Ikari",
+          "imposteur": "Misato Katsuragi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gendo Ikari",
+          "imposteur_en": "Misato Katsuragi"
+        },
+        {
+          "civil": "Power",
+          "imposteur": "Denji",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Power",
+          "imposteur_en": "Denji"
+        },
+        {
+          "civil": "Fern",
+          "imposteur": "Stark",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Fern",
+          "imposteur_en": "Stark"
+        },
+        {
+          "civil": "Riko",
+          "imposteur": "Reg",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Riko",
+          "imposteur_en": "Reg"
+        },
+        {
+          "civil": "Spike Spiegel",
+          "imposteur": "Jet Black",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Spike Spiegel",
+          "imposteur_en": "Jet Black"
+        },
+        {
+          "civil": "Spike Spiegel",
+          "imposteur": "Faye Valentine",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Spike Spiegel",
+          "imposteur_en": "Faye Valentine"
+        },
+        {
+          "civil": "Okabe Rintaro",
+          "imposteur": "Kurisu Makise",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Okabe Rintaro",
+          "imposteur_en": "Kurisu Makise"
+        },
+        {
+          "civil": "Guts",
+          "imposteur": "Casca",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Guts",
+          "imposteur_en": "Casca"
+        },
+        {
+          "civil": "Griffith",
+          "imposteur": "Femto",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Griffith",
+          "imposteur_en": "Femto"
+        },
+        {
+          "civil": "Mob",
+          "imposteur": "Ritsu",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mob",
+          "imposteur_en": "Ritsu"
+        },
+        {
+          "civil": "Kaneki Ken",
+          "imposteur": "Touka Kirishima",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Kaneki Ken",
+          "imposteur_en": "Touka Kirishima"
+        },
+        {
+          "civil": "Nina Fortner",
+          "imposteur": "Johan Liebert",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Nina Fortner",
+          "imposteur_en": "Johan Liebert"
+        }
+      ]
+    }
+  ]
+}

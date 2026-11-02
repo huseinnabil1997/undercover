@@ -1,0 +1,214 @@
+{
+  "id": "dreamworks",
+  "name": "DreamWorks",
+  "emoji": "🌙",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Shrek",
+          "imposteur": "L'Âne",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Shrek",
+          "imposteur_en": "Donkey"
+        },
+        {
+          "civil": "Po",
+          "imposteur": "Tigresse",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Po",
+          "imposteur_en": "Tigress"
+        },
+        {
+          "civil": "Alex",
+          "imposteur": "Marty",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Alex",
+          "imposteur_en": "Marty"
+        },
+        {
+          "civil": "Harold",
+          "imposteur": "Krokmou",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hiccup",
+          "imposteur_en": "Toothless"
+        },
+        {
+          "civil": "Shrek",
+          "imposteur": "Fiona",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Shrek",
+          "imposteur_en": "Fiona"
+        },
+        {
+          "civil": "Le Chat Potté",
+          "imposteur": "Kitty Pattes-de-Velours",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Puss in Boots",
+          "imposteur_en": "Kitty Softpaws"
+        },
+        {
+          "civil": "Poppy",
+          "imposteur": "Branch",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Poppy",
+          "imposteur_en": "Branch"
+        },
+        {
+          "civil": "Boss Baby",
+          "imposteur": "Tim",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Boss Baby",
+          "imposteur_en": "Tim"
+        },
+        {
+          "civil": "Maître Shifu",
+          "imposteur": "Oogway",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Master Shifu",
+          "imposteur_en": "Oogway"
+        },
+        {
+          "civil": "Grug",
+          "imposteur": "Eep",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Grug",
+          "imposteur_en": "Eep"
+        },
+        {
+          "civil": "B.O.B.",
+          "imposteur": "Docteur Cafard",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "B.O.B.",
+          "imposteur_en": "Dr. Cockroach"
+        },
+        {
+          "civil": "Gingembre",
+          "imposteur": "Roulé",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Ginger",
+          "imposteur_en": "Rocky"
+        }
+      ]
+    },
+    {
+      "id": "films",
+      "name": "Films",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Shrek",
+          "imposteur": "Madagascar",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Shrek",
+          "imposteur_en": "Madagascar"
+        },
+        {
+          "civil": "Kung Fu Panda",
+          "imposteur": "Comment Dresser Son Dragon",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Kung Fu Panda",
+          "imposteur_en": "How to Train Your Dragon"
+        },
+        {
+          "civil": "Les Croods",
+          "imposteur": "Trolls",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "The Croods",
+          "imposteur_en": "Trolls"
+        },
+        {
+          "civil": "Le Chat Potté",
+          "imposteur": "Shrek 2",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Puss in Boots",
+          "imposteur_en": "Shrek 2"
+        },
+        {
+          "civil": "Dragons 2",
+          "imposteur": "Dragons 3",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "How to Train Your Dragon 2",
+          "imposteur_en": "The Hidden World"
+        },
+        {
+          "civil": "Madagascar 2",
+          "imposteur": "Madagascar 3",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Escape 2 Africa",
+          "imposteur_en": "Europe's Most Wanted"
+        },
+        {
+          "civil": "Kung Fu Panda 2",
+          "imposteur": "Kung Fu Panda 3",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Kung Fu Panda 2",
+          "imposteur_en": "Kung Fu Panda 3"
+        },
+        {
+          "civil": "Trolls",
+          "imposteur": "Boss Baby",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Trolls",
+          "imposteur_en": "The Boss Baby"
+        },
+        {
+          "civil": "Gang de Requins",
+          "imposteur": "Fourmiz",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Shark Tale",
+          "imposteur_en": "Antz"
+        },
+        {
+          "civil": "Spirit, l'Étalon des Plaines",
+          "imposteur": "Le Prince d'Égypte",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Spirit: Stallion of the Cimarron",
+          "imposteur_en": "The Prince of Egypt"
+        },
+        {
+          "civil": "Monstres contre Aliens",
+          "imposteur": "Les Cinq Légendes",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Monsters vs. Aliens",
+          "imposteur_en": "Rise of the Guardians"
+        },
+        {
+          "civil": "Abominable",
+          "imposteur": "Voyage vers la Lune",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Abominable",
+          "imposteur_en": "Over the Moon"
+        }
+      ]
+    }
+  ]
+}

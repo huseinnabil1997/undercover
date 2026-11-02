@@ -105,3 +105,134 @@ Curtain / Blind = Gorden / Kerai
 Cup / Mug = Cangkir / Mug
 Oven / Stove = Oven / Kompor
 Brush / Comb = Sikat / Sisir
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Armchair / Stool = Kursi Berlengan / Bangku
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+chair / sofa = Kursi / Sofa
+brick / tile = Bata / Ubin
+kitchen / pantry = Dapur / Gudang Makanan
+bedroom / dorm = Kamar Tidur / Asrama
+bed / cot = Kasur / Ranjang Lipat
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Button / Switch = Tombol / Saklar
+Wall / Fence = Tembok / Pagar
+Gate / Door = Gerbang / Pintu
+Roof / Balcony = Atap / Balkon
+Candle / Torch = Lilin / Obor
+Bucket / Pot = Ember / Panci
+Fan / Heater = Kipas Angin / Pemanas
+Floor / Ceiling = Lantai / Langit-langit
+Plate / Tray = Piring / Nampan
+Remote / Button = Remote / Tombol
+Locker / Drawer = Loker / Laci
+Well / Pump = Sumur / Pompa Air
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Fourchette / Cuillere = Garpu / Sendok
+Chaise / Tabouret = Kursi / Bangku
+Table / Bureau = Meja Makan / Meja Kerja
+Lampe / Bougie = Lampu / Lilin
+Miroir / Fenetre = Cermin / Jendela
+Brosse a dents / Peigne = Sikat Gigi / Sisir
+Serviette / Torchon = Handuk / Lap Dapur
+Oreiller / Couette = Bantal / Selimut
+Balai / Aspirateur = Sapu / Penyedot Debu
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Fridge / Freezer = Kulkas / Freezer
+Napkin / Towel = Serbet / Handuk
+Jar / Bottle = Toples / Botol
+Matchbox / Lighter = Korek Api / Pemantik
+Soap / Shampoo = Sabun / Sampo
+Toothbrush / Toothpaste = Sikat Gigi / Pasta Gigi
+Mirror / Window = Cermin / Jendela
+Light / Bulb = Lampu / Bohlam
+Shelf / Rack = Lemari / Rak
+Broom / Mop = Sapu / Pel
+Lock / Key = Gembok / Kunci
+Clock / Calendar = Jam Dinding / Kalender
+Balcony / Terrace = Balkon / Teras
+Washing Machine / Dryer = Mesin Cuci / Pengering
+Iron / Steamer = Setrika / Setrika Uap
+Blanket / Quilt = Selimut / Bed Cover
+Torch / Lantern = Senter / Lentera
+Roof / Ceiling = Atap / Plafon
+Curtain / Carpet = Gorden / Karpet
+Clean / Wash = Membersihkan / Mencuci
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Sofa / Living Room = Sofa / Ruang Tamu
+Mug / Coaster = Mug / Tatakan Gelas
+Bottle / Flask = Botol / Termos
+Piggy Bank / Purse = Celengan / Dompet
+Plate / Glass = Piring / Gelas
+Bottle / Lunchbox = Botol Minum / Kotak Bekal
+Bucket / Broom = Ember / Sapu
+Fan / Bulb = Kipas Angin / Bohlam
+Fridge / Washing Machine = Kulkas / Mesin Cuci
+Stove / Microwave = Kompor / Microwave
+Tap / Shower = Keran / Shower
+Soap / Towel = Sabun / Handuk
+Shampoo / Comb = Sampo / Sisir
+Mirror / Comb = Cermin / Sisir
+Balcony / Window = Balkon / Jendela
+Curtain / Door = Gorden / Pintu
+Comb / Razor = Sisir / Pisau Cukur
+Toothbrush / Mouthwash = Sikat Gigi / Obat Kumur
+Bucket / Shower = Ember / Shower
+Towel / Handkerchief = Handuk / Sapu Tangan
+Kettle / Thermos = Ketel / Termos
+Plate / Tiffin = Piring / Rantang
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Rug / Carpet = Permadani / Karpet
+Lamp / Lantern = Lampu Meja / Lentera
+Knife / Blade = Pisau / Silet
+Sink / Basin = Wastafel / Bak Cuci
+Colgate / Sensodyne = Pepsodent / Sensodyne
+Sofa / Armchair = Sofa / Kursi Berlengan
+Sheets / Duvet = Seprai / Selimut Tebal
+Shelf / Cabinet = Rak / Lemari
+Drawer / Wardrobe = Laci / Lemari Pakaian
+Glass / Tumbler = Gelas / Cangkir
+Toaster / Grill = Pemanggang Roti / Panggangan
+Kettle / Teapot = Ketel / Teko
+Shower / Bathtub = Shower / Bak Mandi
+Towel / Bathrobe = Handuk / Jubah Mandi
+Vacuum / Sweeper = Vacuum Cleaner / Sapu
+Dustpan / Trash Can = Pengki / Tempat Sampah
+Hanger / Peg = Gantungan Baju / Jepitan Baju
+Fan / Air Conditioner = Kipas Angin / AC
+Heater / Radiator = Pemanas / Radiator
+Candle / Match = Lilin / Korek Api
+
+# Terjemahan dan kurasi dari xuqssq/whois-undercover-game.
+@ xuqssq
+洗发水 / 护发素 = Sampo / Kondisioner
+电梯 / 扶梯 = Lift / Eskalator
+微波炉 / 烤箱 = Microwave / Oven
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+洗衣粉 / 皂角粉 = Deterjen / Sabun Batang
+水桶 / 脸盆 = Ember / Baskom
+手帕 / 纸巾 = Sapu Tangan / Tisu
+湿巾 / 餐巾纸 = Tisu Basah / Tisu Makan
+沐浴盐 / 沐浴露 = Garam Mandi / Sabun Cair
+楼梯 / 电梯 = Tangga / Lift
+空调 / 风扇 = AC / Kipas Angin
+饭桶 / 饭碗 = Bakul Nasi / Mangkuk Nasi
+床单 / 被子 = Seprai / Selimut
+玻璃 / 镜子 = Kaca / Cermin
+壁纸 / 贴画 = Wallpaper / Stiker Dinding
+抱枕 / 枕头 = Guling / Bantal

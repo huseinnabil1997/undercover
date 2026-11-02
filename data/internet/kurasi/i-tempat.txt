@@ -165,3 +165,76 @@ garasi / terras = Garasi / Teras
 @ sqiprasanna
 Tower / Building = Menara / Gedung
 Bank / Vault = Bank / Brankas
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+pharmacy / drugstore = Apotek / Toko Obat
+mall / store = Mal / Toko
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Market / Shop = Pasar / Toko
+Airport / Station = Bandara / Stasiun
+City / Town = Kota / Desa
+Street / Road = Jalan / Gang
+Prison / Dungeon = Penjara / Ruang Bawah Tanah
+Farm / Garden = Peternakan / Kebun
+Bank / Office = Bank / Kantor
+Gym / Park = Gym / Taman
+Zoo / Farm = Kebun Binatang / Peternakan
+Village / Town = Desa / Kota Kecil
+Alley / Lane = Gang / Lorong
+Cabin / Hut = Kabin / Pondok
+Tent / Hut = Tenda / Pondok
+Mansion / Villa = Rumah Mewah / Vila
+Flat / Room = Apartemen / Kamar Kos
+Harbour / Airport = Pelabuhan / Bandara
+Prison / Cage = Penjara / Kandang
+Queue / Line = Antrean / Barisan
+Travel / Trip = Perjalanan / Wisata
+Bridge / Road = Jembatan / Jalan
+Buspark / Airport = Terminal / Bandara
+Hostel / Room = Asrama / Kamar
+Canteen / Cafe = Kantin / Kafe
+Farm / Field = Kebun / Sawah
+Basecamp / Camp = Base Camp / Perkemahan
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Plage / Montagne = Pantai / Gunung
+Bali / Maldives = Bali / Maladewa
+Hawai / Tahiti = Hawaii / Tahiti
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Cinema / Theatre = Bioskop / Teater
+Hotel / Hostel = Hotel / Hostel
+Playground / Stadium = Taman Bermain / Stadion
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Plage / Piscine = Pantai / Kolam Renang
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Hotel / Restaurant = Hotel / Restoran
+Restaurant / Bar = Restoran / Kafe
+Subway / Platform = Stasiun MRT / Peron
+Cabin / Cubicle = Kabin / Bilik Kerja
+Beach / Pool = Pantai / Kolam Renang
+Road / Footpath = Jalan Raya / Trotoar
+School / Hospital = Sekolah / Rumah Sakit
+Hospital / Ambulance = Rumah Sakit / Ambulans
+Platform / Bus Stop = Peron / Halte Bus
+Metro / Elevator = MRT / Lift
+Petrol Pump / Parking = SPBU / Parkiran
+School / Library = Sekolah / Perpustakaan
+Stadium / Theatre = Stadion / Teater
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Lab / Clinic = Laboratorium / Klinik
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+图书店 / 图书馆 = Toko Buku / Perpustakaan

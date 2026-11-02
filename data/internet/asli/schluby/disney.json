@@ -1,0 +1,276 @@
+{
+  "id": "disney",
+  "name": "Disney",
+  "emoji": "🏰",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Mickey",
+          "imposteur": "Donald",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Mickey Mouse",
+          "imposteur_en": "Donald Duck"
+        },
+        {
+          "civil": "Stitch",
+          "imposteur": "Baymax",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Stitch",
+          "imposteur_en": "Baymax"
+        },
+        {
+          "civil": "Simba",
+          "imposteur": "Mufasa",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Simba",
+          "imposteur_en": "Mufasa"
+        },
+        {
+          "civil": "Baloo",
+          "imposteur": "Winnie l'Ourson",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Baloo",
+          "imposteur_en": "Winnie the Pooh"
+        },
+        {
+          "civil": "Hercule",
+          "imposteur": "Tarzan",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hercules",
+          "imposteur_en": "Tarzan"
+        },
+        {
+          "civil": "Vaiana",
+          "imposteur": "Lilo",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Moana",
+          "imposteur_en": "Lilo"
+        }
+      ]
+    },
+    {
+      "id": "princesses",
+      "name": "Princesses",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Blanche-Neige",
+          "imposteur": "Cendrillon",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Snow White",
+          "imposteur_en": "Cinderella"
+        },
+        {
+          "civil": "Ariel",
+          "imposteur": "Jasmine",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Ariel",
+          "imposteur_en": "Jasmine"
+        },
+        {
+          "civil": "Belle",
+          "imposteur": "Aurore",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Belle",
+          "imposteur_en": "Aurora"
+        },
+        {
+          "civil": "Elsa",
+          "imposteur": "Anna",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Elsa",
+          "imposteur_en": "Anna"
+        },
+        {
+          "civil": "Mulan",
+          "imposteur": "Pocahontas",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Mulan",
+          "imposteur_en": "Pocahontas"
+        },
+        {
+          "civil": "Raiponce",
+          "imposteur": "Vaiana",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Rapunzel",
+          "imposteur_en": "Moana"
+        }
+      ]
+    },
+    {
+      "id": "vilains",
+      "name": "Vilains",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Scar",
+          "imposteur": "Jafar",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Scar",
+          "imposteur_en": "Jafar"
+        },
+        {
+          "civil": "Maléfique",
+          "imposteur": "Ursula",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Maleficent",
+          "imposteur_en": "Ursula"
+        },
+        {
+          "civil": "Cruella d'Enfer",
+          "imposteur": "Capitaine Crochet",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Cruella De Vil",
+          "imposteur_en": "Captain Hook"
+        },
+        {
+          "civil": "Gaston",
+          "imposteur": "Hadès",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gaston",
+          "imposteur_en": "Hades"
+        },
+        {
+          "civil": "Mère Gothel",
+          "imposteur": "La Reine-Sorcière",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Mother Gothel",
+          "imposteur_en": "The Evil Queen"
+        },
+        {
+          "civil": "Chernabog",
+          "imposteur": "Yzma",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Chernabog",
+          "imposteur_en": "Yzma"
+        }
+      ]
+    },
+    {
+      "id": "films",
+      "name": "Films",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "La Reine des Neiges",
+          "imposteur": "Raiponce",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Frozen",
+          "imposteur_en": "Tangled"
+        },
+        {
+          "civil": "Le Roi Lion",
+          "imposteur": "Bambi",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "The Lion King",
+          "imposteur_en": "Bambi"
+        },
+        {
+          "civil": "Aladdin",
+          "imposteur": "Hercule",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Aladdin",
+          "imposteur_en": "Hercules"
+        },
+        {
+          "civil": "Cendrillon",
+          "imposteur": "Blanche-Neige",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Cinderella",
+          "imposteur_en": "Snow White"
+        },
+        {
+          "civil": "Zootopie",
+          "imposteur": "Robin des Bois",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Zootopia",
+          "imposteur_en": "Robin Hood"
+        },
+        {
+          "civil": "Raya",
+          "imposteur": "Encanto",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Raya and the Last Dragon",
+          "imposteur_en": "Encanto"
+        },
+        {
+          "civil": "La Belle et la Bête",
+          "imposteur": "La Princesse et la Grenouille",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Beauty and the Beast",
+          "imposteur_en": "The Princess and the Frog"
+        },
+        {
+          "civil": "Tarzan",
+          "imposteur": "Le Livre de la Jungle",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Tarzan",
+          "imposteur_en": "The Jungle Book"
+        },
+        {
+          "civil": "Peter Pan",
+          "imposteur": "Pinocchio",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Peter Pan",
+          "imposteur_en": "Pinocchio"
+        },
+        {
+          "civil": "Les Aristochats",
+          "imposteur": "Les 101 Dalmatiens",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Aristocats",
+          "imposteur_en": "101 Dalmatians"
+        },
+        {
+          "civil": "Lilo et Stitch",
+          "imposteur": "Dumbo",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Lilo & Stitch",
+          "imposteur_en": "Dumbo"
+        },
+        {
+          "civil": "Big Hero 6",
+          "imposteur": "Les Mondes de Ralph",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Big Hero 6",
+          "imposteur_en": "Wreck-It Ralph"
+        }
+      ]
+    }
+  ]
+}

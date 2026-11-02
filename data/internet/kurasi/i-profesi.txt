@@ -79,3 +79,163 @@ Artis / Model
 @ arisandi
 pilot / nahkoda = Pilot / Nakhoda
 detektif / mata-mata = Detektif / Mata-mata
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Employee / boss = Karyawan / Bos
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+police / guard = Polisi / Satpam
+president / governor = Presiden / Gubernur
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Actor / Comedian = Aktor / Komedian
+Painter / Sculptor = Pelukis / Pematung
+Writer / Poet = Penulis / Penyair
+President / King = Presiden / Raja
+Judge / Jury = Hakim / Juri
+Cook / Baker = Juru Masak / Tukang Roti
+Singer / Dancer = Penyanyi / Penari
+Spy / Thief = Mata-mata / Pencuri
+Guard / Soldier = Penjaga / Tentara
+Hunter / Fisherman = Pemburu / Nelayan
+Clown / Magician = Badut / Pesulap
+Engineer / Builder = Insinyur / Tukang Bangunan
+Scientist / Doctor = Ilmuwan / Dokter
+Reporter / Writer = Reporter / Penulis
+Witness / Spy = Saksi / Mata-mata
+Suspect / Thief = Tersangka / Pencuri
+Chairman / Leader = Ketua / Pemimpin
+Boatman / Sailor = Tukang Perahu / Pelaut
+Farmer / Worker = Petani / Buruh
+Guide / Porter = Pemandu / Porter
+Army / Police = Tentara / Polisi
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Pompier / Policier = Pemadam Kebakaran / Polisi
+Avocat / Notaire = Pengacara / Notaris
+Professeur / Instituteur = Dosen / Guru SD
+Plombier / Electricien = Tukang Ledeng / Tukang Listrik
+Coiffeur / Estheticienne = Penata Rambut / Ahli Kecantikan
+Chef cuisinier / Serveur = Koki / Pelayan
+Architecte / Ingenieur = Arsitek / Insinyur
+Pilote / Steward = Pilot / Pramugara
+Menuisier / Charpentier = Tukang Kayu / Tukang Mebel
+Journaliste / Photographe = Jurnalis / Fotografer
+Veterinaire / Eleveur = Dokter Hewan / Peternak
+Comptable / Banquier = Akuntan / Bankir
+Chauffeur de taxi / Chauffeur de bus = Sopir Taksi / Sopir Bus
+Facteur / Livreur = Tukang Pos / Kurir
+Agriculteur / Jardinier = Petani / Tukang Kebun
+Dentiste / Orthodontiste = Dokter Gigi / Ortodontis
+Mecanicien / Garagiste = Mekanik / Pemilik Bengkel
+Peintre / Decorateur = Tukang Cat / Dekorator
+Boucher / Poissonnier = Tukang Daging / Penjual Ikan
+Astronaute / Pilote de chasse = Astronaut / Pilot Jet Tempur
+Acteur / Realisateur = Aktor / Sutradara
+Programmeur / Developpeur web = Programmer / Web Developer
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Police / Soldier = Polisi / Tentara
+Lawyer / Judge = Pengacara / Hakim
+Scientist / Researcher = Ilmuwan / Peneliti
+Director / Producer = Sutradara / Produser
+Accountant / Auditor = Akuntan / Auditor
+Farmer / Gardener = Petani / Tukang Kebun
+Pilot / Driver = Pilot / Sopir
+Actor / Director = Aktor / Sutradara
+Plumber / Electrician = Tukang Ledeng / Tukang Listrik
+Barber / Tailor = Tukang Cukur / Penjahit
+Journalist / Writer = Wartawan / Penulis
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Surgeon / Dentist = Dokter Bedah / Dokter Gigi
+Architect / Urban planner = Arsitek / Perencana Kota
+Chef / Pastry chef = Koki / Koki Pastri
+Pilot / Co-pilot = Pilot / Kopilot
+Lawyer / Notary = Pengacara / Notaris
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Boulanger / Pâtissier = Tukang Roti / Pembuat Kue
+Médecin / Infirmier = Dokter / Perawat
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Firefighter / Police Officer = Pemadam Kebakaran / Polisi
+Author / Journalist = Penulis / Jurnalis
+Surgeon / Anesthesiologist = Dokter Bedah / Dokter Anestesi
+Barber / Razor = Tukang Cukur / Pisau Cukur
+Florist / Gardener = Penjual Bunga / Tukang Kebun
+Photographer / Tripod = Fotografer / Tripod
+Sculptor / Potter = Pematung / Pembuat Tembikar
+Dancer / Choreographer = Penari / Koreografer
+Athlete / Coach = Atlet / Pelatih
+Spy / Binoculars = Mata-mata / Teropong
+Doctor / Patient = Dokter / Pasien
+Nurse / Medicine = Perawat / Obat
+Dentist / Toothbrush = Dokter Gigi / Sikat Gigi
+Police / Thief = Polisi / Pencuri
+Driver / Passenger = Sopir / Penumpang
+Shopkeeper / Customer = Penjual / Pembeli
+Waiter / Customer = Pelayan / Tamu Restoran
+Farmer / Tractor = Petani / Traktor
+Tailor / Shirt = Penjahit / Kemeja
+Electrician / Bulb = Tukang Listrik / Bohlam
+Plumber / Tap = Tukang Ledeng / Keran
+Guard / Gate = Satpam / Gerbang
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Police / Detective = Polisi / Detektif
+Pilot / Captain = Pilot / Kapten Kapal
+Carpenter / Plumber = Tukang Kayu / Tukang Ledeng
+Sailor / Fisherman = Pelaut / Nelayan
+Astronaut / Cosmonaut = Astronaut / Kosmonaut
+Coach / Trainer = Pelatih / Instruktur
+Photographer / Videographer = Fotografer / Videografer
+Waiter / Bartender = Pelayan / Bartender
+Soldier / Marine = Tentara / Marinir
+Firefighter / Paramedic = Pemadam Kebakaran / Paramedis
+Artist / Illustrator = Seniman / Ilustrator
+Musician / Singer = Musisi / Penyanyi
+Dentist / Orthodontist = Dokter Gigi / Ortodontis
+Electrician / Mechanic = Tukang Listrik / Montir
+Tailor / Designer = Penjahit / Desainer
+Barber / Hairdresser = Tukang Cukur / Penata Rambut
+Butcher / Fishmonger = Tukang Daging / Penjual Ikan
+Programmer / Coder = Programmer / Coder
+Cashier / Teller = Kasir / Teller
+Librarian / Archivist = Pustakawan / Arsiparis
+Receptionist / Secretary = Resepsionis / Sekretaris
+Manager / Director = Manajer / Direktur
+CEO / President = CEO / Presiden Direktur
+Politician / Diplomat = Politikus / Diplomat
+Athlete / Gymnast = Atlet / Pesenam
+Therapist / Counselor = Terapis / Konselor
+Surgeon / Physician = Dokter Bedah / Dokter Umum
+Veterinarian / Zookeeper = Dokter Hewan / Penjaga Kebun Binatang
+Pharmacist / Chemist = Apoteker / Ahli Kimia
+Broker / Trader = Pialang / Trader
+Reporter / Anchor = Reporter / Pembawa Berita
+Architect / Draftsman = Arsitek / Juru Gambar
+Mason / Bricklayer = Tukang Batu / Tukang Bata
+Welder / Blacksmith = Tukang Las / Pandai Besi
+Janitor / Cleaner = Petugas Kebersihan / Cleaning Service
+Courier / Postman = Kurir / Tukang Pos
+Flight Attendant / Stewardess = Pramugari / Pramugara
+President / Prime Minister = Presiden / Perdana Menteri
+General / Admiral = Jenderal / Laksamana
+Soldier / Mercenary = Tentara / Tentara Bayaran
+Spy / Agent = Mata-mata / Agen Rahasia
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+作家 / 编剧 = Penulis / Penulis Skenario
+捕快 / 警察 = Polisi Zaman Dulu / Polisi
+保安 / 保镖 = Satpam / Pengawal

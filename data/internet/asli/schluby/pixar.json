@@ -1,0 +1,214 @@
+{
+  "id": "pixar",
+  "name": "Pixar",
+  "emoji": "💡",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Woody",
+          "imposteur": "Buzz l'Éclair",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Woody",
+          "imposteur_en": "Buzz Lightyear"
+        },
+        {
+          "civil": "Rémy",
+          "imposteur": "Linguini",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Remy",
+          "imposteur_en": "Linguini"
+        },
+        {
+          "civil": "Sulli",
+          "imposteur": "Bob Razowski",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Sulley",
+          "imposteur_en": "Mike Wazowski"
+        },
+        {
+          "civil": "Marin",
+          "imposteur": "Dory",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Marlin",
+          "imposteur_en": "Dory"
+        },
+        {
+          "civil": "Flash McQueen",
+          "imposteur": "Martin",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Lightning McQueen",
+          "imposteur_en": "Mater"
+        },
+        {
+          "civil": "Joie",
+          "imposteur": "Tristesse",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Joy",
+          "imposteur_en": "Sadness"
+        },
+        {
+          "civil": "M. Indestructible",
+          "imposteur": "Frozone",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mr. Incredible",
+          "imposteur_en": "Frozone"
+        },
+        {
+          "civil": "WALL-E",
+          "imposteur": "EVE",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "WALL-E",
+          "imposteur_en": "EVE"
+        },
+        {
+          "civil": "Miguel",
+          "imposteur": "Hector",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Miguel",
+          "imposteur_en": "Hector"
+        },
+        {
+          "civil": "Merida",
+          "imposteur": "Elinor",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Merida",
+          "imposteur_en": "Elinor"
+        },
+        {
+          "civil": "Carl Fredricksen",
+          "imposteur": "Russell",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Carl Fredricksen",
+          "imposteur_en": "Russell"
+        },
+        {
+          "civil": "Luca",
+          "imposteur": "Alberto",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Luca",
+          "imposteur_en": "Alberto"
+        }
+      ]
+    },
+    {
+      "id": "films",
+      "name": "Films",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Toy Story",
+          "imposteur": "Cars",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Toy Story",
+          "imposteur_en": "Cars"
+        },
+        {
+          "civil": "Monstres & Cie",
+          "imposteur": "Vice-Versa",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Monsters, Inc.",
+          "imposteur_en": "Inside Out"
+        },
+        {
+          "civil": "Le Monde de Nemo",
+          "imposteur": "Le Monde de Dory",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Finding Nemo",
+          "imposteur_en": "Finding Dory"
+        },
+        {
+          "civil": "Les Indestructibles",
+          "imposteur": "Rebelle",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "The Incredibles",
+          "imposteur_en": "Brave"
+        },
+        {
+          "civil": "Là-Haut",
+          "imposteur": "Ratatouille",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Up",
+          "imposteur_en": "Ratatouille"
+        },
+        {
+          "civil": "WALL-E",
+          "imposteur": "Coco",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "WALL-E",
+          "imposteur_en": "Coco"
+        },
+        {
+          "civil": "1001 Pattes",
+          "imposteur": "Cars 2",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "A Bug's Life",
+          "imposteur_en": "Cars 2"
+        },
+        {
+          "civil": "Soul",
+          "imposteur": "En Avant",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Soul",
+          "imposteur_en": "Onward"
+        },
+        {
+          "civil": "Luca",
+          "imposteur": "Alerte Rouge",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Luca",
+          "imposteur_en": "Turning Red"
+        },
+        {
+          "civil": "Élémentaire",
+          "imposteur": "Le Voyage d'Arlo",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Elemental",
+          "imposteur_en": "The Good Dinosaur"
+        },
+        {
+          "civil": "Vice-Versa 2",
+          "imposteur": "Toy Story 4",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Inside Out 2",
+          "imposteur_en": "Toy Story 4"
+        },
+        {
+          "civil": "Rebelle",
+          "imposteur": "Monstres Academy",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Brave",
+          "imposteur_en": "Monsters University"
+        }
+      ]
+    }
+  ]
+}

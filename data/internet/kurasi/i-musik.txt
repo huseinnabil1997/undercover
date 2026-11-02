@@ -42,3 +42,123 @@ Violin / Cello = Biola / Selo
 @ trk78
 Guitar / Bass = Gitar / Bass
 Piano / Synth = Piano / Synthesizer
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Song / Poem = Lagu / Puisi
+Guitar / Violin = Gitar / Biola
+Flute / Trumpet = Seruling / Terompet
+Singer / Rapper = Penyanyi / Rapper
+Drum / Guitar = Drum / Gitar
+Piano / Flute = Piano / Seruling
+Concert / Show = Konser / Pertunjukan
+Band / Group = Band / Grup
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Pop / RnB = Pop / R&B
+Rap / Hip-hop = Rap / Hip-hop
+Salsa / Reggaeton = Salsa / Reggaeton
+Opera / Musique classique = Opera / Musik Klasik
+Electro / Dubstep = EDM / Dubstep
+Gospel / Soul = Gospel / Soul
+K-pop / J-pop = K-pop / J-pop
+Flamenco / Tango = Flamenco / Tango
+Ambient / Lo-fi = Ambient / Lo-fi
+Indie / Alternative = Indie / Alternatif
+Comedie musicale / Operette = Drama Musikal / Operet
+Piano / Clavier = Piano / Keyboard
+Violon / Alto = Biola / Viola
+Batterie / Percussions = Drum / Perkusi
+Flute / Clarinette = Seruling / Klarinet
+Saxophone / Trompette = Saksofon / Terompet
+Trombone / Tuba = Trombon / Tuba
+Harpe / Violoncelle = Harpa / Selo
+Accordeon / Harmonica = Akordeon / Harmonika
+Ukulele / Banjo = Ukulele / Banjo
+Guitare electrique / Guitare acoustique = Gitar Listrik / Gitar Akustik
+Xylophone / Marimba = Xilofon / Marimba
+Djembe / Congas = Djembe / Konga
+Orgue / Piano = Orgel / Piano
+Contrebasse / Violoncelle = Kontrabas / Selo
+Castagnettes / Maracas = Kastanyet / Marakas
+Cymbales / Tambourin = Simbal / Tamborin
+Synthetiseur / Clavier = Synthesizer / Keyboard
+Sitar / Guitare = Sitar / Gitar
+Hautbois / Basson = Obo / Bassoon
+Piano a queue / Piano droit = Grand Piano / Piano Tegak
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Song / Album = Lagu / Album
+Violin / Viola = Biola / Viola
+Clarinet / Flute = Klarinet / Seruling
+Sing / Dance = Bernyanyi / Menari
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Guitar / Bass guitar = Gitar / Gitar Bass
+Drums / Percussion = Drum / Perkusi
+Accordion / Concertina = Akordeon / Konsertina
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Guitare / Basse = Gitar / Bass
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Guitar / Ukulele = Gitar / Ukulele
+Piano / Keyboard = Piano / Keyboard
+Trumpet / Trombone = Terompet / Trombon
+Rock / Metal = Rock / Metal
+Jazz / Blues = Jazz / Blues
+Country / Folk = Country / Folk
+Reggae / Ska = Reggae / Ska
+Techno / House = Techno / House
+Punk / Grunge = Punk / Grunge
+Disco / Funk = Disko / Funk
+Sing / Hum = Bernyanyi / Bersenandung
+Drums / Bongos = Drum / Bongo
+Saxophone / Clarinet = Saksofon / Klarinet
+Harp / Lyre = Harpa / Lira
+Accordion / Harmonica = Akordeon / Harmonika
+Rapper / Beatboxer = Rapper / Beatboxer
+DJ / Producer = DJ / Produser Musik
+Band / Orchestra = Band / Orkestra
+Choir / Chorus = Paduan Suara / Vokal Grup
+Album / Single = Album / Single
+Lyrics / Poetry = Lirik / Puisi
+Microphone / Megaphone = Mikrofon / Megafon
+Speaker / Amplifier = Speaker / Amplifier
+Record / CD = Piringan Hitam / CD
+Pop / Dance = Pop / Dance
+Hip Hop / R&B = Hip Hop / R&B
+Classical / Opera = Musik Klasik / Opera
+Dubstep / Drum and Bass = Dubstep / Drum and Bass
+Composer / Conductor = Komposer / Dirigen
+Symphony / Sonata = Simfoni / Sonata
+Metronome / Tuner = Metronom / Tuner
+Banjo / Mandolin = Banjo / Mandolin
+Xylophone / Glockenspiel = Xilofon / Glockenspiel
+Tambourine / Maracas = Tamborin / Marakas
+Cymbals / Gong = Simbal / Gong
+Beat / Rhythm = Ketukan / Irama
+Melody / Harmony = Melodi / Harmoni
+Chorus / Verse = Reff / Bait
+Karaoke / Lip Sync = Karaoke / Lip Sync
+Vinyl / Gramophone = Piringan Hitam / Gramofon
+
+# Terjemahan dan kurasi dari VM1235/undercover-word-game.
+@ vm1235
+Elvis / The Beatles = Elvis / The Beatles
+
+# Terjemahan dan kurasi dari xuqssq/whois-undercover-game.
+@ xuqssq
+键盘 / 钢琴 = Keyboard Komputer / Piano
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+油画 / 素描 = Lukisan Cat Minyak / Sketsa
+小品 / 话剧 = Lawak / Drama Panggung
+扩音器 / 麦克风 = Pengeras Suara / Mikrofon
+吉他 / 琵琶 = Gitar / Pipa

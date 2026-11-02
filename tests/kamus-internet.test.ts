@@ -20,6 +20,19 @@ const SUMBER_WAJIB = [
   'DaengWithAI/undercover-indonesia (tanpa lisensi)',
   'Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)',
   'arisandi95/undercover-game-indonesia (tanpa lisensi)',
+  'tejasdasari06/Imposter-game (tanpa lisensi)',
+  'Schluby/Undercover (tanpa lisensi)',
+  'Bipash2002/undercover (tanpa lisensi)',
+  'Deepak-Ajay-Dubey/word-spy (tanpa lisensi)',
+  'ArashadDodhiya/UnderCoverGame (tanpa lisensi)',
+  'AmazinAmazon/Undercover (tanpa lisensi)',
+  'jishnurajendran/undercover (tanpa lisensi)',
+  'srinath987/Undercover-clone (MIT)',
+  'VM1235/undercover-word-game (MIT)',
+  'ChairGamertag87/undercover (MIT)',
+  'Nidroz/undercover (MIT)',
+  'zhengyi-yang/WhoIsTheSpy (MIT)',
+  'xuqssq/whois-undercover-game (MIT)',
 ];
 
 describe('integritas data kata Internet', () => {

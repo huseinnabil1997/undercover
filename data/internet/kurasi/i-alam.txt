@@ -71,3 +71,72 @@ Ash / Dust = Abu / Debu
 # Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
 @ trk78
 Desert / Beach = Gurun / Pantai
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Quicksand / Avalanche = Pasir Isap / Longsoran Salju
+Archipelago / Constellation = Kepulauan / Rasi Bintang
+Glacier / Oasis = Gletser / Oasis
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+ocean / lake = Laut / Danau
+fire / flame = Api / Bara
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Desert / Dune = Gurun / Bukit Pasir
+Mine / Cave = Tambang / Gua
+Mountain / Peak = Gunung / Puncak
+Forest / Wood = Hutan / Rimba
+Path / Road = Jalan Setapak / Jalan Raya
+Beach / River = Pantai / Sungai
+Island / Cliff = Pulau / Tebing
+Swamp / Mud = Rawa / Lumpur
+Wave / Tide = Ombak / Pasang Surut
+Mud / Clay = Lumpur / Tanah Liat
+Spring / Stream = Mata Air / Sungai Kecil
+Valley / Village = Lembah / Desa
+Dungeon / Cave = Ruang Bawah Tanah / Gua
+Riverbank / Shore = Tepi Sungai / Tepi Pantai
+Valley / Hill = Lembah / Bukit
+Trail / Trek = Jalur / Pendakian
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Alpes / Pyrenees = Pegunungan Alpen / Pegunungan Pirenia
+Sahara / Serengeti = Sahara / Serengeti
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Desert / Steppe = Gurun / Stepa
+Glacier / Ice shelf = Gletser / Lapisan Es
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Montagne / Colline = Gunung / Bukit
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Mountain / Cliff = Gunung / Tebing
+Ocean / Coral Reef = Laut / Terumbu Karang
+Fog / Lighthouse = Kabut / Mercusuar
+Earthquake / Landslide = Gempa Bumi / Tanah Longsor
+River / Boat = Sungai / Perahu
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Cave / Tunnel = Gua / Terowongan
+Soil / Sand = Tanah / Pasir
+Rock / Stone = Batu / Kerikil
+Crater / Canyon = Kawah / Ngarai
+Ocean / Beach = Laut / Pantai
+Mineral / Crystal = Mineral / Kristal
+Swamp / Marsh = Rawa / Payau
+Cliff / Ridge = Tebing / Punggung Bukit
+Meadow / Pasture = Padang Rumput / Ladang Gembala
+Coral Reef / Atoll = Terumbu Karang / Atol
+Tundra / Taiga = Tundra / Taiga
+Savanna / Prairie = Sabana / Prairi
+Woodland / Rainforest = Hutan / Hutan Hujan
+Rainbow / Mirage = Pelangi / Fatamorgana

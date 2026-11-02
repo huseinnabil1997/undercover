@@ -85,3 +85,7 @@ Rocky Balboa / Creed = Rocky Balboa / Creed
 Tarzan / Mowgli = Tarzan / Mowgli
 Hannibal Lecter / Jigsaw = Hannibal Lecter / Jigsaw
 Chucky / Annabelle = Chucky / Annabelle
+
+# Terjemahan dan kurasi dari VM1235/undercover-word-game.
+@ vm1235
+Napoleon / Caesar = Napoleon / Julius Caesar

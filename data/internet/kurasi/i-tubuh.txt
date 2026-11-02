@@ -41,3 +41,39 @@ gigi / taring = Gigi / Taring
 # Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
 @ sqiprasanna
 Skin / Hair = Kulit / Rambut
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Hand / Foot = Tangan / Kaki
+Heart / Lung = Jantung / Paru-paru
+Brain / Bone = Otak / Tulang
+Blood / Skin = Darah / Kulit
+Knee / Elbow = Lutut / Siku
+Shoulder / Neck = Bahu / Leher
+Stomach / Chest = Perut / Dada
+Cough / Sneeze = Batuk / Bersin
+Medicine / Injection = Obat / Suntikan
+Sweat / Tears = Keringat / Air Mata
+Scar / Bruise = Bekas Luka / Memar
+Forehead / Cheek = Dahi / Pipi
+Back / Waist = Punggung / Pinggang
+Throat / Neck = Tenggorokan / Leher
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Eye / Ear = Mata / Telinga
+Nose / Mouth = Hidung / Mulut
+Hair / Nail = Rambut / Kuku
+Finger / Toe = Jari Tangan / Jari Kaki
+Tooth / Tongue = Gigi / Lidah
+Fever / Cold = Demam / Pilek
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Tablet / Injection = Tablet Obat / Suntikan
+Tablet / Bandage = Tablet Obat / Perban
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+眉毛 / 胡子 = Alis / Kumis
+卷发 / 直发 = Rambut Keriting / Rambut Lurus

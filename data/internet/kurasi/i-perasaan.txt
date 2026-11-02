@@ -9,3 +9,42 @@ Terkejut / Tercengang
 Bangga / Percaya Diri
 Iri / Cemburu
 Lelah / Mengantuk
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Dream / Nightmare = Mimpi / Mimpi Buruk
+Funny / Silly = Lucu / Konyol
+Greedy / Selfish = Rakus / Egois
+Lazy / Slow = Malas / Lambat
+Enemy / Rival = Musuh / Saingan
+Cry / Scream = Menangis / Berteriak
+Hungry / Thirsty = Lapar / Haus
+Brave / Strong = Berani / Kuat
+Kind / Gentle = Baik Hati / Lembut
+Jealous / Envious = Cemburu / Iri
+Guilty / Ashamed = Bersalah / Malu
+Busy / Active = Sibuk / Aktif
+Calm / Quiet = Tenang / Diam
+Rude / Mean = Kasar / Jahat
+Shy / Quiet = Pemalu / Pendiam
+Curious / Nosy = Penasaran / Kepo
+Trust / Faith = Percaya / Yakin
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Happy / Excited = Senang / Bersemangat
+Sad / Angry = Sedih / Marah
+Scared / Nervous = Takut / Gugup
+Tired / Sleepy = Lelah / Mengantuk
+Proud / Confident = Bangga / Percaya Diri
+Bored / Lonely = Bosan / Kesepian
+Laugh / Smile = Tertawa / Tersenyum
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Love / Like = Cinta / Suka
+Hate / Dislike = Benci / Tidak Suka
+Fear / Panic = Takut / Panik
+Hope / Faith = Harapan / Keyakinan
+Anger / Rage = Marah / Murka
+Sadness / Grief = Sedih / Duka

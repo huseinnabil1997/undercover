@@ -26,3 +26,20 @@ Pemuda / Orang Tua
 # Kurasi dari sqiprasanna/mr-white-undercover (MIT), diterjemahkan dari bahasa Inggris.
 @ sqiprasanna
 Child / Adult = Anak / Orang Dewasa
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+guest / host = Tamu / Tuan Rumah
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Kid / Teen = Anak / Remaja
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Friend / Neighbor = Teman / Tetangga
+Baby / Child = Bayi / Anak-anak
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+双胞胎 / 龙凤胎 = Anak Kembar / Kembar Sepasang

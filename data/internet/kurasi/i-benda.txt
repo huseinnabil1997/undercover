@@ -86,3 +86,140 @@ Rocket / Shuttle = Roket / Pesawat Ulang-alik
 # Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
 @ trk78
 Bike / Motorcycle = Sepeda / Motor
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Solar Panel / Umbrella = Panel Surya / Payung
+Typewriter / Abacus = Mesin Tik / Sempoa
+Cash / credit card = Uang Tunai / Kartu Kredit
+Car / motorbike = Mobil / Motor
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+plastic / rubber = Plastik / Karet
+glass / crystal = Kaca / Kristal
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Cycle / Scooter = Sepeda / Skuter
+Letter / Card = Surat / Kartu Ucapan
+Coin / Stamp = Koin / Prangko
+Bottle / Can = Botol / Kaleng
+Flag / Banner = Bendera / Spanduk
+Bell / Horn = Lonceng / Klakson
+Car / Jeep = Mobil / Jip
+Taxi / Bus = Taksi / Bus
+Rocket / Plane = Roket / Pesawat
+Canoe / Raft = Kano / Rakit
+Tractor / Truck = Traktor / Truk
+Train / Tram = Kereta / Trem
+Ferry / Boat = Kapal Feri / Perahu
+Cart / Wagon = Gerobak / Pedati
+Glider / Plane = Glider / Pesawat
+Tank / Truck = Tank / Truk
+Whistle / Horn = Peluit / Klakson
+Sign / Symbol = Tanda / Simbol
+Engine / Motor = Mesin / Motor Listrik
+Ropeway / Cable = Kereta Gantung / Kabel
+Micro / Bus = Angkot / Bus
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Montre / Reveil = Jam Tangan / Jam Weker
+Cle / Cadenas = Kunci / Gembok
+Bougie / Lampe de poche = Lilin / Senter
+Voiture / Moto = Mobil / Motor
+Bus / Tramway = Bus / Trem
+Train / TGV = Kereta / Kereta Cepat
+Velo / Trottinette = Sepeda / Skuter
+Bateau / Voilier = Perahu / Kapal Layar
+Camion / Camionnette = Truk / Mobil Box
+Taxi / VTC = Taksi / Taksi Online
+Montgolfiere / Parapente = Balon Udara / Paralayang
+Sous-marin / Yacht = Kapal Selam / Kapal Pesiar
+Charrette / Caleche = Gerobak / Delman
+Telepherique / Funiculaire = Kereta Gantung / Funikular
+Ferry / Paquebot = Kapal Feri / Kapal Pesiar Besar
+Fusee / Navette spatiale = Roket / Pesawat Ulang-alik
+Tracteur / Bulldozer = Traktor / Buldoser
+Limousine / Cabriolet = Limosin / Mobil Atap Terbuka
+Jet ski / Bateau a moteur = Jet Ski / Speedboat
+Traineau / Motoneige = Kereta Luncur / Mobil Salju
+Segway / Trottinette electrique = Segway / Skuter Listrik
+Ballon dirigeable / Montgolfiere = Kapal Udara / Balon Udara
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Kite / Balloon = Layang-layang / Balon
+Airplane / Helicopter = Pesawat / Helikopter
+Truck / Van = Truk / Mobil Van
+Petrol / Diesel = Bensin / Solar
+Helmet / Seatbelt = Helm / Sabuk Pengaman
+Ticket / Pass = Tiket / Kartu Langganan
+Bag / Box = Tas / Kotak
+Camera / Binoculars = Kamera / Teropong
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Avion / Hélicoptère = Pesawat Terbang / Helikopter
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Telescope / Binoculars = Teleskop / Teropong
+Bicycle / Motorbike = Sepeda / Motor
+Auto / Bus = Bajaj / Bus
+Metro / Auto = MRT / Bajaj
+Ticket / Token = Tiket / Token
+Auto / Scooter = Bajaj / Skuter
+Ambulance / Police Van = Ambulans / Mobil Polisi
+Wallet / Locker = Dompet / Loker
+Receipt / Ticket = Struk / Tiket
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Boat / Yacht = Perahu / Kapal Pesiar
+Toyota / Honda = Toyota / Honda
+Tesla / BYD = Tesla / BYD
+Boeing / Airbus = Boeing / Airbus
+DHL / FedEx = DHL / FedEx
+Audi / Porsche = Audi / Porsche
+Sedan / Hatchback = Sedan / Hatchback
+SUV / Crossover = SUV / Crossover
+Convertible / Roadster = Mobil Atap Terbuka / Roadster
+Bus / Coach = Bus Kota / Bus Antarkota
+Bicycle / Tricycle = Sepeda / Sepeda Roda Tiga
+Submarine / Scuba = Kapal Selam / Scuba
+Tractor / Bulldozer = Traktor / Buldoser
+Ambulance / Fire Truck = Ambulans / Mobil Pemadam
+Police Car / Security Van = Mobil Polisi / Mobil Patroli
+Go-Kart / Quad Bike = Gokart / ATV
+Golf Cart / Segway = Mobil Golf / Segway
+Skateboard / Hoverboard = Skateboard / Hoverboard
+Monorail / Tram = Monorel / Trem
+Ferry / Cruise Ship = Kapal Feri / Kapal Pesiar
+Rocket / Space Shuttle = Roket / Pesawat Ulang-alik
+Jet Ski / Speedboat = Jet Ski / Speedboat
+RV / Campervan = Karavan / Campervan
+Taxi / Uber = Taksi / Ojek Online
+Hot Air Balloon / Blimp = Balon Udara / Zeppelin
+Glider / Parachute = Glider / Parasut
+Steam Train / Bullet Train = Kereta Uap / Kereta Cepat
+Unicycle / Bicycle = Sepeda Roda Satu / Sepeda
+Moped / Motorbike = Moped / Motor Gede
+Forklift / Crane = Forklift / Derek
+Dump Truck / Garbage Truck = Truk Pasir / Truk Sampah
+Cement Mixer / Steamroller = Truk Molen / Mesin Gilas
+Trolley / Rickshaw = Becak / Bajaj
+Jeep / Land Rover = Jeep / Land Rover
+Minivan / Microbus = Minivan / Minibus
+Vespa / Harley-Davidson = Vespa / Harley-Davidson
+Mustang / Camaro = Mustang / Camaro
+Civic / Corolla = Civic / Corolla
+Tugboat / Barge = Kapal Tunda / Tongkang
+Jet Plane / Propeller Plane = Pesawat Jet / Pesawat Baling-baling
+Snowmobile / Sled = Mobil Salju / Kereta Luncur
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+盒子 / 箱子 = Kotak / Peti
+电动车 / 自行车 = Sepeda Listrik / Sepeda

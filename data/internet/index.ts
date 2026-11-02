@@ -6,10 +6,21 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "id": "i-aktor-tokoh",
     "nama": "Aktor & Tokoh Film",
     "sumber": [
-      "MASJV/undercover-game (MIT)"
+      "MASJV/undercover-game (MIT)",
+      "VM1235/undercover-word-game (MIT)"
     ],
-    "jumlah": 84,
+    "jumlah": 85,
     "jumlahSatuKata": 20
+  },
+  {
+    "id": "i-anime",
+    "nama": "Anime & Animasi",
+    "sumber": [
+      "ChairGamertag87/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)"
+    ],
+    "jumlah": 198,
+    "jumlahSatuKata": 90
   },
   {
     "id": "i-benda",
@@ -21,10 +32,19 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 67,
-    "jumlahSatuKata": 44
+    "jumlah": 161,
+    "jumlahSatuKata": 93
   },
   {
     "id": "i-alam",
@@ -36,10 +56,18 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)"
     ],
-    "jumlah": 51,
-    "jumlahSatuKata": 41
+    "jumlah": 93,
+    "jumlahSatuKata": 66
   },
   {
     "id": "i-amerika",
@@ -54,10 +82,14 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "id": "i-campuran",
     "nama": "Campuran",
     "sumber": [
-      "antebrl/undercover-word-game (MIT)"
+      "antebrl/undercover-word-game (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 212,
-    "jumlahSatuKata": 144
+    "jumlah": 219,
+    "jumlahSatuKata": 154
   },
   {
     "id": "i-fantasi",
@@ -66,10 +98,18 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 23,
-    "jumlahSatuKata": 17
+    "jumlah": 79,
+    "jumlahSatuKata": 58
   },
   {
     "id": "i-film-teknologi",
@@ -80,10 +120,39 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "jishnurajendran/undercover (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "xuqssq/whois-undercover-game (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 160,
-    "jumlahSatuKata": 102
+    "jumlah": 496,
+    "jumlahSatuKata": 281
+  },
+  {
+    "id": "i-game",
+    "nama": "Game",
+    "sumber": [
+      "MASJV/undercover-game (MIT)",
+      "trk78/undercover-plus (MIT)",
+      "antebrl/undercover-word-game (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "VM1235/undercover-word-game (MIT)"
+    ],
+    "jumlah": 283,
+    "jumlahSatuKata": 146
   },
   {
     "id": "i-hewan",
@@ -94,10 +163,21 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "jishnurajendran/undercover (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 96,
-    "jumlahSatuKata": 76
+    "jumlah": 159,
+    "jumlahSatuKata": 120
   },
   {
     "id": "i-india",
@@ -105,8 +185,8 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "sumber": [
       "MASJV/undercover-game (MIT)"
     ],
-    "jumlah": 22,
-    "jumlahSatuKata": 10
+    "jumlah": 21,
+    "jumlahSatuKata": 9
   },
   {
     "id": "i-keluarga",
@@ -114,20 +194,26 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "sumber": [
       "CK-Arena (Apache-2.0)",
       "DaengWithAI/undercover-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 19,
-    "jumlahSatuKata": 13
+    "jumlah": 22,
+    "jumlahSatuKata": 15
   },
   {
     "id": "i-kota",
     "nama": "Kota & Pulau",
     "sumber": [
       "chud-lori/ethok (tanpa lisensi)",
-      "arisandi95/undercover-game-indonesia (tanpa lisensi)"
+      "arisandi95/undercover-game-indonesia (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 12,
-    "jumlahSatuKata": 9
+    "jumlah": 21,
+    "jumlahSatuKata": 18
   },
   {
     "id": "i-lain",
@@ -135,8 +221,8 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "sumber": [
       "CK-Arena (Apache-2.0)"
     ],
-    "jumlah": 18,
-    "jumlahSatuKata": 13
+    "jumlah": 14,
+    "jumlahSatuKata": 9
   },
   {
     "id": "i-benda-langit",
@@ -147,20 +233,29 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "xuqssq/whois-undercover-game (MIT)"
     ],
-    "jumlah": 37,
-    "jumlahSatuKata": 29
+    "jumlah": 88,
+    "jumlahSatuKata": 57
   },
   {
     "id": "i-logam",
     "nama": "Logam & Permata",
     "sumber": [
       "CK-Arena (Apache-2.0)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)"
     ],
-    "jumlah": 9,
-    "jumlahSatuKata": 9
+    "jumlah": 10,
+    "jumlahSatuKata": 10
   },
   {
     "id": "i-makanan",
@@ -172,10 +267,22 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "VM1235/undercover-word-game (MIT)",
+      "xuqssq/whois-undercover-game (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 171,
-    "jumlahSatuKata": 112
+    "jumlah": 342,
+    "jumlahSatuKata": 221
   },
   {
     "id": "i-musik",
@@ -186,20 +293,31 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "VM1235/undercover-word-game (MIT)",
+      "xuqssq/whois-undercover-game (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 25,
-    "jumlahSatuKata": 21
+    "jumlah": 107,
+    "jumlahSatuKata": 86
   },
   {
     "id": "i-negara",
     "nama": "Negara",
     "sumber": [
       "MASJV/undercover-game (MIT)",
-      "chud-lori/ethok (tanpa lisensi)"
+      "chud-lori/ethok (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)"
     ],
-    "jumlah": 88,
-    "jumlahSatuKata": 72
+    "jumlah": 99,
+    "jumlahSatuKata": 83
   },
   {
     "id": "i-olahraga",
@@ -210,10 +328,18 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 63,
-    "jumlahSatuKata": 38
+    "jumlah": 148,
+    "jumlahSatuKata": 89
   },
   {
     "id": "i-pakaian",
@@ -224,29 +350,44 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 51,
-    "jumlahSatuKata": 33
+    "jumlah": 105,
+    "jumlahSatuKata": 58
   },
   {
     "id": "i-perasaan",
     "nama": "Perasaan",
     "sumber": [
-      "chud-lori/ethok (tanpa lisensi)"
+      "chud-lori/ethok (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)"
     ],
-    "jumlah": 7,
-    "jumlahSatuKata": 6
+    "jumlah": 33,
+    "jumlahSatuKata": 29
   },
   {
     "id": "i-perayaan",
     "nama": "Perayaan & Acara",
     "sumber": [
       "chud-lori/ethok (tanpa lisensi)",
-      "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)"
+      "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 12,
-    "jumlahSatuKata": 4
+    "jumlah": 29,
+    "jumlahSatuKata": 12
   },
   {
     "id": "i-perkakas",
@@ -254,10 +395,16 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "sumber": [
       "CK-Arena (Apache-2.0)",
       "DaengWithAI/undercover-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)"
     ],
-    "jumlah": 22,
-    "jumlahSatuKata": 16
+    "jumlah": 40,
+    "jumlahSatuKata": 32
   },
   {
     "id": "i-profesi",
@@ -266,10 +413,20 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "DaengWithAI/undercover-indonesia (tanpa lisensi)",
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
-      "arisandi95/undercover-game-indonesia (tanpa lisensi)"
+      "arisandi95/undercover-game-indonesia (tanpa lisensi)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Nidroz/undercover (MIT)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 67,
-    "jumlahSatuKata": 53
+    "jumlah": 164,
+    "jumlahSatuKata": 107
   },
   {
     "id": "i-rumah",
@@ -279,10 +436,19 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "xuqssq/whois-undercover-game (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 90,
-    "jumlahSatuKata": 63
+    "jumlah": 167,
+    "jumlahSatuKata": 104
   },
   {
     "id": "i-sekolah",
@@ -291,10 +457,20 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "DaengWithAI/undercover-indonesia (tanpa lisensi)",
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "xuqssq/whois-undercover-game (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 50,
-    "jumlahSatuKata": 36
+    "jumlah": 148,
+    "jumlahSatuKata": 115
   },
   {
     "id": "i-tempat",
@@ -305,20 +481,32 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "ArashadDodhiya/UnderCoverGame (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 147,
-    "jumlahSatuKata": 79
+    "jumlah": 180,
+    "jumlahSatuKata": 98
   },
   {
     "id": "i-landmark",
     "nama": "Tempat Terkenal Dunia",
     "sumber": [
       "MASJV/undercover-game (MIT)",
-      "arisandi95/undercover-game-indonesia (tanpa lisensi)"
+      "arisandi95/undercover-game-indonesia (tanpa lisensi)",
+      "AmazinAmazon/Undercover (tanpa lisensi)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "ChairGamertag87/undercover (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)"
     ],
-    "jumlah": 75,
-    "jumlahSatuKata": 6
+    "jumlah": 81,
+    "jumlahSatuKata": 10
   },
   {
     "id": "i-tubuh",
@@ -327,10 +515,14 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "chud-lori/ethok (tanpa lisensi)",
       "Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi)",
       "arisandi95/undercover-game-indonesia (tanpa lisensi)",
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 30,
-    "jumlahSatuKata": 26
+    "jumlah": 47,
+    "jumlahSatuKata": 37
   },
   {
     "id": "i-tumbuhan",
@@ -339,18 +531,25 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "DaengWithAI/undercover-indonesia (tanpa lisensi)",
       "chud-lori/ethok (tanpa lisensi)",
       "sqiprasanna/mr-white-undercover (MIT)",
-      "trk78/undercover-plus (MIT)"
+      "trk78/undercover-plus (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)",
+      "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
+      "Schluby/Undercover (tanpa lisensi)",
+      "srinath987/Undercover-clone (MIT)",
+      "tejasdasari06/Imposter-game (tanpa lisensi)",
+      "zhengyi-yang/WhoIsTheSpy (MIT)"
     ],
-    "jumlah": 32,
-    "jumlahSatuKata": 28
+    "jumlah": 50,
+    "jumlahSatuKata": 38
   },
   {
     "id": "i-warna-bentuk",
     "nama": "Warna & Bentuk",
     "sumber": [
-      "sqiprasanna/mr-white-undercover (MIT)"
+      "sqiprasanna/mr-white-undercover (MIT)",
+      "Bipash2002/undercover (tanpa lisensi)"
     ],
-    "jumlah": 7,
-    "jumlahSatuKata": 5
+    "jumlah": 14,
+    "jumlahSatuKata": 11
   }
 ];

@@ -1,0 +1,627 @@
+{
+  "id": "league_of_legends",
+  "name": "League of Legends",
+  "emoji": "⚔️",
+  "version": 3,
+  "subthemes": [
+    {
+      "id": "champions",
+      "name": "Champions",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Yasuo",
+          "imposteur": "Yone",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Yasuo",
+          "imposteur_en": "Yone"
+        },
+        {
+          "civil": "Garen",
+          "imposteur": "Darius",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Garen",
+          "imposteur_en": "Darius"
+        },
+        {
+          "civil": "Vi",
+          "imposteur": "Jinx",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Vi",
+          "imposteur_en": "Jinx"
+        },
+        {
+          "civil": "Caitlyn",
+          "imposteur": "Jinx",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Caitlyn",
+          "imposteur_en": "Jinx"
+        },
+        {
+          "civil": "Caitlyn",
+          "imposteur": "Vi",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Caitlyn",
+          "imposteur_en": "Vi"
+        },
+        {
+          "civil": "Nasus",
+          "imposteur": "Renekton",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Nasus",
+          "imposteur_en": "Renekton"
+        },
+        {
+          "civil": "Jayce",
+          "imposteur": "Viktor",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Jayce",
+          "imposteur_en": "Viktor"
+        },
+        {
+          "civil": "Leona",
+          "imposteur": "Diana",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Leona",
+          "imposteur_en": "Diana"
+        },
+        {
+          "civil": "Shen",
+          "imposteur": "Zed",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Shen",
+          "imposteur_en": "Zed"
+        },
+        {
+          "civil": "Aatrox",
+          "imposteur": "Mordekaiser",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Aatrox",
+          "imposteur_en": "Mordekaiser"
+        },
+        {
+          "civil": "Ashe",
+          "imposteur": "Sejuani",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ashe",
+          "imposteur_en": "Sejuani"
+        },
+        {
+          "civil": "Morgana",
+          "imposteur": "Kayle",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Morgana",
+          "imposteur_en": "Kayle"
+        },
+        {
+          "civil": "Rakan",
+          "imposteur": "Xayah",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Rakan",
+          "imposteur_en": "Xayah"
+        },
+        {
+          "civil": "Kha'Zix",
+          "imposteur": "Rengar",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Kha'Zix",
+          "imposteur_en": "Rengar"
+        },
+        {
+          "civil": "Lucian",
+          "imposteur": "Senna",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Lucian",
+          "imposteur_en": "Senna"
+        },
+        {
+          "civil": "Miss Fortune",
+          "imposteur": "Gangplank",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Miss Fortune",
+          "imposteur_en": "Gangplank"
+        },
+        {
+          "civil": "Katarina",
+          "imposteur": "Talon",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Katarina",
+          "imposteur_en": "Talon"
+        },
+        {
+          "civil": "Darius",
+          "imposteur": "Draven",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Darius",
+          "imposteur_en": "Draven"
+        },
+        {
+          "civil": "Teemo",
+          "imposteur": "Tristana",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Teemo",
+          "imposteur_en": "Tristana"
+        },
+        {
+          "civil": "Blitzcrank",
+          "imposteur": "Thresh",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Blitzcrank",
+          "imposteur_en": "Thresh"
+        },
+        {
+          "civil": "Kayn",
+          "imposteur": "Rhaast",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Kayn",
+          "imposteur_en": "Rhaast"
+        },
+        {
+          "civil": "Lux",
+          "imposteur": "Sylas",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Lux",
+          "imposteur_en": "Sylas"
+        },
+        {
+          "civil": "Nautilus",
+          "imposteur": "Thresh",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Nautilus",
+          "imposteur_en": "Thresh"
+        },
+        {
+          "civil": "Anivia",
+          "imposteur": "Lissandra",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Anivia",
+          "imposteur_en": "Lissandra"
+        },
+        {
+          "civil": "Maître Yi",
+          "imposteur": "Wukong",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Master Yi",
+          "imposteur_en": "Wukong"
+        },
+        {
+          "civil": "Ahri",
+          "imposteur": "Evelynn",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Ahri",
+          "imposteur_en": "Evelynn"
+        }
+      ]
+    },
+    {
+      "id": "items",
+      "name": "Items",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Lame de Doran",
+          "imposteur": "Anneau de Doran",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Doran's Blade",
+          "imposteur_en": "Doran's Ring"
+        },
+        {
+          "civil": "Bottes de Berserker",
+          "imposteur": "Bottes de Sorcier",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Berserker's Greaves",
+          "imposteur_en": "Sorcerer's Shoes"
+        },
+        {
+          "civil": "Bottes de Mercure",
+          "imposteur": "Coques d'acier",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mercury's Treads",
+          "imposteur_en": "Plated Steelcaps"
+        },
+        {
+          "civil": "Infinity Edge",
+          "imposteur": "Bloodthirster",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Infinity Edge",
+          "imposteur_en": "Bloodthirster"
+        },
+        {
+          "civil": "Coiffe de Rabadon",
+          "imposteur": "Bâton du Vide",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Rabadon's Deathcap",
+          "imposteur_en": "Void Staff"
+        },
+        {
+          "civil": "Sablier de Zhonya",
+          "imposteur": "Voile de la Banshee",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Zhonya's Hourglass",
+          "imposteur_en": "Banshee's Veil"
+        },
+        {
+          "civil": "Larme de la Déesse",
+          "imposteur": "Manamune",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Tear of the Goddess",
+          "imposteur_en": "Manamune"
+        },
+        {
+          "civil": "Force de la Trinité",
+          "imposteur": "Gage de Sterak",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Trinity Force",
+          "imposteur_en": "Sterak's Gage"
+        },
+        {
+          "civil": "Lame du Roi Déchu",
+          "imposteur": "Éclat de Kraken",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Blade of the Ruined King",
+          "imposteur_en": "Kraken Slayer"
+        },
+        {
+          "civil": "Rédemption",
+          "imposteur": "Encensoir Ardent",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Redemption",
+          "imposteur_en": "Ardent Censer"
+        },
+        {
+          "civil": "Armure de Warmog",
+          "imposteur": "Cœuracier",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Warmog's Armor",
+          "imposteur_en": "Heartsteel"
+        },
+        {
+          "civil": "Sceptre de Rylai",
+          "imposteur": "Tourment de Liandry",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Rylai's Crystal Scepter",
+          "imposteur_en": "Liandry's Torment"
+        }
+      ]
+    },
+    {
+      "id": "lore",
+      "name": "Régions & Factions",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Demacia",
+          "imposteur": "Noxus",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Demacia",
+          "imposteur_en": "Noxus"
+        },
+        {
+          "civil": "Piltover",
+          "imposteur": "Zaun",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Piltover",
+          "imposteur_en": "Zaun"
+        },
+        {
+          "civil": "Ionia",
+          "imposteur": "Noxus",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ionia",
+          "imposteur_en": "Noxus"
+        },
+        {
+          "civil": "Freljord",
+          "imposteur": "Îles Obscures",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Freljord",
+          "imposteur_en": "Shadow Isles"
+        },
+        {
+          "civil": "Bilgewater",
+          "imposteur": "Îles Obscures",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Bilgewater",
+          "imposteur_en": "Shadow Isles"
+        },
+        {
+          "civil": "Hextech",
+          "imposteur": "Chemtech",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hextech",
+          "imposteur_en": "Chemtech"
+        },
+        {
+          "civil": "Les Solari",
+          "imposteur": "Les Lunari",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "The Solari",
+          "imposteur_en": "The Lunari"
+        },
+        {
+          "civil": "Shurima",
+          "imposteur": "le Néant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Shurima",
+          "imposteur_en": "The Void"
+        },
+        {
+          "civil": "Mont Targon",
+          "imposteur": "le Néant",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Mount Targon",
+          "imposteur_en": "The Void"
+        },
+        {
+          "civil": "Bandle",
+          "imposteur": "Runeterra",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Bandle City",
+          "imposteur_en": "Runeterra"
+        },
+        {
+          "civil": "Ixtal",
+          "imposteur": "Shurima",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Ixtal",
+          "imposteur_en": "Shurima"
+        }
+      ]
+    },
+    {
+      "id": "sub_b6vn4c",
+      "name": "Streamers & pros",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Kameto",
+          "imposteur": "Sardoche",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kameto",
+          "imposteur_en": "Sardoche"
+        },
+        {
+          "civil": "Kotei",
+          "imposteur": "Kameto",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Kotei",
+          "imposteur_en": "Kameto"
+        },
+        {
+          "civil": "Skyyart",
+          "imposteur": "Domingo",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Skyyart",
+          "imposteur_en": "Domingo"
+        },
+        {
+          "civil": "Domingo",
+          "imposteur": "Doigby",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Domingo",
+          "imposteur_en": "Doigby"
+        },
+        {
+          "civil": "Gotaga",
+          "imposteur": "Kameto",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Gotaga",
+          "imposteur_en": "Kameto"
+        },
+        {
+          "civil": "Caps",
+          "imposteur": "Perkz",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Caps",
+          "imposteur_en": "Perkz"
+        },
+        {
+          "civil": "Faker",
+          "imposteur": "Chovy",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Faker",
+          "imposteur_en": "Chovy"
+        },
+        {
+          "civil": "Tyler1",
+          "imposteur": "Imaqtpie",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Tyler1",
+          "imposteur_en": "Imaqtpie"
+        },
+        {
+          "civil": "Alderiate",
+          "imposteur": "Wakz",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Alderiate",
+          "imposteur_en": "Wakz"
+        },
+        {
+          "civil": "Sixen",
+          "imposteur": "LRB",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Sixen",
+          "imposteur_en": "LRB"
+        },
+        {
+          "civil": "Wakz",
+          "imposteur": "Rhobalas",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Wakz",
+          "imposteur_en": "Rhobalas"
+        },
+        {
+          "civil": "Rekkles",
+          "imposteur": "Caps",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Rekkles",
+          "imposteur_en": "Caps"
+        },
+        {
+          "civil": "Pokimane",
+          "imposteur": "LilyPichu",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Pokimane",
+          "imposteur_en": "LilyPichu"
+        },
+        {
+          "civil": "Sardoche",
+          "imposteur": "Sixen",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Sardoche",
+          "imposteur_en": "Sixen"
+        }
+      ]
+    },
+    {
+      "id": "sub_aktmvq",
+      "name": "Gameplay & Objectifs",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Baron",
+          "imposteur": "Dragon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Baron Nashor",
+          "imposteur_en": "Dragon"
+        },
+        {
+          "civil": "Flash",
+          "imposteur": "Fantôme",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Flash",
+          "imposteur_en": "Ghost"
+        },
+        {
+          "civil": "Téléportation",
+          "imposteur": "Embrasement",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Teleport",
+          "imposteur_en": "Ignite"
+        },
+        {
+          "civil": "Buff rouge",
+          "imposteur": "Buff bleu",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Red Buff",
+          "imposteur_en": "Blue Buff"
+        },
+        {
+          "civil": "Tourelle",
+          "imposteur": "Inhibiteur",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Turret",
+          "imposteur_en": "Inhibitor"
+        },
+        {
+          "civil": "Nexus",
+          "imposteur": "Inhibiteur",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Nexus",
+          "imposteur_en": "Inhibitor"
+        },
+        {
+          "civil": "Héraut de la Faille",
+          "imposteur": "Baron",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Rift Herald",
+          "imposteur_en": "Baron Nashor"
+        },
+        {
+          "civil": "Vol de vie",
+          "imposteur": "Vampirisme des sorts",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Lifesteal",
+          "imposteur_en": "Spell Vamp"
+        },
+        {
+          "civil": "Âme du Dragon",
+          "imposteur": "Dragon Ancestral",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Dragon Soul",
+          "imposteur_en": "Elder Dragon"
+        },
+        {
+          "civil": "Sbire",
+          "imposteur": "Sbire canon",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Minion",
+          "imposteur_en": "Cannon Minion"
+        }
+      ]
+    }
+  ]
+}

@@ -120,16 +120,10 @@ Lizard / Gecko = Kadal / Cicak
 Elvis Presley / The Beatles = Elvis Presley / The Beatles
 Leonardo da Vinci / Michelangelo = Leonardo da Vinci / Michelangelo
 Napoleon / Julius Caesar = Napoleon / Julius Caesar
-Mario / Luigi = Mario / Luigi
-Sonic / Tails = Sonic / Tails
-Pac-Man / Tetris = Pac-Man / Tetris
-Fortnite / Minecraft = Fortnite / Minecraft
-Call of Duty / Battlefield = Call of Duty / Battlefield
 Game of Thrones / Lord of the Rings = Game of Thrones / Lord of the Rings
 Harry Potter / Percy Jackson = Harry Potter / Percy Jackson
 Homer Simpson / Peter Griffin = Homer Simpson / Peter Griffin
 SpongeBob / Patrick = SpongeBob / Patrick
-UNO / Monopoly = UNO / Monopoli
 New York / Los Angeles = New York / Los Angeles
 Paris / London = Paris / London
 Rome / Athens = Roma / Athena
@@ -257,3 +251,60 @@ Cinema / Bowling = Bioskop / Bowling
 Netflix / Cinema = Netflix / Bioskop
 Swimming Pool / Beach = Kolam Renang / Pantai
 Glass / Cup = Gelas / Cangkir
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Minute / Second = Menit / Detik
+Season / Month = Musim / Bulan
+Secret / Lie = Rahasia / Kebohongan
+Poison / Medicine = Racun / Obat
+Hunt / Chase = Berburu / Mengejar
+Fire / Explosion = Kebakaran / Ledakan
+Buy / Borrow = Membeli / Meminjam
+Follow / Copy = Mengikuti / Meniru
+Push / Pull = Mendorong / Menarik
+Fall / Jump = Jatuh / Melompat
+Climb / Crawl = Memanjat / Merangkak
+Fly / Float = Terbang / Melayang
+Sink / Drown = Tenggelam / Karam
+Break / Crack = Pecah / Retak
+Burn / Melt = Terbakar / Meleleh
+Hide / Bury = Bersembunyi / Mengubur
+Fight / Attack = Berkelahi / Menyerang
+Guard / Protect = Menjaga / Melindungi
+Rescue / Save = Menolong / Menyelamatkan
+Trap / Catch = Menjebak / Menangkap
+Sneak / Creep = Mengendap / Merayap
+Loadshedding / Blackout = Pemadaman Bergilir / Mati Lampu
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Sleep / Rest = Tidur / Istirahat
+Morning / Evening = Pagi / Sore
+Today / Tomorrow = Hari Ini / Besok
+Week / Month = Minggu / Bulan
+Minute / Hour = Menit / Jam
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+War / Battle = Perang / Pertempuran
+Sleep / Dream = Tidur / Mimpi
+Hot / Warm = Panas / Hangat
+Cold / Cool = Dingin / Sejuk
+Treaty / Alliance = Perjanjian / Aliansi
+Revolution / Rebellion = Revolusi / Pemberontakan
+Parliament / Congress = Parlemen / Kongres
+Currency / Coin = Mata Uang / Koin
+Trade / Barter = Perdagangan / Barter
+Colony / Territory = Koloni / Wilayah
+Border / Frontier = Perbatasan / Garis Depan
+Nomad / Settler = Pengembara / Pemukim
+Democracy / Republic = Demokrasi / Republik
+Monarchy / Oligarchy = Monarki / Oligarki
+UN / NATO = PBB / NATO
+Talk / Whisper = Bicara / Berbisik
+Memory / Fantasy = Kenangan / Khayalan
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+气泡 / 水泡 = Gelembung / Lepuh

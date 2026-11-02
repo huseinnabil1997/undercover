@@ -1,0 +1,214 @@
+{
+  "id": "jujutsu_kaisen",
+  "name": "Jujutsu Kaisen",
+  "emoji": "🔮",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Yuji Itadori",
+          "imposteur": "Megumi Fushiguro",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Yuji Itadori",
+          "imposteur_en": "Megumi Fushiguro"
+        },
+        {
+          "civil": "Nobara Kugisaki",
+          "imposteur": "Megumi Fushiguro",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Nobara Kugisaki",
+          "imposteur_en": "Megumi Fushiguro"
+        },
+        {
+          "civil": "Satoru Gojo",
+          "imposteur": "Suguru Geto",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Satoru Gojo",
+          "imposteur_en": "Suguru Geto"
+        },
+        {
+          "civil": "Ryomen Sukuna",
+          "imposteur": "Satoru Gojo",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Ryomen Sukuna",
+          "imposteur_en": "Satoru Gojo"
+        },
+        {
+          "civil": "Nanami Kento",
+          "imposteur": "Maki Zenin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Nanami Kento",
+          "imposteur_en": "Maki Zenin"
+        },
+        {
+          "civil": "Toge Inumaki",
+          "imposteur": "Panda",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Toge Inumaki",
+          "imposteur_en": "Panda"
+        },
+        {
+          "civil": "Yuta Okkotsu",
+          "imposteur": "Maki Zenin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Yuta Okkotsu",
+          "imposteur_en": "Maki Zenin"
+        },
+        {
+          "civil": "Aoi Todo",
+          "imposteur": "Yuji Itadori",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Aoi Todo",
+          "imposteur_en": "Yuji Itadori"
+        },
+        {
+          "civil": "Mahito",
+          "imposteur": "Jogo",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Mahito",
+          "imposteur_en": "Jogo"
+        },
+        {
+          "civil": "Maki Zenin",
+          "imposteur": "Toge Inumaki",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Maki Zenin",
+          "imposteur_en": "Toge Inumaki"
+        },
+        {
+          "civil": "Nobara Kugisaki",
+          "imposteur": "Panda",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Nobara Kugisaki",
+          "imposteur_en": "Panda"
+        },
+        {
+          "civil": "Nanami Kento",
+          "imposteur": "Satoru Gojo",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Nanami Kento",
+          "imposteur_en": "Satoru Gojo"
+        },
+        {
+          "civil": "Suguru Geto",
+          "imposteur": "Mahito",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Suguru Geto",
+          "imposteur_en": "Mahito"
+        },
+        {
+          "civil": "Megumi Fushiguro",
+          "imposteur": "Toge Inumaki",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Megumi Fushiguro",
+          "imposteur_en": "Toge Inumaki"
+        }
+      ]
+    },
+    {
+      "id": "techniques_univers",
+      "name": "Techniques & Univers",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Extension de Domaine",
+          "imposteur": "Flash Noir",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Domain Expansion",
+          "imposteur_en": "Black Flash"
+        },
+        {
+          "civil": "Infini",
+          "imposteur": "Six Yeux",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Infinity",
+          "imposteur_en": "Six Eyes"
+        },
+        {
+          "civil": "École de Tokyo",
+          "imposteur": "École de Kyoto",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Tokyo Jujutsu High",
+          "imposteur_en": "Kyoto Jujutsu High"
+        },
+        {
+          "civil": "Doigts de Sukuna",
+          "imposteur": "Énergie Maléfique",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sukuna's Fingers",
+          "imposteur_en": "Cursed Energy"
+        },
+        {
+          "civil": "Malédiction de Classe Spéciale",
+          "imposteur": "Malédiction de Classe 1",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Special Grade Curse",
+          "imposteur_en": "Grade 1 Curse"
+        },
+        {
+          "civil": "Flash Noir",
+          "imposteur": "Infini",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Black Flash",
+          "imposteur_en": "Infinity"
+        },
+        {
+          "civil": "Extension de Domaine",
+          "imposteur": "Énergie Maléfique",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Domain Expansion",
+          "imposteur_en": "Cursed Energy"
+        },
+        {
+          "civil": "Six Yeux",
+          "imposteur": "Doigts de Sukuna",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Six Eyes",
+          "imposteur_en": "Sukuna's Fingers"
+        },
+        {
+          "civil": "Domaine de la Prison Malléable",
+          "imposteur": "Extension de Domaine",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Malleable Shadow Domain",
+          "imposteur_en": "Domain Expansion"
+        },
+        {
+          "civil": "Association du Jujutsu",
+          "imposteur": "École de Tokyo",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Jujutsu Sorcerer Association",
+          "imposteur_en": "Tokyo Jujutsu High"
+        }
+      ]
+    }
+  ]
+}

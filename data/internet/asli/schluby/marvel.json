@@ -1,0 +1,244 @@
+{
+  "id": "marvel",
+  "name": "Marvel",
+  "emoji": "🦸",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "heros",
+      "name": "Héros",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Iron Man",
+          "imposteur": "Captain America",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Iron Man",
+          "imposteur_en": "Captain America"
+        },
+        {
+          "civil": "Thor",
+          "imposteur": "Hulk",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Thor",
+          "imposteur_en": "Hulk"
+        },
+        {
+          "civil": "Black Widow",
+          "imposteur": "Hawkeye",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Black Widow",
+          "imposteur_en": "Hawkeye"
+        },
+        {
+          "civil": "Wolverine",
+          "imposteur": "Deadpool",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Wolverine",
+          "imposteur_en": "Deadpool"
+        },
+        {
+          "civil": "Ms. Marvel",
+          "imposteur": "Captain Marvel",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Ms. Marvel",
+          "imposteur_en": "Captain Marvel"
+        },
+        {
+          "civil": "Spider-Man",
+          "imposteur": "Daredevil",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Spider-Man",
+          "imposteur_en": "Daredevil"
+        },
+        {
+          "civil": "Doctor Strange",
+          "imposteur": "Scarlet Witch",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Doctor Strange",
+          "imposteur_en": "Scarlet Witch"
+        },
+        {
+          "civil": "Black Panther",
+          "imposteur": "Namor",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Black Panther",
+          "imposteur_en": "Namor"
+        },
+        {
+          "civil": "Professeur X",
+          "imposteur": "Magneto",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Professor X",
+          "imposteur_en": "Magneto"
+        },
+        {
+          "civil": "Miles Morales",
+          "imposteur": "Peter Parker",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Miles Morales",
+          "imposteur_en": "Peter Parker"
+        }
+      ]
+    },
+    {
+      "id": "vilains",
+      "name": "Vilains",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Thanos",
+          "imposteur": "Ultron",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Thanos",
+          "imposteur_en": "Ultron"
+        },
+        {
+          "civil": "Venom",
+          "imposteur": "Carnage",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Venom",
+          "imposteur_en": "Carnage"
+        },
+        {
+          "civil": "Loki",
+          "imposteur": "Hela",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Loki",
+          "imposteur_en": "Hela"
+        },
+        {
+          "civil": "Green Goblin",
+          "imposteur": "Vautour",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Green Goblin",
+          "imposteur_en": "Vulture"
+        },
+        {
+          "civil": "Docteur Fatalis",
+          "imposteur": "Kingpin",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Doctor Doom",
+          "imposteur_en": "Kingpin"
+        },
+        {
+          "civil": "Red Skull",
+          "imposteur": "Baron Zemo",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Red Skull",
+          "imposteur_en": "Baron Zemo"
+        }
+      ]
+    },
+    {
+      "id": "objets",
+      "name": "Objets & Concepts",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Bouclier de Captain America",
+          "imposteur": "Marteau de Thor",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Captain America's Shield",
+          "imposteur_en": "Thor's Hammer"
+        },
+        {
+          "civil": "Pierre du Temps",
+          "imposteur": "Pierre de l'Esprit",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Time Stone",
+          "imposteur_en": "Mind Stone"
+        },
+        {
+          "civil": "Pierre de l'Espace",
+          "imposteur": "Pierre de la Réalité",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Space Stone",
+          "imposteur_en": "Reality Stone"
+        },
+        {
+          "civil": "Vibranium",
+          "imposteur": "Adamantium",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Vibranium",
+          "imposteur_en": "Adamantium"
+        },
+        {
+          "civil": "S.H.I.E.L.D.",
+          "imposteur": "HYDRA",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "S.H.I.E.L.D.",
+          "imposteur_en": "HYDRA"
+        },
+        {
+          "civil": "Gant de l'Infini",
+          "imposteur": "Nano-Gant",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Infinity Gauntlet",
+          "imposteur_en": "Nano Gauntlet"
+        }
+      ]
+    },
+    {
+      "id": "mcu",
+      "name": "Films & Séries MCU",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Avengers",
+          "imposteur": "X-Men",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Avengers",
+          "imposteur_en": "X-Men"
+        },
+        {
+          "civil": "WandaVision",
+          "imposteur": "Loki",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "WandaVision",
+          "imposteur_en": "Loki"
+        },
+        {
+          "civil": "Multivers de la Folie",
+          "imposteur": "No Way Home",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Multiverse of Madness",
+          "imposteur_en": "No Way Home"
+        },
+        {
+          "civil": "Le Multivers",
+          "imposteur": "La Ligne Temporelle Sacrée",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "The Multiverse",
+          "imposteur_en": "The Sacred Timeline"
+        }
+      ]
+    }
+  ]
+}

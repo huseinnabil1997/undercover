@@ -92,3 +92,23 @@ Amerika / Kanada
 Prancis / Italia
 Filipina / Singapura
 Meksiko / Kuba
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Islande / Norvege = Islandia / Norwegia
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Canada / Alaska = Kanada / Alaska
+France / Italy = Prancis / Italia
+Finland / Iceland = Finlandia / Islandia
+England / Scotland = Inggris / Skotlandia
+Ireland / Wales = Irlandia / Wales
+Poland / Czechia = Polandia / Ceko
+Denmark / Sweden = Denmark / Swedia
+Argentina / Uruguay = Argentina / Uruguay
+Colombia / Venezuela = Kolombia / Venezuela
+Norway / Finland = Norwegia / Finlandia
+Czechia / Slovakia = Ceko / Slowakia
+Hungary / Romania = Hungaria / Rumania
+Kazakhstan / Uzbekistan = Kazakhstan / Uzbekistan

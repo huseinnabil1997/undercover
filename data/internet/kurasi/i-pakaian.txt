@@ -69,3 +69,95 @@ baju / celana = Baju / Celana
 @ sqiprasanna
 Shirt / Jacket = Kemeja / Jaket
 Shoes / Socks = Sepatu / Kaus Kaki
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+shoe / slipper = Sepatu / Sandal Rumah
+pants / shorts = Celana Panjang / Celana Pendek
+glasses / sunglasses = Kacamata / Kacamata Hitam
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Dress / Skirt = Gaun / Rok
+Ring / Bracelet = Cincin / Gelang
+Necklace / Chain = Kalung / Rantai
+Ring / Chain = Cincin / Rantai
+Mask / Hat = Topeng / Topi
+Jeans / Shorts = Celana Jeans / Celana Pendek
+Shoes / Boots = Sepatu / Sepatu Bot
+Scarf / Belt = Syal / Ikat Pinggang
+Suit / Uniform = Jas / Seragam
+Glasses / Goggles = Kacamata / Kacamata Renang
+Hoodie / Sweater = Hoodie / Sweter
+Veil / Mask = Cadar / Masker
+Cape / Cloak = Jubah / Mantel
+Apron / Vest = Celemek / Rompi
+Turban / Cap = Sorban / Peci
+Mask / Disguise = Topeng / Penyamaran
+Costume / Uniform = Kostum / Seragam
+Helmet / Cap = Helm / Topi
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Parapluie / Impermeable = Payung / Jas Hujan
+Sac a dos / Valise = Ransel / Koper
+Ceinture / Bretelles = Ikat Pinggang / Suspender
+Casquette / Chapeau = Topi Baseball / Topi Fedora
+Lunettes / Lentilles = Kacamata / Lensa Kontak
+Portefeuille / Sac a main = Dompet / Tas Tangan
+T-shirt / Chemise = Kaus / Kemeja
+Pantalon / Jean = Celana Panjang / Celana Jeans
+Robe / Jupe = Gaun / Rok
+Pull / Gilet = Sweter / Kardigan
+Veste / Manteau = Jaket / Mantel
+Baskets / Chaussures de ville = Sneakers / Sepatu Pantofel
+Echarpe / Foulard = Syal / Selendang
+Short / Bermuda = Celana Pendek / Celana Bermuda
+Costume / Tailleur = Jas Pria / Setelan Wanita
+Chaussettes / Collants = Kaus Kaki / Stoking
+Gants / Moufles = Sarung Tangan / Sarung Tangan Jempol
+Sweat a capuche / Pull = Hoodie / Sweter
+Doudoune / Blouson = Jaket Bulu Angsa / Jaket Kulit
+Cravate / Noeud papillon = Dasi / Dasi Kupu-kupu
+Sandales / Tongs = Sandal / Sandal Jepit
+Bottes / Bottines = Sepatu Bot / Sepatu Bot Pendek
+Pyjama / Chemise de nuit = Piyama / Daster
+Blazer / Veston = Blazer / Jas
+Legging / Jogging = Legging / Celana Training
+Salopette / Combinaison = Overall / Terusan
+Peignoir / Kimono = Jubah Mandi / Kimono
+Chemisier / Blouse = Kemeja Wanita / Blus
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Slippers / Sandals = Sandal Jepit / Sandal Gunung
+Shirt / T-Shirt = Kemeja / Kaus
+Sock / Glove = Kaus Kaki / Sarung Tangan
+Watch / Bracelet = Jam Tangan / Gelang
+Ring / Necklace = Cincin / Kalung
+Bag / Wallet = Tas / Dompet
+Umbrella / Raincoat = Payung / Jas Hujan
+Wallet / Purse = Dompet / Tas Tangan
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Glasses / Lens = Kacamata / Lensa
+Shirt / Jeans = Kemeja / Celana Jeans
+Belt / Wallet = Ikat Pinggang / Dompet
+Cap / Sunglasses = Topi / Kacamata Hitam
+Umbrella / Sunglasses = Payung / Kacamata Hitam
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Puma / Reebok = Puma / Reebok
+Gucci / Prada = Gucci / Prada
+Rolex / Omega = Rolex / Omega
+H&M / Zara = H&M / Zara
+Louis Vuitton / Chanel = Louis Vuitton / Chanel
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+遮阳帽 / 鸭舌帽 = Topi Pantai / Topi Pet
+增高鞋 / 高跟鞋 = Sepatu Peninggi / Sepatu Hak Tinggi
+喜服 / 婚纱 = Baju Pengantin / Gaun Pengantin
+近视眼镜 / 隐形眼镜 = Kacamata / Lensa Kontak

@@ -35,3 +35,87 @@ Bow / Arrow = Busur / Anak Panah
 # Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
 @ trk78
 Sword / Axe = Pedang / Kapak
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Seahorse / Pegasus = Kuda Laut / Pegasus
+Robot / Mummy = Robot / Mumi
+Gargoyle / Totem Pole = Gargoyle / Totem
+Rhinoceros / Unicorn = Badak / Unicorn
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+dragon / wyvern = Naga / Wyvern
+king / prince = Raja / Pangeran
+queen / princess = Ratu / Putri
+knight / squire = Ksatria / Pengawal Ksatria
+wizard / mage = Penyihir / Ahli Sihir
+zombie / mummy = Zombi / Mumi
+bomb / grenade = Bom / Granat
+tank / cannon = Tank / Meriam
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Wizard / Witch = Penyihir / Nenek Sihir
+Ghost / Spirit = Hantu / Arwah
+Prince / Princess = Pangeran / Putri
+Pirate / Sailor = Bajak Laut / Pelaut
+Vampire / Ghost = Vampir / Hantu
+Angel / Fairy = Malaikat / Peri
+Giant / Dwarf = Raksasa / Kurcaci
+Dragon / Snake = Naga / Ular
+Ninja / Warrior = Ninja / Pendekar
+Bandit / Thief = Bandit / Pencuri
+Hero / Warrior = Pahlawan / Pendekar
+Villain / Monster = Penjahat / Monster
+Tower / Castle = Menara / Istana
+Throne / Chair = Singgasana / Kursi
+Crown / Helmet = Mahkota / Helm
+Gun / Bow = Senapan / Busur
+Trap / Cage = Perangkap / Kandang
+Crown / Tiara = Mahkota / Tiara
+Magic / Trick = Sihir / Trik Sulap
+Shadow / Ghost = Bayangan / Hantu
+Curse / Spell = Kutukan / Mantra
+Treasure / Gold = Harta Karun / Emas
+Sword / Dagger = Pedang / Belati
+Arrow / Spear = Panah / Tombak
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Ninja / Assassin = Ninja / Pembunuh Bayaran
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Château / Manoir = Istana / Rumah Besar
+Hobbit / Nain = Hobbit / Kurcaci
+Elfe / Homme = Elf / Manusia
+Orque / Uruk-hai = Orc / Uruk-hai
+Ent / Troll = Ent / Troll
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+King / Minister = Raja / Menteri
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Cinderella / Snow White = Cinderella / Putri Salju
+Alien / Martian = Alien / Makhluk Mars
+King / Emperor = Raja / Kaisar
+Queen / Empress = Ratu / Permaisuri
+Knight / Samurai = Ksatria / Samurai
+Bow / Crossbow = Busur / Panah Silang
+Viking / Pirate = Viking / Bajak Laut
+Aladdin / Sinbad = Aladdin / Sinbad
+Empire / Kingdom = Kekaisaran / Kerajaan
+Sword / Spear = Pedang / Tombak
+Cannon / Catapult = Meriam / Katapel
+Mummy / Sarcophagus = Mumi / Sarkofagus
+Gladiator / Chariot = Gladiator / Kereta Perang
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+神话 / 童话 = Mitos / Dongeng
+魔术师 / 魔法师 = Pesulap / Penyihir
+梁山伯与祝英台 / 罗密欧与朱丽叶 = Romeo dan Juliet / Sampek Engtay
+丑小鸭 / 灰姑娘 = Itik Buruk Rupa / Cinderella

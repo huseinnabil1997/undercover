@@ -1,0 +1,2642 @@
+[
+    {
+        "citizen": "coffee",
+        "undercover": "tea"
+    },
+    {
+        "citizen": "sun",
+        "undercover": "moon"
+    },
+    {
+        "citizen": "guitar",
+        "undercover": "violin"
+    },
+    {
+        "citizen": "apple",
+        "undercover": "orange"
+    },
+    {
+        "citizen": "car",
+        "undercover": "bus"
+    },
+    {
+        "citizen": "pen",
+        "undercover": "pencil"
+    },
+    {
+        "citizen": "chair",
+        "undercover": "sofa"
+    },
+    {
+        "citizen": "shoe",
+        "undercover": "slipper"
+    },
+    {
+        "citizen": "laptop",
+        "undercover": "tablet"
+    },
+    {
+        "citizen": "ocean",
+        "undercover": "lake"
+    },
+    {
+        "citizen": "train",
+        "undercover": "subway"
+    },
+    {
+        "citizen": "plane",
+        "undercover": "helicopter"
+    },
+    {
+        "citizen": "fork",
+        "undercover": "spoon"
+    },
+    {
+        "citizen": "bread",
+        "undercover": "toast"
+    },
+    {
+        "citizen": "butter",
+        "undercover": "margarine"
+    },
+    {
+        "citizen": "shirt",
+        "undercover": "t-shirt"
+    },
+    {
+        "citizen": "pants",
+        "undercover": "shorts"
+    },
+    {
+        "citizen": "sock",
+        "undercover": "glove"
+    },
+    {
+        "citizen": "hat",
+        "undercover": "cap"
+    },
+    {
+        "citizen": "scarf",
+        "undercover": "tie"
+    },
+    {
+        "citizen": "glasses",
+        "undercover": "sunglasses"
+    },
+    {
+        "citizen": "watch",
+        "undercover": "clock"
+    },
+    {
+        "citizen": "ring",
+        "undercover": "bracelet"
+    },
+    {
+        "citizen": "necklace",
+        "undercover": "chain"
+    },
+    {
+        "citizen": "book",
+        "undercover": "magazine"
+    },
+    {
+        "citizen": "newspaper",
+        "undercover": "article"
+    },
+    {
+        "citizen": "movie",
+        "undercover": "series"
+    },
+    {
+        "citizen": "song",
+        "undercover": "poem"
+    },
+    {
+        "citizen": "painting",
+        "undercover": "drawing"
+    },
+    {
+        "citizen": "photo",
+        "undercover": "picture"
+    },
+    {
+        "citizen": "camera",
+        "undercover": "phone"
+    },
+    {
+        "citizen": "keyboard",
+        "undercover": "typewriter"
+    },
+    {
+        "citizen": "mouse",
+        "undercover": "trackpad"
+    },
+    {
+        "citizen": "monitor",
+        "undercover": "screen"
+    },
+    {
+        "citizen": "printer",
+        "undercover": "scanner"
+    },
+    {
+        "citizen": "speaker",
+        "undercover": "headphone"
+    },
+    {
+        "citizen": "microphone",
+        "undercover": "recorder"
+    },
+    {
+        "citizen": "desk",
+        "undercover": "table"
+    },
+    {
+        "citizen": "bed",
+        "undercover": "couch"
+    },
+    {
+        "citizen": "pillow",
+        "undercover": "cushion"
+    },
+    {
+        "citizen": "blanket",
+        "undercover": "sheet"
+    },
+    {
+        "citizen": "door",
+        "undercover": "gate"
+    },
+    {
+        "citizen": "window",
+        "undercover": "mirror"
+    },
+    {
+        "citizen": "roof",
+        "undercover": "ceiling"
+    },
+    {
+        "citizen": "floor",
+        "undercover": "ground"
+    },
+    {
+        "citizen": "wall",
+        "undercover": "fence"
+    },
+    {
+        "citizen": "garden",
+        "undercover": "park"
+    },
+    {
+        "citizen": "forest",
+        "undercover": "jungle"
+    },
+    {
+        "citizen": "river",
+        "undercover": "stream"
+    },
+    {
+        "citizen": "mountain",
+        "undercover": "hill"
+    },
+    {
+        "citizen": "beach",
+        "undercover": "desert"
+    },
+    {
+        "citizen": "rain",
+        "undercover": "snow"
+    },
+    {
+        "citizen": "storm",
+        "undercover": "hurricane"
+    },
+    {
+        "citizen": "wind",
+        "undercover": "breeze"
+    },
+    {
+        "citizen": "fire",
+        "undercover": "flame"
+    },
+    {
+        "citizen": "ice",
+        "undercover": "water"
+    },
+    {
+        "citizen": "gold",
+        "undercover": "silver"
+    },
+    {
+        "citizen": "diamond",
+        "undercover": "ruby"
+    },
+    {
+        "citizen": "iron",
+        "undercover": "steel"
+    },
+    {
+        "citizen": "plastic",
+        "undercover": "rubber"
+    },
+    {
+        "citizen": "wood",
+        "undercover": "paper"
+    },
+    {
+        "citizen": "glass",
+        "undercover": "crystal"
+    },
+    {
+        "citizen": "stone",
+        "undercover": "rock"
+    },
+    {
+        "citizen": "brick",
+        "undercover": "tile"
+    },
+    {
+        "citizen": "cement",
+        "undercover": "concrete"
+    },
+    {
+        "citizen": "dog",
+        "undercover": "wolf"
+    },
+    {
+        "citizen": "cat",
+        "undercover": "tiger"
+    },
+    {
+        "citizen": "lion",
+        "undercover": "leopard"
+    },
+    {
+        "citizen": "horse",
+        "undercover": "donkey"
+    },
+    {
+        "citizen": "cow",
+        "undercover": "bull"
+    },
+    {
+        "citizen": "sheep",
+        "undercover": "goat"
+    },
+    {
+        "citizen": "chicken",
+        "undercover": "duck"
+    },
+    {
+        "citizen": "eagle",
+        "undercover": "hawk"
+    },
+    {
+        "citizen": "parrot",
+        "undercover": "pigeon"
+    },
+    {
+        "citizen": "snake",
+        "undercover": "lizard"
+    },
+    {
+        "citizen": "frog",
+        "undercover": "toad"
+    },
+    {
+        "citizen": "shark",
+        "undercover": "whale"
+    },
+    {
+        "citizen": "dolphin",
+        "undercover": "seal"
+    },
+    {
+        "citizen": "fish",
+        "undercover": "crab"
+    },
+    {
+        "citizen": "bee",
+        "undercover": "wasp"
+    },
+    {
+        "citizen": "ant",
+        "undercover": "spider"
+    },
+    {
+        "citizen": "butterfly",
+        "undercover": "moth"
+    },
+    {
+        "citizen": "apple",
+        "undercover": "pear"
+    },
+    {
+        "citizen": "banana",
+        "undercover": "plantain"
+    },
+    {
+        "citizen": "grape",
+        "undercover": "berry"
+    },
+    {
+        "citizen": "lemon",
+        "undercover": "lime"
+    },
+    {
+        "citizen": "orange",
+        "undercover": "tangerine"
+    },
+    {
+        "citizen": "peach",
+        "undercover": "apricot"
+    },
+    {
+        "citizen": "plum",
+        "undercover": "cherry"
+    },
+    {
+        "citizen": "melon",
+        "undercover": "watermelon"
+    },
+    {
+        "citizen": "carrot",
+        "undercover": "potato"
+    },
+    {
+        "citizen": "onion",
+        "undercover": "garlic"
+    },
+    {
+        "citizen": "tomato",
+        "undercover": "pepper"
+    },
+    {
+        "citizen": "cucumber",
+        "undercover": "zucchini"
+    },
+    {
+        "citizen": "lettuce",
+        "undercover": "cabbage"
+    },
+    {
+        "citizen": "spinach",
+        "undercover": "kale"
+    },
+    {
+        "citizen": "corn",
+        "undercover": "wheat"
+    },
+    {
+        "citizen": "rice",
+        "undercover": "pasta"
+    },
+    {
+        "citizen": "pizza",
+        "undercover": "burger"
+    },
+    {
+        "citizen": "taco",
+        "undercover": "burrito"
+    },
+    {
+        "citizen": "sushi",
+        "undercover": "sashimi"
+    },
+    {
+        "citizen": "cake",
+        "undercover": "pie"
+    },
+    {
+        "citizen": "cookie",
+        "undercover": "biscuit"
+    },
+    {
+        "citizen": "chocolate",
+        "undercover": "candy"
+    },
+    {
+        "citizen": "ice cream",
+        "undercover": "yogurt"
+    },
+    {
+        "citizen": "juice",
+        "undercover": "soda"
+    },
+    {
+        "citizen": "beer",
+        "undercover": "wine"
+    },
+    {
+        "citizen": "whiskey",
+        "undercover": "vodka"
+    },
+    {
+        "citizen": "milk",
+        "undercover": "cream"
+    },
+    {
+        "citizen": "doctor",
+        "undercover": "nurse"
+    },
+    {
+        "citizen": "teacher",
+        "undercover": "professor"
+    },
+    {
+        "citizen": "lawyer",
+        "undercover": "judge"
+    },
+    {
+        "citizen": "police",
+        "undercover": "guard"
+    },
+    {
+        "citizen": "soldier",
+        "undercover": "warrior"
+    },
+    {
+        "citizen": "king",
+        "undercover": "prince"
+    },
+    {
+        "citizen": "queen",
+        "undercover": "princess"
+    },
+    {
+        "citizen": "president",
+        "undercover": "governor"
+    },
+    {
+        "citizen": "actor",
+        "undercover": "star"
+    },
+    {
+        "citizen": "artist",
+        "undercover": "painter"
+    },
+    {
+        "citizen": "writer",
+        "undercover": "poet"
+    },
+    {
+        "citizen": "chef",
+        "undercover": "cook"
+    },
+    {
+        "citizen": "driver",
+        "undercover": "pilot"
+    },
+    {
+        "citizen": "football",
+        "undercover": "soccer"
+    },
+    {
+        "citizen": "basketball",
+        "undercover": "volleyball"
+    },
+    {
+        "citizen": "tennis",
+        "undercover": "badminton"
+    },
+    {
+        "citizen": "baseball",
+        "undercover": "cricket"
+    },
+    {
+        "citizen": "golf",
+        "undercover": "hockey"
+    },
+    {
+        "citizen": "run",
+        "undercover": "walk"
+    },
+    {
+        "citizen": "jump",
+        "undercover": "hop"
+    },
+    {
+        "citizen": "swim",
+        "undercover": "dive"
+    },
+    {
+        "citizen": "dance",
+        "undercover": "sing"
+    },
+    {
+        "citizen": "read",
+        "undercover": "write"
+    },
+    {
+        "citizen": "listen",
+        "undercover": "hear"
+    },
+    {
+        "citizen": "look",
+        "undercover": "see"
+    },
+    {
+        "citizen": "touch",
+        "undercover": "feel"
+    },
+    {
+        "citizen": "smell",
+        "undercover": "taste"
+    },
+    {
+        "citizen": "love",
+        "undercover": "like"
+    },
+    {
+        "citizen": "hate",
+        "undercover": "dislike"
+    },
+    {
+        "citizen": "happy",
+        "undercover": "excited"
+    },
+    {
+        "citizen": "sad",
+        "undercover": "angry"
+    },
+    {
+        "citizen": "fear",
+        "undercover": "panic"
+    },
+    {
+        "citizen": "surprise",
+        "undercover": "shock"
+    },
+    {
+        "citizen": "laugh",
+        "undercover": "smile"
+    },
+    {
+        "citizen": "cry",
+        "undercover": "weep"
+    },
+    {
+        "citizen": "dream",
+        "undercover": "nightmare"
+    },
+    {
+        "citizen": "sleep",
+        "undercover": "nap"
+    },
+    {
+        "citizen": "wake",
+        "undercover": "rise"
+    },
+    {
+        "citizen": "start",
+        "undercover": "begin"
+    },
+    {
+        "citizen": "end",
+        "undercover": "finish"
+    },
+    {
+        "citizen": "win",
+        "undercover": "lose"
+    },
+    {
+        "citizen": "success",
+        "undercover": "failure"
+    },
+    {
+        "citizen": "rich",
+        "undercover": "poor"
+    },
+    {
+        "citizen": "cheap",
+        "undercover": "expensive"
+    },
+    {
+        "citizen": "hot",
+        "undercover": "cold"
+    },
+    {
+        "citizen": "warm",
+        "undercover": "cool"
+    },
+    {
+        "citizen": "dry",
+        "undercover": "wet"
+    },
+    {
+        "citizen": "clean",
+        "undercover": "dirty"
+    },
+    {
+        "citizen": "fast",
+        "undercover": "slow"
+    },
+    {
+        "citizen": "hard",
+        "undercover": "soft"
+    },
+    {
+        "citizen": "heavy",
+        "undercover": "light"
+    },
+    {
+        "citizen": "big",
+        "undercover": "small"
+    },
+    {
+        "citizen": "tall",
+        "undercover": "short"
+    },
+    {
+        "citizen": "wide",
+        "undercover": "narrow"
+    },
+    {
+        "citizen": "thick",
+        "undercover": "thin"
+    },
+    {
+        "citizen": "old",
+        "undercover": "new"
+    },
+    {
+        "citizen": "young",
+        "undercover": "adult"
+    },
+    {
+        "citizen": "man",
+        "undercover": "boy"
+    },
+    {
+        "citizen": "woman",
+        "undercover": "girl"
+    },
+    {
+        "citizen": "father",
+        "undercover": "mother"
+    },
+    {
+        "citizen": "brother",
+        "undercover": "sister"
+    },
+    {
+        "citizen": "son",
+        "undercover": "daughter"
+    },
+    {
+        "citizen": "uncle",
+        "undercover": "aunt"
+    },
+    {
+        "citizen": "grandfather",
+        "undercover": "grandmother"
+    },
+    {
+        "citizen": "friend",
+        "undercover": "enemy"
+    },
+    {
+        "citizen": "neighbor",
+        "undercover": "stranger"
+    },
+    {
+        "citizen": "guest",
+        "undercover": "host"
+    },
+    {
+        "citizen": "student",
+        "undercover": "pupil"
+    },
+    {
+        "citizen": "school",
+        "undercover": "college"
+    },
+    {
+        "citizen": "university",
+        "undercover": "library"
+    },
+    {
+        "citizen": "hospital",
+        "undercover": "clinic"
+    },
+    {
+        "citizen": "pharmacy",
+        "undercover": "drugstore"
+    },
+    {
+        "citizen": "market",
+        "undercover": "shop"
+    },
+    {
+        "citizen": "mall",
+        "undercover": "store"
+    },
+    {
+        "citizen": "restaurant",
+        "undercover": "cafe"
+    },
+    {
+        "citizen": "hotel",
+        "undercover": "motel"
+    },
+    {
+        "citizen": "airport",
+        "undercover": "station"
+    },
+    {
+        "citizen": "bus stop",
+        "undercover": "taxi stand"
+    },
+    {
+        "citizen": "street",
+        "undercover": "road"
+    },
+    {
+        "citizen": "highway",
+        "undercover": "freeway"
+    },
+    {
+        "citizen": "bridge",
+        "undercover": "tunnel"
+    },
+    {
+        "citizen": "city",
+        "undercover": "town"
+    },
+    {
+        "citizen": "village",
+        "undercover": "country"
+    },
+    {
+        "citizen": "world",
+        "undercover": "planet"
+    },
+    {
+        "citizen": "space",
+        "undercover": "universe"
+    },
+    {
+        "citizen": "star",
+        "undercover": "galaxy"
+    },
+    {
+        "citizen": "sun",
+        "undercover": "star"
+    },
+    {
+        "citizen": "moon",
+        "undercover": "satellite"
+    },
+    {
+        "citizen": "earth",
+        "undercover": "mars"
+    },
+    {
+        "citizen": "sky",
+        "undercover": "cloud"
+    },
+    {
+        "citizen": "air",
+        "undercover": "oxygen"
+    },
+    {
+        "citizen": "gas",
+        "undercover": "liquid"
+    },
+    {
+        "citizen": "solid",
+        "undercover": "fluid"
+    },
+    {
+        "citizen": "atom",
+        "undercover": "molecule"
+    },
+    {
+        "citizen": "cell",
+        "undercover": "tissue"
+    },
+    {
+        "citizen": "organ",
+        "undercover": "body"
+    },
+    {
+        "citizen": "head",
+        "undercover": "face"
+    },
+    {
+        "citizen": "hand",
+        "undercover": "foot"
+    },
+    {
+        "citizen": "arm",
+        "undercover": "leg"
+    },
+    {
+        "citizen": "finger",
+        "undercover": "toe"
+    },
+    {
+        "citizen": "eye",
+        "undercover": "ear"
+    },
+    {
+        "citizen": "nose",
+        "undercover": "mouth"
+    },
+    {
+        "citizen": "tooth",
+        "undercover": "tongue"
+    },
+    {
+        "citizen": "hair",
+        "undercover": "fur"
+    },
+    {
+        "citizen": "skin",
+        "undercover": "scale"
+    },
+    {
+        "citizen": "bone",
+        "undercover": "skull"
+    },
+    {
+        "citizen": "blood",
+        "undercover": "vein"
+    },
+    {
+        "citizen": "heart",
+        "undercover": "lung"
+    },
+    {
+        "citizen": "brain",
+        "undercover": "mind"
+    },
+    {
+        "citizen": "soul",
+        "undercover": "spirit"
+    },
+    {
+        "citizen": "ghost",
+        "undercover": "phantom"
+    },
+    {
+        "citizen": "monster",
+        "undercover": "beast"
+    },
+    {
+        "citizen": "dragon",
+        "undercover": "dinosaur"
+    },
+    {
+        "citizen": "unicorn",
+        "undercover": "pegasus"
+    },
+    {
+        "citizen": "fairy",
+        "undercover": "elf"
+    },
+    {
+        "citizen": "witch",
+        "undercover": "wizard"
+    },
+    {
+        "citizen": "magic",
+        "undercover": "spell"
+    },
+    {
+        "citizen": "science",
+        "undercover": "math"
+    },
+    {
+        "citizen": "history",
+        "undercover": "geography"
+    },
+    {
+        "citizen": "art",
+        "undercover": "music"
+    },
+    {
+        "citizen": "sport",
+        "undercover": "game"
+    },
+    {
+        "citizen": "puzzle",
+        "undercover": "riddle"
+    },
+    {
+        "citizen": "joke",
+        "undercover": "prank"
+    },
+    {
+        "citizen": "story",
+        "undercover": "tale"
+    },
+    {
+        "citizen": "news",
+        "undercover": "gossip"
+    },
+    {
+        "citizen": "truth",
+        "undercover": "lie"
+    },
+    {
+        "citizen": "fact",
+        "undercover": "opinion"
+    },
+    {
+        "citizen": "question",
+        "undercover": "answer"
+    },
+    {
+        "citizen": "problem",
+        "undercover": "solution"
+    },
+    {
+        "citizen": "idea",
+        "undercover": "thought"
+    },
+    {
+        "citizen": "plan",
+        "undercover": "strategy"
+    },
+    {
+        "citizen": "goal",
+        "undercover": "target"
+    },
+    {
+        "citizen": "dream",
+        "undercover": "wish"
+    },
+    {
+        "citizen": "hope",
+        "undercover": "faith"
+    },
+    {
+        "citizen": "luck",
+        "undercover": "chance"
+    },
+    {
+        "citizen": "fate",
+        "undercover": "destiny"
+    },
+    {
+        "citizen": "life",
+        "undercover": "death"
+    },
+    {
+        "citizen": "birth",
+        "undercover": "growth"
+    },
+    {
+        "citizen": "age",
+        "undercover": "time"
+    },
+    {
+        "citizen": "year",
+        "undercover": "month"
+    },
+    {
+        "citizen": "week",
+        "undercover": "day"
+    },
+    {
+        "citizen": "hour",
+        "undercover": "minute"
+    },
+    {
+        "citizen": "second",
+        "undercover": "moment"
+    },
+    {
+        "citizen": "arm",
+        "undercover": "leg"
+    },
+    {
+        "citizen": "finger",
+        "undercover": "toe"
+    },
+    {
+        "citizen": "eye",
+        "undercover": "ear"
+    },
+    {
+        "citizen": "nose",
+        "undercover": "mouth"
+    },
+    {
+        "citizen": "tooth",
+        "undercover": "tongue"
+    },
+    {
+        "citizen": "hair",
+        "undercover": "fur"
+    },
+    {
+        "citizen": "skin",
+        "undercover": "scale"
+    },
+    {
+        "citizen": "bone",
+        "undercover": "skull"
+    },
+    {
+        "citizen": "blood",
+        "undercover": "vein"
+    },
+    {
+        "citizen": "heart",
+        "undercover": "lung"
+    },
+    {
+        "citizen": "brain",
+        "undercover": "mind"
+    },
+    {
+        "citizen": "soul",
+        "undercover": "spirit"
+    },
+    {
+        "citizen": "ghost",
+        "undercover": "phantom"
+    },
+    {
+        "citizen": "monster",
+        "undercover": "beast"
+    },
+    {
+        "citizen": "dragon",
+        "undercover": "dinosaur"
+    },
+    {
+        "citizen": "unicorn",
+        "undercover": "pegasus"
+    },
+    {
+        "citizen": "fairy",
+        "undercover": "elf"
+    },
+    {
+        "citizen": "witch",
+        "undercover": "wizard"
+    },
+    {
+        "citizen": "magic",
+        "undercover": "spell"
+    },
+    {
+        "citizen": "science",
+        "undercover": "math"
+    },
+    {
+        "citizen": "history",
+        "undercover": "geography"
+    },
+    {
+        "citizen": "art",
+        "undercover": "music"
+    },
+    {
+        "citizen": "sport",
+        "undercover": "game"
+    },
+    {
+        "citizen": "puzzle",
+        "undercover": "riddle"
+    },
+    {
+        "citizen": "joke",
+        "undercover": "prank"
+    },
+    {
+        "citizen": "story",
+        "undercover": "tale"
+    },
+    {
+        "citizen": "news",
+        "undercover": "gossip"
+    },
+    {
+        "citizen": "truth",
+        "undercover": "lie"
+    },
+    {
+        "citizen": "fact",
+        "undercover": "opinion"
+    },
+    {
+        "citizen": "question",
+        "undercover": "answer"
+    },
+    {
+        "citizen": "problem",
+        "undercover": "solution"
+    },
+    {
+        "citizen": "idea",
+        "undercover": "thought"
+    },
+    {
+        "citizen": "plan",
+        "undercover": "strategy"
+    },
+    {
+        "citizen": "goal",
+        "undercover": "target"
+    },
+    {
+        "citizen": "dream",
+        "undercover": "wish"
+    },
+    {
+        "citizen": "hope",
+        "undercover": "faith"
+    },
+    {
+        "citizen": "luck",
+        "undercover": "chance"
+    },
+    {
+        "citizen": "fate",
+        "undercover": "destiny"
+    },
+    {
+        "citizen": "life",
+        "undercover": "death"
+    },
+    {
+        "citizen": "birth",
+        "undercover": "growth"
+    },
+    {
+        "citizen": "age",
+        "undercover": "time"
+    },
+    {
+        "citizen": "year",
+        "undercover": "month"
+    },
+    {
+        "citizen": "week",
+        "undercover": "day"
+    },
+    {
+        "citizen": "hour",
+        "undercover": "minute"
+    },
+    {
+        "citizen": "second",
+        "undercover": "moment"
+    },
+    {
+        "citizen": "past",
+        "undercover": "future"
+    },
+    {
+        "citizen": "now",
+        "undercover": "then"
+    },
+    {
+        "citizen": "here",
+        "undercover": "there"
+    },
+    {
+        "citizen": "this",
+        "undercover": "that"
+    },
+    {
+        "citizen": "laptop",
+        "undercover": "desktop"
+    },
+    {
+        "citizen": "keyboard",
+        "undercover": "keypad"
+    },
+    {
+        "citizen": "mouse",
+        "undercover": "touchpad"
+    },
+    {
+        "citizen": "monitor",
+        "undercover": "display"
+    },
+    {
+        "citizen": "printer",
+        "undercover": "copier"
+    },
+    {
+        "citizen": "scanner",
+        "undercover": "fax"
+    },
+    {
+        "citizen": "speaker",
+        "undercover": "woofer"
+    },
+    {
+        "citizen": "headphone",
+        "undercover": "earphone"
+    },
+    {
+        "citizen": "microphone",
+        "undercover": "mic"
+    },
+    {
+        "citizen": "webcam",
+        "undercover": "camera"
+    },
+    {
+        "citizen": "router",
+        "undercover": "modem"
+    },
+    {
+        "citizen": "wifi",
+        "undercover": "bluetooth"
+    },
+    {
+        "citizen": "usb",
+        "undercover": "hdmi"
+    },
+    {
+        "citizen": "battery",
+        "undercover": "charger"
+    },
+    {
+        "citizen": "cable",
+        "undercover": "wire"
+    },
+    {
+        "citizen": "switch",
+        "undercover": "button"
+    },
+    {
+        "citizen": "screen",
+        "undercover": "panel"
+    },
+    {
+        "citizen": "pixel",
+        "undercover": "voxel"
+    },
+    {
+        "citizen": "code",
+        "undercover": "script"
+    },
+    {
+        "citizen": "file",
+        "undercover": "folder"
+    },
+    {
+        "citizen": "software",
+        "undercover": "hardware"
+    },
+    {
+        "citizen": "app",
+        "undercover": "program"
+    },
+    {
+        "citizen": "virus",
+        "undercover": "bug"
+    },
+    {
+        "citizen": "hacker",
+        "undercover": "coder"
+    },
+    {
+        "citizen": "server",
+        "undercover": "client"
+    },
+    {
+        "citizen": "cloud",
+        "undercover": "local"
+    },
+    {
+        "citizen": "email",
+        "undercover": "sms"
+    },
+    {
+        "citizen": "chat",
+        "undercover": "call"
+    },
+    {
+        "citizen": "video",
+        "undercover": "audio"
+    },
+    {
+        "citizen": "image",
+        "undercover": "photo"
+    },
+    {
+        "citizen": "link",
+        "undercover": "url"
+    },
+    {
+        "citizen": "site",
+        "undercover": "page"
+    },
+    {
+        "citizen": "blog",
+        "undercover": "vlog"
+    },
+    {
+        "citizen": "post",
+        "undercover": "tweet"
+    },
+    {
+        "citizen": "like",
+        "undercover": "share"
+    },
+    {
+        "citizen": "comment",
+        "undercover": "reply"
+    },
+    {
+        "citizen": "login",
+        "undercover": "logout"
+    },
+    {
+        "citizen": "password",
+        "undercover": "pin"
+    },
+    {
+        "citizen": "username",
+        "undercover": "nickname"
+    },
+    {
+        "citizen": "profile",
+        "undercover": "account"
+    },
+    {
+        "citizen": "search",
+        "undercover": "find"
+    },
+    {
+        "citizen": "download",
+        "undercover": "upload"
+    },
+    {
+        "citizen": "install",
+        "undercover": "update"
+    },
+    {
+        "citizen": "delete",
+        "undercover": "remove"
+    },
+    {
+        "citizen": "save",
+        "undercover": "keep"
+    },
+    {
+        "citizen": "edit",
+        "undercover": "change"
+    },
+    {
+        "citizen": "copy",
+        "undercover": "paste"
+    },
+    {
+        "citizen": "cut",
+        "undercover": "crop"
+    },
+    {
+        "citizen": "undo",
+        "undercover": "redo"
+    },
+    {
+        "citizen": "zoom",
+        "undercover": "scale"
+    },
+    {
+        "citizen": "print",
+        "undercover": "scan"
+    },
+    {
+        "citizen": "click",
+        "undercover": "tap"
+    },
+    {
+        "citizen": "scroll",
+        "undercover": "swipe"
+    },
+    {
+        "citizen": "drag",
+        "undercover": "drop"
+    },
+    {
+        "citizen": "hover",
+        "undercover": "focus"
+    },
+    {
+        "citizen": "select",
+        "undercover": "choose"
+    },
+    {
+        "citizen": "check",
+        "undercover": "mark"
+    },
+    {
+        "citizen": "list",
+        "undercover": "grid"
+    },
+    {
+        "citizen": "table",
+        "undercover": "chart"
+    },
+    {
+        "citizen": "graph",
+        "undercover": "plot"
+    },
+    {
+        "citizen": "map",
+        "undercover": "gps"
+    },
+    {
+        "citizen": "compass",
+        "undercover": "magnet"
+    },
+    {
+        "citizen": "north",
+        "undercover": "south"
+    },
+    {
+        "citizen": "east",
+        "undercover": "west"
+    },
+    {
+        "citizen": "left",
+        "undercover": "right"
+    },
+    {
+        "citizen": "up",
+        "undercover": "down"
+    },
+    {
+        "citizen": "front",
+        "undercover": "back"
+    },
+    {
+        "citizen": "top",
+        "undercover": "bottom"
+    },
+    {
+        "citizen": "inside",
+        "undercover": "outside"
+    },
+    {
+        "citizen": "open",
+        "undercover": "close"
+    },
+    {
+        "citizen": "on",
+        "undercover": "off"
+    },
+    {
+        "citizen": "high",
+        "undercover": "low"
+    },
+    {
+        "citizen": "near",
+        "undercover": "far"
+    },
+    {
+        "citizen": "fast",
+        "undercover": "quick"
+    },
+    {
+        "citizen": "slow",
+        "undercover": "lazy"
+    },
+    {
+        "citizen": "loud",
+        "undercover": "noisy"
+    },
+    {
+        "citizen": "quiet",
+        "undercover": "silent"
+    },
+    {
+        "citizen": "bright",
+        "undercover": "shiny"
+    },
+    {
+        "citizen": "dark",
+        "undercover": "dim"
+    },
+    {
+        "citizen": "hard",
+        "undercover": "tough"
+    },
+    {
+        "citizen": "soft",
+        "undercover": "smooth"
+    },
+    {
+        "citizen": "rough",
+        "undercover": "coarse"
+    },
+    {
+        "citizen": "sharp",
+        "undercover": "blunt"
+    },
+    {
+        "citizen": "heavy",
+        "undercover": "massive"
+    },
+    {
+        "citizen": "light",
+        "undercover": "airy"
+    },
+    {
+        "citizen": "wet",
+        "undercover": "damp"
+    },
+    {
+        "citizen": "dry",
+        "undercover": "arid"
+    },
+    {
+        "citizen": "hot",
+        "undercover": "boiling"
+    },
+    {
+        "citizen": "cold",
+        "undercover": "freezing"
+    },
+    {
+        "citizen": "warm",
+        "undercover": "mild"
+    },
+    {
+        "citizen": "cool",
+        "undercover": "chilly"
+    },
+    {
+        "citizen": "sweet",
+        "undercover": "sugary"
+    },
+    {
+        "citizen": "sour",
+        "undercover": "tart"
+    },
+    {
+        "citizen": "bitter",
+        "undercover": "harsh"
+    },
+    {
+        "citizen": "salty",
+        "undercover": "savory"
+    },
+    {
+        "citizen": "spicy",
+        "undercover": "hot"
+    },
+    {
+        "citizen": "fresh",
+        "undercover": "raw"
+    },
+    {
+        "citizen": "rotten",
+        "undercover": "spoiled"
+    },
+    {
+        "citizen": "clean",
+        "undercover": "pure"
+    },
+    {
+        "citizen": "dirty",
+        "undercover": "filthy"
+    },
+    {
+        "citizen": "empty",
+        "undercover": "hollow"
+    },
+    {
+        "citizen": "full",
+        "undercover": "packed"
+    },
+    {
+        "citizen": "new",
+        "undercover": "modern"
+    },
+    {
+        "citizen": "old",
+        "undercover": "ancient"
+    },
+    {
+        "citizen": "young",
+        "undercover": "junior"
+    },
+    {
+        "citizen": "rich",
+        "undercover": "wealthy"
+    },
+    {
+        "citizen": "poor",
+        "undercover": "broke"
+    },
+    {
+        "citizen": "happy",
+        "undercover": "joyful"
+    },
+    {
+        "citizen": "sad",
+        "undercover": "unhappy"
+    },
+    {
+        "citizen": "angry",
+        "undercover": "mad"
+    },
+    {
+        "citizen": "calm",
+        "undercover": "peaceful"
+    },
+    {
+        "citizen": "brave",
+        "undercover": "bold"
+    },
+    {
+        "citizen": "scared",
+        "undercover": "afraid"
+    },
+    {
+        "citizen": "smart",
+        "undercover": "clever"
+    },
+    {
+        "citizen": "stupid",
+        "undercover": "dumb"
+    },
+    {
+        "citizen": "funny",
+        "undercover": "silly"
+    },
+    {
+        "citizen": "serious",
+        "undercover": "stern"
+    },
+    {
+        "citizen": "kind",
+        "undercover": "nice"
+    },
+    {
+        "citizen": "cruel",
+        "undercover": "mean"
+    },
+    {
+        "citizen": "polite",
+        "undercover": "rude"
+    },
+    {
+        "citizen": "honest",
+        "undercover": "truthful"
+    },
+    {
+        "citizen": "liar",
+        "undercover": "fake"
+    },
+    {
+        "citizen": "friend",
+        "undercover": "pal"
+    },
+    {
+        "citizen": "enemy",
+        "undercover": "rival"
+    },
+    {
+        "citizen": "family",
+        "undercover": "relative"
+    },
+    {
+        "citizen": "parent",
+        "undercover": "guardian"
+    },
+    {
+        "citizen": "child",
+        "undercover": "kid"
+    },
+    {
+        "citizen": "baby",
+        "undercover": "infant"
+    },
+    {
+        "citizen": "man",
+        "undercover": "guy"
+    },
+    {
+        "citizen": "woman",
+        "undercover": "lady"
+    },
+    {
+        "citizen": "boy",
+        "undercover": "lad"
+    },
+    {
+        "citizen": "girl",
+        "undercover": "lass"
+    },
+    {
+        "citizen": "king",
+        "undercover": "emperor"
+    },
+    {
+        "citizen": "queen",
+        "undercover": "empress"
+    },
+    {
+        "citizen": "prince",
+        "undercover": "duke"
+    },
+    {
+        "citizen": "princess",
+        "undercover": "duchess"
+    },
+    {
+        "citizen": "knight",
+        "undercover": "squire"
+    },
+    {
+        "citizen": "wizard",
+        "undercover": "mage"
+    },
+    {
+        "citizen": "witch",
+        "undercover": "sorceress"
+    },
+    {
+        "citizen": "dragon",
+        "undercover": "wyvern"
+    },
+    {
+        "citizen": "ghost",
+        "undercover": "spirit"
+    },
+    {
+        "citizen": "zombie",
+        "undercover": "mummy"
+    },
+    {
+        "citizen": "vampire",
+        "undercover": "werewolf"
+    },
+    {
+        "citizen": "alien",
+        "undercover": "martian"
+    },
+    {
+        "citizen": "robot",
+        "undercover": "cyborg"
+    },
+    {
+        "citizen": "angel",
+        "undercover": "saint"
+    },
+    {
+        "citizen": "devil",
+        "undercover": "demon"
+    },
+    {
+        "citizen": "god",
+        "undercover": "deity"
+    },
+    {
+        "citizen": "hero",
+        "undercover": "savior"
+    },
+    {
+        "citizen": "villain",
+        "undercover": "criminal"
+    },
+    {
+        "citizen": "police",
+        "undercover": "cop"
+    },
+    {
+        "citizen": "thief",
+        "undercover": "robber"
+    },
+    {
+        "citizen": "judge",
+        "undercover": "jury"
+    },
+    {
+        "citizen": "lawyer",
+        "undercover": "attorney"
+    },
+    {
+        "citizen": "doctor",
+        "undercover": "medic"
+    },
+    {
+        "citizen": "nurse",
+        "undercover": "caretaker"
+    },
+    {
+        "citizen": "teacher",
+        "undercover": "tutor"
+    },
+    {
+        "citizen": "student",
+        "undercover": "learner"
+    },
+    {
+        "citizen": "chef",
+        "undercover": "baker"
+    },
+    {
+        "citizen": "waiter",
+        "undercover": "server"
+    },
+    {
+        "citizen": "pilot",
+        "undercover": "aviator"
+    },
+    {
+        "citizen": "driver",
+        "undercover": "chauffeur"
+    },
+    {
+        "citizen": "farmer",
+        "undercover": "gardener"
+    },
+    {
+        "citizen": "artist",
+        "undercover": "creator"
+    },
+    {
+        "citizen": "writer",
+        "undercover": "author"
+    },
+    {
+        "citizen": "singer",
+        "undercover": "vocalist"
+    },
+    {
+        "citizen": "dancer",
+        "undercover": "performer"
+    },
+    {
+        "citizen": "actor",
+        "undercover": "player"
+    },
+    {
+        "citizen": "athlete",
+        "undercover": "sportsperson"
+    },
+    {
+        "citizen": "coach",
+        "undercover": "trainer"
+    },
+    {
+        "citizen": "referee",
+        "undercover": "umpire"
+    },
+    {
+        "citizen": "team",
+        "undercover": "squad"
+    },
+    {
+        "citizen": "game",
+        "undercover": "match"
+    },
+    {
+        "citizen": "ball",
+        "undercover": "sphere"
+    },
+    {
+        "citizen": "bat",
+        "undercover": "club"
+    },
+    {
+        "citizen": "goal",
+        "undercover": "net"
+    },
+    {
+        "citizen": "field",
+        "undercover": "pitch"
+    },
+    {
+        "citizen": "court",
+        "undercover": "arena"
+    },
+    {
+        "citizen": "stadium",
+        "undercover": "coliseum"
+    },
+    {
+        "citizen": "gym",
+        "undercover": "fitness"
+    },
+    {
+        "citizen": "run",
+        "undercover": "jog"
+    },
+    {
+        "citizen": "jump",
+        "undercover": "leap"
+    },
+    {
+        "citizen": "swim",
+        "undercover": "float"
+    },
+    {
+        "citizen": "bike",
+        "undercover": "cycle"
+    },
+    {
+        "citizen": "skate",
+        "undercover": "blade"
+    },
+    {
+        "citizen": "ski",
+        "undercover": "snowboard"
+    },
+    {
+        "citizen": "surf",
+        "undercover": "sail"
+    },
+    {
+        "citizen": "climb",
+        "undercover": "hike"
+    },
+    {
+        "citizen": "camp",
+        "undercover": "tent"
+    },
+    {
+        "citizen": "hunt",
+        "undercover": "fish"
+    },
+    {
+        "citizen": "shoot",
+        "undercover": "fire"
+    },
+    {
+        "citizen": "fight",
+        "undercover": "battle"
+    },
+    {
+        "citizen": "war",
+        "undercover": "conflict"
+    },
+    {
+        "citizen": "peace",
+        "undercover": "truce"
+    },
+    {
+        "citizen": "gun",
+        "undercover": "rifle"
+    },
+    {
+        "citizen": "sword",
+        "undercover": "blade"
+    },
+    {
+        "citizen": "shield",
+        "undercover": "armor"
+    },
+    {
+        "citizen": "helmet",
+        "undercover": "visor"
+    },
+    {
+        "citizen": "bomb",
+        "undercover": "grenade"
+    },
+    {
+        "citizen": "tank",
+        "undercover": "cannon"
+    },
+    {
+        "citizen": "plane",
+        "undercover": "jet"
+    },
+    {
+        "citizen": "ship",
+        "undercover": "boat"
+    },
+    {
+        "citizen": "car",
+        "undercover": "auto"
+    },
+    {
+        "citizen": "bus",
+        "undercover": "van"
+    },
+    {
+        "citizen": "truck",
+        "undercover": "lorry"
+    },
+    {
+        "citizen": "train",
+        "undercover": "rail"
+    },
+    {
+        "citizen": "bike",
+        "undercover": "moto"
+    },
+    {
+        "citizen": "taxi",
+        "undercover": "cab"
+    },
+    {
+        "citizen": "road",
+        "undercover": "path"
+    },
+    {
+        "citizen": "bridge",
+        "undercover": "viaduct"
+    },
+    {
+        "citizen": "tunnel",
+        "undercover": "tube"
+    },
+    {
+        "citizen": "city",
+        "undercover": "urban"
+    },
+    {
+        "citizen": "village",
+        "undercover": "rural"
+    },
+    {
+        "citizen": "house",
+        "undercover": "home"
+    },
+    {
+        "citizen": "apartment",
+        "undercover": "flat"
+    },
+    {
+        "citizen": "room",
+        "undercover": "chamber"
+    },
+    {
+        "citizen": "kitchen",
+        "undercover": "pantry"
+    },
+    {
+        "citizen": "bathroom",
+        "undercover": "toilet"
+    },
+    {
+        "citizen": "bedroom",
+        "undercover": "dorm"
+    },
+    {
+        "citizen": "living",
+        "undercover": "lounge"
+    },
+    {
+        "citizen": "garden",
+        "undercover": "yard"
+    },
+    {
+        "citizen": "roof",
+        "undercover": "top"
+    },
+    {
+        "citizen": "floor",
+        "undercover": "deck"
+    },
+    {
+        "citizen": "wall",
+        "undercover": "barrier"
+    },
+    {
+        "citizen": "door",
+        "undercover": "entry"
+    },
+    {
+        "citizen": "window",
+        "undercover": "pane"
+    },
+    {
+        "citizen": "chair",
+        "undercover": "seat"
+    },
+    {
+        "citizen": "table",
+        "undercover": "desk"
+    },
+    {
+        "citizen": "bed",
+        "undercover": "cot"
+    },
+    {
+        "citizen": "lamp",
+        "undercover": "light"
+    },
+    {
+        "citizen": "clock",
+        "undercover": "timer"
+    },
+    {
+        "citizen": "mirror",
+        "undercover": "glass"
+    },
+    {
+        "citizen": "rug",
+        "undercover": "carpet"
+    },
+    {
+        "citizen": "curtain",
+        "undercover": "blind"
+    },
+    {
+        "citizen": "shelf",
+        "undercover": "rack"
+    },
+    {
+        "citizen": "box",
+        "undercover": "case"
+    },
+    {
+        "citizen": "bag",
+        "undercover": "sack"
+    },
+    {
+        "citizen": "bottle",
+        "undercover": "jar"
+    },
+    {
+        "citizen": "cup",
+        "undercover": "mug"
+    },
+    {
+        "citizen": "plate",
+        "undercover": "dish"
+    },
+    {
+        "citizen": "spoon",
+        "undercover": "scoop"
+    },
+    {
+        "citizen": "fork",
+        "undercover": "prong"
+    },
+    {
+        "citizen": "knife",
+        "undercover": "blade"
+    },
+    {
+        "citizen": "pan",
+        "undercover": "pot"
+    },
+    {
+        "citizen": "oven",
+        "undercover": "stove"
+    },
+    {
+        "citizen": "fridge",
+        "undercover": "freezer"
+    },
+    {
+        "citizen": "sink",
+        "undercover": "basin"
+    },
+    {
+        "citizen": "soap",
+        "undercover": "foam"
+    },
+    {
+        "citizen": "towel",
+        "undercover": "cloth"
+    },
+    {
+        "citizen": "brush",
+        "undercover": "comb"
+    },
+    {
+        "citizen": "paste",
+        "undercover": "gel"
+    },
+    {
+        "citizen": "shampoo",
+        "undercover": "wash"
+    },
+    {
+        "citizen": "paper",
+        "undercover": "sheet"
+    },
+    {
+        "citizen": "pen",
+        "undercover": "marker"
+    },
+    {
+        "citizen": "pencil",
+        "undercover": "crayon"
+    },
+    {
+        "citizen": "book",
+        "undercover": "novel"
+    },
+    {
+        "citizen": "note",
+        "undercover": "memo"
+    },
+    {
+        "citizen": "card",
+        "undercover": "ticket"
+    },
+    {
+        "citizen": "money",
+        "undercover": "cash"
+    },
+    {
+        "citizen": "coin",
+        "undercover": "cent"
+    },
+    {
+        "citizen": "wallet",
+        "undercover": "purse"
+    },
+    {
+        "citizen": "bank",
+        "undercover": "vault"
+    },
+    {
+        "citizen": "shop",
+        "undercover": "mart"
+    },
+    {
+        "citizen": "market",
+        "undercover": "bazaar"
+    },
+    {
+        "citizen": "price",
+        "undercover": "cost"
+    },
+    {
+        "citizen": "sale",
+        "undercover": "deal"
+    },
+    {
+        "citizen": "buy",
+        "undercover": "purchase"
+    },
+    {
+        "citizen": "sell",
+        "undercover": "trade"
+    },
+    {
+        "citizen": "pay",
+        "undercover": "spend"
+    },
+    {
+        "citizen": "gift",
+        "undercover": "present"
+    },
+    {
+        "citizen": "party",
+        "undercover": "bash"
+    },
+    {
+        "citizen": "music",
+        "undercover": "tune"
+    },
+    {
+        "citizen": "song",
+        "undercover": "track"
+    },
+    {
+        "citizen": "dance",
+        "undercover": "move"
+    },
+    {
+        "citizen": "movie",
+        "undercover": "film"
+    },
+    {
+        "citizen": "show",
+        "undercover": "play"
+    },
+    {
+        "citizen": "art",
+        "undercover": "craft"
+    },
+    {
+        "citizen": "paint",
+        "undercover": "draw"
+    },
+    {
+        "citizen": "color",
+        "undercover": "hue"
+    },
+    {
+        "citizen": "red",
+        "undercover": "crimson"
+    },
+    {
+        "citizen": "blue",
+        "undercover": "azure"
+    },
+    {
+        "citizen": "green",
+        "undercover": "lime"
+    },
+    {
+        "citizen": "yellow",
+        "undercover": "gold"
+    },
+    {
+        "citizen": "black",
+        "undercover": "dark"
+    },
+    {
+        "citizen": "white",
+        "undercover": "pale"
+    },
+    {
+        "citizen": "dog",
+        "undercover": "pup"
+    },
+    {
+        "citizen": "cat",
+        "undercover": "kitty"
+    },
+    {
+        "citizen": "bird",
+        "undercover": "fowl"
+    },
+    {
+        "citizen": "fish",
+        "undercover": "trout"
+    },
+    {
+        "citizen": "horse",
+        "undercover": "pony"
+    },
+    {
+        "citizen": "cow",
+        "undercover": "ox"
+    },
+    {
+        "citizen": "pig",
+        "undercover": "hog"
+    },
+    {
+        "citizen": "sheep",
+        "undercover": "lamb"
+    },
+    {
+        "citizen": "goat",
+        "undercover": "ram"
+    },
+    {
+        "citizen": "chicken",
+        "undercover": "hen"
+    },
+    {
+        "citizen": "duck",
+        "undercover": "goose"
+    },
+    {
+        "citizen": "lion",
+        "undercover": "tiger"
+    },
+    {
+        "citizen": "bear",
+        "undercover": "panda"
+    },
+    {
+        "citizen": "wolf",
+        "undercover": "fox"
+    },
+    {
+        "citizen": "deer",
+        "undercover": "elk"
+    },
+    {
+        "citizen": "monkey",
+        "undercover": "ape"
+    },
+    {
+        "citizen": "elephant",
+        "undercover": "mammoth"
+    },
+    {
+        "citizen": "snake",
+        "undercover": "viper"
+    },
+    {
+        "citizen": "frog",
+        "undercover": "toad"
+    },
+    {
+        "citizen": "spider",
+        "undercover": "tarantula"
+    },
+    {
+        "citizen": "fly",
+        "undercover": "gnat"
+    },
+    {
+        "citizen": "bee",
+        "undercover": "hornet"
+    },
+    {
+        "citizen": "ant",
+        "undercover": "termite"
+    },
+    {
+        "citizen": "tree",
+        "undercover": "bush"
+    },
+    {
+        "citizen": "flower",
+        "undercover": "bloom"
+    },
+    {
+        "citizen": "grass",
+        "undercover": "weed"
+    },
+    {
+        "citizen": "leaf",
+        "undercover": "petal"
+    },
+    {
+        "citizen": "root",
+        "undercover": "stem"
+    },
+    {
+        "citizen": "fruit",
+        "undercover": "berry"
+    },
+    {
+        "citizen": "apple",
+        "undercover": "pear"
+    },
+    {
+        "citizen": "banana",
+        "undercover": "melon"
+    },
+    {
+        "citizen": "grape",
+        "undercover": "raisin"
+    },
+    {
+        "citizen": "orange",
+        "undercover": "lemon"
+    },
+    {
+        "citizen": "potato",
+        "undercover": "yam"
+    },
+    {
+        "citizen": "carrot",
+        "undercover": "radish"
+    },
+    {
+        "citizen": "onion",
+        "undercover": "leek"
+    },
+    {
+        "citizen": "corn",
+        "undercover": "maize"
+    },
+    {
+        "citizen": "bread",
+        "undercover": "bun"
+    },
+    {
+        "citizen": "cake",
+        "undercover": "tart"
+    },
+    {
+        "citizen": "pie",
+        "undercover": "pastry"
+    },
+    {
+        "citizen": "meat",
+        "undercover": "flesh"
+    },
+    {
+        "citizen": "beef",
+        "undercover": "pork"
+    },
+    {
+        "citizen": "chicken",
+        "undercover": "turkey"
+    },
+    {
+        "citizen": "fish",
+        "undercover": "seafood"
+    },
+    {
+        "citizen": "egg",
+        "undercover": "roe"
+    },
+    {
+        "citizen": "milk",
+        "undercover": "dairy"
+    },
+    {
+        "citizen": "cheese",
+        "undercover": "curd"
+    },
+    {
+        "citizen": "butter",
+        "undercover": "oil"
+    },
+    {
+        "citizen": "water",
+        "undercover": "liquid"
+    },
+    {
+        "citizen": "juice",
+        "undercover": "drink"
+    },
+    {
+        "citizen": "coffee",
+        "undercover": "espresso"
+    },
+    {
+        "citizen": "tea",
+        "undercover": "chai"
+    },
+    {
+        "citizen": "beer",
+        "undercover": "ale"
+    },
+    {
+        "citizen": "wine",
+        "undercover": "cider"
+    },
+    {
+        "citizen": "sun",
+        "undercover": "star"
+    },
+    {
+        "citizen": "moon",
+        "undercover": "orb"
+    },
+    {
+        "citizen": "sky",
+        "undercover": "heaven"
+    },
+    {
+        "citizen": "cloud",
+        "undercover": "fog"
+    },
+    {
+        "citizen": "rain",
+        "undercover": "shower"
+    },
+    {
+        "citizen": "snow",
+        "undercover": "hail"
+    },
+    {
+        "citizen": "wind",
+        "undercover": "gale"
+    },
+    {
+        "citizen": "storm",
+        "undercover": "tempest"
+    },
+    {
+        "citizen": "fire",
+        "undercover": "blaze"
+    },
+    {
+        "citizen": "ice",
+        "undercover": "frost"
+    },
+    {
+        "citizen": "earth",
+        "undercover": "soil"
+    },
+    {
+        "citizen": "sea",
+        "undercover": "ocean"
+    },
+    {
+        "citizen": "river",
+        "undercover": "creek"
+    },
+    {
+        "citizen": "lake",
+        "undercover": "pond"
+    },
+    {
+        "citizen": "mountain",
+        "undercover": "peak"
+    },
+    {
+        "citizen": "hill",
+        "undercover": "mound"
+    },
+    {
+        "citizen": "valley",
+        "undercover": "canyon"
+    },
+    {
+        "citizen": "forest",
+        "undercover": "woods"
+    },
+    {
+        "citizen": "desert",
+        "undercover": "dune"
+    },
+    {
+        "citizen": "island",
+        "undercover": "isle"
+    }
+]

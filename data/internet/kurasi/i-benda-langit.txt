@@ -53,3 +53,85 @@ Spring / Autumn = Musim Semi / Musim Gugur
 # Kurasi dari trk78/undercover-plus (MIT), daftar bahasa Inggris, diterjemahkan.
 @ trk78
 Cloud / Mist = Awan / Kabut
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Meteor / Rainbow = Meteor / Pelangi
+Thunderstorm / Sandstorm = Badai Petir / Badai Pasir
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+star / galaxy = Bintang / Galaksi
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Star / Moon = Bintang / Bulan
+Ice / Snow = Es / Salju
+Cloudy / Rainy = Berawan / Hujan
+Sunny / Bright = Cerah / Terang
+Rainy / Monsoon = Hujan / Musim Hujan
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Rain / Snow = Hujan / Salju
+Wind / Storm = Angin / Badai
+Star / Sky = Bintang / Langit
+Summer / Spring = Musim Panas / Musim Semi
+Rainbow / Lightning = Pelangi / Petir
+
+# Terjemahan dan kurasi dari Schluby/Undercover.
+@ schluby
+Soleil / Lune = Matahari / Bulan
+Neige / Grêle = Salju / Hujan Es
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Aurora / Eclipse = Aurora / Gerhana
+Sun / Sunglasses = Matahari / Kacamata Hitam
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Mars / Venus = Mars / Venus
+Storm / Hurricane = Badai / Topan
+Ice / Frost = Es / Embun Beku
+Dawn / Dusk = Fajar / Senja
+Sunrise / Sunset = Matahari Terbit / Matahari Terbenam
+Noon / Midnight = Siang / Tengah Malam
+Autumn / Winter = Musim Gugur / Musim Dingin
+Jupiter / Saturn = Jupiter / Saturnus
+Uranus / Neptune = Uranus / Neptunus
+Meteor / Meteorite = Meteor / Meteorit
+Black Hole / Wormhole = Lubang Hitam / Lubang Cacing
+Orbit / Trajectory = Orbit / Lintasan
+Satellite / Spacecraft = Satelit / Pesawat Antariksa
+Spacesuit / Helmet = Baju Astronaut / Helm Astronaut
+Telescope / Observatory = Teleskop / Observatorium
+Eclipse / Solstice = Gerhana / Titik Balik Matahari
+Universe / Cosmos = Alam Semesta / Kosmos
+Constellation / Zodiac = Rasi Bintang / Zodiak
+Milky Way / Andromeda = Bima Sakti / Andromeda
+Supernova / Hypernova = Supernova / Hipernova
+Dark Matter / Dark Energy = Materi Gelap / Energi Gelap
+Exoplanet / Asteroid = Eksoplanet / Asteroid
+Solar System / Galaxy = Tata Surya / Galaksi
+Rover / Lander = Rover / Pendarat
+NASA / ESA = NASA / ESA
+SpaceX / Blue Origin = SpaceX / Blue Origin
+ISS / Mir = ISS / Mir
+Hubble / James Webb = Hubble / James Webb
+UFO / Spaceship = UFO / Pesawat Alien
+Quasar / Pulsar = Quasar / Pulsar
+White Dwarf / Red Giant = Katai Putih / Raksasa Merah
+Cosmic Ray / Solar Wind = Sinar Kosmik / Angin Matahari
+Astrology / Astronomy = Astrologi / Astronomi
+Lunar / Solar = Gerhana Bulan / Gerhana Matahari
+Meteor Shower / Comet Tail = Hujan Meteor / Ekor Komet
+Spacewalk / Moonwalk = Spacewalk / Moonwalk
+Apollo / Artemis = Apollo / Artemis
+Voyager / Pioneer = Voyager / Pioneer
+Sputnik / Explorer = Sputnik / Explorer
+Climate / Weather = Iklim / Cuaca
+
+# Terjemahan dan kurasi dari xuqssq/whois-undercover-game.
+@ xuqssq
+月亮 / 太阳 = Bulan / Matahari

@@ -13,3 +13,7 @@ lead / zinc = Timbal / Seng
 Diamond / Ruby = Berlian / Rubi
 Emerald / Sapphire = Zamrud / Safir
 Pearl / Opal = Mutiara / Opal
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Metal / Iron = Logam / Besi

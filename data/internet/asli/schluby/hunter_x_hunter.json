@@ -1,0 +1,214 @@
+{
+  "id": "hunter_x_hunter",
+  "name": "Hunter x Hunter",
+  "emoji": "🎣",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Gon Freecss",
+          "imposteur": "Killua Zoldyck",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Gon Freecss",
+          "imposteur_en": "Killua Zoldyck"
+        },
+        {
+          "civil": "Kurapika",
+          "imposteur": "Leorio",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Kurapika",
+          "imposteur_en": "Leorio"
+        },
+        {
+          "civil": "Hisoka Morow",
+          "imposteur": "Chrollo Lucilfer",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Hisoka Morow",
+          "imposteur_en": "Chrollo Lucilfer"
+        },
+        {
+          "civil": "Illumi Zoldyck",
+          "imposteur": "Killua Zoldyck",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Illumi Zoldyck",
+          "imposteur_en": "Killua Zoldyck"
+        },
+        {
+          "civil": "Silva Zoldyck",
+          "imposteur": "Illumi Zoldyck",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Silva Zoldyck",
+          "imposteur_en": "Illumi Zoldyck"
+        },
+        {
+          "civil": "Ging Freecss",
+          "imposteur": "Gon Freecss",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Ging Freecss",
+          "imposteur_en": "Gon Freecss"
+        },
+        {
+          "civil": "Meruem",
+          "imposteur": "Neferpitou",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Meruem",
+          "imposteur_en": "Neferpitou"
+        },
+        {
+          "civil": "Kite",
+          "imposteur": "Ging Freecss",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Kite",
+          "imposteur_en": "Ging Freecss"
+        },
+        {
+          "civil": "Isaac Netero",
+          "imposteur": "Meruem",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Isaac Netero",
+          "imposteur_en": "Meruem"
+        },
+        {
+          "civil": "Chrollo Lucilfer",
+          "imposteur": "Machi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Chrollo Lucilfer",
+          "imposteur_en": "Machi"
+        },
+        {
+          "civil": "Hisoka Morow",
+          "imposteur": "Illumi Zoldyck",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Hisoka Morow",
+          "imposteur_en": "Illumi Zoldyck"
+        },
+        {
+          "civil": "Kurapika",
+          "imposteur": "Chrollo Lucilfer",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Kurapika",
+          "imposteur_en": "Chrollo Lucilfer"
+        },
+        {
+          "civil": "Gon Freecss",
+          "imposteur": "Kurapika",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Gon Freecss",
+          "imposteur_en": "Kurapika"
+        },
+        {
+          "civil": "Killua Zoldyck",
+          "imposteur": "Alluka Zoldyck",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Killua Zoldyck",
+          "imposteur_en": "Alluka Zoldyck"
+        }
+      ]
+    },
+    {
+      "id": "nen_univers",
+      "name": "Nen & Univers",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Renforcement",
+          "imposteur": "Émission",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Enhancer",
+          "imposteur_en": "Emitter"
+        },
+        {
+          "civil": "Transformation",
+          "imposteur": "Manipulation",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Transmuter",
+          "imposteur_en": "Manipulator"
+        },
+        {
+          "civil": "Matérialisation",
+          "imposteur": "Spécialisation",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Conjurer",
+          "imposteur_en": "Specialist"
+        },
+        {
+          "civil": "Renforcement",
+          "imposteur": "Transformation",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Enhancer",
+          "imposteur_en": "Transmuter"
+        },
+        {
+          "civil": "Brigade Fantôme",
+          "imposteur": "Fourmis Chimères",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Phantom Troupe",
+          "imposteur_en": "Chimera Ants"
+        },
+        {
+          "civil": "Examen d'Hunter",
+          "imposteur": "Greed Island",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hunter Exam",
+          "imposteur_en": "Greed Island"
+        },
+        {
+          "civil": "Famille Zoldyck",
+          "imposteur": "Brigade Fantôme",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Zoldyck Family",
+          "imposteur_en": "Phantom Troupe"
+        },
+        {
+          "civil": "Émission",
+          "imposteur": "Manipulation",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Emitter",
+          "imposteur_en": "Manipulator"
+        },
+        {
+          "civil": "Le Zodiaque",
+          "imposteur": "Brigade Fantôme",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Zodiacs",
+          "imposteur_en": "Phantom Troupe"
+        },
+        {
+          "civil": "Matérialisation",
+          "imposteur": "Émission",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Conjurer",
+          "imposteur_en": "Emitter"
+        }
+      ]
+    }
+  ]
+}

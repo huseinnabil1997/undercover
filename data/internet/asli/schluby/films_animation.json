@@ -1,0 +1,214 @@
+{
+  "id": "films_animation",
+  "name": "Films d'Animation",
+  "emoji": "🌸",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "ghibli",
+      "name": "Studio Ghibli",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Le Voyage de Chihiro",
+          "imposteur": "Princesse Mononoké",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Spirited Away",
+          "imposteur_en": "Princess Mononoke"
+        },
+        {
+          "civil": "Mon Voisin Totoro",
+          "imposteur": "Ponyo sur la Falaise",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "My Neighbor Totoro",
+          "imposteur_en": "Ponyo"
+        },
+        {
+          "civil": "Le Château Ambulant",
+          "imposteur": "Le Château dans le Ciel",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Howl's Moving Castle",
+          "imposteur_en": "Castle in the Sky"
+        },
+        {
+          "civil": "Kiki la Petite Sorcière",
+          "imposteur": "Si tu tends l'oreille",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kiki's Delivery Service",
+          "imposteur_en": "Whisper of the Heart"
+        },
+        {
+          "civil": "Le Tombeau des Lucioles",
+          "imposteur": "Le Vent se Lève",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Grave of the Fireflies",
+          "imposteur_en": "The Wind Rises"
+        },
+        {
+          "civil": "Nausicaä de la Vallée du Vent",
+          "imposteur": "Porco Rosso",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Nausicaä of the Valley of the Wind",
+          "imposteur_en": "Porco Rosso"
+        },
+        {
+          "civil": "Arrietty",
+          "imposteur": "Souvenirs de Marnie",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "The Secret World of Arrietty",
+          "imposteur_en": "When Marnie Was There"
+        },
+        {
+          "civil": "Pompoko",
+          "imposteur": "Le Conte de la Princesse Kaguya",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Pom Poko",
+          "imposteur_en": "The Tale of the Princess Kaguya"
+        },
+        {
+          "civil": "Le Voyage de Chihiro",
+          "imposteur": "Mon Voisin Totoro",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Spirited Away",
+          "imposteur_en": "My Neighbor Totoro"
+        },
+        {
+          "civil": "Les Contes de Terremer",
+          "imposteur": "Souvenirs Goutte à Goutte",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Tales from Earthsea",
+          "imposteur_en": "Only Yesterday"
+        },
+        {
+          "civil": "Princesse Mononoké",
+          "imposteur": "Nausicaä de la Vallée du Vent",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Princess Mononoke",
+          "imposteur_en": "Nausicaä of the Valley of the Wind"
+        },
+        {
+          "civil": "Le Château dans le Ciel",
+          "imposteur": "Porco Rosso",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Castle in the Sky",
+          "imposteur_en": "Porco Rosso"
+        }
+      ]
+    },
+    {
+      "id": "realisateurs_cultes",
+      "name": "Réalisateurs Cultes",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Your Name",
+          "imposteur": "Les Enfants du Temps",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Your Name.",
+          "imposteur_en": "Weathering with You"
+        },
+        {
+          "civil": "Perfect Blue",
+          "imposteur": "Paprika",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Perfect Blue",
+          "imposteur_en": "Paprika"
+        },
+        {
+          "civil": "Millennium Actress",
+          "imposteur": "Tokyo Godfathers",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Millennium Actress",
+          "imposteur_en": "Tokyo Godfathers"
+        },
+        {
+          "civil": "Akira",
+          "imposteur": "Ghost in the Shell",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Akira",
+          "imposteur_en": "Ghost in the Shell"
+        },
+        {
+          "civil": "Les Enfants Loups",
+          "imposteur": "Le Garçon et la Bête",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Wolf Children",
+          "imposteur_en": "The Boy and the Beast"
+        },
+        {
+          "civil": "Summer Wars",
+          "imposteur": "La Traversée du Temps",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Summer Wars",
+          "imposteur_en": "The Girl Who Leapt Through Time"
+        },
+        {
+          "civil": "Suzume",
+          "imposteur": "Your Name",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Suzume",
+          "imposteur_en": "Your Name."
+        },
+        {
+          "civil": "5 Centimètres par Seconde",
+          "imposteur": "Le Jardin des Mots",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "5 Centimeters per Second",
+          "imposteur_en": "The Garden of Words"
+        },
+        {
+          "civil": "Mirai, ma petite sœur",
+          "imposteur": "Belle",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mirai",
+          "imposteur_en": "Belle"
+        },
+        {
+          "civil": "Paprika",
+          "imposteur": "Akira",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Paprika",
+          "imposteur_en": "Akira"
+        },
+        {
+          "civil": "Perfect Blue",
+          "imposteur": "Millennium Actress",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Perfect Blue",
+          "imposteur_en": "Millennium Actress"
+        },
+        {
+          "civil": "Les Enfants Loups",
+          "imposteur": "Mirai, ma petite sœur",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Wolf Children",
+          "imposteur_en": "Mirai"
+        }
+      ]
+    }
+  ]
+}

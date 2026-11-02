@@ -17,3 +17,20 @@ Istanbul / Ankara
 # Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
 @ arisandi
 bali / lombok = Bali / Lombok
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Paris / Londres = Paris / London
+Tokyo / Seoul = Tokyo / Seoul
+Rome / Venise = Roma / Venesia
+Dubai / Doha = Dubai / Doha
+Barcelone / Madrid = Barcelona / Madrid
+Amsterdam / Bruxelles = Amsterdam / Brussel
+Marrakech / Le Caire = Marrakesh / Kairo
+Bangkok / Singapour = Bangkok / Singapura
+Athenes / Santorin = Athena / Santorini
+Lisbonne / Porto = Lisbon / Porto
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+东京 / 首尔 = Tokyo / Seoul

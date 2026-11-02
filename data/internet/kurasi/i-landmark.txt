@@ -79,3 +79,21 @@ Taj Mahal / Red Fort = Taj Mahal / Benteng Merah
 # Kurasi dari arisandi95/undercover-game-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
 @ arisandi
 prambanan / borobudur = Prambanan / Borobudur
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Pyramid / Skyscraper = Piramida / Pencakar Langit
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Lighthouse / Tower = Mercusuar / Menara
+Statue / Idol = Patung / Arca
+Everest / Annapurna = Everest / Annapurna
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Grand Canyon / Yosemite = Grand Canyon / Yosemite
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Pyramid / Ziggurat = Piramida / Ziggurat

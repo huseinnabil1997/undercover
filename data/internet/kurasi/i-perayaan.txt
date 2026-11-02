@@ -17,3 +17,36 @@ Imlek / Cap Go Meh
 # Kurasi dari Egi-Pebriyawan/game-undercover-indonesia (tanpa lisensi), sudah berbahasa Indonesia.
 @ egi
 Konser / Pesta
+
+# Terjemahan dan kurasi dari AmazinAmazon/Undercover.
+@ amazin
+Carousel / Ferris Wheel = Komidi Putar / Bianglala
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Birthday / Wedding = Ulang Tahun / Pernikahan
+Circus / Carnival = Sirkus / Karnaval
+Holiday / Weekend = Liburan / Akhir Pekan
+Party / Festival = Pesta / Festival
+Wedding / Party = Pernikahan / Pesta
+Gift / Prize = Kado / Hadiah Lomba
+Parade / March = Parade / Pawai
+Feast / Dinner = Pesta Makan / Makan Malam
+Firework / Sparkle = Kembang Api / Kembang Api Tangan
+Invite / Letter = Undangan / Surat
+Cheer / Clap = Bersorak / Bertepuk Tangan
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Balloon / Ribbon = Balon / Pita
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Wedding / Festival = Pernikahan / Festival
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+烟花 / 鞭炮 = Kembang Api / Petasan
+新年 / 跨年 = Tahun Baru / Malam Tahun Baru
+两小无猜 / 青梅竹马 = Cinta Monyet / Teman Masa Kecil
+结婚 / 订婚 = Menikah / Tunangan

@@ -1,0 +1,677 @@
+{
+  "id": "films_series",
+  "name": "Films & Séries (général)",
+  "emoji": "🎬",
+  "version": 4,
+  "subthemes": [
+    {
+      "id": "sagas",
+      "name": "Sagas & Univers",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Star Wars",
+          "imposteur": "Star Trek",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Star Wars",
+          "imposteur_en": "Star Trek"
+        },
+        {
+          "civil": "Marvel",
+          "imposteur": "DC",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Marvel",
+          "imposteur_en": "DC"
+        },
+        {
+          "civil": "Harry Potter",
+          "imposteur": "Le Seigneur des Anneaux",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Harry Potter",
+          "imposteur_en": "Lord of the Rings"
+        },
+        {
+          "civil": "Jurassic Park",
+          "imposteur": "King Kong",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Jurassic Park",
+          "imposteur_en": "King Kong"
+        },
+        {
+          "civil": "Le Parrain",
+          "imposteur": "Scarface",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Godfather",
+          "imposteur_en": "Scarface"
+        },
+        {
+          "civil": "Rocky",
+          "imposteur": "Rambo",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Rocky",
+          "imposteur_en": "Rambo"
+        },
+        {
+          "civil": "Fast and Furious",
+          "imposteur": "Need for Speed",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Fast and Furious",
+          "imposteur_en": "Need for Speed"
+        },
+        {
+          "civil": "James Bond",
+          "imposteur": "Mission Impossible",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "James Bond",
+          "imposteur_en": "Mission Impossible"
+        },
+        {
+          "civil": "Le Hobbit",
+          "imposteur": "Narnia",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Hobbit",
+          "imposteur_en": "Narnia"
+        },
+        {
+          "civil": "Pirates des Caraïbes",
+          "imposteur": "Indiana Jones",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Pirates of the Caribbean",
+          "imposteur_en": "Indiana Jones"
+        },
+        {
+          "civil": "Matrix",
+          "imposteur": "Inception",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "The Matrix",
+          "imposteur_en": "Inception"
+        },
+        {
+          "civil": "Twilight",
+          "imposteur": "Hunger Games",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Twilight",
+          "imposteur_en": "Hunger Games"
+        },
+        {
+          "civil": "Avengers",
+          "imposteur": "Justice League",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Avengers",
+          "imposteur_en": "Justice League"
+        },
+        {
+          "civil": "Toy Story",
+          "imposteur": "Shrek",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Toy Story",
+          "imposteur_en": "Shrek"
+        },
+        {
+          "civil": "Le Roi Lion",
+          "imposteur": "Le Livre de la Jungle",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "The Lion King",
+          "imposteur_en": "The Jungle Book"
+        },
+        {
+          "civil": "Spider-Man",
+          "imposteur": "Batman",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Spider-Man",
+          "imposteur_en": "Batman"
+        },
+        {
+          "civil": "Terminator",
+          "imposteur": "RoboCop",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Terminator",
+          "imposteur_en": "RoboCop"
+        },
+        {
+          "civil": "Alien",
+          "imposteur": "Predator",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Alien",
+          "imposteur_en": "Predator"
+        },
+        {
+          "civil": "Retour vers le Futur",
+          "imposteur": "Les Goonies",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Back to the Future",
+          "imposteur_en": "The Goonies"
+        },
+        {
+          "civil": "Le Cinquième Élément",
+          "imposteur": "Blade Runner",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "The Fifth Element",
+          "imposteur_en": "Blade Runner"
+        },
+        {
+          "civil": "Shrek",
+          "imposteur": "Madagascar",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Shrek",
+          "imposteur_en": "Madagascar"
+        },
+        {
+          "civil": "Transformers",
+          "imposteur": "Pacific Rim",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Transformers",
+          "imposteur_en": "Pacific Rim"
+        },
+        {
+          "civil": "Le Cinquième Élément",
+          "imposteur": "Dune",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "The Fifth Element",
+          "imposteur_en": "Dune"
+        },
+        {
+          "civil": "Ocean's Eleven",
+          "imposteur": "La Casa de Papel",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Ocean's Eleven",
+          "imposteur_en": "Money Heist"
+        },
+        {
+          "civil": "Le Silence des Agneaux",
+          "imposteur": "Seven",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "The Silence of the Lambs",
+          "imposteur_en": "Se7en"
+        },
+        {
+          "civil": "Fight Club",
+          "imposteur": "American Psycho",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Fight Club",
+          "imposteur_en": "American Psycho"
+        },
+        {
+          "civil": "Donnie Darko",
+          "imposteur": "Eternal Sunshine of the Spotless Mind",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Donnie Darko",
+          "imposteur_en": "Eternal Sunshine of the Spotless Mind"
+        },
+        {
+          "civil": "Requiem for a Dream",
+          "imposteur": "Trainspotting",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Requiem for a Dream",
+          "imposteur_en": "Trainspotting"
+        }
+      ]
+    },
+    {
+      "id": "series",
+      "name": "Séries cultes",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Game of Thrones",
+          "imposteur": "The Witcher",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Game of Thrones",
+          "imposteur_en": "The Witcher"
+        },
+        {
+          "civil": "Breaking Bad",
+          "imposteur": "Better Call Saul",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Breaking Bad",
+          "imposteur_en": "Better Call Saul"
+        },
+        {
+          "civil": "Friends",
+          "imposteur": "How I Met Your Mother",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Friends",
+          "imposteur_en": "How I Met Your Mother"
+        },
+        {
+          "civil": "Stranger Things",
+          "imposteur": "Dark",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Stranger Things",
+          "imposteur_en": "Dark"
+        },
+        {
+          "civil": "The Walking Dead",
+          "imposteur": "The Last of Us",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "The Walking Dead",
+          "imposteur_en": "The Last of Us"
+        },
+        {
+          "civil": "La Casa de Papel",
+          "imposteur": "Prison Break",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Money Heist",
+          "imposteur_en": "Prison Break"
+        },
+        {
+          "civil": "Peaky Blinders",
+          "imposteur": "Gomorra",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Peaky Blinders",
+          "imposteur_en": "Gomorrah"
+        },
+        {
+          "civil": "The Office",
+          "imposteur": "Parks and Recreation",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Office",
+          "imposteur_en": "Parks and Recreation"
+        },
+        {
+          "civil": "Sherlock",
+          "imposteur": "Dr House",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Sherlock",
+          "imposteur_en": "House M.D."
+        },
+        {
+          "civil": "Squid Game",
+          "imposteur": "Alice in Borderland",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Squid Game",
+          "imposteur_en": "Alice in Borderland"
+        },
+        {
+          "civil": "Lost",
+          "imposteur": "The 100",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Lost",
+          "imposteur_en": "The 100"
+        },
+        {
+          "civil": "Black Mirror",
+          "imposteur": "Love Death and Robots",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Black Mirror",
+          "imposteur_en": "Love Death and Robots"
+        },
+        {
+          "civil": "The Mandalorian",
+          "imposteur": "The Book of Boba Fett",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Mandalorian",
+          "imposteur_en": "The Book of Boba Fett"
+        },
+        {
+          "civil": "Vikings",
+          "imposteur": "The Last Kingdom",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Vikings",
+          "imposteur_en": "The Last Kingdom"
+        },
+        {
+          "civil": "Mercredi",
+          "imposteur": "La Famille Addams",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Wednesday",
+          "imposteur_en": "The Addams Family"
+        },
+        {
+          "civil": "The Boys",
+          "imposteur": "Invincible",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "The Boys",
+          "imposteur_en": "Invincible"
+        },
+        {
+          "civil": "Narcos",
+          "imposteur": "Ozark",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Narcos",
+          "imposteur_en": "Ozark"
+        },
+        {
+          "civil": "Mercredi",
+          "imposteur": "Sabrina",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Wednesday",
+          "imposteur_en": "Sabrina"
+        },
+        {
+          "civil": "Grey's Anatomy",
+          "imposteur": "Dr House",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Grey's Anatomy",
+          "imposteur_en": "House M.D."
+        },
+        {
+          "civil": "The Crown",
+          "imposteur": "Downton Abbey",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "The Crown",
+          "imposteur_en": "Downton Abbey"
+        },
+        {
+          "civil": "Euphoria",
+          "imposteur": "Skins",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Euphoria",
+          "imposteur_en": "Skins"
+        },
+        {
+          "civil": "Mr Robot",
+          "imposteur": "Westworld",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Mr Robot",
+          "imposteur_en": "Westworld"
+        },
+        {
+          "civil": "Brooklyn Nine-Nine",
+          "imposteur": "The Office",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Brooklyn Nine-Nine",
+          "imposteur_en": "The Office"
+        },
+        {
+          "civil": "Arcane",
+          "imposteur": "Cyberpunk Edgerunners",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Arcane",
+          "imposteur_en": "Cyberpunk Edgerunners"
+        },
+        {
+          "civil": "House of the Dragon",
+          "imposteur": "Le Seigneur des Anneaux : Les Anneaux de Pouvoir",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "House of the Dragon",
+          "imposteur_en": "The Rings of Power"
+        },
+        {
+          "civil": "Twin Peaks",
+          "imposteur": "True Detective",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Twin Peaks",
+          "imposteur_en": "True Detective"
+        },
+        {
+          "civil": "The Wire",
+          "imposteur": "Oz",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "The Wire",
+          "imposteur_en": "Oz"
+        }
+      ]
+    },
+    {
+      "id": "personnages",
+      "name": "Personnages de films",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Dark Vador",
+          "imposteur": "Kylo Ren",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Darth Vader",
+          "imposteur_en": "Kylo Ren"
+        },
+        {
+          "civil": "Iron Man",
+          "imposteur": "Captain America",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Iron Man",
+          "imposteur_en": "Captain America"
+        },
+        {
+          "civil": "Joker",
+          "imposteur": "Bane",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Joker",
+          "imposteur_en": "Bane"
+        },
+        {
+          "civil": "Hermione",
+          "imposteur": "Luna Lovegood",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Hermione",
+          "imposteur_en": "Luna Lovegood"
+        },
+        {
+          "civil": "Gandalf",
+          "imposteur": "Dumbledore",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Gandalf",
+          "imposteur_en": "Dumbledore"
+        },
+        {
+          "civil": "Thanos",
+          "imposteur": "Darkseid",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Thanos",
+          "imposteur_en": "Darkseid"
+        },
+        {
+          "civil": "Indiana Jones",
+          "imposteur": "Lara Croft",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Indiana Jones",
+          "imposteur_en": "Lara Croft"
+        },
+        {
+          "civil": "Forrest Gump",
+          "imposteur": "Truman",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Forrest Gump",
+          "imposteur_en": "Truman"
+        },
+        {
+          "civil": "Hulk",
+          "imposteur": "Thor",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Hulk",
+          "imposteur_en": "Thor"
+        },
+        {
+          "civil": "Neo",
+          "imposteur": "John Wick",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Neo",
+          "imposteur_en": "John Wick"
+        },
+        {
+          "civil": "Wolverine",
+          "imposteur": "Deadpool",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Wolverine",
+          "imposteur_en": "Deadpool"
+        },
+        {
+          "civil": "Jack Sparrow",
+          "imposteur": "Davy Jones",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Jack Sparrow",
+          "imposteur_en": "Davy Jones"
+        },
+        {
+          "civil": "Voldemort",
+          "imposteur": "Saroumane",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Voldemort",
+          "imposteur_en": "Saruman"
+        },
+        {
+          "civil": "Yoda",
+          "imposteur": "Maître Splinter",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Yoda",
+          "imposteur_en": "Master Splinter"
+        },
+        {
+          "civil": "Harley Quinn",
+          "imposteur": "Catwoman",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Harley Quinn",
+          "imposteur_en": "Catwoman"
+        },
+        {
+          "civil": "Black Panther",
+          "imposteur": "Black Widow",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Black Panther",
+          "imposteur_en": "Black Widow"
+        },
+        {
+          "civil": "Han Solo",
+          "imposteur": "Luke Skywalker",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Han Solo",
+          "imposteur_en": "Luke Skywalker"
+        },
+        {
+          "civil": "Doctor Strange",
+          "imposteur": "Scarlet Witch",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Doctor Strange",
+          "imposteur_en": "Scarlet Witch"
+        },
+        {
+          "civil": "Frodon",
+          "imposteur": "Bilbon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Frodo",
+          "imposteur_en": "Bilbo"
+        },
+        {
+          "civil": "Gollum",
+          "imposteur": "Dobby",
+          "difficulty": 3,
+          "niche": 1,
+          "civil_en": "Gollum",
+          "imposteur_en": "Dobby"
+        },
+        {
+          "civil": "Maximus",
+          "imposteur": "Spartacus",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Maximus",
+          "imposteur_en": "Spartacus"
+        },
+        {
+          "civil": "Hannibal Lecter",
+          "imposteur": "Norman Bates",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Hannibal Lecter",
+          "imposteur_en": "Norman Bates"
+        },
+        {
+          "civil": "T-800",
+          "imposteur": "RoboCop",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "T-800",
+          "imposteur_en": "RoboCop"
+        },
+        {
+          "civil": "Loki",
+          "imposteur": "Hela",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Loki",
+          "imposteur_en": "Hela"
+        },
+        {
+          "civil": "Buzz l'Éclair",
+          "imposteur": "Woody",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Buzz Lightyear",
+          "imposteur_en": "Woody"
+        },
+        {
+          "civil": "Tyler Durden",
+          "imposteur": "Patrick Bateman",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Tyler Durden",
+          "imposteur_en": "Patrick Bateman"
+        }
+      ]
+    }
+  ]
+}

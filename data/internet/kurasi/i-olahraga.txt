@@ -81,3 +81,130 @@ Running / Walking = Lari / Jalan Kaki
 Golf / Minigolf = Golf / Mini Golf
 Surfing / Skateboarding = Selancar / Skateboard
 Gymnastics / Dancing = Senam / Menari
+
+# Terjemahan dan kurasi dari ArashadDodhiya/UnderCoverGame.
+@ arashad
+golf / hockey = Golf / Hoki
+ski / snowboard = Ski / Papan Seluncur
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Skiing / Skating = Ski / Seluncur Es
+Fishing / Hunting = Memancing / Berburu
+Camping / Hiking = Berkemah / Mendaki
+Hockey / Polo = Hoki / Polo
+Climbing / Hiking = Panjat Tebing / Mendaki
+Racing / Cycling = Balap / Bersepeda
+Boxer / Wrestler = Petinju / Pegulat
+Cycling / Running = Bersepeda / Lari
+Surfing / Swimming = Selancar / Renang
+Jumping / Running = Lompat / Lari
+Throwing / Kicking = Melempar / Menendang
+Throw / Kick = Melempar / Menendang
+Catch / Grab = Menangkap / Meraih
+Player / Referee = Pemain / Wasit
+Goal / Point = Gol / Poin
+
+# Terjemahan dan kurasi dari ChairGamertag87/undercover.
+@ chair
+Basketball / Handball = Basket / Bola Tangan
+Natation / Water-polo = Renang / Polo Air
+Boxe / Karate = Tinju / Karate
+Judo / Taekwondo = Judo / Taekwondo
+Volleyball / Beach-volley = Voli / Voli Pantai
+Cyclisme / Triathlon = Bersepeda / Triatlon
+Athletisme / Marathon = Atletik / Maraton
+Escalade / Alpinisme = Panjat Tebing / Mendaki Gunung
+Surf / Bodyboard = Selancar / Bodyboard
+Formule 1 / Moto GP = Formula 1 / MotoGP
+Escrime / Tir a l'arc = Anggar / Panahan
+Patinage / Hockey sur glace = Seluncur Es / Hoki Es
+Gymnastique / Danse sportive = Senam / Dansa
+Rugby / Football americain = Rugbi / American Football
+Curling / Bobsleigh = Curling / Bobsled
+Aviron / Kayak = Dayung / Kayak
+Petanque / Bowling = Petanque / Bowling
+Skateboard / Roller = Skateboard / Sepatu Roda
+Plongee / Apnee = Selam / Freediving
+
+# Terjemahan dan kurasi dari Deepak-Ajay-Dubey/word-spy.
+@ deepak
+Cricket / Football = Kriket / Sepak Bola
+Bat / Ball = Pemukul / Bola
+Referee / Umpire = Wasit / Hakim Garis
+Medal / Trophy = Medali / Piala
+Boxing / Wrestling = Tinju / Gulat
+Darts / Archery = Dart / Panahan
+High Jump / Pole Vault = Lompat Tinggi / Lompat Galah
+Squash / Racquetball = Squash / Tenis Meja
+Walk / Run = Jalan Kaki / Lari
+Swim / Dive = Berenang / Menyelam
+Racket / Shuttlecock = Raket / Kok
+Goal / Basket = Gawang / Ring Basket
+Stadium / Ground = Stadion / Lapangan
+Swimming / Running = Renang / Lari
+Treadmill / Dumbbell = Treadmill / Dumbel
+Volleyball / Handball = Voli / Bola Tangan
+Goalkeeper / Striker = Kiper / Penyerang
+Penalty / Free Kick = Penalti / Tendangan Bebas
+Push Ups / Pull Ups = Push Up / Pull Up
+Squats / Lunges = Squat / Lunges
+Cycling / Skating = Bersepeda / Sepatu Roda
+Surfing / Rowing = Selancar / Dayung
+Whistle / Stopwatch = Peluit / Stopwatch
+Kayaking / Canoeing = Kayak / Kano
+Canoeing / Rafting = Kano / Arung Jeram
+Snorkelling / Scuba Diving = Snorkeling / Scuba Diving
+Scuba Diving / Freediving = Scuba Diving / Freediving
+Jersey / Kit = Jersey / Seragam
+
+# Terjemahan dan kurasi dari Nidroz/undercover.
+@ nidroz
+Swimming / Water polo = Renang / Polo Air
+Boxing / MMA = Tinju / MMA
+Cycling / Triathlon = Bersepeda / Triatlon
+Golf / Disc golf = Golf / Disc Golf
+Fencing / Taekwondo = Anggar / Taekwondo
+
+# Terjemahan dan kurasi dari srinath987/Undercover-clone.
+@ srinath
+Body building / Yoga = Binaraga / Yoga
+Football / Goalpost = Sepak Bola / Tiang Gawang
+Surfing / Boating = Selancar / Berperahu
+Cricket / Badminton = Kriket / Bulu Tangkis
+Umpire / Goalkeeper = Wasit / Kiper
+
+# Terjemahan dan kurasi dari tejasdasari06/Imposter-game.
+@ tejas
+Skiing / Snowboarding = Ski / Snowboard
+Volleyball / Beach Volleyball = Voli / Voli Pantai
+Archery / Shooting = Panahan / Menembak
+Karate / Taekwondo = Karate / Taekwondo
+MotoGP / Formula 1 = MotoGP / Formula 1
+Canoe / Kayak = Kano / Kayak
+Basketball / Netball = Basket / Netball
+Rugby / American Football = Rugbi / American Football
+Ice Hockey / Field Hockey = Hoki Es / Hoki Lapangan
+Cycling / Spinning = Bersepeda / Spinning
+Boxing / Kickboxing = Tinju / Kickboxing
+Skating / Skateboarding = Sepatu Roda / Skateboard
+Gymnastics / Trampolining = Senam / Trampolin
+Fencing / Kendo = Anggar / Kendo
+Rowing / Kayaking = Dayung / Kayak
+Rock Climbing / Bouldering = Panjat Tebing / Bouldering
+Marathon / Triathlon = Maraton / Triatlon
+MMA / UFC = MMA / UFC
+Kung Fu / Tai Chi = Kung Fu / Tai Chi
+Hiking / Trekking = Hiking / Trekking
+Polo / Water Polo = Polo / Polo Air
+Weightlifting / Powerlifting = Angkat Besi / Powerlifting
+Zumba / Aerobics = Zumba / Aerobik
+Sumo / Wrestling = Sumo / Gulat
+Frisbee / Disc Golf = Frisbee / Disc Golf
+Parkour / Free Running = Parkour / Free Running
+F1 Car / IndyCar = Mobil F1 / Mobil IndyCar
+
+# Terjemahan dan kurasi dari zhengyi-yang/WhoIsTheSpy.
+@ zhengyi
+奖牌 / 金牌 = Medali / Medali Emas
+冠军 / 状元 = Juara / Peringkat Satu

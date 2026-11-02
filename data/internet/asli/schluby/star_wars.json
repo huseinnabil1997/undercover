@@ -1,0 +1,269 @@
+{
+  "id": "star_wars",
+  "name": "Star Wars",
+  "emoji": "🌌",
+  "version": 1,
+  "subthemes": [
+    {
+      "id": "personnages",
+      "name": "Personnages",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Luke Skywalker",
+          "imposteur": "Han Solo",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Luke Skywalker",
+          "imposteur_en": "Han Solo"
+        },
+        {
+          "civil": "Dark Vador",
+          "imposteur": "Anakin Skywalker",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Darth Vader",
+          "imposteur_en": "Anakin Skywalker"
+        },
+        {
+          "civil": "Obi-Wan Kenobi",
+          "imposteur": "Yoda",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Obi-Wan Kenobi",
+          "imposteur_en": "Yoda"
+        },
+        {
+          "civil": "C-3PO",
+          "imposteur": "R2-D2",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "C-3PO",
+          "imposteur_en": "R2-D2"
+        },
+        {
+          "civil": "Rey",
+          "imposteur": "Finn",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Rey",
+          "imposteur_en": "Finn"
+        },
+        {
+          "civil": "Grogu",
+          "imposteur": "Din Djarin",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Grogu",
+          "imposteur_en": "Din Djarin"
+        },
+        {
+          "civil": "Leia Organa",
+          "imposteur": "Padmé Amidala",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Leia Organa",
+          "imposteur_en": "Padmé Amidala"
+        },
+        {
+          "civil": "Chewbacca",
+          "imposteur": "Lando Calrissian",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Chewbacca",
+          "imposteur_en": "Lando Calrissian"
+        },
+        {
+          "civil": "Palpatine",
+          "imposteur": "Dark Maul",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Palpatine",
+          "imposteur_en": "Darth Maul"
+        },
+        {
+          "civil": "Boba Fett",
+          "imposteur": "Jango Fett",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Boba Fett",
+          "imposteur_en": "Jango Fett"
+        },
+        {
+          "civil": "Qui-Gon Jinn",
+          "imposteur": "Mace Windu",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Qui-Gon Jinn",
+          "imposteur_en": "Mace Windu"
+        },
+        {
+          "civil": "Ahsoka Tano",
+          "imposteur": "Anakin Skywalker",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Ahsoka Tano",
+          "imposteur_en": "Anakin Skywalker"
+        },
+        {
+          "civil": "Kylo Ren",
+          "imposteur": "Snoke",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Kylo Ren",
+          "imposteur_en": "Snoke"
+        },
+        {
+          "civil": "Général Grievous",
+          "imposteur": "Comte Dooku",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "General Grievous",
+          "imposteur_en": "Count Dooku"
+        }
+      ]
+    },
+    {
+      "id": "vaisseaux",
+      "name": "Vaisseaux & Technologie",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Faucon Millenium",
+          "imposteur": "Étoile de la Mort",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Millennium Falcon",
+          "imposteur_en": "Death Star"
+        },
+        {
+          "civil": "Chasseur X-Wing",
+          "imposteur": "Chasseur TIE",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "X-Wing",
+          "imposteur_en": "TIE Fighter"
+        },
+        {
+          "civil": "Sabre laser",
+          "imposteur": "Sabre noir",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Lightsaber",
+          "imposteur_en": "Darksaber"
+        },
+        {
+          "civil": "Destroyer Stellaire",
+          "imposteur": "Étoile de la Mort",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Star Destroyer",
+          "imposteur_en": "Death Star"
+        },
+        {
+          "civil": "Droïde de combat",
+          "imposteur": "Stormtrooper",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Battle Droid",
+          "imposteur_en": "Stormtrooper"
+        },
+        {
+          "civil": "AT-AT",
+          "imposteur": "AT-ST",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "AT-AT",
+          "imposteur_en": "AT-ST"
+        },
+        {
+          "civil": "Speeder",
+          "imposteur": "Pod de course",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Speeder",
+          "imposteur_en": "Podracer"
+        },
+        {
+          "civil": "Hyperdrive",
+          "imposteur": "Bouclier déflecteur",
+          "difficulty": 3,
+          "niche": 2,
+          "civil_en": "Hyperdrive",
+          "imposteur_en": "Deflector shield"
+        }
+      ]
+    },
+    {
+      "id": "univers",
+      "name": "Univers & Lore",
+      "crossMixable": true,
+      "pairs": [
+        {
+          "civil": "Jedi",
+          "imposteur": "Sith",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Jedi",
+          "imposteur_en": "Sith"
+        },
+        {
+          "civil": "La Force",
+          "imposteur": "Le Côté Obscur",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "The Force",
+          "imposteur_en": "The Dark Side"
+        },
+        {
+          "civil": "Rébellion",
+          "imposteur": "Empire Galactique",
+          "difficulty": 2,
+          "niche": 1,
+          "civil_en": "Rebel Alliance",
+          "imposteur_en": "Galactic Empire"
+        },
+        {
+          "civil": "République Galactique",
+          "imposteur": "Premier Ordre",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Galactic Republic",
+          "imposteur_en": "First Order"
+        },
+        {
+          "civil": "Tatooine",
+          "imposteur": "Jakku",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Tatooine",
+          "imposteur_en": "Jakku"
+        },
+        {
+          "civil": "Coruscant",
+          "imposteur": "Naboo",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Coruscant",
+          "imposteur_en": "Naboo"
+        },
+        {
+          "civil": "Ordre 66",
+          "imposteur": "La Purge Jedi",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Order 66",
+          "imposteur_en": "The Jedi Purge"
+        },
+        {
+          "civil": "Midi-chloriens",
+          "imposteur": "La Force",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Midi-chlorians",
+          "imposteur_en": "The Force"
+        }
+      ]
+    }
+  ]
+}

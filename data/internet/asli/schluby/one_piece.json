@@ -1,0 +1,871 @@
+{
+  "id": "one_piece",
+  "name": "One Piece",
+  "emoji": "🏴‍☠️",
+  "version": 3,
+  "subthemes": [
+    {
+      "id": "sub_bkajw5",
+      "name": "Personnages",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Luffy",
+          "imposteur": "Zoro",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Luffy",
+          "imposteur_en": "Zoro"
+        },
+        {
+          "civil": "Nami",
+          "imposteur": "Nico Robin",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Nami",
+          "imposteur_en": "Nico Robin"
+        },
+        {
+          "civil": "Sanji",
+          "imposteur": "Roronoa Zoro",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Sanji",
+          "imposteur_en": "Roronoa Zoro"
+        },
+        {
+          "civil": "Ace",
+          "imposteur": "Sabo",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Ace",
+          "imposteur_en": "Sabo"
+        },
+        {
+          "civil": "Barbe Blanche",
+          "imposteur": "Barbe Noire",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Whitebeard",
+          "imposteur_en": "Blackbeard"
+        },
+        {
+          "civil": "Shanks",
+          "imposteur": "Baggy",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Shanks",
+          "imposteur_en": "Buggy"
+        },
+        {
+          "civil": "Trafalgar Law",
+          "imposteur": "Eustass Kid",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Trafalgar Law",
+          "imposteur_en": "Eustass Kid"
+        },
+        {
+          "civil": "Yamato",
+          "imposteur": "Kozuki Oden",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Yamato",
+          "imposteur_en": "Kozuki Oden"
+        },
+        {
+          "civil": "Gol D. Roger",
+          "imposteur": "Silvers Rayleigh",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Gol D. Roger",
+          "imposteur_en": "Silvers Rayleigh"
+        },
+        {
+          "civil": "Monkey D. Garp",
+          "imposteur": "Koby",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Monkey D. Garp",
+          "imposteur_en": "Koby"
+        },
+        {
+          "civil": "Doflamingo",
+          "imposteur": "Corazon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Doflamingo",
+          "imposteur_en": "Corazon"
+        },
+        {
+          "civil": "Jinbe",
+          "imposteur": "Arlong",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Jinbe",
+          "imposteur_en": "Arlong"
+        },
+        {
+          "civil": "Boa Hancock",
+          "imposteur": "Emporio Ivankov",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Boa Hancock",
+          "imposteur_en": "Emporio Ivankov"
+        },
+        {
+          "civil": "Crocodile",
+          "imposteur": "Rob Lucci",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Crocodile",
+          "imposteur_en": "Rob Lucci"
+        },
+        {
+          "civil": "Enel",
+          "imposteur": "Gekko Moria",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Enel",
+          "imposteur_en": "Gekko Moria"
+        }
+      ]
+    },
+    {
+      "id": "sub_k1v7iw",
+      "name": "Fruit du démon & pouvoris",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Gomu Gomu no Mi",
+          "imposteur": "Mera Mera no Mi",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Gum-Gum Fruit",
+          "imposteur_en": "Flame-Flame Fruit"
+        },
+        {
+          "civil": "Goro Goro no Mi",
+          "imposteur": "Pika Pika no Mi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Rumble-Rumble Fruit",
+          "imposteur_en": "Glint-Glint Fruit"
+        },
+        {
+          "civil": "Hito Hito no Mi",
+          "imposteur": "Uo Uo no Mi",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Human-Human Fruit",
+          "imposteur_en": "Fish-Fish Fruit"
+        },
+        {
+          "civil": "Yami Yami no Mi",
+          "imposteur": "Gura Gura no Mi",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Dark-Dark Fruit",
+          "imposteur_en": "Tremor-Tremor Fruit"
+        },
+        {
+          "civil": "Haki des Rois",
+          "imposteur": "Haki de l'Armement",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Conqueror's Haki",
+          "imposteur_en": "Armament Haki"
+        },
+        {
+          "civil": "Ope Ope no Mi",
+          "imposteur": "Mochi Mochi no Mi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Op-Op Fruit",
+          "imposteur_en": "Mochi-Mochi Fruit"
+        },
+        {
+          "civil": "Suna Suna no Mi",
+          "imposteur": "Hie Hie no Mi",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Sand-Sand Fruit",
+          "imposteur_en": "Chilly-Chilly Fruit"
+        },
+        {
+          "civil": "Éveil du Fruit",
+          "imposteur": "Haki",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Fruit Awakening",
+          "imposteur_en": "Haki"
+        },
+        {
+          "civil": "Rokushiki",
+          "imposteur": "Kami-e",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Six Powers",
+          "imposteur_en": "Paper Arts"
+        }
+      ]
+    },
+    {
+      "id": "sub_1e0evb",
+      "name": "Equipage et factions",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Équipage du Chapeau de Paille",
+          "imposteur": "Génération Terrible",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Straw Hat Pirates",
+          "imposteur_en": "Worst Generation"
+        },
+        {
+          "civil": "Les Quatre Empereurs",
+          "imposteur": "Les Grands Corsaires",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Four Emperors",
+          "imposteur_en": "Seven Warlords of the Sea"
+        },
+        {
+          "civil": "La Marine",
+          "imposteur": "Le Gouvernement Mondial",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "The Marines",
+          "imposteur_en": "World Government"
+        },
+        {
+          "civil": "L'Armée Révolutionnaire",
+          "imposteur": "Cipher Pol",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Revolutionary Army",
+          "imposteur_en": "Cipher Pol"
+        },
+        {
+          "civil": "Équipage de Barbe Blanche",
+          "imposteur": "Équipage de Roger",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Whitebeard Pirates",
+          "imposteur_en": "Roger Pirates"
+        },
+        {
+          "civil": "Équipage de Kaido",
+          "imposteur": "Équipage de Big Mom",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Beast Pirates",
+          "imposteur_en": "Big Mom Pirates"
+        },
+        {
+          "civil": "Cinq Doyens",
+          "imposteur": "Chevaliers Divins",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Five Elders",
+          "imposteur_en": "Holy Knights"
+        },
+        {
+          "civil": "SWORD",
+          "imposteur": "CP0",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "SWORD",
+          "imposteur_en": "CP0"
+        },
+        {
+          "civil": "Cross Guild",
+          "imposteur": "Flotte du Chapeau de Paille",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Cross Guild",
+          "imposteur_en": "Straw Hat Grand Fleet"
+        },
+        {
+          "civil": "Minks",
+          "imposteur": "Hommes-Poissons",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Minks",
+          "imposteur_en": "Fish-Men"
+        }
+      ]
+    },
+    {
+      "id": "sub_8h5wma",
+      "name": "Arcs et emplacements",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Arc Enies Lobby",
+          "imposteur": "Arc Marineford",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Enies Lobby Arc",
+          "imposteur_en": "Marineford Arc"
+        },
+        {
+          "civil": "Arc Wano Kuni",
+          "imposteur": "Arc Whole Cake Island",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Wano Country Arc",
+          "imposteur_en": "Whole Cake Island Arc"
+        },
+        {
+          "civil": "Arc Alabasta",
+          "imposteur": "Arc Dressrosa",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Alabasta Arc",
+          "imposteur_en": "Dressrosa Arc"
+        },
+        {
+          "civil": "Arc Skypiea",
+          "imposteur": "Arc Île des Hommes-Poissons",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Skypiea Arc",
+          "imposteur_en": "Fish-Man Island Arc"
+        },
+        {
+          "civil": "Arc Egghead",
+          "imposteur": "Arc Sabaody",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Egghead Arc",
+          "imposteur_en": "Sabaody Archipelago Arc"
+        },
+        {
+          "civil": "Loguetown",
+          "imposteur": "Water Seven",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Loguetown",
+          "imposteur_en": "Water Seven"
+        },
+        {
+          "civil": "Mary Geoise",
+          "imposteur": "Impel Down",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Mary Geoise",
+          "imposteur_en": "Impel Down"
+        },
+        {
+          "civil": "Laugh Tale",
+          "imposteur": "Raftel",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Laugh Tale",
+          "imposteur_en": "Raftel"
+        },
+        {
+          "civil": "Arlong Park",
+          "imposteur": "Baratie",
+          "difficulty": 1,
+          "niche": 1,
+          "civil_en": "Arlong Park",
+          "imposteur_en": "Baratie"
+        },
+        {
+          "civil": "Punk Hazard",
+          "imposteur": "Zou",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Punk Hazard",
+          "imposteur_en": "Zou"
+        }
+      ]
+    },
+    {
+      "id": "sub_cjaq57",
+      "name": "Item et lore",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Poneglyphe",
+          "imposteur": "Road Poneglyphe",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Poneglyph",
+          "imposteur_en": "Road Poneglyph"
+        },
+        {
+          "civil": "Siècle Oublié",
+          "imposteur": "Volonté du D",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Void Century",
+          "imposteur_en": "Will of D"
+        },
+        {
+          "civil": "Pluton",
+          "imposteur": "Poséidon",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Pluton",
+          "imposteur_en": "Poseidon"
+        },
+        {
+          "civil": "Uranus",
+          "imposteur": "Noah",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Uranus",
+          "imposteur_en": "Noah"
+        },
+        {
+          "civil": "Chapeau de paille géant",
+          "imposteur": "Trésor national de Marie Joie",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Giant Straw Hat",
+          "imposteur_en": "National Treasure of Mary Geoise"
+        },
+        {
+          "civil": "Sabre Noir",
+          "imposteur": "Shusui",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Black Blade",
+          "imposteur_en": "Shusui"
+        },
+        {
+          "civil": "Yoru",
+          "imposteur": "Enma",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Yoru",
+          "imposteur_en": "Enma"
+        },
+        {
+          "civil": "Escargophone",
+          "imposteur": "Vivre Card",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Den Den Mushi",
+          "imposteur_en": "Vivre Card"
+        },
+        {
+          "civil": "Log Pose",
+          "imposteur": "Eternal Pose",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Log Pose",
+          "imposteur_en": "Eternal Pose"
+        },
+        {
+          "civil": "Fruit du Démon",
+          "imposteur": "Arbre de la Connaissance",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Devil Fruit",
+          "imposteur_en": "Tree of Knowledge"
+        }
+      ]
+    },
+    {
+      "id": "sub_afestt",
+      "name": "Personnages secondaires & niche",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Bartholomew Kuma",
+          "imposteur": "Jewelry Bonney",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Bartholomew Kuma",
+          "imposteur_en": "Jewelry Bonney"
+        },
+        {
+          "civil": "Kozuki Oden",
+          "imposteur": "Kozuki Momonosuke",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Kozuki Oden",
+          "imposteur_en": "Kozuki Momonosuke"
+        },
+        {
+          "civil": "Donquixote Rosinante",
+          "imposteur": "Donquixote Doflamingo",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Corazon",
+          "imposteur_en": "Doflamingo"
+        },
+        {
+          "civil": "Charlotte Katakuri",
+          "imposteur": "Charlotte Cracker",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Charlotte Katakuri",
+          "imposteur_en": "Charlotte Cracker"
+        },
+        {
+          "civil": "Vinsmoke Reiju",
+          "imposteur": "Vinsmoke Ichiji",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Vinsmoke Reiju",
+          "imposteur_en": "Vinsmoke Ichiji"
+        },
+        {
+          "civil": "Pedro",
+          "imposteur": "Pekoms",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Pedro",
+          "imposteur_en": "Pekoms"
+        },
+        {
+          "civil": "Bepo",
+          "imposteur": "Jean Bart",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Bepo",
+          "imposteur_en": "Jean Bart"
+        },
+        {
+          "civil": "Cavendish",
+          "imposteur": "Bartolomeo",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Cavendish",
+          "imposteur_en": "Bartolomeo"
+        },
+        {
+          "civil": "Koala",
+          "imposteur": "Sabo",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Koala",
+          "imposteur_en": "Sabo"
+        },
+        {
+          "civil": "Vista",
+          "imposteur": "Marco",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Vista",
+          "imposteur_en": "Marco"
+        },
+        {
+          "civil": "Carrot",
+          "imposteur": "Wanda",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Carrot",
+          "imposteur_en": "Wanda"
+        },
+        {
+          "civil": "Killer",
+          "imposteur": "Eustass Kid",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Killer",
+          "imposteur_en": "Eustass Kid"
+        },
+        {
+          "civil": "Capone Bege",
+          "imposteur": "Urouge",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Capone Bege",
+          "imposteur_en": "Urouge"
+        },
+        {
+          "civil": "Vivi",
+          "imposteur": "Rebecca",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Vivi",
+          "imposteur_en": "Rebecca"
+        },
+        {
+          "civil": "Tashigi",
+          "imposteur": "Hina",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Tashigi",
+          "imposteur_en": "Hina"
+        },
+        {
+          "civil": "Bonney",
+          "imposteur": "Perona",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Bonney",
+          "imposteur_en": "Perona"
+        },
+        {
+          "civil": "Caesar Clown",
+          "imposteur": "Vegapunk",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Caesar Clown",
+          "imposteur_en": "Vegapunk"
+        }
+      ]
+    },
+    {
+      "id": "sub_aww0q9",
+      "name": "Fruits du Démon (niche)",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Gomu Gomu no Mi",
+          "imposteur": "Hito Hito no Mi modèle Nika",
+          "difficulty": 1,
+          "niche": 3,
+          "civil_en": "Gum-Gum Fruit",
+          "imposteur_en": "Human-Human Fruit Nika"
+        },
+        {
+          "civil": "Mochi Mochi no Mi",
+          "imposteur": "Bisu Bisu no Mi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Mochi-Mochi Fruit",
+          "imposteur_en": "Biscuit-Biscuit Fruit"
+        },
+        {
+          "civil": "Zushi Zushi no Mi",
+          "imposteur": "Buki Buki no Mi",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Press-Press Fruit",
+          "imposteur_en": "Arms-Arms Fruit"
+        },
+        {
+          "civil": "Mero Mero no Mi",
+          "imposteur": "Horu Horu no Mi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Love-Love Fruit",
+          "imposteur_en": "Hormone-Hormone Fruit"
+        },
+        {
+          "civil": "Soru Soru no Mi",
+          "imposteur": "Yomi Yomi no Mi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Soul-Soul Fruit",
+          "imposteur_en": "Revive-Revive Fruit"
+        },
+        {
+          "civil": "Kage Kage no Mi",
+          "imposteur": "Horo Horo no Mi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Shadow-Shadow Fruit",
+          "imposteur_en": "Hollow-Hollow Fruit"
+        },
+        {
+          "civil": "Moku Moku no Mi",
+          "imposteur": "Suna Suna no Mi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Smoke-Smoke Fruit",
+          "imposteur_en": "Sand-Sand Fruit"
+        },
+        {
+          "civil": "Magu Magu no Mi",
+          "imposteur": "Mera Mera no Mi",
+          "difficulty": 1,
+          "niche": 2,
+          "civil_en": "Magma-Magma Fruit",
+          "imposteur_en": "Flame-Flame Fruit"
+        }
+      ]
+    },
+    {
+      "id": "sub_cyylp8",
+      "name": "Lieux & Îles (niche)",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Water Seven",
+          "imposteur": "Enies Lobby",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Water Seven",
+          "imposteur_en": "Enies Lobby"
+        },
+        {
+          "civil": "Thriller Bark",
+          "imposteur": "Punk Hazard",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Thriller Bark",
+          "imposteur_en": "Punk Hazard"
+        },
+        {
+          "civil": "Wano",
+          "imposteur": "Dressrosa",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Wano",
+          "imposteur_en": "Dressrosa"
+        },
+        {
+          "civil": "Sabaody",
+          "imposteur": "Amazon Lily",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Sabaody Archipelago",
+          "imposteur_en": "Amazon Lily"
+        },
+        {
+          "civil": "Île des Hommes-Poissons",
+          "imposteur": "Skypiea",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Fish-Man Island",
+          "imposteur_en": "Skypiea"
+        },
+        {
+          "civil": "Whole Cake Island",
+          "imposteur": "Totto Land",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Whole Cake Island",
+          "imposteur_en": "Totto Land"
+        },
+        {
+          "civil": "Marineford",
+          "imposteur": "Impel Down",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Marineford",
+          "imposteur_en": "Impel Down"
+        },
+        {
+          "civil": "Ohara",
+          "imposteur": "Elbaf",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Ohara",
+          "imposteur_en": "Elbaf"
+        },
+        {
+          "civil": "Loguetown",
+          "imposteur": "Alabasta",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Loguetown",
+          "imposteur_en": "Alabasta"
+        },
+        {
+          "civil": "Zou",
+          "imposteur": "Jaya",
+          "difficulty": 3,
+          "niche": 3,
+          "civil_en": "Zou",
+          "imposteur_en": "Jaya"
+        },
+        {
+          "civil": "Mary Geoise",
+          "imposteur": "Raftel",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Mary Geoise",
+          "imposteur_en": "Laugh Tale"
+        },
+        {
+          "civil": "Baratie",
+          "imposteur": "Arlong Park",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Baratie",
+          "imposteur_en": "Arlong Park"
+        }
+      ]
+    },
+    {
+      "id": "sub_472875",
+      "name": "Concepts & Organisations (niche)",
+      "crossMixable": false,
+      "pairs": [
+        {
+          "civil": "Tenryūbito",
+          "imposteur": "Cinq Doyens",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Celestial Dragons",
+          "imposteur_en": "Five Elders"
+        },
+        {
+          "civil": "Vivre Card",
+          "imposteur": "Log Pose",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Vivre Card",
+          "imposteur_en": "Log Pose"
+        },
+        {
+          "civil": "SMILE",
+          "imposteur": "Fruit du Démon artificiel",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "SMILE",
+          "imposteur_en": "Artificial Devil Fruit"
+        },
+        {
+          "civil": "Pacifista",
+          "imposteur": "Seraphim",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Pacifista",
+          "imposteur_en": "Seraphim"
+        },
+        {
+          "civil": "Den Den Mushi",
+          "imposteur": "Visual Den Den Mushi",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Den Den Mushi",
+          "imposteur_en": "Visual Den Den Mushi"
+        },
+        {
+          "civil": "Berry",
+          "imposteur": "Prime",
+          "difficulty": 2,
+          "niche": 2,
+          "civil_en": "Berry",
+          "imposteur_en": "Bounty"
+        },
+        {
+          "civil": "CP9",
+          "imposteur": "CP0",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "CP9",
+          "imposteur_en": "CP0"
+        },
+        {
+          "civil": "Will of D",
+          "imposteur": "Siècle Oublié",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Will of D",
+          "imposteur_en": "Void Century"
+        },
+        {
+          "civil": "Poneglyphe",
+          "imposteur": "Road Poneglyphe",
+          "difficulty": 2,
+          "niche": 3,
+          "civil_en": "Poneglyph",
+          "imposteur_en": "Road Poneglyph"
+        }
+      ]
+    }
+  ]
+}

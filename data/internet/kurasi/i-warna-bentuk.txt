@@ -9,3 +9,13 @@ Square / Rectangle = Persegi / Persegi Panjang
 Circle / Oval = Lingkaran / Oval
 Triangle / Pyramid = Segitiga / Piramida
 Star / Diamond = Bintang / Belah Ketupat
+
+# Terjemahan dan kurasi dari Bipash2002/undercover.
+@ bipash
+Red / Pink = Merah / Merah Muda
+Blue / Purple = Biru / Ungu
+Green / Yellow = Hijau / Kuning
+Black / Grey = Hitam / Abu-abu
+White / Cream = Putih / Krem
+Orange / Brown = Oranye / Cokelat
+Triangle / Arrow = Segitiga / Panah
