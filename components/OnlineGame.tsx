@@ -8,7 +8,8 @@ import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasanga
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
-import { paksaRelayDari, teksJalur } from '@/lib/online/jalur';
+import { modeRelayDari, paksaRelayDari, teksDiagnosa, teksJalur } from '@/lib/online/jalur';
+import type { ModeRelay } from '@/lib/online/relay';
 import { BATAS_MENYAMBUNG_MS, pesanMacet, sudahMacet } from '@/lib/online/macet';
 import type { PesanChat } from '@/lib/online/chat';
 import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online/room';
@@ -120,8 +121,11 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       baru = false;
     };
     let paksaRelay = false;
+    let modeRelay: ModeRelay = 'semua';
     try {
-      paksaRelay = paksaRelayDari(window.location.search, window.localStorage.getItem('online:jalur'));
+      const simpanJalur = window.sessionStorage.getItem('online:jalur') ?? window.localStorage.getItem('online:jalur');
+      paksaRelay = paksaRelayDari(window.location.search, simpanJalur);
+      modeRelay = modeRelayDari(window.location.search, simpanJalur);
     } catch {
       // localStorage bisa diblokir; abaikan
     }
@@ -150,7 +154,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           }
         },
         onChat: setChat,
-      }, { paksaRelay });
+      }, { paksaRelay, modeRelay });
       hostRef.current = host;
       void host.mulai();
       return () => {
@@ -184,7 +188,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       onJalur: () => {
         baru = true;
       },
-    }, { paksaRelay });
+    }, { paksaRelay, modeRelay });
     klienRef.current = klien;
     void klien.mulai();
     return () => {
@@ -202,6 +206,19 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     return () => window.clearTimeout(id);
   }, [sesi, siap, status.sejak]);
   const macet = !!sesi && sudahMacet(status.s, status.sejak, sekarang);
+
+  // Diagnosa jalur di layar "Coba lagi": jalur apa saja yang sudah dicoba dan keadaannya, diperbarui tiap detik.
+  const [diagnosa, setDiagnosa] = useState<string[]>([]);
+  useEffect(() => {
+    if (!macet) return;
+    const perbarui = () => {
+      const r = hostRef.current ?? klienRef.current;
+      setDiagnosa(r ? teksDiagnosa(r.diagnosa()) : []);
+    };
+    perbarui();
+    const id = window.setInterval(perbarui, 1000);
+    return () => window.clearInterval(id);
+  }, [macet]);
 
   const cobaLagi = useCallback(() => {
     // Objek sesi baru memicu effect: koneksi lama dihentikan dan dibuat ulang dari awal.
@@ -317,6 +334,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       {view && macet && (
         <div className="kartu macet" role="alert">
           <p className="galat">{pesanMacet(sesi.host, sesi.kode, status.s, status.info)}</p>
+          <PanelDiagnosa baris={diagnosa} />
           <div className="baris-tombol">
             <button className="utama" onClick={cobaLagi}>Coba lagi</button>
             <button className="kedua" onClick={keluarRoom}>{sesi.host ? 'Tutup room' : 'Keluar dari room'}</button>
@@ -329,6 +347,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           {macet ? (
             <div className="kartu besar" role="alert">
               <p>{pesanMacet(sesi.host, sesi.kode, status.s, status.info)}</p>
+              <PanelDiagnosa baris={diagnosa} />
               <div className="baris-tombol">
                 <button className="utama" onClick={cobaLagi}>Coba lagi</button>
                 <button className="kedua" onClick={keluarRoom}>Keluar dari room</button>
@@ -999,5 +1018,18 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
         )}
       </div>
     </section>
+  );
+}
+
+/** Daftar jalur yang dicoba (Langsung, Metered, MQTT) beserta keadaannya, untuk layar macet. */
+function PanelDiagnosa({ baris }: { baris: string[] }) {
+  if (!baris.length) return null;
+  return (
+    <div className="diagnosa" aria-label="Jalur yang dicoba">
+      <p className="catatan">Jalur yang dicoba:</p>
+      <ul>
+        {baris.map((b) => <li key={b.split(':')[0]}>{b}</li>)}
+      </ul>
+    </div>
   );
 }

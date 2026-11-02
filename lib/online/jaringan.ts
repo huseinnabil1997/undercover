@@ -1,15 +1,24 @@
 // Lapisan jaringan mode online. Hanya berjalan di browser.
 // Topologi bintang: setiap pemain tersambung ke HP host lewat salah satu jalur:
 // - "Langsung": WebRTC P2P (PeerJS). Broker publik 0.peerjs.com hanya untuk saling menemukan (signaling).
-// - "Lewat relay": beberapa broker MQTT publik (lihat relay.ts), saat jalur langsung tidak bisa terbuka.
+// - "Lewat relay": Metered Realtime (utama) plus beberapa broker MQTT publik (lihat relay.ts), saat jalur langsung
+//   tidak bisa terbuka. Pemain menyiapkan relay sejak awal agar peralihan nyaris seketika.
 // Host mendengarkan kedua jalur sejak awal; logika room (gabung, ambil alih sesi, chat) sama untuk keduanya.
+// Welcome Metered juga bisa membawa server TURN (bila layanan TURN aktif di akun Metered); dipakai untuk WebRTC.
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
 import { buatStateChat, gabungChat, GALAT_CHAT_CEPAT, lajuKlien, terimaChat, type PesanChat } from './chat';
 import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
 import { CEK_NEGOSIASI_MS, ICE_SERVERS, nasibNegosiasi, TUNGGU_AWAL_MS } from './ice';
-import { BATAS_SENYAP_RELAY_MS, perluRelay, statusHostGabungan, ULANG_HALO_RELAY_MS, type Jalur } from './jalur';
+import {
+  BATAS_SENYAP_HOST_RELAY_MS, BATAS_SENYAP_RELAY_MS, INTERVAL_PING_RELAY_MS, JEDA_PONG_RELAY_MS, jedaHaloRelay, perluRelay,
+  statusHostGabungan, TUNGGU_TURN_MS, type Diagnosa, type Jalur,
+} from './jalur';
+import type { PembuatSoketTeks } from './metered';
 import type { Broker, PembuatSoket } from './mqtt';
-import { BROKER_RELAY, buatIdRelay, RelayMulti, topikHost, topikKlien, turunkanKunciRoom, type AmplopKeHost, type KunciRoom } from './relay';
+import {
+  buatIdRelay, daftarPengangkut, RelayMulti, topikHost, topikKlien, turunkanKunciRoom,
+  type AmplopKeHost, type KunciRoom, type ModeRelay, type PembuatPengangkut,
+} from './relay';
 import { peerIdHost } from './room';
 import {
   INTERVAL_PING_MS, VERSI_PROTOKOL,
@@ -22,7 +31,7 @@ export const OPSI_PEER: PeerOptions = {
   config: { iceServers: ICE_SERVERS },
 };
 
-/** Klien menganggap host hilang jika tidak ada pesan selama ini, lalu menyambung ulang. */
+/** Klien (jalur langsung) menganggap host hilang jika tidak ada pesan selama ini, lalu menyambung ulang. */
 export const BATAS_SENYAP_HOST_MS = 8000;
 const JEDA_ULANG_MS = 2500;
 
@@ -57,14 +66,66 @@ function saluranPeer(conn: DataConnection): Saluran {
 export interface OpsiJaringan {
   /** Lewati WebRTC sama sekali (uji/diagnosis jalur relay). */
   paksaRelay?: boolean;
+  /** Jalur relay yang dipakai: semua (bawaan), hanya Metered, atau hanya MQTT. */
+  modeRelay?: ModeRelay;
   /** Untuk pengujian: daftar broker dan pembuat soket tiruan. */
   broker?: Broker[];
   buatSoket?: PembuatSoket;
+  kunciMetered?: string;
+  buatSoketMetered?: PembuatSoketTeks;
+  /** Untuk pengujian: daftar jalur relay lengkap (mengganti semua opsi di atas). */
+  pengangkut?: PembuatPengangkut[];
 }
 
-async function buatPeer(id?: string): Promise<PeerT> {
+function pengangkutDari(o: OpsiJaringan): PembuatPengangkut[] {
+  return o.pengangkut ?? daftarPengangkut({ mode: o.modeRelay, kunciMetered: o.kunciMetered, broker: o.broker, buatSoket: o.buatSoket, buatSoketMetered: o.buatSoketMetered });
+}
+
+async function buatPeer(id?: string, turn: RTCIceServer[] = []): Promise<PeerT> {
   const { Peer } = await import('peerjs');
-  return id ? new Peer(id, OPSI_PEER) : new Peer(OPSI_PEER);
+  const opsi: PeerOptions = turn.length ? { ...OPSI_PEER, config: { iceServers: [...ICE_SERVERS, ...turn] } } : OPSI_PEER;
+  return id ? new Peer(id, opsi) : new Peer(opsi);
+}
+
+const KUNCI_ADA_TURN = 'online:turn';
+
+/** Sesi sebelumnya mendapat TURN dari Metered? (agar tidak menunggu welcome bila memang tidak ada TURN) */
+function pernahAdaTurn(): boolean {
+  try {
+    return globalThis.localStorage?.getItem(KUNCI_ADA_TURN) !== '0';
+  } catch {
+    return true;
+  }
+}
+
+function ingatTurn(ada: boolean): void {
+  try {
+    globalThis.localStorage?.setItem(KUNCI_ADA_TURN, ada ? '1' : '0');
+  } catch {
+    // abaikan
+  }
+}
+
+/** Ambil server TURN dari welcome Metered (tunggu sebentar bila belum datang). Kosong jika tidak ada. */
+async function ambilTurn(relay: RelayMulti | null): Promise<RTCIceServer[]> {
+  const m = relay?.metered;
+  if (!m) return [];
+  if (m.iceServers) return m.iceServers;
+  if (!pernahAdaTurn()) {
+    // Tidak menunggu, tapi tetap catat hasil welcome nanti untuk sesi berikutnya.
+    void m.tungguWelcome(30000).then((ice) => {
+      if (m.adaWelcome()) ingatTurn(ice.length > 0);
+    });
+    return [];
+  }
+  const ice = await m.tungguWelcome(TUNGGU_TURN_MS);
+  if (m.adaWelcome()) ingatTurn(ice.length > 0);
+  return ice;
+}
+
+function turnDari(relay: RelayMulti | null): boolean | null {
+  const ice = relay?.metered?.iceServers;
+  return ice ? ice.length > 0 : null;
 }
 
 /* ---------------------------------- Host ---------------------------------- */
@@ -83,7 +144,9 @@ export class HostRoom {
   private pemilikKoneksi = new Map<Saluran, string>();
   private relay: RelayMulti | null = null;
   private kunciRelay: KunciRoom | null = null;
-  private saluranRelay = new Map<string, { s: Saluran; terakhir: number }>();
+  private siapRelay: Promise<void> = Promise.resolve();
+  private turn: RTCIceServer[] = [];
+  private saluranRelay = new Map<string, { s: Saluran; terakhir: number; kirimTerakhir: number }>();
   private statusLangsung: { s: StatusJaringan; info?: string } = { s: 'menyambung' };
   private brokerRelay = 0;
   private terkirim = new Map<string, number>();
@@ -103,8 +166,12 @@ export class HostRoom {
       this.kedaluwarsaRelay();
       this.dispatch({ jenis: 'tick' });
     }, 2000);
-    void this.mulaiRelay();
-    if (!this.opsi.paksaRelay) await this.sambung();
+    this.siapRelay = this.mulaiRelay();
+    if (this.opsi.paksaRelay) return;
+    // Relay gagal disiapkan (mis. crypto.subtle tidak ada di http biasa): jalur langsung tetap jalan.
+    await this.siapRelay.catch(() => {});
+    this.turn = await ambilTurn(this.relay);
+    await this.sambung();
   }
 
   /** Status ke UI: room terbuka bila jalur langsung ATAU minimal satu broker relay siap. */
@@ -127,7 +194,7 @@ export class HostRoom {
     this.relay = new RelayMulti(kunci, (isi) => this.terimaRelay(isi), (n) => {
       this.brokerRelay = n;
       this.laporStatus();
-    }, this.opsi.broker ?? BROKER_RELAY, this.opsi.buatSoket);
+    }, pengangkutDari(this.opsi));
     this.relay.mulai(topikHost(kunci));
   }
 
@@ -147,13 +214,20 @@ export class HostRoom {
       const s: Saluran = {
         jalur: 'relay',
         terbuka: () => this.saluranRelay.get(rid)?.s === s && this.brokerRelay > 0,
-        kirim: (p) => void relay.kirim(topikKlien(kunci, rid), { d: p }),
+        kirim: (p) => {
+          const masuk = this.saluranRelay.get(rid);
+          const t = Date.now();
+          // Hemat kuota: pesan apa pun dari host sudah cukup sebagai tanda hidup, pong tidak perlu.
+          if (p.t === 'pong' && masuk && t - masuk.kirimTerakhir < JEDA_PONG_RELAY_MS) return;
+          if (masuk) masuk.kirimTerakhir = t;
+          void relay.kirim(topikKlien(kunci, rid), { d: p });
+        },
         tutup: () => {
           if (this.saluranRelay.get(rid)?.s === s) this.saluranRelay.delete(rid);
           this.lepasSaluran(s);
         },
       };
-      e = { s, terakhir: 0 };
+      e = { s, terakhir: 0, kirimTerakhir: 0 };
       this.saluranRelay.set(rid, e);
     }
     e.terakhir = Date.now();
@@ -162,12 +236,30 @@ export class HostRoom {
 
   private kedaluwarsaRelay(): void {
     const t = Date.now();
-    for (const e of [...this.saluranRelay.values()]) if (t - e.terakhir > BATAS_SENYAP_RELAY_MS) e.s.tutup();
+    for (const e of [...this.saluranRelay.values()]) {
+      if (t - e.terakhir > BATAS_SENYAP_RELAY_MS) {
+        e.s.tutup();
+        continue;
+      }
+      // Pemain relay ping lebih jarang dari batas offline umum; selama saluran relay hidup, anggap terlihat.
+      const id = this.pemilikKoneksi.get(e.s);
+      if (id && this.koneksi.get(id) === e.s) this.dispatch({ jenis: 'terlihat', id });
+    }
+  }
+
+  /** Jejak jalur untuk layar "Coba lagi". */
+  diagnosa(): Diagnosa {
+    const l = this.opsi.paksaRelay ? 'dilewati (mode relay)'
+      : this.statusLangsung.s === 'tersambung' ? 'server PeerJS tersambung'
+        : this.statusLangsung.s === 'menyambung' ? 'menyambung ke server PeerJS'
+          : this.statusLangsung.s === 'idDipakai' ? 'kode masih dipakai sesi lain'
+            : `gagal (${this.statusLangsung.info ?? this.statusLangsung.s})`;
+    return { langsung: l, turn: turnDari(this.relay), relay: this.relay?.ringkasan() ?? null };
   }
 
   private async sambung(): Promise<void> {
     if (this.selesai) return;
-    const peer = await buatPeer(peerIdHost(this.state.kode));
+    const peer = await buatPeer(peerIdHost(this.state.kode), this.turn);
     if (this.selesai) {
       peer.destroy();
       return;
@@ -364,6 +456,12 @@ export class KlienRoom {
   private kunciRelay: KunciRoom | null = null;
   private readonly rid = buatIdRelay();
   private haloRelayTerakhir = 0;
+  private relayMulaiMs = 0;
+  private pingRelayTerakhir = 0;
+  private siapRelay: Promise<void> | null = null;
+  private turn: RTCIceServer[] = [];
+  /** Keadaan jalur langsung terakhir untuk diagnosa. */
+  private langsung = 'belum dicoba';
 
   constructor(
     private kode: string,
@@ -376,14 +474,24 @@ export class KlienRoom {
     this.dengar.onStatus('menyambung');
     this.mulaiMs = Date.now();
     this.timer = setInterval(() => this.detak(), INTERVAL_PING_MS);
+    // Relay disiapkan sejak awal (tanpa mengirim apa pun) agar peralihan cepat, dan untuk mengambil TURN dari Metered.
+    this.siapkanRelay();
     if (perluRelay({ lamaMs: 0, adaView: false, paksaRelay: this.opsi.paksaRelay })) {
+      this.langsung = 'dilewati (mode relay)';
       void this.keRelay();
       return;
     }
+    this.langsung = 'menyiapkan';
+    await this.siapRelay?.catch(() => {});
+    if (this.berhentiLangsung()) return;
+    this.turn = await ambilTurn(this.relay);
+    if (this.berhentiLangsung()) return;
+    this.langsung = 'menyambung ke server PeerJS';
     let peer: PeerT;
     try {
-      peer = await buatPeer();
+      peer = await buatPeer(undefined, this.turn);
     } catch {
+      this.langsung = 'gagal (PeerJS tidak termuat)';
       void this.keRelay();
       return;
     }
@@ -398,6 +506,7 @@ export class KlienRoom {
     });
     peer.on('error', (err) => {
       if (this.selesai || this.jalur === 'relay') return;
+      this.langsung = `gagal (${err.type})`;
       if (perluRelay({ lamaMs: this.lamaTanpaHost(), galat: err.type, adaView: !!this.conn?.open })) {
         void this.keRelay();
       } else if (err.type === 'peer-unavailable') {
@@ -410,20 +519,72 @@ export class KlienRoom {
     });
   }
 
+  /** Jalur langsung tidak perlu dilanjutkan (dihentikan atau sudah pindah ke relay). */
+  private berhentiLangsung(): boolean {
+    return this.selesai || this.jalur === 'relay';
+  }
+
   /** Lama tanpa data dari host sejak mulai atau pesan terakhir. */
   private lamaTanpaHost(): number {
     return Date.now() - Math.max(this.mulaiMs, this.terakhirDengar);
   }
 
   private terbuka(): boolean {
-    if (this.jalur === 'relay') return !!this.relay && this.relay.jumlah() > 0 && this.sudahView && Date.now() - this.terakhirDengar < BATAS_SENYAP_HOST_MS;
+    if (this.jalur === 'relay') return !!this.relay && this.relay.jumlah() > 0 && this.sudahView && Date.now() - this.terakhirDengar < BATAS_SENYAP_HOST_RELAY_MS;
     return !!this.conn?.open;
   }
 
-  /** Pindah ke jalur relay MQTT: tutup PeerJS, turunkan kunci room, dengarkan topik sendiri, kirim salam ke host. */
+  /** Turunkan kunci room lalu sambungkan jalur relay dan dengarkan topik sendiri. Belum mengirim apa pun. */
+  private siapkanRelay(): void {
+    if (this.siapRelay) return;
+    this.siapRelay = (async () => {
+      const kunci = this.kunciRelay ?? await turunkanKunciRoom(this.kode);
+      if (this.selesai) return;
+      this.kunciRelay = kunci;
+      const relay = new RelayMulti(kunci, (isi) => {
+        if (this.jalur !== 'relay' || relay !== this.relay) return;
+        const d = (isi as { d?: unknown } | null)?.d;
+        if (d && typeof d === 'object') this.terima(d as PesanKeKlien);
+      }, (n) => {
+        if (this.selesai || this.jalur !== 'relay' || relay !== this.relay) return;
+        if (n > 0 && !this.sudahView) this.haloRelay(true);
+        if (n === 0) this.dengar.onStatus('menyambungUlang', 'relay-putus');
+      }, pengangkutDari(this.opsi));
+      this.relay = relay;
+      relay.mulai(topikKlien(kunci, this.rid));
+    })();
+  }
+
+  /** Jalur langsung sudah jalan: lepas relay yang disiapkan (hemat koneksi Metered). Dibuat lagi bila perlu. */
+  private lepasRelaySiaga(): void {
+    if (this.jalur !== 'langsung' || !this.siapRelay) return;
+    const tunggu = this.siapRelay;
+    this.siapRelay = null;
+    void tunggu.then(() => {
+      if (this.siapRelay || this.jalur !== 'langsung') return;
+      this.relay?.hentikan();
+      this.relay = null;
+    }, () => {});
+  }
+
+  /** Jejak jalur untuk layar "Coba lagi". */
+  diagnosa(): Diagnosa {
+    let l = this.langsung;
+    const conn = this.conn;
+    if (this.jalur === 'langsung' && conn && !conn.open) l = `menunggu host (ICE ${conn.peerConnection?.iceConnectionState ?? 'baru'})`;
+    else if (this.jalur === 'langsung' && conn?.open) l = 'terbuka';
+    const host = this.sudahView ? 'menjawab' : this.jalur === 'relay' ? 'belum menjawab lewat relay' : 'belum menjawab';
+    return { langsung: l, turn: turnDari(this.relay), relay: this.relay?.ringkasan() ?? null, host };
+  }
+
+  /** Pindah ke jalur relay: tutup PeerJS, pakai relay yang sudah disiapkan, kirim salam ke host. */
   private async keRelay(): Promise<void> {
     if (this.jalur === 'relay' || this.selesai) return;
     this.jalur = 'relay';
+    this.relayMulaiMs = Date.now();
+    const conn0 = this.conn;
+    if (conn0 && !conn0.open && this.langsung.startsWith('menyambung')) this.langsung = `gagal (ICE ${conn0.peerConnection?.iceConnectionState ?? 'baru'})`;
+    else if (this.langsung === 'menyambung ke server PeerJS' || this.langsung === 'terbuka') this.langsung = 'tidak ada jawaban host';
     if (this.jadwalUlang) clearTimeout(this.jadwalUlang);
     this.jadwalUlang = null;
     const conn = this.conn;
@@ -434,23 +595,20 @@ export class KlienRoom {
     this.sudahView = false;
     this.dengar.onJalur?.('relay');
     this.dengar.onStatus('menyambung', 'relay');
-    const kunci = await turunkanKunciRoom(this.kode);
+    this.siapkanRelay();
+    try {
+      await this.siapRelay;
+    } catch {
+      this.dengar.onStatus('menyambungUlang', 'relay-putus');
+      return;
+    }
     if (this.selesai) return;
-    this.kunciRelay = kunci;
-    this.relay = new RelayMulti(kunci, (isi) => {
-      const d = (isi as { d?: unknown } | null)?.d;
-      if (d && typeof d === 'object') this.terima(d as PesanKeKlien);
-    }, (n) => {
-      if (this.selesai) return;
-      if (n > 0 && !this.sudahView) this.haloRelay(true);
-      if (n === 0) this.dengar.onStatus('menyambungUlang', 'relay-putus');
-    }, this.opsi.broker ?? BROKER_RELAY, this.opsi.buatSoket);
-    this.relay.mulai(topikKlien(kunci, this.rid));
+    if (this.relay && this.relay.jumlah() > 0 && !this.sudahView) this.haloRelay(true);
   }
 
   private haloRelay(segera = false): void {
     const t = Date.now();
-    if (!segera && t - this.haloRelayTerakhir < ULANG_HALO_RELAY_MS) return;
+    if (!segera && t - this.haloRelayTerakhir < jedaHaloRelay(t - this.relayMulaiMs)) return;
     this.haloRelayTerakhir = t;
     this.kirimMentah({ t: 'halo', v: VERSI_PROTOKOL, ...this.identitas });
   }
@@ -459,16 +617,19 @@ export class KlienRoom {
     if (this.selesai) return;
     if (this.jalur === 'relay') {
       if (!this.relay || this.relay.jumlah() === 0) return;
-      if (!this.sudahView || Date.now() - this.terakhirDengar > BATAS_SENYAP_HOST_MS) {
+      const t = Date.now();
+      if (!this.sudahView || t - this.terakhirDengar > BATAS_SENYAP_HOST_RELAY_MS) {
         // Belum dijawab atau host diam: ulangi salam (host memperlakukannya sebagai sambung ulang).
         if (this.sudahView) {
           this.sudahView = false;
           this.dengar.onStatus('menyambungUlang', 'relay');
-        } else if (Date.now() - this.mulaiMs > BATAS_SENYAP_HOST_MS * 2) {
+        } else if (t - this.mulaiMs > BATAS_SENYAP_HOST_MS * 2) {
           this.dengar.onStatus('hostTidakAda', 'relay');
         }
         this.haloRelay();
-      } else {
+      } else if (t - this.pingRelayTerakhir >= INTERVAL_PING_RELAY_MS) {
+        // Ping relay jarang (hemat kuota Metered); view/chat dari host juga dihitung sebagai tanda hidup.
+        this.pingRelayTerakhir = t;
         this.kirimMentah({ t: 'ping' });
       }
       return;
@@ -510,6 +671,7 @@ export class KlienRoom {
     this.sudahView = false;
     conn.on('open', () => {
       if (conn !== this.conn) return;
+      this.langsung = 'terbuka';
       this.terakhirDengar = Date.now();
       this.kirimMentah({ t: 'halo', v: VERSI_PROTOKOL, ...this.identitas });
     });
@@ -535,6 +697,7 @@ export class KlienRoom {
         setTimeout(periksa, CEK_NEGOSIASI_MS);
         return;
       }
+      this.langsung = `gagal (ICE ${ice ?? 'baru'}, waktu habis)`;
       conn.close();
       this.conn = null;
       this.dengar.onStatus('menyambungUlang', 'timeout');
@@ -554,6 +717,7 @@ export class KlienRoom {
       if (!this.sudahView || p.view.seq >= this.seq) {
         this.sudahView = true;
         this.seq = p.view.seq;
+        if (this.jalur === 'langsung') this.lepasRelaySiaga();
         this.dengar.onStatus('tersambung', this.jalur);
         this.dengar.onView(p.view);
       }

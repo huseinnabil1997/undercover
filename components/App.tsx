@@ -63,6 +63,13 @@ function Isi() {
   // Riwayat browser: menu di entri dasar, mode main di entri di atasnya, jadi tombol back browser kembali ke menu.
   useEffect(() => {
     bersihkanKunciLama();
+    // Flag uji ?jalur= diingat untuk tab ini, karena query URL dibuang saat pindah layar.
+    try {
+      const jalur = new URLSearchParams(window.location.search).get('jalur');
+      if (jalur) window.sessionStorage.setItem('online:jalur', jalur);
+    } catch {
+      // sessionStorage bisa diblokir; abaikan
+    }
     if (awal.mode !== 'beranda' && !modeRiwayat(window.history.state)) {
       const url = window.location.pathname + window.location.search;
       window.history.replaceState({ [KUNCI_RIWAYAT]: 'beranda' }, '', window.location.pathname);

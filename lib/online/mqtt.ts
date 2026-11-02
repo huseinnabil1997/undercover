@@ -149,6 +149,7 @@ const BATAS_CONNECT_MS = 10000;
 /** Satu koneksi ke satu broker. Menyambung ulang sendiri (jeda bertambah) dan berlangganan ulang. */
 export class KlienMqtt {
   siap = false;
+  readonly metered = false;
   private ws: SoketMinimal | null = null;
   private langganan = new Set<string>();
   private idPaket = 1;
@@ -165,6 +166,18 @@ export class KlienMqtt {
     private onSiap: (siap: boolean) => void = () => {},
     private buatSoket: PembuatSoket = bawaanSoket,
   ) {}
+
+  get nama(): string {
+    try {
+      return new URL(this.broker.url).host;
+    } catch {
+      return this.broker.url;
+    }
+  }
+
+  keadaan(): string {
+    return this.siap ? 'tersambung' : 'menyambung';
+  }
 
   mulai(): void {
     if (this.selesai) return;

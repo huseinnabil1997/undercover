@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { BATAS_LANGSUNG_MS, paksaRelayDari, perluRelay, statusHostGabungan, teksJalur } from '../lib/online/jalur';
+import { BATAS_LANGSUNG_MS, modeRelayDari, paksaRelayDari, perluRelay, statusHostGabungan, teksJalur } from '../lib/online/jalur';
 import { HostRoom, KlienRoom, type StatusJaringan } from '../lib/online/jaringan';
 import { pesanMacet } from '../lib/online/macet';
 import {
   KlienMqtt, PAKET_PING, paketConnect, paketPublish, paketSubscribe, PenguraiMqtt, type Broker, type PembuatSoket, type SoketMinimal,
 } from '../lib/online/mqtt';
 import {
-  BROKER_RELAY, bukaSandi, buatIdRelay, idPesan, PenyaringDuplikat, RelayMulti, sandikan, topikHost, topikKlien, turunkanKunciRoom,
+  BROKER_RELAY, bukaSandi, buatIdRelay, daftarPengangkut, idPesan, PenyaringDuplikat, RelayMulti, sandikan, topikHost, topikKlien, turunkanKunciRoom,
 } from '../lib/online/relay';
 import { buatStateHost } from '../lib/online/host';
 import type { ViewPemain } from '../lib/online/types';
@@ -220,8 +220,8 @@ describe('RelayMulti', () => {
     const k = await turunkanKunciRoom('QWERT', ITER);
     const masukA: unknown[] = [];
     const masukB: unknown[] = [];
-    const a = new RelayMulti(k, (x) => masukA.push(x), () => {}, daftar, buatSoket);
-    const b = new RelayMulti(k, (x) => masukB.push(x), () => {}, daftar, buatSoket);
+    const a = new RelayMulti(k, (x) => masukA.push(x), () => {}, daftarPengangkut({ broker: daftar, buatSoket }));
+    const b = new RelayMulti(k, (x) => masukB.push(x), () => {}, daftarPengangkut({ broker: daftar, buatSoket }));
     a.mulai(topikHost(k));
     b.mulai(topikKlien(k, 'b1'));
     await tunggu(() => a.jumlah() === 2 && b.jumlah() === 2);
@@ -315,6 +315,11 @@ describe('keputusan pindah ke relay', () => {
     expect(paksaRelayDari('?jalur=relay', null)).toBe(true);
     expect(paksaRelayDari('', 'relay')).toBe(true);
     expect(paksaRelayDari('?x=1', null)).toBe(false);
+    expect(paksaRelayDari('?jalur=metered', null)).toBe(true);
+    expect(paksaRelayDari('?jalur=mqtt', null)).toBe(true);
+    expect(modeRelayDari('?jalur=metered', null)).toBe('metered');
+    expect(modeRelayDari('', 'mqtt')).toBe('mqtt');
+    expect(modeRelayDari('?jalur=relay', null)).toBe('semua');
   });
 
   it('pesan macet khusus relay', () => {

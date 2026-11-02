@@ -475,3 +475,7 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .kartu.macet { margin: 0 0 12px; }
 .kartu.macet .galat { margin: 0; }
 .kartu.macet .baris-tombol > *, .kartu.besar .baris-tombol > * { flex: 1; }
+.diagnosa { margin: 8px 0 0; text-align: left; }
+.diagnosa .catatan { margin: 0 0 4px; }
+.diagnosa ul { margin: 0; padding-left: 18px; font-size: 0.85rem; opacity: 0.85; overflow-wrap: anywhere; }
+.diagnosa li { margin: 2px 0; }

@@ -1,8 +1,11 @@
-// Jalur cadangan "Lewat relay": pesan host <-> pemain lewat beberapa broker MQTT publik gratis (WSS) sekaligus,
-// dipakai saat koneksi langsung WebRTC tidak terbuka (mis. CGNAT seluler di dua sisi) atau broker PeerJS tidak terjangkau.
+// Jalur cadangan "Lewat relay": pesan host <-> pemain lewat Metered Realtime (utama) dan beberapa broker MQTT
+// publik gratis (WSS) sekaligus, dipakai saat koneksi langsung WebRTC tidak terbuka (mis. CGNAT seluler di dua sisi)
+// atau broker PeerJS tidak terjangkau.
 // Isi pesan dienkripsi AES-GCM dengan kunci turunan kode room (PBKDF2), dan nama topik juga turunan PBKDF2,
 // jadi pengamat broker tidak melihat kode room maupun kata rahasia.
 import { KlienMqtt, type Broker, type PembuatSoket } from './mqtt';
+import { KlienMetered, type PembuatSoketTeks } from './metered';
+import { KUNCI_METERED } from './kunciMetered';
 
 /** Broker publik tanpa daftar akun. Pesan dikirim ke semua yang tersambung; yang mati diabaikan. */
 export const BROKER_RELAY: Broker[] = [
@@ -80,26 +83,84 @@ export class PenyaringDuplikat {
   }
 }
 
-/** Satu topik masuk, kirim ke banyak broker sekaligus, buang duplikat, toleran broker mati. */
+/** Satu jalur relay (Metered atau satu broker MQTT). */
+export interface Pengangkut {
+  readonly nama: string;
+  /** true untuk Metered (dihitung kuota pesan). */
+  readonly metered?: boolean;
+  siap: boolean;
+  langgan(topik: string): void;
+  mulai(): void;
+  terbit(topik: string, data: Uint8Array): boolean;
+  hentikan(): void;
+  /** Keadaan singkat untuk diagnosa, mis. "tersambung" atau "menyambung (tutup 4010)". */
+  keadaan(): string;
+}
+
+export type PembuatPengangkut = (onPesan: (topik: string, data: Uint8Array) => void, onSiap: (siap: boolean) => void) => Pengangkut;
+
+/** Mode jalur relay yang dipakai: semua (bawaan), hanya Metered, atau hanya MQTT (untuk pengujian). */
+export type ModeRelay = 'semua' | 'metered' | 'mqtt';
+
+export interface OpsiPengangkut {
+  mode?: ModeRelay;
+  /** Kunci publik Metered; kosong = Metered tidak dipakai. */
+  kunciMetered?: string;
+  broker?: Broker[];
+  buatSoket?: PembuatSoket;
+  buatSoketMetered?: PembuatSoketTeks;
+}
+
+/** Daftar jalur relay: Metered lebih dulu (paling andal), lalu broker MQTT publik sebagai cadangan tambahan. */
+export function daftarPengangkut(o: OpsiPengangkut = {}): PembuatPengangkut[] {
+  const mode = o.mode ?? 'semua';
+  // Soket MQTT tiruan (pengujian) tanpa soket Metered tiruan: jangan menyambung ke Metered sungguhan.
+  const kunci = o.kunciMetered ?? (o.buatSoket && !o.buatSoketMetered ? '' : KUNCI_METERED);
+  const hasil: PembuatPengangkut[] = [];
+  if (mode !== 'mqtt' && kunci) hasil.push((p, s) => new KlienMetered(kunci, p, s, o.buatSoketMetered));
+  if (mode !== 'metered') for (const b of o.broker ?? BROKER_RELAY) hasil.push((p, s) => new KlienMqtt(b, p, s, o.buatSoket));
+  return hasil;
+}
+
+/** Ringkasan keadaan jalur relay untuk diagnosa. */
+export interface RingkasanRelay {
+  /** null = Metered tidak dipakai. */
+  metered: string | null;
+  mqttSiap: number;
+  mqttTotal: number;
+  /** Pesan terenkripsi valid yang diterima, per nama jalur yang mengantarnya lebih dulu. */
+  masuk: Record<string, number>;
+  /** Jumlah publish ke Metered (dihitung kuota). */
+  terbitMetered: number;
+}
+
+/** Satu topik masuk, kirim lewat semua jalur sekaligus, buang duplikat, toleran jalur mati. */
 export class RelayMulti {
-  private klien: KlienMqtt[];
+  private klien: Pengangkut[];
   private saring = new PenyaringDuplikat();
   private selesai = false;
+  private masuk: Record<string, number> = {};
+  private terbitMetered = 0;
 
   constructor(
     private kunci: KunciRoom,
     private onPesan: (isi: unknown) => void,
     private onJumlah: (tersambung: number) => void = () => {},
-    daftar: Broker[] = BROKER_RELAY,
-    buatSoket?: PembuatSoket,
+    pengangkut: PembuatPengangkut[] = daftarPengangkut(),
   ) {
-    this.klien = daftar.map((b) => new KlienMqtt(b, (_t, d) => void this.terima(d), () => this.onJumlah(this.jumlah()), buatSoket));
+    this.klien = pengangkut.map((buat) => {
+      let k: Pengangkut | null = null;
+      k = buat((_t, d) => void this.terima(d, k), () => this.onJumlah(this.jumlah()));
+      return k;
+    });
   }
 
-  private async terima(data: Uint8Array): Promise<void> {
+  private async terima(data: Uint8Array, dari: Pengangkut | null): Promise<void> {
     if (this.selesai || !this.saring.baru(idPesan(data))) return;
     const isi = await bukaSandi(this.kunci.kunci, data);
-    if (isi !== null && !this.selesai) this.onPesan(isi);
+    if (isi === null || this.selesai) return;
+    if (dari) this.masuk[dari.nama] = (this.masuk[dari.nama] ?? 0) + 1;
+    this.onPesan(isi);
   }
 
   mulai(topikMasuk: string): void {
@@ -113,13 +174,34 @@ export class RelayMulti {
     return this.klien.filter((k) => k.siap).length;
   }
 
-  /** Kirim ke semua broker yang tersambung. false jika tidak ada satu pun. */
+  /** Jalur Metered (jika dipakai), misalnya untuk mengambil iceServers TURN dari welcome. */
+  get metered(): KlienMetered | null {
+    return (this.klien.find((k) => k instanceof KlienMetered) as KlienMetered | undefined) ?? null;
+  }
+
+  ringkasan(): RingkasanRelay {
+    const m = this.klien.find((k) => k.metered);
+    const mqtt = this.klien.filter((k) => !k.metered);
+    return {
+      metered: m ? m.keadaan() : null,
+      mqttSiap: mqtt.filter((k) => k.siap).length,
+      mqttTotal: mqtt.length,
+      masuk: { ...this.masuk },
+      terbitMetered: this.terbitMetered,
+    };
+  }
+
+  /** Kirim lewat semua jalur yang tersambung. false jika tidak ada satu pun. */
   async kirim(topik: string, isi: unknown): Promise<boolean> {
     if (this.selesai) return false;
     const data = await sandikan(this.kunci.kunci, isi);
     this.saring.baru(idPesan(data)); // gema pesan sendiri tidak diproses
     let ok = false;
-    for (const k of this.klien) ok = k.terbit(topik, data) || ok;
+    for (const k of this.klien) {
+      const t = k.terbit(topik, data);
+      if (t && k.metered) this.terbitMetered++;
+      ok = t || ok;
+    }
     return ok;
   }
 
