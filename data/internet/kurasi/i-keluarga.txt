@@ -1,0 +1,10 @@
+# i-keluarga | Keluarga
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Family Relations".
+@ ck:Family_Relations_7
+father / mother = Ayah / Ibu
+brother / sister = Kakak Laki-Laki / Kakak Perempuan
+grandfather / grandmother = Kakek / Nenek
+mother in law / father in law = Ibu Mertua / Bapak Mertua
+son / daughter = Anak Laki-Laki / Anak Perempuan
+aunt / uncle = Tante / Om
+family / relatives = Keluarga / Kerabat

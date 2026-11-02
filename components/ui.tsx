@@ -3,8 +3,8 @@
 // Komponen tampilan yang dipakai mode satu HP dan mode online.
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { maksPenyusup, type Komposisi } from '@/lib/game';
-import { PILIHAN_KATEGORI, SEMUA_KATEGORI, totalKombinasi } from '@/lib/bankKata';
-import type { PanjangKata, Pemenang, Peran } from '@/lib/types';
+import { KREDIT_SUMBER_INTERNET, pilihanKategori, PILIHAN_SUMBER, semuaKategori, totalKombinasi } from '@/lib/bankKata';
+import type { PanjangKata, Pemenang, Peran, SumberKata } from '@/lib/types';
 
 export const NAMA_PERAN: Record<Peran, string> = { civilian: 'Civilian', undercover: 'Undercover', mrwhite: 'Mr. White' };
 
@@ -91,20 +91,21 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
 }
 
 /** Kartu pilihan kategori kata. */
-export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas' }: {
-  kategori: string[]; onUbah: (k: string[]) => void; nonaktif?: boolean; panjangKata?: PanjangKata;
+export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas', sumber = 'kamus' }: {
+  kategori: string[]; onUbah: (k: string[]) => void; nonaktif?: boolean; panjangKata?: PanjangKata; sumber?: SumberKata;
 }) {
-  const semua = kategori.length === SEMUA_KATEGORI.length;
+  const daftarSemua = semuaKategori(sumber);
+  const semua = daftarSemua.every((id) => kategori.includes(id));
   return (
     <div className="kartu">
       <div className="baris-judul">
-        <h2>Kategori</h2>
+        <h2>Kategori {sumber === 'internet' ? 'Internet' : 'Kamus kita'}</h2>
         {!nonaktif && (
-          <button className="kecil" onClick={() => onUbah(semua ? [] : SEMUA_KATEGORI)}>{semua ? 'Kosong' : 'Semua'}</button>
+          <button className="kecil" onClick={() => onUbah(semua ? [] : [...daftarSemua])}>{semua ? 'Kosong' : 'Semua'}</button>
         )}
       </div>
       <div className="chip-grup">
-        {PILIHAN_KATEGORI.map((k) => {
+        {pilihanKategori(sumber).map((k) => {
           const aktif = kategori.includes(k.id);
           if (nonaktif && !aktif) return null;
           return (
@@ -123,6 +124,33 @@ export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas
       <p className="catatan">
         <strong>{angka(totalKombinasi(kategori, panjangKata))}</strong> pasangan kata
       </p>
+    </div>
+  );
+}
+
+/** Pilihan sumber kata: Internet (bawaan) atau Kamus kita. */
+export function PilihSumberKata({ nilai, onUbah, nonaktif }: { nilai: SumberKata; onUbah: (s: SumberKata) => void; nonaktif?: boolean }) {
+  const pilihan = PILIHAN_SUMBER.find((p) => p.id === nilai) ?? PILIHAN_SUMBER[0];
+  return (
+    <div className="kartu">
+      <div className="baris-judul">
+        <h2>Sumber kata</h2>
+      </div>
+      <div className="segmen" role="group" aria-label="Sumber kata">
+        {PILIHAN_SUMBER.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            aria-pressed={nilai === p.id}
+            disabled={nonaktif}
+            onClick={() => onUbah(p.id)}
+          >
+            {p.nama}
+          </button>
+        ))}
+      </div>
+      <p className="catatan">{pilihan.keterangan}</p>
+      {nilai === 'internet' && <p className="catatan">Sumber kata: {KREDIT_SUMBER_INTERNET}.</p>}
     </div>
   );
 }

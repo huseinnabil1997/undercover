@@ -1,6 +1,6 @@
 // Logika murni permainan Undercover. Tidak menyentuh DOM, localStorage, maupun React,
 // sehingga mudah diuji. Semua keacakan memakai fungsi `rng` yang bisa disuntikkan.
-import type { Kategori, KategoriMeta, PanjangKata, PasanganKata, Pemain, Pemenang, Peran } from './types';
+import type { DaftarPasangan, Kategori, KategoriMeta, PanjangKata, PasanganKata, Pemain, Pemenang, Peran } from './types';
 
 export type Rng = () => number;
 
@@ -243,6 +243,45 @@ export function pilihPasangan(opsi: OpsiPasangan): PasanganKata {
       sumber = `${k.nama} / ${s.nama}`;
     }
     const tukar = rng() < 0.5;
+    calon = { civilian: tukar ? b : a, undercover: tukar ? a : b, sumber };
+    if (!riwayat.has(kunciPasangan(a, b))) return calon;
+  }
+  return calon as PasanganKata;
+}
+
+export interface OpsiPasanganDaftar {
+  daftar: readonly DaftarPasangan[];
+  panjangKata?: PanjangKata;
+  riwayat?: ReadonlySet<string> | readonly string[];
+  /** Awalan label sumber, misalnya "Internet". */
+  label?: string;
+  maksPercobaan?: number;
+  rng?: Rng;
+}
+
+/**
+ * Pilih pasangan dari daftar pasangan jadi (sumber Internet). Kategori dipilih rata, lalu
+ * pasangannya. Mode 'satu' hanya memakai pasangan yang kedua katanya tanpa spasi; jika tidak
+ * ada sama sekali, melempar TanpaPasanganError agar pemanggil bisa jatuh ke mode 'bebas'.
+ */
+export function pilihPasanganDaftar(opsi: OpsiPasanganDaftar): PasanganKata {
+  const rng = opsi.rng ?? Math.random;
+  const riwayat = opsi.riwayat instanceof Set ? opsi.riwayat : new Set(opsi.riwayat ?? []);
+  const mode = opsi.panjangKata ?? 'bebas';
+  const daftar = opsi.daftar
+    .map((d) => ({ ...d, pasangan: mode === 'satu' ? d.pasangan.filter(([a, b]) => satuKata(a) && satuKata(b)) : d.pasangan }))
+    .filter((d) => d.pasangan.length > 0);
+  if (daftar.length === 0) {
+    if (mode === 'satu' && opsi.daftar.some((d) => d.pasangan.length > 0)) throw new TanpaPasanganError();
+    throw new Error('Tidak ada kategori kata yang dipilih.');
+  }
+  const maks = opsi.maksPercobaan ?? 50;
+  let calon: PasanganKata | null = null;
+  for (let t = 0; t < maks; t++) {
+    const d = daftar[acakIndeks(daftar.length, rng)];
+    const [a, b] = d.pasangan[acakIndeks(d.pasangan.length, rng)];
+    const tukar = rng() < 0.5;
+    const sumber = opsi.label ? `${opsi.label} / ${d.nama}` : d.nama;
     calon = { civilian: tukar ? b : a, undercover: tukar ? a : b, sumber };
     if (!riwayat.has(kunciPasangan(a, b))) return calon;
   }

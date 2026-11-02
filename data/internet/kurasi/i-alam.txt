@@ -1,0 +1,19 @@
+# i-alam | Bentang Alam & Bencana
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Landforms" dan "Natural Disasters".
+@ ck:Landforms_15_
+continent / island = Benua / Pulau
+desert / oasis = Gurun / Oasis
+mountain / hill = Gunung / Bukit
+river / lake = Sungai / Danau
+valley / plain = Lembah / Dataran
+peninsula / cape = Semenanjung / Tanjung
+valley / canyon = Lembah / Ngarai
+island / archipelago = Pulau / Kepulauan
+desert / sand = Gurun / Pasir
+river / stream = Sungai / Kali
+ocean / sea = Samudra / Laut
+@ ck:Natural_Disasters_5
+flood / drought = Banjir / Kemarau
+tsunami / volcano = Tsunami / Gunung Meletus
+volcano / earthquake = Gunung Meletus / Gempa Bumi
+tornado / hurricane = Tornado / Badai

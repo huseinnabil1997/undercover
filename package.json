@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "words": "python scripts/generate_words.py data/sumber"
+    "words": "python scripts/generate_words.py data/sumber",
+    "words:internet": "python scripts/generate_internet.py"
   },
   "dependencies": {
     "next": "16.4.3",

@@ -72,15 +72,30 @@ Live: https://huseinnabil1997.github.io/undercover/
 
 Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr. White. Mr. White boleh 0.
 
-## Bank kata
+## Sumber kata
+
+Di layar pengaturan (mode satu HP dan online) ada pilihan **Sumber kata**:
+
+- **Internet** (bawaan): 905 pasangan kata di 19 kategori, diambil dari proyek terbuka
+  MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), dan CK-Arena (Apache-2.0),
+  lalu diterjemahkan dan dikurasi manual ke bahasa Indonesia. Rincian lisensi ada di [ATRIBUSI.md](ATRIBUSI.md).
+- **Kamus kita**: bank kata buatan sendiri (lihat di bawah).
+
+Setiap sumber punya daftar kategori sendiri, dan pilihan kategori disimpan terpisah per sumber.
+Di mode online, sumber kata diatur oleh host dan ikut tersinkron ke semua pemain.
+Filter "Satu kata" berlaku untuk kedua sumber (untuk Internet, kedua kata pasangan harus satu kata).
+
+Data Internet ada di `data/internet/`: sumber mentah dan lisensinya di `asli/`, terjemahan di `kurasi/*.txt`.
+Setelah mengedit kurasi, jalankan `npm run words:internet` untuk membuat ulang `data/internet/*.ts`.
+
+## Bank kata (Kamus kita)
 
 Kata disimpan per kategori di `data/words/*.ts`. Setiap kategori punya subkategori berisi kata yang mirip.
 Pasangan dibuat saat main: pilih kategori, pilih subkategori, lalu ambil 2 kata berbeda secara acak.
-Jumlah kombinasi = jumlah C(n, 2) dari setiap subkategori, saat ini **1.143.300 kombinasi** dari
-10.493 kata, 58 subkategori, 23 kategori. Ada juga 120 pasangan kurasi manual (kategori "Klasik").
-
-Kategori terbaru: **Anime**, **Film**, dan **Game** (judul game populer, 133 hero Mobile Legends dengan ejaan resmi,
-item/istilah MLBB, hero Dota 2 dan Honor of Kings, karakter Genshin Impact, agen Valorant, Pokemon).
+Jumlah kombinasi = jumlah C(n, 2) dari setiap subkategori, saat ini **1.607.365 kombinasi** dari
+12.470 kata, 66 subkategori, 23 kategori. Kata yang kurang dikenal orang sudah dibuang, dan kata populer
+(makanan, merek, tempat wisata, aplikasi, hero Mobile Legends terbaru, anime, film, game, penyanyi, klub) ditambahkan.
+Ada juga 120 pasangan kurasi manual (kategori "Klasik").
 
 - Data tiap kategori dimuat lazy (dynamic import) hanya saat permainan dimulai.
 - Pasangan yang baru dipakai disimpan di riwayat dan dihindari.
@@ -104,7 +119,7 @@ Struktur penting:
 - `components/App.tsx`: beranda pilihan mode. `components/OnlineGame.tsx`: UI mode online. `components/UndercoverGame.tsx`: UI mode satu HP.
 - `components/ui.tsx`: komponen bersama (pengaturan peran, kategori, kartu balik, konfeti).
 - Animasi CSS 150 sampai 350 ms di `app/globals.css`, otomatis dimatikan jika perangkat memakai `prefers-reduced-motion`.
-- `data/words/`: bank kata hasil generator, `data/klasik.ts`: pasangan kurasi.
+- `data/words/`: bank kata hasil generator, `data/klasik.ts`: pasangan kurasi, `data/internet/`: sumber kata Internet.
 - `tests/`: unit test.
 
 ## Deploy

@@ -29,6 +29,25 @@ export interface KategoriMeta {
   subkategori: SubkategoriMeta[];
 }
 
+/** Asal data kata: daftar pasangan dari internet (terjemahan) atau kamus buatan sendiri. */
+export type SumberKata = 'internet' | 'kamus';
+
+export interface KategoriInternetMeta {
+  id: string;
+  nama: string;
+  /** Repositori asal beserta lisensinya. */
+  sumber: string[];
+  jumlah: number;
+  /** Pasangan yang kedua katanya tanpa spasi (dipakai mode Satu kata). */
+  jumlahSatuKata: number;
+}
+
+/** Satu kategori pasangan siap pakai (sumber Internet). */
+export interface DaftarPasangan {
+  nama: string;
+  pasangan: ReadonlyArray<readonly [string, string]>;
+}
+
 export interface PasanganKata {
   /** Kata untuk Civilian. */
   civilian: string;

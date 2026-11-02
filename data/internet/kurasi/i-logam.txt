@@ -1,0 +1,9 @@
+# i-logam | Logam
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Materials".
+@ ck:Materials_11
+copper / brass = Tembaga / Kuningan
+aluminum / tin = Aluminium / Timah
+iron / steel = Besi / Baja
+gold / silver = Emas / Perak
+copper / bronze = Tembaga / Perunggu
+lead / zinc = Timbal / Seng

@@ -1,0 +1,27 @@
+# i-india | India
+# Terjemahan dan kurasi dari MASJV/undercover-game (MIT), kategori asli "indian" (Desi Blend).
+# Format: Kata Asli A / Kata Asli B = Terjemahan A / Terjemahan B
+@ masjv:indian
+Auto Rickshaw / Cycle Rickshaw = Bajaj / Becak
+Metro / Local Train = MRT / KRL
+Train / Metro = Kereta / MRT
+Innova Crysta / Ertiga = Innova / Ertiga
+Shah Rukh Khan / Salman Khan = Shah Rukh Khan / Salman Khan
+Deepika Padukone / Alia Bhatt = Deepika Padukone / Alia Bhatt
+Priyanka Chopra / Katrina Kaif = Priyanka Chopra / Katrina Kaif
+Akshay Kumar / Ajay Devgn = Akshay Kumar / Ajay Devgn
+PV Sindhu / Saina Nehwal = PV Sindhu / Saina Nehwal
+3 Idiots / Taare Zameen Par = 3 Idiots / Taare Zameen Par
+DDLJ / Kuch Kuch Hota Hai = Dilwale Dulhania Le Jayenge / Kuch Kuch Hota Hai
+Baahubali / Pushpa = Baahubali / Pushpa
+Dangal / Sultan = Dangal / Sultan
+Diwali / Holi = Diwali / Holi
+Rupee / Dollar = Rupee / Dolar
+Wedding / Engagement = Pernikahan / Lamaran
+Yoga / Meditation = Yoga / Meditasi
+Ghee / Butter = Minyak Samin / Mentega
+Nimbu Pani / Aam Panna = Es Lemon / Es Mangga Muda
+Rickshaw Wala / Cab Driver = Tukang Becak / Sopir Taksi
+Agarbatti / Dhoop = Dupa / Kemenyan
+Biryani / Pulao = Nasi Biryani / Nasi Kebuli
+Roti / Naan = Roti Canai / Roti Naan

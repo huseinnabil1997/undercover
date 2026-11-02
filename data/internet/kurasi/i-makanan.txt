@@ -1,0 +1,32 @@
+# i-makanan | Makanan & Minuman
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Food".
+# Pasangan babi, minuman beralkohol, dan obat-obatan sengaja tidak dipakai.
+@ ck:Food_33_
+bread / cake = Roti / Kue
+apple / pear = Apel / Pir
+pineapple / mango = Nanas / Mangga
+cherry / blueberry = Ceri / Blueberry
+noodle / pasta = Mi / Pasta
+Zongzi / mooncake = Bakcang / Kue Bulan
+Macaron / cookie = Makaron / Kue Kering
+Jam / juice = Selai / Jus
+Pepper Powder / Mustard = Lada Bubuk / Mustard
+pear / peach = Pir / Persik
+salad / soup = Salad / Sup
+cake / pie = Kue / Pai
+banana / kiwi = Pisang / Kiwi
+tomato / potato = Tomat / Kentang
+rice / wheat = Beras / Gandum
+bread / pasta = Roti / Pasta
+tea / coffee = Teh / Kopi
+peach / plum = Persik / Plum
+apple / orange = Apel / Jeruk
+pea / bean = Kacang Polong / Buncis
+chicken / turkey = Ayam / Kalkun
+chicken / beef = Ayam / Daging Sapi
+salmon / tuna = Salmon / Tuna
+ice cream / Yogurt = Es Krim / Yoghurt
+Smoothie / juice = Smoothie / Jus
+pizza / lasagna = Pizza / Lasagna
+sandwich / hamburger = Sandwich / Hamburger
+dumplings / wonton = Pangsit / Siomay

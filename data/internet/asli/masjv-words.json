@@ -1,0 +1,5337 @@
+{
+  "indian": {
+    "displayName": "Desi Blend",
+    "icon": "🇮🇳",
+    "desc": "Indian street food, sweets, Bollywood, cities, and landmarks.",
+    "pairs": [
+      {
+        "c": "Samosa",
+        "m": "Kachori",
+        "cd": "Fried snack",
+        "md": "Fried snack"
+      },
+      {
+        "c": "Vada Pav",
+        "m": "Dabeli",
+        "cd": "Potato burger",
+        "md": "Spiced bun"
+      },
+      {
+        "c": "Pani Puri",
+        "m": "Dahi Puri",
+        "cd": "Street snack",
+        "md": "Street snack"
+      },
+      {
+        "c": "Pav Bhaji",
+        "m": "Misal Pav",
+        "cd": "Vegetable curry",
+        "md": "Spicy curry"
+      },
+      {
+        "c": "Momos",
+        "m": "Dimsums",
+        "cd": "Steamed dumpling",
+        "md": "Steamed dumpling"
+      },
+      {
+        "c": "Pakora",
+        "m": "Bhajiya",
+        "cd": "Fried fritter",
+        "md": "Fried fritter"
+      },
+      {
+        "c": "Chole Bhature",
+        "m": "Puri Sabzi",
+        "cd": "Chickpea bread",
+        "md": "Bread curry"
+      },
+      {
+        "c": "Kathi Roll",
+        "m": "Frankie",
+        "cd": "Street roll",
+        "md": "Street roll"
+      },
+      {
+        "c": "Bhel Puri",
+        "m": "Sev Puri",
+        "cd": "Street snack",
+        "md": "Street snack"
+      },
+      {
+        "c": "Dhokla",
+        "m": "Khandvi",
+        "cd": "Steamed cake",
+        "md": "Gram roll"
+      },
+      {
+        "c": "Poha",
+        "m": "Upma",
+        "cd": "Rice breakfast",
+        "md": "Semolina breakfast"
+      },
+      {
+        "c": "Kebab",
+        "m": "Tikka",
+        "cd": "Grilled starter",
+        "md": "Roasted starter"
+      },
+      {
+        "c": "Manchurian",
+        "m": "Chowmein",
+        "cd": "Chinese dish",
+        "md": "Fried noodles"
+      },
+      {
+        "c": "Gulab Jamun",
+        "m": "Rasgulla",
+        "cd": "Sweet dessert",
+        "md": "Sweet dessert"
+      },
+      {
+        "c": "Jalebi",
+        "m": "Imarti",
+        "cd": "Sweet dessert",
+        "md": "Sweet dessert"
+      },
+      {
+        "c": "Kaju Katli",
+        "m": "Soan Papdi",
+        "cd": "Cashew sweet",
+        "md": "Flaky sweet"
+      },
+      {
+        "c": "Ladoo",
+        "m": "Modak",
+        "cd": "Sweet ball",
+        "md": "Sweet dumpling"
+      },
+      {
+        "c": "Kulfi",
+        "m": "Matka Ice Cream",
+        "cd": "Milk dessert",
+        "md": "Pot ice cream"
+      },
+      {
+        "c": "Rasmalai",
+        "m": "Cham Cham",
+        "cd": "Milk dessert",
+        "md": "Milk sweet"
+      },
+      {
+        "c": "Halwa",
+        "m": "Kheer",
+        "cd": "Sweet pudding",
+        "md": "Rice pudding"
+      },
+      {
+        "c": "Mishti Doi",
+        "m": "Shrikhand",
+        "cd": "Sweet yogurt",
+        "md": "Sweet yogurt"
+      },
+      {
+        "c": "Chai",
+        "m": "Kaapi",
+        "cd": "Hot tea",
+        "md": "Hot coffee"
+      },
+      {
+        "c": "Lassi",
+        "m": "Chaas",
+        "cd": "Yogurt drink",
+        "md": "Spiced buttermilk"
+      },
+      {
+        "c": "Nimbu Pani",
+        "m": "Aam Panna",
+        "cd": "Lemon water",
+        "md": "Mango drink"
+      },
+      {
+        "c": "Biryani",
+        "m": "Pulao",
+        "cd": "Spiced rice",
+        "md": "Vegetable rice"
+      },
+      {
+        "c": "Butter Chicken",
+        "m": "Dal Makhani",
+        "cd": "Chicken curry",
+        "md": "Lentil curry"
+      },
+      {
+        "c": "Dosa",
+        "m": "Uttapam",
+        "cd": "Crispy crepe",
+        "md": "Savory pancake"
+      },
+      {
+        "c": "Rajma",
+        "m": "Chole",
+        "cd": "Bean curry",
+        "md": "Chickpea curry"
+      },
+      {
+        "c": "Aloo Paratha",
+        "m": "Gobi Paratha",
+        "cd": "Stuffed bread",
+        "md": "Stuffed bread"
+      },
+      {
+        "c": "Roti",
+        "m": "Naan",
+        "cd": "Wheat flatbread",
+        "md": "Baked flatbread"
+      },
+      {
+        "c": "Palak Paneer",
+        "m": "Matar Paneer",
+        "cd": "Spinach curry",
+        "md": "Paneer curry"
+      },
+      {
+        "c": "Idli",
+        "m": "Medu Vada",
+        "cd": "Steamed cake",
+        "md": "Fried donut"
+      },
+      {
+        "c": "Zomato",
+        "m": "Swiggy",
+        "cd": "Food app",
+        "md": "Food app"
+      },
+      {
+        "c": "Ola",
+        "m": "Rapido",
+        "cd": "Taxi app",
+        "md": "Bike taxi"
+      },
+      {
+        "c": "Flipkart",
+        "m": "Meesho",
+        "cd": "Shopping site",
+        "md": "Shopping app"
+      },
+      {
+        "c": "Paytm",
+        "m": "PhonePe",
+        "cd": "Payment app",
+        "md": "Payment app"
+      },
+      {
+        "c": "Jio",
+        "m": "Airtel",
+        "cd": "Telecom network",
+        "md": "Telecom network"
+      },
+      {
+        "c": "Amul",
+        "m": "Mother Dairy",
+        "cd": "Dairy brand",
+        "md": "Dairy brand"
+      },
+      {
+        "c": "Tata",
+        "m": "Mahindra",
+        "cd": "Business group",
+        "md": "Automobile maker"
+      },
+      {
+        "c": "Reliance",
+        "m": "Adani",
+        "cd": "Business group",
+        "md": "Business group"
+      },
+      {
+        "c": "Shah Rukh Khan",
+        "m": "Salman Khan",
+        "cd": "Film actor",
+        "md": "Film actor"
+      },
+      {
+        "c": "Amitabh Bachchan",
+        "m": "Dharmendra",
+        "cd": "Film actor",
+        "md": "Classic actor"
+      },
+      {
+        "c": "Deepika Padukone",
+        "m": "Alia Bhatt",
+        "cd": "Film actress",
+        "md": "Film actress"
+      },
+      {
+        "c": "Ranveer Singh",
+        "m": "Ranbir Kapoor",
+        "cd": "Film actor",
+        "md": "Film actor"
+      },
+      {
+        "c": "Priyanka Chopra",
+        "m": "Katrina Kaif",
+        "cd": "Film actress",
+        "md": "Film actress"
+      },
+      {
+        "c": "Akshay Kumar",
+        "m": "Ajay Devgn",
+        "cd": "Film actor",
+        "md": "Film actor"
+      },
+      {
+        "c": "Virat Kohli",
+        "m": "Rohit Sharma",
+        "cd": "Cricket player",
+        "md": "Cricket player"
+      },
+      {
+        "c": "MS Dhoni",
+        "m": "Sourav Ganguly",
+        "cd": "Cricket player",
+        "md": "Cricket player"
+      },
+      {
+        "c": "Sachin Tendulkar",
+        "m": "Rahul Dravid",
+        "cd": "Cricket legend",
+        "md": "Cricket player"
+      },
+      {
+        "c": "PV Sindhu",
+        "m": "Saina Nehwal",
+        "cd": "Badminton player",
+        "md": "Badminton player"
+      },
+      {
+        "c": "Neeraj Chopra",
+        "m": "Abhinav Bindra",
+        "cd": "Javelin athlete",
+        "md": "Shooting athlete"
+      },
+      {
+        "c": "Sania Mirza",
+        "m": "Leander Paes",
+        "cd": "Tennis player",
+        "md": "Tennis player"
+      },
+      {
+        "c": "3 Idiots",
+        "m": "Taare Zameen Par",
+        "cd": "Comedy movie",
+        "md": "Drama movie"
+      },
+      {
+        "c": "DDLJ",
+        "m": "Kuch Kuch Hota Hai",
+        "cd": "Romance movie",
+        "md": "Romance movie"
+      },
+      {
+        "c": "Sholay",
+        "m": "Deewar",
+        "cd": "Classic movie",
+        "md": "Classic movie"
+      },
+      {
+        "c": "Dangal",
+        "m": "Sultan",
+        "cd": "Sports movie",
+        "md": "Wrestling movie"
+      },
+      {
+        "c": "Baahubali",
+        "m": "Pushpa",
+        "cd": "Fantasy movie",
+        "md": "Action movie"
+      },
+      {
+        "c": "Dil Chahta Hai",
+        "m": "Zindagi Na Milegi Dobara",
+        "cd": "Friendship movie",
+        "md": "Roadtrip movie"
+      },
+      {
+        "c": "Lagaan",
+        "m": "Swades",
+        "cd": "Cricket movie",
+        "md": "Drama movie"
+      },
+      {
+        "c": "Andaz Apna Apna",
+        "m": "Hera Pheri",
+        "cd": "Comedy movie",
+        "md": "Comedy movie"
+      },
+      {
+        "c": "Taarak Mehta",
+        "m": "Bhabiji Ghar Par Hain",
+        "cd": "Comedy show",
+        "md": "Comedy show"
+      },
+      {
+        "c": "KBC",
+        "m": "Bigg Boss",
+        "cd": "Quiz show",
+        "md": "Reality show"
+      },
+      {
+        "c": "Sacred Games",
+        "m": "Mirzapur",
+        "cd": "Crime series",
+        "md": "Crime series"
+      },
+      {
+        "c": "CID",
+        "m": "Crime Patrol",
+        "cd": "Crime show",
+        "md": "Crime show"
+      },
+      {
+        "c": "Mumbai",
+        "m": "Pune",
+        "cd": "Coastal city",
+        "md": "Metropolitan city"
+      },
+      {
+        "c": "Delhi",
+        "m": "Noida",
+        "cd": "Capital city",
+        "md": "Planned city"
+      },
+      {
+        "c": "Bangalore",
+        "m": "Hyderabad",
+        "cd": "Tech city",
+        "md": "Historic city"
+      },
+      {
+        "c": "Chennai",
+        "m": "Coimbatore",
+        "cd": "Coastal city",
+        "md": "Industrial city"
+      },
+      {
+        "c": "Kolkata",
+        "m": "Patna",
+        "cd": "Historic city",
+        "md": "Historic city"
+      },
+      {
+        "c": "Jaipur",
+        "m": "Udaipur",
+        "cd": "Heritage city",
+        "md": "Lake city"
+      },
+      {
+        "c": "Ahmedabad",
+        "m": "Surat",
+        "cd": "Heritage city",
+        "md": "Commercial city"
+      },
+      {
+        "c": "Goa",
+        "m": "Pondicherry",
+        "cd": "Beach state",
+        "md": "Coastal town"
+      },
+      {
+        "c": "Gateway of India",
+        "m": "India Gate",
+        "cd": "Historic arch",
+        "md": "War memorial"
+      },
+      {
+        "c": "Lotus Temple",
+        "m": "Akshardham",
+        "cd": "Sacred temple",
+        "md": "Sacred temple"
+      },
+      {
+        "c": "Red Fort",
+        "m": "Agra Fort",
+        "cd": "Historic fortress",
+        "md": "Historic fortress"
+      },
+      {
+        "c": "Charminar",
+        "m": "Golconda Fort",
+        "cd": "Historic monument",
+        "md": "Historic fortress"
+      },
+      {
+        "c": "Golden Temple",
+        "m": "Jagannath Temple",
+        "cd": "Sacred temple",
+        "md": "Sacred temple"
+      },
+      {
+        "c": "Hawa Mahal",
+        "m": "City Palace",
+        "cd": "Palace monument",
+        "md": "Royal palace"
+      },
+      {
+        "c": "Auto Rickshaw",
+        "m": "Cycle Rickshaw",
+        "cd": "Three wheeler",
+        "md": "Cycle taxi"
+      },
+      {
+        "c": "Metro",
+        "m": "Local Train",
+        "cd": "City train",
+        "md": "City train"
+      },
+      {
+        "c": "Vande Bharat",
+        "m": "Tejas Express",
+        "cd": "Express train",
+        "md": "Express train"
+      },
+      {
+        "c": "Royal Enfield",
+        "m": "Bajaj Pulsar",
+        "cd": "Cruiser bike",
+        "md": "Sports bike"
+      },
+      {
+        "c": "Honda Activa",
+        "m": "TVS Jupiter",
+        "cd": "Scooter bike",
+        "md": "Scooter bike"
+      },
+      {
+        "c": "Maruti Swift",
+        "m": "Hyundai i20",
+        "cd": "Hatchback car",
+        "md": "Hatchback car"
+      },
+      {
+        "c": "Tata Nexon",
+        "m": "Mahindra Scorpio",
+        "cd": "Compact SUV",
+        "md": "SUV car"
+      },
+      {
+        "c": "Innova Crysta",
+        "m": "Ertiga",
+        "cd": "MUV car",
+        "md": "MUV car"
+      },
+      {
+        "c": "Diwali",
+        "m": "Holi",
+        "cd": "Light festival",
+        "md": "Color festival"
+      },
+      {
+        "c": "Navratri",
+        "m": "Durga Puja",
+        "cd": "Dance festival",
+        "md": "Grand festival"
+      },
+      {
+        "c": "Rakhi",
+        "m": "Karwa Chauth",
+        "cd": "Sacred thread",
+        "md": "Fasting ritual"
+      },
+      {
+        "c": "Ganesh Chaturthi",
+        "m": "Janmashtami",
+        "cd": "Deity festival",
+        "md": "Deity festival"
+      },
+      {
+        "c": "UPSC",
+        "m": "SSC",
+        "cd": "Civil exam",
+        "md": "Government exam"
+      },
+      {
+        "c": "CBSE",
+        "m": "ICSE",
+        "cd": "School board",
+        "md": "School board"
+      },
+      {
+        "c": "JEE",
+        "m": "NEET",
+        "cd": "Engineering exam",
+        "md": "Medical exam"
+      },
+      {
+        "c": "Kurkure",
+        "m": "Lays",
+        "cd": "Crispy snack",
+        "md": "Potato chips"
+      },
+      {
+        "c": "Maggi",
+        "m": "Yippee",
+        "cd": "Instant noodles",
+        "md": "Instant noodles"
+      },
+      {
+        "c": "Parle-G",
+        "m": "Good Day",
+        "cd": "Tea biscuit",
+        "md": "Butter biscuit"
+      },
+      {
+        "c": "Haldiram's",
+        "m": "Bikano",
+        "cd": "Snack brand",
+        "md": "Snack brand"
+      },
+      {
+        "c": "Rupee",
+        "m": "Dollar",
+        "cd": "Money currency",
+        "md": "Foreign currency"
+      },
+      {
+        "c": "Wedding",
+        "m": "Engagement",
+        "cd": "Marriage celebration",
+        "md": "Marriage ceremony"
+      },
+      {
+        "c": "Yoga",
+        "m": "Meditation",
+        "cd": "Body exercise",
+        "md": "Mental practice"
+      },
+      {
+        "c": "Lassi",
+        "m": "Chaas",
+        "cd": "Yogurt drink",
+        "md": "Spiced buttermilk"
+      },
+      {
+        "c": "Jalebi",
+        "m": "Imarti",
+        "cd": "Sweet dessert",
+        "md": "Sweet dessert"
+      },
+      {
+        "c": "Pulao",
+        "m": "Biryani",
+        "cd": "Vegetable rice",
+        "md": "Spiced rice"
+      },
+      {
+        "c": "Auto Rickshaw",
+        "m": "E-Rickshaw",
+        "cd": "Three wheeler",
+        "md": "Electric taxi"
+      },
+      {
+        "c": "Mehndi",
+        "m": "Haldi",
+        "cd": "Henna art",
+        "md": "Wedding ritual"
+      },
+      {
+        "c": "Kurta",
+        "m": "Sherwani",
+        "cd": "Ethnic shirt",
+        "md": "Wedding coat"
+      },
+      {
+        "c": "Lungi",
+        "m": "Dhoti",
+        "cd": "Wrapped cloth",
+        "md": "Ethnic cloth"
+      },
+      {
+        "c": "Roti",
+        "m": "Naan",
+        "cd": "Wheat flatbread",
+        "md": "Baked flatbread"
+      },
+      {
+        "c": "Rajma",
+        "m": "Chole",
+        "cd": "Bean curry",
+        "md": "Chickpea curry"
+      },
+      {
+        "c": "Chai",
+        "m": "Filter Coffee",
+        "cd": "Hot tea",
+        "md": "Brewed coffee"
+      },
+      {
+        "c": "Tabla",
+        "m": "Dholak",
+        "cd": "Hand drums",
+        "md": "Folk drum"
+      },
+      {
+        "c": "Sitar",
+        "m": "Sarod",
+        "cd": "String instrument",
+        "md": "String instrument"
+      },
+      {
+        "c": "Gulab Jamun",
+        "m": "Rasgulla",
+        "cd": "Sweet dessert",
+        "md": "Sweet dessert"
+      },
+      {
+        "c": "Kulfi",
+        "m": "Ice Cream",
+        "cd": "Milk dessert",
+        "md": "Frozen dessert"
+      },
+      {
+        "c": "Ghee",
+        "m": "Butter",
+        "cd": "Clarified butter",
+        "md": "Dairy butter"
+      },
+      {
+        "c": "Papad",
+        "m": "Khakhra",
+        "cd": "Crispy wafer",
+        "md": "Crispy flatbread"
+      },
+      {
+        "c": "Dosa",
+        "m": "Uttapam",
+        "cd": "Crispy crepe",
+        "md": "Savory pancake"
+      },
+      {
+        "c": "Idli",
+        "m": "Vada",
+        "cd": "Steamed cake",
+        "md": "Fried donut"
+      },
+      {
+        "c": "Chutney",
+        "m": "Achar",
+        "cd": "Spicy dip",
+        "md": "Spicy pickle"
+      },
+      {
+        "c": "Tandoori",
+        "m": "Tikka",
+        "cd": "Clay oven",
+        "md": "Roasted starter"
+      },
+      {
+        "c": "Bhel Puri",
+        "m": "Sev Puri",
+        "cd": "Street snack",
+        "md": "Street snack"
+      },
+      {
+        "c": "Bhangra",
+        "m": "Garba",
+        "cd": "Folk dance",
+        "md": "Folk dance"
+      },
+      {
+        "c": "Saree",
+        "m": "Lehenga",
+        "cd": "Traditional dress",
+        "md": "Flared dress"
+      },
+      {
+        "c": "Train",
+        "m": "Metro",
+        "cd": "Railway train",
+        "md": "City train"
+      },
+      {
+        "c": "Rickshaw Wala",
+        "m": "Cab Driver",
+        "cd": "Taxi driver",
+        "md": "Car driver"
+      },
+      {
+        "c": "Pan Masala",
+        "m": "Mukhwas",
+        "cd": "Mouth freshener",
+        "md": "Mouth freshener"
+      },
+      {
+        "c": "Golgappa",
+        "m": "Puchka",
+        "cd": "Street snack",
+        "md": "Street snack"
+      },
+      {
+        "c": "Paratha",
+        "m": "Kulcha",
+        "cd": "Pan flatbread",
+        "md": "Soft flatbread"
+      },
+      {
+        "c": "Desi Ghee",
+        "m": "Vanaspati",
+        "cd": "Clarified butter",
+        "md": "Vegetable oil"
+      },
+      {
+        "c": "Agarbatti",
+        "m": "Dhoop",
+        "cd": "Incense stick",
+        "md": "Incense cone"
+      }
+    ]
+  },
+  "american": {
+    "displayName": "American Culture",
+    "icon": "🇺🇸",
+    "desc": "US fast foods, popular sports, American landmarks, and famous brands.",
+    "pairs": [
+      {
+        "c": "Pancake",
+        "m": "Waffle",
+        "cd": "Breakfast cake",
+        "md": "Breakfast waffle"
+      },
+      {
+        "c": "Hot Dog",
+        "m": "Corndog",
+        "cd": "Sausage sandwich",
+        "md": "Fried sausage"
+      },
+      {
+        "c": "New York City",
+        "m": "Los Angeles",
+        "cd": "Major metropolis",
+        "md": "Coastal city"
+      },
+      {
+        "c": "Broadway",
+        "m": "Hollywood",
+        "cd": "Theater avenue",
+        "md": "Cinema district"
+      },
+      {
+        "c": "Disney World",
+        "m": "Universal Studios",
+        "cd": "Theme park",
+        "md": "Theme park"
+      },
+      {
+        "c": "Target",
+        "m": "Walmart",
+        "cd": "Retail store",
+        "md": "Hypermarket store"
+      },
+      {
+        "c": "Costco",
+        "m": "Sam's Club",
+        "cd": "Warehouse store",
+        "md": "Warehouse club"
+      },
+      {
+        "c": "Apple Pie",
+        "m": "Pumpkin Pie",
+        "cd": "Baked pie",
+        "md": "Holiday pie"
+      },
+      {
+        "c": "NFL",
+        "m": "NBA",
+        "cd": "Sports league",
+        "md": "Sports league"
+      },
+      {
+        "c": "Baseball",
+        "m": "Softball",
+        "cd": "Batting sport",
+        "md": "Batting sport"
+      },
+      {
+        "c": "S'mores",
+        "m": "Marshmallow",
+        "cd": "Campfire dessert",
+        "md": "Puffy candy"
+      },
+      {
+        "c": "Diner",
+        "m": "Cafe",
+        "cd": "Vintage restaurant",
+        "md": "Coffee shop"
+      },
+      {
+        "c": "Grand Canyon",
+        "m": "Yellowstone",
+        "cd": "Desert canyon",
+        "md": "National park"
+      },
+      {
+        "c": "Central Park",
+        "m": "Golden Gate Park",
+        "cd": "Urban park",
+        "md": "City park"
+      },
+      {
+        "c": "Ford",
+        "m": "Chevrolet",
+        "cd": "Car company",
+        "md": "Car company"
+      },
+      {
+        "c": "Harvard",
+        "m": "Yale",
+        "cd": "Top university",
+        "md": "Top university"
+      },
+      {
+        "c": "MIT",
+        "m": "Stanford",
+        "cd": "Tech university",
+        "md": "Tech university"
+      },
+      {
+        "c": "Times Square",
+        "m": "Las Vegas Strip",
+        "cd": "Pedestrian plaza",
+        "md": "Resort corridor"
+      },
+      {
+        "c": "French Fries",
+        "m": "Tater Tots",
+        "cd": "Fried potatoes",
+        "md": "Fried potatoes"
+      },
+      {
+        "c": "Bagel",
+        "m": "Croissant",
+        "cd": "Breakfast bread",
+        "md": "Flaky pastry"
+      },
+      {
+        "c": "Mac and Cheese",
+        "m": "Mashed Potatoes",
+        "cd": "Pasta dish",
+        "md": "Potato side"
+      },
+      {
+        "c": "Tesla",
+        "m": "Jeep",
+        "cd": "Electric car",
+        "md": "Off-road car"
+      },
+      {
+        "c": "NASA",
+        "m": "SpaceX",
+        "cd": "Space agency",
+        "md": "Rocket company"
+      },
+      {
+        "c": "Uber",
+        "m": "Lyft",
+        "cd": "Taxi app",
+        "md": "Taxi app"
+      },
+      {
+        "c": "Peanut Butter",
+        "m": "Nutella",
+        "cd": "Nut spread",
+        "md": "Chocolate spread"
+      },
+      {
+        "c": "Donut",
+        "m": "Cupcake",
+        "cd": "Glazed pastry",
+        "md": "Small cake"
+      },
+      {
+        "c": "Milkshake",
+        "m": "Smoothie",
+        "cd": "Ice-cream drink",
+        "md": "Fruit drink"
+      },
+      {
+        "c": "Chicken Wings",
+        "m": "Chicken Nuggets",
+        "cd": "Fried chicken",
+        "md": "Fried chicken"
+      },
+      {
+        "c": "Bud Light",
+        "m": "Coors Light",
+        "cd": "Canned beer",
+        "md": "Canned beer"
+      },
+      {
+        "c": "Chipotle",
+        "m": "Taco Bell",
+        "cd": "Burrito chain",
+        "md": "Taco chain"
+      },
+      {
+        "c": "Whole Foods",
+        "m": "Trader Joe's",
+        "cd": "Grocery store",
+        "md": "Grocery market"
+      },
+      {
+        "c": "Route 66",
+        "m": "Pacific Coast Highway",
+        "cd": "Historic highway",
+        "md": "Scenic highway"
+      },
+      {
+        "c": "Coca-Cola",
+        "m": "Dr Pepper",
+        "cd": "Cola drink",
+        "md": "Spiced soda"
+      },
+      {
+        "c": "Washington DC",
+        "m": "Philadelphia",
+        "cd": "Capital city",
+        "md": "Historic city"
+      },
+      {
+        "c": "Dollar Tree",
+        "m": "Dollar General",
+        "cd": "Discount store",
+        "md": "Discount store"
+      },
+      {
+        "c": "Jeep",
+        "m": "Hummer",
+        "cd": "Off-road car",
+        "md": "Heavy SUV"
+      },
+      {
+        "c": "Eggnog",
+        "m": "Apple Cider",
+        "cd": "Holiday drink",
+        "md": "Spiced juice"
+      },
+      {
+        "c": "Thanksgiving",
+        "m": "Halloween",
+        "cd": "Autumn holiday",
+        "md": "Autumn holiday"
+      },
+      {
+        "c": "Super Bowl",
+        "m": "World Series",
+        "cd": "Football final",
+        "md": "Baseball final"
+      },
+      {
+        "c": "Five Guys",
+        "m": "Shake Shack",
+        "cd": "Burger chain",
+        "md": "Burger chain"
+      },
+      {
+        "c": "Dunkin'",
+        "m": "Starbucks",
+        "cd": "Donut chain",
+        "md": "Coffee chain"
+      },
+      {
+        "c": "Chicago Deep Dish",
+        "m": "New York Pizza",
+        "cd": "Stuffed pizza",
+        "md": "Thin pizza"
+      },
+      {
+        "c": "Ranch Dressing",
+        "m": "Honey Mustard",
+        "cd": "Salad dressing",
+        "md": "Sweet condiment"
+      },
+      {
+        "c": "Home Depot",
+        "m": "Lowe's",
+        "cd": "Hardware store",
+        "md": "Hardware store"
+      },
+      {
+        "c": "Yellow Cab",
+        "m": "School Bus",
+        "cd": "City taxi",
+        "md": "Yellow bus"
+      },
+      {
+        "c": "Popcorn",
+        "m": "Cotton Candy",
+        "cd": "Corn snack",
+        "md": "Spun sugar"
+      },
+      {
+        "c": "Oreo",
+        "m": "Chocolate Chip Cookie",
+        "cd": "Cream biscuit",
+        "md": "Baked cookie"
+      },
+      {
+        "c": "Pepsi",
+        "m": "Coca-Cola",
+        "cd": "Cola drink",
+        "md": "Cola drink"
+      },
+      {
+        "c": "Chevrolet Corvette",
+        "m": "Ford Mustang",
+        "cd": "Sports car",
+        "md": "Muscle car"
+      },
+      {
+        "c": "Wall Street",
+        "m": "Silicon Valley",
+        "cd": "Financial street",
+        "md": "Tech region"
+      },
+      {
+        "c": "Fourth of July",
+        "m": "Memorial Day",
+        "cd": "Holiday celebration",
+        "md": "Federal holiday"
+      },
+      {
+        "c": "Chevrolet",
+        "m": "Dodge",
+        "cd": "Car company",
+        "md": "Car company"
+      },
+      {
+        "c": "Nike",
+        "m": "Under Armour",
+        "cd": "Sports brand",
+        "md": "Athletic brand"
+      },
+      {
+        "c": "San Francisco",
+        "m": "Seattle",
+        "cd": "Bay city",
+        "md": "Coastal city"
+      },
+      {
+        "c": "Florida Keys",
+        "m": "Hawaii",
+        "cd": "Tropical islands",
+        "md": "Tropical state"
+      },
+      {
+        "c": "Boston",
+        "m": "Chicago",
+        "cd": "Historic city",
+        "md": "Windy city"
+      },
+      {
+        "c": "Las Vegas",
+        "m": "Atlantic City",
+        "cd": "Casino city",
+        "md": "Coastal resort"
+      },
+      {
+        "c": "Mount Rushmore",
+        "m": "Statue of Liberty",
+        "cd": "Mountain carving",
+        "md": "Iconic statue"
+      },
+      {
+        "c": "Buffalo Wings",
+        "m": "Mozzarella Sticks",
+        "cd": "Spicy chicken",
+        "md": "Cheesy snack"
+      },
+      {
+        "c": "Cheerios",
+        "m": "Froot Loops",
+        "cd": "Breakfast cereal",
+        "md": "Sweet cereal"
+      },
+      {
+        "c": "Twinkies",
+        "m": "Ding Dongs",
+        "cd": "Cream cake",
+        "md": "Chocolate cake"
+      },
+      {
+        "c": "Gatorade",
+        "m": "Powerade",
+        "cd": "Sports drink",
+        "md": "Sports drink"
+      },
+      {
+        "c": "Mountain Dew",
+        "m": "Sprite",
+        "cd": "Citrus soda",
+        "md": "Lemon soda"
+      },
+      {
+        "c": "Subway",
+        "m": "Quiznos",
+        "cd": "Sandwich chain",
+        "md": "Sandwich shop"
+      },
+      {
+        "c": "Wendy's",
+        "m": "Burger King",
+        "cd": "Burger chain",
+        "md": "Burger chain"
+      },
+      {
+        "c": "Domino's",
+        "m": "Pizza Hut",
+        "cd": "Pizza chain",
+        "md": "Pizza chain"
+      },
+      {
+        "c": "Ben & Jerry's",
+        "m": "Häagen-Dazs",
+        "cd": "Ice-cream brand",
+        "md": "Ice-cream brand"
+      },
+      {
+        "c": "Hershey's",
+        "m": "Snickers",
+        "cd": "Chocolate bar",
+        "md": "Chocolate bar"
+      },
+      {
+        "c": "Nordstrom",
+        "m": "Macy's",
+        "cd": "Department store",
+        "md": "Department store"
+      },
+      {
+        "c": "Best Buy",
+        "m": "Circuit City",
+        "cd": "Electronics store",
+        "md": "Electronics store"
+      },
+      {
+        "c": "Amazon",
+        "m": "eBay",
+        "cd": "Shopping site",
+        "md": "Auction store"
+      },
+      {
+        "c": "FedEx",
+        "m": "UPS",
+        "cd": "Courier service",
+        "md": "Delivery service"
+      },
+      {
+        "c": "Visa",
+        "m": "Mastercard",
+        "cd": "Credit card",
+        "md": "Credit card"
+      },
+      {
+        "c": "Netflix",
+        "m": "Hulu",
+        "cd": "Streaming app",
+        "md": "Streaming service"
+      },
+      {
+        "c": "NFL",
+        "m": "College Football",
+        "cd": "Sports league",
+        "md": "Campus sport"
+      },
+      {
+        "c": "Major League Baseball",
+        "m": "Minor League Baseball",
+        "cd": "Baseball league",
+        "md": "Baseball league"
+      },
+      {
+        "c": "NASCAR",
+        "m": "IndyCar",
+        "cd": "Car racing",
+        "md": "Open-wheel racing"
+      },
+      {
+        "c": "Tailgating",
+        "m": "Picnicking",
+        "cd": "Parking cookout",
+        "md": "Outdoor meal"
+      },
+      {
+        "c": "Root Beer",
+        "m": "Dr Pepper",
+        "cd": "Sweet soda",
+        "md": "Spiced soda"
+      },
+      {
+        "c": "Cornbread",
+        "m": "Biscuit",
+        "cd": "Baked bread",
+        "md": "Flaky bread"
+      },
+      {
+        "c": "Clam Chowder",
+        "m": "Lobster Roll",
+        "cd": "Creamy soup",
+        "md": "Seafood sandwich"
+      },
+      {
+        "c": "Texas BBQ",
+        "m": "Carolina BBQ",
+        "cd": "Smoked brisket",
+        "md": "Pulled pork"
+      },
+      {
+        "c": "Philly Cheesesteak",
+        "m": "Sloppy Joe",
+        "cd": "Beef sandwich",
+        "md": "Minced sandwich"
+      },
+      {
+        "c": "Bagel and Cream Cheese",
+        "m": "Avocado Toast",
+        "cd": "Breakfast spread",
+        "md": "Breakfast toast"
+      },
+      {
+        "c": "New Orleans",
+        "m": "Miami",
+        "cd": "Historic city",
+        "md": "Coastal city"
+      },
+      {
+        "c": "Yosemite",
+        "m": "Yellowstone",
+        "cd": "National park",
+        "md": "National park"
+      },
+      {
+        "c": "Niagara Falls",
+        "m": "Grand Canyon",
+        "cd": "Massive waterfall",
+        "md": "Desert canyon"
+      },
+      {
+        "c": "Hollywood Walk of Fame",
+        "m": "Beverly Hills",
+        "cd": "Star sidewalk",
+        "md": "Luxury neighborhood"
+      },
+      {
+        "c": "Las Vegas Strip",
+        "m": "Fremont Street",
+        "cd": "Resort corridor",
+        "md": "Pedestrian avenue"
+      },
+      {
+        "c": "Mount Everest",
+        "m": "Mount Hood",
+        "cd": "Mountain peak",
+        "md": "Volcano peak"
+      },
+      {
+        "c": "Lake Tahoe",
+        "m": "Lake Michigan",
+        "cd": "Alpine lake",
+        "md": "Great lake"
+      },
+      {
+        "c": "Groundhog Day",
+        "m": "April Fools' Day",
+        "cd": "Winter tradition",
+        "md": "Prank holiday"
+      },
+      {
+        "c": "Black Friday",
+        "m": "Cyber Monday",
+        "cd": "Shopping day",
+        "md": "Online sale"
+      },
+      {
+        "c": "Harley-Davidson",
+        "m": "Indian Motorcycle",
+        "cd": "Motorcycle brand",
+        "md": "Cruiser motorcycle"
+      },
+      {
+        "c": "Cadillac",
+        "m": "Lincoln",
+        "cd": "Luxury car",
+        "md": "Luxury car"
+      },
+      {
+        "c": "Chrysler",
+        "m": "Buick",
+        "cd": "American automobile",
+        "md": "American automobile"
+      },
+      {
+        "c": "Levi's",
+        "m": "Wranglers",
+        "cd": "Denim brand",
+        "md": "Denim jeans"
+      },
+      {
+        "c": "Converse",
+        "m": "Vans",
+        "cd": "Canvas sneakers",
+        "md": "Skate shoes"
+      },
+      {
+        "c": "Ralph Lauren",
+        "m": "Tommy Hilfiger",
+        "cd": "Fashion brand",
+        "md": "Fashion brand"
+      },
+      {
+        "c": "Red Solo Cup",
+        "m": "Mason Jar",
+        "cd": "Plastic cup",
+        "md": "Glass jar"
+      },
+      {
+        "c": "Hot Dog",
+        "m": "Corn Dog",
+        "cd": "Sausage sandwich",
+        "md": "Fried sausage"
+      },
+      {
+        "c": "Baseball",
+        "m": "Softball",
+        "cd": "Batting sport",
+        "md": "Batting sport"
+      },
+      {
+        "c": "Dime",
+        "m": "Quarter",
+        "cd": "Small coin",
+        "md": "Metal coin"
+      },
+      {
+        "c": "Freeway",
+        "m": "Highway",
+        "cd": "Highway road",
+        "md": "Public roadway"
+      },
+      {
+        "c": "Diner",
+        "m": "Drive-Thru",
+        "cd": "Vintage restaurant",
+        "md": "Takeaway window"
+      },
+      {
+        "c": "Pancake",
+        "m": "Waffle",
+        "cd": "Breakfast cake",
+        "md": "Breakfast waffle"
+      },
+      {
+        "c": "Muffin",
+        "m": "Cupcake",
+        "cd": "Baked bread",
+        "md": "Small cake"
+      },
+      {
+        "c": "Brownie",
+        "m": "Cookie",
+        "cd": "Chocolate dessert",
+        "md": "Baked treat"
+      },
+      {
+        "c": "Thanksgiving",
+        "m": "Fourth of July",
+        "cd": "Autumn holiday",
+        "md": "Holiday celebration"
+      },
+      {
+        "c": "Motel",
+        "m": "Hotel",
+        "cd": "Roadside hotel",
+        "md": "Lodging hotel"
+      },
+      {
+        "c": "Prom",
+        "m": "Homecoming",
+        "cd": "School dance",
+        "md": "School dance"
+      },
+      {
+        "c": "Cheerleader",
+        "m": "Mascot",
+        "cd": "Dance performer",
+        "md": "Team mascot"
+      },
+      {
+        "c": "Cowboy",
+        "m": "Rancher",
+        "cd": "Ranch rider",
+        "md": "Farm owner"
+      },
+      {
+        "c": "Pickup Truck",
+        "m": "SUV",
+        "cd": "Utility truck",
+        "md": "Passenger car"
+      },
+      {
+        "c": "Burger",
+        "m": "Sandwich",
+        "cd": "Sandwich burger",
+        "md": "Sliced sandwich"
+      },
+      {
+        "c": "Ketchup",
+        "m": "Mustard",
+        "cd": "Tomato sauce",
+        "md": "Spicy condiment"
+      },
+      {
+        "c": "Milkshake",
+        "m": "Smoothie",
+        "cd": "Ice-cream drink",
+        "md": "Fruit drink"
+      },
+      {
+        "c": "Donut",
+        "m": "Bagel",
+        "cd": "Glazed pastry",
+        "md": "Breakfast bread"
+      },
+      {
+        "c": "Super Bowl",
+        "m": "World Series",
+        "cd": "Football final",
+        "md": "Baseball final"
+      },
+      {
+        "c": "Skateboard",
+        "m": "Rollerblades",
+        "cd": "Skate board",
+        "md": "Skate shoes"
+      },
+      {
+        "c": "RV",
+        "m": "Camper",
+        "cd": "Travel vehicle",
+        "md": "Travel trailer"
+      },
+      {
+        "c": "BBQ",
+        "m": "Grill",
+        "cd": "Smoked meat",
+        "md": "Barbecue cookout"
+      },
+      {
+        "c": "Marshmallow",
+        "m": "S'mores",
+        "cd": "Puffy candy",
+        "md": "Campfire dessert"
+      },
+      {
+        "c": "Peanut Butter",
+        "m": "Jelly",
+        "cd": "Nut spread",
+        "md": "Fruit spread"
+      },
+      {
+        "c": "Bacon",
+        "m": "Sausage",
+        "cd": "Crispy pork",
+        "md": "Breakfast meat"
+      },
+      {
+        "c": "Broadway",
+        "m": "Hollywood",
+        "cd": "Theater avenue",
+        "md": "Cinema district"
+      },
+      {
+        "c": "Rodeo",
+        "m": "Circus",
+        "cd": "Horse contest",
+        "md": "Acrobat show"
+      },
+      {
+        "c": "Fraternity",
+        "m": "Sorority",
+        "cd": "College society",
+        "md": "College society"
+      },
+      {
+        "c": "Tailgate",
+        "m": "Picnic",
+        "cd": "Parking party",
+        "md": "Outdoor meal"
+      },
+      {
+        "c": "Dodgeball",
+        "m": "Kickball",
+        "cd": "Ball game",
+        "md": "Field game"
+      }
+    ]
+  },
+  "monuments": {
+    "displayName": "World Landmarks",
+    "icon": "🏛️",
+    "desc": "Famous historical wonders, natural icons, bridges, and monuments.",
+    "pairs": [
+      {
+        "c": "Eiffel Tower",
+        "m": "Leaning Tower of Pisa",
+        "cd": "Paris tower",
+        "md": "Leaning tower"
+      },
+      {
+        "c": "Pyramids of Giza",
+        "m": "Chichen Itza",
+        "cd": "Ancient tombs",
+        "md": "Ancient pyramid"
+      },
+      {
+        "c": "Statue of Liberty",
+        "m": "Christ the Redeemer",
+        "cd": "Iconic statue",
+        "md": "Mountain statue"
+      },
+      {
+        "c": "Colosseum",
+        "m": "Parthenon",
+        "cd": "Ancient arena",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Sydney Opera House",
+        "m": "London Eye",
+        "cd": "Performing venue",
+        "md": "Observation wheel"
+      },
+      {
+        "c": "Golden Gate Bridge",
+        "m": "Brooklyn Bridge",
+        "cd": "Suspension bridge",
+        "md": "Suspension bridge"
+      },
+      {
+        "c": "Big Ben",
+        "m": "Arc de Triomphe",
+        "cd": "Clock tower",
+        "md": "Victory arch"
+      },
+      {
+        "c": "Louvre Museum",
+        "m": "British Museum",
+        "cd": "Art museum",
+        "md": "History museum"
+      },
+      {
+        "c": "Machu Picchu",
+        "m": "Petra",
+        "cd": "Ancient ruins",
+        "md": "Rock city"
+      },
+      {
+        "c": "Vatican City",
+        "m": "Mecca",
+        "cd": "Papal state",
+        "md": "Holy city"
+      },
+      {
+        "c": "White House",
+        "m": "Buckingham Palace",
+        "cd": "Presidential residence",
+        "md": "Royal residence"
+      },
+      {
+        "c": "Grand Canyon",
+        "m": "Mount Everest",
+        "cd": "Desert canyon",
+        "md": "Mountain peak"
+      },
+      {
+        "c": "Niagara Falls",
+        "m": "Victoria Falls",
+        "cd": "Massive waterfall",
+        "md": "Massive waterfall"
+      },
+      {
+        "c": "Times Square",
+        "m": "Hollywood Sign",
+        "cd": "Pedestrian plaza",
+        "md": "Hilltop landmark"
+      },
+      {
+        "c": "Burj Khalifa",
+        "m": "Empire State Building",
+        "cd": "Skyscraper tower",
+        "md": "Skyscraper building"
+      },
+      {
+        "c": "Notre-Dame Cathedral",
+        "m": "Westminster Abbey",
+        "cd": "Gothic cathedral",
+        "md": "Royal church"
+      },
+      {
+        "c": "Stonehenge",
+        "m": "Easter Island Moai",
+        "cd": "Stone circle",
+        "md": "Stone statues"
+      },
+      {
+        "c": "Amazon Rainforest",
+        "m": "Sahara Desert",
+        "cd": "Tropical jungle",
+        "md": "Arid desert"
+      },
+      {
+        "c": "Tokyo Tower",
+        "m": "Space Needle",
+        "cd": "Lattice tower",
+        "md": "Observation tower"
+      },
+      {
+        "c": "Panama Canal",
+        "m": "Suez Canal",
+        "cd": "Shipping canal",
+        "md": "Shipping canal"
+      },
+      {
+        "c": "Mount Fuji",
+        "m": "Mount Kilimanjaro",
+        "cd": "Volcano mountain",
+        "md": "Mountain peak"
+      },
+      {
+        "c": "Versailles Palace",
+        "m": "Forbidden City",
+        "cd": "Royal palace",
+        "md": "Imperial palace"
+      },
+      {
+        "c": "Venice Canals",
+        "m": "Amsterdam Canals",
+        "cd": "Water channels",
+        "md": "Water channels"
+      },
+      {
+        "c": "Pompeii Ruins",
+        "m": "Athens Acropolis",
+        "cd": "Ancient ruins",
+        "md": "Hilltop citadel"
+      },
+      {
+        "c": "Great Barrier Reef",
+        "m": "Galapagos Islands",
+        "cd": "Coral reef",
+        "md": "Wildlife islands"
+      },
+      {
+        "c": "Mount Rushmore",
+        "m": "Easter Island Moai",
+        "cd": "Mountain carving",
+        "md": "Stone statues"
+      },
+      {
+        "c": "Loch Ness",
+        "m": "Bermuda Triangle",
+        "cd": "Freshwater loch",
+        "md": "Mysterious ocean"
+      },
+      {
+        "c": "Burj Al Arab",
+        "m": "Marina Bay Sands",
+        "cd": "Luxury hotel",
+        "md": "Resort complex"
+      },
+      {
+        "c": "Tower of London",
+        "m": "Alcatraz",
+        "cd": "Historic castle",
+        "md": "Island prison"
+      },
+      {
+        "c": "Acropolis of Athens",
+        "m": "Colosseum",
+        "cd": "Ancient citadel",
+        "md": "Ancient arena"
+      },
+      {
+        "c": "Neuschwanstein Castle",
+        "m": "Dracula's Castle",
+        "cd": "Hilltop castle",
+        "md": "Gothic fortress"
+      },
+      {
+        "c": "Sherwood Forest",
+        "m": "Black Forest",
+        "cd": "Legendary woodland",
+        "md": "Mountain forest"
+      },
+      {
+        "c": "Dead Sea",
+        "m": "Lake Baikal",
+        "cd": "Salt lake",
+        "md": "Deepest lake"
+      },
+      {
+        "c": "Gibraltar",
+        "m": "Suez Canal",
+        "cd": "British territory",
+        "md": "Shipping canal"
+      },
+      {
+        "c": "Chichen Itza",
+        "m": "Angkor Wat",
+        "cd": "Ancient pyramid",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Notre-Dame",
+        "m": "Cologne Cathedral",
+        "cd": "Gothic cathedral",
+        "md": "Gothic cathedral"
+      },
+      {
+        "c": "Leaning Tower of Pisa",
+        "m": "Big Ben",
+        "cd": "Leaning tower",
+        "md": "Clock tower"
+      },
+      {
+        "c": "Kremlin",
+        "m": "Pentagon",
+        "cd": "Historic complex",
+        "md": "Military headquarters"
+      },
+      {
+        "c": "Great Sphinx",
+        "m": "Mummy Tomb",
+        "cd": "Ancient statue",
+        "md": "Ancient burial"
+      },
+      {
+        "c": "Tower Bridge",
+        "m": "London Bridge",
+        "cd": "River bridge",
+        "md": "River bridge"
+      },
+      {
+        "c": "Angel Falls",
+        "m": "Niagara Falls",
+        "cd": "Tall waterfall",
+        "md": "Massive waterfall"
+      },
+      {
+        "c": "Mount Vesuvius",
+        "m": "Mount Fuji",
+        "cd": "Active volcano",
+        "md": "Volcano mountain"
+      },
+      {
+        "c": "Salar de Uyuni",
+        "m": "Sahara Desert",
+        "cd": "Salt flat",
+        "md": "Arid desert"
+      },
+      {
+        "c": "Golden Gate Bridge",
+        "m": "Sydney Harbour Bridge",
+        "cd": "Suspension bridge",
+        "md": "Arch bridge"
+      },
+      {
+        "c": "Central Park",
+        "m": "Hyde Park",
+        "cd": "Urban park",
+        "md": "Royal park"
+      },
+      {
+        "c": "Great Wall of China",
+        "m": "Hadrian's Wall",
+        "cd": "Defensive wall",
+        "md": "Roman wall"
+      },
+      {
+        "c": "Taj Mahal",
+        "m": "Qutub Minar",
+        "cd": "Marble mausoleum",
+        "md": "Historic minaret"
+      },
+      {
+        "c": "Acropolis",
+        "m": "Parthenon",
+        "cd": "Hilltop citadel",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Forbidden City",
+        "m": "Summer Palace",
+        "cd": "Imperial palace",
+        "md": "Imperial garden"
+      },
+      {
+        "c": "Angkor Wat",
+        "m": "Borobudur",
+        "cd": "Ancient temple",
+        "md": "Buddhist temple"
+      },
+      {
+        "c": "Hagia Sophia",
+        "m": "Blue Mosque",
+        "cd": "Historic basilica",
+        "md": "Imperial mosque"
+      },
+      {
+        "c": "Sagrada Familia",
+        "m": "Park Güell",
+        "cd": "Gothic church",
+        "md": "Mosaic park"
+      },
+      {
+        "c": "Brandenburg Gate",
+        "m": "Berlin Wall",
+        "cd": "Neoclassical monument",
+        "md": "Border barrier"
+      },
+      {
+        "c": "CN Tower",
+        "m": "Space Needle",
+        "cd": "Concrete tower",
+        "md": "Observation tower"
+      },
+      {
+        "c": "Mount Fuji",
+        "m": "Mount Rainier",
+        "cd": "Volcano mountain",
+        "md": "Volcano peak"
+      },
+      {
+        "c": "Hoover Dam",
+        "m": "Three Gorges Dam",
+        "cd": "Concrete dam",
+        "md": "Hydroelectric dam"
+      },
+      {
+        "c": "Galapagos Islands",
+        "m": "Madagascar",
+        "cd": "Wildlife islands",
+        "md": "Island nation"
+      },
+      {
+        "c": "Mount Kilimanjaro",
+        "m": "Mount Kenya",
+        "cd": "Mountain peak",
+        "md": "Volcano mountain"
+      },
+      {
+        "c": "Death Valley",
+        "m": "Sahara Desert",
+        "cd": "Desert valley",
+        "md": "Arid desert"
+      },
+      {
+        "c": "Madison Square Garden",
+        "m": "O2 Arena",
+        "cd": "Indoor arena",
+        "md": "Music arena"
+      },
+      {
+        "c": "Moulin Rouge",
+        "m": "Broadway Theatre",
+        "cd": "Cabaret venue",
+        "md": "Stage theater"
+      },
+      {
+        "c": "Sistine Chapel",
+        "m": "St. Peter's Basilica",
+        "cd": "Vatican chapel",
+        "md": "Papal basilica"
+      },
+      {
+        "c": "Shwedagon Pagoda",
+        "m": "Temple of Heaven",
+        "cd": "Golden pagoda",
+        "md": "Sacred complex"
+      },
+      {
+        "c": "Terracotta Army",
+        "m": "Great Wall of China",
+        "cd": "Ancient sculptures",
+        "md": "Defensive wall"
+      },
+      {
+        "c": "Mount Rushmore",
+        "m": "Crazy Horse Memorial",
+        "cd": "Mountain carving",
+        "md": "Mountain monument"
+      },
+      {
+        "c": "Edinburgh Castle",
+        "m": "Windsor Castle",
+        "cd": "Historic castle",
+        "md": "Royal castle"
+      },
+      {
+        "c": "Cliffs of Moher",
+        "m": "Giant's Causeway",
+        "cd": "Sea cliffs",
+        "md": "Rock columns"
+      },
+      {
+        "c": "Mont Saint-Michel",
+        "m": "Château de Chambord",
+        "cd": "Tidal island",
+        "md": "French chateau"
+      },
+      {
+        "c": "Trevi Fountain",
+        "m": "Spanish Steps",
+        "cd": "Baroque fountain",
+        "md": "Monumental stairway"
+      },
+      {
+        "c": "Pantheon",
+        "m": "Roman Forum",
+        "cd": "Ancient temple",
+        "md": "Ancient plaza"
+      },
+      {
+        "c": "Prado Museum",
+        "m": "Reina Sofía",
+        "cd": "Art museum",
+        "md": "Modern museum"
+      },
+      {
+        "c": "Plaza Mayor",
+        "m": "Puerta del Sol",
+        "cd": "Grand square",
+        "md": "Public square"
+      },
+      {
+        "c": "Santorini Caldera",
+        "m": "Mykonos Windmills",
+        "cd": "Volcanic caldera",
+        "md": "Island windmills"
+      },
+      {
+        "c": "Hermitage Museum",
+        "m": "Winter Palace",
+        "cd": "Art museum",
+        "md": "Imperial residence"
+      },
+      {
+        "c": "Saint Basil's Cathedral",
+        "m": "Red Square",
+        "cd": "Colorful cathedral",
+        "md": "City plaza"
+      },
+      {
+        "c": "Sheikh Zayed Mosque",
+        "m": "Grand Mosque of Mecca",
+        "cd": "Grand mosque",
+        "md": "Holy mosque"
+      },
+      {
+        "c": "Masada Fortress",
+        "m": "Qumran Caves",
+        "cd": "Desert fortress",
+        "md": "Scroll caves"
+      },
+      {
+        "c": "Valley of the Kings",
+        "m": "Karnak Temple",
+        "cd": "Ancient burial",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Abu Simbel",
+        "m": "Luxor Temple",
+        "cd": "Rock temple",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Kruger National Park",
+        "m": "Serengeti National Park",
+        "cd": "Safari reserve",
+        "md": "Wildlife plain"
+      },
+      {
+        "c": "Lotus Temple",
+        "m": "Akshardham Temple",
+        "cd": "Sacred temple",
+        "md": "Sacred temple"
+      },
+      {
+        "c": "Batu Caves",
+        "m": "Tiger Nest Monastery",
+        "cd": "Limestone caves",
+        "md": "Cliff monastery"
+      },
+      {
+        "c": "Petronas Twin Towers",
+        "m": "KL Tower",
+        "cd": "Twin skyscrapers",
+        "md": "Communications tower"
+      },
+      {
+        "c": "Marina Bay Sands Casino",
+        "m": "Gardens by the Bay",
+        "cd": "Resort hotel",
+        "md": "Botanical park"
+      },
+      {
+        "c": "Tokyo Skytree",
+        "m": "Tokyo Tower",
+        "cd": "Broadcasting tower",
+        "md": "Lattice tower"
+      },
+      {
+        "c": "Fushimi Inari Shrine",
+        "m": "Kinkaku-ji Golden Pavilion",
+        "cd": "Shinto shrine",
+        "md": "Golden temple"
+      },
+      {
+        "c": "Himeji Castle",
+        "m": "Osaka Castle",
+        "cd": "White castle",
+        "md": "Historic fortress"
+      },
+      {
+        "c": "Gyeongbokgung Palace",
+        "m": "Seoul N Tower",
+        "cd": "Royal palace",
+        "md": "Observation tower"
+      },
+      {
+        "c": "Uluru Ayers Rock",
+        "m": "Kata Tjuta",
+        "cd": "Sacred rock",
+        "md": "Rock domes"
+      },
+      {
+        "c": "Milford Sound",
+        "m": "Geirangerfjord",
+        "cd": "New Zealand fjord",
+        "md": "Coastal fjord"
+      },
+      {
+        "c": "Hobbiton Movie Set",
+        "m": "Waitomo Caves",
+        "cd": "Fantasy village",
+        "md": "Glowworm caves"
+      },
+      {
+        "c": "Banff National Park",
+        "m": "Jasper National Park",
+        "cd": "Mountain park",
+        "md": "Mountain park"
+      },
+      {
+        "c": "Saint Mark's Basilica",
+        "m": "Doge's Palace",
+        "cd": "Gothic basilica",
+        "md": "Venetian palace"
+      },
+      {
+        "c": "Alhambra",
+        "m": "Alcázar of Seville",
+        "cd": "Moorish palace",
+        "md": "Royal palace"
+      },
+      {
+        "c": "Bran Castle",
+        "m": "Peleș Castle",
+        "cd": "Historic castle",
+        "md": "Neo-Renaissance castle"
+      },
+      {
+        "c": "Giant's Causeway",
+        "m": "Stonehenge",
+        "cd": "Rock columns",
+        "md": "Stone circle"
+      },
+      {
+        "c": "Table Mountain",
+        "m": "Sugarloaf Mountain",
+        "cd": "Flat mountain",
+        "md": "Granite peak"
+      },
+      {
+        "c": "Iguazu Falls",
+        "m": "Niagara Falls",
+        "cd": "Massive waterfall",
+        "md": "Massive waterfall"
+      },
+      {
+        "c": "Easter Island",
+        "m": "Galapagos Islands",
+        "cd": "Remote island",
+        "md": "Wildlife islands"
+      },
+      {
+        "c": "Panama Canal",
+        "m": "Suez Canal",
+        "cd": "Shipping canal",
+        "md": "Shipping canal"
+      },
+      {
+        "c": "Taj Mahal",
+        "m": "Red Fort",
+        "cd": "Marble mausoleum",
+        "md": "Historic fortress"
+      },
+      {
+        "c": "Eiffel Tower",
+        "m": "Leaning Tower of Pisa",
+        "cd": "Paris tower",
+        "md": "Leaning tower"
+      },
+      {
+        "c": "Statue of Liberty",
+        "m": "Christ the Redeemer",
+        "cd": "Iconic statue",
+        "md": "Mountain statue"
+      },
+      {
+        "c": "Colosseum",
+        "m": "Pantheon",
+        "cd": "Ancient arena",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Pyramids of Giza",
+        "m": "Great Sphinx",
+        "cd": "Ancient tombs",
+        "md": "Ancient statue"
+      },
+      {
+        "c": "Great Wall of China",
+        "m": "Berlin Wall",
+        "cd": "Defensive wall",
+        "md": "Border barrier"
+      },
+      {
+        "c": "Machu Picchu",
+        "m": "Chichen Itza",
+        "cd": "Ancient ruins",
+        "md": "Ancient pyramid"
+      },
+      {
+        "c": "Stonehenge",
+        "m": "Easter Island Moai",
+        "cd": "Stone circle",
+        "md": "Stone statues"
+      },
+      {
+        "c": "Big Ben",
+        "m": "London Eye",
+        "cd": "Clock tower",
+        "md": "Observation wheel"
+      },
+      {
+        "c": "Mount Rushmore",
+        "m": "Lincoln Memorial",
+        "cd": "Mountain carving",
+        "md": "Presidential memorial"
+      },
+      {
+        "c": "Sydney Opera House",
+        "m": "Louvre Museum",
+        "cd": "Performing venue",
+        "md": "Art museum"
+      },
+      {
+        "c": "Burj Khalifa",
+        "m": "Empire State Building",
+        "cd": "Skyscraper tower",
+        "md": "Skyscraper building"
+      },
+      {
+        "c": "Golden Gate Bridge",
+        "m": "Brooklyn Bridge",
+        "cd": "Suspension bridge",
+        "md": "Suspension bridge"
+      },
+      {
+        "c": "Tower Bridge",
+        "m": "London Bridge",
+        "cd": "River bridge",
+        "md": "River bridge"
+      },
+      {
+        "c": "Alcatraz",
+        "m": "Tower of London",
+        "cd": "Island prison",
+        "md": "Historic castle"
+      },
+      {
+        "c": "Acropolis",
+        "m": "Parthenon",
+        "cd": "Hilltop citadel",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Taj Mahal",
+        "m": "Victoria Memorial",
+        "cd": "Marble mausoleum",
+        "md": "Marble palace"
+      },
+      {
+        "c": "Mount Fuji",
+        "m": "Mount Everest",
+        "cd": "Volcano mountain",
+        "md": "Mountain peak"
+      },
+      {
+        "c": "Niagara Falls",
+        "m": "Victoria Falls",
+        "cd": "Massive waterfall",
+        "md": "Massive waterfall"
+      },
+      {
+        "c": "Buckingham Palace",
+        "m": "White House",
+        "cd": "Royal residence",
+        "md": "Presidential residence"
+      },
+      {
+        "c": "Vatican City",
+        "m": "Mecca",
+        "cd": "Papal state",
+        "md": "Holy city"
+      },
+      {
+        "c": "Petra",
+        "m": "Angkor Wat",
+        "cd": "Rock city",
+        "md": "Ancient temple"
+      },
+      {
+        "c": "Versailles",
+        "m": "Windsor Castle",
+        "cd": "Royal palace",
+        "md": "Royal castle"
+      },
+      {
+        "c": "Burj Al Arab",
+        "m": "Palm Jumeirah",
+        "cd": "Luxury hotel",
+        "md": "Artificial island"
+      },
+      {
+        "c": "Mount Vesuvius",
+        "m": "Mount Etna",
+        "cd": "Active volcano",
+        "md": "Active volcano"
+      }
+    ]
+  },
+  "countries": {
+    "displayName": "Nations",
+    "icon": "🌎",
+    "desc": "Clashing countries, sister territories, and global islands.",
+    "pairs": [
+      {
+        "c": "USA",
+        "m": "Canada",
+        "cd": "North country",
+        "md": "Northern country"
+      },
+      {
+        "c": "UK",
+        "m": "Ireland",
+        "cd": "Island nation",
+        "md": "Island nation"
+      },
+      {
+        "c": "France",
+        "m": "Germany",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Italy",
+        "m": "Spain",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Japan",
+        "m": "South Korea",
+        "cd": "Asian nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "China",
+        "m": "Russia",
+        "cd": "Asian nation",
+        "md": "Northern country"
+      },
+      {
+        "c": "Australia",
+        "m": "New Zealand",
+        "cd": "Island continent",
+        "md": "Island country"
+      },
+      {
+        "c": "India",
+        "m": "Pakistan",
+        "cd": "Asian nation",
+        "md": "Asian country"
+      },
+      {
+        "c": "Brazil",
+        "m": "Argentina",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Mexico",
+        "m": "Spain",
+        "cd": "Latin country",
+        "md": "European country"
+      },
+      {
+        "c": "Egypt",
+        "m": "Greece",
+        "cd": "African nation",
+        "md": "European country"
+      },
+      {
+        "c": "South Africa",
+        "m": "Kenya",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "Switzerland",
+        "m": "Austria",
+        "cd": "Alpine nation",
+        "md": "European country"
+      },
+      {
+        "c": "Netherlands",
+        "m": "Belgium",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Singapore",
+        "m": "Malaysia",
+        "cd": "City nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Thailand",
+        "m": "Vietnam",
+        "cd": "Asian country",
+        "md": "Asian country"
+      },
+      {
+        "c": "Saudi Arabia",
+        "m": "UAE",
+        "cd": "Desert kingdom",
+        "md": "Gulf nation"
+      },
+      {
+        "c": "Nepal",
+        "m": "Sri Lanka",
+        "cd": "Himalayan nation",
+        "md": "Island nation"
+      },
+      {
+        "c": "Russia",
+        "m": "Canada",
+        "cd": "Northern country",
+        "md": "Northern country"
+      },
+      {
+        "c": "Turkey",
+        "m": "Greece",
+        "cd": "Eurasian nation",
+        "md": "European country"
+      },
+      {
+        "c": "Ireland",
+        "m": "Scotland",
+        "cd": "Island nation",
+        "md": "British country"
+      },
+      {
+        "c": "Portugal",
+        "m": "Brazil",
+        "cd": "European country",
+        "md": "South country"
+      },
+      {
+        "c": "Peru",
+        "m": "Colombia",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Ecuador",
+        "m": "Venezuela",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Cuba",
+        "m": "Jamaica",
+        "cd": "Island nation",
+        "md": "Caribbean island"
+      },
+      {
+        "c": "Iceland",
+        "m": "Greenland",
+        "cd": "Nordic island",
+        "md": "Arctic island"
+      },
+      {
+        "c": "Denmark",
+        "m": "Finland",
+        "cd": "Nordic country",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Poland",
+        "m": "Ukraine",
+        "cd": "European nation",
+        "md": "European nation"
+      },
+      {
+        "c": "Philippines",
+        "m": "Indonesia",
+        "cd": "Island archipelago",
+        "md": "Island nation"
+      },
+      {
+        "c": "Maldives",
+        "m": "Bahamas",
+        "cd": "Tropical archipelago",
+        "md": "Caribbean archipelago"
+      },
+      {
+        "c": "Morocco",
+        "m": "Egypt",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "North Korea",
+        "m": "South Korea",
+        "cd": "Asian country",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Monaco",
+        "m": "Vatican City",
+        "cd": "Micro state",
+        "md": "Papal state"
+      },
+      {
+        "c": "Madagascar",
+        "m": "Sri Lanka",
+        "cd": "Island nation",
+        "md": "Island nation"
+      },
+      {
+        "c": "Iran",
+        "m": "Iraq",
+        "cd": "Eastern country",
+        "md": "Middle country"
+      },
+      {
+        "c": "Afghanistan",
+        "m": "Pakistan",
+        "cd": "Asian country",
+        "md": "Asian country"
+      },
+      {
+        "c": "Bangladesh",
+        "m": "India",
+        "cd": "Asian nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Nigeria",
+        "m": "South Africa",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "Chile",
+        "m": "Argentina",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Austria",
+        "m": "Germany",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Belgium",
+        "m": "Switzerland",
+        "cd": "European country",
+        "md": "Alpine nation"
+      },
+      {
+        "c": "Norway",
+        "m": "Denmark",
+        "cd": "Nordic country",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Thailand",
+        "m": "Indonesia",
+        "cd": "Asian country",
+        "md": "Island nation"
+      },
+      {
+        "c": "Vietnam",
+        "m": "Philippines",
+        "cd": "Asian country",
+        "md": "Island archipelago"
+      },
+      {
+        "c": "China",
+        "m": "India",
+        "cd": "Asian nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Sweden",
+        "m": "Norway",
+        "cd": "Nordic country",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Finland",
+        "m": "Estonia",
+        "cd": "Nordic country",
+        "md": "Baltic nation"
+      },
+      {
+        "c": "Kazakhstan",
+        "m": "Uzbekistan",
+        "cd": "Central nation",
+        "md": "Central nation"
+      },
+      {
+        "c": "Colombia",
+        "m": "Venezuela",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Israel",
+        "m": "Jordan",
+        "cd": "Middle nation",
+        "md": "Middle kingdom"
+      },
+      {
+        "c": "Kuwait",
+        "m": "Qatar",
+        "cd": "Gulf country",
+        "md": "Gulf nation"
+      },
+      {
+        "c": "Lebanon",
+        "m": "Syria",
+        "cd": "Coast nation",
+        "md": "Middle country"
+      },
+      {
+        "c": "Greece",
+        "m": "Cyprus",
+        "cd": "European country",
+        "md": "Island nation"
+      },
+      {
+        "c": "Portugal",
+        "m": "Spain",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Poland",
+        "m": "Czech Republic",
+        "cd": "European nation",
+        "md": "European country"
+      },
+      {
+        "c": "Hungary",
+        "m": "Romania",
+        "cd": "European country",
+        "md": "Balkan nation"
+      },
+      {
+        "c": "Croatia",
+        "m": "Serbia",
+        "cd": "European country",
+        "md": "Balkan nation"
+      },
+      {
+        "c": "Slovakia",
+        "m": "Slovenia",
+        "cd": "Central nation",
+        "md": "Central nation"
+      },
+      {
+        "c": "Lithuania",
+        "m": "Latvia",
+        "cd": "Baltic country",
+        "md": "Baltic country"
+      },
+      {
+        "c": "Belarus",
+        "m": "Ukraine",
+        "cd": "Eastern nation",
+        "md": "European nation"
+      },
+      {
+        "c": "Mongolia",
+        "m": "Kazakhstan",
+        "cd": "Steppe nation",
+        "md": "Central nation"
+      },
+      {
+        "c": "Ethiopia",
+        "m": "Kenya",
+        "cd": "African country",
+        "md": "African nation"
+      },
+      {
+        "c": "Ghana",
+        "m": "Nigeria",
+        "cd": "African country",
+        "md": "African nation"
+      },
+      {
+        "c": "Algeria",
+        "m": "Tunisia",
+        "cd": "North country",
+        "md": "North country"
+      },
+      {
+        "c": "Sudan",
+        "m": "South Sudan",
+        "cd": "African nation",
+        "md": "African country"
+      },
+      {
+        "c": "Congo",
+        "m": "DR Congo",
+        "cd": "African country",
+        "md": "African nation"
+      },
+      {
+        "c": "Tanzania",
+        "m": "Uganda",
+        "cd": "African nation",
+        "md": "East nation"
+      },
+      {
+        "c": "Zimbabwe",
+        "m": "Zambia",
+        "cd": "South country",
+        "md": "African country"
+      },
+      {
+        "c": "Angola",
+        "m": "Mozambique",
+        "cd": "African country",
+        "md": "Coastal country"
+      },
+      {
+        "c": "Senegal",
+        "m": "Mali",
+        "cd": "West country",
+        "md": "West nation"
+      },
+      {
+        "c": "Ivory Coast",
+        "m": "Ghana",
+        "cd": "Coastal nation",
+        "md": "African country"
+      },
+      {
+        "c": "Sri Lanka",
+        "m": "Maldives",
+        "cd": "Island nation",
+        "md": "Tropical archipelago"
+      },
+      {
+        "c": "Myanmar",
+        "m": "Thailand",
+        "cd": "Asian nation",
+        "md": "Asian country"
+      },
+      {
+        "c": "Cambodia",
+        "m": "Vietnam",
+        "cd": "Asian nation",
+        "md": "Asian country"
+      },
+      {
+        "c": "Laos",
+        "m": "Cambodia",
+        "cd": "Asian country",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Taiwan",
+        "m": "Hong Kong",
+        "cd": "Island country",
+        "md": "Special city"
+      },
+      {
+        "c": "New Zealand",
+        "m": "Fiji",
+        "cd": "Island country",
+        "md": "Tropical island"
+      },
+      {
+        "c": "Costa Rica",
+        "m": "Panama",
+        "cd": "Central nation",
+        "md": "Central nation"
+      },
+      {
+        "c": "Guatemala",
+        "m": "Honduras",
+        "cd": "Central nation",
+        "md": "Central nation"
+      },
+      {
+        "c": "Jamaica",
+        "m": "Bahamas",
+        "cd": "Caribbean island",
+        "md": "Caribbean archipelago"
+      },
+      {
+        "c": "Peru",
+        "m": "Bolivia",
+        "cd": "South country",
+        "md": "South nation"
+      },
+      {
+        "c": "Uruguay",
+        "m": "Paraguay",
+        "cd": "South country",
+        "md": "South nation"
+      },
+      {
+        "c": "Chile",
+        "m": "Peru",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Iceland",
+        "m": "Norway",
+        "cd": "Nordic island",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Luxembourg",
+        "m": "Belgium",
+        "cd": "European state",
+        "md": "European country"
+      },
+      {
+        "c": "Monaco",
+        "m": "France",
+        "cd": "Micro state",
+        "md": "European country"
+      },
+      {
+        "c": "Vatican City",
+        "m": "Italy",
+        "cd": "Papal state",
+        "md": "European country"
+      },
+      {
+        "c": "San Marino",
+        "m": "Andorra",
+        "cd": "Micro republic",
+        "md": "Pyrenean state"
+      },
+      {
+        "c": "Liechtenstein",
+        "m": "Switzerland",
+        "cd": "Alpine state",
+        "md": "Alpine nation"
+      },
+      {
+        "c": "Malta",
+        "m": "Cyprus",
+        "cd": "Island nation",
+        "md": "Island nation"
+      },
+      {
+        "c": "Wales",
+        "m": "Scotland",
+        "cd": "Celtic country",
+        "md": "British country"
+      },
+      {
+        "c": "Iraq",
+        "m": "Syria",
+        "cd": "Middle country",
+        "md": "Middle country"
+      },
+      {
+        "c": "Oman",
+        "m": "Yemen",
+        "cd": "Gulf country",
+        "md": "Arab country"
+      },
+      {
+        "c": "South Korea",
+        "m": "Japan",
+        "cd": "Asian nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "North Korea",
+        "m": "China",
+        "cd": "Asian country",
+        "md": "Asian nation"
+      },
+      {
+        "c": "United States",
+        "m": "United Kingdom",
+        "cd": "North country",
+        "md": "Island nation"
+      },
+      {
+        "c": "Brazil",
+        "m": "Portugal",
+        "cd": "South country",
+        "md": "European country"
+      },
+      {
+        "c": "Australia",
+        "m": "Great Britain",
+        "cd": "Island continent",
+        "md": "Island nation"
+      },
+      {
+        "c": "Canada",
+        "m": "France",
+        "cd": "Northern country",
+        "md": "European country"
+      },
+      {
+        "c": "Switzerland",
+        "m": "Sweden",
+        "cd": "Alpine nation",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Australia",
+        "m": "New Zealand",
+        "cd": "Island continent",
+        "md": "Island country"
+      },
+      {
+        "c": "Canada",
+        "m": "USA",
+        "cd": "Northern country",
+        "md": "North country"
+      },
+      {
+        "c": "Brazil",
+        "m": "Argentina",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "India",
+        "m": "Pakistan",
+        "cd": "Asian nation",
+        "md": "Asian country"
+      },
+      {
+        "c": "Japan",
+        "m": "South Korea",
+        "cd": "Asian nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "China",
+        "m": "Taiwan",
+        "cd": "Asian nation",
+        "md": "Island country"
+      },
+      {
+        "c": "UK",
+        "m": "Ireland",
+        "cd": "Island nation",
+        "md": "Island nation"
+      },
+      {
+        "c": "Spain",
+        "m": "Portugal",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Italy",
+        "m": "Greece",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Germany",
+        "m": "Austria",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "France",
+        "m": "Belgium",
+        "cd": "European country",
+        "md": "European country"
+      },
+      {
+        "c": "Sweden",
+        "m": "Norway",
+        "cd": "Nordic country",
+        "md": "Nordic country"
+      },
+      {
+        "c": "Mexico",
+        "m": "Colombia",
+        "cd": "Latin country",
+        "md": "South country"
+      },
+      {
+        "c": "Egypt",
+        "m": "Morocco",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "South Africa",
+        "m": "Kenya",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "Russia",
+        "m": "Ukraine",
+        "cd": "Northern country",
+        "md": "European nation"
+      },
+      {
+        "c": "Thailand",
+        "m": "Vietnam",
+        "cd": "Asian country",
+        "md": "Asian country"
+      },
+      {
+        "c": "Indonesia",
+        "m": "Malaysia",
+        "cd": "Island nation",
+        "md": "Asian nation"
+      },
+      {
+        "c": "Singapore",
+        "m": "Hong Kong",
+        "cd": "City nation",
+        "md": "Special city"
+      },
+      {
+        "c": "Switzerland",
+        "m": "Netherlands",
+        "cd": "Alpine nation",
+        "md": "European country"
+      },
+      {
+        "c": "Turkey",
+        "m": "Iran",
+        "cd": "Eurasian nation",
+        "md": "Eastern country"
+      },
+      {
+        "c": "Saudi Arabia",
+        "m": "UAE",
+        "cd": "Desert kingdom",
+        "md": "Gulf nation"
+      },
+      {
+        "c": "Cuba",
+        "m": "Puerto Rico",
+        "cd": "Island nation",
+        "md": "Island territory"
+      },
+      {
+        "c": "Peru",
+        "m": "Chile",
+        "cd": "South country",
+        "md": "South country"
+      },
+      {
+        "c": "Nigeria",
+        "m": "Ghana",
+        "cd": "African nation",
+        "md": "African country"
+      },
+      {
+        "c": "Kenya",
+        "m": "Tanzania",
+        "cd": "African nation",
+        "md": "African nation"
+      },
+      {
+        "c": "Finland",
+        "m": "Denmark",
+        "cd": "Nordic country",
+        "md": "Nordic country"
+      }
+    ]
+  },
+  "places": {
+    "displayName": "Places & Spaces",
+    "icon": "🗺️",
+    "desc": "Everyday geography, scenario spots, rooms, and stores.",
+    "pairs": [
+      {
+        "c": "Beach",
+        "m": "Lake",
+        "cd": "Sandy coast",
+        "md": "Inland lake"
+      },
+      {
+        "c": "Mountain",
+        "m": "Hill",
+        "cd": "High mountain",
+        "md": "Grassy hill"
+      },
+      {
+        "c": "Forest",
+        "m": "Desert",
+        "cd": "Wooded forest",
+        "md": "Sandy desert"
+      },
+      {
+        "c": "Cave",
+        "m": "Canyon",
+        "cd": "Rock cave",
+        "md": "Deep canyon"
+      },
+      {
+        "c": "Island",
+        "m": "Peninsula",
+        "cd": "Surrounded island",
+        "md": "Land peninsula"
+      },
+      {
+        "c": "City",
+        "m": "Village",
+        "cd": "Urban city",
+        "md": "Rural village"
+      },
+      {
+        "c": "Zoo",
+        "m": "Aquarium",
+        "cd": "Animal park",
+        "md": "Fish aquarium"
+      },
+      {
+        "c": "Museum",
+        "m": "Library",
+        "cd": "Exhibition museum",
+        "md": "Book building"
+      },
+      {
+        "c": "Cinema",
+        "m": "Theater",
+        "cd": "Movie theater",
+        "md": "Stage venue"
+      },
+      {
+        "c": "Mall",
+        "m": "Market",
+        "cd": "Shopping center",
+        "md": "Shopping market"
+      },
+      {
+        "c": "Park",
+        "m": "Playground",
+        "cd": "Public park",
+        "md": "Kids playground"
+      },
+      {
+        "c": "Airport",
+        "m": "Train Station",
+        "cd": "Flight terminal",
+        "md": "Railway station"
+      },
+      {
+        "c": "Office",
+        "m": "Classroom",
+        "cd": "Workplace office",
+        "md": "Student room"
+      },
+      {
+        "c": "Palace",
+        "m": "Castle",
+        "cd": "Royal palace",
+        "md": "Stone castle"
+      },
+      {
+        "c": "Kitchen",
+        "m": "Bathroom",
+        "cd": "Cooking room",
+        "md": "Wash room"
+      },
+      {
+        "c": "Bedroom",
+        "m": "Living Room",
+        "cd": "Sleeping room",
+        "md": "Lounge room"
+      },
+      {
+        "c": "Basement",
+        "m": "Attic",
+        "cd": "Underground floor",
+        "md": "Roof storage"
+      },
+      {
+        "c": "Balcony",
+        "m": "Backyard",
+        "cd": "Outdoor ledge",
+        "md": "Private garden"
+      },
+      {
+        "c": "Hotel",
+        "m": "Resort",
+        "cd": "Lodging hotel",
+        "md": "Vacation resort"
+      },
+      {
+        "c": "School",
+        "m": "University",
+        "cd": "Educational school",
+        "md": "College campus"
+      },
+      {
+        "c": "Hospital",
+        "m": "Pharmacy",
+        "cd": "Medical center",
+        "md": "Chemist pharmacy"
+      },
+      {
+        "c": "Post Office",
+        "m": "Bank",
+        "cd": "Postal branch",
+        "md": "Financial bank"
+      },
+      {
+        "c": "Restaurant",
+        "m": "Cafe",
+        "cd": "Dining restaurant",
+        "md": "Coffee shop"
+      },
+      {
+        "c": "Bakery",
+        "m": "Candy Shop",
+        "cd": "Bread bakery",
+        "md": "Sweet shop"
+      },
+      {
+        "c": "Bar",
+        "m": "Nightclub",
+        "cd": "Drinking pub",
+        "md": "Music club"
+      },
+      {
+        "c": "Cabin",
+        "m": "Tent",
+        "cd": "Wooden lodge",
+        "md": "Camping shelter"
+      },
+      {
+        "c": "Closet",
+        "m": "Pantry",
+        "cd": "Storage room",
+        "md": "Food cupboard"
+      },
+      {
+        "c": "Highway",
+        "m": "Bridge",
+        "cd": "Public roadway",
+        "md": "River crossing"
+      },
+      {
+        "c": "Greenhouse",
+        "m": "Botanical Garden",
+        "cd": "Glass nursery",
+        "md": "Plant garden"
+      },
+      {
+        "c": "Barber Shop",
+        "m": "Spa",
+        "cd": "Hair salon",
+        "md": "Wellness spa"
+      },
+      {
+        "c": "Garage",
+        "m": "Car Wash",
+        "cd": "Car shed",
+        "md": "Vehicle wash"
+      },
+      {
+        "c": "Bus Stop",
+        "m": "Subway Station",
+        "cd": "Transit stop",
+        "md": "Metro terminal"
+      },
+      {
+        "c": "Supermarket",
+        "m": "Convenience Store",
+        "cd": "Grocery store",
+        "md": "Corner shop"
+      },
+      {
+        "c": "Attic",
+        "m": "Closet",
+        "cd": "Roof storage",
+        "md": "Storage room"
+      },
+      {
+        "c": "Flea Market",
+        "m": "Thrift Store",
+        "cd": "Bazaar market",
+        "md": "Secondhand shop"
+      },
+      {
+        "c": "Ice Cream Parlor",
+        "m": "Bakery",
+        "cd": "Dessert parlor",
+        "md": "Bread bakery"
+      },
+      {
+        "c": "Yoga Studio",
+        "m": "Gym",
+        "cd": "Fitness studio",
+        "md": "Fitness center"
+      },
+      {
+        "c": "Pizzeria",
+        "m": "Burger Joint",
+        "cd": "Pizza restaurant",
+        "md": "Burger restaurant"
+      },
+      {
+        "c": "Treehouse",
+        "m": "Playhouse",
+        "cd": "Wooden treehouse",
+        "md": "Kids playhouse"
+      },
+      {
+        "c": "Yacht",
+        "m": "Cruise Ship",
+        "cd": "Luxury vessel",
+        "md": "Ocean liner"
+      },
+      {
+        "c": "Dental Clinic",
+        "m": "Doctor's Office",
+        "cd": "Teeth clinic",
+        "md": "Medical clinic"
+      },
+      {
+        "c": "Police Station",
+        "m": "Courthouse",
+        "cd": "Police station",
+        "md": "Judicial court"
+      },
+      {
+        "c": "Gym",
+        "m": "Swimming Pool",
+        "cd": "Fitness center",
+        "md": "Water pool"
+      },
+      {
+        "c": "Concert Hall",
+        "m": "Stadium",
+        "cd": "Music auditorium",
+        "md": "Sports stadium"
+      },
+      {
+        "c": "Playground",
+        "m": "Park",
+        "cd": "Kids playground",
+        "md": "Public park"
+      },
+      {
+        "c": "Subway Station",
+        "m": "Bus Stop",
+        "cd": "Metro terminal",
+        "md": "Transit stop"
+      },
+      {
+        "c": "Library",
+        "m": "Bookstore",
+        "cd": "Book building",
+        "md": "Book shop"
+      },
+      {
+        "c": "Pharmacy",
+        "m": "Hospital",
+        "cd": "Chemist pharmacy",
+        "md": "Medical center"
+      },
+      {
+        "c": "Gas Station",
+        "m": "Electric Charger",
+        "cd": "Fuel station",
+        "md": "Charging station"
+      },
+      {
+        "c": "Living Room",
+        "m": "Dining Room",
+        "cd": "Lounge room",
+        "md": "Eating room"
+      },
+      {
+        "c": "Garage",
+        "m": "Driveway",
+        "cd": "Car shed",
+        "md": "Paved entrance"
+      },
+      {
+        "c": "Garden",
+        "m": "Yard",
+        "cd": "Flower garden",
+        "md": "Grassy yard"
+      },
+      {
+        "c": "Cabin",
+        "m": "Cottage",
+        "cd": "Wooden lodge",
+        "md": "Cozy house"
+      },
+      {
+        "c": "Castle",
+        "m": "Fortress",
+        "cd": "Stone castle",
+        "md": "Defensive fort"
+      },
+      {
+        "c": "Church",
+        "m": "Cathedral",
+        "cd": "Christian church",
+        "md": "Grand cathedral"
+      },
+      {
+        "c": "Mosque",
+        "m": "Temple",
+        "cd": "Islamic mosque",
+        "md": "Sacred temple"
+      },
+      {
+        "c": "Synagogue",
+        "m": "Church",
+        "cd": "Jewish synagogue",
+        "md": "Christian church"
+      },
+      {
+        "c": "Tunnel",
+        "m": "Bridge",
+        "cd": "Underground passage",
+        "md": "River crossing"
+      },
+      {
+        "c": "Alley",
+        "m": "Street",
+        "cd": "Narrow pathway",
+        "md": "Urban street"
+      },
+      {
+        "c": "Harbor",
+        "m": "Port",
+        "cd": "Ship port",
+        "md": "Maritime port"
+      },
+      {
+        "c": "Lighthouse",
+        "m": "Windmill",
+        "cd": "Coastal tower",
+        "md": "Wind turbine"
+      },
+      {
+        "c": "Office",
+        "m": "Conference Room",
+        "cd": "Workplace office",
+        "md": "Meeting room"
+      },
+      {
+        "c": "Lab",
+        "m": "Classroom",
+        "cd": "Science laboratory",
+        "md": "Student room"
+      },
+      {
+        "c": "Cafeteria",
+        "m": "Food Court",
+        "cd": "Dining hall",
+        "md": "Dining area"
+      },
+      {
+        "c": "Auditorium",
+        "m": "Theater",
+        "cd": "Lecture hall",
+        "md": "Stage venue"
+      },
+      {
+        "c": "Locker Room",
+        "m": "Shower Room",
+        "cd": "Changing room",
+        "md": "Bathing room"
+      },
+      {
+        "c": "Runway",
+        "m": "Helipad",
+        "cd": "Airplane strip",
+        "md": "Helicopter landing"
+      },
+      {
+        "c": "Hangar",
+        "m": "Garage",
+        "cd": "Airplane shed",
+        "md": "Car shed"
+      },
+      {
+        "c": "Barn",
+        "m": "Stable",
+        "cd": "Farm storage",
+        "md": "Horse stable"
+      },
+      {
+        "c": "Farm",
+        "m": "Ranch",
+        "cd": "Agricultural farm",
+        "md": "Cattle ranch"
+      },
+      {
+        "c": "Orchard",
+        "m": "Vineyard",
+        "cd": "Fruit plantation",
+        "md": "Grape farm"
+      },
+      {
+        "c": "Swamp",
+        "m": "Marsh",
+        "cd": "Wetland marsh",
+        "md": "Wetland swamp"
+      },
+      {
+        "c": "Volcano",
+        "m": "Geyser",
+        "cd": "Lava volcano",
+        "md": "Hot spring"
+      },
+      {
+        "c": "Waterfall",
+        "m": "Stream",
+        "cd": "Water cascade",
+        "md": "Flowing brook"
+      },
+      {
+        "c": "Glacier",
+        "m": "Iceberg",
+        "cd": "Ice glacier",
+        "md": "Glacial ice"
+      },
+      {
+        "c": "Jungle",
+        "m": "Savannah",
+        "cd": "Tropical jungle",
+        "md": "Grassy plain"
+      },
+      {
+        "c": "Meadow",
+        "m": "Lawn",
+        "cd": "Grassy meadow",
+        "md": "Green grass"
+      },
+      {
+        "c": "Cemetery",
+        "m": "Mausoleum",
+        "cd": "Burial graveyard",
+        "md": "Burial tomb"
+      },
+      {
+        "c": "Prison",
+        "m": "Police Station",
+        "cd": "Correctional prison",
+        "md": "Police station"
+      },
+      {
+        "c": "Fire Station",
+        "m": "Hospital",
+        "cd": "Fire station",
+        "md": "Medical center"
+      },
+      {
+        "c": "City Hall",
+        "m": "Courthouse",
+        "cd": "Civic building",
+        "md": "Judicial court"
+      },
+      {
+        "c": "Embassy",
+        "m": "Consulate",
+        "cd": "Diplomatic office",
+        "md": "Diplomatic agency"
+      },
+      {
+        "c": "Observatory",
+        "m": "Planetarium",
+        "cd": "Space observatory",
+        "md": "Space theater"
+      },
+      {
+        "c": "Casino",
+        "m": "Arcade",
+        "cd": "Gambling house",
+        "md": "Gaming parlor"
+      },
+      {
+        "c": "Bowling Alley",
+        "m": "Pool Hall",
+        "cd": "Bowling lanes",
+        "md": "Billiards parlor"
+      },
+      {
+        "c": "Skatepark",
+        "m": "Playground",
+        "cd": "Skate park",
+        "md": "Kids playground"
+      },
+      {
+        "c": "Vineyard",
+        "m": "Brewery",
+        "cd": "Grape farm",
+        "md": "Beer factory"
+      },
+      {
+        "c": "Fish Market",
+        "m": "Butcher Shop",
+        "cd": "Seafood market",
+        "md": "Meat shop"
+      },
+      {
+        "c": "Boutique",
+        "m": "Department Store",
+        "cd": "Fashion shop",
+        "md": "Retail store"
+      },
+      {
+        "c": "Hardware Store",
+        "m": "Garden Center",
+        "cd": "Tool shop",
+        "md": "Plant nursery"
+      },
+      {
+        "c": "Pet Shop",
+        "m": "Vet Clinic",
+        "cd": "Animal shop",
+        "md": "Animal clinic"
+      },
+      {
+        "c": "Tailor Shop",
+        "m": "Laundromat",
+        "cd": "Clothing workshop",
+        "md": "Laundry shop"
+      },
+      {
+        "c": "Sauna",
+        "m": "Steam Room",
+        "cd": "Steam room",
+        "md": "Vapor sauna"
+      },
+      {
+        "c": "Nursery",
+        "m": "Kindergarten",
+        "cd": "Infant room",
+        "md": "Preschool school"
+      },
+      {
+        "c": "Attic",
+        "m": "Basement",
+        "cd": "Roof storage",
+        "md": "Underground floor"
+      },
+      {
+        "c": "Corridor",
+        "m": "Lobby",
+        "cd": "Long hallway",
+        "md": "Entrance hall"
+      },
+      {
+        "c": "Safe House",
+        "m": "Bunker",
+        "cd": "Secret shelter",
+        "md": "Underground shelter"
+      },
+      {
+        "c": "Submarine",
+        "m": "Spaceship",
+        "cd": "Underwater vessel",
+        "md": "Cosmic vessel"
+      },
+      {
+        "c": "Hot Air Balloon",
+        "m": "Airplane",
+        "cd": "Floating balloon",
+        "md": "Flying aircraft"
+      },
+      {
+        "c": "Treehouse",
+        "m": "Tent",
+        "cd": "Wooden treehouse",
+        "md": "Camping shelter"
+      },
+      {
+        "c": "Library",
+        "m": "Bookstore",
+        "cd": "Book building",
+        "md": "Book shop"
+      },
+      {
+        "c": "Cinema",
+        "m": "Theater",
+        "cd": "Movie theater",
+        "md": "Stage venue"
+      },
+      {
+        "c": "Hospital",
+        "m": "Clinic",
+        "cd": "Medical center",
+        "md": "Medical clinic"
+      },
+      {
+        "c": "Supermarket",
+        "m": "Mall",
+        "cd": "Grocery store",
+        "md": "Shopping center"
+      },
+      {
+        "c": "Park",
+        "m": "Botanical Garden",
+        "cd": "Public park",
+        "md": "Plant garden"
+      },
+      {
+        "c": "Beach",
+        "m": "Swimming Pool",
+        "cd": "Sandy coast",
+        "md": "Water pool"
+      },
+      {
+        "c": "Airport",
+        "m": "Train Station",
+        "cd": "Flight terminal",
+        "md": "Railway station"
+      },
+      {
+        "c": "Museum",
+        "m": "Art Gallery",
+        "cd": "Exhibition museum",
+        "md": "Art gallery"
+      },
+      {
+        "c": "Zoo",
+        "m": "Aquarium",
+        "cd": "Animal park",
+        "md": "Fish aquarium"
+      },
+      {
+        "c": "Gym",
+        "m": "Spa",
+        "cd": "Fitness center",
+        "md": "Wellness spa"
+      },
+      {
+        "c": "Hotel",
+        "m": "Resort",
+        "cd": "Lodging hotel",
+        "md": "Vacation resort"
+      },
+      {
+        "c": "Cafe",
+        "m": "Restaurant",
+        "cd": "Coffee shop",
+        "md": "Dining restaurant"
+      },
+      {
+        "c": "Bar",
+        "m": "Nightclub",
+        "cd": "Drinking pub",
+        "md": "Music club"
+      },
+      {
+        "c": "School",
+        "m": "College",
+        "cd": "Educational school",
+        "md": "Higher university"
+      },
+      {
+        "c": "Office",
+        "m": "Co-working Space",
+        "cd": "Workplace office",
+        "md": "Shared office"
+      },
+      {
+        "c": "Bakery",
+        "m": "Pastry Shop",
+        "cd": "Bread bakery",
+        "md": "Pastry bakery"
+      },
+      {
+        "c": "Post Office",
+        "m": "Bank",
+        "cd": "Postal branch",
+        "md": "Financial bank"
+      },
+      {
+        "c": "Pharmacy",
+        "m": "Dispensary",
+        "cd": "Chemist pharmacy",
+        "md": "Medical dispensary"
+      },
+      {
+        "c": "Stadium",
+        "m": "Arena",
+        "cd": "Sports stadium",
+        "md": "Indoor arena"
+      },
+      {
+        "c": "Bus Stop",
+        "m": "Taxi Stand",
+        "cd": "Transit stop",
+        "md": "Vehicle rank"
+      },
+      {
+        "c": "Lighthouse",
+        "m": "Observatory",
+        "cd": "Coastal tower",
+        "md": "Space observatory"
+      },
+      {
+        "c": "Prison",
+        "m": "Police Station",
+        "cd": "Correctional prison",
+        "md": "Police station"
+      },
+      {
+        "c": "Fire Station",
+        "m": "Ambulance",
+        "cd": "Fire station",
+        "md": "Emergency vehicle"
+      },
+      {
+        "c": "Farm",
+        "m": "Ranch",
+        "cd": "Agricultural farm",
+        "md": "Cattle ranch"
+      },
+      {
+        "c": "Factory",
+        "m": "Warehouse",
+        "cd": "Industrial factory",
+        "md": "Storage warehouse"
+      },
+      {
+        "c": "Skatepark",
+        "m": "Playground",
+        "cd": "Skate park",
+        "md": "Kids playground"
+      },
+      {
+        "c": "Cemetery",
+        "m": "Mausoleum",
+        "cd": "Burial graveyard",
+        "md": "Burial tomb"
+      }
+    ]
+  },
+  "popculture": {
+    "displayName": "Movies & Tech",
+    "icon": "🎬",
+    "desc": "Hollywood blockbusters, tech software, trending social apps, and icons.",
+    "pairs": [
+      {
+        "c": "Harry Potter",
+        "m": "Lord of the Rings",
+        "cd": "Fantasy franchise",
+        "md": "Fantasy franchise"
+      },
+      {
+        "c": "Star Wars",
+        "m": "Star Trek",
+        "cd": "Sci-fi franchise",
+        "md": "Sci-fi franchise"
+      },
+      {
+        "c": "Marvel",
+        "m": "DC",
+        "cd": "Comic universe",
+        "md": "Comic universe"
+      },
+      {
+        "c": "Batman",
+        "m": "Superman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Iron Man",
+        "m": "Captain America",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Spider-Man",
+        "m": "Batman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Barbie",
+        "m": "Oppenheimer",
+        "cd": "Fashion movie",
+        "md": "Drama movie"
+      },
+      {
+        "c": "Titanic",
+        "m": "Avatar",
+        "cd": "Romance movie",
+        "md": "Sci-fi movie"
+      },
+      {
+        "c": "Game of Thrones",
+        "m": "Stranger Things",
+        "cd": "Fantasy series",
+        "md": "Sci-fi series"
+      },
+      {
+        "c": "Breaking Bad",
+        "m": "Sherlock",
+        "cd": "Crime series",
+        "md": "Detective series"
+      },
+      {
+        "c": "Friends",
+        "m": "How I Met Your Mother",
+        "cd": "Comedy sitcom",
+        "md": "Comedy sitcom"
+      },
+      {
+        "c": "The Office",
+        "m": "Parks and Recreation",
+        "cd": "Comedy sitcom",
+        "md": "Comedy sitcom"
+      },
+      {
+        "c": "Simpsons",
+        "m": "Family Guy",
+        "cd": "Animated sitcom",
+        "md": "Animated sitcom"
+      },
+      {
+        "c": "Mickey Mouse",
+        "m": "Bugs Bunny",
+        "cd": "Cartoon character",
+        "md": "Cartoon character"
+      },
+      {
+        "c": "Pokémon",
+        "m": "Yu-Gi-Oh",
+        "cd": "Pocket monster",
+        "md": "Anime franchise"
+      },
+      {
+        "c": "Minecraft",
+        "m": "Roblox",
+        "cd": "Sandbox video game",
+        "md": "Online video game"
+      },
+      {
+        "c": "PlayStation",
+        "m": "Xbox",
+        "cd": "Gaming console",
+        "md": "Gaming console"
+      },
+      {
+        "c": "Instagram",
+        "m": "TikTok",
+        "cd": "Photo app",
+        "md": "Video app"
+      },
+      {
+        "c": "YouTube",
+        "m": "Twitch",
+        "cd": "Video platform",
+        "md": "Live streaming"
+      },
+      {
+        "c": "Spotify",
+        "m": "Apple Music",
+        "cd": "Music app",
+        "md": "Music app"
+      },
+      {
+        "c": "Netflix",
+        "m": "Disney+",
+        "cd": "Streaming app",
+        "md": "Streaming service"
+      },
+      {
+        "c": "ChatGPT",
+        "m": "Gemini",
+        "cd": "AI chatbot",
+        "md": "AI chatbot"
+      },
+      {
+        "c": "Smartwatch",
+        "m": "Fitness Tracker",
+        "cd": "Wearable watch",
+        "md": "Wrist band"
+      },
+      {
+        "c": "Steve Jobs",
+        "m": "Bill Gates",
+        "cd": "Tech visionary",
+        "md": "Tech founder"
+      },
+      {
+        "c": "iPhone",
+        "m": "Android",
+        "cd": "Mobile smartphone",
+        "md": "Mobile system"
+      },
+      {
+        "c": "Fortnite",
+        "m": "PUBG",
+        "cd": "Battle video game",
+        "md": "Shooter video game"
+      },
+      {
+        "c": "GTA",
+        "m": "Call of Duty",
+        "cd": "Action video game",
+        "md": "Shooter video game"
+      },
+      {
+        "c": "Google",
+        "m": "Microsoft",
+        "cd": "Search company",
+        "md": "Software company"
+      },
+      {
+        "c": "Facebook",
+        "m": "Twitter",
+        "cd": "Social platform",
+        "md": "Social network"
+      },
+      {
+        "c": "Zoom",
+        "m": "Skype",
+        "cd": "Video calling",
+        "md": "Video calling"
+      },
+      {
+        "c": "Shrek",
+        "m": "Toy Story",
+        "cd": "Swamp ogre",
+        "md": "Animated movie"
+      },
+      {
+        "c": "Frozen",
+        "m": "Tangled",
+        "cd": "Animated movie",
+        "md": "Animated movie"
+      },
+      {
+        "c": "Godzilla",
+        "m": "King Kong",
+        "cd": "Giant monster",
+        "md": "Giant ape"
+      },
+      {
+        "c": "iPad",
+        "m": "Kindle",
+        "cd": "Touch tablet",
+        "md": "E-book reader"
+      },
+      {
+        "c": "AirPods",
+        "m": "Headphones",
+        "cd": "Wireless earbuds",
+        "md": "Audio headphones"
+      },
+      {
+        "c": "SpongeBob",
+        "m": "Mickey Mouse",
+        "cd": "Cartoon character",
+        "md": "Cartoon character"
+      },
+      {
+        "c": "Wikipedia",
+        "m": "Google Search",
+        "cd": "Online encyclopedia",
+        "md": "Search engine"
+      },
+      {
+        "c": "Mario",
+        "m": "Sonic",
+        "cd": "Video character",
+        "md": "Video character"
+      },
+      {
+        "c": "Dracula",
+        "m": "Frankenstein",
+        "cd": "Vampire count",
+        "md": "Gothic monster"
+      },
+      {
+        "c": "Wednesday",
+        "m": "Sabrina the Witch",
+        "cd": "Gothic heroine",
+        "md": "Teen witch"
+      },
+      {
+        "c": "Sherlock Holmes",
+        "m": "James Bond",
+        "cd": "Consulting detective",
+        "md": "Secret agent"
+      },
+      {
+        "c": "Elon Musk",
+        "m": "Mark Zuckerberg",
+        "cd": "Tech mogul",
+        "md": "Tech founder"
+      },
+      {
+        "c": "Billie Eilish",
+        "m": "Olivia Rodrigo",
+        "cd": "Pop singer",
+        "md": "Pop artist"
+      },
+      {
+        "c": "Taylor Swift",
+        "m": "Beyoncé",
+        "cd": "Pop superstar",
+        "md": "Pop icon"
+      },
+      {
+        "c": "Inception",
+        "m": "Interstellar",
+        "cd": "Sci-fi thriller",
+        "md": "Space drama"
+      },
+      {
+        "c": "The Matrix",
+        "m": "Inception",
+        "cd": "Cyberpunk movie",
+        "md": "Sci-fi thriller"
+      },
+      {
+        "c": "Gladiator",
+        "m": "Braveheart",
+        "cd": "Historical epic",
+        "md": "Historical epic"
+      },
+      {
+        "c": "Jurassic Park",
+        "m": "King Kong",
+        "cd": "Dinosaur movie",
+        "md": "Giant ape"
+      },
+      {
+        "c": "Home Alone",
+        "m": "Elf",
+        "cd": "Comedy classic",
+        "md": "Holiday comedy"
+      },
+      {
+        "c": "The Dark Knight",
+        "m": "Joker",
+        "cd": "Batman movie",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Pirates of the Caribbean",
+        "m": "Peter Pan",
+        "cd": "Pirate movie",
+        "md": "Fairy boy"
+      },
+      {
+        "c": "The Godfather",
+        "m": "Scarface",
+        "cd": "Mafia classic",
+        "md": "Gangster movie"
+      },
+      {
+        "c": "Pulp Fiction",
+        "m": "Fight Club",
+        "cd": "Crime thriller",
+        "md": "Cult drama"
+      },
+      {
+        "c": "Black Panther",
+        "m": "Thor",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Wolverine",
+        "m": "Deadpool",
+        "cd": "Mutant superhero",
+        "md": "Antihero character"
+      },
+      {
+        "c": "Thanos",
+        "m": "Darth Vader",
+        "cd": "Supervillain character",
+        "md": "Galactic villain"
+      },
+      {
+        "c": "Pikachu",
+        "m": "Charizard",
+        "cd": "Electric creature",
+        "md": "Fire creature"
+      },
+      {
+        "c": "Zelda",
+        "m": "Link",
+        "cd": "Video princess",
+        "md": "Video hero"
+      },
+      {
+        "c": "Donkey Kong",
+        "m": "Pac-Man",
+        "cd": "Gorilla character",
+        "md": "Arcade video game"
+      },
+      {
+        "c": "Tetris",
+        "m": "Pac-Man",
+        "cd": "Puzzle video game",
+        "md": "Arcade video game"
+      },
+      {
+        "c": "Apex Legends",
+        "m": "Valorant",
+        "cd": "Shooter video game",
+        "md": "Shooter video game"
+      },
+      {
+        "c": "Candy Crush",
+        "m": "Angry Birds",
+        "cd": "Puzzle video game",
+        "md": "Bird video game"
+      },
+      {
+        "c": "Subway Surfers",
+        "m": "Temple Run",
+        "cd": "Runner video game",
+        "md": "Runner video game"
+      },
+      {
+        "c": "Rick",
+        "m": "Morty",
+        "cd": "Mad scientist",
+        "md": "Timid grandson"
+      },
+      {
+        "c": "Scooby-Doo",
+        "m": "Shaggy",
+        "cd": "Cartoon character",
+        "md": "Cartoon companion"
+      },
+      {
+        "c": "Naruto",
+        "m": "Sasuke",
+        "cd": "Anime series",
+        "md": "Ninja warrior"
+      },
+      {
+        "c": "Goku",
+        "m": "Vegeta",
+        "cd": "Saiyan warrior",
+        "md": "Saiyan prince"
+      },
+      {
+        "c": "MacBook",
+        "m": "Dell XPS",
+        "cd": "Apple laptop",
+        "md": "Windows laptop"
+      },
+      {
+        "c": "GoPro",
+        "m": "Insta360",
+        "cd": "Action camera",
+        "md": "Action camera"
+      },
+      {
+        "c": "DJI Drone",
+        "m": "RC Helicopter",
+        "cd": "Camera drone",
+        "md": "Toy aircraft"
+      },
+      {
+        "c": "Windows",
+        "m": "macOS",
+        "cd": "Operating system",
+        "md": "Operating system"
+      },
+      {
+        "c": "Chrome",
+        "m": "Safari",
+        "cd": "Web browser",
+        "md": "Web browser"
+      },
+      {
+        "c": "Slack",
+        "m": "Microsoft Teams",
+        "cd": "Workplace chat",
+        "md": "Team collaboration"
+      },
+      {
+        "c": "Discord",
+        "m": "Skype",
+        "cd": "Gamer chat",
+        "md": "Video calling"
+      },
+      {
+        "c": "Snapchat",
+        "m": "Instagram",
+        "cd": "Photo app",
+        "md": "Photo app"
+      },
+      {
+        "c": "Reddit",
+        "m": "Quora",
+        "cd": "Online forum",
+        "md": "Question platform"
+      },
+      {
+        "c": "GitHub",
+        "m": "GitLab",
+        "cd": "Code platform",
+        "md": "Code platform"
+      },
+      {
+        "c": "VS Code",
+        "m": "IntelliJ IDEA",
+        "cd": "Code editor",
+        "md": "Code IDE"
+      },
+      {
+        "c": "Stack Overflow",
+        "m": "Reddit",
+        "cd": "Coding forum",
+        "md": "Online forum"
+      },
+      {
+        "c": "Dropbox",
+        "m": "Google Drive",
+        "cd": "Cloud storage",
+        "md": "Cloud storage"
+      },
+      {
+        "c": "PayPal",
+        "m": "Stripe",
+        "cd": "Payment service",
+        "md": "Payment service"
+      },
+      {
+        "c": "Bitcoin",
+        "m": "Ethereum",
+        "cd": "Digital cryptocurrency",
+        "md": "Digital cryptocurrency"
+      },
+      {
+        "c": "Uber Eats",
+        "m": "DoorDash",
+        "cd": "Food delivery",
+        "md": "Food delivery"
+      },
+      {
+        "c": "Airbnb",
+        "m": "Booking.com",
+        "cd": "House rental",
+        "md": "Hotel booking"
+      },
+      {
+        "c": "Yelp",
+        "m": "TripAdvisor",
+        "cd": "Business reviews",
+        "md": "Travel platform"
+      },
+      {
+        "c": "Daenerys Targaryen",
+        "m": "Jon Snow",
+        "cd": "Fantasy character",
+        "md": "Fantasy character"
+      },
+      {
+        "c": "Walter White",
+        "m": "Jesse Pinkman",
+        "cd": "Drama character",
+        "md": "Drama character"
+      },
+      {
+        "c": "Ted Lasso",
+        "m": "Coach Beard",
+        "cd": "Football coach",
+        "md": "Assistant coach"
+      },
+      {
+        "c": "Luke Skywalker",
+        "m": "Darth Vader",
+        "cd": "Jedi master",
+        "md": "Galactic villain"
+      },
+      {
+        "c": "Voldemort",
+        "m": "Grindelwald",
+        "cd": "Dark wizard",
+        "md": "Dark wizard"
+      },
+      {
+        "c": "Dumbledore",
+        "m": "Gandalf",
+        "cd": "Headmaster wizard",
+        "md": "Elder wizard"
+      },
+      {
+        "c": "Captain Jack Sparrow",
+        "m": "Indiana Jones",
+        "cd": "Pirate captain",
+        "md": "Adventurer archaeologist"
+      },
+      {
+        "c": "Justin Bieber",
+        "m": "Taylor Swift",
+        "cd": "Pop singer",
+        "md": "Pop superstar"
+      },
+      {
+        "c": "Drake",
+        "m": "Kendrick Lamar",
+        "cd": "Hip-hop rapper",
+        "md": "Rap superstar"
+      },
+      {
+        "c": "Ed Sheeran",
+        "m": "Lewis Capaldi",
+        "cd": "Pop singer",
+        "md": "Pop balladeer"
+      },
+      {
+        "c": "Jimmy Fallon",
+        "m": "Jimmy Kimmel",
+        "cd": "Late-night host",
+        "md": "Late-night host"
+      },
+      {
+        "c": "Oscar",
+        "m": "Grammy",
+        "cd": "Film trophy",
+        "md": "Music trophy"
+      },
+      {
+        "c": "Alexa",
+        "m": "Siri",
+        "cd": "Voice assistant",
+        "md": "Voice assistant"
+      },
+      {
+        "c": "Amazon",
+        "m": "eBay",
+        "cd": "Shopping site",
+        "md": "Auction store"
+      },
+      {
+        "c": "Microsoft Office",
+        "m": "Google Workspace",
+        "cd": "Productivity suite",
+        "md": "Productivity suite"
+      },
+      {
+        "c": "Harry Potter",
+        "m": "Lord of the Rings",
+        "cd": "Fantasy franchise",
+        "md": "Fantasy franchise"
+      },
+      {
+        "c": "Star Wars",
+        "m": "Star Trek",
+        "cd": "Sci-fi franchise",
+        "md": "Sci-fi franchise"
+      },
+      {
+        "c": "Marvel",
+        "m": "DC",
+        "cd": "Comic universe",
+        "md": "Comic universe"
+      },
+      {
+        "c": "Batman",
+        "m": "Superman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Spider-Man",
+        "m": "Iron Man",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Netflix",
+        "m": "YouTube",
+        "cd": "Streaming app",
+        "md": "Video platform"
+      },
+      {
+        "c": "Instagram",
+        "m": "TikTok",
+        "cd": "Photo app",
+        "md": "Video app"
+      },
+      {
+        "c": "iPhone",
+        "m": "Android",
+        "cd": "Mobile smartphone",
+        "md": "Mobile system"
+      },
+      {
+        "c": "Playstation",
+        "m": "Xbox",
+        "cd": "Gaming console",
+        "md": "Gaming console"
+      },
+      {
+        "c": "Mario",
+        "m": "Sonic",
+        "cd": "Video character",
+        "md": "Video character"
+      },
+      {
+        "c": "Disney",
+        "m": "Pixar",
+        "cd": "Animation studio",
+        "md": "Animation studio"
+      },
+      {
+        "c": "Anime",
+        "m": "Cartoon",
+        "cd": "Japanese animation",
+        "md": "Animated show"
+      },
+      {
+        "c": "Meme",
+        "m": "GIF",
+        "cd": "Internet joke",
+        "md": "Animated image"
+      },
+      {
+        "c": "Podcast",
+        "m": "Radio",
+        "cd": "Audio broadcast",
+        "md": "Audio broadcast"
+      },
+      {
+        "c": "Influencer",
+        "m": "Celebrity",
+        "cd": "Online creator",
+        "md": "Public star"
+      },
+      {
+        "c": "Emoji",
+        "m": "Sticker",
+        "cd": "Keyboard icon",
+        "md": "Visual badge"
+      },
+      {
+        "c": "Hacker",
+        "m": "Coder",
+        "cd": "Cyber specialist",
+        "md": "Software programmer"
+      },
+      {
+        "c": "Vampire",
+        "m": "Zombie",
+        "cd": "Mythical creature",
+        "md": "Mythical creature"
+      },
+      {
+        "c": "Magic",
+        "m": "Sci-Fi",
+        "cd": "Mystical power",
+        "md": "Fiction genre"
+      },
+      {
+        "c": "Hogwarts",
+        "m": "Narnia",
+        "cd": "Magic school",
+        "md": "Fantasy world"
+      },
+      {
+        "c": "Avengers",
+        "m": "Justice League",
+        "cd": "Superhero team",
+        "md": "Superhero team"
+      },
+      {
+        "c": "Jedi",
+        "m": "Sith",
+        "cd": "Sci-fi warrior",
+        "md": "Sci-fi villain"
+      },
+      {
+        "c": "Gryffindor",
+        "m": "Slytherin",
+        "cd": "School house",
+        "md": "School house"
+      },
+      {
+        "c": "Autobot",
+        "m": "Decepticon",
+        "cd": "Robot warrior",
+        "md": "Robot villain"
+      },
+      {
+        "c": "Pokemon",
+        "m": "Digimon",
+        "cd": "Pocket monster",
+        "md": "Digital monster"
+      },
+      {
+        "c": "Barbie",
+        "m": "Bratz",
+        "cd": "Fashion movie",
+        "md": "Fashion dolls"
+      },
+      {
+        "c": "Spotify",
+        "m": "Apple Music",
+        "cd": "Music app",
+        "md": "Music app"
+      }
+    ]
+  },
+  "cinema": {
+    "displayName": "Actors & Characters",
+    "icon": "🎭",
+    "desc": "Marvel & DC heroes, Hollywood stars & famous movie characters.",
+    "pairs": [
+      {
+        "c": "Iron Man",
+        "m": "Batman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Thor",
+        "m": "Aquaman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Spider-Man",
+        "m": "Deadpool",
+        "cd": "Superhero character",
+        "md": "Antihero character"
+      },
+      {
+        "c": "Captain America",
+        "m": "Superman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Hawkeye",
+        "m": "Green Arrow",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Hulk",
+        "m": "Doomsday",
+        "cd": "Superhero character",
+        "md": "Supervillain monster"
+      },
+      {
+        "c": "Doctor Strange",
+        "m": "Doctor Fate",
+        "cd": "Sorcerer superhero",
+        "md": "Sorcerer superhero"
+      },
+      {
+        "c": "Black Panther",
+        "m": "Aquaman",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Wolverine",
+        "m": "Deadpool",
+        "cd": "Mutant superhero",
+        "md": "Antihero character"
+      },
+      {
+        "c": "Thanos",
+        "m": "Darkseid",
+        "cd": "Supervillain character",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Joker",
+        "m": "Green Goblin",
+        "cd": "Supervillain character",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Loki",
+        "m": "Riddler",
+        "cd": "Trickster villain",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Scarlet Witch",
+        "m": "Raven",
+        "cd": "Sorceress superhero",
+        "md": "Mystic superhero"
+      },
+      {
+        "c": "Flash",
+        "m": "Quicksilver",
+        "cd": "Speedster superhero",
+        "md": "Speedster superhero"
+      },
+      {
+        "c": "Black Widow",
+        "m": "Catwoman",
+        "cd": "Spy superhero",
+        "md": "Antihero character"
+      },
+      {
+        "c": "Venom",
+        "m": "Carnage",
+        "cd": "Symbiote antihero",
+        "md": "Symbiote villain"
+      },
+      {
+        "c": "Magneto",
+        "m": "Professor X",
+        "cd": "Mutant villain",
+        "md": "Mutant leader"
+      },
+      {
+        "c": "Bane",
+        "m": "Juggernaut",
+        "cd": "Supervillain character",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Harley Quinn",
+        "m": "Poison Ivy",
+        "cd": "Antihero character",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Ant-Man",
+        "m": "The Atom",
+        "cd": "Shrinking superhero",
+        "md": "Shrinking superhero"
+      },
+      {
+        "c": "Star-Lord",
+        "m": "Han Solo",
+        "cd": "Galactic hero",
+        "md": "Space smuggler"
+      },
+      {
+        "c": "Groot",
+        "m": "Chewbacca",
+        "cd": "Tree creature",
+        "md": "Furry alien"
+      },
+      {
+        "c": "Rocket Raccoon",
+        "m": "Stitch",
+        "cd": "Raccoon gunner",
+        "md": "Blue alien"
+      },
+      {
+        "c": "Winter Soldier",
+        "m": "Red Hood",
+        "cd": "Bionic soldier",
+        "md": "Masked vigilante"
+      },
+      {
+        "c": "Doctor Octopus",
+        "m": "Lex Luthor",
+        "cd": "Tentacle villain",
+        "md": "Mastermind villain"
+      },
+      {
+        "c": "Wonder Woman",
+        "m": "Captain Marvel",
+        "cd": "Superhero heroine",
+        "md": "Cosmic superhero"
+      },
+      {
+        "c": "Miles Morales",
+        "m": "Peter Parker",
+        "cd": "Superhero character",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Two-Face",
+        "m": "Red Skull",
+        "cd": "Supervillain character",
+        "md": "Supervillain character"
+      },
+      {
+        "c": "Robin",
+        "m": "Bucky Barnes",
+        "cd": "Superhero sidekick",
+        "md": "Soldier sidekick"
+      },
+      {
+        "c": "Gwen Stacy",
+        "m": "Mary Jane",
+        "cd": "Superhero heroine",
+        "md": "Romantic interest"
+      },
+      {
+        "c": "Nick Fury",
+        "m": "Amanda Waller",
+        "cd": "Espionage director",
+        "md": "Government director"
+      },
+      {
+        "c": "Shazam",
+        "m": "Superman",
+        "cd": "Magical superhero",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Penguin",
+        "m": "Kingpin",
+        "cd": "Underworld villain",
+        "md": "Crime boss"
+      },
+      {
+        "c": "Ultron",
+        "m": "Brainiac",
+        "cd": "Robotic villain",
+        "md": "Alien villain"
+      },
+      {
+        "c": "Daredevil",
+        "m": "Batman",
+        "cd": "Vigilante superhero",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Punisher",
+        "m": "Peacemaker",
+        "cd": "Lethal vigilante",
+        "md": "Vigilante character"
+      },
+      {
+        "c": "Cyborg",
+        "m": "Vision",
+        "cd": "Cybernetic superhero",
+        "md": "Synthetic android"
+      },
+      {
+        "c": "Mystique",
+        "m": "Chameleon",
+        "cd": "Shapeshifter mutant",
+        "md": "Spy villain"
+      },
+      {
+        "c": "Moon Knight",
+        "m": "Batman",
+        "cd": "Nocturnal vigilante",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Wolverine",
+        "m": "Sabretooth",
+        "cd": "Mutant superhero",
+        "md": "Feral mutant"
+      },
+      {
+        "c": "Deadpool",
+        "m": "Harley Quinn",
+        "cd": "Antihero character",
+        "md": "Antihero character"
+      },
+      {
+        "c": "Captain America",
+        "m": "Winter Soldier",
+        "cd": "Superhero character",
+        "md": "Bionic soldier"
+      },
+      {
+        "c": "Iron Man",
+        "m": "War Machine",
+        "cd": "Superhero character",
+        "md": "Armored superhero"
+      },
+      {
+        "c": "Loki",
+        "m": "Thor",
+        "cd": "Trickster villain",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Gamora",
+        "m": "Nebula",
+        "cd": "Alien warrior",
+        "md": "Alien assassin"
+      },
+      {
+        "c": "Tom Cruise",
+        "m": "Dwayne Johnson",
+        "cd": "Action actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Tom Cruise",
+        "m": "Keanu Reeves",
+        "cd": "Action actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Dwayne Johnson",
+        "m": "Vin Diesel",
+        "cd": "Action actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Leonardo DiCaprio",
+        "m": "Brad Pitt",
+        "cd": "Drama actor",
+        "md": "Leading actor"
+      },
+      {
+        "c": "Robert Downey Jr.",
+        "m": "Johnny Depp",
+        "cd": "Leading actor",
+        "md": "Method actor"
+      },
+      {
+        "c": "Chris Hemsworth",
+        "m": "Jason Momoa",
+        "cd": "Action actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Ryan Reynolds",
+        "m": "Chris Pratt",
+        "cd": "Comedy actor",
+        "md": "Blockbuster actor"
+      },
+      {
+        "c": "Tom Holland",
+        "m": "Timothée Chalamet",
+        "cd": "Young actor",
+        "md": "Drama actor"
+      },
+      {
+        "c": "Arnold Schwarzenegger",
+        "m": "Sylvester Stallone",
+        "cd": "Action legend",
+        "md": "Action legend"
+      },
+      {
+        "c": "Will Smith",
+        "m": "Denzel Washington",
+        "cd": "Leading actor",
+        "md": "Acclaimed actor"
+      },
+      {
+        "c": "Christian Bale",
+        "m": "Cillian Murphy",
+        "cd": "Method actor",
+        "md": "Drama actor"
+      },
+      {
+        "c": "Scarlett Johansson",
+        "m": "Margot Robbie",
+        "cd": "Leading actress",
+        "md": "Leading actress"
+      },
+      {
+        "c": "Emma Stone",
+        "m": "Jennifer Lawrence",
+        "cd": "Acclaimed actress",
+        "md": "Leading actress"
+      },
+      {
+        "c": "Jackie Chan",
+        "m": "Bruce Lee",
+        "cd": "Martial artist",
+        "md": "Martial legend"
+      },
+      {
+        "c": "Morgan Freeman",
+        "m": "Samuel L. Jackson",
+        "cd": "Veteran actor",
+        "md": "Veteran actor"
+      },
+      {
+        "c": "Hugh Jackman",
+        "m": "Ryan Reynolds",
+        "cd": "Action actor",
+        "md": "Comedy actor"
+      },
+      {
+        "c": "Henry Cavill",
+        "m": "Ben Affleck",
+        "cd": "Action actor",
+        "md": "Leading actor"
+      },
+      {
+        "c": "Zendaya",
+        "m": "Jenna Ortega",
+        "cd": "Drama actress",
+        "md": "Young actress"
+      },
+      {
+        "c": "Al Pacino",
+        "m": "Robert De Niro",
+        "cd": "Cinema legend",
+        "md": "Cinema legend"
+      },
+      {
+        "c": "Harrison Ford",
+        "m": "Tom Cruise",
+        "cd": "Cinema icon",
+        "md": "Action actor"
+      },
+      {
+        "c": "Jason Statham",
+        "m": "Bruce Willis",
+        "cd": "Action actor",
+        "md": "Action hero"
+      },
+      {
+        "c": "Pedro Pascal",
+        "m": "Oscar Isaac",
+        "cd": "Leading actor",
+        "md": "Drama actor"
+      },
+      {
+        "c": "Matt Damon",
+        "m": "Ben Affleck",
+        "cd": "Leading actor",
+        "md": "Leading actor"
+      },
+      {
+        "c": "Gal Gadot",
+        "m": "Angelina Jolie",
+        "cd": "Action actress",
+        "md": "Leading actress"
+      },
+      {
+        "c": "Daniel Craig",
+        "m": "Pierce Brosnan",
+        "cd": "Action actor",
+        "md": "Suave actor"
+      },
+      {
+        "c": "Meryl Streep",
+        "m": "Cate Blanchett",
+        "cd": "Acting royalty",
+        "md": "Acclaimed actress"
+      },
+      {
+        "c": "Jim Carrey",
+        "m": "Rowan Atkinson",
+        "cd": "Comedy actor",
+        "md": "Comedy actor"
+      },
+      {
+        "c": "Zac Efron",
+        "m": "Channing Tatum",
+        "cd": "Comedy actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Shah Rukh Khan",
+        "m": "Tom Cruise",
+        "cd": "Film actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Amitabh Bachchan",
+        "m": "Morgan Freeman",
+        "cd": "Film actor",
+        "md": "Veteran actor"
+      },
+      {
+        "c": "Chris Evans",
+        "m": "Chris Hemsworth",
+        "cd": "Action actor",
+        "md": "Action actor"
+      },
+      {
+        "c": "Anne Hathaway",
+        "m": "Natalie Portman",
+        "cd": "Leading actress",
+        "md": "Acclaimed actress"
+      },
+      {
+        "c": "Johnny Depp",
+        "m": "Orlando Bloom",
+        "cd": "Method actor",
+        "md": "Fantasy actor"
+      },
+      {
+        "c": "Mark Wahlberg",
+        "m": "Matt Damon",
+        "cd": "Action actor",
+        "md": "Leading actor"
+      },
+      {
+        "c": "Liam Neeson",
+        "m": "Harrison Ford",
+        "cd": "Action hero",
+        "md": "Cinema icon"
+      },
+      {
+        "c": "James Bond",
+        "m": "Ethan Hunt",
+        "cd": "Secret agent",
+        "md": "Secret agent"
+      },
+      {
+        "c": "John Wick",
+        "m": "Jason Bourne",
+        "cd": "Suited assassin",
+        "md": "Secret operative"
+      },
+      {
+        "c": "Indiana Jones",
+        "m": "Lara Croft",
+        "cd": "Adventurer archaeologist",
+        "md": "Tomb explorer"
+      },
+      {
+        "c": "Harry Potter",
+        "m": "Percy Jackson",
+        "cd": "Fantasy franchise",
+        "md": "Demigod hero"
+      },
+      {
+        "c": "Darth Vader",
+        "m": "Lord Voldemort",
+        "cd": "Galactic villain",
+        "md": "Dark wizard"
+      },
+      {
+        "c": "Luke Skywalker",
+        "m": "Neo",
+        "cd": "Jedi master",
+        "md": "Chosen hero"
+      },
+      {
+        "c": "Gandalf",
+        "m": "Dumbledore",
+        "cd": "Elder wizard",
+        "md": "Headmaster wizard"
+      },
+      {
+        "c": "Jack Sparrow",
+        "m": "Captain Hook",
+        "cd": "Pirate captain",
+        "md": "Pirate villain"
+      },
+      {
+        "c": "Terminator",
+        "m": "RoboCop",
+        "cd": "Cyborg assassin",
+        "md": "Cyborg officer"
+      },
+      {
+        "c": "Sherlock Holmes",
+        "m": "Hercule Poirot",
+        "cd": "Consulting detective",
+        "md": "Belgian detective"
+      },
+      {
+        "c": "Katniss Everdeen",
+        "m": "Tris Prior",
+        "cd": "Rebellion heroine",
+        "md": "Divergent heroine"
+      },
+      {
+        "c": "Dom Toretto",
+        "m": "Ethan Hunt",
+        "cd": "Street racer",
+        "md": "Secret agent"
+      },
+      {
+        "c": "Optimus Prime",
+        "m": "Iron Giant",
+        "cd": "Robot leader",
+        "md": "Giant robot"
+      },
+      {
+        "c": "Gollum",
+        "m": "Dobby",
+        "cd": "Cave creature",
+        "md": "House elf"
+      },
+      {
+        "c": "Legolas",
+        "m": "Hawkeye",
+        "cd": "Elf archer",
+        "md": "Superhero character"
+      },
+      {
+        "c": "Shrek",
+        "m": "The Grinch",
+        "cd": "Swamp ogre",
+        "md": "Holiday villain"
+      },
+      {
+        "c": "Frodo Baggins",
+        "m": "Bilbo Baggins",
+        "cd": "Hobbit hero",
+        "md": "Hobbit hero"
+      },
+      {
+        "c": "Severus Snape",
+        "m": "Kylo Ren",
+        "cd": "Potions master",
+        "md": "Dark warrior"
+      },
+      {
+        "c": "Yoda",
+        "m": "Master Oogway",
+        "cd": "Jedi master",
+        "md": "Turtle master"
+      },
+      {
+        "c": "Willy Wonka",
+        "m": "Mad Hatter",
+        "cd": "Candy maker",
+        "md": "Eccentric character"
+      },
+      {
+        "c": "Godzilla",
+        "m": "King Kong",
+        "cd": "Giant monster",
+        "md": "Giant ape"
+      },
+      {
+        "c": "Pennywise",
+        "m": "Freddy Krueger",
+        "cd": "Cosmic clown",
+        "md": "Nightmare stalker"
+      },
+      {
+        "c": "Morpheus",
+        "m": "Obi-Wan Kenobi",
+        "cd": "Rebellion captain",
+        "md": "Jedi mentor"
+      },
+      {
+        "c": "Cruella de Vil",
+        "m": "Miranda Priestly",
+        "cd": "Fashion villain",
+        "md": "Magazine editor"
+      },
+      {
+        "c": "Forrest Gump",
+        "m": "Benjamin Button",
+        "cd": "Pure-hearted man",
+        "md": "Reverse man"
+      },
+      {
+        "c": "Maximus",
+        "m": "William Wallace",
+        "cd": "Roman gladiator",
+        "md": "Scottish leader"
+      },
+      {
+        "c": "Maverick",
+        "m": "Han Solo",
+        "cd": "Fighter pilot",
+        "md": "Space smuggler"
+      },
+      {
+        "c": "Voldemort",
+        "m": "Sauron",
+        "cd": "Dark wizard",
+        "md": "Dark lord"
+      },
+      {
+        "c": "Rocky Balboa",
+        "m": "Creed",
+        "cd": "Boxing champion",
+        "md": "Boxing fighter"
+      },
+      {
+        "c": "Marty McFly",
+        "m": "Doctor Who",
+        "cd": "Time traveler",
+        "md": "Time lord"
+      },
+      {
+        "c": "Tyler Durden",
+        "m": "Patrick Bateman",
+        "cd": "Anarchist alter-ego",
+        "md": "Investment banker"
+      },
+      {
+        "c": "Tarzan",
+        "m": "Mowgli",
+        "cd": "Jungle man",
+        "md": "Jungle boy"
+      },
+      {
+        "c": "Hannibal Lecter",
+        "m": "Jigsaw",
+        "cd": "Psychiatrist killer",
+        "md": "Trap mastermind"
+      },
+      {
+        "c": "Chucky",
+        "m": "Annabelle",
+        "cd": "Haunted doll",
+        "md": "Haunted doll"
+      },
+      {
+        "c": "Gomez Addams",
+        "m": "Count Dracula",
+        "cd": "Family father",
+        "md": "Vampire count"
+      }
+    ]
+  }
+}

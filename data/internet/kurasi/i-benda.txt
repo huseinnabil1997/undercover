@@ -1,0 +1,24 @@
+# i-benda | Benda & Kendaraan
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Artifacts".
+@ ck:Artifacts_22
+cup / bowl = Cangkir / Mangkuk
+chair / table = Kursi / Meja
+vacuum / broom = Vacuum Cleaner / Sapu
+car / bus = Mobil / Bus
+boat / ship = Perahu / Kapal
+bike / scooter = Sepeda / Skuter
+plane / helicopter = Pesawat / Helikopter
+truck / car = Truk / Mobil
+train / subway = Kereta / MRT
+table / desk = Meja Makan / Meja Belajar
+cabinet / wardrobe = Lemari / Lemari Pakaian
+stool / bench = Kursi Bulat / Bangku
+fork / spoon = Garpu / Sendok
+bed / pillow = Kasur / Bantal
+lamp / lightbulb = Lampu Meja / Bohlam
+camera / lens = Kamera / Lensa
+bed / mattress = Ranjang / Kasur
+apartment / condo = Apartemen / Kondominium
+pillow / cushion = Bantal / Bantal Sofa
+sculpture / statue = Pahatan / Patung
+clock / watch = Jam Dinding / Jam Tangan

@@ -1,0 +1,27 @@
+# i-lain | Lain-lain
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Miscellaneous", "Plants", dan "People & Social".
+@ ck:Miscellaneous_12
+rain / drizzle = Hujan / Gerimis
+Library / bookstore = Perpustakaan / Toko Buku
+vampire / werewolf = Vampir / Manusia Serigala
+bicyle / motorcycle = Sepeda / Motor
+museum / gallery = Museum / Galeri
+hospital / clinic = Rumah Sakit / Klinik
+shampoo / conditioner = Sampo / Kondisioner
+Bakery / Café = Toko Roti / Kafe
+doctor / nurse = Dokter / Perawat
+painting / drawing = Lukisan / Gambar
+garden / park = Kebun / Taman
+@ ck:Plants_8
+fern / palm = Pakis / Palem
+tree / bush = Pohon / Semak
+rose / tulip = Mawar / Tulip
+maple / oak = Maple / Ek
+Pine / cypress = Pinus / Cemara
+@ ck:People_Social_18
+peasant / farmer = Buruh Tani / Petani
+chef / cook = Chef / Juru Masak
+architect / designer = Arsitek / Desainer
+doctor / physician = Dokter Umum / Dokter Spesialis
+teacher / professor = Guru / Dosen
+lawyer / attorney = Pengacara / Advokat

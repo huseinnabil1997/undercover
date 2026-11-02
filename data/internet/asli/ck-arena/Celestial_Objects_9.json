@@ -1,0 +1,11 @@
+[
+    ["galaxy", "nebula"],
+    ["blackhole", "supernova"],
+    ["star", "comet"],
+    ["asteroid", "meteor"],
+    ["rainbow", "aurora"],
+    ["moon", "galaxy"],
+    ["nebula", "sun"],
+    ["sun", "star"],
+    ["thunder", "lightning"]
+]

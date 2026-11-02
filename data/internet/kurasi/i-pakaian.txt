@@ -1,0 +1,18 @@
+# i-pakaian | Pakaian & Kain
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Clothing", "Textiles", dan "Materials".
+@ ck:Clothing_12
+coat / jacket = Mantel / Jaket
+socks / stockings = Kaus Kaki / Stoking
+shirt / blouse = Kemeja / Blus
+hat / cap = Topi Bundar / Topi Pet
+wool / silk = Wol / Sutra
+jeans / pants = Celana Jeans / Celana Panjang
+gloves / mittens = Sarung Tangan / Sarung Tangan Bayi
+skirt / kilt = Rok / Rok Kotak-Kotak
+shorts / trunks = Celana Pendek / Celana Renang
+sandals / flip-flops = Sandal / Sandal Jepit
+@ ck:Textiles_8
+rayon / polyester = Rayon / Poliester
+velvet / satin = Beludru / Satin
+cotton / linen = Katun / Linen
+Wool / cashmere = Wol / Kasmir

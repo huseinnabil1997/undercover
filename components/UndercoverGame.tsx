@@ -6,13 +6,13 @@ import {
   MAX_PEMAIN, MIN_PEMAIN, namaDefault, tebakanBenar, urutanBicara,
   rapikanPanjangKata, validasiSetup, type Komposisi,
 } from '@/lib/game';
-import { kategoriTersimpan, PESAN_TANPA_SATU_KATA, siapkanPasangan } from '@/lib/bankKata';
+import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
-import type { PanjangKata, PasanganKata, Pemain, Pemenang } from '@/lib/types';
+import type { PanjangKata, PasanganKata, Pemain, Pemenang, SumberKata } from '@/lib/types';
 import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
 import { useDialog } from './Modal';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
-import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, Stepper, TombolMenu, type Penjaga } from './ui';
+import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
 
 const PILIHAN_TIMER = [0, 60, 90, 120, 180];
 
@@ -51,7 +51,14 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   const [layar, setLayar] = useState<Layar>('setup');
   const [nama, setNama] = useState<string[]>(namaAwal);
   const [komposisi, setKomposisi] = useState<Komposisi>(() => komposisiAwal(namaAwal().length));
-  const [kategori, setKategori] = useState<string[]>(kategoriTersimpan);
+  const [sumber, setSumber] = useState<SumberKata>(sumberTersimpan);
+  // Pilihan kategori disimpan terpisah per sumber kata, bawaan semua kategori.
+  const [kategoriPerSumber, setKategoriPerSumber] = useState<Record<SumberKata, string[]>>(() => ({
+    internet: kategoriTersimpan('internet'),
+    kamus: kategoriTersimpan('kamus'),
+  }));
+  const kategori = kategoriPerSumber[sumber];
+  const setKategori = (k: string[]) => setKategoriPerSumber((lama) => ({ ...lama, [sumber]: k }));
   const [timer, setTimer] = useState<number>(() => baca<number>(KUNCI.timer, 0));
   const [panjangKata, setPanjangKata] = useState<PanjangKata>(() => rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)));
   const [game, setGame] = useState<Permainan | null>(null);
@@ -59,7 +66,8 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   const [galatMuat, setGalatMuat] = useState<string | null>(null);
 
   // Pilihan kategori langsung disimpan, jadi kategori yang dibuang tetap dibuang di kunjungan berikutnya.
-  useEffect(() => simpan(KUNCI.kategori, kategori), [kategori]);
+  useEffect(() => simpan(kunciKategori(sumber), kategori), [sumber, kategori]);
+  useEffect(() => simpan(KUNCI.sumberKata, sumber), [sumber]);
 
   // Kembali ke menu saat permainan berjalan harus dikonfirmasi lewat modal.
   const penjaga = useCallback(async () => {
@@ -98,11 +106,12 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
     setMemuat(true);
     setGalatMuat(null);
     try {
-      const { pasangan, cadangan } = await siapkanPasangan(kategori, panjangKata);
+      const { pasangan, cadangan } = await siapkanPasangan(kategori, panjangKata, sumber);
       const bersih = nama.map((n) => n.trim());
       simpan(KUNCI.nama, bersih);
       simpan(KUNCI.komposisi, komposisi);
-      simpan(KUNCI.kategori, kategori);
+      simpan(KUNCI.sumberKata, sumber);
+      simpan(kunciKategori(sumber), kategori);
       simpan(KUNCI.timer, timer);
       simpan(KUNCI.panjangKata, panjangKata);
       setNama(bersih);
@@ -201,7 +210,9 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
             onOtomatis={() => setKomposisi(komposisiDefault(nama.length))}
           />
 
-          <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} />
+          <PilihSumberKata nilai={sumber} onUbah={setSumber} />
+
+          <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} sumber={sumber} />
 
           <PilihPanjangKata nilai={panjangKata} onUbah={setPanjangKata} />
 

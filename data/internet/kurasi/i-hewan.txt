@@ -1,0 +1,17 @@
+# i-hewan | Hewan
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Animals".
+@ ck:Animals_16
+parrot / crow = Burung Beo / Burung Gagak
+shark / whale = Hiu / Paus
+wolf / tiger = Serigala / Harimau
+elephant / giraffe = Gajah / Jerapah
+lion / tiger = Singa / Harimau
+snake / lizard = Ular / Kadal
+fox / coyote = Rubah / Anjing Hutan
+bee / butterfly = Lebah / Kupu-Kupu
+goose / duck = Angsa / Bebek
+elephant / mammoth = Gajah / Mamut
+lion / rhino = Singa / Badak
+toad / frog = Kodok / Katak
+turtle / tortoise = Penyu / Kura-Kura
+moth / butterfly = Ngengat / Kupu-Kupu

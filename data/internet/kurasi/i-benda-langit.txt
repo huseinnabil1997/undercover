@@ -1,0 +1,11 @@
+# i-benda-langit | Langit & Cuaca
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Celestial Objects".
+@ ck:Celestial_Objects_9
+galaxy / nebula = Galaksi / Nebula
+blackhole / supernova = Lubang Hitam / Supernova
+star / comet = Bintang / Komet
+asteroid / meteor = Asteroid / Meteor
+rainbow / aurora = Pelangi / Aurora
+moon / galaxy = Bulan / Galaksi
+sun / star = Matahari / Bintang
+thunder / lightning = Guntur / Petir

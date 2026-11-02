@@ -1,0 +1,21 @@
+# i-perkakas | Perkakas & Alat Tulis
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Tools" dan "Stationery".
+@ ck:Tools_19
+saw / chisel = Gergaji / Pahat
+hammer / axe = Palu / Kapak
+screwdriver / drill = Obeng / Bor
+saw / scissors = Gergaji / Gunting
+shovel / rake = Sekop / Garu
+pliers / wrench = Tang / Kunci Inggris
+scalpel / scissors = Pisau Bedah / Gunting
+pliers / tongs = Tang / Capit
+bandage / gauze = Perban / Kain Kasa
+syringe / needle = Suntikan / Jarum
+stethoscope / thermometer = Stetoskop / Termometer
+eraser / sharpener = Penghapus / Rautan
+@ ck:Stationery_7
+eraser / ruler = Penghapus / Penggaris
+marker / highlighter = Spidol / Stabilo
+stapler / clip = Stapler / Penjepit Kertas
+notepad / notebook = Notes / Buku Tulis
+marker / crayon = Spidol / Krayon

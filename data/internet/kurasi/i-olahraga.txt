@@ -1,0 +1,15 @@
+# i-olahraga | Olahraga & Mainan
+# Terjemahan dan kurasi dari CK-Arena (Apache-2.0), kategori asli "Sports" dan "Toys".
+@ ck:Sports_8
+skateboard / skis = Skateboard / Ski
+surfboard / paddleboard = Papan Selancar / Papan Dayung
+skateboard / rollerblades = Skateboard / Sepatu Roda
+football / rugby = Sepak Bola / Rugbi
+Baseball / Cricket = Bisbol / Kriket
+boxing / Taekwondo = Tinju / Taekwondo
+wrestling / judo = Gulat / Judo
+surfing / windsurfing = Selancar / Selancar Angin
+@ ck:Toys_3
+yo-yo / boomerang = Yoyo / Bumerang
+frisbee / ball = Frisbee / Bola
+kite / parachute = Layangan / Parasut

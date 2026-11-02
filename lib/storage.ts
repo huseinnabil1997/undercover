@@ -6,6 +6,10 @@ export const KUNCI = {
   komposisi: 'komposisi',
   /** v2: default berubah menjadi semua kategori terpilih, pilihan lama tidak dipakai lagi. */
   kategori: 'kategori.v2',
+  /** Sumber kata: 'internet' (bawaan) atau 'kamus'. */
+  sumberKata: 'sumberKata',
+  /** Pilihan kategori untuk sumber Internet (terpisah dari kategori Kamus kita). */
+  kategoriInternet: 'kategoriInternet',
   panjangKata: 'panjangKata',
   timer: 'timer',
   riwayat: 'riwayatPasangan',
