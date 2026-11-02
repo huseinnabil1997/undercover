@@ -14,7 +14,14 @@ import {
 export const OPSI_PEER: PeerOptions = {
   debug: 0,
   config: {
-    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }],
+    // `config` PeerJS MENGGANTI default-nya (tidak digabung). Dulu hanya STUN, sehingga relay TURN gratis bawaan PeerJS
+    // ikut hilang dan pemain di jaringan lain (NAT simetris/CGNAT) tidak pernah tersambung. Relay ini best-effort:
+    // hanya dipakai bila koneksi langsung gagal.
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' },
+      { urls: ['turn:eu-0.turn.peerjs.com:3478', 'turn:us-0.turn.peerjs.com:3478'], username: 'peerjs', credential: 'peerjsp' },
+    ],
   },
 };
 

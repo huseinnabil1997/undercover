@@ -8,10 +8,11 @@ import { kategoriTersimpan, PESAN_TANPA_SATU_KATA, siapkanPasangan } from '@/lib
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import { buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
+import { BATAS_MENYAMBUNG_MS, pesanMacet, sudahMacet } from '@/lib/online/macet';
 import type { PesanChat } from '@/lib/online/chat';
 import { buatIdPemain, buatKodeRoom, kodeValid, rapikanKode } from '@/lib/online/room';
 import {
-  bacaSesi, bacaStateHostMentah, bolehTawarkanLanjut, buatToken, DETAK_AKTIF_MS, hapusSesi, hapusStateHost, lepasAktif,
+  bacaSesi, bacaStateHostMentah, bersihkanAktifBasi, bolehTawarkanLanjut, buatToken, DETAK_AKTIF_MS, hapusSesi, hapusStateHost, lepasAktif,
   sesiDipakaiHalamanLain, simpanSesi, simpanStateHost, tandaiAktif, type SesiOnline,
 } from '@/lib/online/sesi';
 import type { Aksi, AksiKhususHost, AksiPemain, GameView, PemainView, Pengaturan, StateHost, ViewPemain } from '@/lib/online/types';
@@ -30,7 +31,7 @@ const TEKS_STATUS: Record<StatusJaringan, string> = {
   tersambung: 'Online',
   menyambungUlang: 'Menyambung',
   hostTidakAda: 'Mencari host',
-  idDipakai: 'Memuat',
+  idDipakai: 'Membuka room',
   gagal: 'Gagal',
 };
 
@@ -48,7 +49,9 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     return s && !sesiDipakaiHalamanLain(s.id) ? s : null;
   });
   const [view, setView] = useState<ViewPemain | null>(null);
-  const [status, setStatus] = useState<{ s: StatusJaringan; info?: string }>({ s: 'menyambung' });
+  // `sejak`: kapan status terakhir berpindah antara tersambung dan belum (atau percobaan baru dimulai).
+  const [status, setStatus] = useState<{ s: StatusJaringan; info?: string; sejak: number }>({ s: 'menyambung', sejak: 0 });
+  const [sekarang, setSekarang] = useState(0);
   const [galatMasuk, setGalatMasuk] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [memuat, setMemuat] = useState(false);
@@ -65,6 +68,15 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     const id = window.setTimeout(() => setToast(null), 3500);
     return () => window.clearTimeout(id);
   }, [toast]);
+
+  const ubahStatus = useCallback((s: StatusJaringan, info?: string, baru = false) => {
+    const t = Date.now();
+    setStatus((prev) => ({
+      s,
+      info,
+      sejak: baru || (prev.s === 'tersambung') !== (s === 'tersambung') ? t : prev.sejak,
+    }));
+  }, []);
 
   const keluarSesi = useCallback((alasan?: string, hanyaTab = false) => {
     hostRef.current?.hentikan();
@@ -83,6 +95,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   useEffect(() => {
     if (!sesi) return;
     const id = sesi.id;
+    bersihkanAktifBasi();
     tandaiAktif(id);
     const detak = window.setInterval(() => tandaiAktif(id), DETAK_AKTIF_MS);
     // Saat halaman dimuat ulang atau ditutup, lepas tanda agar sesi bisa langsung dilanjutkan.
@@ -99,6 +112,12 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   useEffect(() => {
     if (!sesi) return;
     simpanSesi({ ...sesi, waktu: Date.now() });
+    // Panggilan status pertama menandai awal percobaan baru (untuk batas waktu menyambung).
+    let baru = true;
+    const lapor = (s: StatusJaringan, info?: string) => {
+      ubahStatus(s, info, baru);
+      baru = false;
+    };
     if (sesi.host) {
       const pulih = pulihkanStateHost(bacaStateHostMentah(), Date.now());
       const dipulihkan = !!pulih && pulih.kode === sesi.kode && pulih.hostId === sesi.id;
@@ -116,7 +135,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           setView(viewUntuk(s, sesi.id));
         },
         onStatus: (s, info) => {
-          setStatus({ s, info });
+          lapor(s, info);
           // Kode bentrok dengan room lain yang masih aktif: buat kode baru selama room masih kosong.
           if (s === 'idDipakai' && !dipulihkan && host.state.pemain.length === 1 && !host.state.game && Number(info) >= 2) {
             setSesi({ ...sesi, kode: buatKodeRoom() });
@@ -139,7 +158,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
         }
         setView(v);
       },
-      onStatus: (s, info) => setStatus({ s, info }),
+      onStatus: lapor,
       onTolak: (alasan, saatGabung) => {
         if (saatGabung) keluarSesi(alasan);
         else tampilkan(alasan);
@@ -160,7 +179,26 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
       klien.hentikan();
       if (klienRef.current === klien) klienRef.current = null;
     };
-  }, [sesi, keluarSesi, tampilkan]);
+  }, [sesi, keluarSesi, tampilkan, ubahStatus]);
+
+  // Pengaman: jangan pernah menunggu tanpa ujung. Setelah BATAS_MENYAMBUNG_MS belum tersambung, tampilkan alasan + tombol.
+  const siap = status.s === 'tersambung';
+  useEffect(() => {
+    if (!sesi || siap || !status.sejak) return;
+    const sisa = Math.max(0, status.sejak + BATAS_MENYAMBUNG_MS - Date.now());
+    const id = window.setTimeout(() => setSekarang(Date.now()), sisa + 50);
+    return () => window.clearTimeout(id);
+  }, [sesi, siap, status.sejak]);
+  const macet = !!sesi && sudahMacet(status.s, status.sejak, sekarang);
+
+  const cobaLagi = useCallback(() => {
+    // Objek sesi baru memicu effect: koneksi lama dihentikan dan dibuat ulang dari awal.
+    setSesi((s) => (s ? { ...s } : s));
+  }, []);
+  const keluarRoom = useCallback(() => {
+    if (sesi?.host) hapusStateHost();
+    keluarSesi();
+  }, [sesi, keluarSesi]);
 
   const aksi = useCallback(
     (a: AksiUi) => {
@@ -236,7 +274,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
         onMasuk={(s) => {
           setGalatMasuk(null);
           setView(null);
-          setStatus({ s: 'menyambung' });
+          setStatus({ s: 'menyambung', sejak: Date.now() });
           setSesi(s);
         }}
       />
@@ -263,14 +301,34 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
 
       {toast && <p className="toast" role="alert">{toast}</p>}
 
+      {view && macet && (
+        <div className="kartu macet" role="alert">
+          <p className="galat">{pesanMacet(sesi.host, sesi.kode, status.s, status.info)}</p>
+          <div className="baris-tombol">
+            <button className="utama" onClick={cobaLagi}>Coba lagi</button>
+            <button className="kedua" onClick={keluarRoom}>{sesi.host ? 'Tutup room' : 'Keluar dari room'}</button>
+          </div>
+        </div>
+      )}
+
       {!view ? (
         <section className="tumpuk tengah masuk">
-          <div className="kartu besar">
-            <div className="pemutar" aria-hidden />
-            <p>{status.s === 'hostTidakAda' ? `Room ${sesi.kode} belum ditemukan. Pastikan HP host membuka room ini dan kodenya benar.` : 'Menyambung'}</p>
-            {status.s === 'gagal' && <p className="catatan">{status.info}</p>}
-            <p className="catatan">Lama? Jaringan ini mungkin memblokir koneksi antar HP. Coba data seluler atau Wi-Fi lain.</p>
-          </div>
+          {macet ? (
+            <div className="kartu besar" role="alert">
+              <p>{pesanMacet(sesi.host, sesi.kode, status.s, status.info)}</p>
+              <div className="baris-tombol">
+                <button className="utama" onClick={cobaLagi}>Coba lagi</button>
+                <button className="kedua" onClick={keluarRoom}>Keluar dari room</button>
+              </div>
+            </div>
+          ) : (
+            <div className="kartu besar">
+              <div className="pemutar" aria-hidden />
+              <p>{status.s === 'hostTidakAda' ? `Room ${sesi.kode} belum ditemukan. Pastikan HP host membuka room ini dan kodenya benar.` : 'Menyambung'}</p>
+              {status.s === 'gagal' && <p className="catatan">{status.info}</p>}
+              <p className="catatan">Lama? Jaringan ini mungkin memblokir koneksi antar HP. Coba data seluler atau Wi-Fi lain.</p>
+            </div>
+          )}
         </section>
       ) : (
         <Ruang
@@ -292,10 +350,20 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
 }) {
   const [nama, setNama] = useState(() => baca<string>(KUNCI_NAMA_ONLINE, ''));
   const [kode, setKode] = useState(kodeAwal ?? '');
-  const [lanjut] = useState(() => {
+  const cariLanjut = useCallback(() => {
     const s = bacaSesi('perangkat');
     return s && bolehTawarkanLanjut(s, kodeAwal, sesiDipakaiHalamanLain(s.id)) ? s : null;
-  });
+  }, [kodeAwal]);
+  const [lanjut, setLanjut] = useState(cariLanjut);
+  // Penanda tab aktif bisa kedaluwarsa (tab lain ditutup atau crash): periksa ulang berkala.
+  useEffect(() => {
+    bersihkanAktifBasi();
+    const id = window.setInterval(() => {
+      const baru = cariLanjut();
+      setLanjut((lama) => (JSON.stringify(lama) === JSON.stringify(baru) ? lama : baru));
+    }, DETAK_AKTIF_MS);
+    return () => window.clearInterval(id);
+  }, [cariLanjut]);
   const namaBersih = rapikanNama(nama);
   const kodeBersih = rapikanKode(kode);
 

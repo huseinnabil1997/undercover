@@ -75,6 +75,34 @@ export function lepasAktif(id: string): void {
   }, undefined);
 }
 
+/** Hapus penanda aktif yang sudah lama basi (tab ditutup tanpa pagehide atau crash). */
+export function bersihkanAktifBasi(now = Date.now()): void {
+  aman(() => {
+    const ls = window.localStorage;
+    const kunci: string[] = [];
+    for (let i = 0; i < ls.length; i++) {
+      const k = ls.key(i);
+      if (k && k.startsWith(PREFIX_AKTIF)) kunci.push(k);
+    }
+    for (const k of kunci) {
+      let t: unknown = null;
+      try {
+        t = JSON.parse(ls.getItem(k) ?? 'null');
+      } catch {
+        // rusak: hapus
+      }
+      if (aktifBasi(t, now)) ls.removeItem(k);
+    }
+  }, undefined);
+}
+
+/** Murni: penanda rusak atau sudah jauh melewati BATAS_AKTIF_MS boleh dihapus. */
+export function aktifBasi(raw: unknown, now: number): boolean {
+  if (!raw || typeof raw !== 'object') return true;
+  const w = (raw as { waktu?: unknown }).waktu;
+  return typeof w !== 'number' || now - w > BATAS_AKTIF_MS * 10;
+}
+
 /** Murni: apakah tanda aktif `raw` menunjukkan sesi masih dipakai halaman lain. */
 export function aktifDiHalamanLain(raw: unknown, halaman: string, now: number): boolean {
   if (!raw || typeof raw !== 'object') return false;

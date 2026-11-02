@@ -470,3 +470,8 @@ button:active:not(:disabled) { transform: scale(0.97); }
   .pemutar { animation: none; border-top-color: var(--garis-kuat); }
   .petunjuk-chip, .galat-petunjuk { animation: none; }
 }
+
+/* Pengaman koneksi macet: alasan + tombol Coba lagi / Keluar. */
+.kartu.macet { margin: 0 0 12px; }
+.kartu.macet .galat { margin: 0; }
+.kartu.macet .baris-tombol > *, .kartu.besar .baris-tombol > * { flex: 1; }
