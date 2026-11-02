@@ -5,8 +5,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { kodeDariUrl } from '@/lib/online/room';
 import { bacaSesi } from '@/lib/online/sesi';
 import { bersihkanKunciLama } from '@/lib/storage';
+import { bacaUmpan, daftarkanSW, pasangUmpan } from '@/lib/umpan/mesin';
 import { DialogProvider } from './Modal';
 import OnlineGame from './OnlineGame';
+import { TombolSuara } from './PanelSuara';
 import UndercoverGame from './UndercoverGame';
 import { Tanda, type Penjaga } from './ui';
 
@@ -52,6 +54,13 @@ function Isi() {
   useEffect(() => {
     modeRef.current = mode;
   }, [mode]);
+
+  // Suara dibuka pada ketukan pertama; service worker hanya dipasang jika notifikasi giliran diaktifkan.
+  useEffect(() => {
+    const lepas = pasangUmpan();
+    if (bacaUmpan().notifikasi) void daftarkanSW();
+    return lepas;
+  }, []);
 
   const keBerandaLangsung = useCallback(() => {
     penjaga.current = null;
@@ -131,6 +140,7 @@ function Isi() {
 
   return (
     <main className="wadah beranda masuk">
+      <div className="atas-beranda"><TombolSuara /></div>
       <div className="pahlawan">
         <Tanda ukuran={44} />
         <h1>Undercover</h1>

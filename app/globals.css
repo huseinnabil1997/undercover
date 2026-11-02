@@ -273,6 +273,7 @@ p.galat { padding-left: 16px; }
 .qr img { background: #fff; padding: 8px; border-radius: var(--r-dalam); width: 240px; height: 240px; max-width: 100%; }
 
 .catatan.nol { margin: 0; }
+.label.nol { margin: 0; }
 .daftar-lobby { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .daftar-lobby li {
   display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 4px;
@@ -482,3 +483,12 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .diagnosa .catatan { margin: 0 0 4px; }
 .diagnosa ul { margin: 0; padding-left: 18px; font-size: 0.85rem; opacity: 0.85; overflow-wrap: anywhere; }
 .diagnosa li { margin: 2px 0; }
+
+/* ---------------------------- Suara & notifikasi ---------------------------- */
+.kecil.ikon { display: inline-flex; align-items: center; justify-content: center; padding: 0; width: 44px; }
+.panel-suara { display: flex; flex-direction: column; gap: 12px; }
+.panel-suara h2 { margin-bottom: 0; }
+.baris-atur { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--garis); }
+.baris-atur .segmen { width: 100%; }
+.atas-beranda { position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: calc(env(safe-area-inset-right) + 12px); }
+.beranda { position: relative; }

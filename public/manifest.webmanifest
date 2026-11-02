@@ -1,7 +1,7 @@
 {
   "name": "Undercover: Tebak Kata",
   "short_name": "Undercover",
-  "description": "Game tebak kata Undercover, main bergiliran dalam satu HP.",
+  "description": "Game tebak kata Undercover. Main online di HP masing-masing atau bergiliran dalam satu HP.",
   "lang": "id",
   "start_url": "/undercover/",
   "scope": "/undercover/",

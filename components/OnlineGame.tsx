@@ -21,7 +21,10 @@ import { SUARA_LEWATI, type Aksi, type AksiKhususHost, type AksiPemain, type Gam
 import {
   AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
 } from './ui';
+import { kunciGiliran, peristiwaOnline, pilihUtama } from '@/lib/umpan/peristiwa';
+import { tutupNotifikasiGiliran, umpan } from '@/lib/umpan/mesin';
 import { ChatRoom } from './ChatRoom';
+import { TombolSuara } from './PanelSuara';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
 import { useDialog } from './Modal';
 
@@ -63,6 +66,25 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   const [galatPetunjuk, setGalatPetunjuk] = useState<string | null>(null);
   const hostRef = useRef<HostRoom | null>(null);
   const klienRef = useRef<KlienRoom | null>(null);
+
+  // Umpan balik: bandingkan view lama dan baru. Notifikasi HP hanya untuk giliranmu (lihat lib/umpan).
+  const viewLalu = useRef<ViewPemain | null>(null);
+  useEffect(() => {
+    const lama = viewLalu.current && view && viewLalu.current.kode === view.kode ? viewLalu.current : null;
+    viewLalu.current = view;
+    if (!view) return;
+    const p = pilihUtama(peristiwaOnline(lama, view));
+    if (p) umpan(p);
+    if (!kunciGiliran(view)) void tutupNotifikasiGiliran();
+  }, [view]);
+  // Pesan chat baru dari pemain lain: bunyi sangat halus, tanpa notifikasi.
+  const chatLalu = useRef<string | null | undefined>(undefined);
+  useEffect(() => {
+    const akhir = chat.length > 0 ? chat[chat.length - 1] : null;
+    const lalu = chatLalu.current;
+    chatLalu.current = akhir?.id ?? null;
+    if (akhir && lalu !== undefined && akhir.id !== lalu && akhir.dari !== sesi?.id) umpan('chat');
+  }, [chat, sesi?.id]);
 
   const tampilkan = useCallback((t: string) => setToast(t), []);
   useEffect(() => {
@@ -325,6 +347,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           </div>
         </div>
         <div className="aksi-kepala">
+          <TombolSuara />
           {view && <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} teks={draftChat} ubahTeks={setDraftChat} />}
         </div>
       </header>
@@ -417,6 +440,7 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
       <header className="kepala">
         <TombolMenu onClick={onBeranda} />
         <span className="logo"><Tanda /> Undercover</span>
+        <TombolSuara />
       </header>
       <section className="tumpuk masuk">
         <div className="kepala-fase"><h2>Online</h2></div>

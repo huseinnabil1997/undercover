@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault,
   MAX_PEMAIN, MIN_PEMAIN, namaDefault, tebakanBenar, urutanBicara,
@@ -10,7 +10,10 @@ import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasanga
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PanjangKata, PasanganKata, Pemain, Pemenang, SumberKata } from '@/lib/types';
 import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
+import { peristiwaLokal } from '@/lib/umpan/peristiwa';
+import { umpan } from '@/lib/umpan/mesin';
 import { useDialog } from './Modal';
+import { TombolSuara } from './PanelSuara';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
 import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
 
@@ -157,30 +160,33 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
     <main className="wadah">
       <header className="kepala">
         {onBeranda && <TombolMenu onClick={onBeranda} />}
-        {layar !== 'main' ? (
-          <nav className="navigasi">
-            <button className={layar === 'caramain' ? 'aktif' : ''} onClick={() => setLayar(layar === 'caramain' ? 'setup' : 'caramain')}>Aturan</button>
-          </nav>
-        ) : (
-          <button
-            className="kecil"
-            onClick={async () => {
-              const ya = await dialog.konfirmasi({
-                judul: 'Akhiri permainan?',
-                pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan.',
-                ok: 'Akhiri',
-                batal: 'Lanjut',
-                bahaya: true,
-              });
-              if (ya) {
-                setGame(null);
-                setLayar('setup');
-              }
-            }}
-          >
-            Keluar
-          </button>
-        )}
+        <div className="aksi-kepala">
+          <TombolSuara />
+          {layar !== 'main' ? (
+            <nav className="navigasi">
+              <button className={layar === 'caramain' ? 'aktif' : ''} onClick={() => setLayar(layar === 'caramain' ? 'setup' : 'caramain')}>Aturan</button>
+            </nav>
+          ) : (
+            <button
+              className="kecil"
+              onClick={async () => {
+                const ya = await dialog.konfirmasi({
+                  judul: 'Akhiri permainan?',
+                  pesan: 'Permainan ini dihentikan dan kamu kembali ke pengaturan.',
+                  ok: 'Akhiri',
+                  batal: 'Lanjut',
+                  bahaya: true,
+                });
+                if (ya) {
+                  setGame(null);
+                  setLayar('setup');
+                }
+              }}
+            >
+              Keluar
+            </button>
+          )}
+        </div>
       </header>
 
       {layar === 'caramain' && <CaraMain onTutup={() => setLayar('setup')} />}
@@ -298,6 +304,14 @@ interface PropsMain {
 
 function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat }: PropsMain) {
   const { pemain, pasangan, fase } = game;
+  // Isyarat suara/getar mode lokal; giliran berikutnya diberi bunyi yang jelas karena HP dioper.
+  const isyarat = peristiwaLokal(fase);
+  const isyaratLalu = useRef<string | null>(null);
+  useEffect(() => {
+    if (isyarat.kunci === isyaratLalu.current) return;
+    isyaratLalu.current = isyarat.kunci;
+    umpan(isyarat.p);
+  }, [isyarat.kunci, isyarat.p]);
   const riwayat = (tampilPeran: boolean, giliran?: number) => (
     <RiwayatPetunjuk
       pemain={pemain.map((p, i) => ({ kunci: String(i), nama: p.nama, hidup: p.hidup, peran: tampilPeran || !p.hidup ? p.peran : undefined }))}
@@ -584,6 +598,12 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
           <li>Voting dilakukan dari HP masing-masing. Setiap pemain boleh memilih Lewati (abstain); Lewati tidak menambah suara siapa pun dan tetap dihitung sudah vote. Jika Lewati lebih banyak dari suara terbanyak, atau tidak ada suara untuk siapa pun, tidak ada yang tereliminasi. Jika suara terbanyak seri (termasuk seri dengan Lewati), ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
           <li>HP host harus tetap membuka halaman selama permainan.</li>
+        </ul>
+        <h3>Suara dan notifikasi</h3>
+        <ul>
+          <li>Tombol speaker di pojok atas membuka pengaturan Suara, Getar, Volume, dan Notifikasi giliran.</li>
+          <li>Bunyi dan getar paling jelas saat giliranmu memberi petunjuk, atau saat kamu Mr. White yang harus menebak. Momen lain (pemain gabung, voting, hasil, chat) hanya bunyi halus.</li>
+          <li>Notifikasi giliran hanya muncul saat giliranmu dan halaman sedang tidak dilihat, selama room masih terbuka di latar. Jika aplikasi sudah ditutup, notifikasi tidak muncul. Di iPhone, pasang dulu ke Layar Utama (iOS 16.4 ke atas).</li>
         </ul>
         <p className="catatan">Semua data (nama, pengaturan, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>
       </div>

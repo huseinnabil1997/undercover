@@ -59,6 +59,24 @@ Live: https://huseinnabil1997.github.io/undercover/
   room dilanjutkan dengan kode dan peer id yang sama, dan klien tersambung kembali otomatis.
 - **Tidak ada timer diskusi** di mode online (timer opsional hanya ada di mode satu HP).
 
+## Suara, getar, dan notifikasi giliran
+
+Tombol speaker di pojok atas (beranda, layar game, dan room online) membuka pengaturan **Suara**, **Volume**, **Getar**, dan **Notifikasi giliran**.
+Pengaturan disimpan di `localStorage` HP itu saja.
+
+- **Suara** dibuat langsung di browser (Web Audio, tanpa file audio). Bunyi paling jelas, nada naik lima ketukan plus getar panjang,
+  hanya untuk **giliranmu** memberi petunjuk dan untuk **Mr. White yang harus menebak**. Momen lain (pemain gabung, game mulai, voting,
+  eliminasi, menang/kalah, chat, oper HP di mode satu HP) memakai bunyi pendek yang halus.
+- **Mode satu HP**: ada isyarat saat HP harus dioper, saat kartu dibuka, dan saat giliran petunjuk pindah ke pemain berikutnya.
+- **Notifikasi giliran** (opsional, perlu izin): muncul di HP **hanya saat giliranmu** dan halaman sedang tidak dilihat (pindah aplikasi
+  atau layar lain). Tidak ada notifikasi untuk mulai, voting, hasil, chat, atau pemain gabung. Notifikasi ditampilkan lewat service worker
+  kecil (`public/sw.js`, tanpa cache) dan otomatis ditutup saat giliran lewat atau halaman dibuka lagi. Judul tab juga berubah menjadi
+  "(Giliranmu!)".
+- **Batasan (jujur)**: ini bukan push dari server. Notifikasi hanya muncul selama room masih terbuka di latar. Jika aplikasi/tab sudah ditutup,
+  tidak ada notifikasi. Android dapat memperlambat atau membekukan tab di latar setelah beberapa menit, sehingga notifikasi bisa terlambat atau
+  tidak muncul. Di iPhone, notifikasi web hanya tersedia jika situs dipasang ke Layar Utama (iOS 16.4 ke atas), dan iOS menghentikan JavaScript
+  tidak lama setelah aplikasi ke latar, jadi dalam praktiknya notifikasi paling andal di Android. iPhone tidak mendukung getar dari web.
+
 ## Cara main singkat (satu HP)
 
 1. Isi 3 sampai 20 nama pemain, atur jumlah Undercover dan Mr. White, pilih kategori kata.
