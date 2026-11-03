@@ -57,7 +57,10 @@ Live: https://huseinnabil1997.github.io/undercover/
   jadi pemain lain tidak bisa mengambil alih kursi orang yang sedang offline. Pesan dari klien juga divalidasi (klien tidak bisa menjalankan aksi host).
 - **Tidak ada migrasi host**: jika host menutup tab, room berhenti untuk semua. Jika host hanya refresh (atau membuka lagi dalam 6 jam di perangkat yang sama),
   room dilanjutkan dengan kode dan peer id yang sama, dan klien tersambung kembali otomatis.
-- **Tidak ada timer diskusi** di mode online (timer opsional hanya ada di mode satu HP).
+- **Batas waktu opsional** (diatur host, ikut ke semua pemain): petunjuk per giliran 20/30/45/60 detik dan diskusi+vote
+  30/60/90/120 detik. Bawaan **Tanpa batas**. Saat waktu habis, giliran petunjuk dilewati dengan tanda "(waktu habis)",
+  vote langsung dihitung seperti tombol Hitung (yang belum memilih dianggap tidak memilih), dan tebakan Mr. White
+  (minimal 30 detik) dianggap salah. Host mengirim sisa waktu, bukan jam, jadi beda jam antar HP tidak berpengaruh.
 
 ## Suara, getar, dan notifikasi giliran
 
@@ -86,7 +89,7 @@ Pengaturan disimpan di `localStorage` HP itu saja.
 3. Petunjuk sesuai urutan giliran acak (giliran pertama bukan Mr. White): layar menampilkan "Giliran [nama]: ketik petunjukmu".
    Pemain mengetik petunjuknya (aturan validasi sama dengan mode online), atau menekan **Sudah bicara** untuk menyelesaikan giliran
    tanpa mencatat petunjuk, lalu HP dioper ke pemain berikutnya. Setelah giliran terakhir, voting dimulai otomatis.
-4. Voting (dengan timer opsional dan riwayat petunjuk) untuk mengeliminasi satu pemain, lalu peran pemain itu dibuka.
+4. Voting (dengan batas waktu opsional dan riwayat petunjuk) untuk mengeliminasi satu pemain, lalu peran pemain itu dibuka.
    Riwayat petunjuk juga tampil di layar hasil akhir.
    Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.
 5. Civilian menang jika semua Undercover dan Mr. White tereliminasi.

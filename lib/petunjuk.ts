@@ -9,6 +9,8 @@ export interface EntriPetunjuk {
   ronde: number;
   teks: string;
   waktu: number;
+  /** Giliran dilewati otomatis karena waktu habis (teks berisi penanda, bukan petunjuk pemain). */
+  habis?: true;
 }
 
 const KONTROL = /[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g;
@@ -44,6 +46,11 @@ export const GALAT_PETUNJUK = {
  * - Ditolak jika petunjuk yang sama persis (setelah dinormalkan) sudah dipakai siapa pun di game ini.
  * Kata pemain lain sengaja tidak dicek: penolakan seperti itu justru membocorkan kata tim lain.
  */
+/** Teks petunjuk yang sudah dipakai (penanda waktu habis tidak dihitung). */
+export function teksDipakai(entri: readonly EntriPetunjuk[]): string[] {
+  return entri.filter((e) => !e.habis).map((e) => e.teks);
+}
+
 export function cekPetunjuk(
   teks: unknown,
   kataRahasia: string | null,

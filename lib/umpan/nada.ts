@@ -70,6 +70,14 @@ export const EFEK: Record<Peristiwa, Nada[]> = {
     { f: N.D5, t: 0, d: 0.05, bentuk: 'sine', g: 0.15 },
     { f: N.A5, t: 0.06, d: 0.08, bentuk: 'sine', g: 0.15 },
   ],
+  // Hitung mundur: ketukan pendek per detik di 5 detik terakhir.
+  detik: [{ f: 1000, t: 0, d: 0.05, bentuk: 'square', g: 0.12 }],
+  // Waktu habis: dua bip turun yang tegas.
+  waktuHabis: [
+    { f: N.A5, t: 0, d: 0.16, bentuk: 'square', g: 0.25 },
+    { f: N.E5, t: 0.2, d: 0.16, bentuk: 'square', g: 0.25 },
+    { f: N.A4, f2: N.E4, t: 0.4, d: 0.35, bentuk: 'square', g: 0.25 },
+  ],
 };
 
 /** Lama total efek (detik). */

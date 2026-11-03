@@ -1,6 +1,7 @@
 // Tipe state dan pesan untuk mode online (host = sumber state otoritatif, topologi bintang).
 import type { Komposisi } from '../game';
 import type { PesanChat } from './chat';
+import type { BatasWaktu } from '../batasWaktu';
 import type { EntriPetunjuk } from '../petunjuk';
 import type { PanjangKata, PasanganKata, Pemenang, Peran, SumberKata } from '../types';
 
@@ -26,6 +27,18 @@ export interface Pengaturan {
   panjangKata?: PanjangKata;
   /** Sumber kata pilihan host. Kosong (state lama) ditebak dari id kategori. */
   sumberKata?: SumberKata;
+  /** Batas waktu giliran petunjuk dan vote pilihan host. Kosong (state lama) berarti tanpa batas. */
+  batasWaktu?: BatasWaktu;
+}
+
+/** Tenggat langkah yang sedang berjalan, dihitung dan dijaga host (jam host). */
+export interface TenggatHost {
+  /** Penanda langkah (fase, ronde, giliran, putaran vote); berganti tepat saat langkah berganti. */
+  kunci: string;
+  /** Waktu habis menurut jam host (ms). */
+  sampai: number;
+  /** Lama total langkah ini (ms), untuk progress bar. */
+  total: number;
 }
 
 export type FaseOnline = 'kata' | 'diskusi' | 'vote' | 'terungkap' | 'hasil';
@@ -65,6 +78,8 @@ export interface GameOnline {
   tebakanSalah?: string;
   pemenang: Pemenang | null;
   tebakanMrWhite?: string;
+  /** Tenggat langkah saat ini; null/kosong jika tanpa batas waktu. */
+  tenggat?: TenggatHost | null;
 }
 
 export interface StateHost {
@@ -147,6 +162,11 @@ export interface GameView {
   tereliminasi: string | null;
   tebakan: 'tidakPerlu' | 'menunggu' | 'salah';
   tebakanSalah?: string;
+  /**
+   * Sisa waktu langkah ini saat view dibuat host. Host mengirim sisa (bukan jam) agar selisih jam antar HP
+   * tidak berpengaruh. `sampaiLokal` diisi penerima: Date.now() saat view diterima + sisaMs.
+   */
+  tenggat?: { kunci: string; sisaMs: number; totalMs: number; sampaiLokal?: number } | null;
   /** Diisi hanya saat permainan selesai. */
   hasil?: { pemenang: Pemenang; pasangan: PasanganKata; tebakanMrWhite?: string };
 }

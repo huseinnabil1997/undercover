@@ -185,9 +185,30 @@ p.galat { padding-left: 16px; }
 .pemain.lewati.pilih { border-style: solid; border-color: var(--teks); background: var(--teks); color: var(--dasar); }
 .rekap li.rekap-lewati .nama { font-style: italic; }
 
-.timer { text-align: center; }
-.waktu { display: block; font-size: 3.25rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.timer.habis .waktu { color: var(--merah); }
+/* Hitung mundur batas waktu: menempel di atas saat digulir, ringkas di HP. */
+.hitungan {
+  position: sticky; top: calc(env(safe-area-inset-top) + 8px); z-index: 5;
+  display: flex; flex-direction: column; gap: 6px; padding: 10px 14px;
+  background: var(--permukaan); border: 1px solid var(--garis); border-radius: var(--r-dalam);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+}
+.hitungan-baris { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.hitungan-label { font-size: 0.85rem; font-weight: 700; color: var(--redup); min-width: 0; overflow-wrap: anywhere; }
+.hitungan-angka { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; white-space: nowrap; }
+.hitungan-bar { height: 6px; border-radius: var(--pil); background: var(--permukaan-2); overflow: hidden; }
+.hitungan-bar > span { display: block; height: 100%; background: var(--aksen); transform-origin: left center; transition: transform 250ms linear; }
+.hitungan.mendesak { border-color: var(--merah); }
+.hitungan.mendesak .hitungan-angka { color: var(--merah); animation: hitungan-detak 1s ease-in-out infinite; }
+.hitungan.mendesak .hitungan-bar > span, .hitungan.habis .hitungan-bar > span { background: var(--merah); }
+.hitungan.habis { border-color: var(--merah); }
+.hitungan.habis .hitungan-angka { color: var(--merah); font-size: 1.15rem; }
+@keyframes hitungan-detak { 50% { transform: scale(1.08); } }
+.batas-waktu .baris-batas { display: flex; flex-direction: column; gap: 8px; }
+.batas-waktu .baris-batas + .baris-batas { margin-top: 12px; }
+.label-batas { margin: 0; font-size: 0.9rem; font-weight: 700; }
+.batas-waktu .chip { min-height: 40px; padding: 0 14px; }
+.batas-waktu .chip:disabled { cursor: default; }
+.batas-waktu .chip:disabled:not(.pilih) { opacity: 0.45; }
 .baris-tombol { display: flex; gap: 8px; margin-top: 8px; }
 .baris-tombol .kedua, .baris-tombol .utama { min-height: 48px; }
 
@@ -461,6 +482,7 @@ button:active:not(:disabled) { transform: scale(0.97); }
   background: var(--permukaan-2); font-weight: 600; word-break: break-word; max-width: 100%;
   animation: petunjuk-masuk 300ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
+.petunjuk-chip.habis { background: transparent; border: 1px dashed var(--garis-kuat); color: var(--redup); font-style: italic; font-weight: 500; }
 .petunjuk-ronde { color: var(--aksen); font-size: 0.75rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 @keyframes petunjuk-masuk { from { opacity: 0; transform: translateY(6px) scale(0.9); } to { opacity: 1; transform: none; } }
 
@@ -472,7 +494,8 @@ button:active:not(:disabled) { transform: scale(0.97); }
   .konfeti { display: none; }
   button:active:not(:disabled) { transform: none; }
   .pemutar { animation: none; border-top-color: var(--garis-kuat); }
-  .petunjuk-chip, .galat-petunjuk { animation: none; }
+  .petunjuk-chip, .galat-petunjuk, .hitungan.mendesak .hitungan-angka { animation: none; }
+  .hitungan-bar > span { transition: none; }
 }
 
 /* Pengaman koneksi macet: alasan + tombol Coba lagi / Keluar. */

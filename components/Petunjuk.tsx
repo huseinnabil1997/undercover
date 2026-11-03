@@ -96,7 +96,7 @@ export function RiwayatPetunjuk({ pemain, entri, giliran, ronde }: {
                 ) : (
                   <ul className="riwayat-petunjuk-list">
                     {milik.map((e) => (
-                      <li key={`${e.ronde}-${e.waktu}`} className="petunjuk-chip">
+                      <li key={`${e.ronde}-${e.waktu}`} className={`petunjuk-chip ${e.habis ? 'habis' : ''}`}>
                         <span className="petunjuk-ronde">R{e.ronde}</span> {e.teks}
                       </li>
                     ))}
@@ -118,7 +118,7 @@ export function RiwayatPetunjuk({ pemain, entri, giliran, ronde }: {
                 ) : (
                   <ul className="riwayat-petunjuk-list">
                     {isi.map((e) => (
-                      <li key={`${e.pemain}-${e.waktu}`} className="petunjuk-chip">
+                      <li key={`${e.pemain}-${e.waktu}`} className={`petunjuk-chip ${e.habis ? 'habis' : ''}`}>
                         <span className="petunjuk-ronde">{nama(e.pemain)}</span> {e.teks}
                       </li>
                     ))}

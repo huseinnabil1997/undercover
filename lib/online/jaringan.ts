@@ -151,6 +151,9 @@ export class HostRoom {
   private brokerRelay = 0;
   private terkirim = new Map<string, number>();
   private timer: ReturnType<typeof setInterval> | null = null;
+  /** Pemicu tepat waktu untuk tenggat langkah saat ini (tick 2 detik tetap jadi cadangan). */
+  private timerTenggat: ReturnType<typeof setTimeout> | null = null;
+  private tenggatTerjadwal: string | null = null;
   private selesai = false;
   private percobaan = 0;
   /** Chat hanya di memori: hilang saat room ditutup atau HP host refresh. */
@@ -166,6 +169,7 @@ export class HostRoom {
       this.kedaluwarsaRelay();
       this.dispatch({ jenis: 'tick' });
     }, 2000);
+    this.jadwalkanTenggat();
     this.siapRelay = this.mulaiRelay();
     if (this.opsi.paksaRelay) return;
     // Relay gagal disiapkan (mis. crypto.subtle tidak ada di http biasa): jalur langsung tetap jalan.
@@ -396,6 +400,7 @@ export class HostRoom {
   private terapkan(baru: StateHost, diam?: boolean): void {
     const berubah = baru !== this.state;
     this.state = baru;
+    this.jadwalkanTenggat();
     if (!berubah || diam) {
       this.kirimSemua();
       return;
@@ -413,9 +418,26 @@ export class HostRoom {
     }
   }
 
+  /** Pasang ulang pemicu hanya jika tenggat berganti; reducer yang memutuskan apakah waktu benar-benar habis. */
+  private jadwalkanTenggat(): void {
+    const t = this.state.game?.tenggat;
+    const kunci = t && !this.selesai ? `${t.kunci}@${t.sampai}` : null;
+    if (kunci === this.tenggatTerjadwal) return;
+    if (this.timerTenggat) clearTimeout(this.timerTenggat);
+    this.timerTenggat = null;
+    this.tenggatTerjadwal = kunci;
+    if (!t || !kunci) return;
+    this.timerTenggat = setTimeout(() => {
+      this.timerTenggat = null;
+      this.tenggatTerjadwal = null;
+      if (!this.selesai) this.dispatch({ jenis: 'tick' });
+    }, Math.max(0, t.sampai - Date.now()) + 30);
+  }
+
   hentikan(): void {
     this.selesai = true;
     if (this.timer) clearInterval(this.timer);
+    if (this.timerTenggat) clearTimeout(this.timerTenggat);
     for (const c of this.koneksi.values()) c.tutup();
     this.relay?.hentikan();
     this.peer?.destroy();

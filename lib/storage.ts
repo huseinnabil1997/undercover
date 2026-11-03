@@ -11,7 +11,10 @@ export const KUNCI = {
   /** Pilihan kategori untuk sumber Internet (terpisah dari kategori Kamus kita). */
   kategoriInternet: 'kategoriInternet',
   panjangKata: 'panjangKata',
+  /** Timer vote manual versi lama (detik); hanya dibaca untuk migrasi ke batasWaktu. */
   timer: 'timer',
+  /** Batas waktu giliran petunjuk dan vote: { petunjuk, vote } dalam detik, 0 = tanpa batas. */
+  batasWaktu: 'batasWaktu',
   riwayat: 'riwayatPasangan',
 } as const;
 

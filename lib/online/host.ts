@@ -3,11 +3,12 @@
 import {
   bagiPeran, cekPemenang, MAX_PEMAIN, tebakanBenar, urutanBicara, validasiSetup, type Rng,
 } from '../game';
-import { cekPetunjuk, MAKS_PETUNJUK } from '../petunjuk';
+import { detikTebakan, rapikanBatasWaktu, TAMBAHAN_PULIH_MS, TEKS_WAKTU_HABIS } from '../batasWaktu';
+import { cekPetunjuk, MAKS_PETUNJUK, teksDipakai } from '../petunjuk';
 import type { Pemain } from '../types';
 import {
   BATAS_OFFLINE_MS, SUARA_LEWATI, VERSI_PROTOKOL,
-  type Aksi, type AksiPemain, type GameOnline, type GameView, type HasilVote, type Pengaturan, type StateHost, type ViewPemain,
+  type Aksi, type AksiPemain, type GameOnline, type GameView, type HasilVote, type Pengaturan, type StateHost, type TenggatHost, type ViewPemain,
 } from './types';
 
 export interface Konteks {
@@ -67,8 +68,59 @@ export function lobbyTerbuka(state: StateHost): boolean {
 
 export function reduceHost(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
   const hasil = langkah(state, aksi, ctx);
-  if (hasil.state !== state && !hasil.diam) hasil.state = { ...hasil.state, seq: state.seq + 1 };
+  if (hasil.state !== state && !hasil.diam) hasil.state = { ...aturTenggat(hasil.state, ctx.now), seq: state.seq + 1 };
   return hasil;
+}
+
+/* ------------------------------- Batas waktu ------------------------------- */
+
+/** Penanda langkah yang diberi batas waktu, atau null jika langkah ini tidak dibatasi. */
+export function kunciLangkah(g: GameOnline): string | null {
+  if (g.fase === 'diskusi' && g.giliran < g.urutan.length) return `diskusi|${g.ronde}|${g.giliran}`;
+  if (g.fase === 'vote') return `vote|${g.ronde}|${g.putaranVote}`;
+  if (g.fase === 'terungkap' && g.tebakan === 'menunggu') return `tebak|${g.ronde}`;
+  return null;
+}
+
+function detikLangkah(state: StateHost, g: GameOnline): number {
+  const b = rapikanBatasWaktu(state.pengaturan.batasWaktu);
+  if (g.fase === 'diskusi') return b.petunjuk;
+  if (g.fase === 'vote') return b.vote;
+  if (g.fase === 'terungkap') return detikTebakan(b);
+  return 0;
+}
+
+/**
+ * Pasang tenggat baru tepat saat langkah berganti (giliran, vote, vote ulang, tebakan Mr. White).
+ * Langkah yang sama mempertahankan tenggatnya, jadi pesan lain (vote masuk, pemain tersambung ulang) tidak mereset waktu.
+ */
+function aturTenggat(state: StateHost, now: number): StateHost {
+  const g = state.game;
+  if (!g) return state;
+  const kunci = kunciLangkah(g);
+  const detik = kunci ? detikLangkah(state, g) : 0;
+  if (!kunci || detik <= 0) return g.tenggat ? { ...state, game: { ...g, tenggat: null } } : state;
+  if (g.tenggat?.kunci === kunci) return state;
+  const tenggat: TenggatHost = { kunci, sampai: now + detik * 1000, total: detik * 1000 };
+  return { ...state, game: { ...g, tenggat } };
+}
+
+/**
+ * Jalankan aturan waktu habis jika tenggat langkah saat ini sudah lewat. Setelahnya langkah sudah berganti
+ * (kunci baru), jadi waktu habis yang sama tidak bisa terpicu dua kali.
+ */
+function waktuHabis(state: StateHost, now: number): StateHost {
+  const g = state.game;
+  const t = g?.tenggat;
+  if (!g || !t || now < t.sampai || kunciLangkah(g) !== t.kunci) return state;
+  if (g.fase === 'diskusi') {
+    // Giliran dilewati dengan penanda di riwayat, lalu lanjut ke pemain berikutnya (atau ke vote).
+    return majuGiliran(state, { pemain: g.urutan[g.giliran], ronde: g.ronde, teks: TEKS_WAKTU_HABIS, waktu: now, habis: true });
+  }
+  // Sama seperti tombol Hitung: yang belum vote dianggap tidak memilih; aturan seri dan Lewati tetap.
+  if (g.fase === 'vote') return tutupVoting(state);
+  // Mr. White kehabisan waktu: dianggap tebakan salah.
+  return { ...state, game: { ...g, tebakan: 'salah', tebakanSalah: TEKS_WAKTU_HABIS } };
 }
 
 function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
@@ -107,9 +159,10 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
     }
     case 'tick': {
       const basi = state.pemain.filter((p) => p.online && p.id !== state.hostId && ctx.now - p.terakhir > BATAS_OFFLINE_MS);
-      if (basi.length === 0) return tetap();
       const ids = new Set(basi.map((p) => p.id));
-      return { state: { ...state, pemain: state.pemain.map((p) => (ids.has(p.id) ? { ...p, online: false } : p)) } };
+      const s = basi.length === 0 ? state : { ...state, pemain: state.pemain.map((p) => (ids.has(p.id) ? { ...p, online: false } : p)) };
+      const habis = waktuHabis(s, ctx.now);
+      return habis === state ? tetap() : { state: habis };
     }
   }
 
@@ -130,7 +183,11 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
     }
     case 'aturPengaturan': {
       if (!lobbyTerbuka(state)) return tetap('Pengaturan hanya bisa diubah di lobby.');
-      return { state: { ...state, pengaturan: aksi.pengaturan } };
+      // UI lama yang tidak mengirim batasWaktu tidak menghapus pilihan yang sudah ada.
+      const pengaturan = aksi.pengaturan.batasWaktu === undefined && state.pengaturan.batasWaktu
+        ? { ...aksi.pengaturan, batasWaktu: state.pengaturan.batasWaktu }
+        : aksi.pengaturan;
+      return { state: { ...state, pengaturan } };
     }
     case 'mulai': {
       if (!lobbyTerbuka(state)) return tetap('Permainan sedang berjalan.');
@@ -173,7 +230,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (!g || g.fase !== 'diskusi') return tetap('Belum waktunya mengetik petunjuk.');
       if (g.urutan[g.giliran] !== dari) return tetap('Belum giliranmu mengetik petunjuk.');
       if (g.petunjuk.some((e) => e.pemain === dari && e.ronde === g.ronde)) return tetap('Kamu sudah mengirim petunjuk di ronde ini.');
-      const cek = cekPetunjuk(aksi.teks, kataMilik(g, dari), g.petunjuk.map((e) => e.teks));
+      const cek = cekPetunjuk(aksi.teks, kataMilik(g, dari), teksDipakai(g.petunjuk));
       // Galat hanya dikirim ke pengirim (lewat `tolak`); state tidak berubah sehingga tidak ada yang disiarkan.
       if ('galat' in cek) return tetap(cek.galat);
       return { state: majuGiliran(state, { pemain: dari, ronde: g.ronde, teks: cek.teks, waktu: ctx.now }) };
@@ -337,7 +394,7 @@ function selesai(state: StateHost, pemenang: NonNullable<GameOnline['pemenang']>
  * View untuk satu pemain. Hanya berisi kata milik pemain itu sendiri. Peran pemain lain
  * baru disertakan setelah mereka tereliminasi, dan semuanya terbuka saat permainan selesai.
  */
-export function viewUntuk(state: StateHost, id: string): ViewPemain {
+export function viewUntuk(state: StateHost, id: string, now = Date.now()): ViewPemain {
   const g = state.game;
   const selesaiMain = g?.fase === 'hasil';
   const pemain = state.pemain.map((p) => {
@@ -361,11 +418,11 @@ export function viewUntuk(state: StateHost, id: string): ViewPemain {
     hostId: state.hostId,
     pemain,
     pengaturan: state.pengaturan,
-    game: g ? gameView(g, id) : null,
+    game: g ? gameView(g, id, now) : null,
   };
 }
 
-function gameView(g: GameOnline, id: string): GameView {
+function gameView(g: GameOnline, id: string, now: number): GameView {
   const ikut = g.peserta.includes(id);
   const peran = ikut ? g.peran[id] : undefined;
   const kata = peran === 'civilian' ? g.pasangan.civilian : peran === 'undercover' ? g.pasangan.undercover : null;
@@ -388,6 +445,7 @@ function gameView(g: GameOnline, id: string): GameView {
     tereliminasi: g.tereliminasi,
     tebakan: g.tebakan,
     ...(g.tebakanSalah !== undefined ? { tebakanSalah: g.tebakanSalah } : {}),
+    tenggat: g.tenggat ? { kunci: g.tenggat.kunci, sisaMs: Math.max(0, g.tenggat.sampai - now), totalMs: g.tenggat.total } : null,
   };
   if (g.fase === 'hasil' && g.pemenang) {
     v.hasil = { pemenang: g.pemenang, pasangan: g.pasangan, ...(g.tebakanMrWhite ? { tebakanMrWhite: g.tebakanMrWhite } : {}) };
@@ -408,7 +466,14 @@ export function pulihkanStateHost(raw: unknown, now: number): StateHost | null {
   if (!s.pemain.some((p) => p.id === s.hostId)) return null;
   return {
     ...s,
-    game: s.game ? { ...s.game, petunjuk: Array.isArray(s.game.petunjuk) ? s.game.petunjuk : [] } : null,
+    game: s.game
+      ? {
+        ...s.game,
+        petunjuk: Array.isArray(s.game.petunjuk) ? s.game.petunjuk : [],
+        // Host refresh: tenggat tetap (tidak diulang dari awal), tetapi diberi tambahan agar pemain sempat tersambung ulang.
+        ...(s.game.tenggat ? { tenggat: { ...s.game.tenggat, sampai: Math.max(s.game.tenggat.sampai, now + TAMBAHAN_PULIH_MS) } } : {}),
+      }
+      : null,
     pemain: s.pemain.map((p) => ({ ...p, online: p.id === s.hostId, terakhir: now })),
     seq: s.seq + 1,
   };

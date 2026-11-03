@@ -9,22 +9,25 @@ import {
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PanjangKata, PasanganKata, Pemain, Pemenang, SumberKata } from '@/lib/types';
-import { cekPetunjuk, type EntriPetunjuk } from '@/lib/petunjuk';
+import { cekPetunjuk, teksDipakai, type EntriPetunjuk } from '@/lib/petunjuk';
+import { batasTersimpan, detikTebakan, TEKS_WAKTU_HABIS, type BatasWaktu } from '@/lib/batasWaktu';
 import { peristiwaLokal } from '@/lib/umpan/peristiwa';
 import { umpan } from '@/lib/umpan/mesin';
 import { useDialog } from './Modal';
 import { TombolSuara } from './PanelSuara';
 import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
-import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
+import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
+import { Hitungan } from './Hitungan';
 
-const PILIHAN_TIMER = [0, 60, 90, 120, 180];
+/** Jeda singkat setelah waktu petunjuk habis agar pemain sempat melihat tanda sebelum giliran pindah. */
+const JEDA_HABIS_MS = 1200;
 
 type Fase =
   | { jenis: 'serah'; idx: number; terbuka: boolean }
   | { jenis: 'diskusi'; ronde: number; urutan: number[]; giliran: number }
   /** pilih: indeks pemain, LEWATI_LOKAL untuk abstain, atau null jika belum memilih. */
   | { jenis: 'vote'; ronde: number; pilih: number | null }
-  | { jenis: 'terungkap'; ronde: number; idx: number; tebakan: 'belum' | 'salah' }
+  | { jenis: 'terungkap'; ronde: number; idx: number; tebakan: 'belum' | 'salah'; habis?: boolean }
   /** Vote dilewati: tidak ada yang tereliminasi, lanjut ronde berikutnya. */
   | { jenis: 'aman'; ronde: number }
   | { jenis: 'hasil'; pemenang: Pemenang; tebakanMrWhite?: string };
@@ -68,7 +71,7 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   }));
   const kategori = kategoriPerSumber[sumber];
   const setKategori = (k: string[]) => setKategoriPerSumber((lama) => ({ ...lama, [sumber]: k }));
-  const [timer, setTimer] = useState<number>(() => baca<number>(KUNCI.timer, 0));
+  const [batas, setBatas] = useState<BatasWaktu>(batasTersimpan);
   const [panjangKata, setPanjangKata] = useState<PanjangKata>(() => rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)));
   const [game, setGame] = useState<Permainan | null>(null);
   const [memuat, setMemuat] = useState(false);
@@ -121,7 +124,7 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
       simpan(KUNCI.komposisi, komposisi);
       simpan(KUNCI.sumberKata, sumber);
       simpan(kunciKategori(sumber), kategori);
-      simpan(KUNCI.timer, timer);
+      simpan(KUNCI.batasWaktu, batas);
       simpan(KUNCI.panjangKata, panjangKata);
       setNama(bersih);
       setGame({ pemain: bagiPeran(bersih, komposisi), pasangan, fase: { jenis: 'serah', idx: 0, terbuka: false }, petunjuk: [] });
@@ -145,11 +148,14 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   }
 
   /** Selesaikan giliran saat ini (dengan petunjuk, atau tanpa entri untuk Sudah bicara / Lewati), lalu otomatis ke voting setelah giliran terakhir. */
-  function majuGiliran(teks: string | null) {
+  function majuGiliran(teks: string | null, habis = false) {
     setGame((g) => {
       if (!g || g.fase.jenis !== 'diskusi') return g;
       const f = g.fase;
-      const petunjuk = teks === null ? g.petunjuk : [...g.petunjuk, { pemain: String(f.urutan[f.giliran]), ronde: f.ronde, teks, waktu: Date.now() }];
+      const entri: EntriPetunjuk | null = habis
+        ? { pemain: String(f.urutan[f.giliran]), ronde: f.ronde, teks: TEKS_WAKTU_HABIS, waktu: Date.now(), habis: true }
+        : teks === null ? null : { pemain: String(f.urutan[f.giliran]), ronde: f.ronde, teks, waktu: Date.now() };
+      const petunjuk = entri ? [...g.petunjuk, entri] : g.petunjuk;
       const giliran = f.giliran + 1;
       const fase: Fase = giliran >= f.urutan.length ? { jenis: 'vote', ronde: f.ronde, pilih: null } : { ...f, giliran };
       return { ...g, petunjuk, fase };
@@ -228,18 +234,14 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
 
           <PilihPanjangKata nilai={panjangKata} onUbah={setPanjangKata} />
 
-          <div className="kartu">
-            <div className="baris-judul">
-              <h2>Timer</h2>
-            </div>
-            <div className="chip-grup">
-              {PILIHAN_TIMER.map((d) => (
-                <button key={d} className={`chip ${timer === d ? 'pilih' : ''}`} aria-pressed={timer === d} onClick={() => setTimer(d)}>
-                  {d === 0 ? 'Mati' : `${d / 60 >= 1 && d % 60 === 0 ? `${d / 60} menit` : `${d} detik`}`}
-                </button>
-              ))}
-            </div>
-          </div>
+          <PilihBatasWaktu
+            nilai={batas}
+            onUbah={(b) => {
+              setBatas(b);
+              simpan(KUNCI.batasWaktu, b);
+            }}
+            mode="lokal"
+          />
 
           {galat.length > 0 && (
             <ul className="galat" role="alert">
@@ -259,7 +261,7 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
         <div key={kunciFase(game.fase)} className="masuk">
         <LayarMain
           game={game}
-          timer={timer}
+          batas={batas}
           setFase={(fase) => setGame((g) => (g ? { ...g, fase } : g))}
           onEliminasi={(idx, ronde) =>
             setGame((g) => (g ? { ...g, pemain: eliminasi(g.pemain, idx), fase: { jenis: 'terungkap', ronde, idx, tebakan: 'belum' } } : g))
@@ -268,6 +270,9 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
             if (tebakanBenar(teks, game.pasangan.civilian)) selesai(game.pemain, 'mrwhite', teks.trim());
             else setGame((g) => (g && g.fase.jenis === 'terungkap' ? { ...g, fase: { ...g.fase, tebakan: 'salah' } } : g));
           }}
+          onTebakHabis={() =>
+            setGame((g) => (g && g.fase.jenis === 'terungkap' && g.fase.tebakan === 'belum' ? { ...g, fase: { ...g.fase, tebakan: 'salah', habis: true } } : g))
+          }
           onLanjut={(ronde) => lanjutSetelahEliminasi(game.pemain, ronde)}
           onGiliran={majuGiliran}
           onMainLagi={mulai}
@@ -291,18 +296,20 @@ function kunciFase(f: Fase): string {
 
 interface PropsMain {
   game: Permainan;
-  timer: number;
+  batas: BatasWaktu;
   setFase: (f: Fase) => void;
   onEliminasi: (idx: number, ronde: number) => void;
   onTebak: (teks: string) => void;
+  /** Waktu tebakan Mr. White habis: dianggap salah. */
+  onTebakHabis: () => void;
   onLanjut: (ronde: number) => void;
-  onGiliran: (teks: string | null) => void;
+  onGiliran: (teks: string | null, habis?: boolean) => void;
   onMainLagi: () => void;
   onAturUlang: () => void;
   memuat: boolean;
 }
 
-function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat }: PropsMain) {
+function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, onLanjut, onGiliran, onMainLagi, onAturUlang, memuat }: PropsMain) {
   const { pemain, pasangan, fase } = game;
   // Isyarat suara/getar mode lokal; giliran berikutnya diberi bunyi yang jelas karena HP dioper.
   const isyarat = peristiwaLokal(fase);
@@ -367,12 +374,16 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
   }
 
   if (fase.jenis === 'diskusi') {
-    return <GiliranPetunjuk key={`${fase.ronde}-${fase.giliran}`} game={game} fase={fase} onGiliran={onGiliran} onVote={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })} riwayat={riwayat(false, fase.urutan[fase.giliran])} />;
+    return <GiliranPetunjuk key={`${fase.ronde}-${fase.giliran}`} game={game} fase={fase} detik={batas.petunjuk} onGiliran={onGiliran} onVote={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })} riwayat={riwayat(false, fase.urutan[fase.giliran])} />;
   }
 
   if (fase.jenis === 'vote') {
     return (
       <section className="tumpuk">
+        {batas.vote > 0 && (
+          // Waktu habis hanya diberi tanda dan bunyi: siapa yang keluar tetap diputuskan pemain.
+          <Hitungan key={`vote-${fase.ronde}`} awalMs={batas.vote * 1000} totalMs={batas.vote * 1000} label="Waktu diskusi dan vote" bunyi />
+        )}
         <div className="kartu">
           <KepalaFase judul="Vote" ronde={fase.ronde} />
           <div className="pilih-pemain">
@@ -393,7 +404,6 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
           </div>
           <p className="catatan">Lewati: tidak ada yang keluar ronde ini.</p>
         </div>
-        {timer > 0 && <Timer key={fase.ronde} detik={timer} />}
         {riwayat(false)}
         <div className="aksi-bawah">
           {fase.pilih === LEWATI_LOKAL ? (
@@ -424,16 +434,21 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
 
   if (fase.jenis === 'terungkap') {
     const p = pemain[fase.idx];
+    const tebak = detikTebakan(batas);
+    const menebak = p.peran === 'mrwhite' && fase.tebakan === 'belum';
     return (
       <section className="tumpuk tengah">
+        {menebak && tebak > 0 && (
+          <Hitungan key={`tebak-${fase.ronde}`} awalMs={tebak * 1000} totalMs={tebak * 1000} label={`Waktu tebakan ${p.nama}`} bunyi onHabis={onTebakHabis} />
+        )}
         <div className={`kartu besar peran-${p.peran}`}>
           <p className="sub">{p.nama} tereliminasi</p>
           <h1 className="kata ungkap">{NAMA_PERAN[p.peran]}</h1>
-          {p.peran === 'mrwhite' && fase.tebakan === 'belum' ? (
+          {menebak ? (
             <TebakMrWhite nama={p.nama} onTebak={onTebak} />
           ) : (
             <>
-              {fase.tebakan === 'salah' && <p className="catatan">Tebakan salah.</p>}
+              {fase.tebakan === 'salah' && <p className="catatan">{fase.habis ? 'Waktu habis. Dianggap salah.' : 'Tebakan salah.'}</p>}
               <button className="utama" onClick={() => onLanjut(fase.ronde)}>Lanjut</button>
             </>
           )}
@@ -474,23 +489,42 @@ function LayarMain({ game, timer, setFase, onEliminasi, onTebak, onLanjut, onGil
   );
 }
 
-function GiliranPetunjuk({ game, fase, onGiliran, onVote, riwayat }: {
+function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, riwayat }: {
   game: Permainan;
   fase: Extract<Fase, { jenis: 'diskusi' }>;
-  onGiliran: (teks: string | null) => void;
+  /** Batas waktu petunjuk (detik), 0 berarti tanpa batas. */
+  detik: number;
+  onGiliran: (teks: string | null, habis?: boolean) => void;
   onVote: () => void;
   riwayat: ReactNode;
 }) {
   const [galat, setGalat] = useState<string | null>(null);
+  const [habis, setHabis] = useState(false);
+  const jeda = useRef<number | null>(null);
+  useEffect(() => () => {
+    if (jeda.current !== null) window.clearTimeout(jeda.current);
+  }, []);
   const idx = fase.urutan[fase.giliran];
   const p = game.pemain[idx];
   const kirim = (teks: string) => {
-    const r = cekPetunjuk(teks, kataUntuk(p, game.pasangan), game.petunjuk.map((e) => e.teks));
+    const r = cekPetunjuk(teks, kataUntuk(p, game.pasangan), teksDipakai(game.petunjuk));
     if ('galat' in r) setGalat(r.galat);
     else onGiliran(r.teks);
   };
+  // Waktu habis: aman dilewati otomatis (sama seperti Skip), dengan tanda di riwayat.
+  const waktuHabis = () => {
+    setHabis(true);
+    jeda.current = window.setTimeout(() => {
+      jeda.current = null;
+      onGiliran(null, true);
+    }, JEDA_HABIS_MS);
+  };
   return (
     <section className="tumpuk">
+      {detik > 0 && (
+        <Hitungan awalMs={detik * 1000} totalMs={detik * 1000} label={`Waktu ${p.nama}`} bunyi onHabis={waktuHabis} />
+      )}
+      {habis && <p className="galat" role="alert">Waktu habis. Giliran {p.nama} dilewati.</p>}
       <div className="kartu">
         <KepalaFase judul="Diskusi" ronde={fase.ronde} />
         <ol className="urutan">
@@ -536,37 +570,6 @@ function TebakMrWhite({ nama, onTebak }: { nama: string; onTebak: (t: string) =>
   );
 }
 
-function Timer({ detik }: { detik: number }) {
-  const [sisa, setSisa] = useState(detik);
-  const [jalan, setJalan] = useState(false);
-  useEffect(() => {
-    if (!jalan) return;
-    const id = window.setInterval(() => {
-      setSisa((s) => {
-        if (s <= 1) {
-          setJalan(false);
-          if ('vibrate' in navigator) navigator.vibrate?.(300);
-          return 0;
-        }
-        return s - 1;
-      });
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [jalan]);
-  const mm = String(Math.floor(sisa / 60)).padStart(2, '0');
-  const ss = String(sisa % 60).padStart(2, '0');
-  return (
-    <div className={`kartu timer ${sisa === 0 ? 'habis' : ''}`}>
-      <output className="waktu" aria-live="off">{mm}:{ss}</output>
-      <div className="baris-tombol">
-        {sisa > 0 && <button className="kedua" onClick={() => setJalan((j) => !j)}>{jalan ? 'Jeda' : 'Mulai'}</button>}
-        <button className="kedua" onClick={() => { setJalan(false); setSisa(detik); }}>Ulang</button>
-      </div>
-      {sisa === 0 && <p className="catatan">Habis</p>}
-    </div>
-  );
-}
-
 function CaraMain({ onTutup }: { onTutup: () => void }) {
   return (
     <section className="tumpuk">
@@ -587,6 +590,14 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka. Pilih Lewati jika belum yakin: tidak ada yang keluar dan permainan lanjut ke ronde berikutnya.</li>
           <li>Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.</li>
         </ol>
+        <h3>Batas waktu</h3>
+        <ul>
+          <li>Bawaan Tanpa batas. Di pengaturan bisa dipilih batas waktu petunjuk per giliran (20 sampai 60 detik) dan batas diskusi dan vote (30 sampai 120 detik). Pilihan terakhir diingat di HP ini. Di mode Online, host yang memilih dan berlaku untuk semua pemain.</li>
+          <li>Hitung mundur tampil di atas layar. Di 5 detik terakhir ada bunyi ketukan dan getar singkat, mengikuti pengaturan Suara dan Getar.</li>
+          <li>Petunjuk: jika waktu habis, giliran dilewati otomatis dan riwayat mencatat (waktu habis).</li>
+          <li>Vote di mode Lokal: waktu habis hanya diberi tanda dan bunyi. Siapa yang keluar tetap kalian yang memutuskan. Di mode Online, vote langsung dihitung seperti tombol Hitung; yang belum memilih dianggap tidak memilih.</li>
+          <li>Tebakan Mr. White mendapat waktu yang sama dengan petunjuk (minimal 30 detik). Jika habis, tebakan dianggap salah.</li>
+        </ul>
         <h3>Menang</h3>
         <ul>
           <li>Civilian menang jika semua Undercover dan Mr. White tereliminasi.</li>

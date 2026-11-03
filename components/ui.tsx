@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { maksPenyusup, type Komposisi } from '@/lib/game';
 import { KREDIT_SUMBER_INTERNET, pilihanKategori, PILIHAN_SUMBER, semuaKategori, totalKombinasi } from '@/lib/bankKata';
 import type { PanjangKata, Pemenang, Peran, SumberKata } from '@/lib/types';
+import { adaBatas, detikTebakan, labelDetik, PILIHAN_PETUNJUK, PILIHAN_VOTE, type BatasWaktu } from '@/lib/batasWaktu';
 
 export const NAMA_PERAN: Record<Peran, string> = { civilian: 'Civilian', undercover: 'Undercover', mrwhite: 'Mr. White' };
 
@@ -194,6 +195,54 @@ export function PilihPanjangKata({ nilai, onUbah, nonaktif }: { nilai: PanjangKa
       </div>
       <p className="catatan">
         {nilai === 'satu' ? 'Hanya pasangan tanpa spasi, misal Kopi dan Teh.' : 'Boleh lebih dari satu kata, misal Es Teh.'}
+      </p>
+    </div>
+  );
+}
+
+/** Batas waktu petunjuk dan vote. Bawaan Tanpa batas (seperti sebelumnya). */
+export function PilihBatasWaktu({ nilai, onUbah, nonaktif, mode }: {
+  nilai: BatasWaktu;
+  onUbah: (b: BatasWaktu) => void;
+  nonaktif?: boolean;
+  mode: 'online' | 'lokal';
+}) {
+  const baris = [
+    { kunci: 'petunjuk' as const, judul: 'Petunjuk per giliran', pilihan: PILIHAN_PETUNJUK },
+    { kunci: 'vote' as const, judul: 'Diskusi dan vote', pilihan: PILIHAN_VOTE },
+  ];
+  const tebak = detikTebakan(nilai);
+  return (
+    <div className="kartu batas-waktu">
+      <div className="baris-judul">
+        <h2>Batas waktu</h2>
+      </div>
+      {baris.map((b) => (
+        <div key={b.kunci} className="baris-batas">
+          <p className="label-batas" id={`batas-${b.kunci}`}>{b.judul}</p>
+          <div className="chip-grup" role="group" aria-labelledby={`batas-${b.kunci}`}>
+            {b.pilihan.map((d) => (
+              <button
+                key={d}
+                type="button"
+                className={`chip ${nilai[b.kunci] === d ? 'pilih' : ''}`}
+                aria-pressed={nilai[b.kunci] === d}
+                disabled={nonaktif}
+                onClick={() => onUbah({ ...nilai, [b.kunci]: d })}
+              >
+                {labelDetik(d)}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <p className="catatan">
+        {!adaBatas(nilai)
+          ? 'Tanpa batas: tidak ada hitung mundur.'
+          : mode === 'online'
+            ? `Waktu habis: giliran petunjuk dilewati, vote langsung dihitung (yang belum memilih dianggap tidak memilih), dan tebakan Mr. White (${tebak} dtk) dianggap salah.`
+            : `Waktu habis: giliran petunjuk otomatis dilewati, vote hanya diberi tanda (tetap kalian yang memilih siapa keluar), dan tebakan Mr. White (${tebak} dtk) dianggap salah.`}
+        {nonaktif ? ' Diatur oleh host.' : ''}
       </p>
     </div>
   );

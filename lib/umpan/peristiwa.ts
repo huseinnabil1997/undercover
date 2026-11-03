@@ -25,7 +25,11 @@ export type Peristiwa =
   /** Mode lokal: kartu kata dibuka. */
   | 'buka'
   /** Mode lokal: giliran pemain berikutnya memberi petunjuk. */
-  | 'giliranLokal';
+  | 'giliranLokal'
+  /** Hitung mundur batas waktu: satu ketukan per detik di 5 detik terakhir. */
+  | 'detik'
+  /** Batas waktu habis. */
+  | 'waktuHabis';
 
 /** Hanya peristiwa yang khusus untuk pemain ini yang memunculkan notifikasi HP. */
 export const PERISTIWA_NOTIFIKASI: readonly Peristiwa[] = ['giliranmu', 'tebakMrWhite'];
@@ -44,6 +48,8 @@ export const POLA_GETAR: Partial<Record<Peristiwa, number[]>> = {
   eliminasi: [90],
   menang: [60, 60, 120],
   kalah: [200],
+  detik: [25],
+  waktuHabis: [250, 80, 250],
 };
 
 export const TEKS_NOTIFIKASI: Partial<Record<Peristiwa, { judul: string; isi: string }>> = {

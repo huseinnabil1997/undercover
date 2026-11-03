@@ -19,8 +19,10 @@ import {
 } from '@/lib/online/sesi';
 import { SUARA_LEWATI, type Aksi, type AksiKhususHost, type AksiPemain, type GameView, type PemainView, type Pengaturan, type StateHost, type ViewPemain } from '@/lib/online/types';
 import {
-  AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
+  AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
 } from './ui';
+import { Hitungan } from './Hitungan';
+import { batasTersimpan, rapikanBatasWaktu, TEKS_WAKTU_HABIS } from '@/lib/batasWaktu';
 import { kunciGiliran, peristiwaOnline, pilihUtama } from '@/lib/umpan/peristiwa';
 import { tutupNotifikasiGiliran, umpan } from '@/lib/umpan/mesin';
 import { ChatRoom } from './ChatRoom';
@@ -41,6 +43,13 @@ const TEKS_STATUS: Record<StatusJaringan, string> = {
 };
 
 type AksiUi = AksiPemain | AksiKhususHost;
+
+/** Host mengirim sisa durasi, bukan jam: ubah ke tenggat dalam jam HP ini agar selisih jam antar-HP tidak berpengaruh. */
+function denganJamLokal(v: ViewPemain): ViewPemain {
+  const t = v.game?.tenggat;
+  if (!v.game || !t) return v;
+  return { ...v, game: { ...v.game, tenggat: { ...t, sampaiLokal: Date.now() + t.sisaMs } } };
+}
 
 export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   kodeAwal: string | null;
@@ -161,12 +170,13 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           sumberKata: sumberTersimpan(),
           kategori: kategoriTersimpan(sumberTersimpan()),
           panjangKata: rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)),
+          batasWaktu: batasTersimpan(),
         }, Date.now());
       simpanStateHost(awal);
       const host = new HostRoom(awal, {
         onState: (s) => {
           simpanStateHost(s);
-          setView(viewUntuk(s, sesi.id));
+          setView(denganJamLokal(viewUntuk(s, sesi.id)));
         },
         onStatus: (s, info) => {
           lapor(s, info);
@@ -190,7 +200,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
           keluarSesi('Kamu dikeluarkan dari room oleh host.');
           return;
         }
-        setView(v);
+        setView(denganJamLokal(v));
       },
       onStatus: lapor,
       onTolak: (alasan, saatGabung) => {
@@ -535,8 +545,9 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const { komposisi, kategori } = view.pengaturan;
   const panjangKata = rapikanPanjangKata(view.pengaturan.panjangKata);
   const sumberKata = view.pengaturan.sumberKata ?? tebakSumber(kategori);
+  const batasWaktu = rapikanBatasWaktu(view.pengaturan.batasWaktu);
   const atur = (p: Partial<Pengaturan>) =>
-    aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi, kategori, panjangKata, sumberKata, ...p } });
+    aksi({ jenis: 'aturPengaturan', pengaturan: { ...view.pengaturan, komposisi, kategori, panjangKata, sumberKata, batasWaktu, ...p } });
   const galat = useMemo(() => {
     const g = validasiSetup(online.map((p) => p.nama), komposisi);
     if (kategori.length === 0) g.push('Pilih minimal 1 kategori kata.');
@@ -549,9 +560,9 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
     if (!host || manual) return;
     const k = komposisiDefault(Math.max(MIN_PEMAIN, jumlah));
     if (k.undercover !== komposisi.undercover || k.mrWhite !== komposisi.mrWhite) {
-      aksi({ jenis: 'aturPengaturan', pengaturan: { komposisi: k, kategori, panjangKata, sumberKata } });
+      aksi({ jenis: 'aturPengaturan', pengaturan: { ...view.pengaturan, komposisi: k, kategori, panjangKata, sumberKata } });
     }
-  }, [host, manual, jumlah, komposisi, kategori, panjangKata, sumberKata, aksi]);
+  }, [host, manual, jumlah, komposisi, kategori, panjangKata, sumberKata, aksi, view.pengaturan]);
 
   const aturKomposisi = (k: Komposisi) => {
     setManual(true);
@@ -569,6 +580,10 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const aturPanjangKata = (p: typeof panjangKata) => {
     simpan(KUNCI.panjangKata, p);
     atur({ panjangKata: p });
+  };
+  const aturBatasWaktu = (b: typeof batasWaktu) => {
+    simpan(KUNCI.batasWaktu, b);
+    atur({ batasWaktu: b });
   };
 
   return (
@@ -588,6 +603,7 @@ function Lobby({ view, host, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
       <PilihSumberKata nilai={sumberKata} onUbah={aturSumber} nonaktif={!host} />
       <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} panjangKata={panjangKata} sumber={sumberKata} />
       <PilihPanjangKata nilai={panjangKata} onUbah={aturPanjangKata} nonaktif={!host} />
+      <PilihBatasWaktu nilai={batasWaktu} onUbah={aturBatasWaktu} nonaktif={!host} mode="online" />
       {galat.length > 0 && (
         <ul className="galat" role="alert">
           {galat.map((x) => <li key={x}>{x}</li>)}
@@ -805,6 +821,9 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
   const sayaGiliran = giliranId === view.saya;
   return (
     <section className="tumpuk">
+      {giliranId && (
+        <WaktuOnline g={g} awalan="diskusi|" label={sayaGiliran ? 'Waktu petunjukmu' : `Waktu ${namaDari(view, giliranId)}`} bunyi={sayaGiliran} />
+      )}
       <div className="kartu">
         <KepalaFase judul="Diskusi" ronde={g.ronde} />
         <ol className="urutan">
@@ -857,6 +876,7 @@ function Voting({ view, g, host, aksi }: PropsFase) {
   const bisaVote = g.ikut && g.hidup && g.kandidat.some((k) => k !== view.saya);
   return (
     <section className="tumpuk">
+      <WaktuOnline g={g} awalan="vote|" label="Waktu vote" bunyi={bisaVote && !g.pilihanSaya} />
       <div className="kartu">
         <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} />
         {g.putaranVote === 2 ? (
@@ -959,6 +979,9 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
   const korban = view.pemain.find((p) => p.id === g.tereliminasi);
   return (
     <section className="tumpuk">
+      {g.tebakan === 'menunggu' && korban && (
+        <WaktuOnline g={g} awalan="tebak|" label={korban.id === view.saya ? 'Waktu menebak' : `Waktu tebakan ${korban.nama}`} bunyi={korban.id === view.saya} />
+      )}
       {!korban ? (
         <div className="kartu besar muncul">
           <h1 className="kata">Aman</h1>
@@ -977,7 +1000,9 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
             <p className="menunggu">Menunggu {korban.nama}</p>
           ))}
           {g.tebakan === 'salah' && (
-            <p className="catatan">{g.tebakanSalah ? `Tebakan salah: “${g.tebakanSalah}”` : 'Tidak menebak'}</p>
+            <p className="catatan">
+              {g.tebakanSalah === TEKS_WAKTU_HABIS ? 'Waktu habis. Dianggap salah.' : g.tebakanSalah ? `Tebakan salah: “${g.tebakanSalah}”` : 'Tidak menebak'}
+            </p>
           )}
         </div>
       )}
@@ -994,6 +1019,13 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
       </div>
     </section>
   );
+}
+
+/** Hitung mundur dari tenggat host. Hanya tampil jika tenggat milik fase ini. */
+function WaktuOnline({ g, awalan, label, bunyi }: { g: GameView; awalan: string; label: string; bunyi: boolean }) {
+  const t = g.tenggat;
+  if (!t || !t.kunci.startsWith(awalan)) return null;
+  return <Hitungan key={t.kunci} sampai={t.sampaiLokal ?? null} awalMs={t.sisaMs} totalMs={t.totalMs} label={label} bunyi={bunyi} />;
 }
 
 function TebakMrWhite({ onTebak }: { onTebak: (t: string) => void }) {
