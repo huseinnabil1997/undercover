@@ -14,6 +14,18 @@ Live: https://huseinnabil1997.github.io/undercover/
 - Data (nama pemain, skor, riwayat pasangan kata, sesi room) hanya tersimpan di `localStorage`/`sessionStorage` perangkat.
 - Tampilan mobile-first (360 sampai 430 px), tombol besar, mendukung safe-area.
 
+## Akun, profil, dan statistik (Supabase)
+
+- Main **Lokal** (satu HP) tanpa login dan tidak dicatat.
+- Main **Online** wajib login (username + password). Nama di room = username. Hasil tiap pemain dicatat ke profilnya.
+- Username 3 sampai 20 karakter (huruf, angka, `_`), unik tanpa beda besar kecil. Password minimal 6 karakter, tidak bisa dipulihkan (tidak ada reset), bisa diganti saat login.
+- Menu **Profil**: total main, persentase menang total dan per peran, riwayat permainan, cari pemain, ganti password, keluar.
+- Foto profil (Supabase Storage, bucket publik `avatars`, hanya pemilik yang bisa mengunggah/menghapus di folder `<user_id>/`): dipotong persegi, 256 px, WebP (cadangan JPEG), di bawah 100 KB. Tanpa foto tampil inisial berwarna.
+- Profil pemain lain (read-only) bisa dibuka dari daftar pemain di room, layar hasil, dan pencarian username.
+- Backend: Supabase (Auth + Postgres dengan RLS). Skema di `supabase/migrations`. Kunci yang ditanam di kode hanya kunci publishable; bisa diganti lewat `NEXT_PUBLIC_SUPABASE_URL` dan `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+- Pengaturan project yang wajib: Authentication > Sign In / Providers > Email > matikan "Confirm email" (username diubah ke email sintetis `@undercover.local` yang tidak pernah dikirimi surat).
+- Batasan: game online dijalankan di HP host, jadi hasil yang dicatat dipercaya dari klien. Pemain yang memodifikasi aplikasi bisa memalsukan hasilnya sendiri (tidak bisa menulis untuk akun orang lain).
+
 ## Mode online
 
 1. Host menekan **Main Online**, mengisi nama, lalu **Buat room**. Muncul kode room 5 huruf

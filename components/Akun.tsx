@@ -1,0 +1,413 @@
+'use client';
+
+// Akun pemain (Supabase Auth): status login, layar Masuk/Daftar, gerbang mode online, dan layar Profil.
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
+import { cekPassword, cekUsername, emailDari, pesanGalatAuth, rapikanUsername, ringkasStatistik, type PeranDb, type RingkasanStatistik } from '@/lib/akun';
+import { supabase } from '@/lib/supabase/klien';
+import { Avatar } from './Avatar';
+import { siapkanAvatar } from '@/lib/gambarAvatar';
+import { hapusAvatar, lupakanProfil, unggahAvatar, ambilProfil, ambilProfilUsername, ambilRiwayat, ambilStatistik, cariProfil, type EntriRiwayat, type ProfilPublik } from '@/lib/supabase/data';
+import { TombolSuara } from './PanelSuara';
+import { JUDUL_MENANG, NAMA_PERAN, Tanda, TombolMenu, angka } from './ui';
+
+export type Akun =
+  | { status: 'memuat' }
+  | { status: 'keluar' }
+  | { status: 'masuk'; id: string; username: string };
+
+const KonteksAkun = createContext<Akun>({ status: 'memuat' });
+/** Buka profil pemain lain (read-only) berdasarkan username, dari mana saja (lobby, hasil, peringkat). */
+const KonteksLihat = createContext<(username: string) => void>(() => {});
+
+export function useLihatProfil(): (username: string) => void {
+  return useContext(KonteksLihat);
+}
+
+export function useAkun(): Akun {
+  return useContext(KonteksAkun);
+}
+
+function dariSesi(s: { user: { id: string; email?: string; user_metadata?: Record<string, unknown> } } | null): Akun {
+  if (!s) return { status: 'keluar' };
+  const meta = s.user.user_metadata?.username;
+  const username = typeof meta === 'string' && meta ? meta : (s.user.email ?? '').split('@')[0];
+  return { status: 'masuk', id: s.user.id, username };
+}
+
+export function AkunProvider({ children }: { children: ReactNode }) {
+  const [akun, setAkun] = useState<Akun>({ status: 'memuat' });
+  useEffect(() => {
+    let hidup = true;
+    const sb = supabase();
+    sb.auth.getSession().then(({ data }) => {
+      if (hidup) setAkun(dariSesi(data.session));
+    }, () => {
+      if (hidup) setAkun({ status: 'keluar' });
+    });
+    const { data } = sb.auth.onAuthStateChange((_e, sesi) => {
+      if (hidup) setAkun(dariSesi(sesi));
+    });
+    return () => {
+      hidup = false;
+      data.subscription.unsubscribe();
+    };
+  }, []);
+  const [lihat, setLihat] = useState<string | null>(null);
+  const tutup = useCallback(() => setLihat(null), []);
+  return (
+    <KonteksAkun.Provider value={akun}>
+      <KonteksLihat.Provider value={setLihat}>
+        {children}
+        {lihat && akun.status === 'masuk' && (
+          <div className="lapisan-profil" role="dialog" aria-modal="true" aria-label={`Profil ${lihat}`}>
+            <LayarProfil key={lihat} akun={akun} usernameLihat={lihat} onBeranda={tutup} onKembali={tutup} />
+          </div>
+        )}
+      </KonteksLihat.Provider>
+    </KonteksAkun.Provider>
+  );
+}
+
+function Kepala({ onBeranda }: { onBeranda: () => void }) {
+  return (
+    <header className="kepala">
+      <TombolMenu onClick={onBeranda} />
+      <span className="logo"><Tanda /> Undercover</span>
+      <TombolSuara />
+    </header>
+  );
+}
+
+/* ------------------------------ Masuk/Daftar ------------------------------ */
+
+export function LayarAkun({ alasan, onBeranda }: { alasan?: string; onBeranda: () => void }) {
+  const [tab, setTab] = useState<'masuk' | 'daftar'>('masuk');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [ulang, setUlang] = useState('');
+  const [galat, setGalat] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const [proses, setProses] = useState(false);
+
+  async function kirim(e: React.FormEvent) {
+    e.preventDefault();
+    setInfo(null);
+    const g = cekUsername(username) ?? cekPassword(password) ?? (tab === 'daftar' && ulang !== password ? 'Ulangi password tidak sama.' : null);
+    if (g) {
+      setGalat(g);
+      return;
+    }
+    setGalat(null);
+    setProses(true);
+    try {
+      const auth = supabase().auth;
+      if (tab === 'masuk') {
+        const { error } = await auth.signInWithPassword({ email: emailDari(username), password });
+        if (error) setGalat(pesanGalatAuth(error));
+      } else {
+        const { data, error } = await auth.signUp({
+          email: emailDari(username),
+          password,
+          options: { data: { username: rapikanUsername(username) } },
+        });
+        if (error) setGalat(pesanGalatAuth(error));
+        else if (!data.session) {
+          // Konfirmasi email masih aktif di project: akun dibuat tetapi belum bisa dipakai login.
+          setInfo('Akun dibuat, tetapi belum bisa dipakai karena konfirmasi email masih aktif di server. Hubungi pengelola game.');
+        }
+      }
+    } catch (err) {
+      setGalat(pesanGalatAuth(err as { message?: string }));
+    } finally {
+      setProses(false);
+    }
+  }
+
+  return (
+    <main className="wadah">
+      <Kepala onBeranda={onBeranda} />
+      <form className="tumpuk masuk" onSubmit={kirim} noValidate>
+        <div className="kepala-fase"><h2>{tab === 'masuk' ? 'Masuk' : 'Daftar'}</h2></div>
+        {alasan && <p className="catatan tengah-teks nol">{alasan}</p>}
+        <div className="segmen" role="group" aria-label="Masuk atau daftar">
+          <button type="button" aria-pressed={tab === 'masuk'} onClick={() => { setTab('masuk'); setGalat(null); setInfo(null); }}>Masuk</button>
+          <button type="button" aria-pressed={tab === 'daftar'} onClick={() => { setTab('daftar'); setGalat(null); setInfo(null); }}>Daftar</button>
+        </div>
+        <div className="kartu">
+          <label className="label" htmlFor="akun-username">Username</label>
+          <input id="akun-username" className="isian" value={username} maxLength={20} autoComplete="username" autoCapitalize="none" spellCheck={false}
+            placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+          <label className="label jarak-atas" htmlFor="akun-password">Password</label>
+          <input id="akun-password" className="isian" type="password" value={password} autoComplete={tab === 'masuk' ? 'current-password' : 'new-password'}
+            placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+          {tab === 'daftar' && (
+            <>
+              <label className="label jarak-atas" htmlFor="akun-ulang">Ulangi password</label>
+              <input id="akun-ulang" className="isian" type="password" value={ulang} autoComplete="new-password"
+                placeholder="Ulangi password" onChange={(e) => setUlang(e.target.value)} />
+              <p className="catatan">Username 3 sampai 20 karakter (huruf, angka, _), tidak bisa diganti. Password minimal 6 karakter dan tidak bisa dipulihkan bila lupa, jadi simpan baik-baik.</p>
+            </>
+          )}
+        </div>
+        {galat && <p className="galat" role="alert">{galat}</p>}
+        {info && <p className="catatan tengah-teks" role="status">{info}</p>}
+        <button className="utama" type="submit" disabled={proses}>{proses ? 'Memproses...' : tab === 'masuk' ? 'Masuk' : 'Daftar'}</button>
+        <p className="catatan tengah-teks">Main Lokal (satu HP) tidak perlu akun.</p>
+        <div className="aksi-bawah" />
+      </form>
+    </main>
+  );
+}
+
+/** Tampilkan isi hanya bila sudah login; selain itu layar Masuk/Daftar. */
+export function GerbangAkun({ alasan, onBeranda, children }: {
+  alasan: string;
+  onBeranda: () => void;
+  children: (akun: { id: string; username: string }) => ReactNode;
+}) {
+  const akun = useAkun();
+  if (akun.status === 'memuat') {
+    return (
+      <main className="wadah">
+        <Kepala onBeranda={onBeranda} />
+        <p className="catatan tengah-teks" role="status">Memuat akun...</p>
+      </main>
+    );
+  }
+  if (akun.status === 'keluar') return <LayarAkun alasan={alasan} onBeranda={onBeranda} />;
+  return <>{children(akun)}</>;
+}
+
+/* --------------------------------- Profil --------------------------------- */
+
+const URUTAN_PERAN: PeranDb[] = ['civilian', 'undercover', 'mrwhite'];
+const persenTeks = (p: number | null) => (p === null ? '-' : `${p}%`);
+
+export function KartuStatistik({ r }: { r: RingkasanStatistik }) {
+  return (
+    <div className="kartu">
+      <h2>Statistik</h2>
+      <div className="stat-utama">
+        <div><strong>{angka(r.main)}</strong><span>Main</span></div>
+        <div><strong>{angka(r.menang)}</strong><span>Menang</span></div>
+        <div><strong>{persenTeks(r.persen)}</strong><span>Menang</span></div>
+      </div>
+      <ul className="stat-peran">
+        {URUTAN_PERAN.map((p) => (
+          <li key={p}>
+            <span>{NAMA_PERAN[p]}</span>
+            <span>{angka(r.perPeran[p].main)} main</span>
+            <strong>{persenTeks(r.perPeran[p].persen)}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function waktuTeks(iso: string): string {
+  return new Date(iso).toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function Riwayat({ userId }: { userId: string }) {
+  const [baris, setBaris] = useState<EntriRiwayat[]>([]);
+  const [halaman, setHalaman] = useState(0);
+  const [adaLagi, setAdaLagi] = useState(false);
+  const [status, setStatus] = useState<'memuat' | 'siap' | 'galat'>('memuat');
+  useEffect(() => {
+    let hidup = true;
+    ambilRiwayat(userId, halaman).then((h) => {
+      if (!hidup) return;
+      setBaris((lama) => (halaman === 0 ? h.baris : [...lama, ...h.baris]));
+      setAdaLagi(h.adaLagi);
+      setStatus('siap');
+    }, () => hidup && setStatus('galat'));
+    return () => {
+      hidup = false;
+    };
+  }, [userId, halaman]);
+  return (
+    <div className="kartu">
+      <h2>Riwayat</h2>
+      {status === 'siap' && baris.length === 0 && <p className="catatan">Belum ada permainan online.</p>}
+      <ul className="daftar-riwayat">
+        {baris.map((b) => (
+          <li key={b.id}>
+            <div>
+              <strong className={b.menang ? 'teks-menang' : 'teks-kalah'}>{b.menang ? 'Menang' : 'Kalah'}</strong>
+              <span> sebagai {NAMA_PERAN[b.peran]}</span>
+            </div>
+            <div className="catatan nol">{b.kata_civilian} / {b.kata_undercover} · {b.jumlah_pemain} pemain · {JUDUL_MENANG[b.pemenang]}</div>
+            <div className="catatan nol">{waktuTeks(b.waktu)}</div>
+          </li>
+        ))}
+      </ul>
+      {status === 'memuat' && <p className="catatan">Memuat...</p>}
+      {status === 'galat' && <p className="galat">Gagal memuat riwayat.</p>}
+      {adaLagi && status === 'siap' && (
+        <button className="kedua jarak-atas" onClick={() => { setStatus('memuat'); setHalaman((h) => h + 1); }}>Muat lagi</button>
+      )}
+    </div>
+  );
+}
+
+function GantiPassword() {
+  const [baru, setBaru] = useState('');
+  const [pesan, setPesan] = useState<{ ok: boolean; teks: string } | null>(null);
+  const [proses, setProses] = useState(false);
+  async function simpan(e: React.FormEvent) {
+    e.preventDefault();
+    const g = cekPassword(baru);
+    if (g) {
+      setPesan({ ok: false, teks: g });
+      return;
+    }
+    setProses(true);
+    const { error } = await supabase().auth.updateUser({ password: baru });
+    setProses(false);
+    setPesan(error ? { ok: false, teks: error.code === 'same_password' ? 'Password baru sama dengan yang lama.' : pesanGalatAuth(error) } : { ok: true, teks: 'Password diganti.' });
+    if (!error) setBaru('');
+  }
+  return (
+    <form className="kartu" onSubmit={simpan} noValidate>
+      <h2>Ganti password</h2>
+      <label className="label" htmlFor="pw-baru">Password baru</label>
+      <input id="pw-baru" className="isian" type="password" value={baru} autoComplete="new-password" placeholder="Minimal 6 karakter" onChange={(e) => setBaru(e.target.value)} />
+      {pesan && <p className={pesan.ok ? 'catatan' : 'galat'} role="status">{pesan.teks}</p>}
+      <button className="kedua jarak-atas" type="submit" disabled={proses}>Simpan</button>
+    </form>
+  );
+}
+
+function FotoProfil({ id, username, versi, onGanti }: { id: string; username: string; versi: number | null; onGanti: (v: number | null) => void }) {
+  const [proses, setProses] = useState(false);
+  const [galat, setGalat] = useState<string | null>(null);
+  async function pilih(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    e.target.value = '';
+    if (!f) return;
+    setProses(true);
+    setGalat(null);
+    try {
+      const blob = await siapkanAvatar(f);
+      onGanti(await unggahAvatar(id, blob, versi));
+      lupakanProfil(username);
+    } catch (err) {
+      setGalat(err instanceof Error && err.message.endsWith('.') ? err.message : 'Gagal mengunggah foto.');
+    } finally {
+      setProses(false);
+    }
+  }
+  async function hapus() {
+    setProses(true);
+    setGalat(null);
+    try {
+      await hapusAvatar(id);
+      lupakanProfil(username);
+      onGanti(null);
+    } catch {
+      setGalat('Gagal menghapus foto.');
+    } finally {
+      setProses(false);
+    }
+  }
+  return (
+    <>
+      <div className="baris-avatar">
+        <label className={`kedua tombol-label${proses ? ' nonaktif' : ''}`}>
+          {proses ? 'Memproses...' : versi ? 'Ganti foto' : 'Pasang foto'}
+          <input type="file" accept="image/*" hidden disabled={proses} onChange={pilih} />
+        </label>
+        {versi && <button className="kedua" type="button" disabled={proses} onClick={hapus}>Hapus foto</button>}
+      </div>
+      {galat && <p className="galat" role="alert">{galat}</p>}
+    </>
+  );
+}
+
+function CariPemain() {
+  const lihat = useLihatProfil();
+  const [teks, setTeks] = useState('');
+  const [hasil, setHasil] = useState<ProfilPublik[] | null>(null);
+  const [galat, setGalat] = useState(false);
+  async function cari(e: React.FormEvent) {
+    e.preventDefault();
+    setGalat(false);
+    try {
+      setHasil(await cariProfil(teks));
+    } catch {
+      setGalat(true);
+    }
+  }
+  return (
+    <form className="kartu" onSubmit={cari} role="search">
+      <h2>Cari pemain</h2>
+      <div className="baris-cari">
+        <input className="isian" aria-label="Username" value={teks} maxLength={20} autoCapitalize="none" spellCheck={false}
+          placeholder="Username" onChange={(e) => setTeks(e.target.value)} />
+        <button className="kedua" type="submit" disabled={!teks.trim()}>Cari</button>
+      </div>
+      {galat && <p className="galat">Gagal mencari. Periksa internet.</p>}
+      {hasil && hasil.length === 0 && <p className="catatan">Tidak ditemukan.</p>}
+      {hasil && hasil.length > 0 && (
+        <ul className="daftar-cari">
+          {hasil.map((p) => (
+            <li key={p.id}>
+              <button type="button" className="tautan nama-dengan-avatar" onClick={() => lihat(p.username)}>
+                <Avatar username={p.username} id={p.id} versi={p.avatar_versi} ukuran={28} />{p.username}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </form>
+  );
+}
+
+/** Profil sendiri (lengkap) atau pemain lain (read-only: statistik dan riwayat). */
+export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
+  akun: { id: string; username: string };
+  usernameLihat?: string;
+  onBeranda: () => void;
+  onKembali?: () => void;
+}) {
+  const [data, setData] = useState<{ id: string; username: string; versi: number | null; r: RingkasanStatistik } | 'galat' | 'tidakAda' | null>(null);
+  useEffect(() => {
+    let hidup = true;
+    (async () => {
+      const p = usernameLihat ? await ambilProfilUsername(usernameLihat) : await ambilProfil(akun.id);
+      if (!p) return null;
+      return { id: p.id, username: p.username, versi: p.avatar_versi, r: ringkasStatistik(await ambilStatistik(p.id)) };
+    })().then((d) => hidup && setData(d ?? 'tidakAda'), () => hidup && setData('galat'));
+    return () => {
+      hidup = false;
+    };
+  }, [akun.id, usernameLihat]);
+  const siap = data && typeof data === 'object' ? data : null;
+  const sendiri = siap ? siap.id === akun.id : !usernameLihat;
+  return (
+    <main className="wadah">
+      <Kepala onBeranda={onBeranda} />
+      <section className="tumpuk masuk">
+        <div className="profil-kepala">
+          <Avatar username={siap ? siap.username : usernameLihat ?? akun.username} id={siap?.id ?? 'memuat'} versi={siap?.versi} ukuran={88} />
+          <h2 className="nol">{siap ? siap.username : usernameLihat ?? akun.username}</h2>
+          {siap && sendiri && !usernameLihat && (
+            <FotoProfil id={siap.id} username={siap.username} versi={siap.versi} onGanti={(v) => setData({ ...siap, versi: v })} />
+          )}
+        </div>
+        {onKembali && <button className="kedua" onClick={onKembali}>Kembali</button>}
+        {data === 'galat' && <p className="galat" role="alert">Gagal memuat profil. Periksa internet.</p>}
+        {data === 'tidakAda' && <p className="catatan tengah-teks">Pemain tidak ditemukan.</p>}
+        {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
+        {siap && <KartuStatistik r={siap.r} />}
+        {siap && <Riwayat userId={siap.id} />}
+        {sendiri && !usernameLihat && <CariPemain />}
+        {sendiri && !usernameLihat && <GantiPassword />}
+        {sendiri && !usernameLihat && <button className="kedua" onClick={() => void supabase().auth.signOut()}>Keluar akun</button>}
+        <p className="catatan tengah-teks">Hanya permainan Online yang dicatat. Main Lokal tidak dicatat.</p>
+        <div className="aksi-bawah" />
+      </section>
+    </main>
+  );
+}

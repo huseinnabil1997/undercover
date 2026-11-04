@@ -196,6 +196,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (galat.length > 0) return tetap(galat[0]);
       const dibagi = bagiPeran(peserta.map((p) => p.nama), state.pengaturan.komposisi, rng);
       const game: GameOnline = {
+        ...(aksi.idMain ? { idMain: aksi.idMain } : {}),
         peserta: peserta.map((p) => p.id),
         peran: Object.fromEntries(peserta.map((p, i) => [p.id, dibagi[i].peran])),
         hidup: Object.fromEntries(peserta.map((p) => [p.id, true])),
@@ -448,7 +449,7 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
     tenggat: g.tenggat ? { kunci: g.tenggat.kunci, sisaMs: Math.max(0, g.tenggat.sampai - now), totalMs: g.tenggat.total } : null,
   };
   if (g.fase === 'hasil' && g.pemenang) {
-    v.hasil = { pemenang: g.pemenang, pasangan: g.pasangan, ...(g.tebakanMrWhite ? { tebakanMrWhite: g.tebakanMrWhite } : {}) };
+    v.hasil = { pemenang: g.pemenang, pasangan: g.pasangan, ...(g.tebakanMrWhite ? { tebakanMrWhite: g.tebakanMrWhite } : {}), ...(g.idMain ? { idMain: g.idMain } : {}) };
   }
   return v;
 }

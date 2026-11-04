@@ -4,6 +4,7 @@
 // Semua teks dirender sebagai teks React biasa (otomatis di-escape), tanpa HTML mentah.
 import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent as KeyboardEventReact } from 'react';
 import { indeksFokusBerikut } from '@/lib/dialog';
+import { Avatar } from './Avatar';
 import {
   EMOJI_CEPAT, MAKS_PANJANG_CHAT, hanyaEmoji, hitungBelumDibaca, jamChat, type PesanChat,
 } from '@/lib/online/chat';
@@ -159,7 +160,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
                 return (
                   <li key={p.id} className={`chat-pesan${milikku ? ' saya' : ''}`}>
                     <div className="chat-meta">
-                      <span className="chat-nama">{milikku ? 'Kamu' : p.nama}</span>
+                      <span className="chat-nama nama-dengan-avatar">{!milikku && <Avatar username={p.nama} cari ukuran={20} />}{milikku ? 'Kamu' : p.nama}</span>
                       <time dateTime={new Date(p.waktu).toISOString()}>{jamChat(p.waktu)}</time>
                     </div>
                     <p className={`chat-teks${hanyaEmoji(p.teks) ? ' emoji' : ''}`}>{p.teks}</p>

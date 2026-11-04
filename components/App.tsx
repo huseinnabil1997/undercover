@@ -6,13 +6,14 @@ import { kodeDariUrl } from '@/lib/online/room';
 import { bacaSesi } from '@/lib/online/sesi';
 import { bersihkanKunciLama } from '@/lib/storage';
 import { bacaUmpan, daftarkanSW, pasangUmpan } from '@/lib/umpan/mesin';
+import { AkunProvider, GerbangAkun, LayarProfil } from './Akun';
 import { DialogProvider } from './Modal';
 import OnlineGame from './OnlineGame';
 import { TombolSuara } from './PanelSuara';
 import UndercoverGame from './UndercoverGame';
 import { Tanda, type Penjaga } from './ui';
 
-type Mode = 'beranda' | 'online' | 'offline';
+type Mode = 'beranda' | 'online' | 'offline' | 'profil';
 
 /** Penanda entri riwayat browser milik aplikasi ini. */
 const KUNCI_RIWAYAT = 'undercover';
@@ -26,16 +27,18 @@ function modeAwal(): { mode: Mode; kode: string | null } {
 
 function modeRiwayat(state: unknown): Mode | null {
   const m = (state as Record<string, unknown> | null)?.[KUNCI_RIWAYAT];
-  return m === 'beranda' || m === 'online' || m === 'offline' ? m : null;
+  return m === 'beranda' || m === 'online' || m === 'offline' || m === 'profil' ? m : null;
 }
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 export default function App() {
   return (
-    <DialogProvider>
-      <Isi />
-    </DialogProvider>
+    <AkunProvider>
+      <DialogProvider>
+        <Isi />
+      </DialogProvider>
+    </AkunProvider>
   );
 }
 
@@ -135,7 +138,20 @@ function Isi() {
     }
   }, [keBerandaLangsung]);
 
-  if (mode === 'online') return <OnlineGame kodeAwal={awal.kode} onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />;
+  if (mode === 'online') {
+    return (
+      <GerbangAkun alasan="Main Online perlu akun agar hasilnya tercatat." onBeranda={keMenu}>
+        {(akun) => <OnlineGame key={akun.id} kodeAwal={awal.kode} username={akun.username} onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />}
+      </GerbangAkun>
+    );
+  }
+  if (mode === 'profil') {
+    return (
+      <GerbangAkun alasan="Masuk untuk melihat profil dan riwayat." onBeranda={keMenu}>
+        {(akun) => <LayarProfil akun={akun} onBeranda={keMenu} />}
+      </GerbangAkun>
+    );
+  }
   if (mode === 'offline') return <UndercoverGame onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />;
 
   return (
@@ -163,7 +179,8 @@ function Isi() {
       <div className="pilihan">
         <button className="utama" onClick={() => masuk('online')}>Online</button>
         <button className="kedua" onClick={() => masuk('offline')}>Lokal</button>
-        <p className="catatan tengah-teks nol">Tanpa login</p>
+        <button className="kedua" onClick={() => masuk('profil')}>Profil</button>
+        <p className="catatan tengah-teks nol">Lokal tanpa login. Online perlu akun.</p>
       </div>
     </main>
   );

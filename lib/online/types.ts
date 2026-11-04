@@ -56,6 +56,8 @@ export interface HasilVote {
 }
 
 export interface GameOnline {
+  /** Id unik permainan (uuid) untuk mencatat riwayat tiap pemain tanpa duplikat. */
+  idMain?: string;
   peserta: string[];
   peran: Record<string, Peran>;
   hidup: Record<string, boolean>;
@@ -107,7 +109,7 @@ export type AksiPemain =
 /** Aksi yang hanya boleh dilakukan host. */
 export type AksiKhususHost =
   | { jenis: 'aturPengaturan'; pengaturan: Pengaturan }
-  | { jenis: 'mulai'; pasangan: PasanganKata }
+  | { jenis: 'mulai'; pasangan: PasanganKata; idMain?: string }
   | { jenis: 'mulaiDiskusi' }
   | { jenis: 'lewatiGiliran' }
   | { jenis: 'mulaiVote' }
@@ -168,7 +170,7 @@ export interface GameView {
    */
   tenggat?: { kunci: string; sisaMs: number; totalMs: number; sampaiLokal?: number } | null;
   /** Diisi hanya saat permainan selesai. */
-  hasil?: { pemenang: Pemenang; pasangan: PasanganKata; tebakanMrWhite?: string };
+  hasil?: { pemenang: Pemenang; pasangan: PasanganKata; tebakanMrWhite?: string; idMain?: string };
 }
 
 export interface ViewPemain {

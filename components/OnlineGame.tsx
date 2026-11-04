@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan, tebakSumber } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
-import { alasanTanpaEliminasi, buatStateHost, MAKS_NAMA, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
+import { alasanTanpaEliminasi, buatStateHost, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
 import { modeRelayDari, paksaRelayDari, teksDiagnosa, teksJalur } from '@/lib/online/jalur';
 import type { ModeRelay } from '@/lib/online/relay';
@@ -29,9 +29,12 @@ import { ChatRoom } from './ChatRoom';
 import { TombolSuara } from './PanelSuara';
 import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk, type PemainRiwayat } from './Petunjuk';
 import { useDialog } from './Modal';
+import { menangDengan } from '@/lib/akun';
+import { useLihatProfil } from './Akun';
+import { Avatar } from './Avatar';
+import { catatHasil, type HasilUntukDicatat } from '@/lib/supabase/data';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-const KUNCI_NAMA_ONLINE = 'online:nama';
 
 const TEKS_STATUS: Record<StatusJaringan, string> = {
   menyambung: 'Menyambung',
@@ -51,8 +54,10 @@ function denganJamLokal(v: ViewPemain): ViewPemain {
   return { ...v, game: { ...v.game, tenggat: { ...t, sampaiLokal: Date.now() + t.sisaMs } } };
 }
 
-export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
+export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjaga }: {
   kodeAwal: string | null;
+  /** Nama pemain online = username akun yang sedang login. */
+  username: string;
   onBeranda: () => void;
   daftarPenjaga?: (p: Penjaga | null) => void;
 }) {
@@ -60,7 +65,8 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
   // Tab hasil "duplikat" ikut menyalin sessionStorage; jangan pakai id yang masih aktif di tab asal.
   const [sesi, setSesi] = useState<SesiOnline | null>(() => {
     const s = bacaSesi('tab');
-    return s && !sesiDipakaiHalamanLain(s.id) ? s : null;
+    // Sesi milik akun lain (mis. ganti akun di HP yang sama) tidak dilanjutkan.
+    return s && s.nama === rapikanNama(username) && !sesiDipakaiHalamanLain(s.id) ? s : null;
   });
   const [view, setView] = useState<ViewPemain | null>(null);
   // `sejak`: kapan status terakhir berpindah antara tersambung dan belum (atau percobaan baru dimulai).
@@ -294,7 +300,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     try {
       const { kategori, panjangKata, sumberKata } = host.state.pengaturan;
       const { pasangan, cadangan } = await siapkanPasangan(kategori, rapikanPanjangKata(panjangKata), sumberKata ?? tebakSumber(kategori));
-      aksi({ jenis: 'mulai', pasangan });
+      aksi({ jenis: 'mulai', pasangan, idMain: crypto.randomUUID() });
       if (cadangan) void dialog.info({ judul: 'Pasangan satu kata tidak ada', pesan: PESAN_TANPA_SATU_KATA });
     } catch {
       tampilkan('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
@@ -330,6 +336,7 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
     return (
       <LayarMasuk
         kodeAwal={kodeAwal}
+        username={username}
         galat={galatMasuk}
         onBeranda={onBeranda}
         onMasuk={(s) => {
@@ -417,18 +424,18 @@ export default function OnlineGame({ kodeAwal, onBeranda, daftarPenjaga }: {
 
 /* --------------------------------- Masuk --------------------------------- */
 
-function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
+function LayarMasuk({ kodeAwal, username, galat, onBeranda, onMasuk }: {
   kodeAwal: string | null;
+  username: string;
   galat: string | null;
   onBeranda: () => void;
   onMasuk: (s: SesiOnline) => void;
 }) {
-  const [nama, setNama] = useState(() => baca<string>(KUNCI_NAMA_ONLINE, ''));
   const [kode, setKode] = useState(kodeAwal ?? '');
   const cariLanjut = useCallback(() => {
     const s = bacaSesi('perangkat');
-    return s && bolehTawarkanLanjut(s, kodeAwal, sesiDipakaiHalamanLain(s.id)) ? s : null;
-  }, [kodeAwal]);
+    return s && s.nama === rapikanNama(username) && bolehTawarkanLanjut(s, kodeAwal, sesiDipakaiHalamanLain(s.id)) ? s : null;
+  }, [kodeAwal, username]);
   const [lanjut, setLanjut] = useState(cariLanjut);
   // Penanda tab aktif bisa kedaluwarsa (tab lain ditutup atau crash): periksa ulang berkala.
   useEffect(() => {
@@ -439,12 +446,11 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
     }, DETAK_AKTIF_MS);
     return () => window.clearInterval(id);
   }, [cariLanjut]);
-  const namaBersih = rapikanNama(nama);
+  const namaBersih = rapikanNama(username);
   const kodeBersih = rapikanKode(kode);
 
   function masuk(host: boolean) {
     if (!namaBersih) return;
-    simpan(KUNCI_NAMA_ONLINE, namaBersih);
     onMasuk({
       kode: host ? buatKodeRoom() : kodeBersih,
       id: buatIdPemain(),
@@ -465,16 +471,8 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
       <section className="tumpuk masuk">
         <div className="kepala-fase"><h2>Online</h2></div>
         <div className="kartu">
-          <label className="label" htmlFor="nama-online">Nama</label>
-          <input
-            id="nama-online"
-            className="isian"
-            value={nama}
-            maxLength={MAKS_NAMA}
-            autoComplete="nickname"
-            placeholder="Nama"
-            onChange={(e) => setNama(e.target.value)}
-          />
+          <p className="label nol">Main sebagai</p>
+          <p className="nama-akun" id="nama-online">{namaBersih}</p>
         </div>
 
         {galat && <p className="galat" role="alert">{galat}</p>}
@@ -510,7 +508,6 @@ function LayarMasuk({ kodeAwal, galat, onBeranda, onMasuk }: {
           <button className={kodeAwal ? 'kedua' : 'utama'} disabled={!namaBersih} onClick={() => masuk(true)}>Buat</button>
           <p className="catatan">HP kamu jadi host. Biarkan halaman tetap terbuka.</p>
         </div>
-        {!namaBersih && <p className="catatan tengah-teks">Isi nama dulu.</p>}
         <div className="aksi-bawah" />
       </section>
     </main>
@@ -690,6 +687,7 @@ function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: strin
 }
 
 function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void }) {
+  const lihatProfil = useLihatProfil();
   const dialog = useDialog();
   const daftar = useDaftarKeluar(view.pemain, (p) => p.id);
   return (
@@ -703,7 +701,7 @@ function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; a
           <li key={p.id} className={`${keluar ? 'keluar' : ''} ${p.online ? '' : 'offline'}`}>
             <span className={`titik ${p.online ? 'on' : 'off'}`} aria-hidden />
             <span className="nama">
-              {p.nama}
+              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} />{p.nama}</button>
               {p.id === view.saya && <em> (kamu)</em>}
             </span>
             {p.host && <span className="lencana host">Host</span>}
@@ -1058,17 +1056,48 @@ function Penonton({ view, g }: PropsFase) {
   );
 }
 
+/** Catat hasil permainan ini ke riwayat akun (sekali per id permainan; duplikat diabaikan server). */
+function CatatHasil({ idMain, peran, pemenang, pasangan, jumlahPemain }: HasilUntukDicatat) {
+  const [status, setStatus] = useState<'proses' | 'ok' | 'galat'>('proses');
+  // Objek pasangan berganti tiap pembaruan view; pakai isinya agar efek tidak berulang.
+  const { civilian, undercover, sumber } = pasangan;
+  useEffect(() => {
+    let hidup = true;
+    let coba = 0;
+    let timer = 0;
+    const jalan = () => {
+      catatHasil({ idMain, peran, pemenang, pasangan: { civilian, undercover, sumber }, jumlahPemain }).then(
+        () => hidup && setStatus('ok'),
+        () => {
+          if (!hidup) return;
+          coba += 1;
+          if (coba < 4) timer = window.setTimeout(jalan, 2000 * coba);
+          else setStatus('galat');
+        },
+      );
+    };
+    jalan();
+    return () => {
+      hidup = false;
+      window.clearTimeout(timer);
+    };
+  }, [idMain, peran, pemenang, civilian, undercover, sumber, jumlahPemain]);
+  if (status === 'proses') return null;
+  return <p className="catatan tengah-teks nol" role="status">{status === 'ok' ? 'Hasil tercatat di profilmu.' : 'Hasil gagal dicatat. Periksa internet.'}</p>;
+}
+
 function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
+  const lihatProfil = useLihatProfil();
   const h = g.hasil;
   if (!h) return null;
   const peserta = pesertaDari(view);
-  const sayaMenang = (() => {
-    const p = peserta.find((x) => x.id === view.saya);
-    if (!p?.peran) return false;
-    return h.pemenang === 'civilian' ? p.peran === 'civilian' : h.pemenang === 'mrwhite' ? p.peran === 'mrwhite' : p.peran !== 'civilian';
-  })();
+  const perananSaya = peserta.find((x) => x.id === view.saya)?.peran;
+  const sayaMenang = perananSaya ? menangDengan(perananSaya, h.pemenang) : false;
   return (
     <section className="tumpuk">
+      {g.ikut && perananSaya && h.idMain && (
+        <CatatHasil idMain={h.idMain} peran={perananSaya} pemenang={h.pemenang} pasangan={h.pasangan} jumlahPemain={peserta.length} />
+      )}
       <Konfeti />
       <div className={`kartu besar menang-${h.pemenang} muncul`}>
         {g.ikut && <p className="sub">{sayaMenang ? 'Menang' : 'Kalah'}</p>}
@@ -1085,7 +1114,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
         <ul className="daftar-hasil">
           {peserta.map((p, i) => (
             <li key={p.id} className={`${p.hidup ? '' : 'mati'} muncul`} style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
-              <span>{p.nama}</span>
+              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} />{p.nama}</button>
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
             </li>
           ))}
