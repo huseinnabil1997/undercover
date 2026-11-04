@@ -19,7 +19,7 @@ Live: https://huseinnabil1997.github.io/undercover/
 - Main **Lokal** (satu HP) tanpa login dan tidak dicatat.
 - Main **Online** wajib login (username + password). Nama di room = username. Hasil tiap pemain dicatat ke profilnya.
 - Username 3 sampai 20 karakter (huruf, angka, `_`), unik tanpa beda besar kecil. Password minimal 6 karakter, tidak bisa dipulihkan (tidak ada reset), bisa diganti saat login.
-- Menu **Profil**: total main, persentase menang total dan per peran, riwayat permainan, cari pemain, ganti password, keluar.
+- Menu **Profil**: total main, persentase menang total dan per peran, riwayat permainan, cari pemain, ganti username (sekali per 7 hari, lewat RPC `ganti_username` yang juga mengganti email login sintetis; statistik, riwayat, kamus, dan foto tetap karena terikat id; nama di room yang sedang berjalan tetap nama lama), ganti password, keluar.
 - Foto profil (Supabase Storage, bucket publik `avatars`, hanya pemilik yang bisa mengunggah/menghapus di folder `<user_id>/`): dipotong persegi, 256 px, WebP (cadangan JPEG), di bawah 100 KB. Tanpa foto tampil inisial berwarna.
 - Profil pemain lain (read-only) bisa dibuka dari daftar pemain di room, layar hasil, dan pencarian username.
 - Backend: Supabase (Auth + Postgres dengan RLS). Skema di `supabase/migrations`. Kunci yang ditanam di kode hanya kunci publishable; bisa diganti lewat `NEXT_PUBLIC_SUPABASE_URL` dan `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
@@ -29,10 +29,10 @@ Live: https://huseinnabil1997.github.io/undercover/
 
 ## Peringkat dan kamus pemain
 
-- **Peringkat** (menu Peringkat, perlu login): 50 pemain dengan kemenangan Online terbanyak, lengkap dengan avatar. Ketuk nama untuk membuka profil pemain itu. Data dari view `papan_peringkat` (hanya untuk pengguna login).
+- **Peringkat** (menu Peringkat, perlu login): 50 pemain teratas, lengkap dengan avatar. Urutkan menurut *Jumlah menang* (seri: main lebih sedikit, lalu username) atau *Winrate* (minimal 5 kali main; seri: menang lebih banyak, lalu main lebih banyak, lalu username), untuk *Keseluruhan* atau per peran (Civilian, Undercover, Mr. White). Pilihan tersimpan di perangkat. Ketuk nama untuk membuka profil pemain itu. Data dari view `papan_peringkat_peran` (hanya untuk pengguna login).
 - **Kamus pemain** (menu Kamus): siapa pun bisa membaca daftar pasangan kata tanpa login. Menambah, mengubah, dan menghapus pasangan milik sendiri perlu login (dijaga RLS di tabel `kamus_pemain`).
 - Validasi di HP dan di database: 2 sampai 30 karakter per kata, huruf/angka/spasi dan tanda - ' . &, kedua kata harus berbeda, pasangan duplikat ditolak walau urutan atau besar kecil huruf beda. Maksimal 300 pasangan per akun.
-- Mode Lokal: kartu **Kamus pemain** di pengaturan, pilih *Pakai* untuk mengambil pasangan dari kamus pemain (tanpa login). Kamus disimpan sebagai cache di HP selama 10 menit dan tetap dipakai saat offline.
+- Mode Lokal dan Online: pasangan kamus pemain otomatis digabung ke sumber **Kamus kita** dan **Internet**. Kategori pemain yang namanya sama dengan kategori bawaan (tanpa beda besar kecil huruf dan spasi) masuk ke kategori itu; nama baru tampil sebagai kategori baru bertanda *pemain* (id `p:<nama>`). Pasangan yang sudah ada di bawaan (dibalik atau beda huruf) dibuang. Di Online, host memuat kamus (cache 10 menit) saat menyiapkan kata; bila gagal, permainan tetap jalan dengan cache lama atau kata bawaan. Setelan lama *Pakai kamus pemain* dihapus otomatis.
 
 ## Mode online
 

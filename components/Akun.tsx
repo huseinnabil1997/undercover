@@ -6,7 +6,7 @@ import { cekPassword, cekUsername, emailDari, pesanGalatAuth, rapikanUsername, r
 import { supabase } from '@/lib/supabase/klien';
 import { Avatar } from './Avatar';
 import { siapkanAvatar } from '@/lib/gambarAvatar';
-import { hapusAvatar, lupakanProfil, unggahAvatar, ambilProfil, ambilProfilUsername, ambilRiwayat, ambilStatistik, cariProfil, type EntriRiwayat, type ProfilPublik } from '@/lib/supabase/data';
+import { ambilUsernameDiganti, bisaGantiLagi, gantiUsername, hapusAvatar, lupakanProfil, unggahAvatar, ambilProfil, ambilProfilUsername, ambilRiwayat, ambilStatistik, cariProfil, type EntriRiwayat, type ProfilPublik } from '@/lib/supabase/data';
 import { TombolSuara } from './PanelSuara';
 import { JUDUL_MENANG, NAMA_PERAN, Tanda, TombolMenu, angka } from './ui';
 
@@ -251,6 +251,68 @@ function Riwayat({ userId }: { userId: string }) {
   );
 }
 
+function tanggalTeks(d: Date): string {
+  return `${d.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })} WIB`;
+}
+
+/** Ganti username sendiri: sekali per 7 hari. Nama di room yang sedang berjalan tetap nama lama. */
+function GantiUsername({ id, username, onGanti }: { id: string; username: string; onGanti: (baru: string) => void }) {
+  const [buka, setBuka] = useState(false);
+  const [baru, setBaru] = useState('');
+  const [diganti, setDiganti] = useState<string | null | undefined>(undefined);
+  const [pesan, setPesan] = useState<{ ok: boolean; teks: string } | null>(null);
+  const [proses, setProses] = useState(false);
+  useEffect(() => {
+    let hidup = true;
+    ambilUsernameDiganti(id).then((d) => hidup && setDiganti(d), () => hidup && setDiganti(null));
+    return () => {
+      hidup = false;
+    };
+  }, [id]);
+  const lagi = bisaGantiLagi(diganti ?? null);
+  async function simpan(e: React.FormEvent) {
+    e.preventDefault();
+    const nama = rapikanUsername(baru);
+    const g = cekUsername(nama);
+    if (g) return setPesan({ ok: false, teks: g });
+    if (nama === username) return setPesan({ ok: false, teks: 'Username baru sama dengan yang sekarang.' });
+    setProses(true);
+    try {
+      setDiganti(await gantiUsername(username, nama));
+      setBaru('');
+      setPesan({ ok: true, teks: `Username diganti menjadi ${nama}. Masuk berikutnya pakai nama ini.` });
+      onGanti(nama);
+    } catch (err) {
+      setPesan({ ok: false, teks: err instanceof Error ? err.message : 'Gagal mengganti username.' });
+    } finally {
+      setProses(false);
+    }
+  }
+  return (
+    <div className="kartu">
+      <h2>Username</h2>
+      {lagi && <p className="catatan" data-uji="ganti-lagi">Bisa diganti lagi pada {tanggalTeks(lagi)}.</p>}
+      {!buka ? (
+        <>
+          {pesan && <p className={pesan.ok ? 'catatan' : 'galat'} role="status">{pesan.teks}</p>}
+          <button className="kedua" type="button" onClick={() => { setBuka(true); setPesan(null); }}>Ganti username</button>
+        </>
+      ) : (
+        <form onSubmit={simpan} noValidate>
+          <label className="label" htmlFor="username-baru">Username baru</label>
+          <input id="username-baru" className="isian" value={baru} maxLength={20} autoComplete="off" autoCapitalize="none" placeholder="3 sampai 20 karakter" onChange={(e) => setBaru(e.target.value)} />
+          <p className="catatan">Huruf, angka, atau underscore. Bisa diganti sekali tiap 7 hari. Statistik, riwayat, kamus, dan foto tetap. Di room yang sedang berjalan namamu tetap nama lama.</p>
+          {pesan && <p className={pesan.ok ? 'catatan' : 'galat'} role="status">{pesan.teks}</p>}
+          <div className="baris-tombol jarak-atas">
+            <button className="kedua" type="button" onClick={() => { setBuka(false); setPesan(pesan?.ok ? pesan : null); }}>Batal</button>
+            <button type="submit" disabled={proses}>Simpan</button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}
+
 function GantiPassword() {
   const [baru, setBaru] = useState('');
   const [pesan, setPesan] = useState<{ ok: boolean; teks: string } | null>(null);
@@ -403,6 +465,7 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
         {siap && <KartuStatistik r={siap.r} />}
         {siap && <Riwayat userId={siap.id} />}
         {sendiri && !usernameLihat && <CariPemain />}
+        {siap && sendiri && !usernameLihat && <GantiUsername id={siap.id} username={siap.username} onGanti={(u) => setData({ ...siap, username: u })} />}
         {sendiri && !usernameLihat && <GantiPassword />}
         {sendiri && !usernameLihat && <button className="kedua" onClick={() => void supabase().auth.signOut()}>Keluar akun</button>}
         <p className="catatan tengah-teks">Hanya permainan Online yang dicatat. Main Lokal tidak dicatat.</p>

@@ -139,7 +139,7 @@ export function LayarKamus({ onBeranda }: { onBeranda: () => void }) {
       <Kepala onBeranda={onBeranda} />
       <section className="tumpuk masuk">
         <div className="kepala-fase"><h2>Kamus pemain</h2></div>
-        <p className="catatan tengah-teks nol">Pasangan kata buatan pemain. Bisa dipakai di mode Lokal lewat pilihan Kamus pemain.</p>
+        <p className="catatan tengah-teks nol">Pasangan kata buatan pemain. Otomatis ikut masuk ke sumber Kamus kita dan Internet, di mode Lokal maupun Online. Kategori yang namanya sama digabung, nama baru jadi kategori baru.</p>
 
         {akun.status === 'masuk' ? (
           <>
@@ -197,33 +197,5 @@ export function LayarKamus({ onBeranda }: { onBeranda: () => void }) {
         <div className="aksi-bawah" />
       </section>
     </main>
-  );
-}
-
-/** Pilihan di setup Lokal: pakai kamus pemain (publik, tanpa login) sebagai sumber kata. */
-export function PilihKamusPemain({ pakai, onUbah }: { pakai: boolean; onUbah: (p: boolean) => void }) {
-  const [info, setInfo] = useState<{ jumlah: number; dariCache: boolean } | 'galat' | null>(null);
-  useEffect(() => {
-    if (!pakai) return;
-    let hidup = true;
-    kamusPublik(false).then((d) => hidup && setInfo({ jumlah: d.data.length, dariCache: d.dariCache }), () => hidup && setInfo('galat'));
-    return () => {
-      hidup = false;
-    };
-  }, [pakai]);
-  return (
-    <div className="kartu">
-      <div className="baris-judul"><h2>Kamus pemain</h2></div>
-      <div className="segmen" role="group" aria-label="Kamus pemain">
-        <button type="button" aria-pressed={!pakai} onClick={() => onUbah(false)}>Tidak</button>
-        <button type="button" aria-pressed={pakai} onClick={() => onUbah(true)}>Pakai</button>
-      </div>
-      {!pakai && <p className="catatan">Pakai pasangan kata buatan pemain (menu Kamus) sebagai pengganti sumber kata bawaan.</p>}
-      {pakai && info === null && <p className="catatan" role="status">Memuat kamus pemain...</p>}
-      {pakai && info === 'galat' && <p className="galat" role="alert">Kamus pemain belum bisa dimuat. Periksa internet.</p>}
-      {pakai && info && info !== 'galat' && (
-        <p className="catatan"><strong>{info.jumlah}</strong> pasangan dari kamus pemain{info.dariCache ? ' (cache di HP ini)' : ''}.</p>
-      )}
-    </div>
   );
 }

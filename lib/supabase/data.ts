@@ -39,6 +39,41 @@ export function lupakanProfil(username: string): void {
   cacheProfil.delete(username.toLowerCase());
 }
 
+/** Waktu terakhir username diganti (null bila belum pernah). */
+export async function ambilUsernameDiganti(id: string): Promise<string | null> {
+  const { data, error } = await supabase().from('profil').select('username_diganti').eq('id', id).maybeSingle();
+  if (error) throw error;
+  return (data?.username_diganti as string | null | undefined) ?? null;
+}
+
+/** Bisa ganti username lagi pada (null = sekarang juga boleh). */
+export function bisaGantiLagi(diganti: string | null, now = Date.now()): Date | null {
+  if (!diganti) return null;
+  const t = new Date(diganti).getTime() + 7 * 24 * 3600 * 1000;
+  return t > now ? new Date(t) : null;
+}
+
+/**
+ * Ganti username lewat RPC (server mengganti profil dan email login sintetis). Cache avatar per username
+ * untuk nama lama dan baru dibuang, lalu sesi disegarkan agar nama di aplikasi ikut berganti.
+ * Mengembalikan waktu penggantian (ISO).
+ */
+export async function gantiUsername(lama: string, baru: string): Promise<string> {
+  const { data, error } = await supabase().rpc('ganti_username', { baru });
+  if (error) throw Object.assign(new Error(pesanGantiUsername(error)), { code: error.code });
+  lupakanProfil(lama);
+  lupakanProfil(baru);
+  await supabase().auth.refreshSession().catch(() => {});
+  return data as string;
+}
+
+export function pesanGantiUsername(e: { code?: string; message?: string }): string {
+  if (e.code === '23505') return 'Username sudah dipakai.';
+  if (e.code === '22023' || e.code === 'P0001') return `${e.message ?? 'Username tidak valid'}.`;
+  if (e.code === '42501') return 'Harus masuk dulu.';
+  return 'Gagal mengganti username. Periksa internet lalu coba lagi.';
+}
+
 /** Unggah foto (sudah diproses) lalu naikkan versi di profil. */
 export async function unggahAvatar(userId: string, blob: Blob, versiLama: number | null): Promise<number> {
   const { error } = await supabase().storage.from(BUCKET_AVATAR).upload(pathAvatar(userId), blob, { upsert: true, contentType: blob.type, cacheControl: '31536000' });

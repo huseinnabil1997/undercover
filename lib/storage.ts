@@ -18,6 +18,9 @@ export const KUNCI = {
   riwayat: 'riwayatPasangan',
   /** Mode Lokal memakai kamus pemain (publik) sebagai sumber kata. */
   pakaiKamusPemain: 'pakaiKamusPemain',
+  /** Pilihan leaderboard: urutan ('menang' | 'winrate') dan peran ('semua' | peran). */
+  peringkatUrut: 'peringkatUrut',
+  peringkatPeran: 'peringkatPeran',
   /** Cache kamus pemain publik: { waktu, data }. */
   cacheKamusPemain: 'kamusPemain.cache',
 } as const;

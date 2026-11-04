@@ -14,9 +14,6 @@ import { batasTersimpan, detikTebakan, TEKS_WAKTU_HABIS, type BatasWaktu } from 
 import { peristiwaLokal } from '@/lib/umpan/peristiwa';
 import { umpan } from '@/lib/umpan/mesin';
 import { useDialog } from './Modal';
-import { PilihKamusPemain } from './Kamus';
-import { pilihDariKamus } from '@/lib/kamusPemain';
-import { kamusPublik } from '@/lib/supabase/kamus';
 import { TombolSuara } from './PanelSuara';
 import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk } from './Petunjuk';
 import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
@@ -79,8 +76,6 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   const [game, setGame] = useState<Permainan | null>(null);
   const [memuat, setMemuat] = useState(false);
   const [galatMuat, setGalatMuat] = useState<string | null>(null);
-  const [pakaiKamus, setPakaiKamus] = useState<boolean>(() => baca<unknown>(KUNCI.pakaiKamusPemain, false) === true);
-  useEffect(() => simpan(KUNCI.pakaiKamusPemain, pakaiKamus), [pakaiKamus]);
 
   // Pilihan kategori langsung disimpan, jadi kategori yang dibuang tetap dibuang di kunjungan berikutnya.
   useEffect(() => simpan(kunciKategori(sumber), kategori), [sumber, kategori]);
@@ -104,9 +99,9 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
 
   const galat = useMemo(() => {
     const g = validasiSetup(nama, komposisi);
-    if (!pakaiKamus && kategori.length === 0) g.push('Pilih minimal 1 kategori kata.');
+    if (kategori.length === 0) g.push('Pilih minimal 1 kategori kata.');
     return g;
-  }, [nama, komposisi, kategori, pakaiKamus]);
+  }, [nama, komposisi, kategori]);
 
   function ubahJumlah(delta: number) {
     const n = Math.max(MIN_PEMAIN, Math.min(MAX_PEMAIN, nama.length + delta));
@@ -123,9 +118,7 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
     setMemuat(true);
     setGalatMuat(null);
     try {
-      const { pasangan, cadangan } = pakaiKamus
-        ? pilihDariKamus((await kamusPublik()).data, panjangKata)
-        : await siapkanPasangan(kategori, panjangKata, sumber);
+      const { pasangan, cadangan } = await siapkanPasangan(kategori, panjangKata, sumber);
       const bersih = nama.map((n) => n.trim());
       simpan(KUNCI.nama, bersih);
       simpan(KUNCI.komposisi, komposisi);
@@ -137,10 +130,8 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
       setGame({ pemain: bagiPeran(bersih, komposisi), pasangan, fase: { jenis: 'serah', idx: 0, terbuka: false }, petunjuk: [] });
       setLayar('main');
       if (cadangan) void dialog.info({ judul: 'Pasangan satu kata tidak ada', pesan: PESAN_TANPA_SATU_KATA });
-    } catch (e) {
-      setGalatMuat(pakaiKamus
-        ? (e instanceof Error && e.message === 'Kamus pemain masih kosong.' ? 'Kamus pemain masih kosong. Tambah kata lewat menu Kamus atau pilih sumber lain.' : 'Gagal memuat kamus pemain. Periksa koneksi lalu coba lagi.')
-        : 'Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
+    } catch {
+      setGalatMuat('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
     } finally {
       setMemuat(false);
     }
@@ -238,11 +229,9 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
             onOtomatis={() => setKomposisi(komposisiDefault(nama.length))}
           />
 
-          <PilihKamusPemain pakai={pakaiKamus} onUbah={setPakaiKamus} />
+          <PilihSumberKata nilai={sumber} onUbah={setSumber} />
 
-          {!pakaiKamus && <PilihSumberKata nilai={sumber} onUbah={setSumber} />}
-
-          {!pakaiKamus && <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} sumber={sumber} />}
+          <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} sumber={sumber} />
 
           <PilihPanjangKata nilai={panjangKata} onUbah={setPanjangKata} />
 
@@ -603,7 +592,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         </ul>
         <h3>Alur</h3>
         <ol>
-          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai. Di mode Lokal bisa juga memakai Kamus pemain: pasangan kata buatan pemain lain dari menu Kamus.</li>
+          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai. Pasangan buatan pemain dari menu Kamus otomatis ikut masuk ke Kamus kita dan Internet, di mode Lokal maupun Online.</li>
           <li>Oper HP ke setiap pemain. Tekan untuk melihat kata, hafalkan, lalu tutup sebelum mengoper.</li>
           <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
           <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka. Pilih Lewati jika belum yakin: tidak ada yang keluar dan permainan lanjut ke ronde berikutnya.</li>

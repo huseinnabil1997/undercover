@@ -3,7 +3,9 @@
 // Komponen tampilan yang dipakai mode satu HP dan mode online.
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { maksPenyusup, type Komposisi } from '@/lib/game';
-import { KREDIT_SUMBER_INTERNET, pilihanKategori, PILIHAN_SUMBER, semuaKategori, totalKombinasi } from '@/lib/bankKata';
+import { KREDIT_SUMBER_INTERNET, pilihanKategoriGabung, PILIHAN_SUMBER, totalGabung } from '@/lib/bankKata';
+import type { EntriKamus } from '@/lib/kamusPemain';
+import { kamusPublik } from '@/lib/supabase/kamus';
 import type { PanjangKata, Pemenang, Peran, SumberKata } from '@/lib/types';
 import { adaBatas, detikTebakan, labelDetik, PILIHAN_PETUNJUK, PILIHAN_VOTE, type BatasWaktu } from '@/lib/batasWaktu';
 
@@ -91,11 +93,26 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
   );
 }
 
-/** Kartu pilihan kategori kata. */
+/** Kamus pemain publik (cache 10 menit, tanpa login). Kosong bila belum termuat atau offline tanpa cache. */
+export function useKamusPemain(): EntriKamus[] {
+  const [data, setData] = useState<EntriKamus[]>([]);
+  useEffect(() => {
+    let hidup = true;
+    kamusPublik(false).then((d) => hidup && setData(d.data), () => {});
+    return () => {
+      hidup = false;
+    };
+  }, []);
+  return data;
+}
+
+/** Kartu pilihan kategori kata. Kategori dari kamus pemain digabung (yang baru diberi tanda 'pemain'). */
 export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas', sumber = 'kamus' }: {
   kategori: string[]; onUbah: (k: string[]) => void; nonaktif?: boolean; panjangKata?: PanjangKata; sumber?: SumberKata;
 }) {
-  const daftarSemua = semuaKategori(sumber);
+  const kamus = useKamusPemain();
+  const pilihan = pilihanKategoriGabung(sumber, kamus);
+  const daftarSemua = pilihan.map((k) => k.id);
   const semua = daftarSemua.every((id) => kategori.includes(id));
   return (
     <div className="kartu">
@@ -106,7 +123,7 @@ export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas
         )}
       </div>
       <div className="chip-grup">
-        {pilihanKategori(sumber).map((k) => {
+        {pilihan.map((k) => {
           const aktif = kategori.includes(k.id);
           if (nonaktif && !aktif) return null;
           return (
@@ -117,13 +134,13 @@ export function PilihKategori({ kategori, onUbah, nonaktif, panjangKata = 'bebas
               disabled={nonaktif}
               onClick={() => onUbah(aktif ? kategori.filter((x) => x !== k.id) : [...kategori, k.id])}
             >
-              {k.nama}
+              {k.nama}{k.dariPemain && <small className="tanda-pemain"> pemain</small>}
             </button>
           );
         })}
       </div>
       <p className="catatan">
-        <strong>{angka(totalKombinasi(kategori, panjangKata))}</strong> pasangan kata
+        <strong>{angka(totalGabung(sumber, kategori, panjangKata, kamus))}</strong> pasangan kata, termasuk kamus pemain
       </p>
     </div>
   );
@@ -150,7 +167,7 @@ export function PilihSumberKata({ nilai, onUbah, nonaktif }: { nilai: SumberKata
           </button>
         ))}
       </div>
-      <p className="catatan">{pilihan.keterangan}</p>
+      <p className="catatan">{pilihan.keterangan} Pasangan buatan pemain (menu Kamus) ikut digabung.{nonaktif ? ' Diatur oleh host.' : ''}</p>
       {nilai === 'internet' && <p className="catatan">Sumber kata: {KREDIT_SUMBER_INTERNET}.</p>}
     </div>
   );

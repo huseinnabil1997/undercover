@@ -84,17 +84,56 @@ export function cacheSegar(c: CacheKamus | null, kini = Date.now()): boolean {
   return !!c && kini - c.waktu < UMUR_CACHE_MS && kini >= c.waktu;
 }
 
+/* -------------------------------- Kategori -------------------------------- */
+
+export interface KategoriPemain { id: string; nama: string; jumlah: number; jumlahSatu: number }
+
+/** Id kategori: dirapikan lalu huruf kecil, jadi "Buah", " buah " dan "BUAH" satu kelompok. */
+export function idKategori(k: string): string {
+  return rapikanKata(k || KATEGORI_BAWAAN).toLowerCase() || KATEGORI_BAWAAN.toLowerCase();
+}
+
+const satuKataSaja = (a: string, b: string) => !/\s/.test(rapikanKata(a)) && !/\s/.test(rapikanKata(b));
+
+/** Kelompokkan kamus per kategori. Nama yang ditampilkan adalah bentuk tulisan paling umum. */
+export function kelompokKategori(data: readonly EntriKamus[]): KategoriPemain[] {
+  const grup = new Map<string, { bentuk: Map<string, number>; jumlah: number; jumlahSatu: number }>();
+  for (const e of data) {
+    const id = idKategori(e.k);
+    const g = grup.get(id) ?? { bentuk: new Map(), jumlah: 0, jumlahSatu: 0 };
+    const nama = rapikanKata(e.k || KATEGORI_BAWAAN);
+    g.bentuk.set(nama, (g.bentuk.get(nama) ?? 0) + 1);
+    g.jumlah += 1;
+    if (satuKataSaja(e.a, e.b)) g.jumlahSatu += 1;
+    grup.set(id, g);
+  }
+  return [...grup].map(([id, g]) => {
+    const nama = [...g.bentuk].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], 'id'))[0][0];
+    return { id, nama, jumlah: g.jumlah, jumlahSatu: g.jumlahSatu };
+  }).sort((a, b) => a.nama.localeCompare(b.nama, 'id', { sensitivity: 'base' }));
+}
+
+export const PESAN_KAMUS_KOSONG = 'Kamus pemain masih kosong.';
+export const PESAN_KATEGORI_KOSONG = 'Tidak ada pasangan di kategori kamus pemain yang dipilih.';
+
 /* ----------------------------- Pilih pasangan ----------------------------- */
 
-/** Pilih pasangan dari kamus pemain, dikelompokkan per kategori. Jatuh ke 'bebas' bila tidak ada satu kata. */
-export function pilihDariKamus(data: readonly EntriKamus[], panjangKata: PanjangKata): { pasangan: PasanganKata; cadangan: boolean } {
+/**
+ * Pilih pasangan dari kamus pemain di kategori terpilih (id ternormalisasi; kosong atau tidak
+ * diisi berarti semua). Jatuh ke 'bebas' bila tidak ada pasangan satu kata.
+ */
+export function pilihDariKamus(data: readonly EntriKamus[], panjangKata: PanjangKata, kategori?: readonly string[]): { pasangan: PasanganKata; cadangan: boolean } {
+  if (data.length === 0) throw new Error(PESAN_KAMUS_KOSONG);
+  const nama = new Map(kelompokKategori(data).map((k) => [k.id, k.nama]));
+  const pilih = kategori && kategori.length > 0 ? new Set(kategori.map(idKategori)) : null;
   const grup = new Map<string, [string, string][]>();
   for (const e of data) {
-    const k = e.k || KATEGORI_BAWAAN;
-    grup.set(k, [...(grup.get(k) ?? []), [e.a, e.b]]);
+    const id = idKategori(e.k);
+    if (pilih && !pilih.has(id)) continue;
+    grup.set(id, [...(grup.get(id) ?? []), [e.a, e.b]]);
   }
-  const daftar = [...grup].map(([nama, pasangan]) => ({ nama, pasangan }));
-  if (daftar.length === 0) throw new Error('Kamus pemain masih kosong.');
+  const daftar = [...grup].map(([id, pasangan]) => ({ nama: nama.get(id) ?? id, pasangan }));
+  if (daftar.length === 0) throw new Error(PESAN_KATEGORI_KOSONG);
   const riwayat = baca<string[]>(KUNCI.riwayat, []);
   const opsi = { daftar, riwayat, label: 'Kamus pemain' };
   let pasangan: PasanganKata;

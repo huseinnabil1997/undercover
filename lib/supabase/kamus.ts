@@ -1,4 +1,5 @@
 // Akses kamus pemain di Supabase. Baca publik (tanpa login); tulis hanya milik sendiri (RLS).
+import { baca, KUNCI } from '../storage';
 import { bacaCacheKamus, cacheSegar, simpanCacheKamus, type EntriKamus } from '../kamusPemain';
 import { supabase } from './klien';
 
@@ -51,11 +52,37 @@ export async function hapusKamus(id: number): Promise<void> {
 }
 
 export interface BarisPeringkat { id: string; username: string; avatar_versi: number | null; main: number; menang: number }
+export type UrutPeringkat = 'menang' | 'winrate';
+export type PeranPeringkat = 'semua' | 'civilian' | 'undercover' | 'mrwhite';
+/** Winrate hanya dihitung untuk pemain dengan minimal sekian permainan (di peran yang dipilih). */
+export const MIN_MAIN_WINRATE = 5;
 
-/** Leaderboard: urut menang terbanyak, lalu main paling sedikit (win rate lebih tinggi). */
-export async function ambilPeringkat(batas = 50): Promise<BarisPeringkat[]> {
-  const { data, error } = await supabase().from('papan_peringkat').select('id, username, avatar_versi, main, menang')
-    .order('menang', { ascending: false }).order('main', { ascending: true }).order('username').limit(batas);
+export const URUT_PERINGKAT: { id: UrutPeringkat; nama: string }[] = [{ id: 'menang', nama: 'Jumlah menang' }, { id: 'winrate', nama: 'Winrate' }];
+export const PERAN_PERINGKAT: { id: PeranPeringkat; nama: string }[] = [
+  { id: 'semua', nama: 'Keseluruhan' }, { id: 'civilian', nama: 'Civilian' }, { id: 'undercover', nama: 'Undercover' }, { id: 'mrwhite', nama: 'Mr. White' },
+];
+
+/** Pilihan tersimpan; nilai tidak dikenal kembali ke bawaan. */
+export function pilihanPeringkat(): { urut: UrutPeringkat; peran: PeranPeringkat } {
+  const u = baca<unknown>(KUNCI.peringkatUrut, null);
+  const p = baca<unknown>(KUNCI.peringkatPeran, null);
+  return {
+    urut: URUT_PERINGKAT.some((x) => x.id === u) ? (u as UrutPeringkat) : 'menang',
+    peran: PERAN_PERINGKAT.some((x) => x.id === p) ? (p as PeranPeringkat) : 'semua',
+  };
+}
+
+
+/**
+ * Leaderboard per peran ('semua' = gabungan). Urut 'menang': menang terbanyak, lalu main paling sedikit,
+ * lalu username. Urut 'winrate': winrate tertinggi (minimal MIN_MAIN_WINRATE main), lalu menang, lalu main terbanyak.
+ */
+export async function ambilPeringkat(urut: UrutPeringkat = 'menang', peran: PeranPeringkat = 'semua', batas = 50): Promise<BarisPeringkat[]> {
+  let q = supabase().from('papan_peringkat_peran').select('id, username, avatar_versi, main, menang').eq('peran', peran);
+  q = urut === 'winrate'
+    ? q.gte('main', MIN_MAIN_WINRATE).order('winrate', { ascending: false }).order('menang', { ascending: false }).order('main', { ascending: false })
+    : q.order('menang', { ascending: false }).order('main', { ascending: true });
+  const { data, error } = await q.order('username').limit(batas);
   if (error) throw error;
   return (data ?? []) as BarisPeringkat[];
 }
