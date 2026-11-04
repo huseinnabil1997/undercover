@@ -26,6 +26,13 @@ Live: https://huseinnabil1997.github.io/undercover/
 - Pengaturan project yang wajib: Authentication > Sign In / Providers > Email > matikan "Confirm email" (username diubah ke email sintetis `@undercover.local` yang tidak pernah dikirimi surat).
 - Batasan: game online dijalankan di HP host, jadi hasil yang dicatat dipercaya dari klien. Pemain yang memodifikasi aplikasi bisa memalsukan hasilnya sendiri (tidak bisa menulis untuk akun orang lain).
 
+## Peringkat dan kamus pemain
+
+- **Peringkat** (menu Peringkat, perlu login): 50 pemain dengan kemenangan Online terbanyak, lengkap dengan avatar. Ketuk nama untuk membuka profil pemain itu. Data dari view `papan_peringkat` (hanya untuk pengguna login).
+- **Kamus pemain** (menu Kamus): siapa pun bisa membaca daftar pasangan kata tanpa login. Menambah, mengubah, dan menghapus pasangan milik sendiri perlu login (dijaga RLS di tabel `kamus_pemain`).
+- Validasi di HP dan di database: 2 sampai 30 karakter per kata, huruf/angka/spasi dan tanda - ' . &, kedua kata harus berbeda, pasangan duplikat ditolak walau urutan atau besar kecil huruf beda. Maksimal 300 pasangan per akun.
+- Mode Lokal: kartu **Kamus pemain** di pengaturan, pilih *Pakai* untuk mengambil pasangan dari kamus pemain (tanpa login). Kamus disimpan sebagai cache di HP selama 10 menit dan tetap dipakai saat offline.
+
 ## Mode online
 
 1. Host menekan **Main Online**, mengisi nama, lalu **Buat room**. Muncul kode room 5 huruf

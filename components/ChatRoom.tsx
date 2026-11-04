@@ -160,7 +160,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
                 return (
                   <li key={p.id} className={`chat-pesan${milikku ? ' saya' : ''}`}>
                     <div className="chat-meta">
-                      <span className="chat-nama nama-dengan-avatar">{!milikku && <Avatar username={p.nama} cari ukuran={20} />}{milikku ? 'Kamu' : p.nama}</span>
+                      <span className="chat-nama nama-dengan-avatar">{!milikku && <Avatar username={p.nama} cari ukuran={20} />}<span className="nama-teks">{milikku ? 'Kamu' : p.nama}</span></span>
                       <time dateTime={new Date(p.waktu).toISOString()}>{jamChat(p.waktu)}</time>
                     </div>
                     <p className={`chat-teks${hanyaEmoji(p.teks) ? ' emoji' : ''}`}>{p.teks}</p>

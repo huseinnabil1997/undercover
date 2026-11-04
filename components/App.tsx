@@ -8,12 +8,14 @@ import { bersihkanKunciLama } from '@/lib/storage';
 import { bacaUmpan, daftarkanSW, pasangUmpan } from '@/lib/umpan/mesin';
 import { AkunProvider, GerbangAkun, LayarProfil } from './Akun';
 import { DialogProvider } from './Modal';
+import { LayarPeringkat } from './Peringkat';
+import { LayarKamus } from './Kamus';
 import OnlineGame from './OnlineGame';
 import { TombolSuara } from './PanelSuara';
 import UndercoverGame from './UndercoverGame';
 import { Tanda, type Penjaga } from './ui';
 
-type Mode = 'beranda' | 'online' | 'offline' | 'profil';
+type Mode = 'beranda' | 'online' | 'offline' | 'profil' | 'peringkat' | 'kamus';
 
 /** Penanda entri riwayat browser milik aplikasi ini. */
 const KUNCI_RIWAYAT = 'undercover';
@@ -27,7 +29,7 @@ function modeAwal(): { mode: Mode; kode: string | null } {
 
 function modeRiwayat(state: unknown): Mode | null {
   const m = (state as Record<string, unknown> | null)?.[KUNCI_RIWAYAT];
-  return m === 'beranda' || m === 'online' || m === 'offline' || m === 'profil' ? m : null;
+  return m === 'beranda' || m === 'online' || m === 'offline' || m === 'profil' || m === 'peringkat' || m === 'kamus' ? m : null;
 }
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -152,6 +154,14 @@ function Isi() {
       </GerbangAkun>
     );
   }
+  if (mode === 'peringkat') {
+    return (
+      <GerbangAkun alasan="Masuk untuk melihat peringkat pemain." onBeranda={keMenu}>
+        {(akun) => <LayarPeringkat akun={akun} onBeranda={keMenu} />}
+      </GerbangAkun>
+    );
+  }
+  if (mode === 'kamus') return <LayarKamus onBeranda={keMenu} />;
   if (mode === 'offline') return <UndercoverGame onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />;
 
   return (
@@ -179,7 +189,11 @@ function Isi() {
       <div className="pilihan">
         <button className="utama" onClick={() => masuk('online')}>Online</button>
         <button className="kedua" onClick={() => masuk('offline')}>Lokal</button>
-        <button className="kedua" onClick={() => masuk('profil')}>Profil</button>
+        <div className="baris-menu">
+          <button className="kedua" onClick={() => masuk('profil')}>Profil</button>
+          <button className="kedua" onClick={() => masuk('peringkat')}>Peringkat</button>
+          <button className="kedua" onClick={() => masuk('kamus')}>Kamus</button>
+        </div>
         <p className="catatan tengah-teks nol">Lokal tanpa login. Online perlu akun.</p>
       </div>
     </main>

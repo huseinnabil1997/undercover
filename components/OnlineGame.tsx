@@ -701,8 +701,8 @@ function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; a
           <li key={p.id} className={`${keluar ? 'keluar' : ''} ${p.online ? '' : 'offline'}`}>
             <span className={`titik ${p.online ? 'on' : 'off'}`} aria-hidden />
             <span className="nama">
-              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} />{p.nama}</button>
-              {p.id === view.saya && <em> (kamu)</em>}
+              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} /><span className="nama-teks">{p.nama}</span></button>
+              {p.id === view.saya && <em className="label-kamu">(kamu)</em>}
             </span>
             {p.host && <span className="lencana host">Host</span>}
             {!p.online && <span className="lencana off">Offline</span>}
@@ -1114,7 +1114,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
         <ul className="daftar-hasil">
           {peserta.map((p, i) => (
             <li key={p.id} className={`${p.hidup ? '' : 'mati'} muncul`} style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
-              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} />{p.nama}</button>
+              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} /><span className="nama-teks">{p.nama}</span></button>
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
             </li>
           ))}

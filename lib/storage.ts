@@ -16,6 +16,10 @@ export const KUNCI = {
   /** Batas waktu giliran petunjuk dan vote: { petunjuk, vote } dalam detik, 0 = tanpa batas. */
   batasWaktu: 'batasWaktu',
   riwayat: 'riwayatPasangan',
+  /** Mode Lokal memakai kamus pemain (publik) sebagai sumber kata. */
+  pakaiKamusPemain: 'pakaiKamusPemain',
+  /** Cache kamus pemain publik: { waktu, data }. */
+  cacheKamusPemain: 'kamusPemain.cache',
 } as const;
 
 /** Kunci lama yang sudah tidak dipakai (pilihan kategori versi 1 dan skor). */

@@ -605,3 +605,36 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .tombol-label { display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
 .tombol-label.nonaktif { opacity: 0.4; cursor: not-allowed; }
 .tombol-label:focus-within { outline: 2px solid var(--teks); outline-offset: 2px; }
+
+/* Tahap 2: menu tambahan, peringkat, kamus pemain */
+.baris-menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.baris-menu button { padding-left: 4px; padding-right: 4px; min-width: 0; }
+.daftar-peringkat { list-style: none; margin: 0; padding: 8px 12px; }
+.daftar-peringkat li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--garis, rgba(255,255,255,0.08)); }
+.daftar-peringkat li:last-child { border-bottom: 0; }
+.daftar-peringkat li.sendiri { background: rgba(34, 214, 104, 0.08); border-radius: 10px; padding-left: 6px; padding-right: 6px; }
+.daftar-peringkat .nomor { width: 24px; text-align: center; font-weight: 700; flex: none; }
+.daftar-peringkat .nama-dengan-avatar { flex: 1; min-width: 0; }
+.nama-peringkat { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.angka-peringkat { text-align: right; font-size: 0.85rem; line-height: 1.3; flex: none; }
+.angka-peringkat small { opacity: 0.7; }
+.daftar-kamus { list-style: none; margin: 10px 0 0; padding: 0; }
+.daftar-kamus li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--garis, rgba(255,255,255,0.08)); }
+.daftar-kamus li.lebar { display: block; }
+.daftar-kamus li:last-child { border-bottom: 0; }
+.pasangan-kamus { min-width: 0; overflow-wrap: anywhere; }
+.pasangan-kamus small { display: block; opacity: 0.7; font-size: 0.78rem; }
+.aksi-kamus { display: flex; gap: 6px; flex: none; }
+.kecil.bahaya { color: var(--merah); }
+.baris-tombol { display: flex; gap: 8px; margin-top: 10px; }
+.baris-tombol > * { flex: 1; }
+
+/* Avatar + nama sejajar di tengah (lobby, hasil, chat, peringkat, pencarian) */
+.nama-dengan-avatar { display: inline-flex; align-items: center; gap: 8px; min-width: 0; max-width: 100%; line-height: 1.25; vertical-align: middle; text-decoration: none; }
+.nama-dengan-avatar > .avatar { flex-shrink: 0; }
+.nama-teks { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.25; }
+.tautan.nama-dengan-avatar .nama-teks { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--garis-kuat); }
+.label-kamu { font-style: normal; color: var(--redup); font-weight: 500; line-height: 1.25; flex-shrink: 0; margin-left: 4px; }
+.daftar-lobby .nama { display: inline-flex; align-items: center; min-width: 0; line-height: 1.25; }
+.daftar-hasil li, .daftar-cari li { align-items: center; }
+.nama-dengan-avatar > .label-kamu { margin-left: -2px; }

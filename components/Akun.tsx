@@ -68,7 +68,7 @@ export function AkunProvider({ children }: { children: ReactNode }) {
   );
 }
 
-function Kepala({ onBeranda }: { onBeranda: () => void }) {
+export function Kepala({ onBeranda }: { onBeranda: () => void }) {
   return (
     <header className="kepala">
       <TombolMenu onClick={onBeranda} />
@@ -354,7 +354,7 @@ function CariPemain() {
           {hasil.map((p) => (
             <li key={p.id}>
               <button type="button" className="tautan nama-dengan-avatar" onClick={() => lihat(p.username)}>
-                <Avatar username={p.username} id={p.id} versi={p.avatar_versi} ukuran={28} />{p.username}
+                <Avatar username={p.username} id={p.id} versi={p.avatar_versi} ukuran={28} /><span className="nama-teks">{p.username}</span>
               </button>
             </li>
           ))}
