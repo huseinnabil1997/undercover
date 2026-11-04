@@ -68,3 +68,20 @@ export function cekPetunjuk(
   if (dipakai.some((d) => kunciPetunjuk(d) === k)) return { galat: GALAT_PETUNJUK.duplikat };
   return { teks: t };
 }
+
+/** Petunjuk milik satu pemain, terbaru dulu (ronde sekarang paling mudah terlihat). */
+export function petunjukMilik(entri: EntriPetunjuk[], kunci: string): EntriPetunjuk[] {
+  return entri.filter((e) => e.pemain === kunci).sort((a, b) => b.ronde - a.ronde || b.waktu - a.waktu);
+}
+
+/**
+ * Urutan baris: pemain sesuai urutan bicara ronde ini, lalu sisanya; yang tereliminasi selalu di bawah.
+ * Tanpa urutan: pemain hidup sesuai urutan asli, lalu yang tereliminasi.
+ */
+export function urutkanBaris<T extends { kunci: string; hidup: boolean }>(pemain: T[], urutan?: string[]): T[] {
+  const posisi = (k: string) => {
+    const i = urutan ? urutan.indexOf(k) : -1;
+    return i >= 0 ? i : (urutan?.length ?? 0) + pemain.findIndex((p) => p.kunci === k);
+  };
+  return [...pemain].sort((a, b) => Number(!a.hidup) - Number(!b.hidup) || posisi(a.kunci) - posisi(b.kunci));
+}

@@ -15,7 +15,7 @@ import { peristiwaLokal } from '@/lib/umpan/peristiwa';
 import { umpan } from '@/lib/umpan/mesin';
 import { useDialog } from './Modal';
 import { TombolSuara } from './PanelSuara';
-import { FormPetunjuk, RiwayatPetunjuk } from './Petunjuk';
+import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk } from './Petunjuk';
 import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
 import { Hitungan } from './Hitungan';
 
@@ -162,8 +162,9 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
     });
   }
 
+  const dok = layar === 'main' && game && game.fase.jenis !== 'serah' && (game.fase.jenis !== 'hasil' || game.petunjuk.length > 0);
   return (
-    <main className="wadah">
+    <main className={`wadah${dok ? ' punya-dok' : ''}`}>
       <header className="kepala">
         {onBeranda && <TombolMenu onClick={onBeranda} />}
         <div className="aksi-kepala">
@@ -284,6 +285,14 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
         />
         </div>
       )}
+      {dok && game && (
+        // Dok bawah: tombol Petunjuk tetap di tempat saat digulir, di bawah tombol aksi.
+        <nav className="dok" aria-label="Petunjuk">
+          <div className="dok-isi">
+            <LembarPetunjuk {...propsRiwayatLokal(game, game.fase.jenis === 'hasil')} />
+          </div>
+        </nav>
+      )}
     </main>
   );
 }
@@ -319,14 +328,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
     isyaratLalu.current = isyarat.kunci;
     umpan(isyarat.p);
   }, [isyarat.kunci, isyarat.p]);
-  const riwayat = (tampilPeran: boolean, giliran?: number) => (
-    <RiwayatPetunjuk
-      pemain={pemain.map((p, i) => ({ kunci: String(i), nama: p.nama, hidup: p.hidup, peran: tampilPeran || !p.hidup ? p.peran : undefined }))}
-      entri={game.petunjuk}
-      giliran={giliran === undefined ? null : String(giliran)}
-      ronde={fase.jenis === 'diskusi' || fase.jenis === 'vote' || fase.jenis === 'terungkap' ? fase.ronde : Math.max(1, ...game.petunjuk.map((e) => e.ronde))}
-    />
-  );
+  const riwayat = (tampilPeran: boolean) => <RiwayatPetunjuk {...propsRiwayatLokal(game, tampilPeran)} />;
 
   if (fase.jenis === 'serah') {
     const p = pemain[fase.idx];
@@ -374,7 +376,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
   }
 
   if (fase.jenis === 'diskusi') {
-    return <GiliranPetunjuk key={`${fase.ronde}-${fase.giliran}`} game={game} fase={fase} detik={batas.petunjuk} onGiliran={onGiliran} onVote={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })} riwayat={riwayat(false, fase.urutan[fase.giliran])} />;
+    return <GiliranPetunjuk key={`${fase.ronde}-${fase.giliran}`} game={game} fase={fase} detik={batas.petunjuk} onGiliran={onGiliran} onVote={() => setFase({ jenis: 'vote', ronde: fase.ronde, pilih: null })} daftar={<DaftarPetunjuk {...propsRiwayatLokal(game, false)} giliranKe={fase.giliran} />} />;
   }
 
   if (fase.jenis === 'vote') {
@@ -390,7 +392,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
             {pemain.map((p, i) =>
               p.hidup ? (
                 <button key={i} className={`pemain ${fase.pilih === i ? 'pilih' : ''}`} aria-pressed={fase.pilih === i} onClick={() => setFase({ ...fase, pilih: i })}>
-                  {p.nama}
+                  <KartuVote nama={p.nama} entri={petunjukMilik(game.petunjuk, String(i))} ronde={fase.ronde} />
                 </button>
               ) : null,
             )}
@@ -404,7 +406,6 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
           </div>
           <p className="catatan">Lewati: tidak ada yang keluar ronde ini.</p>
         </div>
-        {riwayat(false)}
         <div className="aksi-bawah">
           {fase.pilih === LEWATI_LOKAL ? (
             <button className="utama" onClick={() => setFase({ jenis: 'aman', ronde: fase.ronde })}>
@@ -489,14 +490,28 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
   );
 }
 
-function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, riwayat }: {
+/** Data riwayat petunjuk mode lokal (kunci pemain = indeks). */
+function propsRiwayatLokal(game: Permainan, tampilPeran: boolean) {
+  const { fase } = game;
+  const aktif = fase.jenis === 'diskusi' || fase.jenis === 'vote' || fase.jenis === 'terungkap' || fase.jenis === 'aman';
+  return {
+    pemain: game.pemain.map((p, i) => ({ kunci: String(i), nama: p.nama, hidup: p.hidup, peran: tampilPeran || !p.hidup ? p.peran : undefined })),
+    entri: game.petunjuk,
+    giliran: fase.jenis === 'diskusi' && fase.giliran < fase.urutan.length ? String(fase.urutan[fase.giliran]) : null,
+    ronde: aktif ? fase.ronde : Math.max(1, ...game.petunjuk.map((e) => e.ronde)),
+    urutan: fase.jenis === 'diskusi' ? fase.urutan.map(String) : undefined,
+  };
+}
+
+function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, daftar }: {
   game: Permainan;
   fase: Extract<Fase, { jenis: 'diskusi' }>;
   /** Batas waktu petunjuk (detik), 0 berarti tanpa batas. */
   detik: number;
   onGiliran: (teks: string | null, habis?: boolean) => void;
   onVote: () => void;
-  riwayat: ReactNode;
+  /** Urutan giliran sekaligus semua petunjuk (satu baris per pemain). */
+  daftar: ReactNode;
 }) {
   const [galat, setGalat] = useState<string | null>(null);
   const [habis, setHabis] = useState(false);
@@ -525,16 +540,6 @@ function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, riwayat }: {
         <Hitungan awalMs={detik * 1000} totalMs={detik * 1000} label={`Waktu ${p.nama}`} bunyi onHabis={waktuHabis} />
       )}
       {habis && <p className="galat" role="alert">Waktu habis. Giliran {p.nama} dilewati.</p>}
-      <div className="kartu">
-        <KepalaFase judul="Diskusi" ronde={fase.ronde} />
-        <ol className="urutan">
-          {fase.urutan.map((i, k) => (
-            <li key={i} className={k < fase.giliran ? 'selesai' : k === fase.giliran ? 'sekarang' : ''}>
-              <span className="nomor">{k < fase.giliran ? '✓' : k + 1}</span> {game.pemain[i].nama}
-            </li>
-          ))}
-        </ol>
-      </div>
       <FormPetunjuk
         judul={`Giliran ${p.nama}`}
         galat={galat}
@@ -542,7 +547,10 @@ function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, riwayat }: {
         onKirim={kirim}
         onSudahBicara={() => onGiliran(null)}
       />
-      {riwayat}
+      <div className="kartu">
+        <KepalaFase judul="Diskusi" ronde={fase.ronde} />
+        {daftar}
+      </div>
       <div className="aksi-bawah">
         <div className="baris-tombol">
           <button className="kedua" onClick={() => onGiliran(null)}>Skip</button>

@@ -1,6 +1,6 @@
 'use client';
 
-// Chat room mode online: tombol di header dengan badge belum dibaca + panel bottom sheet.
+// Chat room mode online: tombol di dok bawah (tetap di tempat saat digulir) dengan badge belum dibaca + panel bottom sheet.
 // Semua teks dirender sebagai teks React biasa (otomatis di-escape), tanpa HTML mentah.
 import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent as KeyboardEventReact } from 'react';
 import { indeksFokusBerikut } from '@/lib/dialog';
@@ -113,7 +113,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
     <>
       <button
         ref={tombolRef}
-        className="kecil tombol-chat"
+        className="kecil tombol-dok tombol-chat"
         onClick={buka}
         aria-haspopup="dialog"
         aria-expanded={terbuka}

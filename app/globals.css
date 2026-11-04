@@ -515,3 +515,65 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .baris-atur .segmen { width: 100%; }
 .atas-beranda { position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: calc(env(safe-area-inset-right) + 12px); }
 .beranda { position: relative; }
+
+/* ---------- Dok bawah (Petunjuk + Chat): tetap di tempat saat digulir ---------- */
+:root { --tinggi-dok: calc(env(safe-area-inset-bottom) + 65px); }
+.dok { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; justify-content: center; pointer-events: none; }
+.dok-isi {
+  pointer-events: auto; width: 100%; max-width: 480px; display: flex; gap: 8px;
+  padding: 8px calc(env(safe-area-inset-right) + 16px) calc(env(safe-area-inset-bottom) + 8px) calc(env(safe-area-inset-left) + 16px);
+  background: var(--bg); border-top: 1px solid var(--garis);
+}
+.tombol-dok { flex: 1; min-height: 48px; justify-content: center; display: inline-flex; align-items: center; gap: 8px; position: relative; }
+.angka-dok {
+  min-width: 22px; height: 22px; padding: 0 6px; border-radius: var(--pil); background: var(--permukaan-2); color: var(--redup);
+  font-size: 0.75rem; font-weight: 800; line-height: 22px; font-variant-numeric: tabular-nums;
+}
+.dok .badge-chat { top: -6px; right: 8px; }
+.wadah.punya-dok { padding-bottom: var(--tinggi-dok); }
+/* Tombol aksi (Skip, Vote, Hitung, ...) duduk tepat di atas dok, tidak pernah tertutup. */
+.wadah.punya-dok .aksi-bawah { bottom: var(--tinggi-dok); padding-bottom: 12px; }
+.wadah.punya-dok .toast { bottom: calc(var(--tinggi-dok) + 96px); }
+/* Saat mengetik petunjuk/tebakan, keyboard HP sudah memakan layar: dok disembunyikan. */
+@media (pointer: coarse) {
+  .wadah.punya-dok:has(.form-petunjuk input:focus, .tebak input:focus) .dok { display: none; }
+  .wadah.punya-dok:has(.form-petunjuk input:focus, .tebak input:focus) .aksi-bawah { bottom: 0; padding-bottom: calc(env(safe-area-inset-bottom) + 12px); }
+  .wadah.punya-dok:has(.form-petunjuk input:focus, .tebak input:focus) { padding-bottom: 0; }
+}
+
+/* ---------- Daftar petunjuk ringkas: satu baris per pemain ---------- */
+.daftar-petunjuk { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; }
+.daftar-petunjuk > li {
+  display: grid; grid-template-columns: 22px minmax(0, 34%) minmax(0, 1fr); gap: 8px; align-items: start;
+  padding: 7px 6px; border-top: 1px solid var(--garis); border-radius: 6px;
+}
+.daftar-petunjuk > li:first-child { border-top: 0; }
+.daftar-petunjuk .nomor { color: var(--redup); font-weight: 800; font-variant-numeric: tabular-nums; text-align: center; line-height: 1.6; }
+.dp-nama { font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; line-height: 1.6; word-break: break-word; }
+.dp-nama em { color: var(--redup); font-style: normal; font-weight: 500; }
+.dp-nama .lencana { margin-left: 4px; font-size: 0.65rem; vertical-align: 1px; }
+.dp-status { display: block; color: var(--aksen); font-size: 0.75rem; font-weight: 800; }
+.dp-kosong { color: var(--redup); font-size: 0.85rem; line-height: 1.6; font-style: italic; }
+.dp-chip { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+.petunjuk-chip.ringkas { padding: 2px 8px; gap: 4px; font-size: 0.85rem; line-height: 1.45; }
+.dp-chip .petunjuk-chip:not(.baru) { background: transparent; border: 1px solid var(--garis-kuat); color: var(--redup); font-weight: 500; }
+.dp-chip .petunjuk-chip.baru { background: var(--permukaan-2); color: var(--teks); }
+.daftar-petunjuk > li.sekarang { background: rgba(30, 215, 96, 0.12); box-shadow: inset 3px 0 0 var(--aksen); }
+.daftar-petunjuk > li.sekarang .nomor, .daftar-petunjuk > li.sekarang .dp-nama { color: var(--aksen); }
+.daftar-petunjuk > li.selesai .nomor { color: var(--aksen); }
+.daftar-petunjuk > li.mati { opacity: 0.45; }
+.daftar-petunjuk > li.mati .dp-nama { text-decoration: line-through; }
+
+/* Lembar Petunjuk (bottom sheet) */
+.lembar-isi { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 -4px; padding: 0 4px; }
+.lembar-isi .riwayat-petunjuk h2 { font-size: 1rem; color: var(--redup); }
+
+/* Petunjuk di dalam kartu vote */
+.pemain { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 4px; text-align: left; padding: 8px 10px; }
+.pemain.lewati { align-items: center; text-align: center; }
+.pemain-nama { font-weight: 800; }
+.pemain-petunjuk { display: flex; flex-wrap: wrap; gap: 2px 6px; font-size: 0.8rem; font-weight: 500; color: var(--redup); line-height: 1.35; }
+.pemain-petunjuk .baru { color: var(--teks); font-weight: 700; }
+.pemain-petunjuk .habis { font-style: italic; }
+.pemain-petunjuk > span + span::before { content: '· '; color: var(--garis-kuat); }
+.pemain.pilih .pemain-petunjuk, .pemain.pilih .pemain-petunjuk .baru { color: var(--dasar); }

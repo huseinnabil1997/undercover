@@ -27,6 +27,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  // Android: keyboard mengecilkan layout, jadi lembar chat/petunjuk tetap terlihat di atas keyboard.
+  interactiveWidget: 'resizes-content',
   themeColor: '#121212',
 };
 
