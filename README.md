@@ -2,7 +2,7 @@
 
 Game tebak kata **Undercover** dengan dua mode:
 
-- **Main Online**: setiap pemain memakai HP sendiri, tersambung realtime peer-to-peer (WebRTC lewat PeerJS).
+- **Main Online**: setiap pemain memakai HP sendiri, tersambung lewat Supabase Realtime (cadangan: WebRTC PeerJS, Metered, MQTT).
 - **Main di Satu HP**: pass-and-play, satu HP dioper bergiliran (tetap bisa dipakai tanpa internet setelah halaman terbuka).
   Saat voting, kelompok bisa memilih **Lewati**: tidak ada yang tereliminasi dan permainan lanjut ke ronde berikutnya.
 
@@ -24,7 +24,8 @@ Live: https://huseinnabil1997.github.io/undercover/
 - Profil pemain lain (read-only) bisa dibuka dari daftar pemain di room, layar hasil, dan pencarian username.
 - Backend: Supabase (Auth + Postgres dengan RLS). Skema di `supabase/migrations`. Kunci yang ditanam di kode hanya kunci publishable; bisa diganti lewat `NEXT_PUBLIC_SUPABASE_URL` dan `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
 - Pengaturan project yang wajib: Authentication > Sign In / Providers > Email > matikan "Confirm email" (username diubah ke email sintetis `@undercover.local` yang tidak pernah dikirimi surat).
-- Batasan: game online dijalankan di HP host, jadi hasil yang dicatat dipercaya dari klien. Pemain yang memodifikasi aplikasi bisa memalsukan hasilnya sendiri (tidak bisa menulis untuk akun orang lain).
+- Hasil online dicatat oleh **host** untuk semua pemain lewat RPC `catat_hasil_room`: hanya host room yang sedang aktif, hanya untuk anggota room yang identitasnya sudah diverifikasi server, minimal 3 pemain, sekali per permainan per akun. Pemain tidak bisa lagi menulis riwayat sendiri (insert langsung ke `riwayat_main` dicabut).
+- Batasan: game tetap dijalankan di HP host, jadi host adalah pihak yang dipercaya. Host yang memodifikasi aplikasi (atau bersekongkol dengan akun lain di room yang sama) bisa memalsukan hasil di room itu, tetapi tidak bisa menulis untuk akun yang tidak pernah gabung ke room-nya.
 
 ## Peringkat dan kamus pemain
 
@@ -60,8 +61,12 @@ Live: https://huseinnabil1997.github.io/undercover/
 
 ### Cara kerja dan batasan (jujur)
 
-- **Arsitektur**: host adalah sumber kebenaran (topologi bintang). Semua klien tersambung ke HP host lewat WebRTC DataChannel.
+- **Arsitektur**: host adalah sumber kebenaran (topologi bintang). Jalur utama adalah **Supabase Realtime** (broadcast di channel
+  privat `uc:<topik>`, RLS di `realtime.messages` hanya mengizinkan pengguna login yang menjadi anggota room). Isi pesan tetap
+  dienkripsi AES-GCM dengan kunci turunan kode room. Jalur cadangan: PeerJS (WebRTC langsung), Metered, dan MQTT publik.
   Peer id host adalah `undercover-hn-<KODE>`.
+- **Verifikasi identitas**: saat gabung, pemain memanggil `gabung_room` dan mendapat nonce sekali pakai. Host menukar nonce itu lewat
+  `verifikasi_pemain` dan hanya menerima pemain bila username akun cocok dengan nama yang dikirim. Akun yang sama dari HP lain kembali ke kursi lamanya.
 - **Broker sinyal publik**: koneksi awal memakai broker gratis `0.peerjs.com`. Broker ini bisa melihat peer id dan alamat IP
   peserta (tidak melihat isi permainan, karena data game lewat koneksi P2P terenkripsi DTLS). Jika broker sedang down, mode online tidak bisa dipakai;
   mode satu HP tetap jalan.
@@ -74,8 +79,13 @@ Live: https://huseinnabil1997.github.io/undercover/
   otomatis bergabung lagi. Ada heartbeat, dan pemain yang terputus ditandai **Offline**.
 - **Token sesi**: setiap pemain punya token acak yang hanya diketahui HP-nya dan host. Token tidak pernah dikirim ke pemain lain,
   jadi pemain lain tidak bisa mengambil alih kursi orang yang sedang offline. Pesan dari klien juga divalidasi (klien tidak bisa menjalankan aksi host).
-- **Tidak ada migrasi host**: jika host menutup tab, room berhenti untuk semua. Jika host hanya refresh (atau membuka lagi dalam 6 jam di perangkat yang sama),
-  room dilanjutkan dengan kode dan peer id yang sama, dan klien tersambung kembali otomatis.
+- **Host pindah otomatis**: host mengirim detak dan snapshot state terenkripsi (AES-GCM, kunci dari kode room, server tidak bisa membacanya)
+  ke tabel `room_online` setiap ada perubahan. Jika host keluar (dialog Keluar) atau tidak berdetak selama 15 detik, satu pemain anggota
+  room mengambil alih lewat `ambil_alih_host` (terkunci di server, hanya satu yang menang), memulihkan snapshot, dan permainan lanjut.
+  Host lama yang kembali menjadi pemain biasa. Catatan: host baru tentu memegang state lengkap (termasuk kata semua pemain), sama seperti host lama.
+  Snapshot hanya bisa diambil anggota room, dan hanya oleh yang menjadi host.
+- **Room persisten dan pembersihan**: room di server kedaluwarsa 6 jam setelah detak terakhir. Room kedaluwarsa dihapus otomatis
+  (fungsi `bersihkan_room`, dipanggil saat room baru dibuat). Tabel room tidak bisa dibaca atau ditulis langsung oleh klien; semua lewat RPC.
 - **Batas waktu opsional** (diatur host, ikut ke semua pemain): petunjuk per giliran 20/30/45/60 detik dan diskusi+vote
   30/60/90/120 detik. Bawaan **Tanpa batas**. Saat waktu habis, giliran petunjuk dilewati dengan tanda "(waktu habis)",
   vote langsung dihitung seperti tombol Hitung (yang belum memilih dianggap tidak memilih), dan tebakan Mr. White

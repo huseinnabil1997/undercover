@@ -134,6 +134,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (ada) {
         // Cegah orang lain menyamar memakai id pemain (id terlihat di daftar pemain).
         if (ada.token && ada.token !== aksi.token) return tetap('Sesi tidak cocok. Gabung ulang dengan nama lain.');
+        if (ada.uid && aksi.uid && ada.uid !== aksi.uid) return tetap('Sesi tidak cocok. Gabung ulang dengan nama lain.');
         return { state: ubahPemain(state, aksi.id, { online: true, terakhir: ctx.now }) };
       }
       if (!nama) return tetap('Nama tidak boleh kosong.');
@@ -141,7 +142,9 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       if (state.pemain.some((p) => p.nama.toLowerCase() === nama.toLowerCase())) {
         return tetap('Nama itu sudah dipakai di room ini. Pakai nama lain.');
       }
-      return { state: { ...state, pemain: [...state.pemain, { id: aksi.id, nama, online: true, terakhir: ctx.now, ...(aksi.token ? { token: aksi.token } : {}) }] } };
+      if (aksi.uid && state.pemain.some((p) => p.uid === aksi.uid)) return tetap('Akun ini sudah ada di room.');
+      const baru = { id: aksi.id, nama, online: true, terakhir: ctx.now, ...(aksi.token ? { token: aksi.token } : {}), ...(aksi.uid ? { uid: aksi.uid } : {}) };
+      return { state: { ...state, pemain: [...state.pemain, baru] } };
     }
     case 'terlihat': {
       const p = state.pemain.find((x) => x.id === aksi.id);
@@ -478,6 +481,20 @@ export function pulihkanStateHost(raw: unknown, now: number): StateHost | null {
     pemain: s.pemain.map((p) => ({ ...p, online: p.id === s.hostId, terakhir: now })),
     seq: s.seq + 1,
   };
+}
+
+/**
+ * Host pindah: pemain `idBaru` menjadi host atas state terakhir (snapshot host lama). Host lama ditandai offline,
+ * atau dikeluarkan bila ia keluar dengan sengaja. Semua pemain lain offline sampai tersambung ulang.
+ */
+export function alihkanHost(raw: unknown, idBaru: string, lamaKeluar: boolean, now: number): StateHost | null {
+  const s = pulihkanStateHost(raw, now);
+  if (!s || !s.pemain.some((p) => p.id === idBaru)) return null;
+  const lama = s.hostId;
+  if (lama === idBaru) return s;
+  let st: StateHost = { ...s, hostId: idBaru, pemain: s.pemain.map((p) => ({ ...p, online: p.id === idBaru, terakhir: now })) };
+  if (lamaKeluar) st = hapusAtauOffline(st, lama);
+  return { ...st, seq: st.seq + 1 };
 }
 
 /* ------------------------------ Validasi pesan ------------------------------ */

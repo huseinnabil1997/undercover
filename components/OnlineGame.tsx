@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan, tebakSumber } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
-import { alasanTanpaEliminasi, buatStateHost, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
+import { alasanTanpaEliminasi, alihkanHost, buatStateHost, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
 import { modeRelayDari, paksaRelayDari, teksDiagnosa, teksJalur } from '@/lib/online/jalur';
 import type { ModeRelay } from '@/lib/online/relay';
@@ -32,7 +32,13 @@ import { useDialog } from './Modal';
 import { menangDengan } from '@/lib/akun';
 import { useLihatProfil } from './Akun';
 import { Avatar } from './Avatar';
-import { catatHasil, type HasilUntukDicatat } from '@/lib/supabase/data';
+import type { HasilUntukDicatat } from '@/lib/supabase/data';
+import { supabase } from '@/lib/supabase/klien';
+import { pembuatRealtime } from '@/lib/online/realtime';
+import {
+  ambilAlihHost, barisHasilRoom, bukaSnapshot, buatRoom, catatHasilRoom, detakHost, gabungRoom, hasilTercatat, roomSupabase, sandikanSnapshot,
+  tinggalkanRoom, verifikasiPemain, type RoomSupabase,
+} from '@/lib/supabase/room';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -54,8 +60,10 @@ function denganJamLokal(v: ViewPemain): ViewPemain {
   return { ...v, game: { ...v.game, tenggat: { ...t, sampaiLokal: Date.now() + t.sisaMs } } };
 }
 
-export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjaga }: {
+export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daftarPenjaga }: {
   kodeAwal: string | null;
+  /** Id akun Supabase yang login (untuk host, verifikasi, dan pencatatan hasil). */
+  userId: string;
   /** Nama pemain online = username akun yang sedang login. */
   username: string;
   onBeranda: () => void;
@@ -81,6 +89,9 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
   const [galatPetunjuk, setGalatPetunjuk] = useState<string | null>(null);
   const hostRef = useRef<HostRoom | null>(null);
   const klienRef = useRef<KlienRoom | null>(null);
+  // Room di Supabase (relay utama + host pindah). null bila Supabase tidak tersedia (jalur lama tetap jalan).
+  const roomRef = useRef<RoomSupabase | null>(null);
+  const [hostPergi, setHostPergi] = useState(0);
 
   // Umpan balik: bandingkan view lama dan baru. Notifikasi HP hanya untuk giliranmu (lihat lib/umpan).
   const viewLalu = useRef<ViewPemain | null>(null);
@@ -166,10 +177,46 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
     } catch {
       // localStorage bisa diblokir; abaikan
     }
+    let batal = false;
+    let bersihkan: (() => void) | null = null;
+    roomRef.current = null;
+    const siapkan = async (): Promise<void> => {
+    const pulih = sesi.host ? pulihkanStateHost(bacaStateHostMentah(), Date.now()) : null;
+    const dipulihkan = !!pulih && pulih.kode === sesi.kode && pulih.hostId === sesi.id;
+    // Daftarkan room di Supabase: host membuat room, pemain menjadi anggota dan mendapat nonce identitas.
+    let room: RoomSupabase | null = null;
+    let nonce: string | undefined;
+    try {
+      const r = await roomSupabase(sesi.kode);
+      if (sesi.host) {
+        const hasil = await buatRoom(r.hex);
+        if (batal) return;
+        if (hasil === 'dipakai') {
+          if (!dipulihkan) {
+            setSesi({ ...sesi, kode: buatKodeRoom() });
+            return;
+          }
+          // Host sudah pindah ke pemain lain selama halaman ini tertutup: lanjut sebagai pemain.
+          hapusStateHost();
+          setSesi({ ...sesi, host: false });
+          return;
+        }
+        room = r;
+      } else {
+        const n = await gabungRoom(r.hex);
+        if (n) {
+          room = r;
+          nonce = n;
+        }
+      }
+    } catch {
+      // Supabase tidak terjangkau: tetap jalan lewat relay cadangan (tanpa host pindah).
+    }
+    if (batal) return;
+    roomRef.current = room;
+    const utama = room ? { utama: pembuatRealtime(supabase) } : {};
     if (sesi.host) {
-      const pulih = pulihkanStateHost(bacaStateHostMentah(), Date.now());
-      const dipulihkan = !!pulih && pulih.kode === sesi.kode && pulih.hostId === sesi.id;
-      const awal: StateHost = dipulihkan
+      const awalMentah: StateHost = dipulihkan
         ? (pulih as StateHost)
         : buatStateHost(sesi.kode, sesi.id, sesi.nama, {
           komposisi: komposisiDefault(MIN_PEMAIN),
@@ -178,6 +225,7 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
           panjangKata: rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)),
           batasWaktu: batasTersimpan(),
         }, Date.now());
+      const awal: StateHost = { ...awalMentah, pemain: awalMentah.pemain.map((p) => (p.id === sesi.id ? { ...p, uid: userId } : p)) };
       simpanStateHost(awal);
       const host = new HostRoom(awal, {
         onState: (s) => {
@@ -192,20 +240,58 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
           }
         },
         onChat: setChat,
-      }, { paksaRelay, modeRelay });
+      }, { paksaRelay, modeRelay, ...utama, ...(room ? { verifikasi: (n: string) => verifikasiPemain(room.hex, n) } : {}) });
       hostRef.current = host;
       void host.mulai();
-      return () => {
+      // Detak host + snapshot terenkripsi (untuk host pindah) + pencatatan hasil oleh host.
+      let timer = 0;
+      if (room) {
+        let terakhir = 0;
+        let seqKirim = -1;
+        const tercatat = new Set<string>();
+        const detak = async () => {
+          const st = host.state;
+          const t = Date.now();
+          if (st.seq !== seqKirim || t - terakhir >= 5000) {
+            terakhir = t;
+            seqKirim = st.seq;
+            try {
+              const masih = await detakHost(room.hex, await sandikanSnapshot(room, st));
+              if (batal) return;
+              if (!masih) {
+                // Pemain lain sudah mengambil alih host (mis. HP ini sempat putus): lanjut sebagai pemain.
+                hapusStateHost();
+                tampilkan('Host sudah pindah ke pemain lain.');
+                setSesi({ ...sesi, host: false });
+                return;
+              }
+            } catch {
+              // coba lagi di detak berikutnya
+            }
+          }
+          const hasil = barisHasilRoom(st);
+          if (hasil && !tercatat.has(hasil.idMain)) {
+            tercatat.add(hasil.idMain);
+            catatHasilRoom(room.hex, hasil.idMain, hasil.baris).catch(() => tercatat.delete(hasil.idMain));
+          }
+        };
+        void detak();
+        timer = window.setInterval(() => void detak(), 1000);
+      }
+      bersihkan = () => {
+        window.clearInterval(timer);
         host.hentikan();
         if (hostRef.current === host) hostRef.current = null;
       };
+      return;
     }
-    const klien = new KlienRoom(sesi.kode, { id: sesi.id, nama: sesi.nama, token: sesi.token }, {
+    const klien = new KlienRoom(sesi.kode, { id: sesi.id, nama: sesi.nama, token: sesi.token, ...(nonce ? { nonce } : {}) }, {
       onView: (v) => {
         if (!v.pemain.some((p) => p.id === v.saya)) {
           keluarSesi('Kamu dikeluarkan dari room oleh host.');
           return;
         }
+        setHostPergi(0);
         setView(denganJamLokal(v));
       },
       onStatus: lapor,
@@ -226,14 +312,58 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
       onJalur: () => {
         baru = true;
       },
-    }, { paksaRelay, modeRelay });
+      onHostPergi: () => setHostPergi(Date.now()),
+      onIdAkun: (id, token) => setSesi({ ...sesi, id, token }),
+    }, { paksaRelay, modeRelay, ...utama, relayUtama: !!room });
     klienRef.current = klien;
     void klien.mulai();
-    return () => {
+    bersihkan = () => {
       klien.hentikan();
       if (klienRef.current === klien) klienRef.current = null;
     };
-  }, [sesi, keluarSesi, tampilkan, ubahStatus]);
+    };
+    void siapkan();
+    return () => {
+      batal = true;
+      bersihkan?.();
+    };
+  }, [sesi, userId, keluarSesi, tampilkan, ubahStatus]);
+
+  // Host pindah: bila host keluar atau lama tidak terdengar, satu pemain (yang menang di server) menjadi host baru
+  // dari snapshot terenkripsi terakhir, lalu permainan berlanjut.
+  const adaView = !!view;
+  useEffect(() => {
+    if (!sesi || sesi.host || !adaView || (status.s === 'tersambung' && !hostPergi)) return;
+    let hidup = true;
+    let sibuk = false;
+    const coba = async () => {
+      const room = roomRef.current;
+      if (!room || sibuk || !hidup) return;
+      sibuk = true;
+      try {
+        const r = await ambilAlihHost(room.hex);
+        if (!r || !hidup) return;
+        const st = alihkanHost(await bukaSnapshot(room, r.snapshot), sesi.id, r.hostKeluar, Date.now());
+        if (!st || !hidup) return;
+        simpanStateHost({ ...st, pemain: st.pemain.map((p) => (p.id === sesi.id ? { ...p, uid: userId } : p)) });
+        tampilkan('Host keluar. Kamu sekarang host room ini.');
+        setHostPergi(0);
+        setSesi({ ...sesi, host: true });
+      } catch {
+        // pemain lain mungkin lebih dulu; coba lagi nanti
+      } finally {
+        sibuk = false;
+      }
+    };
+    // Jeda acak kecil agar tidak semua pemain berebut bersamaan.
+    const awal = window.setTimeout(() => void coba(), hostPergi ? 300 + Math.random() * 900 : 4000 + Math.random() * 2000);
+    const id = window.setInterval(() => void coba(), 4000);
+    return () => {
+      hidup = false;
+      window.clearTimeout(awal);
+      window.clearInterval(id);
+    };
+  }, [sesi, adaView, status.s, hostPergi, userId, tampilkan]);
 
   // Pengaman: jangan pernah menunggu tanpa ujung. Setelah BATAS_MENYAMBUNG_MS belum tersambung, tampilkan alasan + tombol.
   const siap = status.s === 'tersambung';
@@ -262,10 +392,26 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
     // Objek sesi baru memicu effect: koneksi lama dihentikan dan dibuat ulang dari awal.
     setSesi((s) => (s ? { ...s } : s));
   }, []);
-  const keluarRoom = useCallback(() => {
-    if (sesi?.host) hapusStateHost();
+  /** Host keluar: simpan snapshot terakhir, umumkan, lalu pemain lain mengambil alih host. */
+  const hostKeluar = useCallback(async () => {
+    const host = hostRef.current;
+    const room = roomRef.current;
+    if (host && room) {
+      host.umumkanPergi();
+      try {
+        await tinggalkanRoom(room.hex, await sandikanSnapshot(room, host.state));
+      } catch {
+        // tanpa tanda keluar, pemain tetap mengambil alih setelah detak host berhenti
+      }
+      host.umumkanPergi();
+      await new Promise((r) => window.setTimeout(r, 300));
+    }
+    hapusStateHost();
+  }, []);
+  const keluarRoom = useCallback(async () => {
+    if (sesi?.host) await hostKeluar();
     keluarSesi();
-  }, [sesi, keluarSesi]);
+  }, [sesi, keluarSesi, hostKeluar]);
 
   const aksi = useCallback(
     (a: AksiUi) => {
@@ -314,11 +460,11 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
     if (!sesi) return true;
     const ya = await dialog.konfirmasi(
       sesi.host
-        ? { judul: 'Tutup room?', pesan: `Room ${sesi.kode} ditutup dan semua pemain akan terputus.`, ok: 'Tutup', bahaya: true }
+        ? { judul: 'Keluar dari room?', pesan: `Peran host pindah ke pemain lain dan permainan di room ${sesi.kode} tetap berjalan.`, ok: 'Keluar', bahaya: true }
         : { judul: 'Keluar dari room?', pesan: 'Kamu bisa gabung lagi dengan kode yang sama selama room masih dibuka.', ok: 'Keluar', bahaya: true },
     );
     if (!ya) return false;
-    if (sesi.host) hapusStateHost();
+    if (sesi.host) await hostKeluar();
     else {
       aksi({ jenis: 'keluar' });
       // Beri waktu pesan keluar terkirim sebelum koneksi ditutup.
@@ -326,7 +472,7 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
     }
     keluarSesi();
     return true;
-  }, [sesi, dialog, aksi, keluarSesi]);
+  }, [sesi, dialog, aksi, keluarSesi, hostKeluar]);
   useEffect(() => {
     daftarPenjaga?.(penjaga);
     return () => daftarPenjaga?.(null);
@@ -378,7 +524,7 @@ export default function OnlineGame({ kodeAwal, username, onBeranda, daftarPenjag
           <PanelDiagnosa baris={diagnosa} />
           <div className="baris-tombol">
             <button className="utama" onClick={cobaLagi}>Coba lagi</button>
-            <button className="kedua" onClick={keluarRoom}>{sesi.host ? 'Tutup room' : 'Keluar dari room'}</button>
+            <button className="kedua" onClick={() => void keluarRoom()}>Keluar dari room</button>
           </div>
         </div>
       )}
@@ -1056,34 +1202,37 @@ function Penonton({ view, g }: PropsFase) {
   );
 }
 
-/** Catat hasil permainan ini ke riwayat akun (sekali per id permainan; duplikat diabaikan server). */
-function CatatHasil({ idMain, peran, pemenang, pasangan, jumlahPemain }: HasilUntukDicatat) {
+/** Host mencatat hasil untuk semua pemain terverifikasi; di sini hanya dicek apakah hasilmu sudah masuk. */
+function CatatHasil({ idMain }: Pick<HasilUntukDicatat, 'idMain'>) {
   const [status, setStatus] = useState<'proses' | 'ok' | 'galat'>('proses');
-  // Objek pasangan berganti tiap pembaruan view; pakai isinya agar efek tidak berulang.
-  const { civilian, undercover, sumber } = pasangan;
   useEffect(() => {
     let hidup = true;
     let coba = 0;
     let timer = 0;
-    const jalan = () => {
-      catatHasil({ idMain, peran, pemenang, pasangan: { civilian, undercover, sumber }, jumlahPemain }).then(
-        () => hidup && setStatus('ok'),
-        () => {
-          if (!hidup) return;
-          coba += 1;
-          if (coba < 4) timer = window.setTimeout(jalan, 2000 * coba);
-          else setStatus('galat');
-        },
-      );
+    const jalan = async () => {
+      try {
+        const { data } = await supabase().auth.getSession();
+        const uid = data.session?.user.id;
+        if (uid && (await hasilTercatat(idMain, uid))) {
+          if (hidup) setStatus('ok');
+          return;
+        }
+      } catch {
+        // coba lagi
+      }
+      if (!hidup) return;
+      coba += 1;
+      if (coba < 12) timer = window.setTimeout(() => void jalan(), 2500);
+      else setStatus('galat');
     };
-    jalan();
+    timer = window.setTimeout(() => void jalan(), 1500);
     return () => {
       hidup = false;
       window.clearTimeout(timer);
     };
-  }, [idMain, peran, pemenang, civilian, undercover, sumber, jumlahPemain]);
+  }, [idMain]);
   if (status === 'proses') return null;
-  return <p className="catatan tengah-teks nol" role="status">{status === 'ok' ? 'Hasil tercatat di profilmu.' : 'Hasil gagal dicatat. Periksa internet.'}</p>;
+  return <p className="catatan tengah-teks nol" role="status">{status === 'ok' ? 'Hasil tercatat di profilmu.' : 'Hasil belum tercatat. Host mencatat hasil saat permainan selesai.'}</p>;
 }
 
 function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
@@ -1096,7 +1245,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
   return (
     <section className="tumpuk">
       {g.ikut && perananSaya && h.idMain && (
-        <CatatHasil idMain={h.idMain} peran={perananSaya} pemenang={h.pemenang} pasangan={h.pasangan} jumlahPemain={peserta.length} />
+        <CatatHasil idMain={h.idMain} />
       )}
       <Konfeti />
       <div className={`kartu besar menang-${h.pemenang} muncul`}>

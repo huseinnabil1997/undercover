@@ -7,7 +7,7 @@
 // Welcome Metered juga bisa membawa server TURN (bila layanan TURN aktif di akun Metered); dipakai untuk WebRTC.
 import type { DataConnection, Peer as PeerT, PeerOptions } from 'peerjs';
 import { buatStateChat, gabungChat, GALAT_CHAT_CEPAT, lajuKlien, terimaChat, type PesanChat } from './chat';
-import { rapikanAksiPemain, reduceHost, viewUntuk } from './host';
+import { rapikanAksiPemain, rapikanNama, reduceHost, viewUntuk } from './host';
 import { CEK_NEGOSIASI_MS, ICE_SERVERS, nasibNegosiasi, TUNGGU_AWAL_MS } from './ice';
 import {
   BATAS_SENYAP_HOST_RELAY_MS, BATAS_SENYAP_RELAY_MS, INTERVAL_PING_RELAY_MS, JEDA_PONG_RELAY_MS, jedaHaloRelay, perluRelay,
@@ -75,10 +75,19 @@ export interface OpsiJaringan {
   buatSoketMetered?: PembuatSoketTeks;
   /** Untuk pengujian: daftar jalur relay lengkap (mengganti semua opsi di atas). */
   pengangkut?: PembuatPengangkut[];
+  /** Jalur relay utama (Supabase Realtime) untuk pemain yang login. */
+  utama?: PembuatPengangkut;
+  /** Pemain memulai lewat relay (jalur utama); PeerJS langsung hanya cadangan bila relay belum menjawab. */
+  relayUtama?: boolean;
+  /** Host: tukar nonce identitas pemain baru dengan akun aslinya. null = tidak sah. */
+  verifikasi?: (nonce: string) => Promise<{ uid: string; username: string } | null>;
 }
 
+/** Pemain di mode relay utama mencoba jalur langsung bila host belum menjawab selama ini. */
+export const CADANGAN_LANGSUNG_MS = 20000;
+
 function pengangkutDari(o: OpsiJaringan): PembuatPengangkut[] {
-  return o.pengangkut ?? daftarPengangkut({ mode: o.modeRelay, kunciMetered: o.kunciMetered, broker: o.broker, buatSoket: o.buatSoket, buatSoketMetered: o.buatSoketMetered });
+  return o.pengangkut ?? daftarPengangkut({ mode: o.modeRelay, kunciMetered: o.kunciMetered, broker: o.broker, buatSoket: o.buatSoket, buatSoketMetered: o.buatSoketMetered, utama: o.utama });
 }
 
 async function buatPeer(id?: string, turn: RTCIceServer[] = []): Promise<PeerT> {
@@ -326,7 +335,67 @@ export class HostRoom {
         return;
       }
       if (typeof pesan.id !== 'string' || pesan.id === this.state.hostId) return;
-      const r = reduceHost(this.state, { jenis: 'gabung', id: pesan.id, nama: String(pesan.nama ?? ''), token: String(pesan.token ?? '') }, { now: Date.now() });
+      const verifikasi = this.opsi.verifikasi;
+      if (verifikasi && !this.state.pemain.some((p) => p.id === pesan.id)) {
+        void this.verifikasiHalo(conn, pesan, verifikasi);
+        return;
+      }
+      this.terimaHalo(conn, pesan);
+      return;
+    }
+    this.terimaPesanPemain(conn, pesan);
+  }
+
+  private menungguVerifikasi = new Set<string>();
+  private terverifikasi = new Map<string, { uid: string; username: string }>();
+
+  /** Pemain baru: nama harus sama dengan username akun yang membuat nonce. */
+  private async verifikasiHalo(conn: Saluran, pesan: PesanKeHost & { t: 'halo' }, verifikasi: NonNullable<OpsiJaringan['verifikasi']>): Promise<void> {
+    if (this.menungguVerifikasi.has(pesan.id)) return;
+    const nonce = typeof pesan.nonce === 'string' ? pesan.nonce : '';
+    const tolak = (alasan: string) => {
+      this.kirim(conn, { t: 'tolak', alasan });
+      setTimeout(() => conn.tutup(), 500);
+    };
+    if (!/^[0-9a-f]{16,64}$/.test(nonce)) {
+      tolak('Identitas akun tidak bisa diverifikasi. Muat ulang lalu gabung lagi.');
+      return;
+    }
+    this.menungguVerifikasi.add(pesan.id);
+    // Halo yang sama bisa datang lewat beberapa relay; nonce hanya bisa ditukar sekali.
+    let akun: { uid: string; username: string } | null = this.terverifikasi.get(pesan.id + ':' + nonce) ?? null;
+    try {
+      if (!akun) {
+        akun = await verifikasi(nonce);
+        if (akun) this.terverifikasi.set(pesan.id + ':' + nonce, akun);
+      }
+    } catch {
+      akun = null;
+    } finally {
+      this.menungguVerifikasi.delete(pesan.id);
+    }
+    if (this.selesai) return;
+    if (!akun) {
+      tolak('Identitas akun tidak bisa diverifikasi. Muat ulang lalu gabung lagi.');
+      return;
+    }
+    if (rapikanNama(String(pesan.nama ?? '')).toLowerCase() !== akun.username.toLowerCase()) {
+      tolak('Nama pemain tidak cocok dengan akun yang login.');
+      return;
+    }
+    const lama = this.state.pemain.find((p) => p.uid === akun.uid && p.id !== pesan.id);
+    if (lama) {
+      // Akun sama dari HP/tab baru: kembalikan ke kursi lamanya (identitas sudah diverifikasi server).
+      this.kirim(conn, { t: 'idAkun', id: lama.id, token: lama.token ?? '' });
+      setTimeout(() => conn.tutup(), 500);
+      return;
+    }
+    this.terimaHalo(conn, { ...pesan, nama: akun.username }, akun.uid);
+  }
+
+  private terimaHalo(conn: Saluran, pesan: PesanKeHost & { t: 'halo' }, uid?: string): void {
+    {
+      const r = reduceHost(this.state, { jenis: 'gabung', id: pesan.id, nama: String(pesan.nama ?? ''), token: String(pesan.token ?? ''), ...(uid ? { uid } : {}) }, { now: Date.now() });
       if (r.tolak) {
         this.kirim(conn, { t: 'tolak', alasan: r.tolak });
         setTimeout(() => conn.tutup(), 500);
@@ -346,8 +415,15 @@ export class HostRoom {
       this.terapkan(r.state, r.diam);
       // Pemain yang baru gabung atau tersambung ulang mendapat riwayat chat singkat.
       this.kirim(conn, { t: 'riwayatChat', pesan: this.chat.pesan });
-      return;
     }
+  }
+
+  /** Host keluar dengan sengaja: beri tahu semua pemain agar salah satu segera mengambil alih. */
+  umumkanPergi(): void {
+    for (const c of this.koneksi.values()) this.kirim(c, { t: 'hostPergi' });
+  }
+
+  private terimaPesanPemain(conn: Saluran, pesan: PesanKeHost): void {
     const id = this.pemilikKoneksi.get(conn);
     if (!id) return;
     if (pesan.t === 'ping') {
@@ -454,6 +530,10 @@ export interface PendengarKlien {
   /** Pesan chat ditolak host; `teks` adalah isi pesan yang ditolak (untuk dikembalikan ke kolom input). */
   onTolakChat?: (alasan: string, teks?: string) => void;
   onTolakPetunjuk?: (alasan: string) => void;
+  /** Host keluar dengan sengaja; pemain bisa langsung mencoba mengambil alih host. */
+  onHostPergi?: () => void;
+  /** Host meminta klien memakai kursi lama akun ini (id + token). Klien sudah dihentikan. */
+  onIdAkun?: (id: string, token: string) => void;
   /** Id ini diambil alih koneksi lain (tab atau HP lain). Klien sudah dihentikan. */
   onDiganti?: (alasan: string) => void;
   /** Jalur berpindah (mis. dari langsung ke relay). */
@@ -487,7 +567,7 @@ export class KlienRoom {
 
   constructor(
     private kode: string,
-    private identitas: { id: string; nama: string; token: string },
+    private identitas: { id: string; nama: string; token: string; nonce?: string },
     private dengar: PendengarKlien,
     private opsi: OpsiJaringan = {},
   ) {}
@@ -503,6 +583,29 @@ export class KlienRoom {
       void this.keRelay();
       return;
     }
+    if (this.opsi.relayUtama) {
+      this.langsung = 'cadangan (relay utama dulu)';
+      void this.keRelay();
+      return;
+    }
+    await this.mulaiLangsung();
+  }
+
+  private sudahCobaLangsung = false;
+
+  /** Relay utama belum menjawab: coba jalur langsung PeerJS sekali sebagai cadangan. */
+  private kembaliLangsung(): void {
+    if (this.sudahCobaLangsung || this.selesai || this.jalur !== 'relay') return;
+    this.sudahCobaLangsung = true;
+    this.jalur = 'langsung';
+    this.sudahView = false;
+    this.mulaiMs = Date.now();
+    this.dengar.onJalur?.('langsung');
+    this.dengar.onStatus('menyambung', 'langsung');
+    void this.mulaiLangsung();
+  }
+
+  private async mulaiLangsung(): Promise<void> {
     this.langsung = 'menyiapkan';
     await this.siapRelay?.catch(() => {});
     if (this.berhentiLangsung()) return;
@@ -640,6 +743,10 @@ export class KlienRoom {
     if (this.jalur === 'relay') {
       if (!this.relay || this.relay.jumlah() === 0) return;
       const t = Date.now();
+      if (this.opsi.relayUtama && !this.sudahView && this.terakhirDengar === 0 && t - this.relayMulaiMs > CADANGAN_LANGSUNG_MS) {
+        this.kembaliLangsung();
+        return;
+      }
       if (!this.sudahView || t - this.terakhirDengar > BATAS_SENYAP_HOST_RELAY_MS) {
         // Belum dijawab atau host diam: ulangi salam (host memperlakukannya sebagai sambung ulang).
         if (this.sudahView) {
@@ -743,6 +850,17 @@ export class KlienRoom {
         this.dengar.onStatus('tersambung', this.jalur);
         this.dengar.onView(p.view);
       }
+    } else if (p.t === 'idAkun') {
+      if (typeof p.id !== 'string' || typeof p.token !== 'string') return;
+      this.hentikan();
+      this.dengar.onIdAkun?.(p.id, p.token);
+    } else if (p.t === 'hostPergi') {
+      // Host keluar: tunggu host baru, ulangi salam ke topik host secepatnya.
+      this.sudahView = false;
+      this.haloRelayTerakhir = 0;
+      this.relayMulaiMs = Date.now();
+      this.dengar.onStatus('menyambungUlang', 'host pindah');
+      this.dengar.onHostPergi?.();
     } else if (p.t === 'chat' || p.t === 'riwayatChat') {
       const masuk: unknown[] = p.t === 'chat' ? [p.pesan] : Array.isArray(p.pesan) ? p.pesan : [];
       const baru = gabungChat(this.chat, masuk);

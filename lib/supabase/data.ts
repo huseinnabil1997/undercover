@@ -1,4 +1,4 @@
-// Akses data akun, statistik, dan riwayat. Semua dibatasi RLS: pemain hanya bisa menulis riwayatnya sendiri.
+// Akses data akun, statistik, dan riwayat. Semua dibatasi RLS; riwayat online dicatat host lewat RPC (lib/supabase/room).
 import type { PasanganKata, Pemenang, Peran } from '../types';
 import { menangDengan, peranDb, type BarisStatistik, type PeranDb } from '../akun';
 import { supabase } from './klien';
@@ -125,9 +125,3 @@ export function barisRiwayat(h: HasilUntukDicatat) {
   };
 }
 
-/** Catat hasil milik pemain yang sedang login. Aman dipanggil berulang: duplikat (id_main, user) diabaikan. */
-export async function catatHasil(h: HasilUntukDicatat): Promise<boolean> {
-  const { error } = await supabase().from('riwayat_main').insert(barisRiwayat(h));
-  if (error && error.code !== '23505') throw error;
-  return true;
-}

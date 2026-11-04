@@ -5,8 +5,11 @@ import type { BatasWaktu } from '../batasWaktu';
 import type { EntriPetunjuk } from '../petunjuk';
 import type { PanjangKata, PasanganKata, Pemenang, Peran, SumberKata } from '../types';
 
-/** Versi 3: diskusi dengan petunjuk ketik (versi 2 menambah chat). Klien versi lama ditolak dengan pesan "muat ulang". */
-export const VERSI_PROTOKOL = 3;
+/**
+ * Versi 4: salam membawa nonce identitas Supabase dan host bisa berpindah (versi 3: petunjuk ketik, versi 2: chat).
+ * Klien versi lama ditolak dengan pesan "muat ulang".
+ */
+export const VERSI_PROTOKOL = 4;
 export const INTERVAL_PING_MS = 3000;
 /** Pemain dianggap offline jika host tidak menerima pesan apa pun selama ini. */
 export const BATAS_OFFLINE_MS = 10000;
@@ -18,6 +21,8 @@ export interface PemainOnline {
   terakhir: number;
   /** Rahasia sesi pemain (hanya disimpan host, tidak pernah dikirim ke pemain lain). */
   token?: string;
+  /** Id akun Supabase yang sudah diverifikasi host (hanya disimpan host, untuk mencatat hasil). */
+  uid?: string;
 }
 
 export interface Pengaturan {
@@ -121,7 +126,7 @@ export type AksiKhususHost =
 
 /** Aksi sistem dari lapisan jaringan host. */
 export type AksiSistem =
-  | { jenis: 'gabung'; id: string; nama: string; token?: string }
+  | { jenis: 'gabung'; id: string; nama: string; token?: string; uid?: string }
   | { jenis: 'terlihat'; id: string }
   | { jenis: 'putus'; id: string }
   | { jenis: 'tick' };
@@ -186,7 +191,7 @@ export interface ViewPemain {
 /* --------------------------------- Pesan --------------------------------- */
 
 export type PesanKeHost =
-  | { t: 'halo'; v: number; id: string; nama: string; token: string }
+  | { t: 'halo'; v: number; id: string; nama: string; token: string; nonce?: string }
   | { t: 'ping' }
   | { t: 'aksi'; aksi: AksiPemain }
   | { t: 'chat'; teks: string };
@@ -198,5 +203,9 @@ export type PesanKeKlien =
   /** `ganti: true` jika id pemain ini baru saja dipakai koneksi lain (tab atau HP lain): klien berhenti, tidak menyambung ulang. */
   | { t: 'tolak'; alasan: string; chat?: boolean; petunjuk?: boolean; teks?: string; ganti?: boolean }
   | { t: 'pong' }
+  /** Host keluar dengan sengaja: pemain lain segera mencoba mengambil alih host. */
+  | { t: 'hostPergi' }
+  /** Akun ini sudah ada di room dengan id lain (HP baru): pakai id dan token lama itu. */
+  | { t: 'idAkun'; id: string; token: string }
   | { t: 'chat'; pesan: PesanChat }
   | { t: 'riwayatChat'; pesan: PesanChat[] };

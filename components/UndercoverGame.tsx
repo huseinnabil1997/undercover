@@ -627,7 +627,9 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Satu orang membuat room dan menjadi host. Pemain lain gabung dengan kode, link, atau QR.</li>
           <li>Setiap pemain melihat katanya sendiri di HP masing-masing, lalu mengetik petunjuk bergiliran sesuai urutan di layar. Pemain lain melihat tulisan Menunggu [nama] dan riwayat petunjuk yang diperbarui langsung. Setelah semua mendapat giliran, voting dimulai otomatis.</li>
           <li>Voting dilakukan dari HP masing-masing. Setiap pemain boleh memilih Lewati (abstain); Lewati tidak menambah suara siapa pun dan tetap dihitung sudah vote. Jika Lewati lebih banyak dari suara terbanyak, atau tidak ada suara untuk siapa pun, tidak ada yang tereliminasi. Jika suara terbanyak seri (termasuk seri dengan Lewati), ada vote ulang sekali antara yang seri. Jika masih seri, tidak ada yang tereliminasi.</li>
-          <li>HP host harus tetap membuka halaman selama permainan.</li>
+          <li>Main Online perlu login. Nama di room adalah username akunmu, dan host memeriksa bahwa akun itu benar milikmu.</li>
+          <li>Jika host keluar atau koneksinya putus, peran host pindah otomatis ke pemain lain dan permainan lanjut. Host lama bisa gabung lagi dengan kode yang sama.</li>
+          <li>Hasil permainan dicatat oleh host ke profil semua pemain.</li>
         </ul>
         <h3>Suara dan notifikasi</h3>
         <ul>
@@ -635,7 +637,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Bunyi dan getar paling jelas saat giliranmu memberi petunjuk, atau saat kamu Mr. White yang harus menebak. Momen lain (pemain gabung, voting, hasil, chat) hanya bunyi halus.</li>
           <li>Notifikasi giliran hanya muncul saat giliranmu dan halaman sedang tidak dilihat, selama room masih terbuka di latar. Jika aplikasi sudah ditutup, notifikasi tidak muncul. Di iPhone, pasang dulu ke Layar Utama (iOS 16.4 ke atas).</li>
         </ul>
-        <p className="catatan">Semua data (nama, pengaturan, riwayat kata) hanya disimpan di HP ini. Tidak ada login dan tidak ada pelacakan. Di mode online, HP saling terhubung langsung (WebRTC); server perantara PeerJS hanya dipakai untuk saling menemukan.</p>
+        <p className="catatan">Semua data (nama, pengaturan, riwayat kata) hanya disimpan di HP ini. Mode Lokal tanpa login dan tanpa pelacakan. Di mode Online, pesan dikirim lewat Supabase Realtime dalam keadaan terenkripsi (cadangan: koneksi langsung WebRTC atau relay lain), dan hasil permainan disimpan di akunmu.</p>
       </div>
       <div className="aksi-bawah">
         <button className="utama" onClick={onTutup}>Oke</button>

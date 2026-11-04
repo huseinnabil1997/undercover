@@ -143,7 +143,7 @@ function Isi() {
   if (mode === 'online') {
     return (
       <GerbangAkun alasan="Main Online perlu akun agar hasilnya tercatat." onBeranda={keMenu}>
-        {(akun) => <OnlineGame key={akun.id} kodeAwal={awal.kode} username={akun.username} onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />}
+        {(akun) => <OnlineGame key={akun.id} kodeAwal={awal.kode} username={akun.username} userId={akun.id} onBeranda={keMenu} daftarPenjaga={daftarPenjaga} />}
       </GerbangAkun>
     );
   }

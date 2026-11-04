@@ -88,6 +88,8 @@ export interface Pengangkut {
   readonly nama: string;
   /** true untuk Metered (dihitung kuota pesan). */
   readonly metered?: boolean;
+  /** Jalur utama (Supabase Realtime): selama siap, pesan hanya dikirim lewat jalur ini. */
+  readonly utama?: boolean;
   siap: boolean;
   langgan(topik: string): void;
   mulai(): void;
@@ -109,14 +111,17 @@ export interface OpsiPengangkut {
   broker?: Broker[];
   buatSoket?: PembuatSoket;
   buatSoketMetered?: PembuatSoketTeks;
+  /** Jalur utama (Supabase Realtime) untuk pemain yang login; dipasang paling depan. */
+  utama?: PembuatPengangkut;
 }
 
-/** Daftar jalur relay: Metered lebih dulu (paling andal), lalu broker MQTT publik sebagai cadangan tambahan. */
+/** Daftar jalur relay: Supabase Realtime (bila ada) lebih dulu, lalu Metered, lalu broker MQTT publik sebagai cadangan. */
 export function daftarPengangkut(o: OpsiPengangkut = {}): PembuatPengangkut[] {
   const mode = o.mode ?? 'semua';
   // Soket MQTT tiruan (pengujian) tanpa soket Metered tiruan: jangan menyambung ke Metered sungguhan.
   const kunci = o.kunciMetered ?? (o.buatSoket && !o.buatSoketMetered ? '' : KUNCI_METERED);
   const hasil: PembuatPengangkut[] = [];
+  if (o.utama && mode === 'semua') hasil.push(o.utama);
   if (mode !== 'mqtt' && kunci) hasil.push((p, s) => new KlienMetered(kunci, p, s, o.buatSoketMetered));
   if (mode !== 'metered') for (const b of o.broker ?? BROKER_RELAY) hasil.push((p, s) => new KlienMqtt(b, p, s, o.buatSoket));
   return hasil;
@@ -124,6 +129,8 @@ export function daftarPengangkut(o: OpsiPengangkut = {}): PembuatPengangkut[] {
 
 /** Ringkasan keadaan jalur relay untuk diagnosa. */
 export interface RingkasanRelay {
+  /** Keadaan jalur utama (Supabase Realtime); null = tidak dipakai. */
+  utama?: string | null;
   /** null = Metered tidak dipakai. */
   metered: string | null;
   mqttSiap: number;
@@ -181,8 +188,10 @@ export class RelayMulti {
 
   ringkasan(): RingkasanRelay {
     const m = this.klien.find((k) => k.metered);
-    const mqtt = this.klien.filter((k) => !k.metered);
+    const u = this.klien.find((k) => k.utama);
+    const mqtt = this.klien.filter((k) => !k.metered && !k.utama);
     return {
+      utama: u ? u.keadaan() : null,
       metered: m ? m.keadaan() : null,
       mqttSiap: mqtt.filter((k) => k.siap).length,
       mqttTotal: mqtt.length,
@@ -191,13 +200,17 @@ export class RelayMulti {
     };
   }
 
-  /** Kirim lewat semua jalur yang tersambung. false jika tidak ada satu pun. */
+  /**
+   * Kirim lewat jalur utama bila siap (hemat kuota Metered dan beban broker publik), selain itu lewat semua jalur
+   * yang tersambung. false jika tidak ada satu pun.
+   */
   async kirim(topik: string, isi: unknown): Promise<boolean> {
     if (this.selesai) return false;
     const data = await sandikan(this.kunci.kunci, isi);
     this.saring.baru(idPesan(data)); // gema pesan sendiri tidak diproses
     let ok = false;
-    for (const k of this.klien) {
+    const utama = this.klien.filter((k) => k.utama && k.siap);
+    for (const k of utama.length ? utama : this.klien) {
       const t = k.terbit(topik, data);
       if (t && k.metered) this.terbitMetered++;
       ok = t || ok;
@@ -208,6 +221,29 @@ export class RelayMulti {
   hentikan(): void {
     this.selesai = true;
     for (const k of this.klien) k.hentikan();
+  }
+}
+
+/** Hex topik room (bagian setelah awalan), dipakai sebagai nama kanal Supabase Realtime. */
+export function hexTopik(topik: string): string | null {
+  const m = /\/r1\/([0-9a-f]{32})(\/|$)/.exec(topik);
+  return m ? m[1] : null;
+}
+
+export function keBase64(b: Uint8Array): string {
+  let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode(...b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+
+export function dariBase64(t: string): Uint8Array | null {
+  try {
+    const s = atob(t);
+    const b = new Uint8Array(s.length);
+    for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i);
+    return b;
+  } catch {
+    return null;
   }
 }
 
