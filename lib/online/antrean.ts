@@ -48,6 +48,8 @@ export interface StatusMatch {
   /** Lama sejak pemain terakhir gabung, menurut jam server. */
   diamMs: number;
   host: boolean;
+  /** Room dibuat pemain Acak: tidak pernah mulai otomatis, hanya host yang memulai. */
+  acak: boolean;
 }
 
 const KODE = /^[A-HJKMNP-Z2-9]{6}$/;
@@ -64,11 +66,13 @@ export function rapikanStatus(x: unknown): StatusMatch | null {
     dimulai: o.status === 'dimulai',
     diamMs: Math.max(0, Number(o.diam_ms) || 0),
     host: o.host === true,
+    acak: o.acak === true,
   };
 }
 
-/** Kapan host memulai otomatis: 'penuh' saat room penuh, 'diam' saat minimal 4 dan tidak ada yang gabung 60 detik. */
-export function alasanMulaiOtomatis(online: number, maks: number, diamMs: number): 'penuh' | 'diam' | null {
+/** Kapan host memulai otomatis (room Acak tidak pernah): 'penuh' saat room penuh, 'diam' saat minimal 4 dan tidak ada yang gabung 60 detik. */
+export function alasanMulaiOtomatis(online: number, maks: number, diamMs: number, acak = false): 'penuh' | 'diam' | null {
+  if (acak) return null;
   if (online >= maks) return 'penuh';
   if (online >= MIN_MULAI_MATCH && diamMs >= BATAS_DIAM_MS) return 'diam';
   return null;

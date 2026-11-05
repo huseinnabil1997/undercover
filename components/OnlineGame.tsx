@@ -542,8 +542,10 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     if (!kodeMatch || !lobbyMatch || mulaiOtomatis.current === kodeMatch) return;
     const cek = () => {
       if (mulaiOtomatis.current === kodeMatch) return;
-      const diam = infoMatch && !infoMatch.s.dimulai ? infoMatch.s.diamMs + (Date.now() - infoMatch.t) : 0;
-      if (!alasanMulaiOtomatis(onlineLobby, maksMatch, diam)) return;
+      // Tunggu status server dulu agar mode room (Acak atau tetap) diketahui.
+      if (!infoMatch || infoMatch.s.dimulai) return;
+      const diam = infoMatch.s.diamMs + (Date.now() - infoMatch.t);
+      if (!alasanMulaiOtomatis(onlineLobby, maksMatch, diam, infoMatch.s.acak)) return;
       mulaiOtomatis.current = kodeMatch;
       void mulaiGame();
     };
@@ -1442,7 +1444,8 @@ function InfoMatch({ maks, online, host, info }: { maks: number; online: number;
     return () => window.clearInterval(id);
   }, []);
   const diam = info ? info.s.diamMs + Math.max(0, sekarang - info.t) : 0;
-  const sisa = info && !info.s.dimulai ? sisaHitungMundur(online, diam) : null;
+  const acak = info?.s.acak === true;
+  const sisa = info && !info.s.dimulai && !acak ? sisaHitungMundur(online, diam) : null;
   return (
     <div className="kartu" id="info-match">
       <h2 data-uji="jumlah-match">Menunggu pemain {online}/{maks}</h2>
@@ -1450,10 +1453,12 @@ function InfoMatch({ maks, online, host, info }: { maks: number; online: number;
         <p className="catatan" role="timer" data-uji="hitung-mundur">Mulai otomatis dalam {formatTunggu(sisa + 999)} jika tidak ada pemain baru.</p>
       ) : info?.s.dimulai ? (
         <p className="catatan">Room ini sudah pernah mulai, jadi tidak menerima pemain match baru.</p>
+      ) : acak ? (
+        <p className="catatan" data-uji="host-memulai">Room Acak: host yang memulai. Tidak ada mulai otomatis.</p>
       ) : (
         <p className="catatan">Room match terbuka. Pemain lain bisa masuk sampai penuh atau sampai game dimulai. Minimal {MIN_MULAI_MATCH} pemain untuk mulai.</p>
       )}
-      <p className="catatan">{host ? `Mulai otomatis saat ${maks} pemain, atau tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH}.` : 'Host memulai permainan.'}</p>
+      <p className="catatan">{host ? (acak ? `Tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH} pemain.` : `Mulai otomatis saat ${maks} pemain, atau tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH}.`) : 'Host memulai permainan.'}</p>
     </div>
   );
 }

@@ -38,6 +38,11 @@ describe('mulai otomatis', () => {
     expect(alasanMulaiOtomatis(4, 6, 60_000)).toBe('diam');
     expect(alasanMulaiOtomatis(3, 6, 999_000)).toBeNull();
   });
+  it('room Acak tidak pernah mulai otomatis, room tetap tetap mulai', () => {
+    expect(alasanMulaiOtomatis(8, 8, 0, true)).toBeNull();
+    expect(alasanMulaiOtomatis(5, 8, 999_000, true)).toBeNull();
+    expect(alasanMulaiOtomatis(8, 8, 0, false)).toBe('penuh');
+  });
   it('hitung mundur hanya berjalan saat minimal 4', () => {
     expect(sisaHitungMundur(3, 10_000)).toBeNull();
     expect(sisaHitungMundur(4, 15_000)).toBe(45_000);
@@ -55,7 +60,8 @@ describe('pembantu', () => {
   });
   it('rapikanStatus', () => {
     expect(rapikanStatus(null)).toBeNull();
-    expect(rapikanStatus({ kode: 'ABCDE2', maks: 5, jumlah: 3, status: 'lobby', diam_ms: 1200, host: true })).toEqual({ kode: 'ABCDE2', maks: 5, jumlah: 3, dimulai: false, diamMs: 1200, host: true });
+    expect(rapikanStatus({ kode: 'ABCDE2', maks: 5, jumlah: 3, status: 'lobby', diam_ms: 1200, host: true })).toEqual({ kode: 'ABCDE2', maks: 5, jumlah: 3, dimulai: false, diamMs: 1200, host: true, acak: false });
+    expect(rapikanStatus({ kode: 'ABCDE2', maks: 8, acak: true })?.acak).toBe(true);
     expect(rapikanStatus({ kode: 'ABCDE2', maks: 5, jumlah: 3, status: 'dimulai' })?.dimulai).toBe(true);
     expect(rapikanStatus({ kode: 'abc0OI', maks: 5 })).toBeNull();
     expect(rapikanStatus({ kode: 'ABCDE2', maks: 9 })).toBeNull();
