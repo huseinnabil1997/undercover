@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { komposisiDefault, MIN_PEMAIN, rapikanPanjangKata, validasiSetup, type Komposisi } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, semuaKategori, siapkanPasangan, siapkanPasanganCampur, sumberTersimpan, tebakSumber } from '@/lib/bankKata';
 import { baca, KUNCI, simpan } from '@/lib/storage';
+import { EVENT_DIKELUARKAN, PESAN_DIKELUARKAN } from '@/lib/akun';
 import { alasanTanpaEliminasi, alihkanHost, buatStateHost, pulihkanStateHost, rapikanNama, viewUntuk } from '@/lib/online/host';
 import { HostRoom, KlienRoom, type StatusJaringan } from '@/lib/online/jaringan';
 import { modeRelayDari, paksaRelayDari, teksDiagnosa, teksJalur } from '@/lib/online/jalur';
@@ -167,6 +168,13 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     setGalatChat(null);
     setGalatMasuk(alasan ?? null);
   }, []);
+
+  // Single login: akun masuk di perangkat lain, tinggalkan room/match dengan rapi (host lama dipindah otomatis).
+  useEffect(() => {
+    const saatDikeluarkan = () => keluarSesi(PESAN_DIKELUARKAN);
+    window.addEventListener(EVENT_DIKELUARKAN, saatDikeluarkan);
+    return () => window.removeEventListener(EVENT_DIKELUARKAN, saatDikeluarkan);
+  }, [keluarSesi]);
 
   // Tandai sesi ini sedang dipakai halaman ini, agar tab lain tidak menawarkan "Lanjut" dengan id yang sama.
   useEffect(() => {

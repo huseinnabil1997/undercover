@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cekPassword, cekUsername, emailDari, menangDengan, peranDb, persen, pesanGalatAuth, ringkasStatistik } from '../lib/akun';
+import { cekPassword, cekUsername, emailDari, galatSesiTidakAktif, menangDengan, PESAN_DIKELUARKAN, peranDb, persen, pesanGalatAuth, ringkasStatistik, sesiDigantikan } from '../lib/akun';
 import { barisRiwayat } from '../lib/supabase/data';
 
 describe('akun', () => {
@@ -78,5 +78,23 @@ describe('avatar', () => {
     expect(a.urlAvatar('u1', 3)).toMatch(/\/storage\/v1\/object\/public\/avatars\/u1\/avatar\.webp\?v=3$/);
     expect(a.potongTengah(400, 300)).toEqual({ x: 50, y: 0, sisi: 300 });
     expect(a.potongTengah(300, 401)).toEqual({ x: 0, y: 50, sisi: 300 });
+  });
+});
+
+describe('single login', () => {
+  it('dikeluarkan hanya bila server menjawab false tanpa galat', () => {
+    expect(sesiDigantikan({ data: false, error: null })).toBe(true);
+    expect(sesiDigantikan({ data: true, error: null })).toBe(false);
+    expect(sesiDigantikan({ data: null, error: null })).toBe(false);
+    expect(sesiDigantikan({ data: false, error: { message: 'Failed to fetch' } })).toBe(false);
+  });
+  it('mengenali galat sesi tidak aktif dari RPC', () => {
+    expect(galatSesiTidakAktif({ message: 'sesi_tidak_aktif' })).toBe(true);
+    expect(galatSesiTidakAktif({ message: 'room penuh' })).toBe(false);
+    expect(galatSesiTidakAktif(null)).toBe(false);
+  });
+  it('pesan dikeluarkan berbahasa Indonesia tanpa em dash', () => {
+    expect(PESAN_DIKELUARKAN).toContain('perangkat lain');
+    expect(PESAN_DIKELUARKAN).not.toMatch(/\u2014/);
   });
 });

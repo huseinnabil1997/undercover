@@ -80,3 +80,25 @@ export function ringkasStatistik(baris: BarisStatistik[]): RingkasanStatistik {
   const menang = baris.reduce((a, b) => a + b.menang, 0);
   return { main, menang, persen: persen(menang, main), perPeran };
 }
+
+/* ------------------------------ Single login ------------------------------ */
+
+/** Pesan untuk perangkat yang dikeluarkan karena akun yang sama masuk di perangkat lain. */
+export const PESAN_DIKELUARKAN = 'Akunmu masuk di perangkat lain, jadi kamu dikeluarkan dari perangkat ini.';
+/** Jeda pengecekan berkala apakah sesi di perangkat ini masih yang aktif (hanya saat halaman terlihat). */
+export const JEDA_CEK_SESI_MS = 5000;
+/** Nama event window yang memberi tahu komponen lain bahwa perangkat ini dikeluarkan. */
+export const EVENT_DIKELUARKAN = 'undercover:dikeluarkan';
+
+/**
+ * Hasil RPC cek_sesi_aktif: perangkat dikeluarkan hanya bila server menjawab tegas `false`.
+ * Galat jaringan atau jawaban lain tidak dianggap digantikan (cek lagi nanti).
+ */
+export function sesiDigantikan(hasil: { data: unknown; error: unknown }): boolean {
+  return !hasil.error && hasil.data === false;
+}
+
+/** Galat dari RPC/RLS yang menolak karena sesi sudah digantikan perangkat lain. */
+export function galatSesiTidakAktif(e: { message?: string; code?: string } | null | undefined): boolean {
+  return !!e && (e.message ?? '').includes('sesi_tidak_aktif');
+}

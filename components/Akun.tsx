@@ -2,7 +2,7 @@
 
 // Akun pemain (Supabase Auth): status login, layar Masuk/Daftar, gerbang mode online, dan layar Profil.
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
-import { cekPassword, cekUsername, emailDari, pesanGalatAuth, rapikanUsername, ringkasStatistik, type PeranDb, type RingkasanStatistik } from '@/lib/akun';
+import { EVENT_DIKELUARKAN, JEDA_CEK_SESI_MS, PESAN_DIKELUARKAN, cekPassword, cekUsername, galatSesiTidakAktif, sesiDigantikan, emailDari, pesanGalatAuth, rapikanUsername, ringkasStatistik, type PeranDb, type RingkasanStatistik } from '@/lib/akun';
 import { supabase } from '@/lib/supabase/klien';
 import { Avatar } from './Avatar';
 import { siapkanAvatar } from '@/lib/gambarAvatar';
@@ -36,6 +36,7 @@ function dariSesi(s: { user: { id: string; email?: string; user_metadata?: Recor
 
 export function AkunProvider({ children }: { children: ReactNode }) {
   const [akun, setAkun] = useState<Akun>({ status: 'memuat' });
+  const [pesanKeluar, setPesanKeluar] = useState<string | null>(null);
   useEffect(() => {
     let hidup = true;
     const sb = supabase();
@@ -44,20 +45,65 @@ export function AkunProvider({ children }: { children: ReactNode }) {
     }, () => {
       if (hidup) setAkun({ status: 'keluar' });
     });
-    const { data } = sb.auth.onAuthStateChange((_e, sesi) => {
-      if (hidup) setAkun(dariSesi(sesi));
+    const { data } = sb.auth.onAuthStateChange((e, sesi) => {
+      if (!hidup) return;
+      setAkun(dariSesi(sesi));
+      if (e === 'SIGNED_IN') setPesanKeluar(null);
     });
     return () => {
       hidup = false;
       data.subscription.unsubscribe();
     };
   }, []);
+  // Single login: cek berkala (saat halaman terlihat) dan saat fokus apakah sesi ini masih yang aktif.
+  const idMasuk = akun.status === 'masuk' ? akun.id : null;
+  useEffect(() => {
+    if (!idMasuk) return;
+    let hidup = true;
+    let sedang = false;
+    const cek = async () => {
+      if (sedang || document.visibilityState !== 'visible') return;
+      sedang = true;
+      try {
+        const sb = supabase();
+        const hasil = await sb.rpc('cek_sesi_aktif');
+        const ditolak = galatSesiTidakAktif(hasil.error as { message?: string } | null);
+        if (!hidup || !(sesiDigantikan(hasil) || ditolak)) return;
+        hidup = false;
+        // Beri tahu layar online agar keluar room dengan rapi, lalu keluar lokal saja (sesi perangkat lain tetap).
+        window.dispatchEvent(new CustomEvent(EVENT_DIKELUARKAN));
+        setPesanKeluar(PESAN_DIKELUARKAN);
+        await sb.auth.signOut({ scope: 'local' }).catch(() => undefined);
+      } catch {
+        // Gangguan jaringan: coba lagi di putaran berikutnya.
+      } finally {
+        sedang = false;
+      }
+    };
+    void cek();
+    const id = window.setInterval(() => void cek(), JEDA_CEK_SESI_MS);
+    const saatTerlihat = () => void cek();
+    window.addEventListener('focus', saatTerlihat);
+    document.addEventListener('visibilitychange', saatTerlihat);
+    return () => {
+      hidup = false;
+      window.clearInterval(id);
+      window.removeEventListener('focus', saatTerlihat);
+      document.removeEventListener('visibilitychange', saatTerlihat);
+    };
+  }, [idMasuk]);
   const [lihat, setLihat] = useState<string | null>(null);
   const tutup = useCallback(() => setLihat(null), []);
   return (
     <KonteksAkun.Provider value={akun}>
       <KonteksLihat.Provider value={setLihat}>
         {children}
+        {pesanKeluar && (
+          <div className="pita-keluar" role="alert" id="pesan-dikeluarkan">
+            <span>{pesanKeluar}</span>
+            <button type="button" className="kedua" onClick={() => setPesanKeluar(null)}>Oke</button>
+          </div>
+        )}
         {lihat && akun.status === 'masuk' && (
           <div className="lapisan-profil" role="dialog" aria-modal="true" aria-label={`Profil ${lihat}`}>
             <LayarProfil key={lihat} akun={akun} usernameLihat={lihat} onBeranda={tutup} onKembali={tutup} />
@@ -79,6 +125,15 @@ export function Kepala({ onBeranda }: { onBeranda: () => void }) {
 }
 
 /* ------------------------------ Masuk/Daftar ------------------------------ */
+
+/** Single login: login terbaru menang, sesi akun ini di perangkat lain dicabut. */
+async function keluarkanPerangkatLain(): Promise<void> {
+  try {
+    await supabase().auth.signOut({ scope: 'others' });
+  } catch {
+    // Gagal mencabut tidak menghalangi login; server tetap menolak sesi lama bila sudah dicabut.
+  }
+}
 
 export function LayarAkun({ alasan, onBeranda }: { alasan?: string; onBeranda: () => void }) {
   const [tab, setTab] = useState<'masuk' | 'daftar'>('masuk');
@@ -104,6 +159,7 @@ export function LayarAkun({ alasan, onBeranda }: { alasan?: string; onBeranda: (
       if (tab === 'masuk') {
         const { error } = await auth.signInWithPassword({ email: emailDari(username), password });
         if (error) setGalat(pesanGalatAuth(error));
+        else await keluarkanPerangkatLain();
       } else {
         const { data, error } = await auth.signUp({
           email: emailDari(username),
@@ -111,7 +167,8 @@ export function LayarAkun({ alasan, onBeranda }: { alasan?: string; onBeranda: (
           options: { data: { username: rapikanUsername(username) } },
         });
         if (error) setGalat(pesanGalatAuth(error));
-        else if (!data.session) {
+        else if (data.session) await keluarkanPerangkatLain();
+        else {
           // Konfirmasi email masih aktif di project: akun dibuat tetapi belum bisa dipakai login.
           setInfo('Akun dibuat, tetapi belum bisa dipakai karena konfirmasi email masih aktif di server. Hubungi pengelola game.');
         }
@@ -467,7 +524,7 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
         {sendiri && !usernameLihat && <CariPemain />}
         {siap && sendiri && !usernameLihat && <GantiUsername id={siap.id} username={siap.username} onGanti={(u) => setData({ ...siap, username: u })} />}
         {sendiri && !usernameLihat && <GantiPassword />}
-        {sendiri && !usernameLihat && <button className="kedua" onClick={() => void supabase().auth.signOut()}>Keluar akun</button>}
+        {sendiri && !usernameLihat && <button className="kedua" onClick={() => void supabase().auth.signOut({ scope: 'local' })}>Keluar akun</button>}
         <p className="catatan tengah-teks">Hanya permainan Online yang dicatat. Main Lokal tidak dicatat.</p>
         <div className="aksi-bawah" />
       </section>
