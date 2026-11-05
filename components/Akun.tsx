@@ -5,8 +5,14 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { EVENT_DIKELUARKAN, JEDA_CEK_SESI_MS, PESAN_DIKELUARKAN, cekPassword, cekUsername, galatSesiTidakAktif, sesiDigantikan, emailDari, pesanGalatAuth, rapikanUsername, ringkasStatistik, type PeranDb, type RingkasanStatistik } from '@/lib/akun';
 import { supabase } from '@/lib/supabase/klien';
 import { Avatar } from './Avatar';
+import { IkonDeretan, TeksGelar } from './Gelar';
 import { siapkanAvatar } from '@/lib/gambarAvatar';
 import { ambilUsernameDiganti, bisaGantiLagi, gantiUsername, hapusAvatar, lupakanProfil, unggahAvatar, ambilProfil, ambilProfilUsername, ambilRiwayat, ambilStatistik, cariProfil, type EntriRiwayat, type ProfilPublik } from '@/lib/supabase/data';
+import {
+  ambilGelarPemain, cekNotifikasiTop3, gelarTeksDari, kodeMusim, lupakanGelar, pasangGelar,
+  teksGelar, type GelarPemainApi,
+} from '@/lib/supabase/peringkatMusim';
+import { META_KATEGORI, labelMusim } from '@/lib/peringkatMusim';
 import { TombolSuara } from './PanelSuara';
 import { JUDUL_MENANG, NAMA_PERAN, Tanda, TombolMenu, angka } from './ui';
 
@@ -483,6 +489,106 @@ function CariPemain() {
   );
 }
 
+
+/** Gelar musim berjalan (bisa dipilih) + daftar award teks bulan lalu. Frame hanya dari slot musim ini. */
+function KartuGelar({ userId, sendiri }: { userId: string; sendiri: boolean }) {
+  const [gelar, setGelar] = useState<GelarPemainApi | null | 'galat'>(null);
+  const [pesan, setPesan] = useState<string | null>(null);
+  const [proses, setProses] = useState(false);
+  const [muatKe, setMuatKe] = useState(0);
+  useEffect(() => {
+    let hidup = true;
+    ambilGelarPemain([userId], muatKe > 0).then(([g]) => {
+      if (!hidup) return;
+      setGelar(g ?? null);
+      if (sendiri && g) {
+        const n = cekNotifikasiTop3(g.slot);
+        if (n) setPesan(n);
+      }
+    }, () => { if (hidup) setGelar('galat'); });
+    return () => { hidup = false; };
+  }, [userId, sendiri, muatKe]);
+  if (gelar === 'galat') return <p className="galat" role="alert">Gagal memuat gelar.</p>;
+  if (!gelar) return <p className="catatan" role="status">Memuat gelar...</p>;
+  const tampil = gelarTeksDari(gelar);
+  const musim = gelar.musim || kodeMusim();
+  async function pasang(nilai: string | null) {
+    if (!sendiri) return;
+    setProses(true);
+    setPesan(null);
+    try {
+      await pasangGelar(nilai);
+      lupakanGelar(userId);
+      setMuatKe((n) => n + 1);
+      setPesan(nilai ? 'Gelar dipasang.' : 'Gelar otomatis.');
+    } catch (e) {
+      setPesan(e instanceof Error ? e.message : 'Gagal memasang gelar.');
+    } finally {
+      setProses(false);
+    }
+  }
+  const nilaiAktif = gelar.gelar_dipasang ?? 'otomatis';
+  return (
+    <div className="kartu">
+      <h2>Gelar</h2>
+      {tampil.teks ? (
+        <p className="nol">
+          <TeksGelar teks={tampil.teks} keterangan={tampil.keterangan} ikon={tampil.frame ? META_KATEGORI[tampil.frame.kategori].ikon : undefined} />
+          {' '}
+          <IkonDeretan slot={gelar.slot} />
+        </p>
+      ) : (
+        <p className="catatan">Belum ada gelar musim {labelMusim(musim)}.</p>
+      )}
+      {pesan && <p className="catatan" role="status">{pesan}</p>}
+      {gelar.slot.length > 0 && (
+        <>
+          <p className="catatan kecil-teks">Top 3 {labelMusim(musim)} (frame avatar hanya di musim ini)</p>
+          {sendiri && (
+            <div className="pilih-gelar" role="radiogroup" aria-label="Pilih gelar musim">
+              <label>
+                <input type="radio" name="gelar" checked={nilaiAktif === 'otomatis' || !gelar.gelar_dipasang} disabled={proses} onChange={() => void pasang(null)} />
+                Otomatis (peringkat terbaik)
+              </label>
+              {gelar.slot.map((s) => {
+                const nilai = `musim:${musim}:${s.kategori}:${s.peringkat}`;
+                return (
+                  <label key={nilai}>
+                    <input type="radio" name="gelar" checked={nilaiAktif === nilai} disabled={proses} onChange={() => void pasang(nilai)} />
+                    {META_KATEGORI[s.kategori].ikon} {teksGelar({ kategori: s.kategori, peringkat: s.peringkat, musim })}
+                  </label>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
+      {gelar.award.length > 0 && (
+        <>
+          <h3 className="nol" style={{ marginTop: 12 }}>Award bulan lalu</h3>
+          <p className="catatan kecil-teks">Hanya gelar teks di profil, tanpa frame.</p>
+          <ul className="daftar-award">
+            {gelar.award.map((a) => {
+              const nilai = `award:${a.id}`;
+              const teks = teksGelar({ kategori: a.kategori, peringkat: a.peringkat, musim: a.musim, sumber: 'award' });
+              return (
+                <li key={a.id}>
+                  <span>{META_KATEGORI[a.kategori].ikon} {teks}</span>
+                  {sendiri && (
+                    <button type="button" className={`kecil mini${nilaiAktif === nilai ? ' utama' : ' kedua'}`} disabled={proses} onClick={() => void pasang(nilaiAktif === nilai ? null : nilai)}>
+                      {nilaiAktif === nilai ? 'Dipakai' : 'Pakai'}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
 /** Profil sendiri (lengkap) atau pemain lain (read-only: statistik dan riwayat). */
 export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
   akun: { id: string; username: string };
@@ -491,6 +597,7 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
   onKembali?: () => void;
 }) {
   const [data, setData] = useState<{ id: string; username: string; versi: number | null; r: RingkasanStatistik } | 'galat' | 'tidakAda' | null>(null);
+  const [infoGelar, setInfoGelar] = useState<{ teks: string; frame: import('@/lib/supabase/peringkatMusim').SlotMusimApi | null; keterangan: string | null } | null>(null);
   useEffect(() => {
     let hidup = true;
     (async () => {
@@ -504,13 +611,24 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
   }, [akun.id, usernameLihat]);
   const siap = data && typeof data === 'object' ? data : null;
   const sendiri = siap ? siap.id === akun.id : !usernameLihat;
+  useEffect(() => {
+    let hidup = true;
+    const id = siap?.id;
+    if (!id) return () => { hidup = false; };
+    ambilGelarPemain([id]).then(([g]) => {
+      if (!hidup || !g) return;
+      setInfoGelar(gelarTeksDari(g));
+    }).catch(() => { /* biarkan teks lama / kosong */ });
+    return () => { hidup = false; };
+  }, [siap?.id]);
   return (
     <main className="wadah">
       <Kepala onBeranda={onBeranda} />
       <section className="tumpuk masuk">
         <div className="profil-kepala">
-          <Avatar username={siap ? siap.username : usernameLihat ?? akun.username} id={siap?.id ?? 'memuat'} versi={siap?.versi} ukuran={88} />
+          <Avatar username={siap ? siap.username : usernameLihat ?? akun.username} id={siap?.id ?? 'memuat'} versi={siap?.versi} ukuran={88} slot={infoGelar?.frame} />
           <h2 className="nol">{siap ? siap.username : usernameLihat ?? akun.username}</h2>
+          {infoGelar?.teks && <TeksGelar teks={infoGelar.teks} keterangan={infoGelar.keterangan} />}
           {siap && sendiri && !usernameLihat && (
             <FotoProfil id={siap.id} username={siap.username} versi={siap.versi} onGanti={(v) => setData({ ...siap, versi: v })} />
           )}
@@ -519,6 +637,7 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
         {data === 'galat' && <p className="galat" role="alert">Gagal memuat profil. Periksa internet.</p>}
         {data === 'tidakAda' && <p className="catatan tengah-teks">Pemain tidak ditemukan.</p>}
         {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
+        {siap && <KartuGelar userId={siap.id} sendiri={sendiri && !usernameLihat} />}
         {siap && <KartuStatistik r={siap.r} />}
         {siap && <Riwayat userId={siap.id} />}
         {sendiri && !usernameLihat && <CariPemain />}

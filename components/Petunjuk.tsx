@@ -9,6 +9,8 @@ import { MAKS_PETUNJUK, petunjukMilik, urutkanBaris, type EntriPetunjuk } from '
 export { petunjukMilik };
 import type { Peran } from '@/lib/types';
 import { NAMA_PERAN } from './ui';
+import type { InfoGelar } from '@/lib/online/gelarRoom';
+import { META_KATEGORI } from '@/lib/peringkatMusim';
 
 export function FormPetunjuk({ judul, galat, onKirim, onSudahBicara, onUbah }: {
   judul: string;
@@ -78,7 +80,7 @@ export function ChipPetunjuk({ e, labelRonde, baru }: { e: EntriPetunjuk; labelR
  * Daftar ringkas satu baris per pemain: nomor urut, nama, lalu semua petunjuknya (terbaru dulu).
  * Dipakai di layar diskusi (sekaligus urutan giliran), riwayat, dan lembar Petunjuk.
  */
-export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, giliran }: {
+export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, giliran, petaGelar }: {
   pemain: PemainRiwayat[];
   entri: EntriPetunjuk[];
   ronde: number;
@@ -88,6 +90,8 @@ export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, gilira
   giliranKe?: number;
   /** Kunci pemain yang sedang giliran. */
   giliran?: string | null;
+  /** Frame top 3 musim berjalan (online). */
+  petaGelar?: Map<string, InfoGelar>;
 }) {
   const labelRonde = entri.some((e) => e.ronde !== ronde) || ronde > 1;
   const baris = urutkanBaris(pemain, urutan);
@@ -101,7 +105,7 @@ export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, gilira
         return (
           <li
             key={p.kunci}
-            className={`${p.hidup ? '' : 'mati'} ${sekarang ? 'sekarang' : ''} ${selesai ? 'selesai' : ''}`}
+            className={`${p.hidup ? '' : 'mati'} ${sekarang ? 'sekarang' : ''} ${selesai ? 'selesai' : ''}${(() => { const f = petaGelar?.get(p.nama.toLowerCase())?.frame; return f ? ` gelar-${META_KATEGORI[f.kategori].warna} gelar-p${f.peringkat}` : ''; })()}`}
             aria-current={sekarang ? 'step' : undefined}
           >
             <span className="nomor" aria-hidden>{!p.hidup ? '×' : selesai ? '✓' : ke >= 0 ? ke + 1 : '·'}</span>

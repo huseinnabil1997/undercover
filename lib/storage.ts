@@ -25,6 +25,8 @@ export const KUNCI = {
   peringkatPeran: 'peringkatPeran',
   /** Cache kamus pemain publik: { waktu, data }. */
   cacheKamusPemain: 'kamusPemain.cache',
+  /** Snapshot top 3 musim berjalan milik sendiri (notifikasi). */
+  top3Musim: 'top3Musim',
 } as const;
 
 /** Kunci lama yang sudah tidak dipakai (pilihan kategori versi 1 dan skor). */

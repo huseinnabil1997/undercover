@@ -1,14 +1,46 @@
 'use client';
 
-// Leaderboard pemain Online: menang terbanyak, dengan avatar. Nama membuka profil (read-only).
-import { useEffect, useState } from 'react';
+// Leaderboard Online: semua waktu + top 3 musim (bulan berjalan realtime, arsip award teks).
+import { useEffect, useMemo, useState } from 'react';
 import { persen } from '@/lib/akun';
 import { KUNCI, simpan } from '@/lib/storage';
+import { KATEGORI_MUSIM, META_KATEGORI, bolehFrame, kodeMusim, labelMusim, musimSebelumnya } from '@/lib/peringkatMusim';
 import { ambilPeringkat, MIN_MAIN_WINRATE, PERAN_PERINGKAT as PERAN, pilihanPeringkat, URUT_PERINGKAT as URUT, type BarisPeringkat } from '@/lib/supabase/kamus';
+import { ambilTopMusim, finalisasiMusim, type BarisTopMusim, type KategoriMusim } from '@/lib/supabase/peringkatMusim';
 import { Kepala, useLihatProfil } from './Akun';
 import { Avatar } from './Avatar';
 
+type Mode = 'semua' | 'musim';
+
+function daftarArsip(n = 6): string[] {
+  const out: string[] = [];
+  let m = musimSebelumnya(kodeMusim());
+  for (let i = 0; i < n; i++) {
+    out.push(m);
+    m = musimSebelumnya(m);
+  }
+  return out;
+}
+
 export function LayarPeringkat({ akun, onBeranda }: { akun: { id: string; username: string }; onBeranda: () => void }) {
+  const [mode, setMode] = useState<Mode>('semua');
+  return (
+    <main className="wadah">
+      <Kepala onBeranda={onBeranda} />
+      <section className="tumpuk masuk">
+        <div className="kepala-fase"><h2>Peringkat</h2></div>
+        <div className="kartu tab-musim" role="tablist" aria-label="Mode peringkat">
+          <button type="button" className={`chip${mode === 'semua' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'semua'} onClick={() => setMode('semua')}>Semua waktu</button>
+          <button type="button" className={`chip${mode === 'musim' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'musim'} onClick={() => setMode('musim')}>Musim</button>
+        </div>
+        {mode === 'semua' ? <PapanSemua akun={akun} /> : <PapanMusim akun={akun} />}
+        <div className="aksi-bawah" />
+      </section>
+    </main>
+  );
+}
+
+function PapanSemua({ akun }: { akun: { id: string } }) {
   const lihat = useLihatProfil();
   const [data, setData] = useState<BarisPeringkat[] | 'galat' | null>(null);
   const [muat, setMuat] = useState(0);
@@ -16,9 +48,7 @@ export function LayarPeringkat({ akun, onBeranda }: { akun: { id: string; userna
   useEffect(() => {
     let hidup = true;
     ambilPeringkat(pilih.urut, pilih.peran).then((d) => hidup && setData(d), () => hidup && setData('galat'));
-    return () => {
-      hidup = false;
-    };
+    return () => { hidup = false; };
   }, [muat, pilih]);
   const ubah = (p: Partial<typeof pilih>) => {
     const n = { ...pilih, ...p };
@@ -29,51 +59,125 @@ export function LayarPeringkat({ akun, onBeranda }: { akun: { id: string; userna
   };
   const namaPeran = PERAN.find((x) => x.id === pilih.peran)!.nama;
   return (
-    <main className="wadah">
-      <Kepala onBeranda={onBeranda} />
-      <section className="tumpuk masuk">
-        <div className="kepala-fase"><h2>Peringkat</h2></div>
-        <div className="kartu">
-          <span className="label">Urutkan</span>
-          <div className="chip-grup" role="group" aria-label="Urutkan">
-            {URUT.map((x) => <button key={x.id} type="button" className={`chip${pilih.urut === x.id ? ' pilih' : ''}`} aria-pressed={pilih.urut === x.id} onClick={() => ubah({ urut: x.id })}>{x.nama}</button>)}
-          </div>
-          <span className="label">Peran</span>
-          <div className="chip-grup" role="group" aria-label="Peran">
-            {PERAN.map((x) => <button key={x.id} type="button" className={`chip${pilih.peran === x.id ? ' pilih' : ''}`} aria-pressed={pilih.peran === x.id} onClick={() => ubah({ peran: x.id })}>{x.nama}</button>)}
-          </div>
+    <>
+      <div className="kartu">
+        <span className="label">Urutkan</span>
+        <div className="chip-grup" role="group" aria-label="Urutkan">
+          {URUT.map((x) => <button key={x.id} type="button" className={`chip${pilih.urut === x.id ? ' pilih' : ''}`} aria-pressed={pilih.urut === x.id} onClick={() => ubah({ urut: x.id })}>{x.nama}</button>)}
         </div>
-        <p className="catatan tengah-teks nol">
-          {pilih.urut === 'menang'
-            ? `50 pemain dengan kemenangan Online terbanyak (${namaPeran}). Seri: main lebih sedikit di atas.`
-            : `50 pemain dengan winrate Online tertinggi (${namaPeran}), minimal ${MIN_MAIN_WINRATE} kali main. Seri: menang lebih banyak di atas.`}
-        </p>
-        {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
-        {data === 'galat' && (
-          <>
-            <p className="galat" role="alert">Gagal memuat peringkat. Periksa internet.</p>
-            <button className="kedua" onClick={() => { setData(null); setMuat((n) => n + 1); }}>Coba lagi</button>
-          </>
-        )}
-        {Array.isArray(data) && data.length === 0 && <p className="catatan tengah-teks">{pilih.urut === 'winrate' ? `Belum ada pemain dengan minimal ${MIN_MAIN_WINRATE} kali main.` : 'Belum ada permainan tercatat.'}</p>}
-        {Array.isArray(data) && data.length > 0 && (
-          <ol className="kartu daftar-peringkat">
-            {data.map((r, i) => (
-              <li key={r.id} className={r.id === akun.id ? 'sendiri' : undefined}>
-                <span className="nomor">{i + 1}</span>
-                <button type="button" className="tautan nama-dengan-avatar" aria-label={`Lihat profil ${r.username}`} onClick={() => lihat(r.username)}>
-                  <Avatar username={r.username} id={r.id} versi={r.avatar_versi} ukuran={32} />
-                  <span className="nama-peringkat nama-teks">{r.username}</span>{r.id === akun.id && <em className="label-kamu">(kamu)</em>}
-                </button>
-                {pilih.urut === 'winrate'
-                  ? <span className="angka-peringkat"><strong>{persen(r.menang, r.main) ?? 0}%</strong><br /><small>{r.menang} menang, {r.main} main</small></span>
-                  : <span className="angka-peringkat"><strong>{r.menang}</strong> menang<br /><small>{r.main} main, {persen(r.menang, r.main) ?? 0}%</small></span>}
-              </li>
-            ))}
-          </ol>
-        )}
-        <div className="aksi-bawah" />
-      </section>
-    </main>
+        <span className="label">Peran</span>
+        <div className="chip-grup" role="group" aria-label="Peran">
+          {PERAN.map((x) => <button key={x.id} type="button" className={`chip${pilih.peran === x.id ? ' pilih' : ''}`} aria-pressed={pilih.peran === x.id} onClick={() => ubah({ peran: x.id })}>{x.nama}</button>)}
+        </div>
+      </div>
+      <p className="catatan tengah-teks nol">
+        {pilih.urut === 'menang'
+          ? `50 pemain dengan kemenangan Online terbanyak (${namaPeran}). Seri: main lebih sedikit di atas.`
+          : `50 pemain dengan winrate Online tertinggi (${namaPeran}), minimal ${MIN_MAIN_WINRATE} kali main. Seri: menang lebih banyak di atas.`}
+      </p>
+      {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
+      {data === 'galat' && (
+        <>
+          <p className="galat" role="alert">Gagal memuat peringkat. Periksa internet.</p>
+          <button className="kedua" onClick={() => { setData(null); setMuat((n) => n + 1); }}>Coba lagi</button>
+        </>
+      )}
+      {Array.isArray(data) && data.length === 0 && <p className="catatan tengah-teks">{pilih.urut === 'winrate' ? `Belum ada pemain dengan minimal ${MIN_MAIN_WINRATE} kali main.` : 'Belum ada permainan tercatat.'}</p>}
+      {Array.isArray(data) && data.length > 0 && (
+        <ol className="kartu daftar-peringkat">
+          {data.map((r, i) => (
+            <li key={r.id} className={r.id === akun.id ? 'sendiri' : undefined}>
+              <span className="nomor">{i + 1}</span>
+              <button type="button" className="tautan nama-dengan-avatar" aria-label={`Lihat profil ${r.username}`} onClick={() => lihat(r.username)}>
+                <Avatar username={r.username} id={r.id} versi={r.avatar_versi} ukuran={32} />
+                <span className="nama-peringkat nama-teks">{r.username}</span>{r.id === akun.id && <em className="label-kamu">(kamu)</em>}
+              </button>
+              {pilih.urut === 'winrate'
+                ? <span className="angka-peringkat"><strong>{persen(r.menang, r.main) ?? 0}%</strong><br /><small>{r.menang} menang, {r.main} main</small></span>
+                : <span className="angka-peringkat"><strong>{r.menang}</strong> menang<br /><small>{r.main} main, {persen(r.menang, r.main) ?? 0}%</small></span>}
+            </li>
+          ))}
+        </ol>
+      )}
+    </>
+  );
+}
+
+function PapanMusim({ akun }: { akun: { id: string } }) {
+  const lihat = useLihatProfil();
+  const sekarang = kodeMusim();
+  const arsip = useMemo(() => daftarArsip(6), []);
+  const [musim, setMusim] = useState(sekarang);
+  const [kat, setKat] = useState<KategoriMusim>('keseluruhan');
+  const [data, setData] = useState<BarisTopMusim[] | 'galat' | null>(null);
+  const [muat, setMuat] = useState(0);
+  const pakaiFrame = bolehFrame(musim);
+  useEffect(() => {
+    let hidup = true;
+    (async () => {
+      if (musim !== sekarang) await finalisasiMusim(musim).catch(() => 0);
+      return ambilTopMusim(musim);
+    })().then((d) => hidup && setData(d), () => hidup && setData('galat'));
+    return () => { hidup = false; };
+  }, [musim, muat, sekarang]);
+  const baris = Array.isArray(data) ? data.filter((b) => b.kategori === kat) : [];
+  return (
+    <>
+      <div className="kartu">
+        <span className="label">Bulan</span>
+        <div className="chip-grup" role="group" aria-label="Bulan musim">
+          <button type="button" className={`chip${musim === sekarang ? ' pilih' : ''}`} aria-pressed={musim === sekarang} onClick={() => { setData(null); setMusim(sekarang); }}>{labelMusim(sekarang)} (berjalan)</button>
+          {arsip.map((m) => (
+            <button key={m} type="button" className={`chip${musim === m ? ' pilih' : ''}`} aria-pressed={musim === m} onClick={() => { setData(null); setMusim(m); }}>{labelMusim(m)}</button>
+          ))}
+        </div>
+        <span className="label">Kategori</span>
+        <div className="chip-grup" role="group" aria-label="Kategori musim">
+          {KATEGORI_MUSIM.map((k) => (
+            <button key={k} type="button" className={`chip${kat === k ? ' pilih' : ''}`} aria-pressed={kat === k} onClick={() => setKat(k)}>
+              {META_KATEGORI[k].ikon} {META_KATEGORI[k].labelSingkat}
+            </button>
+          ))}
+        </div>
+      </div>
+      <p className="catatan tengah-teks nol">
+        {pakaiFrame
+          ? `Top 3 ${META_KATEGORI[kat].nama} bulan ${labelMusim(musim)}. Frame avatar aktif di room selama musim berjalan.`
+          : `Top 3 ${META_KATEGORI[kat].nama} ${labelMusim(musim)} (arsip). Award teks permanen, tanpa frame.`}
+      </p>
+      {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
+      {data === 'galat' && (
+        <>
+          <p className="galat" role="alert">Gagal memuat peringkat musim. Periksa internet.</p>
+          <button className="kedua" onClick={() => { setData(null); setMuat((n) => n + 1); }}>Coba lagi</button>
+        </>
+      )}
+      {Array.isArray(data) && baris.length === 0 && <p className="catatan tengah-teks">Belum ada top 3 untuk kategori ini.</p>}
+      {baris.length > 0 && (
+        <ol className="kartu daftar-peringkat">
+          {baris.map((r) => (
+            <li key={`${r.kategori}-${r.peringkat}-${r.user_id}`} className={r.user_id === akun.id ? 'sendiri' : undefined}>
+              <span className="nomor">{r.peringkat}</span>
+              <button type="button" className="tautan nama-dengan-avatar" aria-label={`Lihat profil ${r.username}`} onClick={() => lihat(r.username)}>
+                <Avatar
+                  username={r.username}
+                  id={r.user_id}
+                  versi={r.avatar_versi}
+                  ukuran={32}
+                  slot={pakaiFrame ? { kategori: r.kategori, peringkat: r.peringkat, main: r.main, menang: r.menang, metrik: r.metrik } : null}
+                />
+                <span className="nama-peringkat nama-teks">{r.username}</span>
+                {r.user_id === akun.id && <em className="label-kamu">(kamu)</em>}
+              </button>
+              <span className="angka-peringkat">
+                <strong>{r.kategori === 'winrate' ? `${Math.round(Number(r.metrik) * 100)}%` : r.kategori === 'main' ? r.main : r.menang}</strong>
+                <br />
+                <small>{r.menang} menang, {r.main} main</small>
+              </span>
+            </li>
+          ))}
+        </ol>
+      )}
+    </>
   );
 }

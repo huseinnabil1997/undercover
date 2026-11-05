@@ -5,6 +5,8 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent as KeyboardEventReact } from 'react';
 import { indeksFokusBerikut } from '@/lib/dialog';
 import { Avatar } from './Avatar';
+import { gelarNama, usePetaGelar } from '@/lib/online/gelarRoom';
+import { META_KATEGORI } from '@/lib/peringkatMusim';
 import {
   EMOJI_CEPAT, MAKS_PANJANG_CHAT, hanyaEmoji, hitungBelumDibaca, jamChat, type PesanChat,
 } from '@/lib/online/chat';
@@ -37,6 +39,7 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
   const terakhir = pesan.length > 0 ? pesan[pesan.length - 1] : null;
   const terbuka = fase !== 'tutup';
   const belum = fase === 'buka' ? 0 : hitungBelumDibaca(pesan, dibaca, saya);
+  const peta = usePetaGelar(pesan.map((x) => x.nama));
 
   const buka = () => {
     dekatBawah.current = true;
@@ -158,9 +161,9 @@ export function ChatRoom({ pesan, saya, kirim, galat, teks, ubahTeks }: {
               {pesan.map((p) => {
                 const milikku = p.dari === saya;
                 return (
-                  <li key={p.id} className={`chat-pesan${milikku ? ' saya' : ''}`}>
+                  <li key={p.id} className={`chat-pesan${milikku ? ' saya' : ''}${(() => { const g = gelarNama(peta, p.nama).frame; return g ? ` gelar-${META_KATEGORI[g.kategori].warna} gelar-p${g.peringkat}` : ''; })()}`}>
                     <div className="chat-meta">
-                      <span className="chat-nama nama-dengan-avatar">{!milikku && <Avatar username={p.nama} cari ukuran={20} />}<span className="nama-teks">{milikku ? 'Kamu' : p.nama}</span></span>
+                      <span className="chat-nama nama-dengan-avatar">{!milikku && <Avatar username={p.nama} cari ukuran={20} slot={gelarNama(peta, p.nama).frame} />}<span className="nama-teks">{milikku ? 'Kamu' : p.nama}</span></span>
                       <time dateTime={new Date(p.waktu).toISOString()}>{jamChat(p.waktu)}</time>
                     </div>
                     <p className={`chat-teks${hanyaEmoji(p.teks) ? ' emoji' : ''}`}>{p.teks}</p>

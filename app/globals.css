@@ -650,3 +650,78 @@ button:active:not(:disabled) { transform: scale(0.97); }
 }
 .pita-keluar span { flex: 1; }
 .pita-keluar button { flex: none; width: auto; min-height: 40px; padding: 0 14px; }
+
+/* ---------- Gelar musiman: frame hanya untuk top 3 bulan berjalan ---------- */
+.bingkai-avatar { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 50%; }
+.bingkai-avatar > .avatar { position: relative; z-index: 1; }
+.frame-gelar { box-sizing: border-box; }
+.frame-p1 { padding: 3px; border: 3px solid transparent; background:
+  linear-gradient(var(--dasar), var(--dasar)) padding-box,
+  conic-gradient(from var(--sudut, 0deg), var(--warna-frame), #fff6, var(--warna-frame)) border-box;
+  animation: frame-putar 4s linear infinite; }
+.frame-p2 { padding: 2px; border: 2px solid transparent; background:
+  linear-gradient(var(--dasar), var(--dasar)) padding-box,
+  linear-gradient(135deg, var(--warna-frame), color-mix(in srgb, var(--warna-frame) 40%, #fff)) border-box; }
+.frame-p3 { padding: 1px; border: 1.5px solid var(--warna-frame); opacity: 0.95; }
+.frame-emas { --warna-frame: #f5c518; }
+.frame-biru { --warna-frame: #3b82f6; }
+.frame-ungu { --warna-frame: #6d28d9; }
+.frame-perak { --warna-frame: #e5e7eb; }
+.frame-hijau { --warna-frame: #22c55e; }
+.frame-oranye { --warna-frame: #f97316; }
+.lencana-gelar {
+  position: absolute; z-index: 2; right: -2px; bottom: -2px;
+  display: inline-flex; align-items: center; gap: 1px;
+  background: var(--permukaan); border-radius: 999px; padding: 0 4px 0 2px;
+  font-size: 0.7rem; line-height: 1.2; box-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+}
+.lencana-gelar.kecil { font-size: 0.6rem; padding: 0 2px; right: -1px; bottom: -1px; }
+.angka-gelar { font-weight: 800; font-size: 0.65rem; }
+@keyframes frame-putar { to { --sudut: 360deg; } }
+@property --sudut { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@media (prefers-reduced-motion: reduce) {
+  .frame-p1 { animation: none; background:
+    linear-gradient(var(--dasar), var(--dasar)) padding-box,
+    linear-gradient(135deg, var(--warna-frame), #fff8) border-box; }
+}
+
+.teks-gelar-bungkus { position: relative; display: inline-flex; max-width: 100%; }
+.teks-gelar {
+  display: inline-flex; align-items: center; gap: 4px; max-width: 100%;
+  background: none; border: 0; padding: 0; margin: 0; color: var(--redup);
+  font: inherit; font-size: 0.75rem; font-weight: 600; cursor: pointer;
+  min-height: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.teks-gelar:hover, .teks-gelar:focus-visible { color: var(--teks); text-decoration: underline; text-underline-offset: 2px; }
+.tip-gelar {
+  position: absolute; z-index: 20; left: 0; top: calc(100% + 4px);
+  min-width: 160px; max-width: min(80vw, 280px); padding: 8px 10px;
+  background: var(--permukaan); border: 1px solid var(--garis-kuat); border-radius: 8px;
+  color: var(--teks); font-size: 0.8rem; font-weight: 600; line-height: 1.35;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.45); white-space: normal;
+}
+.deretan-gelar { display: inline-flex; gap: 4px; font-size: 0.9rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* Kotak giliran & bubble chat mengikuti frame musim berjalan */
+.daftar-petunjuk > li.sekarang.gelar-p1 { box-shadow: inset 3px 0 0 var(--warna-frame, var(--aksen)), 0 0 0 1px color-mix(in srgb, var(--warna-frame, var(--aksen)) 50%, transparent); }
+.daftar-petunjuk > li.sekarang.gelar-p2 { box-shadow: inset 3px 0 0 var(--warna-frame, var(--aksen)); }
+.daftar-petunjuk > li.sekarang.gelar-p3 { box-shadow: inset 2px 0 0 color-mix(in srgb, var(--warna-frame, var(--aksen)) 70%, transparent); }
+.daftar-petunjuk > li.gelar-emas, .chat-pesan.gelar-emas { --warna-frame: #f5c518; }
+.daftar-petunjuk > li.gelar-biru, .chat-pesan.gelar-biru { --warna-frame: #3b82f6; }
+.daftar-petunjuk > li.gelar-ungu, .chat-pesan.gelar-ungu { --warna-frame: #6d28d9; }
+.daftar-petunjuk > li.gelar-perak, .chat-pesan.gelar-perak { --warna-frame: #e5e7eb; }
+.daftar-petunjuk > li.gelar-hijau, .chat-pesan.gelar-hijau { --warna-frame: #22c55e; }
+.daftar-petunjuk > li.gelar-oranye, .chat-pesan.gelar-oranye { --warna-frame: #f97316; }
+.chat-pesan.gelar-p1 { border: 2px solid var(--warna-frame); }
+.chat-pesan.gelar-p2 { border: 1.5px solid color-mix(in srgb, var(--warna-frame) 80%, transparent); }
+.chat-pesan.gelar-p3 { border: 1px solid color-mix(in srgb, var(--warna-frame) 55%, transparent); }
+.chat-pesan.saya.gelar-p1, .chat-pesan.saya.gelar-p2, .chat-pesan.saya.gelar-p3 { border-color: var(--warna-frame); }
+
+.daftar-award { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.daftar-award li { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--permukaan-2); border-radius: 10px; font-size: 0.9rem; }
+.daftar-award .utama, .daftar-award .kedua { width: auto; min-height: 36px; padding: 0 12px; flex: none; }
+.pilih-gelar { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.pilih-gelar label { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--permukaan-2); border-radius: 10px; cursor: pointer; font-weight: 600; }
+.pilih-gelar input { accent-color: var(--aksen); }
+.tab-musim { display: flex; gap: 6px; flex-wrap: wrap; }
