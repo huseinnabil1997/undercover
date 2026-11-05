@@ -210,3 +210,13 @@ async function siapkanPasanganInternet(
   return { pasangan, cadangan };
 }
 
+
+/** Sumber kata room match: Kamus kita atau Internet (diacak per game), semua kategori termasuk kategori pemain. */
+export async function siapkanPasanganCampur(
+  panjangKata: PanjangKata,
+  rng: () => number = Math.random,
+): Promise<{ pasangan: PasanganKata; cadangan: boolean; sumber: SumberKata; kategori: string[] }> {
+  const sumber: SumberKata = rng() < 0.5 ? 'kamus' : 'internet';
+  const kategori = [...semuaKategori(sumber), ...kategoriPemain(await muatKamusPemain(), pilihanKategori(sumber))];
+  return { ...(await siapkanPasangan(kategori, panjangKata, sumber)), sumber, kategori };
+}

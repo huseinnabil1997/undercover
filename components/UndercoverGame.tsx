@@ -619,6 +619,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Main Online perlu login. Nama di room adalah username akunmu, dan host memeriksa bahwa akun itu benar milikmu.</li>
           <li>Jika host keluar atau koneksinya putus, peran host pindah otomatis ke pemain lain dan permainan lanjut. Host lama bisa gabung lagi dengan kode yang sama.</li>
           <li>Hasil permainan dicatat oleh host ke profil semua pemain.</li>
+          <li>Cari match: pilih jumlah pemain (4 sampai 8) atau Acak, lalu tunggu. Pemain dicocokkan sesuai urutan masuk antrean, tanpa melihat skor. Pemain Acak bisa mengisi ukuran mana pun; jika semua Acak, match dibentuk setelah minimal 4 orang menunggu sekitar 20 detik. Pemain yang paling dulu antre jadi host, semua pemain masuk room otomatis, dan permainan mulai sendiri saat semua sudah masuk (atau setelah 45 detik jika minimal 4). Aturan room match: Mr. White ikut (mulai 5 pemain), petunjuk 45 detik, vote 60 detik, kata dari Kamus kita dan Internet termasuk kamus pemain. Tekan Batal atau tutup halaman untuk keluar dari antrean.</li>
         </ul>
         <h3>Suara dan notifikasi</h3>
         <ul>

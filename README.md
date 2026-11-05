@@ -59,6 +59,13 @@ Live: https://huseinnabil1997.github.io/undercover/
 9. Mr. White yang tereliminasi menebak kata Civilian dari HP-nya sendiri (host bisa melewati jika dia tidak merespons).
 10. Layar menang tampil di semua HP, lalu host bisa **Main lagi** atau kembali ke lobby. Skor room disimpan per nama.
 
+### Cari match (matchmaking)
+
+- Di menu Online (wajib login) ada **Cari match**: pilih 4 sampai 8 pemain atau **Acak** (ukuran bebas, minimal 4).
+- Antrean FIFO di tabel `antrean_match` (RLS: hanya baris sendiri, tulis hanya lewat RPC SECURITY DEFINER `masuk_antrean`, `detak_antrean`, `keluar_antrean`). Pencocokan atomik di server dengan advisory lock: ukuran N terbentuk saat N pemain menunggu (pemain ukuran itu didahulukan, Acak mengisi sisanya); khusus Acak, match terbentuk bila 8 menunggu, atau minimal 4 dan yang terlama sudah menunggu 20 detik. Tidak ada cron: pencocokan jalan saat masuk dan tiap detak (4 detik). Baris tanpa detak 30 detik dihapus.
+- Saat cocok, server memberi kode room 6 huruf ke baris tiap pemain (diberi tahu lewat Realtime, cadangan polling detak). Pemain yang paling dulu antre jadi host dan membuat room biasa, jadi relay, verifikasi identitas, migrasi host, dan pencatatan hasil tetap sama. Host mulai otomatis saat semua masuk, atau setelah 45 detik jika minimal 4.
+- Pengaturan room match: komposisi bawaan (Mr. White mulai 5 pemain; match 4 pemain tanpa Mr. White), petunjuk 45 detik, vote 60 detik, sumber kata diacak tiap game antara Kamus kita dan Internet, semua kategori termasuk kamus pemain.
+
 ### Cara kerja dan batasan (jujur)
 
 - **Arsitektur**: host adalah sumber kebenaran (topologi bintang). Jalur utama adalah **Supabase Realtime** (broadcast di channel

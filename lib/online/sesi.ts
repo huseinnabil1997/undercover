@@ -10,6 +10,8 @@ export interface SesiOnline {
   nama: string;
   host: boolean;
   waktu: number;
+  /** Room hasil matchmaking: jumlah pemain match (host mulai otomatis, sumber kata campur). */
+  match?: number;
 }
 
 const KUNCI_SESI = 'undercover:online:sesi';
