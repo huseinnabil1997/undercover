@@ -13,18 +13,14 @@ export function kelasFrame(slot: SlotMusimApi | null | undefined): string {
 
 export function LencanaGelar({ slot, ukuran = 32 }: { slot: SlotMusimApi; ukuran?: number }) {
   const meta = META_KATEGORI[slot.kategori];
-  // Tier ukuran mengikuti avatar asli di app (chat 20, daftar 28, leaderboard 32, profil 88).
-  const tier = ukuran <= 22 ? 'mikro' : ukuran < 40 ? 'kecil' : ukuran < 64 ? '' : 'besar';
-  const kelas = ['lencana-gelar', tier, slot.peringkat === 1 ? 'juara' : ''].filter(Boolean).join(' ');
+  const judul = `${meta.ikon} #${slot.peringkat} ${meta.nama}`;
+  // Semua ukuran: lingkaran ikon kategori saja (tanpa teks #n) di luar pojok kanan bawah.
+  // Peringkat dibedakan frame/animasi; #n ada di title + sr-only BingkaiAvatar / tip ketuk.
+  const sz = ukuran <= 22 ? 'titik-mikro' : ukuran < 48 ? 'titik' : 'titik-profil';
+  const kelas = ['lencana-gelar', sz, slot.peringkat === 1 ? 'juara' : ''].filter(Boolean).join(' ');
   return (
-    <span
-      className={kelas}
-      title={`${meta.ikon} #${slot.peringkat} ${meta.nama}`}
-      aria-hidden
-    >
-      {/* Avatar sangat kecil: cukup angka agar inisial/foto tetap terbaca */}
-      {ukuran > 22 && <span className="ikon-gelar">{meta.ikon}</span>}
-      <span className="angka-gelar">#{slot.peringkat}</span>
+    <span className={kelas} title={judul} aria-hidden>
+      <span className="ikon-gelar">{meta.ikon}</span>
     </span>
   );
 }

@@ -110,8 +110,10 @@ export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, gilira
             aria-current={sekarang ? 'step' : undefined}
           >
             <span className="nomor" aria-hidden>{!p.hidup ? '×' : selesai ? '✓' : ke >= 0 ? ke + 1 : '·'}</span>
-            <span className="dp-nama nama-dengan-avatar">
+            <span className="dp-ava">
               <Avatar username={p.nama} cari ukuran={28} slot={petaGelar?.get(p.nama.toLowerCase())?.frame} />
+            </span>
+            <span className="dp-nama">
               <span className="nama-teks">{p.nama}{p.saya && <em> (kamu)</em>}</span>
               {p.offline && <span className="lencana off">Offline</span>}
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
