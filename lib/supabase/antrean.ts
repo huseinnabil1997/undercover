@@ -1,5 +1,5 @@
-// RPC antrean matchmaking (lihat migrasi antrean_match).
-import { rapikanStatus, type StatusAntrean } from '../online/antrean';
+// RPC room match terbuka (lihat migrasi room_match_terbuka).
+import { rapikanStatus, type StatusMatch } from '../online/antrean';
 import { KUNCI_SUPABASE, URL_SUPABASE } from './konfig';
 import { supabase } from './klien';
 
@@ -9,20 +9,22 @@ async function rpc(nama: string, arg: Record<string, unknown> = {}): Promise<unk
   return data;
 }
 
-export const masukAntrean = async (ukuran: number | null): Promise<StatusAntrean | null> =>
-  rapikanStatus(await rpc('masuk_antrean', { p_ukuran: ukuran }));
-export const detakAntrean = async (): Promise<StatusAntrean | null> => rapikanStatus(await rpc('detak_antrean'));
-export const keluarAntrean = async (): Promise<void> => {
-  await rpc('keluar_antrean');
+export const cariMatch = async (ukuran: number | null): Promise<StatusMatch | null> => rapikanStatus(await rpc('cari_match', { p_ukuran: ukuran }));
+export const detakMatch = async (): Promise<StatusMatch | null> => rapikanStatus(await rpc('detak_match'));
+export const mulaiMatch = async (): Promise<void> => {
+  await rpc('mulai_match');
+};
+export const keluarMatch = async (): Promise<void> => {
+  await rpc('keluar_match');
 };
 
-/** Saat halaman ditutup: kirim keluar_antrean dengan keepalive (supabase-js tidak bisa). Sisanya dibersihkan detak basi 30 detik. */
-export async function keluarAntreanSaatTutup(): Promise<void> {
+/** Saat halaman ditutup: keluar_match dengan keepalive. Bila gagal, kursi dibebaskan oleh batas detak 30 detik. */
+export async function keluarMatchSaatTutup(): Promise<void> {
   try {
     const { data } = await supabase().auth.getSession();
     const token = data.session?.access_token;
     if (!token) return;
-    void fetch(`${URL_SUPABASE}/rest/v1/rpc/keluar_antrean`, {
+    void fetch(`${URL_SUPABASE}/rest/v1/rpc/keluar_match`, {
       method: 'POST',
       keepalive: true,
       headers: { apikey: KUNCI_SUPABASE, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -31,16 +33,4 @@ export async function keluarAntreanSaatTutup(): Promise<void> {
   } catch {
     // dibersihkan oleh batas detak di server
   }
-}
-
-/** Notifikasi instan saat baris antrean milik sendiri berubah (RLS: hanya baris sendiri). Detak tetap jadi cadangan. */
-export function pantauAntrean(uid: string, onUbah: () => void): () => void {
-  const sb = supabase();
-  const ch = sb
-    .channel(`antrean:${uid}`)
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'antrean_match', filter: `user_id=eq.${uid}` }, () => onUbah())
-    .subscribe();
-  return () => {
-    void sb.removeChannel(ch);
-  };
 }

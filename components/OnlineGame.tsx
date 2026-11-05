@@ -31,8 +31,8 @@ import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik,
 import { useDialog } from './Modal';
 import { menangDengan } from '@/lib/akun';
 import { KartuCariMatch, LayarAntrean } from './Antrean';
-import { bolehMulaiOtomatis, type StatusAntrean } from '@/lib/online/antrean';
-import { keluarAntrean } from '@/lib/supabase/antrean';
+import { alasanMulaiOtomatis, DETAK_MATCH_MS, formatTunggu, MIN_MULAI_MATCH, sisaHitungMundur, type StatusMatch } from '@/lib/online/antrean';
+import { detakMatch, keluarMatch, keluarMatchSaatTutup, mulaiMatch } from '@/lib/supabase/antrean';
 import { useLihatProfil } from './Akun';
 import { Avatar } from './Avatar';
 import type { HasilUntukDicatat } from '@/lib/supabase/data';
@@ -108,6 +108,10 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
   const [hostPergi, setHostPergi] = useState(0);
   // Antrean matchmaking: undefined = tidak antre, null = Acak, angka = ukuran match.
   const [antre, setAntre] = useState<number | null | undefined>(undefined);
+  const matchAktif = useRef(false);
+  const pilihanMatch = useRef<number | null>(null);
+  // Status room match dari server, beserta waktu diterima (untuk hitung mundur tanpa bergantung jam HP).
+  const [infoMatch, setInfoMatch] = useState<{ s: StatusMatch; t: number } | null>(null);
 
   // Umpan balik: bandingkan view lama dan baru. Notifikasi HP hanya untuk giliranmu (lihat lib/umpan).
   const viewLalu = useRef<ViewPemain | null>(null);
@@ -145,6 +149,9 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
   }, []);
 
   const keluarSesi = useCallback((alasan?: string, hanyaTab = false) => {
+    // Lepas kursi room match (bila ada). Aman dipanggil walau bukan room match.
+    if (matchAktif.current) void keluarMatch().catch(() => undefined);
+    matchAktif.current = false;
     hostRef.current?.hentikan();
     klienRef.current?.hentikan();
     hostRef.current = null;
@@ -230,6 +237,12 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
           n = await gabungRoom(r.hex);
         }
         if (batal) return;
+        if (!n && sesi.match) {
+          // Host room match sudah pergi sebelum room dibuat: lepas kursi lalu cari room lain.
+          keluarSesi();
+          setAntre(pilihanMatch.current);
+          return;
+        }
         if (n) {
           room = r;
           nonce = n;
@@ -474,6 +487,11 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
       const { kategori, panjangKata, sumberKata } = host.state.pengaturan;
       let hasil;
       if (sesiMatch) {
+        // Room match: tandai sudah mulai agar tidak menerima pemain matchmaking baru.
+        void mulaiMatch().catch(() => undefined);
+        // Komposisi mengikuti jumlah pemain online saat mulai (Mr. White mulai 5 pemain).
+        const n = host.state.pemain.filter((p) => p.online).length;
+        aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, komposisi: komposisiDefault(Math.max(MIN_PEMAIN, n)) } });
         // Room match: Kamus kita atau Internet diacak tiap game, semua kategori termasuk kamus pemain.
         hasil = await siapkanPasanganCampur(rapikanPanjangKata(panjangKata));
         aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, sumberKata: hasil.sumber, kategori: hasil.kategori } });
@@ -490,25 +508,49 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     }
   }, [aksi, tampilkan, dialog, sesiMatch]);
 
-  // Room match: host mulai otomatis begitu semua pemain match gabung, atau setelah batas waktu bila minimal 4.
-  const mulaiOtomatis = useRef<string | null>(null);
-  const awalMatch = useRef<{ kode: string; t: number } | null>(null);
-  const kodeMatch = sesi?.match && sesi.host ? sesi.kode : null;
-  const onlineLobby = view && !view.game ? view.pemain.filter((p) => p.online).length : 0;
+  // Room match: detak kursi ke server (status j/maks dan lama tanpa pemain baru), lepas kursi saat halaman ditutup.
+  const kodeSesiMatch = sesi?.match ? sesi.kode : null;
   useEffect(() => {
-    if (!kodeMatch || !sesi?.match || !view || view.game || memuat || mulaiOtomatis.current === kodeMatch) return;
-    if (awalMatch.current?.kode !== kodeMatch) awalMatch.current = { kode: kodeMatch, t: Date.now() };
-    const awal = awalMatch.current.t;
+    if (!kodeSesiMatch) return;
+    matchAktif.current = true;
+    let hidup = true;
+    const detak = () =>
+      void detakMatch()
+        .then((s) => {
+          if (hidup) setInfoMatch(s && s.kode === kodeSesiMatch ? { s, t: Date.now() } : null);
+        })
+        .catch(() => undefined);
+    detak();
+    const id = window.setInterval(detak, DETAK_MATCH_MS);
+    const tutup = () => void keluarMatchSaatTutup();
+    window.addEventListener('pagehide', tutup);
+    return () => {
+      hidup = false;
+      window.clearInterval(id);
+      window.removeEventListener('pagehide', tutup);
+      setInfoMatch(null);
+    };
+  }, [kodeSesiMatch]);
+
+  // Host room match mulai otomatis: saat room penuh, atau minimal 4 pemain dan 60 detik tanpa pemain baru.
+  const mulaiOtomatis = useRef<string | null>(null);
+  const kodeMatch = sesi?.match && sesi.host ? sesi.kode : null;
+  const maksMatch = sesi?.match ?? 0;
+  const onlineLobby = view && !view.game ? view.pemain.filter((p) => p.online).length : 0;
+  const lobbyMatch = !!kodeMatch && !!view && !view.game && !memuat;
+  useEffect(() => {
+    if (!kodeMatch || !lobbyMatch || mulaiOtomatis.current === kodeMatch) return;
     const cek = () => {
       if (mulaiOtomatis.current === kodeMatch) return;
-      if (!bolehMulaiOtomatis(onlineLobby, sesi.match ?? 0, Date.now() - awal)) return;
+      const diam = infoMatch && !infoMatch.s.dimulai ? infoMatch.s.diamMs + (Date.now() - infoMatch.t) : 0;
+      if (!alasanMulaiOtomatis(onlineLobby, maksMatch, diam)) return;
       mulaiOtomatis.current = kodeMatch;
       void mulaiGame();
     };
-    // Jeda singkat agar pemain terakhir sempat menerima view lobby.
+    // Jeda singkat agar pemain terakhir sempat menerima view lobby dan komposisi menyesuaikan.
     const id = window.setInterval(cek, 1500);
     return () => window.clearInterval(id);
-  }, [kodeMatch, sesi?.match, view, memuat, onlineLobby, mulaiGame]);
+  }, [kodeMatch, lobbyMatch, maksMatch, onlineLobby, infoMatch, mulaiGame]);
 
   // Kembali ke menu dari room: konfirmasi, lalu putuskan PeerJS dan hapus sesi tersimpan agar tidak gabung ulang otomatis.
   const penjaga = useCallback(async () => {
@@ -537,18 +579,16 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     return (
       <LayarAntrean
         ukuran={antre}
-        userId={userId}
         onBatal={(g) => {
           setAntre(undefined);
           setGalatMasuk(g ?? null);
         }}
-        onCocok={(s: StatusAntrean) => {
+        onCocok={(s: StatusMatch) => {
           setAntre(undefined);
-          void keluarAntrean().catch(() => undefined);
           setGalatMasuk(null);
           setView(null);
           setStatus({ s: 'menyambung', sejak: Date.now() });
-          setSesi({ kode: s.kode as string, id: buatIdPemain(), token: buatToken(), nama: rapikanNama(username), host: s.host, waktu: 0, match: s.jumlah ?? 4 });
+          setSesi({ kode: s.kode, id: buatIdPemain(), token: buatToken(), nama: rapikanNama(username), host: s.host, waktu: 0, match: s.maks });
         }}
       />
     );
@@ -559,6 +599,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
       <LayarMasuk
         onCari={(u) => {
           setGalatMasuk(null);
+          pilihanMatch.current = u;
           setAntre(u);
         }}
         kodeAwal={kodeAwal}
@@ -631,7 +672,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
         </section>
       ) : (
         <Ruang
-          view={view} host={sesi.host} match={sesi.match} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan}
+          view={view} host={sesi.host} match={sesi.match} infoMatch={infoMatch} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan}
           galatPetunjuk={galatPetunjuk} hapusGalatPetunjuk={() => setGalatPetunjuk(null)}
         />
       )}
@@ -749,6 +790,7 @@ interface PropsRuang {
   host: boolean;
   /** Jumlah pemain bila room ini hasil matchmaking. */
   match?: number;
+  infoMatch?: { s: StatusMatch; t: number } | null;
   aksi: (a: AksiUi) => void;
   mulaiGame: () => void;
   memuat: boolean;
@@ -776,7 +818,7 @@ function namaDari(view: ViewPemain, id: string | null): string {
   return view.pemain.find((p) => p.id === id)?.nama ?? '?';
 }
 
-function Lobby({ view, host, match, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
+function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const online = view.pemain.filter((p) => p.online);
   const [manual, setManual] = useState(false);
   const { komposisi, kategori } = view.pengaturan;
@@ -826,10 +868,7 @@ function Lobby({ view, host, match, aksi, mulaiGame, memuat, tampilkan }: PropsR
   return (
     <section className="tumpuk">
       {match ? (
-        <div className="kartu" id="info-match">
-          <h2>Match {match} pemain</h2>
-          <p className="catatan">{host ? 'Permainan mulai otomatis saat semua pemain sudah masuk (paling lama 45 detik, minimal 4 pemain).' : 'Menunggu pemain lain. Host memulai otomatis.'}</p>
-        </div>
+        <InfoMatch maks={match} online={jumlah} host={host} info={infoMatch ?? null} />
       ) : <KartuUndangan kode={view.kode} tampilkan={tampilkan} />}
       <DaftarPemain view={view} host={host} aksi={aksi} />
       <AturPeran
@@ -862,7 +901,7 @@ function Lobby({ view, host, match, aksi, mulaiGame, memuat, tampilkan }: PropsR
       )}
       <div className="aksi-bawah">
         {host ? (
-          <button className="utama" disabled={galat.length > 0 || memuat} onClick={mulaiGame}>
+          <button className="utama" disabled={galat.length > 0 || memuat || (!!match && jumlah < MIN_MULAI_MATCH)} onClick={mulaiGame}>
             {memuat ? 'Memuat' : `Mulai (${jumlah})`}
           </button>
         ) : (
@@ -1391,6 +1430,30 @@ function PanelDiagnosa({ baris }: { baris: string[] }) {
       <ul>
         {baris.map((b) => <li key={b.split(':')[0]}>{b}</li>)}
       </ul>
+    </div>
+  );
+}
+
+/** Status room match di lobby: jumlah pemain dari maksimal dan hitung mundur mulai otomatis. */
+function InfoMatch({ maks, online, host, info }: { maks: number; online: number; host: boolean; info: { s: StatusMatch; t: number } | null }) {
+  const [sekarang, setSekarang] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setSekarang(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  const diam = info ? info.s.diamMs + Math.max(0, sekarang - info.t) : 0;
+  const sisa = info && !info.s.dimulai ? sisaHitungMundur(online, diam) : null;
+  return (
+    <div className="kartu" id="info-match">
+      <h2 data-uji="jumlah-match">Menunggu pemain {online}/{maks}</h2>
+      {sisa !== null ? (
+        <p className="catatan" role="timer" data-uji="hitung-mundur">Mulai otomatis dalam {formatTunggu(sisa + 999)} jika tidak ada pemain baru.</p>
+      ) : info?.s.dimulai ? (
+        <p className="catatan">Room ini sudah pernah mulai, jadi tidak menerima pemain match baru.</p>
+      ) : (
+        <p className="catatan">Room match terbuka. Pemain lain bisa masuk sampai penuh atau sampai game dimulai. Minimal {MIN_MULAI_MATCH} pemain untuk mulai.</p>
+      )}
+      <p className="catatan">{host ? `Mulai otomatis saat ${maks} pemain, atau tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH}.` : 'Host memulai permainan.'}</p>
     </div>
   );
 }
