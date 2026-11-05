@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { alasanMulaiOtomatis, formatTunggu, labelUkuran, maksRoomBaru, pilihRoom, rapikanStatus, sisaHitungMundur, ukuranValid, type RoomTerbuka } from '../lib/online/antrean';
+import { alasanMulaiOtomatis, campurAwalMatch, pakaiCampur, formatTunggu, labelUkuran, maksRoomBaru, pilihRoom, rapikanStatus, sisaHitungMundur, ukuranValid, type RoomTerbuka } from '../lib/online/antrean';
 
 const r = (kode: string, maks: number, jumlah: number, dibuat: number, dimulai = false): RoomTerbuka => ({ kode, maks, jumlah, dibuat, dimulai });
 
@@ -47,6 +47,19 @@ describe('mulai otomatis', () => {
     expect(sisaHitungMundur(3, 10_000)).toBeNull();
     expect(sisaHitungMundur(4, 15_000)).toBe(45_000);
     expect(sisaHitungMundur(4, 90_000)).toBe(0);
+  });
+});
+
+describe('sumber kata room match', () => {
+  it('awal: pilihan Campur terakhir, lalu sumber terakhir, selain itu Campur', () => {
+    expect(campurAwalMatch(true, true)).toBe(true);
+    expect(campurAwalMatch(false, false)).toBe(false);
+    expect(campurAwalMatch(null, true)).toBe(false);
+    expect(campurAwalMatch(null, false)).toBe(true);
+  });
+  it('state lama tanpa sumberCampur tetap Campur', () => {
+    expect(pakaiCampur({})).toBe(true);
+    expect(pakaiCampur({ sumberCampur: false })).toBe(false);
   });
 });
 

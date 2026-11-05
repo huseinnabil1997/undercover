@@ -84,6 +84,18 @@ export function sisaHitungMundur(online: number, diamMs: number): number | null 
   return Math.max(0, BATAS_DIAM_MS - diamMs);
 }
 
+/**
+ * Sumber kata awal room match untuk host: pilihan Campur terakhir bila ada, lalu sumber kata terakhir
+ * yang dipakai (Kamus kita atau Internet), selain itu campuran keduanya.
+ */
+export function campurAwalMatch(campurTersimpan: unknown, adaSumberTersimpan: boolean): boolean {
+  if (typeof campurTersimpan === 'boolean') return campurTersimpan;
+  return !adaSumberTersimpan;
+}
+
+/** Room match memakai campuran sumber kecuali host memilih sumber tertentu (sumberCampur false). */
+export const pakaiCampur = (p: { sumberCampur?: boolean }): boolean => p.sumberCampur !== false;
+
 export function formatTunggu(ms: number): string {
   const s = Math.max(0, Math.floor(ms / 1000));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;

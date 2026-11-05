@@ -11,6 +11,8 @@ export const KUNCI = {
   /** Pilihan kategori untuk sumber Internet (terpisah dari kategori Kamus kita). */
   kategoriInternet: 'kategoriInternet',
   panjangKata: 'panjangKata',
+  /** Room match: true bila host terakhir memilih campuran Kamus kita dan Internet. */
+  sumberMatchCampur: 'sumberMatchCampur',
   /** Timer vote manual versi lama (detik); hanya dibaca untuk migrasi ke batasWaktu. */
   timer: 'timer',
   /** Batas waktu giliran petunjuk dan vote: { petunjuk, vote } dalam detik, 0 = tanpa batas. */

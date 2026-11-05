@@ -32,6 +32,8 @@ export interface Pengaturan {
   panjangKata?: PanjangKata;
   /** Sumber kata pilihan host. Kosong (state lama) ditebak dari id kategori. */
   sumberKata?: SumberKata;
+  /** Room match: Kamus kita atau Internet diacak tiap game (semua kategori). Kosong di room match berarti campur. */
+  sumberCampur?: boolean;
   /** Batas waktu giliran petunjuk dan vote pilihan host. Kosong (state lama) berarti tanpa batas. */
   batasWaktu?: BatasWaktu;
 }

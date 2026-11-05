@@ -31,7 +31,7 @@ import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik,
 import { useDialog } from './Modal';
 import { menangDengan } from '@/lib/akun';
 import { KartuCariMatch, LayarAntrean } from './Antrean';
-import { alasanMulaiOtomatis, DETAK_MATCH_MS, formatTunggu, MIN_MULAI_MATCH, sisaHitungMundur, type StatusMatch } from '@/lib/online/antrean';
+import { alasanMulaiOtomatis, campurAwalMatch, pakaiCampur, DETAK_MATCH_MS, formatTunggu, MIN_MULAI_MATCH, sisaHitungMundur, type StatusMatch } from '@/lib/online/antrean';
 import { detakMatch, keluarMatch, keluarMatchSaatTutup, mulaiMatch } from '@/lib/supabase/antrean';
 import { useLihatProfil } from './Akun';
 import { Avatar } from './Avatar';
@@ -45,12 +45,16 @@ import {
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
-/** Pengaturan awal room match: komposisi bawaan (Mr. White mulai 5 pemain), petunjuk 45 detik, vote 60 detik. */
+/** Pengaturan awal room match: komposisi bawaan (Mr. White mulai 5 pemain), petunjuk 45 detik, vote 60 detik, sumber kata pilihan host. */
 function pengaturanMatch(jumlah: number): Pengaturan {
+  // Sumber kata awal: pilihan host terakhir (Campur, Kamus kita, atau Internet), selain itu Campur.
+  const campur = campurAwalMatch(baca<unknown>(KUNCI.sumberMatchCampur, null), baca<unknown>(KUNCI.sumberKata, null) !== null);
+  const sumber = campur ? 'internet' : sumberTersimpan();
   return {
     komposisi: komposisiDefault(jumlah),
-    sumberKata: 'internet',
-    kategori: semuaKategori('internet'),
+    sumberKata: sumber,
+    kategori: campur ? semuaKategori('internet') : kategoriTersimpan(sumber),
+    sumberCampur: campur,
     panjangKata: rapikanPanjangKata(null),
     batasWaktu: { petunjuk: 45, vote: 60 },
   };
@@ -492,9 +496,14 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
         // Komposisi mengikuti jumlah pemain online saat mulai (Mr. White mulai 5 pemain).
         const n = host.state.pemain.filter((p) => p.online).length;
         aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, komposisi: komposisiDefault(Math.max(MIN_PEMAIN, n)) } });
-        // Room match: Kamus kita atau Internet diacak tiap game, semua kategori termasuk kamus pemain.
-        hasil = await siapkanPasanganCampur(rapikanPanjangKata(panjangKata));
-        aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, sumberKata: hasil.sumber, kategori: hasil.kategori } });
+        if (pakaiCampur(host.state.pengaturan)) {
+          // Campur: Kamus kita atau Internet diacak tiap game, semua kategori termasuk kamus pemain.
+          hasil = await siapkanPasanganCampur(rapikanPanjangKata(panjangKata));
+          aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, sumberKata: hasil.sumber, kategori: hasil.kategori } });
+        } else {
+          // Sumber dan kategori pilihan host, berlaku juga saat mulai otomatis.
+          hasil = await siapkanPasangan(kategori, rapikanPanjangKata(panjangKata), sumberKata ?? tebakSumber(kategori));
+        }
       } else {
         hasil = await siapkanPasangan(kategori, rapikanPanjangKata(panjangKata), sumberKata ?? tebakSumber(kategori));
       }
@@ -544,6 +553,9 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
       if (mulaiOtomatis.current === kodeMatch) return;
       // Tunggu status server dulu agar mode room (Acak atau tetap) diketahui.
       if (!infoMatch || infoMatch.s.dimulai) return;
+      // Sumber pilihan host tanpa kategori: tunggu host memperbaikinya (tombol Mulai juga nonaktif).
+      const atur = hostRef.current?.state.pengaturan;
+      if (atur && !pakaiCampur(atur) && atur.kategori.length === 0) return;
       const diam = infoMatch.s.diamMs + (Date.now() - infoMatch.t);
       if (!alasanMulaiOtomatis(onlineLobby, maksMatch, diam, infoMatch.s.acak)) return;
       mulaiOtomatis.current = kodeMatch;
@@ -854,9 +866,11 @@ function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilka
     atur({ kategori: k });
   };
   // Ganti sumber: kategori ikut berganti ke pilihan tersimpan sumber itu (bawaan semua).
+  const campur = !!match && pakaiCampur(view.pengaturan);
   const aturSumber = (s: typeof sumberKata) => {
     simpan(KUNCI.sumberKata, s);
-    atur({ sumberKata: s, kategori: kategoriTersimpan(s) });
+    if (match) simpan(KUNCI.sumberMatchCampur, false);
+    atur({ sumberKata: s, kategori: kategoriTersimpan(s), sumberCampur: match ? false : undefined });
   };
   const aturPanjangKata = (p: typeof panjangKata) => {
     simpan(KUNCI.panjangKata, p);
@@ -883,12 +897,36 @@ function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilka
           atur({ komposisi: komposisiDefault(Math.max(MIN_PEMAIN, jumlah)) });
         }}
       />
-      {match ? (
-        <div className="kartu">
-          <p className="label nol">Sumber kata</p>
-          <p className="catatan">Kamus kita dan Internet (termasuk kamus pemain), diacak tiap game.</p>
+      {match && (
+        <div className="kartu" id="sumber-match">
+          <div className="baris-judul">
+            <h2>Pilihan kata</h2>
+          </div>
+          <div className="segmen" role="group" aria-label="Pilihan kata room match">
+            {([[true, 'Campur'], [false, 'Pilih sendiri']] as const).map(([nilai, nama]) => (
+              <button
+                key={nama}
+                type="button"
+                aria-pressed={campur === nilai}
+                disabled={!host}
+                onClick={() => {
+                  simpan(KUNCI.sumberMatchCampur, nilai);
+                  atur({ sumberCampur: nilai });
+                }}
+              >
+                {nama}
+              </button>
+            ))}
+          </div>
+          <p className="catatan">
+            {campur
+              ? 'Kamus kita atau Internet diacak tiap game dari semua kategori (termasuk kamus pemain).'
+              : 'Sumber dan kategori pilihan host di bawah dipakai saat game dimulai.'}
+            {host ? '' : ' Diatur oleh host.'}
+          </p>
         </div>
-      ) : (
+      )}
+      {!campur && (
         <>
           <PilihSumberKata nilai={sumberKata} onUbah={aturSumber} nonaktif={!host} />
           <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} panjangKata={panjangKata} sumber={sumberKata} />
