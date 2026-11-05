@@ -652,37 +652,286 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .pita-keluar button { flex: none; width: auto; min-height: 40px; padding: 0 14px; }
 
 /* ---------- Gelar musiman: frame hanya untuk top 3 bulan berjalan ---------- */
-.bingkai-avatar { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 50%; }
-.bingkai-avatar > .avatar { position: relative; z-index: 1; }
-.frame-gelar { box-sizing: border-box; }
-.frame-p1 { padding: 3px; border: 3px solid transparent; background:
-  linear-gradient(var(--dasar), var(--dasar)) padding-box,
-  conic-gradient(from var(--sudut, 0deg), var(--warna-frame), #fff6, var(--warna-frame)) border-box;
-  animation: frame-putar 4s linear infinite; }
-.frame-p2 { padding: 2px; border: 2px solid transparent; background:
-  linear-gradient(var(--dasar), var(--dasar)) padding-box,
-  linear-gradient(135deg, var(--warna-frame), color-mix(in srgb, var(--warna-frame) 40%, #fff)) border-box; }
-.frame-p3 { padding: 1px; border: 1.5px solid var(--warna-frame); opacity: 0.95; }
-.frame-emas { --warna-frame: #f5c518; }
-.frame-biru { --warna-frame: #3b82f6; }
-.frame-ungu { --warna-frame: #6d28d9; }
-.frame-perak { --warna-frame: #e5e7eb; }
-.frame-hijau { --warna-frame: #22c55e; }
-.frame-oranye { --warna-frame: #f97316; }
-.lencana-gelar {
-  position: absolute; z-index: 2; right: -2px; bottom: -2px;
-  display: inline-flex; align-items: center; gap: 1px;
-  background: var(--permukaan); border-radius: 999px; padding: 0 4px 0 2px;
-  font-size: 0.7rem; line-height: 1.2; box-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+/* Tebal 3–5px di avatar kecil, glow kontras, animasi beda per kategori. */
+.bingkai-avatar {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  flex: none; border-radius: 50%; isolation: isolate;
 }
-.lencana-gelar.kecil { font-size: 0.6rem; padding: 0 2px; right: -1px; bottom: -1px; }
-.angka-gelar { font-weight: 800; font-size: 0.65rem; }
-@keyframes frame-putar { to { --sudut: 360deg; } }
+.bingkai-avatar .frame-isi { position: relative; z-index: 2; display: inline-flex; border-radius: 50%; }
+.bingkai-avatar .frame-isi > .avatar {
+  width: var(--avatar-sz) !important; height: var(--avatar-sz) !important;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.35);
+}
+.frame-lapisan {
+  position: absolute; inset: 0; border-radius: 50%; z-index: 0; pointer-events: none;
+  overflow: visible;
+}
+.frame-dasar, .frame-efek, .frame-aksen {
+  position: absolute; inset: 0; border-radius: 50%; box-sizing: border-box;
+}
+.frame-gelar { --warna-frame: #f5c518; --frame-pad: 4px; }
+.frame-emas { --warna-frame: #f5c518; --warna-frame-2: #ffe566; --warna-frame-3: #b8860b; }
+.frame-biru { --warna-frame: #3b82f6; --warna-frame-2: #93c5fd; --warna-frame-3: #1d4ed8; }
+.frame-ungu { --warna-frame: #a855f7; --warna-frame-2: #d8b4fe; --warna-frame-3: #6d28d9; }
+.frame-perak { --warna-frame: #f3f4f6; --warna-frame-2: #ffffff; --warna-frame-3: #9ca3af; }
+.frame-hijau { --warna-frame: #22c55e; --warna-frame-2: #86efac; --warna-frame-3: #15803d; }
+.frame-oranye { --warna-frame: #f97316; --warna-frame-2: #fdba74; --warna-frame-3: #c2410c; }
+
+/* Dasar tebal + glow — selalu jelas meski animasi mati */
+.frame-gelar .frame-dasar {
+  border: var(--frame-pad) solid var(--warna-frame);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warna-frame-3) 80%, #000),
+    0 0 10px 2px color-mix(in srgb, var(--warna-frame) 75%, transparent),
+    0 0 18px 4px color-mix(in srgb, var(--warna-frame) 35%, transparent);
+  background: transparent;
+}
+.frame-p1 .frame-dasar {
+  box-shadow:
+    0 0 0 1.5px color-mix(in srgb, var(--warna-frame-3) 90%, #000),
+    0 0 12px 3px color-mix(in srgb, var(--warna-frame) 85%, transparent),
+    0 0 22px 6px color-mix(in srgb, var(--warna-frame) 45%, transparent);
+}
+.frame-p2 .frame-dasar {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warna-frame-3) 70%, #000),
+    0 0 8px 2px color-mix(in srgb, var(--warna-frame) 65%, transparent);
+}
+.frame-p3 .frame-dasar {
+  border-width: max(3px, var(--frame-pad));
+  box-shadow:
+    0 0 0 1.5px color-mix(in srgb, var(--warna-frame-3) 75%, #000),
+    0 0 10px 2px color-mix(in srgb, var(--warna-frame) 70%, transparent),
+    0 0 16px 3px color-mix(in srgb, var(--warna-frame) 35%, transparent);
+  animation: frame-glow-pelan 2.8s ease-in-out infinite;
+}
+
+/* ---- Keseluruhan: cincin emas berputar + kilau + sparkle (satu-satunya cincin) ---- */
+.frame-kat-keseluruhan .frame-efek {
+  inset: calc(var(--frame-pad) * -0.35);
+  border: calc(var(--frame-pad) * 0.85) solid transparent;
+  background:
+    conic-gradient(from var(--sudut, 0deg),
+      var(--warna-frame-3), var(--warna-frame-2), #fff, var(--warna-frame),
+      transparent 55%, var(--warna-frame-2), var(--warna-frame-3)) border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: frame-putar 2.8s linear infinite;
+  filter: drop-shadow(0 0 4px var(--warna-frame));
+}
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-a,
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-b,
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-c {
+  inset: auto; width: 5px; height: 5px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 6px 2px var(--warna-frame-2);
+  animation: frame-sparkle 1.6s ease-in-out infinite;
+}
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-a { top: 4%; left: 50%; animation-delay: 0s; }
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-b { top: 55%; right: 2%; left: auto; animation-delay: 0.45s; }
+.frame-kat-keseluruhan.frame-p1 .frame-aksen-c { bottom: 6%; left: 18%; animation-delay: 0.9s; }
+.frame-kat-keseluruhan.frame-p1 .frame-efek::after {
+  content: ""; position: absolute; inset: -2px; border-radius: 50%;
+  background: conic-gradient(from calc(var(--sudut, 0deg) + 80deg), transparent 0 70%, #fff8 78%, transparent 88%);
+  animation: frame-putar 2.8s linear infinite;
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--frame-pad) - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--frame-pad) - 2px), #000 calc(100% - 1px));
+}
+.frame-kat-keseluruhan.frame-p2 .frame-efek { animation-duration: 4s; opacity: 0.85; }
+.frame-kat-keseluruhan.frame-p3 .frame-efek { animation: none; opacity: 0.55; }
+
+/* ---- Civilian: perisai biru + gelombang pulse ---- */
+.frame-kat-civilian .frame-dasar {
+  border-radius: 40% 40% 46% 46% / 34% 34% 62% 62%;
+}
+.frame-kat-civilian .frame-efek {
+  border-radius: inherit;
+  border: calc(var(--frame-pad) * 0.7) solid color-mix(in srgb, var(--warna-frame) 70%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--warna-frame-2) 50%, transparent);
+  animation: frame-pulse-gelombang 2.2s ease-out infinite;
+}
+.frame-kat-civilian.frame-p1 .frame-aksen-a,
+.frame-kat-civilian.frame-p1 .frame-aksen-b {
+  border-radius: inherit; border: 2px solid color-mix(in srgb, var(--warna-frame) 55%, transparent);
+  animation: frame-pulse-gelombang 2.2s ease-out infinite;
+}
+.frame-kat-civilian.frame-p1 .frame-aksen-a { animation-delay: 0.55s; }
+.frame-kat-civilian.frame-p1 .frame-aksen-b { animation-delay: 1.1s; }
+.frame-kat-civilian.frame-p2 .frame-efek { animation-duration: 2.8s; opacity: 0.8; }
+.frame-kat-civilian.frame-p3 .frame-efek { animation: none; opacity: 0.5; }
+
+/* ---- Undercover: kabut ungu berputar + glitch ---- */
+.frame-kat-undercover .frame-efek {
+  inset: calc(var(--frame-pad) * -0.5);
+  background:
+    radial-gradient(circle at 30% 40%, color-mix(in srgb, var(--warna-frame-2) 55%, transparent), transparent 55%),
+    radial-gradient(circle at 70% 60%, color-mix(in srgb, var(--warna-frame) 45%, transparent), transparent 50%),
+    conic-gradient(from var(--sudut, 0deg), transparent, color-mix(in srgb, var(--warna-frame) 40%, transparent), transparent 40%, color-mix(in srgb, var(--warna-frame-2) 35%, transparent), transparent 75%);
+  filter: blur(1.2px);
+  animation: frame-putar 5s linear infinite, frame-asap 2.4s ease-in-out infinite alternate;
+  opacity: 0.9;
+}
+.frame-kat-undercover.frame-p1 .frame-dasar {
+  animation: frame-glitch 3.2s steps(1) infinite;
+}
+.frame-kat-undercover.frame-p2 .frame-efek { animation-duration: 6s, 3s; opacity: 0.7; }
+.frame-kat-undercover.frame-p3 .frame-efek { animation: none; opacity: 0.45; filter: blur(0.8px); }
+
+/* ---- Mr. White: aura perak float/fade ---- */
+.frame-kat-mrwhite .frame-dasar {
+  border-color: color-mix(in srgb, var(--warna-frame) 85%, #fff);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warna-frame-3) 60%, transparent),
+    0 0 14px 4px color-mix(in srgb, #fff 35%, transparent),
+    0 0 22px 8px color-mix(in srgb, var(--warna-frame) 25%, transparent);
+}
+.frame-kat-mrwhite .frame-efek {
+  inset: calc(var(--frame-pad) * -0.8);
+  background: radial-gradient(circle, color-mix(in srgb, #fff 40%, transparent) 0%, transparent 68%);
+  animation: frame-hantu 2.6s ease-in-out infinite;
+  filter: blur(2px);
+}
+.frame-kat-mrwhite.frame-p1 .frame-aksen-a {
+  inset: calc(var(--frame-pad) * -1.4);
+  background: radial-gradient(circle, color-mix(in srgb, #fff 28%, transparent), transparent 70%);
+  animation: frame-hantu 2.6s ease-in-out infinite reverse;
+  filter: blur(3px);
+}
+.frame-kat-mrwhite.frame-p2 .frame-efek { animation-duration: 3.4s; opacity: 0.75; }
+.frame-kat-mrwhite.frame-p3 .frame-efek { animation: frame-glow-pelan 3s ease-in-out infinite; opacity: 0.5; }
+
+/* ---- Winrate: BUKAN cincin; crosshair 4 sisi lock-on ---- */
+.frame-kat-winrate .frame-dasar { border-radius: 18%; }
+.frame-kat-winrate .frame-isi > .avatar,
+.frame-kat-winrate .frame-isi { border-radius: 18%; }
+.frame-kat-winrate .frame-efek { display: none; }
+.frame-kat-winrate .frame-aksen {
+  border-radius: 0; background: transparent; inset: auto;
+  width: 34%; height: 34%;
+  border-color: var(--warna-frame-2); border-style: solid; border-width: 0;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--warna-frame) 85%, transparent);
+}
+.frame-kat-winrate .frame-aksen-a { top: 0; left: 0; border-top-width: 4px; border-left-width: 4px; animation: frame-lock-tl 1.5s ease-in-out infinite; }
+.frame-kat-winrate .frame-aksen-b { top: 0; right: 0; border-top-width: 4px; border-right-width: 4px; animation: frame-lock-tr 1.5s ease-in-out infinite; }
+.frame-kat-winrate .frame-aksen-c { bottom: 0; left: 0; border-bottom-width: 4px; border-left-width: 4px; animation: frame-lock-bl 1.5s ease-in-out infinite; }
+.frame-kat-winrate .frame-aksen-d { bottom: 0; right: 0; border-bottom-width: 4px; border-right-width: 4px; animation: frame-lock-br 1.5s ease-in-out infinite; }
+.frame-kat-winrate.frame-p1 .frame-dasar::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px;
+  margin: -3px 0 0 -3px; border-radius: 50%;
+  background: var(--warna-frame); box-shadow: 0 0 8px var(--warna-frame-2);
+  animation: frame-lock-dot 1.5s ease-in-out infinite;
+}
+.frame-kat-winrate.frame-p2 .frame-aksen { animation-duration: 2.2s; opacity: 0.85; }
+.frame-kat-winrate.frame-p3 .frame-aksen { animation: none; opacity: 0.75; }
+
+/* ---- Match: api oranye flicker di tepi ---- */
+.frame-kat-main .frame-efek {
+  inset: calc(var(--frame-pad) * -0.45);
+  background:
+    radial-gradient(circle at 20% 85%, #fbbf24 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #ef4444 0%, transparent 42%),
+    radial-gradient(circle at 50% 100%, var(--warna-frame) 0%, transparent 48%),
+    radial-gradient(circle at 35% 15%, #fdba74 0%, transparent 35%);
+  filter: blur(1px);
+  animation: frame-api 0.55s steps(2) infinite;
+  mix-blend-mode: screen; opacity: 0.95;
+  -webkit-mask: radial-gradient(farthest-side, transparent 58%, #000 72%);
+  mask: radial-gradient(farthest-side, transparent 58%, #000 72%);
+}
+.frame-kat-main.frame-p1 .frame-aksen-a,
+.frame-kat-main.frame-p1 .frame-aksen-b {
+  inset: auto; width: 7px; height: 10px; border-radius: 40% 40% 20% 20%;
+  background: linear-gradient(#fde68a, #f97316 60%, transparent);
+  animation: frame-api-nyala 0.7s ease-in-out infinite alternate;
+  filter: blur(0.4px);
+}
+.frame-kat-main.frame-p1 .frame-aksen-a { bottom: 0; left: 28%; }
+.frame-kat-main.frame-p1 .frame-aksen-b { bottom: 2%; right: 24%; animation-delay: 0.2s; }
+.frame-kat-main.frame-p2 .frame-efek { animation-duration: 0.8s; opacity: 0.75; }
+.frame-kat-main.frame-p3 .frame-efek { animation: none; opacity: 0.5; }
+
+/* Keyframes */
 @property --sudut { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes frame-putar { to { --sudut: 360deg; } }
+@keyframes frame-sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  40% { opacity: 1; transform: scale(1.15); }
+  70% { opacity: 0.6; transform: scale(0.8); }
+}
+@keyframes frame-pulse-gelombang {
+  0% { transform: scale(1); opacity: 0.85; }
+  70% { transform: scale(1.22); opacity: 0; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+@keyframes frame-asap {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(18deg) scale(1.06); }
+}
+@keyframes frame-glitch {
+  0%, 86%, 100% { filter: none; transform: none; }
+  88% { filter: hue-rotate(40deg); transform: translate(1px, -1px); }
+  90% { filter: hue-rotate(-30deg); transform: translate(-1px, 1px); }
+  92% { filter: none; transform: none; }
+}
+@keyframes frame-hantu {
+  0%, 100% { opacity: 0.35; transform: translateY(0) scale(1); }
+  50% { opacity: 0.85; transform: translateY(-3px) scale(1.06); }
+}
+@keyframes frame-glow-pelan {
+  0%, 100% { opacity: 0.7; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.15); }
+}
+@keyframes frame-lock-tl { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(18%, 18%); } }
+@keyframes frame-lock-tr { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18%, 18%); } }
+@keyframes frame-lock-bl { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(18%, -18%); } }
+@keyframes frame-lock-br { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-18%, -18%); } }
+@keyframes frame-lock-dot { 0%, 100% { opacity: 0.35; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1); } }
+@keyframes frame-api {
+  0% { transform: scale(1) translateY(0); filter: blur(1px) hue-rotate(0deg); }
+  50% { transform: scale(1.04) translateY(-1px); filter: blur(1.4px) hue-rotate(-8deg); }
+  100% { transform: scale(0.98) translateY(1px); filter: blur(0.8px) hue-rotate(6deg); }
+}
+@keyframes frame-api-nyala {
+  from { opacity: 0.55; transform: scaleY(0.85) translateY(1px); }
+  to { opacity: 1; transform: scaleY(1.15) translateY(-2px); }
+}
+
+.lencana-gelar {
+  position: absolute; z-index: 3; right: -6px; bottom: -6px;
+  display: inline-flex; align-items: center; gap: 2px;
+  background: color-mix(in srgb, var(--permukaan, #121212) 88%, var(--warna-frame));
+  border: 2px solid var(--warna-frame);
+  border-radius: 999px; padding: 2px 6px 2px 4px;
+  font-size: 0.88rem; line-height: 1.1;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.65), 0 0 10px color-mix(in srgb, var(--warna-frame) 55%, transparent);
+}
+.lencana-gelar.juara { padding-right: 7px; }
+.lencana-gelar.kecil { font-size: 0.62rem; padding: 1px 4px 1px 2px; right: -5px; bottom: -5px; border-width: 1.5px; }
+.lencana-gelar .ikon-gelar { font-size: 1.15em; line-height: 1; filter: drop-shadow(0 0 2px rgb(0 0 0 / 0.6)); }
+.lencana-gelar.kecil .ikon-gelar { font-size: 1em; }
+.angka-gelar { font-weight: 900; font-size: 0.78em; letter-spacing: -0.02em; color: var(--warna-frame-2, #fff); text-shadow: 0 1px 2px rgb(0 0 0 / 0.7); }
+.lencana-gelar.kecil .angka-gelar { font-size: 0.85em; }
+
 @media (prefers-reduced-motion: reduce) {
-  .frame-p1 { animation: none; background:
-    linear-gradient(var(--dasar), var(--dasar)) padding-box,
-    linear-gradient(135deg, var(--warna-frame), #fff8) border-box; }
+  .frame-gelar .frame-efek,
+  .frame-gelar .frame-aksen,
+  .frame-gelar .frame-dasar,
+  .frame-kat-keseluruhan .frame-efek::after {
+    animation: none !important;
+  }
+  .frame-p3 .frame-dasar { animation: none; }
+  .frame-kat-keseluruhan .frame-efek {
+    background: conic-gradient(var(--warna-frame-3), var(--warna-frame-2), var(--warna-frame), var(--warna-frame-3)) border-box;
+  }
+  .frame-kat-undercover .frame-efek { filter: blur(0.8px); opacity: 0.7; }
+  .frame-kat-mrwhite .frame-efek { opacity: 0.55; }
+  .frame-kat-main .frame-efek { opacity: 0.7; }
+  .frame-kat-winrate .frame-aksen { opacity: 1; }
 }
 
 .teks-gelar-bungkus { position: relative; display: inline-flex; max-width: 100%; }
@@ -703,20 +952,82 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .deretan-gelar { display: inline-flex; gap: 4px; font-size: 0.9rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
-/* Kotak giliran & bubble chat mengikuti frame musim berjalan */
-.daftar-petunjuk > li.sekarang.gelar-p1 { box-shadow: inset 3px 0 0 var(--warna-frame, var(--aksen)), 0 0 0 1px color-mix(in srgb, var(--warna-frame, var(--aksen)) 50%, transparent); }
-.daftar-petunjuk > li.sekarang.gelar-p2 { box-shadow: inset 3px 0 0 var(--warna-frame, var(--aksen)); }
-.daftar-petunjuk > li.sekarang.gelar-p3 { box-shadow: inset 2px 0 0 color-mix(in srgb, var(--warna-frame, var(--aksen)) 70%, transparent); }
-.daftar-petunjuk > li.gelar-emas, .chat-pesan.gelar-emas { --warna-frame: #f5c518; }
-.daftar-petunjuk > li.gelar-biru, .chat-pesan.gelar-biru { --warna-frame: #3b82f6; }
-.daftar-petunjuk > li.gelar-ungu, .chat-pesan.gelar-ungu { --warna-frame: #6d28d9; }
-.daftar-petunjuk > li.gelar-perak, .chat-pesan.gelar-perak { --warna-frame: #e5e7eb; }
-.daftar-petunjuk > li.gelar-hijau, .chat-pesan.gelar-hijau { --warna-frame: #22c55e; }
-.daftar-petunjuk > li.gelar-oranye, .chat-pesan.gelar-oranye { --warna-frame: #f97316; }
-.chat-pesan.gelar-p1 { border: 2px solid var(--warna-frame); }
-.chat-pesan.gelar-p2 { border: 1.5px solid color-mix(in srgb, var(--warna-frame) 80%, transparent); }
-.chat-pesan.gelar-p3 { border: 1px solid color-mix(in srgb, var(--warna-frame) 55%, transparent); }
-.chat-pesan.saya.gelar-p1, .chat-pesan.saya.gelar-p2, .chat-pesan.saya.gelar-p3 { border-color: var(--warna-frame); }
+/* Kotak giliran & bubble chat: border ikut animasi kategori */
+.daftar-petunjuk > li.gelar-emas, .chat-pesan.gelar-emas { --warna-frame: #f5c518; --warna-frame-2: #ffe566; --warna-frame-3: #b8860b; }
+.daftar-petunjuk > li.gelar-biru, .chat-pesan.gelar-biru { --warna-frame: #3b82f6; --warna-frame-2: #93c5fd; --warna-frame-3: #1d4ed8; }
+.daftar-petunjuk > li.gelar-ungu, .chat-pesan.gelar-ungu { --warna-frame: #a855f7; --warna-frame-2: #d8b4fe; --warna-frame-3: #6d28d9; }
+.daftar-petunjuk > li.gelar-perak, .chat-pesan.gelar-perak { --warna-frame: #f3f4f6; --warna-frame-2: #ffffff; --warna-frame-3: #9ca3af; }
+.daftar-petunjuk > li.gelar-hijau, .chat-pesan.gelar-hijau { --warna-frame: #22c55e; --warna-frame-2: #86efac; --warna-frame-3: #15803d; }
+.daftar-petunjuk > li.gelar-oranye, .chat-pesan.gelar-oranye { --warna-frame: #f97316; --warna-frame-2: #fdba74; --warna-frame-3: #c2410c; }
+
+.daftar-petunjuk > li[class*="gelar-"] {
+  border: 2px solid var(--warna-frame);
+  box-shadow: inset 3px 0 0 var(--warna-frame), 0 0 10px color-mix(in srgb, var(--warna-frame) 35%, transparent);
+}
+.daftar-petunjuk > li.sekarang[class*="gelar-"] {
+  background: color-mix(in srgb, var(--warna-frame) 12%, transparent);
+  box-shadow: inset 4px 0 0 var(--warna-frame), 0 0 14px color-mix(in srgb, var(--warna-frame) 45%, transparent);
+}
+.daftar-petunjuk > li.gelar-p1.gelar-emas.sekarang { animation: border-emas-putar 2.8s linear infinite; border-image: none; border-color: transparent; background-image:
+  linear-gradient(color-mix(in srgb, var(--warna-frame) 12%, var(--permukaan, #121212)), color-mix(in srgb, var(--warna-frame) 12%, var(--permukaan, #121212))),
+  conic-gradient(from var(--sudut, 0deg), var(--warna-frame-3), #fff, var(--warna-frame), var(--warna-frame-3));
+  background-origin: border-box; background-clip: padding-box, border-box; }
+.daftar-petunjuk > li.gelar-p1.gelar-biru.sekarang { animation: border-pulse 2.2s ease-out infinite; }
+.daftar-petunjuk > li.gelar-p1.gelar-ungu.sekarang { animation: border-glitch 3.2s steps(1) infinite; }
+.daftar-petunjuk > li.gelar-p1.gelar-perak.sekarang { animation: border-hantu 2.6s ease-in-out infinite; }
+.daftar-petunjuk > li.gelar-p1.gelar-hijau.sekarang {
+  border-style: dashed; animation: border-lock 1.5s ease-in-out infinite;
+}
+.daftar-petunjuk > li.gelar-p1.gelar-oranye.sekarang { animation: border-api 0.55s steps(2) infinite; }
+
+.chat-pesan[class*="gelar-"] {
+  border: 3px solid var(--warna-frame) !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--warna-frame) 40%, transparent);
+}
+.chat-pesan.gelar-p1 { border-width: 3px !important; }
+.chat-pesan.gelar-p2 { border-width: 2.5px !important; }
+.chat-pesan.gelar-p3 { border-width: 2px !important; opacity: 0.98; }
+.chat-pesan.gelar-p1.gelar-emas { animation: border-emas-putar 2.8s linear infinite; border-color: transparent !important; background-image:
+  linear-gradient(var(--permukaan-2), var(--permukaan-2)),
+  conic-gradient(from var(--sudut, 0deg), var(--warna-frame-3), #fff, var(--warna-frame), var(--warna-frame-3));
+  background-origin: border-box; background-clip: padding-box, border-box; }
+.chat-pesan.saya.gelar-p1.gelar-emas { background-image:
+  linear-gradient(var(--aksen), var(--aksen)),
+  conic-gradient(from var(--sudut, 0deg), var(--warna-frame-3), #fff, var(--warna-frame), var(--warna-frame-3)); }
+.chat-pesan.gelar-p1.gelar-biru { animation: border-pulse 2.2s ease-out infinite; }
+.chat-pesan.gelar-p1.gelar-ungu { animation: border-glitch 3.2s steps(1) infinite; }
+.chat-pesan.gelar-p1.gelar-perak { animation: border-hantu 2.6s ease-in-out infinite; }
+.chat-pesan.gelar-p1.gelar-hijau { border-style: dashed !important; animation: border-lock 1.5s ease-in-out infinite; }
+.chat-pesan.gelar-p1.gelar-oranye { animation: border-api 0.55s steps(2) infinite; }
+
+@keyframes border-emas-putar { to { --sudut: 360deg; } }
+@keyframes border-pulse {
+  0%, 100% { box-shadow: inset 4px 0 0 var(--warna-frame), 0 0 10px color-mix(in srgb, var(--warna-frame) 35%, transparent); }
+  50% { box-shadow: inset 4px 0 0 var(--warna-frame-2), 0 0 18px color-mix(in srgb, var(--warna-frame) 60%, transparent); }
+}
+@keyframes border-glitch {
+  0%, 86%, 100% { filter: none; }
+  88% { filter: hue-rotate(35deg); }
+  90% { filter: hue-rotate(-25deg); }
+}
+@keyframes border-hantu {
+  0%, 100% { box-shadow: 0 0 8px color-mix(in srgb, #fff 20%, transparent); }
+  50% { box-shadow: 0 0 18px color-mix(in srgb, #fff 45%, transparent); }
+}
+@keyframes border-lock {
+  0%, 100% { border-color: var(--warna-frame); }
+  50% { border-color: var(--warna-frame-2); }
+}
+@keyframes border-api {
+  0% { box-shadow: 0 0 8px #f97316; }
+  50% { box-shadow: 0 0 16px #ef4444, 0 0 4px #fde68a; }
+  100% { box-shadow: 0 0 10px #fb923c; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .daftar-petunjuk > li[class*="gelar-"],
+  .chat-pesan[class*="gelar-"] { animation: none !important; }
+}
 
 .daftar-award { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .daftar-award li { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--permukaan-2); border-radius: 10px; font-size: 0.9rem; }
