@@ -11,15 +11,19 @@ export function kelasFrame(slot: SlotMusimApi | null | undefined): string {
   return `frame-gelar frame-${meta.warna} frame-kat-${slot.kategori} frame-p${slot.peringkat}`;
 }
 
-export function LencanaGelar({ slot, kecil = false }: { slot: SlotMusimApi; kecil?: boolean }) {
+export function LencanaGelar({ slot, ukuran = 32 }: { slot: SlotMusimApi; ukuran?: number }) {
   const meta = META_KATEGORI[slot.kategori];
+  // Tier ukuran mengikuti avatar asli di app (chat 20, daftar 28, leaderboard 32, profil 88).
+  const tier = ukuran <= 22 ? 'mikro' : ukuran < 40 ? 'kecil' : ukuran < 64 ? '' : 'besar';
+  const kelas = ['lencana-gelar', tier, slot.peringkat === 1 ? 'juara' : ''].filter(Boolean).join(' ');
   return (
     <span
-      className={`lencana-gelar${kecil ? ' kecil' : ''}${slot.peringkat === 1 ? ' juara' : ''}`}
+      className={kelas}
       title={`${meta.ikon} #${slot.peringkat} ${meta.nama}`}
       aria-hidden
     >
-      <span className="ikon-gelar">{meta.ikon}</span>
+      {/* Avatar sangat kecil: cukup angka agar inisial/foto tetap terbaca */}
+      {ukuran > 22 && <span className="ikon-gelar">{meta.ikon}</span>}
       <span className="angka-gelar">#{slot.peringkat}</span>
     </span>
   );
@@ -53,7 +57,7 @@ export function BingkaiAvatar({ slot, anak, ukuran = 32 }: { slot?: SlotMusimApi
         <span className="frame-aksen frame-aksen-d" />
       </span>
       <span className="frame-isi">{anak}</span>
-      <LencanaGelar slot={slot} kecil={ukuran < 36} />
+      <LencanaGelar slot={slot} ukuran={ukuran} />
       <span className="sr-only">{`#${slot.peringkat} ${meta.nama}`}</span>
     </span>
   );

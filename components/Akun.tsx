@@ -9,8 +9,8 @@ import { IkonDeretan, TeksGelar } from './Gelar';
 import { siapkanAvatar } from '@/lib/gambarAvatar';
 import { ambilUsernameDiganti, bisaGantiLagi, gantiUsername, hapusAvatar, lupakanProfil, unggahAvatar, ambilProfil, ambilProfilUsername, ambilRiwayat, ambilStatistik, cariProfil, type EntriRiwayat, type ProfilPublik } from '@/lib/supabase/data';
 import {
-  ambilGelarPemain, cekNotifikasiTop3, gelarTeksDari, kodeMusim, lupakanGelar, pasangGelar,
-  teksGelar, type GelarPemainApi,
+  ambilGelarPemain, cekNotifikasiTop3, gelarTeksDari, kodeMusim, pasangGelar,
+  teksGelar, tulisCacheGelar, type GelarPemainApi, type SlotMusimApi,
 } from '@/lib/supabase/peringkatMusim';
 import { META_KATEGORI, labelMusim } from '@/lib/peringkatMusim';
 import { TombolSuara } from './PanelSuara';
@@ -490,42 +490,53 @@ function CariPemain() {
 }
 
 
+type InfoTampilGelar = { teks: string; frame: SlotMusimApi | null; keterangan: string | null };
+
 /** Gelar musim berjalan (bisa dipilih) + daftar award teks bulan lalu. Frame hanya dari slot musim ini. */
-function KartuGelar({ userId, sendiri }: { userId: string; sendiri: boolean }) {
+function KartuGelar({ userId, sendiri, onTampil }: {
+  userId: string;
+  sendiri: boolean;
+  /** Langsung perbarui frame avatar profil (optimistic). */
+  onTampil?: (info: InfoTampilGelar) => void;
+}) {
   const [gelar, setGelar] = useState<GelarPemainApi | null | 'galat'>(null);
   const [pesan, setPesan] = useState<string | null>(null);
-  const [proses, setProses] = useState(false);
-  const [muatKe, setMuatKe] = useState(0);
   useEffect(() => {
     let hidup = true;
-    ambilGelarPemain([userId], muatKe > 0).then(([g]) => {
+    ambilGelarPemain([userId]).then(([g]) => {
       if (!hidup) return;
       setGelar(g ?? null);
+      if (g) onTampil?.(gelarTeksDari(g));
       if (sendiri && g) {
         const n = cekNotifikasiTop3(g.slot);
         if (n) setPesan(n);
       }
     }, () => { if (hidup) setGelar('galat'); });
     return () => { hidup = false; };
-  }, [userId, sendiri, muatKe]);
+  }, [userId, sendiri, onTampil]);
   if (gelar === 'galat') return <p className="galat" role="alert">Gagal memuat gelar.</p>;
   if (!gelar) return <p className="catatan" role="status">Memuat gelar...</p>;
   const tampil = gelarTeksDari(gelar);
   const musim = gelar.musim || kodeMusim();
-  async function pasang(nilai: string | null) {
-    if (!sendiri) return;
-    setProses(true);
+  function pasang(nilai: string | null) {
+    if (!sendiri || gelar === 'galat' || !gelar) return;
+    const sebelumnya = gelar;
+    const berikutnya: GelarPemainApi = { ...gelar, gelar_dipasang: nilai };
+    // Optimistic: frame/teks profil + cache room langsung ikut pilihan.
+    setGelar(berikutnya);
+    const info = gelarTeksDari(berikutnya);
+    onTampil?.(info);
+    tulisCacheGelar(berikutnya);
     setPesan(null);
-    try {
-      await pasangGelar(nilai);
-      lupakanGelar(userId);
-      setMuatKe((n) => n + 1);
+    void pasangGelar(nilai).then(() => {
       setPesan(nilai ? 'Gelar dipasang.' : 'Gelar otomatis.');
-    } catch (e) {
+    }, (e: unknown) => {
+      setGelar(sebelumnya);
+      const balik = gelarTeksDari(sebelumnya);
+      onTampil?.(balik);
+      tulisCacheGelar(sebelumnya);
       setPesan(e instanceof Error ? e.message : 'Gagal memasang gelar.');
-    } finally {
-      setProses(false);
-    }
+    });
   }
   const nilaiAktif = gelar.gelar_dipasang ?? 'otomatis';
   return (
@@ -547,14 +558,14 @@ function KartuGelar({ userId, sendiri }: { userId: string; sendiri: boolean }) {
           {sendiri && (
             <div className="pilih-gelar" role="radiogroup" aria-label="Pilih gelar musim">
               <label>
-                <input type="radio" name="gelar" checked={nilaiAktif === 'otomatis' || !gelar.gelar_dipasang} disabled={proses} onChange={() => void pasang(null)} />
+                <input type="radio" name="gelar" checked={nilaiAktif === 'otomatis' || !gelar.gelar_dipasang} onChange={() => pasang(null)} />
                 Otomatis (peringkat terbaik)
               </label>
               {gelar.slot.map((s) => {
                 const nilai = `musim:${musim}:${s.kategori}:${s.peringkat}`;
                 return (
                   <label key={nilai}>
-                    <input type="radio" name="gelar" checked={nilaiAktif === nilai} disabled={proses} onChange={() => void pasang(nilai)} />
+                    <input type="radio" name="gelar" checked={nilaiAktif === nilai} onChange={() => pasang(nilai)} />
                     {META_KATEGORI[s.kategori].ikon} {teksGelar({ kategori: s.kategori, peringkat: s.peringkat, musim })}
                   </label>
                 );
@@ -575,7 +586,7 @@ function KartuGelar({ userId, sendiri }: { userId: string; sendiri: boolean }) {
                 <li key={a.id}>
                   <span>{META_KATEGORI[a.kategori].ikon} {teks}</span>
                   {sendiri && (
-                    <button type="button" className={`kecil mini${nilaiAktif === nilai ? ' utama' : ' kedua'}`} disabled={proses} onClick={() => void pasang(nilaiAktif === nilai ? null : nilai)}>
+                    <button type="button" className={`kecil mini${nilaiAktif === nilai ? ' utama' : ' kedua'}`} onClick={() => pasang(nilaiAktif === nilai ? null : nilai)}>
                       {nilaiAktif === nilai ? 'Dipakai' : 'Pakai'}
                     </button>
                   )}
@@ -597,7 +608,8 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
   onKembali?: () => void;
 }) {
   const [data, setData] = useState<{ id: string; username: string; versi: number | null; r: RingkasanStatistik } | 'galat' | 'tidakAda' | null>(null);
-  const [infoGelar, setInfoGelar] = useState<{ teks: string; frame: import('@/lib/supabase/peringkatMusim').SlotMusimApi | null; keterangan: string | null } | null>(null);
+  const [infoGelar, setInfoGelar] = useState<InfoTampilGelar | null>(null);
+  const onTampilGelar = useCallback((info: InfoTampilGelar) => setInfoGelar(info), []);
   useEffect(() => {
     let hidup = true;
     (async () => {
@@ -611,16 +623,6 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
   }, [akun.id, usernameLihat]);
   const siap = data && typeof data === 'object' ? data : null;
   const sendiri = siap ? siap.id === akun.id : !usernameLihat;
-  useEffect(() => {
-    let hidup = true;
-    const id = siap?.id;
-    if (!id) return () => { hidup = false; };
-    ambilGelarPemain([id]).then(([g]) => {
-      if (!hidup || !g) return;
-      setInfoGelar(gelarTeksDari(g));
-    }).catch(() => { /* biarkan teks lama / kosong */ });
-    return () => { hidup = false; };
-  }, [siap?.id]);
   return (
     <main className="wadah">
       <Kepala onBeranda={onBeranda} />
@@ -637,7 +639,7 @@ export function LayarProfil({ akun, usernameLihat, onBeranda, onKembali }: {
         {data === 'galat' && <p className="galat" role="alert">Gagal memuat profil. Periksa internet.</p>}
         {data === 'tidakAda' && <p className="catatan tengah-teks">Pemain tidak ditemukan.</p>}
         {data === null && <p className="catatan tengah-teks" role="status">Memuat...</p>}
-        {siap && <KartuGelar userId={siap.id} sendiri={sendiri && !usernameLihat} />}
+        {siap && <KartuGelar userId={siap.id} sendiri={sendiri && !usernameLihat} onTampil={onTampilGelar} />}
         {siap && <KartuStatistik r={siap.r} />}
         {siap && <Riwayat userId={siap.id} />}
         {sendiri && !usernameLihat && <CariPemain />}

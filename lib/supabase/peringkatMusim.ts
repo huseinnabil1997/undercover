@@ -52,9 +52,20 @@ export interface BarisTopMusim {
 const cacheGelar = new Map<string, { waktu: number; data: GelarPemainApi }>();
 const CACHE_MS = 30_000;
 
+/** Dipicu setelah pilihan gelar berubah (optimistik atau dari server). */
+export const EVENT_GELAR_BERUBAH = 'gelar:berubah';
+
 export function lupakanGelar(userId?: string): void {
   if (!userId) cacheGelar.clear();
   else cacheGelar.delete(userId);
+}
+
+/** Tulis cache lokal lalu beri tahu UI room/profil agar frame ikut. */
+export function tulisCacheGelar(g: GelarPemainApi): void {
+  cacheGelar.set(g.user_id, { waktu: Date.now(), data: g });
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent(EVENT_GELAR_BERUBAH, { detail: { userId: g.user_id } }));
+  }
 }
 
 export async function ambilTopMusim(musim?: string): Promise<BarisTopMusim[]> {

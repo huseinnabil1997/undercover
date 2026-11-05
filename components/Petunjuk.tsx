@@ -11,6 +11,7 @@ import type { Peran } from '@/lib/types';
 import { NAMA_PERAN } from './ui';
 import type { InfoGelar } from '@/lib/online/gelarRoom';
 import { META_KATEGORI } from '@/lib/peringkatMusim';
+import { Avatar } from './Avatar';
 
 export function FormPetunjuk({ judul, galat, onKirim, onSudahBicara, onUbah }: {
   judul: string;
@@ -109,8 +110,9 @@ export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, gilira
             aria-current={sekarang ? 'step' : undefined}
           >
             <span className="nomor" aria-hidden>{!p.hidup ? '×' : selesai ? '✓' : ke >= 0 ? ke + 1 : '·'}</span>
-            <span className="dp-nama">
-              {p.nama}{p.saya && <em> (kamu)</em>}
+            <span className="dp-nama nama-dengan-avatar">
+              <Avatar username={p.nama} cari ukuran={28} slot={petaGelar?.get(p.nama.toLowerCase())?.frame} />
+              <span className="nama-teks">{p.nama}{p.saya && <em> (kamu)</em>}</span>
               {p.offline && <span className="lencana off">Offline</span>}
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
               {!p.hidup && !p.peran && <span className="lencana off">Keluar</span>}

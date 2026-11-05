@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { profilTercache } from '../supabase/data';
 import {
-  ambilGelarPemain, gelarTeksDari, type GelarPemainApi, type SlotMusimApi,
+  ambilGelarPemain, EVENT_GELAR_BERUBAH, gelarTeksDari, type GelarPemainApi, type SlotMusimApi,
 } from '../supabase/peringkatMusim';
 
 export interface InfoGelar {
@@ -24,6 +24,12 @@ export function infoDariGelar(g: GelarPemainApi | undefined): InfoGelar {
 export function usePetaGelar(namas: readonly string[]): Map<string, InfoGelar> {
   const kunci = useMemo(() => [...new Set(namas.map((n) => n.trim()).filter(Boolean))].sort().join('|'), [namas]);
   const [peta, setPeta] = useState<Map<string, InfoGelar>>(() => new Map());
+  const [segar, setSegar] = useState(0);
+  useEffect(() => {
+    const h = () => setSegar((n) => n + 1);
+    window.addEventListener(EVENT_GELAR_BERUBAH, h);
+    return () => window.removeEventListener(EVENT_GELAR_BERUBAH, h);
+  }, []);
   useEffect(() => {
     let hidup = true;
     const daftar = kunci ? kunci.split('|') : [];
@@ -41,7 +47,7 @@ export function usePetaGelar(namas: readonly string[]): Map<string, InfoGelar> {
       if (hidup) setPeta(m);
     })().catch(() => { if (hidup) setPeta(new Map()); });
     return () => { hidup = false; };
-  }, [kunci]);
+  }, [kunci, segar]);
   return kunci ? peta : new Map();
 }
 
