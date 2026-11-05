@@ -73,6 +73,16 @@ export function barisHasilRoom(s: StateHost): { idMain: string; baris: Record<st
   return baris.length >= 3 ? { idMain: g.idMain, baris } : null;
 }
 
+export const PESAN_ROOM_TAK_TERDAFTAR = 'Room ini tidak terdaftar di server, jadi hasil permainan tidak akan masuk riwayat. Tutup room lama yang tidak dipakai lalu buat room baru.';
+export const PESAN_GAGAL_CATAT = 'Hasil gagal dicatat ke riwayat. Mencoba lagi otomatis.';
+
+/** Galat dari server (bukan jaringan putus) saat host mendaftarkan room: hasil tidak bisa dicatat. */
+export function galatDitolakServer(e: unknown): boolean {
+  if (!e || typeof e !== 'object') return false;
+  const kode = (e as { code?: unknown }).code;
+  return typeof kode === 'string' && kode.length > 0;
+}
+
 export const catatHasilRoom = (hex: string, idMain: string, baris: Record<string, unknown>[]) =>
   rpc<number>('catat_hasil_room', { p_topik: hex, p_id_main: idMain, p_baris: baris });
 

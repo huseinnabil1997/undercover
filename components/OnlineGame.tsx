@@ -40,7 +40,7 @@ import type { HasilUntukDicatat } from '@/lib/supabase/data';
 import { supabase } from '@/lib/supabase/klien';
 import { pembuatRealtime } from '@/lib/online/realtime';
 import {
-  ambilAlihHost, barisHasilRoom, bukaSnapshot, buatRoom, catatHasilRoom, detakHost, gabungRoom, hasilTercatat, roomSupabase, sandikanSnapshot,
+  ambilAlihHost, barisHasilRoom, galatDitolakServer, PESAN_GAGAL_CATAT, PESAN_ROOM_TAK_TERDAFTAR, bukaSnapshot, buatRoom, catatHasilRoom, detakHost, gabungRoom, hasilTercatat, roomSupabase, sandikanSnapshot,
   tinggalkanRoom, verifikasiPemain, type RoomSupabase,
 } from '@/lib/supabase/room';
 
@@ -260,8 +260,10 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
           nonce = n;
         }
       }
-    } catch {
+    } catch (e) {
       // Supabase tidak terjangkau: tetap jalan lewat relay cadangan (tanpa host pindah).
+      // Bila server menolak (mis. batas room), beri tahu host: hasil tidak akan tercatat.
+      if (sesi.host && galatDitolakServer(e)) tampilkan(PESAN_ROOM_TAK_TERDAFTAR);
     }
     if (batal) return;
     roomRef.current = room;
@@ -300,6 +302,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
         let terakhir = 0;
         let seqKirim = -1;
         const tercatat = new Set<string>();
+        const gagalDiumumkan = new Set<string>();
         const detak = async () => {
           const st = host.state;
           const t = Date.now();
@@ -323,7 +326,13 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
           const hasil = barisHasilRoom(st);
           if (hasil && !tercatat.has(hasil.idMain)) {
             tercatat.add(hasil.idMain);
-            catatHasilRoom(room.hex, hasil.idMain, hasil.baris).catch(() => tercatat.delete(hasil.idMain));
+            catatHasilRoom(room.hex, hasil.idMain, hasil.baris).catch(() => {
+              tercatat.delete(hasil.idMain);
+              if (!gagalDiumumkan.has(hasil.idMain)) {
+                gagalDiumumkan.add(hasil.idMain);
+                tampilkan(PESAN_GAGAL_CATAT);
+              }
+            });
           }
         };
         void detak();
