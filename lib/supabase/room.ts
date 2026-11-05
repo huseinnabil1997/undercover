@@ -52,6 +52,9 @@ export async function bukaSnapshot(r: RoomSupabase, t: string): Promise<unknown>
 export const detakHost = (hex: string, snapshot: string | null) => rpc<boolean>('detak_host', { p_topik: hex, p_snapshot: snapshot });
 export const tinggalkanRoom = (hex: string, snapshot: string | null) => rpc<null>('tinggalkan_room', { p_topik: hex, p_snapshot: snapshot });
 
+/** Pemain biasa keluar: lepas kursi di server. Room dihapus bila ia anggota terakhir dan host sudah pergi. */
+export const lepasKursiRoom = (hex: string) => tinggalkanRoom(hex, null);
+
 export async function ambilAlihHost(hex: string): Promise<{ snapshot: string; hostKeluar: boolean } | null> {
   const rows = await rpc<{ snapshot: string; host_keluar: boolean }[]>('ambil_alih_host', { p_topik: hex });
   const r = rows?.[0];

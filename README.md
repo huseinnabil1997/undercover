@@ -68,7 +68,7 @@ Live: https://huseinnabil1997.github.io/undercover/
 - Saat host memulai game, room ditandai `dimulai` dan tidak menerima pemain matchmaking baru (pemain berikutnya mendapat room baru).
 - Mulai otomatis saat room penuh, atau setelah **60 detik** tanpa pemain baru bila sudah minimal 4 (lobby menampilkan "Menunggu pemain j/maks" dan hitung mundur). Host juga bisa menekan Mulai sejak 4 pemain.
 - Room yang dibuat pemain **Acak** (maks 8, kolom `room_match.acak`) **tidak pernah** mulai otomatis, baik saat penuh maupun setelah 60 detik: hanya host yang memulai, dan lobby menulis "Host yang memulai" tanpa hitung mundur. Mode disimpan di server sehingga host pengganti tetap mengikutinya. Pemain Acak yang masuk room ukuran tetap mengikuti aturan room itu.
-- Kursi dibebaskan saat pemain keluar dari room, menutup halaman (keepalive), atau tidak berdetak 30 detik (detak tiap 5 detik). Room yang tidak punya anggota berdetak dalam 15 detik tidak menerima pemain baru; room tanpa anggota atau lebih dari 6 jam dihapus. Bila pemain gagal masuk karena host sudah pergi, kursinya dilepas dan pencarian diulang otomatis. Host yang pergi digantikan lewat migrasi host biasa.
+- Kursi dibebaskan saat pemain keluar dari room, menutup halaman (keepalive), atau tidak berdetak 30 detik (detak tiap 5 detik). Room yang tidak punya anggota berdetak dalam 15 detik tidak menerima pemain baru; room match tanpa anggota atau lebih dari 6 jam dihapus. Bila pemain gagal masuk karena host sudah pergi, kursinya dilepas dan pencarian diulang otomatis. Host yang pergi digantikan lewat migrasi host biasa.
 - Pengaturan room match: komposisi bawaan sesuai jumlah pemain saat mulai (Mr. White mulai 5 pemain), petunjuk 45 detik, vote 60 detik.
 - **Sumber kata room match** diatur host di lobby selama menunggu pemain: **Campur** (Kamus kita atau Internet diacak tiap game, semua kategori termasuk kamus pemain) atau **Pilih sendiri** (pilihan sumber dan kategori yang sama dengan room biasa, plus panjang kata). Pemain lain melihatnya tanpa bisa mengubah. Bawaan: pilihan host terakhir (`undercover:sumberMatchCampur`, lalu sumber kata terakhir), selain itu Campur. Pilihan ada di `Pengaturan.sumberCampur` dalam state host, jadi ikut tersinkron ke pemain dan ke snapshot migrasi host; mulai otomatis memakai pilihan host saat itu. State lama tanpa field ini dianggap Campur.
 
@@ -97,8 +97,12 @@ Live: https://huseinnabil1997.github.io/undercover/
   room mengambil alih lewat `ambil_alih_host` (terkunci di server, hanya satu yang menang), memulihkan snapshot, dan permainan lanjut.
   Host lama yang kembali menjadi pemain biasa. Catatan: host baru tentu memegang state lengkap (termasuk kata semua pemain), sama seperti host lama.
   Snapshot hanya bisa diambil anggota room, dan hanya oleh yang menjadi host.
-- **Room persisten dan pembersihan**: room di server kedaluwarsa 6 jam setelah detak terakhir. Room kedaluwarsa dihapus otomatis
-  (fungsi `bersihkan_room`, dipanggil saat room baru dibuat). Tabel room tidak bisa dibaca atau ditulis langsung oleh klien; semua lewat RPC.
+- **Room persisten dan pembersihan**: pemain yang keluar dengan sengaja langsung dilepas dari room (bukan
+  anggota lagi, tidak bisa mengambil alih atau mencatat hasil, dan harus gabung ulang dengan kode). Host yang keluar
+  memindahkan kepemilikan room ke pemain tersisa, sehingga room itu tidak lagi dihitung dalam batas 5 room miliknya.
+  Room dihapus begitu anggota terakhir keluar. Room tanpa detak
+  host selama 2 menit juga dihapus, dan batas keras tetap 6 jam setelah detak terakhir. Pembersihan berjalan otomatis
+  (fungsi `bersihkan_room`, dipanggil saat room dibuat, digabungi, atau saat mencari match). Tabel room tidak bisa dibaca atau ditulis langsung oleh klien; semua lewat RPC.
 - **Batas waktu opsional** (diatur host, ikut ke semua pemain): petunjuk per giliran 20/30/45/60 detik dan diskusi+vote
   30/60/90/120 detik. Bawaan **Tanpa batas**. Saat waktu habis, giliran petunjuk dilewati dengan tanda "(waktu habis)",
   vote langsung dihitung seperti tombol Hitung (yang belum memilih dianggap tidak memilih), dan tebakan Mr. White

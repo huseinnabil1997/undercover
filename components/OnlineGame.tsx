@@ -41,7 +41,7 @@ import { supabase } from '@/lib/supabase/klien';
 import { pembuatRealtime } from '@/lib/online/realtime';
 import {
   ambilAlihHost, barisHasilRoom, galatDitolakServer, PESAN_GAGAL_CATAT, PESAN_ROOM_TAK_TERDAFTAR, bukaSnapshot, buatRoom, catatHasilRoom, detakHost, gabungRoom, hasilTercatat, roomSupabase, sandikanSnapshot,
-  tinggalkanRoom, verifikasiPemain, type RoomSupabase,
+  lepasKursiRoom, tinggalkanRoom, verifikasiPemain, type RoomSupabase,
 } from '@/lib/supabase/room';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -157,6 +157,8 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     // Lepas kursi room match (bila ada). Aman dipanggil walau bukan room match.
     if (matchAktif.current) void keluarMatch().catch(() => undefined);
     matchAktif.current = false;
+    // Pemain biasa keluar: lepas kursi room (host sudah lewat hostKeluar). Tidak saat sesi pindah ke tab/perangkat lain.
+    if (!hanyaTab && !hostRef.current && roomRef.current) void lepasKursiRoom(roomRef.current.hex).catch(() => undefined);
     hostRef.current?.hentikan();
     klienRef.current?.hentikan();
     hostRef.current = null;
