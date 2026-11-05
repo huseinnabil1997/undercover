@@ -106,7 +106,12 @@ export function DaftarPetunjuk({ pemain, entri, ronde, urutan, giliranKe, gilira
         return (
           <li
             key={p.kunci}
-            className={`${p.hidup ? '' : 'mati'} ${sekarang ? 'sekarang' : ''} ${selesai ? 'selesai' : ''}${(() => { const f = petaGelar?.get(p.nama.toLowerCase())?.frame; return f ? ` gelar-${META_KATEGORI[f.kategori].warna} gelar-p${f.peringkat}` : ''; })()}`}
+            className={`${p.hidup ? '' : 'mati'} ${sekarang ? 'sekarang' : ''} ${selesai ? 'selesai' : ''}${(() => {
+              // Border/glow baris gelar hanya saat giliran pemain ini; frame avatar + badge tetap.
+              if (!sekarang) return '';
+              const f = petaGelar?.get(p.nama.toLowerCase())?.frame;
+              return f ? ` gelar-${META_KATEGORI[f.kategori].warna} gelar-p${f.peringkat}` : '';
+            })()}`}
             aria-current={sekarang ? 'step' : undefined}
           >
             <span className="nomor" aria-hidden>{!p.hidup ? '×' : selesai ? '✓' : ke >= 0 ? ke + 1 : '·'}</span>
