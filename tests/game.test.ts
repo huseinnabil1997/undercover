@@ -32,6 +32,8 @@ describe('setup', () => {
     expect(komposisiDefault(5).lovers).toBe(false);
     expect(komposisiDefault(6).jester).toBe(1);
     expect(komposisiDefault(6).lovers).toBe(false);
+    expect(komposisiDefault(6).undercover).toBe(1);
+    expect(komposisiDefault(6).mrWhite).toBe(0); // 4 civ > 1 UC + Jester
     expect(komposisiDefault(7).jester).toBe(1);
     expect(komposisiDefault(7).lovers).toBe(true);
   });
@@ -41,12 +43,19 @@ describe('setup', () => {
     expect(validasiSetup(nama(21), { undercover: 1, mrWhite: 0 }).length).toBeGreaterThan(0);
   });
 
-  it('Civilian harus lebih banyak dari Undercover + Mr. White', () => {
+  it('Civilian harus lebih banyak dari Undercover + Mr. White + Jester', () => {
     expect(validasiSetup(nama(4), { undercover: 1, mrWhite: 1 })).not.toEqual([]); // 2 vs 2
     expect(validasiSetup(nama(5), { undercover: 1, mrWhite: 1 })).toEqual([]); // 3 vs 2
     expect(validasiSetup(nama(6), { undercover: 2, mrWhite: 1 })).not.toEqual([]); // 3 vs 3
+    // 6 pemain 3 civ / 1 UC / 1 MW / Jester: 3 vs 3 invalid
+    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 1, jester: 1 })).not.toEqual([]);
+    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 1, jester: 1 })[0]).toMatch(/Jester/);
+    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 0, jester: 1 })).toEqual([]); // 4 vs 2
+    expect(validasiSetup(nama(7), { undercover: 1, mrWhite: 1, jester: 1 })).toEqual([]); // 4 vs 3
     expect(maksPenyusup(6)).toBe(2);
+    expect(maksPenyusup(6, 1)).toBe(1);
     expect(maksPenyusup(7)).toBe(3);
+    expect(maksPenyusup(7, 1)).toBe(2);
   });
 
   it('Mr. White boleh 0, tapi minimal 1 penyusup', () => {

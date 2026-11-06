@@ -141,7 +141,7 @@ Pengaturan disimpan di `localStorage` HP itu saja.
 5. Civilian menang jika semua Undercover dan Mr. White tereliminasi.
    Penyusup menang jika jumlah penyusup tersisa sama atau lebih banyak dari Civilian (termasuk saat tinggal 2 pemain).
 
-Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr. White. Mr. White boleh 0.
+Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover, Mr. White, dan Jester. Mr. White boleh 0.
 
 ## Sumber kata
 

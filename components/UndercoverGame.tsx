@@ -626,12 +626,12 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li><strong>Civilian</strong>: mayoritas, semua mendapat kata yang sama.</li>
           <li><strong>Undercover</strong>: mendapat kata yang mirip tapi berbeda. Undercover tidak tahu bahwa dirinya Undercover.</li>
           <li><strong>Mr. White</strong>: tidak mendapat kata sama sekali dan harus berpura-pura tahu.</li>
-          <li><strong>Jester</strong> (opsional, min 5 pemain): tanpa kata seperti Mr. White, tetapi tidak menebak. Tujuan: beri petunjuk sedikit mencurigakan agar divote. Menang sendiri jika tereliminasi lewat vote; kalah jika bertahan sampai akhir. Tidak dihitung sebagai Civilian.</li>
+          <li><strong>Jester</strong> (opsional, min 5 pemain): tanpa kata seperti Mr. White, tetapi tidak menebak. Tujuan: beri petunjuk sedikit mencurigakan agar divote. Menang sendiri jika tereliminasi lewat vote; kalah jika bertahan sampai akhir. Dihitung non-Civilian saat atur komposisi (Civilian harus lebih banyak dari Undercover + Mr. White + Jester).</li>
           <li><strong>Lovers</strong> (opsional, min 5; bersama Jester min 6): dua pemain dengan peran sama (Civilian atau Undercover) dipasangkan diam-diam. Di layar kata tertulis jelas siapa pasanganmu dan bahwa kalian punya kata yang sama. Tujuan: lindungi pasangan dan giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</li>
         </ul>
         <h3>Alur</h3>
         <ol>
-          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai. Pasangan buatan pemain dari menu Kamus otomatis ikut masuk ke Kamus kita dan Internet, di mode Lokal maupun Online.</li>
+          <li>Atur pemain, jumlah peran, dan kategori kata, lalu tekan Mulai. Civilian harus lebih banyak dari gabungan Undercover, Mr. White, dan Jester. Pasangan buatan pemain dari menu Kamus otomatis ikut masuk ke Kamus kita dan Internet, di mode Lokal maupun Online.</li>
           <li>Oper HP ke setiap pemain. Tekan untuk melihat kata, hafalkan, lalu tutup sebelum mengoper.</li>
           <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
           <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka. Pilih Lewati jika belum yakin: tidak ada yang keluar dan permainan lanjut ke ronde berikutnya.</li>

@@ -17,7 +17,9 @@ describe('validasi Jester/Lovers', () => {
     expect(validasiSetup(nama(4), { undercover: 1, mrWhite: 0, jester: 1 })).not.toEqual([]);
     expect(validasiSetup(nama(5), { undercover: 1, mrWhite: 0, jester: 1 })).toEqual([]);
     expect(validasiSetup(nama(5), { undercover: 1, mrWhite: 0, jester: 1, lovers: true })).not.toEqual([]);
-    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 1, jester: 1, lovers: true })).toEqual([]);
+    // 6: UC1+MW1+Jester = 3 non-civ vs 3 civ → invalid (Jester ikut dihitung)
+    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 1, jester: 1, lovers: true })).not.toEqual([]);
+    expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 0, jester: 1, lovers: true })).toEqual([]);
   });
 
   it('7 pemain Civ4 UC1 MW1 Jester On Lovers Off valid', () => {
@@ -62,7 +64,7 @@ describe('eliminasi berantai Lovers', () => {
 
 describe('bagiPeran jester + lovers', () => {
   it('satu jester dan dua lovers saling merujuk dengan peran sama', () => {
-    const pemain = bagiPeran(nama(6), { undercover: 1, mrWhite: 1, jester: 1, lovers: true }, () => 0.1);
+    const pemain = bagiPeran(nama(6), { undercover: 1, mrWhite: 0, jester: 1, lovers: true }, () => 0.1);
     expect(pemain.filter((x) => x.peran === 'jester')).toHaveLength(1);
     const lovers = pemain.filter((x) => x.pasanganLovers != null);
     expect(lovers).toHaveLength(2);
@@ -85,9 +87,9 @@ describe('bagiPeran jester + lovers', () => {
     };
     const setups = [
       { n: 5, k: { undercover: 1, mrWhite: 0, lovers: true } },
-      { n: 6, k: { undercover: 1, mrWhite: 1, jester: 1, lovers: true } },
+      { n: 6, k: { undercover: 1, mrWhite: 0, jester: 1, lovers: true } },
       { n: 7, k: { undercover: 2, mrWhite: 1, lovers: true } },
-      { n: 8, k: { undercover: 2, mrWhite: 1, jester: 1, lovers: true } },
+      { n: 8, k: { undercover: 1, mrWhite: 1, jester: 1, lovers: true } },
       { n: 10, k: { undercover: 2, mrWhite: 1, jester: 1, lovers: true } },
       { n: 12, k: { undercover: 3, mrWhite: 1, lovers: true } },
     ] as const;

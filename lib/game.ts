@@ -56,18 +56,31 @@ export function jumlahJester(k: Komposisi): number {
 export function komposisiDefault(jumlahPemain: number): Komposisi {
   const n = Math.max(MIN_PEMAIN, Math.min(MAX_PEMAIN, Math.floor(jumlahPemain)));
   // Auto: Jester dari 6, Lovers dari 7 (pasangan selalu Civilian-Civilian atau Undercover-Undercover).
-  // Host bisa mematikan. Syarat manual tetap 5/5/6.
+  // Host bisa mematikan. Syarat: civilian > undercover + mrWhite + jester.
   const jester = n >= 6 ? 1 : 0;
   const lovers = n >= 7;
-  const mrWhite = n >= 5 ? 1 : 0;
+  let mrWhite = n >= 5 ? 1 : 0;
   let undercover = Math.max(1, Math.round(n / 4));
-  while (undercover > 1 && n - undercover - mrWhite - jester <= undercover + mrWhite) undercover--;
+  // Turunkan UC lalu MW sampai civilian ketat lebih banyak dari non-Civilian (termasuk Jester).
+  while (
+    undercover + mrWhite + jester > 0
+    && n - undercover - mrWhite - jester <= undercover + mrWhite + jester
+  ) {
+    if (undercover > 1) undercover--;
+    else if (mrWhite > 0) mrWhite--;
+    else break;
+  }
+  if (undercover + mrWhite < 1) undercover = 1;
   return { undercover, mrWhite, jester, lovers };
 }
 
-/** Jumlah penyusup (Undercover + Mr. White) terbesar yang masih valid. */
-export function maksPenyusup(jumlahPemain: number): number {
-  return Math.max(0, Math.ceil(jumlahPemain / 2) - 1);
+/**
+ * Kapasitas Undercover + Mr. White terbesar yang masih valid.
+ * `jester` (0/1) mengurangi kapasitas karena Jester dihitung non-Civilian.
+ */
+export function maksPenyusup(jumlahPemain: number, jester = 0): number {
+  const jes = jester ? 1 : 0;
+  return Math.max(0, Math.floor((jumlahPemain - 1) / 2) - jes);
 }
 
 /** Mengembalikan daftar pesan galat. Kosong berarti valid. */
@@ -89,8 +102,8 @@ export function validasiSetup(nama: readonly string[], komposisi: Komposisi): st
   if (undercover + mrWhite < 1) galat.push('Minimal ada 1 Undercover atau Mr. White.');
   const civilian = n - undercover - mrWhite - jester;
   if (civilian < 0) galat.push('Jumlah peran melebihi jumlah pemain.');
-  else if (civilian <= undercover + mrWhite) {
-    galat.push('Jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr. White.');
+  else if (civilian <= undercover + mrWhite + jester) {
+    galat.push('Jumlah Civilian harus lebih banyak dari gabungan Undercover, Mr. White, dan Jester.');
   }
   // Lovers = 2 Civilian atau 2 Undercover. Civilian hampir selalu >=2 bila komposisi valid.
   if (k.lovers && civilian >= 0 && civilian < 2 && undercover < 2) {

@@ -68,20 +68,43 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
   nonaktif?: boolean;
 }) {
   const k = rapikanKomposisi(komposisi);
-  const ubah = (peran: 'undercover' | 'mrWhite', d: number) => onUbah({ ...k, [peran]: Math.max(0, k[peran] + d) });
-  const maks = maksPenyusup(jumlah);
   const jester = k.jester ? 1 : 0;
+  const kapasitas = maksPenyusup(jumlah, jester);
+  const ubah = (peran: 'undercover' | 'mrWhite', d: number) => {
+    const lain = peran === 'undercover' ? k.mrWhite : k.undercover;
+    const maksPeran = Math.max(0, kapasitas - lain);
+    onUbah({ ...k, [peran]: Math.max(0, Math.min(maksPeran, k[peran] + d)) });
+  };
   const civilian = Math.max(0, jumlah - k.undercover - k.mrWhite - jester);
-  const nilai = (peran: 'undercover' | 'mrWhite', label: string) =>
-    nonaktif ? (
+  const nilai = (peran: 'undercover' | 'mrWhite', label: string) => {
+    const lain = peran === 'undercover' ? k.mrWhite : k.undercover;
+    const maksPeran = Math.max(k[peran], Math.max(0, kapasitas - lain));
+    return nonaktif ? (
       <strong className="angka-besar">{k[peran]}</strong>
     ) : (
-      <Stepper nilai={k[peran]} min={0} max={maks} onUbah={(d) => ubah(peran, d)} label={label} />
+      <Stepper nilai={k[peran]} min={0} max={maksPeran} onUbah={(d) => ubah(peran, d)} label={label} />
     );
+  };
   const toggle = (field: 'jester' | 'lovers', aktif: boolean) => {
     if (nonaktif) return;
-    if (field === 'jester') onUbah({ ...k, jester: aktif ? 1 : 0 });
-    else onUbah({ ...k, lovers: aktif });
+    if (field === 'jester') {
+      if (!aktif) {
+        onUbah({ ...k, jester: 0 });
+        return;
+      }
+      // Nyalakan Jester: turunkan UC/MW bila perlu agar civilian > UC+MW+Jester.
+      let uc = k.undercover;
+      let mw = k.mrWhite;
+      const kap = maksPenyusup(jumlah, 1);
+      while (uc + mw > kap) {
+        if (uc > 1) uc--;
+        else if (mw > 0) mw--;
+        else if (uc > 0) uc--;
+        else break;
+      }
+      if (uc + mw < 1) uc = 1;
+      onUbah({ ...k, jester: 1, undercover: uc, mrWhite: mw });
+    } else onUbah({ ...k, lovers: aktif });
   };
   return (
     <div className="kartu">
@@ -133,7 +156,7 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
           </button>
         )}
       </div>
-      <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White. Jester/Lovers opsional (min 5 pemain; keduanya min 6).</p>
+      <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White + Jester. Jester/Lovers opsional (min 5 pemain; keduanya min 6).</p>
       <p className="catatan nol"><strong>Jester</strong>: tanpa kata. Menang jika divote; kalah jika bertahan sampai akhir. Bukan Civilian.</p>
       <p className="catatan nol"><strong>Lovers</strong>: dua pemain peran sama (Civilian atau Undercover) dipasangkan diam-diam. Kamu diberi tahu siapa pasanganmu dan kalian punya kata yang sama. Lindungi pasangan; jika satu mati, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</p>
     </div>
