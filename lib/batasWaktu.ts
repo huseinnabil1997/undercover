@@ -21,6 +21,10 @@ export const DETIK_PERINGATAN = 5;
 export const TEKS_WAKTU_HABIS = '(waktu habis)';
 /** Host refresh: beri tambahan waktu agar pemain sempat tersambung ulang. */
 export const TAMBAHAN_PULIH_MS = 10000;
+/** Layar hasil eliminasi / aman: auto-lanjut tanpa menunggu host (detik). */
+export const DETIK_LANJUT_HASIL = 8;
+/** Fase baca kata: auto mulai diskusi jika belum semua Siap (detik). */
+export const DETIK_SIAP_KATA = 45;
 
 function pilih(x: unknown, daftar: readonly number[]): number {
   return typeof x === 'number' && daftar.includes(x) ? x : 0;

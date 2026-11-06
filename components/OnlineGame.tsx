@@ -1161,8 +1161,10 @@ function Riwayat({ view, g }: { view: ViewPemain; g: GameView }) {
 function FaseKata({ view, g, host, aksi }: PropsFase) {
   const peserta = pesertaDari(view);
   const sudah = g.siap.includes(view.saya);
+  const ikut = g.ikut;
   return (
     <section className="tumpuk">
+      <WaktuOnline g={g} awalan="kata|" label="Diskusi otomatis dalam" bunyi={false} />
       <KataSaya view={view} g={g} />
       <div className="kartu">
         <Progres nilai={g.siap.length} total={peserta.length} label="Siap" />
@@ -1175,10 +1177,19 @@ function FaseKata({ view, g, host, aksi }: PropsFase) {
         </ul>
       </div>
       <div className="aksi-bawah">
-        <button className="utama" disabled={sudah} onClick={() => aksi({ jenis: 'siap' })}>
-          {sudah ? 'Menunggu' : 'Siap'}
-        </button>
-        {host && <button className="kedua" onClick={() => aksi({ jenis: 'mulaiDiskusi' })}>Diskusi</button>}
+        {ikut && (
+          sudah ? (
+            <button className="kedua" onClick={() => aksi({ jenis: 'batalSiap' })}>Batal siap</button>
+          ) : (
+            <button className="utama" onClick={() => aksi({ jenis: 'siap' })}>Siap</button>
+          )
+        )}
+        {host && (
+          <div className="baris-tombol">
+            <button className="kedua" onClick={() => aksi({ jenis: 'mulaiDiskusi' })}>Diskusi</button>
+            <button className="kedua" onClick={() => aksi({ jenis: 'keLobby' })}>Batal ke lobby</button>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -1335,10 +1346,14 @@ function teksAman(view: ViewPemain, g: GameView): string {
 
 function Terungkap({ view, g, host, aksi }: PropsFase) {
   const korban = view.pemain.find((p) => p.id === g.tereliminasi);
+  const menungguTebak = g.tebakan === 'menunggu';
   return (
     <section className="tumpuk">
-      {g.tebakan === 'menunggu' && korban && (
+      {menungguTebak && korban && (
         <WaktuOnline g={g} awalan="tebak|" label={korban.id === view.saya ? 'Waktu menebak' : `Waktu tebakan ${korban.nama}`} bunyi={korban.id === view.saya} />
+      )}
+      {!menungguTebak && (
+        <WaktuOnline g={g} awalan="hasil|" label="Lanjut otomatis dalam" bunyi={false} />
       )}
       {!korban ? (
         <div className="kartu besar muncul">
@@ -1352,7 +1367,7 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
         <div className={`kartu besar peran-${korban.peran ?? 'civilian'}`}>
           <p className="sub">{korban.id === view.saya ? 'Kamu tereliminasi' : `${korban.nama} tereliminasi`}</p>
           <h1 className="kata ungkap">{korban.peran ? NAMA_PERAN[korban.peran] : '?'}</h1>
-          {g.tebakan === 'menunggu' && (korban.id === view.saya ? (
+          {menungguTebak && (korban.id === view.saya ? (
             <TebakMrWhite onTebak={(teks) => aksi({ jenis: 'tebak', teks })} />
           ) : (
             <p className="menunggu">Menunggu {korban.nama}</p>
@@ -1368,11 +1383,11 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
       <div className="aksi-bawah">
         {host ? (
           <>
-            {g.tebakan === 'menunggu' && <button className="kedua" onClick={() => aksi({ jenis: 'lewatiTebakan' })}>Skip</button>}
-            <button className="utama" disabled={g.tebakan === 'menunggu'} onClick={() => aksi({ jenis: 'lanjut' })}>Lanjut</button>
+            {menungguTebak && <button className="kedua" onClick={() => aksi({ jenis: 'lewatiTebakan' })}>Skip</button>}
+            <button className="utama" disabled={menungguTebak} onClick={() => aksi({ jenis: 'lanjut' })}>Lanjut</button>
           </>
         ) : (
-          g.tebakan !== 'menunggu' && <p className="menunggu">Menunggu host</p>
+          !menungguTebak && <p className="menunggu">Lanjut otomatis...</p>
         )}
       </div>
     </section>

@@ -366,6 +366,7 @@ describe('token sesi', () => {
 describe('validasi pesan jaringan', () => {
   it('hanya menerima aksi pemain biasa dengan field yang benar', () => {
     expect(rapikanAksiPemain({ jenis: 'siap', dari: 'h' })).toEqual({ jenis: 'siap' });
+    expect(rapikanAksiPemain({ jenis: 'batalSiap' })).toEqual({ jenis: 'batalSiap' });
     expect(rapikanAksiPemain({ jenis: 'vote', target: 'p1' })).toEqual({ jenis: 'vote', target: 'p1' });
     expect(rapikanAksiPemain({ jenis: 'vote', target: 5 })).toBeNull();
     expect(rapikanAksiPemain({ jenis: 'tebak', teks: { x: 1 } })).toBeNull();

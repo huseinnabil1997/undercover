@@ -105,6 +105,8 @@ export interface StateHost {
 /** Aksi yang boleh dikirim pemain mana pun (dari HP masing-masing). */
 export type AksiPemain =
   | { jenis: 'siap' }
+  /** Batalkan Siap di fase baca kata (sebelum semua siap / diskusi dimulai). */
+  | { jenis: 'batalSiap' }
   | { jenis: 'petunjuk'; teks: string }
   /** Pemain giliran sudah memberi petunjuk secara lisan: giliran maju tanpa entri riwayat. */
   | { jenis: 'sudahBicara' }

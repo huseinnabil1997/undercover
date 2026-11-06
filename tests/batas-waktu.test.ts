@@ -166,7 +166,7 @@ describe('batas waktu vote', () => {
     expect(tick(now, a).state).toBe(a);
     expect(a.game!.fase).toBe('terungkap');
     expect(a.game!.tereliminasi).toBeNull();
-    expect(a.game!.tenggat).toBeNull();
+    expect(a.game!.tenggat).toEqual({ kunci: 'hasil|1', sampai: now + 8_000, total: 8_000 });
   });
 });
 
@@ -185,8 +185,9 @@ describe('batas waktu tebakan Mr. White', () => {
     expect(a.game!.tebakan).toBe('salah');
     expect(a.game!.tebakanSalah).toBe(TEKS_WAKTU_HABIS);
     expect(a.game!.fase).toBe('terungkap');
-    expect(a.game!.tenggat).toBeNull();
-    expect(tick(now + 10, a).state).toBe(a);
+    expect(a.game!.tenggat).toEqual({ kunci: 'hasil|1', sampai: now + 8_000, total: 8_000 });
+    // Tick sebelum hasil habis: tetap di terungkap (idempoten tebak sudah lewat).
+    expect(tick(now + 10, hidupkan(a, now + 10)).state.game!.fase).toBe('terungkap');
     // Tebakan yang datang terlambat ditolak (sudah bukan langkah menebak).
     expect(pada(now + 20, a, { jenis: 'tebak', teks: 'APEL', dari: mw }).game!.fase).toBe('terungkap');
   });
@@ -214,5 +215,77 @@ describe('host refresh', () => {
     const s = keDiskusi(room(undefined));
     const p = pulihkanStateHost(JSON.parse(JSON.stringify(s)), T0)!;
     expect(p.game!.tenggat ?? null).toBeNull();
+  });
+});
+
+describe('auto lanjut hasil eliminasi (8 detik)', () => {
+  function eliminasiKeHasil(batas: BatasWaktu | undefined, now = T0) {
+    let s = pada(now, keDiskusi(room(batas)), { jenis: 'mulaiVote', dari: 'h' });
+    const hidup = s.game!.peserta.filter((id) => s.game!.hidup[id]);
+    const target = hidup[0];
+    const lain = hidup[1];
+    // Tidak boleh vote diri sendiri: target memilih orang lain.
+    s = pada(now + 100, s, ...hidup.map((id): Aksi => ({
+      jenis: 'vote', dari: id, target: id === target ? lain : target,
+    })));
+    return { s, now: now + 100, target };
+  }
+
+  it('pasang hasil|ronde setelah eliminasi tanpa tebakan, lalu tick lanjut ke ronde berikutnya', () => {
+    const { s, now } = eliminasiKeHasil({ petunjuk: 0, vote: 30 });
+    expect(s.game!.fase).toBe('terungkap');
+    expect(s.game!.tebakan).not.toBe('menunggu');
+    expect(s.game!.tenggat).toEqual({ kunci: 'hasil|1', sampai: now + 8_000, total: 8_000 });
+    expect(kunciLangkah(s.game!)).toBe('hasil|1');
+    const habis = now + 8_000;
+    const a = tick(habis, hidupkan(s, habis)).state;
+    expect(a.game!.fase).toBe('diskusi');
+    expect(a.game!.ronde).toBe(2);
+    // Idempoten: tick ulang di waktu yang sama tidak menggandakan ronde.
+    expect(tick(habis, hidupkan(a, habis)).state.game!.ronde).toBe(2);
+  });
+
+  it('tombol lanjut host mempercepat sebelum tenggat habis', () => {
+    const { s, now } = eliminasiKeHasil(undefined);
+    expect(s.game!.tenggat?.kunci).toBe('hasil|1');
+    const early = pada(now + 400, s, { jenis: 'lanjut', dari: 'h' });
+    expect(early.game!.fase).toBe('diskusi');
+    expect(early.game!.ronde).toBe(2);
+  });
+});
+
+describe('fase kata: Siap / Batal siap / auto diskusi', () => {
+  it('setelah mulai ada tenggat kata|ronde; waktu habis mulai diskusi tanpa host', () => {
+    const s = pada(T0, room(undefined), { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' });
+    expect(s.game!.fase).toBe('kata');
+    expect(s.game!.tenggat).toEqual({ kunci: 'kata|1', sampai: T0 + 45_000, total: 45_000 });
+    const now = T0 + 45_000;
+    const a = tick(now, hidupkan(s, now)).state;
+    expect(a.game!.fase).toBe('diskusi');
+    expect(a.game!.ronde).toBe(1);
+  });
+
+  it('batalSiap menghapus dari daftar; race semua siap tetap aman', () => {
+    let s = pada(T0, room(undefined), { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' });
+    const ids = s.game!.peserta;
+    s = pada(T0 + 10, s, { jenis: 'siap', dari: ids[0] });
+    expect(s.game!.siap).toEqual([ids[0]]);
+    s = pada(T0 + 20, s, { jenis: 'batalSiap', dari: ids[0] });
+    expect(s.game!.siap).toEqual([]);
+    // Semua siap dalam satu rantai: masuk diskusi sekali.
+    s = pada(T0 + 30, s, ...ids.map((id): Aksi => ({ jenis: 'siap', dari: id })));
+    expect(s.game!.fase).toBe('diskusi');
+    // batalSiap setelah diskusi tidak mengubah apa pun.
+    expect(pada(T0 + 40, s, { jenis: 'batalSiap', dari: ids[0] }).game!.fase).toBe('diskusi');
+  });
+
+  it('host keLobby dari fase kata kembali ke lobby; lobby tidak auto-mulai', () => {
+    let s = pada(T0, room(undefined), { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' });
+    s = pada(T0 + 5, s, { jenis: 'keLobby', dari: 'h' });
+    expect(s.game).toBeNull();
+    // Tanpa aksi mulai, tick lama tidak memulai permainan.
+    const later = T0 + 3_600_000;
+    const t = tick(later, hidupkan(s, later)).state;
+    expect(t.game).toBeNull();
   });
 });
