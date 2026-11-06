@@ -19,6 +19,10 @@ describe('validasi Jester/Lovers', () => {
     expect(validasiSetup(nama(5), { undercover: 1, mrWhite: 0, jester: 1, lovers: true })).not.toEqual([]);
     expect(validasiSetup(nama(6), { undercover: 1, mrWhite: 1, jester: 1, lovers: true })).toEqual([]);
   });
+
+  it('7 pemain Civ4 UC1 MW1 Jester On Lovers Off valid', () => {
+    expect(validasiSetup(nama(7), { undercover: 1, mrWhite: 1, jester: 1, lovers: false })).toEqual([]);
+  });
 });
 
 describe('cekPemenang dengan Jester', () => {

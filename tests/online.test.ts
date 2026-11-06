@@ -4,6 +4,7 @@ import {
 } from '../lib/online/host';
 import { ALFABET_KODE, buatKodeRoom, kodeDariUrl, kodeValid, peerIdHost, rapikanKode } from '../lib/online/room';
 import type { Aksi, StateHost } from '../lib/online/types';
+import type { Komposisi } from '../lib/game';
 import { BATAS_OFFLINE_MS } from '../lib/online/types';
 
 const KATA_C = 'ZEBRACIVIL';
@@ -28,13 +29,13 @@ function jalan(state: StateHost, ...aksi: Aksi[]): StateHost {
 }
 
 /** Room dengan host + n-1 pemain di lobby. */
-function room(n = 5, komposisi = { undercover: 1, mrWhite: 1 }): StateHost {
+function room(n = 5, komposisi: Komposisi = { undercover: 1, mrWhite: 1 }): StateHost {
   let s = buatStateHost('ABCDE', 'h', 'Host', { komposisi, kategori: ['klasik'] }, now);
   for (let i = 1; i < n; i++) s = jalan(s, { jenis: 'gabung', id: `p${i}`, nama: `Pemain ${i}` });
   return s;
 }
 
-function mulai(n = 5, komposisi = { undercover: 1, mrWhite: 1 }): StateHost {
+function mulai(n = 5, komposisi: Komposisi = { undercover: 1, mrWhite: 1 }): StateHost {
   return jalan(room(n, komposisi), { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' });
 }
 
@@ -94,6 +95,52 @@ describe('lobby', () => {
     expect(s2.game!.peserta).toEqual(['h', 'p1', 'p2', 'p3', 'p4']);
     expect(idDenganPeran(s2, 'undercover')).toHaveLength(1);
     expect(idDenganPeran(s2, 'mrwhite')).toHaveLength(1);
+  });
+
+  it('7 pemain + Jester (Civ4 UC1 MW1) valid; mulai sukses', () => {
+    const komposisi = { undercover: 1, mrWhite: 1, jester: 1 };
+    const s = room(7, komposisi);
+    const r = reduceHost(s, { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' }, ctx());
+    expect(r.tolak).toBeUndefined();
+    expect(r.state.game!.peserta).toHaveLength(7);
+    expect(idDenganPeran(r.state, 'jester')).toHaveLength(1);
+    expect(idDenganPeran(r.state, 'undercover')).toHaveLength(1);
+    expect(idDenganPeran(r.state, 'mrwhite')).toHaveLength(1);
+  });
+
+  it('8 terdaftar / 1 offline presence: peserta eksplisit 7 + Jester, offline jadi penonton', () => {
+    // Semua masih p.online=true di host (mirip presence offline belum sync ke flag host).
+    const komposisi = { undercover: 1, mrWhite: 1, jester: 1 };
+    const s = room(8, komposisi);
+    expect(s.pemain).toHaveLength(8);
+    expect(s.pemain.every((p) => p.online)).toBe(true);
+    // Tanpa peserta: host menghitung 8 → Civ5, tetap valid — tapi UI komposisi untuk 7.
+    // Repro gagal diam-diam: host.online lebih sedikit dari presence (3 putus → 5 aktif).
+    let sKurang = s;
+    sKurang = jalan(sKurang, { jenis: 'putus', id: 'p5' }, { jenis: 'putus', id: 'p6' }, { jenis: 'putus', id: 'p7' });
+    expect(sKurang.pemain.filter((p) => p.online)).toHaveLength(5);
+    const gagal = reduceHost(sKurang, { jenis: 'mulai', pasangan: PASANGAN, dari: 'h' }, ctx());
+    expect(gagal.tolak).toMatch(/Civilian/);
+    // Perbaikan: UI kirim 7 id aktif (presence); yang offline (p7) jadi penonton.
+    const ids7 = s.pemain.filter((p) => p.id !== 'p7').map((p) => p.id);
+    const r = reduceHost(s, { jenis: 'mulai', pasangan: PASANGAN, dari: 'h', peserta: ids7 }, ctx());
+    expect(r.tolak).toBeUndefined();
+    expect(r.state.game!.peserta).toEqual(ids7);
+    expect(r.state.game!.peserta).toHaveLength(7);
+    expect(r.state.pemain.find((p) => p.id === 'p7')!.online).toBe(false);
+    expect(r.state.game!.peserta.includes('p7')).toBe(false);
+    const vOffline = viewUntuk(r.state, 'p7');
+    expect(vOffline.game?.ikut).toBe(false);
+    expect(idDenganPeran(r.state, 'jester')).toHaveLength(1);
+  });
+
+  it('peserta berisi id asing ditolak dengan pesan jelas', () => {
+    const s = room(7, { undercover: 1, mrWhite: 1, jester: 1 });
+    const r = reduceHost(s, {
+      jenis: 'mulai', pasangan: PASANGAN, dari: 'h', peserta: ['h', 'p1', 'p2', 'p3', 'p4', 'p5', 'asing'],
+    }, ctx());
+    expect(r.tolak).toMatch(/tidak valid/);
+    expect(r.state.game).toBeNull();
   });
 
   it('pemain keluar dari lobby dihapus, host bisa mengeluarkan pemain', () => {

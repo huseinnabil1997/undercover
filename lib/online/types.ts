@@ -126,7 +126,7 @@ export type AksiPemain =
 /** Aksi yang hanya boleh dilakukan host. */
 export type AksiKhususHost =
   | { jenis: 'aturPengaturan'; pengaturan: Pengaturan }
-  | { jenis: 'mulai'; pasangan: PasanganKata; idMain?: string }
+  | { jenis: 'mulai'; pasangan: PasanganKata; idMain?: string; /** Id pemain aktif (presence UI); offline jadi penonton. */ peserta?: string[] }
   | { jenis: 'mulaiDiskusi' }
   | { jenis: 'lewatiGiliran' }
   | { jenis: 'mulaiVote' }

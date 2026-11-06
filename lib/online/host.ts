@@ -8,7 +8,7 @@ import { cekPetunjuk, MAKS_PETUNJUK, teksDipakai } from '../petunjuk';
 import type { Pemain } from '../types';
 import {
   BATAS_OFFLINE_MS, SUARA_LEWATI, VERSI_PROTOKOL,
-  type Aksi, type AksiPemain, type GameOnline, type GameView, type HasilVote, type Pengaturan, type StateHost, type TenggatHost, type ViewPemain,
+  type Aksi, type AksiPemain, type GameOnline, type GameView, type HasilVote, type PemainOnline, type Pengaturan, type StateHost, type TenggatHost, type ViewPemain,
 } from './types';
 
 export interface Konteks {
@@ -78,6 +78,28 @@ export function pesertaHidup(g: GameOnline): string[] {
 
 export function lobbyTerbuka(state: StateHost): boolean {
   return !state.game || state.game.fase === 'hasil';
+}
+
+/**
+ * Pemain yang ikut saat Mulai. UI mengirim id aktif presence-first; tanpa itu fallback p.online host.
+ * Pemain di room yang tidak ikut otomatis penonton (tidak masuk `game.peserta`).
+ */
+export function pilihPesertaMulai(
+  state: StateHost,
+  ids?: readonly string[] | null,
+): { peserta: PemainOnline[]; galat?: string } {
+  if (ids && ids.length > 0) {
+    const unik = [...new Set(ids)];
+    const byId = new Map(state.pemain.map((p) => [p.id, p]));
+    const peserta: PemainOnline[] = [];
+    for (const id of unik) {
+      const p = byId.get(id);
+      if (!p) return { peserta: [], galat: 'Daftar pemain tidak valid.' };
+      peserta.push(p);
+    }
+    return { peserta };
+  }
+  return { peserta: state.pemain.filter((p) => p.online) };
 }
 
 export function reduceHost(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
@@ -230,11 +252,17 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
     }
     case 'mulai': {
       if (!lobbyTerbuka(state)) return tetap('Permainan sedang berjalan.');
-      const peserta = state.pemain.filter((p) => p.online);
+      // Presence UI mengirim `peserta`; tanpa itu fallback p.online (bisa beda → validasi gagal diam-diam).
+      const pilih = pilihPesertaMulai(state, aksi.peserta);
+      if (pilih.galat) return tetap(pilih.galat);
+      const peserta = pilih.peserta;
       const galat = validasiSetup(peserta.map((p) => p.nama), state.pengaturan.komposisi);
       if (galat.length > 0) return tetap(galat[0]);
       const dibagi = bagiPeran(peserta.map((p) => p.nama), state.pengaturan.komposisi, rng);
       const ids = peserta.map((p) => p.id);
+      const idSet = new Set(ids);
+      // Samakan flag online host dengan set yang dipakai UI; yang offline tetap di room sebagai penonton.
+      const pemain = state.pemain.map((p) => (idSet.has(p.id) ? { ...p, online: true } : { ...p, online: false }));
       let lovers: GameOnline['lovers'] = null;
       const iLover = dibagi.findIndex((p) => p.pasanganLovers != null);
       if (iLover >= 0) {
@@ -263,7 +291,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
         pemenang: null,
         lovers,
       };
-      return { state: { ...state, game } };
+      return { state: { ...state, pemain, game } };
     }
     case 'siap': {
       if (!g || g.fase !== 'kata' || !g.peserta.includes(dari) || g.siap.includes(dari)) return tetap();

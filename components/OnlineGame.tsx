@@ -496,18 +496,32 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
   }, [sesi, keluarSesi, hostKeluar]);
 
   const aksi = useCallback(
-    (a: AksiUi) => {
-      if (!sesi) return;
+    (a: AksiUi): string | undefined => {
+      if (!sesi) return 'Belum ada sesi.';
       const petunjuk = a.jenis === 'petunjuk' || a.jenis === 'sudahBicara';
       if (petunjuk) setGalatPetunjuk(null);
       if (hostRef.current) {
         const t = hostRef.current.dispatch({ ...a, dari: sesi.id } as Aksi);
         // Galat petunjuk tampil di bawah kolom input, bukan sebagai toast.
-        if (t && petunjuk) setGalatPetunjuk(t);
-        else if (t) tampilkan(t);
-      } else if (klienRef.current) {
-        if (!klienRef.current.kirim(a as AksiPemain)) tampilkan('Belum tersambung ke host. Coba lagi sebentar.');
+        if (t && petunjuk) {
+          setGalatPetunjuk(t);
+          return t;
+        }
+        if (t) {
+          tampilkan(t);
+          return t;
+        }
+        return undefined;
       }
+      if (klienRef.current) {
+        if (!klienRef.current.kirim(a as AksiPemain)) {
+          const m = 'Belum tersambung ke host. Coba lagi sebentar.';
+          tampilkan(m);
+          return m;
+        }
+        return undefined;
+      }
+      return 'Belum tersambung ke host. Coba lagi sebentar.';
     },
     [sesi, tampilkan],
   );
@@ -522,19 +536,20 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
   }, []);
 
   const sesiMatch = sesi?.match;
-  const mulaiGame = useCallback(async () => {
+  /** `pesertaIds` = pemain aktif presence-first dari UI; wajib agar hitungan sama dengan lobby. */
+  const mulaiGame = useCallback(async (pesertaIds?: string[]): Promise<string | undefined> => {
     const host = hostRef.current;
-    if (!host) return;
+    if (!host) return 'Host belum siap.';
     setMemuat(true);
     try {
       const { kategori, panjangKata, sumberKata } = host.state.pengaturan;
       let hasil;
+      const nAktif = pesertaIds?.length ?? host.state.pemain.filter((p) => p.online).length;
       if (sesiMatch) {
         // Room match: tandai sudah mulai agar tidak menerima pemain matchmaking baru.
         void mulaiMatch().catch(() => undefined);
-        // Komposisi mengikuti jumlah pemain online saat mulai (Mr. White mulai 5 pemain).
-        const n = host.state.pemain.filter((p) => p.online).length;
-        aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, komposisi: komposisiDefault(Math.max(MIN_PEMAIN, n)) } });
+        // Komposisi mengikuti jumlah pemain aktif saat mulai (Mr. White mulai 5 pemain).
+        aksi({ jenis: 'aturPengaturan', pengaturan: { ...host.state.pengaturan, komposisi: komposisiDefault(Math.max(MIN_PEMAIN, nAktif)) } });
         if (pakaiCampur(host.state.pengaturan)) {
           // Campur: Kamus kita atau Internet diacak tiap game, semua kategori termasuk kamus pemain.
           hasil = await siapkanPasanganCampur(rapikanPanjangKata(panjangKata));
@@ -547,10 +562,19 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
         hasil = await siapkanPasangan(kategori, rapikanPanjangKata(panjangKata), sumberKata ?? tebakSumber(kategori));
       }
       const { pasangan, cadangan } = hasil;
-      aksi({ jenis: 'mulai', pasangan, idMain: crypto.randomUUID() });
+      const tolak = aksi({
+        jenis: 'mulai',
+        pasangan,
+        idMain: crypto.randomUUID(),
+        ...(pesertaIds && pesertaIds.length > 0 ? { peserta: pesertaIds } : {}),
+      });
+      if (tolak) return tolak;
       if (cadangan) void dialog.info({ judul: 'Pasangan satu kata tidak ada', pesan: PESAN_TANPA_SATU_KATA });
+      return undefined;
     } catch {
-      tampilkan('Gagal memuat bank kata. Periksa koneksi lalu coba lagi.');
+      const m = 'Gagal memuat bank kata. Periksa koneksi lalu coba lagi.';
+      tampilkan(m);
+      return m;
     } finally {
       setMemuat(false);
     }
@@ -598,12 +622,13 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
       const diam = infoMatch.s.diamMs + (Date.now() - infoMatch.t);
       if (!alasanMulaiOtomatis(onlineLobby, maksMatch, diam, infoMatch.s.acak)) return;
       mulaiOtomatis.current = kodeMatch;
-      void mulaiGame();
+      const ids = view?.pemain.filter((p) => p.online).map((p) => p.id);
+      void mulaiGame(ids);
     };
     // Jeda singkat agar pemain terakhir sempat menerima view lobby dan komposisi menyesuaikan.
     const id = window.setInterval(cek, 1500);
     return () => window.clearInterval(id);
-  }, [kodeMatch, lobbyMatch, maksMatch, onlineLobby, infoMatch, mulaiGame]);
+  }, [kodeMatch, lobbyMatch, maksMatch, onlineLobby, infoMatch, mulaiGame, view]);
 
   // Kembali ke menu dari room: konfirmasi, lalu putuskan PeerJS dan hapus sesi tersimpan agar tidak gabung ulang otomatis.
   const penjaga = useCallback(async () => {
@@ -878,7 +903,7 @@ interface PropsRuang {
   match?: number;
   infoMatch?: { s: StatusMatch; t: number } | null;
   aksi: (a: AksiUi) => void;
-  mulaiGame: () => void;
+  mulaiGame: (pesertaIds?: string[]) => void | Promise<string | undefined>;
   memuat: boolean;
   tampilkan: (t: string) => void;
   galatPetunjuk: string | null;
@@ -916,6 +941,8 @@ function namaDari(view: ViewPemain, id: string | null): string {
 function Lobby({ view, host, hexRoom, hadir, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const online = view.pemain.filter((p) => !offlineTampil(hadir, p));
   const [manual, setManual] = useState(false);
+  /** Pesan gagal Mulai terakhir; diikat ke kunci setup agar hilang otomatis saat jumlah/komposisi berubah (tanpa effect). */
+  const [gagalMulai, setGagalMulai] = useState<{ kunci: string; pesan: string } | null>(null);
   const { komposisi, kategori } = view.pengaturan;
   const panjangKata = rapikanPanjangKata(view.pengaturan.panjangKata);
   const sumberKata = view.pengaturan.sumberKata ?? tebakSumber(kategori);
@@ -929,6 +956,16 @@ function Lobby({ view, host, hexRoom, hadir, match, infoMatch, aksi, mulaiGame, 
   }, [online, komposisi, kategori]);
 
   const jumlah = online.length;
+  const kunciSetup = `${jumlah}|${komposisi.undercover}|${komposisi.mrWhite}|${komposisi.jester ? 1 : 0}|${komposisi.lovers ? 1 : 0}|${kategori.join(',')}|${match ?? ''}`;
+  const pesanGagal = gagalMulai && gagalMulai.kunci === kunciSetup ? gagalMulai.pesan : null;
+  // Semua alasan tombol Mulai disabled + kegagalan dispatch, selalu tampil di bawah tombol.
+  const alasanMulai = useMemo(() => {
+    const a = [...galat];
+    if (match && jumlah < MIN_MULAI_MATCH) a.push(`Minimal ${MIN_MULAI_MATCH} pemain untuk mulai di room match.`);
+    if (memuat) a.push('Memuat bank kata…');
+    if (pesanGagal && !a.includes(pesanGagal)) a.push(pesanGagal);
+    return a;
+  }, [galat, match, jumlah, memuat, pesanGagal]);
   // Selama host belum mengatur manual, komposisi mengikuti jumlah pemain online.
   useEffect(() => {
     if (!host || manual) return;
@@ -1046,14 +1083,24 @@ function Lobby({ view, host, hexRoom, hadir, match, infoMatch, aksi, mulaiGame, 
           {host || match ? '' : ' Diatur oleh host.'}
         </p>
       </div>
-      {galat.length > 0 && (
+      {alasanMulai.length > 0 && (
         <ul className="galat" role="alert">
-          {galat.map((x) => <li key={x}>{x}</li>)}
+          {alasanMulai.map((x) => <li key={x}>{x}</li>)}
         </ul>
       )}
       <div className="aksi-bawah">
         {host ? (
-          <button className="utama" disabled={galat.length > 0 || memuat || (!!match && jumlah < MIN_MULAI_MATCH)} onClick={mulaiGame}>
+          <button
+            className="utama"
+            disabled={galat.length > 0 || memuat || (!!match && jumlah < MIN_MULAI_MATCH)}
+            onClick={() => {
+              void (async () => {
+                const err = await mulaiGame(online.map((p) => p.id));
+                if (err) setGagalMulai({ kunci: kunciSetup, pesan: err });
+                else setGagalMulai(null);
+              })();
+            }}
+          >
             {memuat ? 'Memuat' : `Mulai (${jumlah})`}
           </button>
         ) : (
@@ -1609,12 +1656,13 @@ function CatatHasil({ idMain }: Pick<HasilUntukDicatat, 'idMain'>) {
   return <p className="catatan tengah-teks nol" role="status">{status === 'ok' ? 'Hasil tercatat di profilmu.' : 'Hasil belum tercatat. Host mencatat hasil saat permainan selesai.'}</p>;
 }
 
-function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
+function Hasil({ view, g, host, aksi, mulaiGame, memuat, hadir }: PropsFase) {
   const lihatProfil = useLihatProfil();
   const peta = usePetaGelar(view.pemain.map((x) => x.nama));
   const h = g.hasil;
   if (!h) return null;
   const peserta = pesertaDari(view);
+  const onlineIds = view.pemain.filter((p) => !offlineTampil(hadir, p)).map((p) => p.id);
   const perananSaya = peserta.find((x) => x.id === view.saya)?.peran;
   const sayaLovers = !!(h.lovers && h.lovers.includes(namaDari(view, view.saya)));
   const sayaMenang = perananSaya
@@ -1655,7 +1703,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
       <div className="aksi-bawah">
         {host ? (
           <>
-            <button className="utama" disabled={memuat} onClick={mulaiGame}>{memuat ? 'Memuat' : 'Ulang'}</button>
+            <button className="utama" disabled={memuat} onClick={() => void mulaiGame(onlineIds)}>{memuat ? 'Memuat' : 'Ulang'}</button>
             <button className="kedua" onClick={() => aksi({ jenis: 'keLobby' })}>Lobby</button>
           </>
         ) : (
