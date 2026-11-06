@@ -28,6 +28,12 @@ describe('setup', () => {
     }
     expect(komposisiDefault(3)).toEqual({ undercover: 1, mrWhite: 0, jester: 0, lovers: false });
     expect(komposisiDefault(5).mrWhite).toBe(1);
+    expect(komposisiDefault(5).jester).toBe(0);
+    expect(komposisiDefault(5).lovers).toBe(false);
+    expect(komposisiDefault(6).jester).toBe(1);
+    expect(komposisiDefault(6).lovers).toBe(false);
+    expect(komposisiDefault(7).jester).toBe(1);
+    expect(komposisiDefault(7).lovers).toBe(true);
   });
 
   it('menolak jumlah pemain di luar 3 sampai 20', () => {
@@ -64,7 +70,9 @@ describe('pembagian peran', () => {
       expect(pemain).toHaveLength(n);
       expect(pemain.filter((x) => x.peran === 'undercover')).toHaveLength(k.undercover);
       expect(pemain.filter((x) => x.peran === 'mrwhite')).toHaveLength(k.mrWhite);
+      expect(pemain.filter((x) => x.peran === 'jester')).toHaveLength(k.jester ? 1 : 0);
       expect(pemain.filter((x) => x.peran === 'civilian')).toHaveLength(n - k.undercover - k.mrWhite - (k.jester ? 1 : 0));
+      expect(pemain.filter((x) => x.pasanganLovers != null)).toHaveLength(k.lovers ? 2 : 0);
       expect(pemain.every((x) => x.hidup)).toBe(true);
     }
   });

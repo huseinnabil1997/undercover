@@ -55,10 +55,13 @@ export function jumlahJester(k: Komposisi): number {
 /** Komposisi peran bawaan yang seimbang untuk jumlah pemain tertentu. */
 export function komposisiDefault(jumlahPemain: number): Komposisi {
   const n = Math.max(MIN_PEMAIN, Math.min(MAX_PEMAIN, Math.floor(jumlahPemain)));
+  // Auto: Jester dari 6 pemain, Lovers dari 7; host tetap bisa mematikan. Syarat manual tetap 5/5/6.
+  const jester = n >= 6 ? 1 : 0;
+  const lovers = n >= 7;
   const mrWhite = n >= 5 ? 1 : 0;
   let undercover = Math.max(1, Math.round(n / 4));
-  while (undercover > 1 && n - undercover - mrWhite <= undercover + mrWhite) undercover--;
-  return { undercover, mrWhite, jester: 0, lovers: false };
+  while (undercover > 1 && n - undercover - mrWhite - jester <= undercover + mrWhite) undercover--;
+  return { undercover, mrWhite, jester, lovers };
 }
 
 /** Jumlah penyusup (Undercover + Mr. White) terbesar yang masih valid. */

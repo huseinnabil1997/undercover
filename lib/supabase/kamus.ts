@@ -53,13 +53,18 @@ export async function hapusKamus(id: number): Promise<void> {
 
 export interface BarisPeringkat { id: string; username: string; avatar_versi: number | null; main: number; menang: number }
 export type UrutPeringkat = 'menang' | 'winrate';
-export type PeranPeringkat = 'semua' | 'civilian' | 'undercover' | 'mrwhite';
+export type PeranPeringkat = 'semua' | 'civilian' | 'undercover' | 'mrwhite' | 'jester' | 'lovers';
 /** Winrate hanya dihitung untuk pemain dengan minimal sekian permainan (di peran yang dipilih). */
 export const MIN_MAIN_WINRATE = 5;
 
 export const URUT_PERINGKAT: { id: UrutPeringkat; nama: string }[] = [{ id: 'menang', nama: 'Jumlah menang' }, { id: 'winrate', nama: 'Winrate' }];
 export const PERAN_PERINGKAT: { id: PeranPeringkat; nama: string }[] = [
-  { id: 'semua', nama: 'Keseluruhan' }, { id: 'civilian', nama: 'Civilian' }, { id: 'undercover', nama: 'Undercover' }, { id: 'mrwhite', nama: 'Mr. White' },
+  { id: 'semua', nama: 'Keseluruhan' },
+  { id: 'civilian', nama: 'Civilian' },
+  { id: 'undercover', nama: 'Undercover' },
+  { id: 'mrwhite', nama: 'Mr. White' },
+  { id: 'lovers', nama: 'Lovers' },
+  { id: 'jester', nama: 'Jester' },
 ];
 
 /** Pilihan tersimpan; nilai tidak dikenal kembali ke bawaan. */
