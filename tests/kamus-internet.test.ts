@@ -33,6 +33,11 @@ const SUMBER_WAJIB = [
   'Nidroz/undercover (MIT)',
   'zhengyi-yang/WhoIsTheSpy (MIT)',
   'xuqssq/whois-undercover-game (MIT)',
+  'atomgenie/open-undercover (MIT)',
+  'FireEmblem59/Undercover (MIT)',
+  'Eikins/Undercover-Bot (MIT)',
+  'Qixuan112/WordSpy-Undercover (MIT)',
+  'llmons/who-is-the-undercover (Apache-2.0)',
 ];
 
 describe('integritas data kata Internet', () => {

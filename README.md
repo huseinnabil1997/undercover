@@ -147,12 +147,14 @@ Aturan setup: jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr
 
 Di layar pengaturan (mode satu HP dan online) ada pilihan **Sumber kata**:
 
-- **Internet** (bawaan): 3766 pasangan kata di 32 kategori (termasuk Game serta Anime & Animasi), diambil dari game
+- **Internet** (bawaan): 4147 pasangan kata di 32 kategori (termasuk Game serta Anime & Animasi), diambil dari game
   Undercover publik di GitHub, lalu diterjemahkan (bila perlu) dan dikurasi manual ke bahasa Indonesia:
   - berlisensi terbuka: MASJV/undercover-game (MIT), antebrl/undercover-word-game (MIT), CK-Arena (Apache-2.0),
     sqiprasanna/mr-white-undercover (MIT), trk78/undercover-plus (MIT), srinath987/Undercover-clone (MIT),
     VM1235/undercover-word-game (MIT), ChairGamertag87/undercover (MIT), Nidroz/undercover (MIT),
-    zhengyi-yang/WhoIsTheSpy (MIT), xuqssq/whois-undercover-game (MIT);
+    zhengyi-yang/WhoIsTheSpy (MIT), xuqssq/whois-undercover-game (MIT), atomgenie/open-undercover (MIT),
+    FireEmblem59/Undercover (MIT), Eikins/Undercover-Bot (MIT), Qixuan112/WordSpy-Undercover (MIT),
+    llmons/who-is-the-undercover (Apache-2.0);
   - repo publik tanpa berkas lisensi: chud-lori/ethok, DaengWithAI/undercover-indonesia,
     Egi-Pebriyawan/game-undercover-indonesia, arisandi95/undercover-game-indonesia, tejasdasari06/Imposter-game,
     Schluby/Undercover, Bipash2002/undercover, Deepak-Ajay-Dubey/word-spy, ArashadDodhiya/UnderCoverGame,

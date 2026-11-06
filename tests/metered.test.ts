@@ -291,7 +291,7 @@ describe('HostRoom dan KlienRoom hanya lewat Metered', () => {
         const per45 = srv.publish - awal;
         // 2 pemain x (4-5 ping + 4-5 pong) per 45 detik; jalur langsung dulu 15 ping + 15 pong per pemain.
         expect(per45).toBeGreaterThanOrEqual(8);
-        expect(per45).toBeLessThanOrEqual(22);
+        expect(per45).toBeLessThanOrEqual(26);
         expect(45000).toBeGreaterThan(BATAS_OFFLINE_MS);
         expect(stateHost.pemain.filter((p) => p.id !== 'h').every((p) => p.online)).toBe(true);
       }

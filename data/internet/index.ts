@@ -17,9 +17,10 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
     "nama": "Anime & Animasi",
     "sumber": [
       "ChairGamertag87/undercover (MIT)",
-      "Schluby/Undercover (tanpa lisensi)"
+      "Schluby/Undercover (tanpa lisensi)",
+      "Eikins/Undercover-Bot (MIT)"
     ],
-    "jumlah": 198,
+    "jumlah": 272,
     "jumlahSatuKata": 90
   },
   {
@@ -86,10 +87,14 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "Bipash2002/undercover (tanpa lisensi)",
       "Deepak-Ajay-Dubey/word-spy (tanpa lisensi)",
       "tejasdasari06/Imposter-game (tanpa lisensi)",
-      "zhengyi-yang/WhoIsTheSpy (MIT)"
+      "zhengyi-yang/WhoIsTheSpy (MIT)",
+      "atomgenie/open-undercover (MIT)",
+      "FireEmblem59/Undercover (MIT)",
+      "Qixuan112/WordSpy-Undercover (MIT)",
+      "llmons/who-is-the-undercover (Apache-2.0)"
     ],
-    "jumlah": 219,
-    "jumlahSatuKata": 154
+    "jumlah": 526,
+    "jumlahSatuKata": 353
   },
   {
     "id": "i-fantasi",
@@ -152,7 +157,7 @@ export const KATEGORI_INTERNET: KategoriInternetMeta[] = [
       "VM1235/undercover-word-game (MIT)"
     ],
     "jumlah": 283,
-    "jumlahSatuKata": 146
+    "jumlahSatuKata": 147
   },
   {
     "id": "i-hewan",

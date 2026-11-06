@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Apple",
+    "undercover": "Pear",
+    "fool": "Steak"
+  },
+  {
+    "id": 2,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Pizza",
+    "undercover": "Calzone",
+    "fool": "Ice Cream"
+  },
+  {
+    "id": 3,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Burger",
+    "undercover": "Sandwich",
+    "fool": "Sushi"
+  },
+  {
+    "id": 4,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Coffee",
+    "undercover": "Tea",
+    "fool": "Lemonade"
+  },
+  {
+    "id": 5,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Chocolate",
+    "undercover": "Candy",
+    "fool": "Popcorn"
+  },
+  {
+    "id": 6,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Spaghetti",
+    "undercover": "Noodles",
+    "fool": "Pancake"
+  },
+  {
+    "id": 7,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Butter",
+    "undercover": "Margarine",
+    "fool": "Honey"
+  },
+  {
+    "id": 8,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Croissant",
+    "undercover": "Brioche",
+    "fool": "Cookie"
+  },
+  {
+    "id": 9,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Cake",
+    "undercover": "Pie",
+    "fool": "Soup"
+  },
+  {
+    "id": 10,
+    "category": "Food",
+    "lang": "en",
+    "villager": "Orange",
+    "undercover": "Tangerine",
+    "fool": "Broccoli"
+  },
+  {
+    "id": 11,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Lion",
+    "undercover": "Tiger",
+    "fool": "Penguin"
+  },
+  {
+    "id": 12,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Dolphin",
+    "undercover": "Whale",
+    "fool": "Giraffe"
+  },
+  {
+    "id": 13,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Dog",
+    "undercover": "Wolf",
+    "fool": "Eagle"
+  },
+  {
+    "id": 14,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Cat",
+    "undercover": "Panther",
+    "fool": "Octopus"
+  },
+  {
+    "id": 15,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Horse",
+    "undercover": "Donkey",
+    "fool": "Flamingo"
+  },
+  {
+    "id": 16,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Crocodile",
+    "undercover": "Alligator",
+    "fool": "Rabbit"
+  },
+  {
+    "id": 17,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Frog",
+    "undercover": "Toad",
+    "fool": "Kangaroo"
+  },
+  {
+    "id": 18,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Falcon",
+    "undercover": "Hawk",
+    "fool": "Elephant"
+  },
+  {
+    "id": 19,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Bee",
+    "undercover": "Wasp",
+    "fool": "Koala"
+  },
+  {
+    "id": 20,
+    "category": "Animals",
+    "lang": "en",
+    "villager": "Shark",
+    "undercover": "Barracuda",
+    "fool": "Hamster"
+  },
+  {
+    "id": 21,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Ocean",
+    "undercover": "Sea",
+    "fool": "Volcano"
+  },
+  {
+    "id": 22,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Mountain",
+    "undercover": "Hill",
+    "fool": "Desert"
+  },
+  {
+    "id": 23,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "River",
+    "undercover": "Stream",
+    "fool": "Glacier"
+  },
+  {
+    "id": 24,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Rain",
+    "undercover": "Shower",
+    "fool": "Sunlight"
+  },
+  {
+    "id": 25,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Forest",
+    "undercover": "Jungle",
+    "fool": "Cave"
+  },
+  {
+    "id": 26,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Tornado",
+    "undercover": "Hurricane",
+    "fool": "Rainbow"
+  },
+  {
+    "id": 27,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Lake",
+    "undercover": "Pond",
+    "fool": "Island"
+  },
+  {
+    "id": 28,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Moon",
+    "undercover": "Satellite",
+    "fool": "Lightning"
+  },
+  {
+    "id": 29,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Snow",
+    "undercover": "Hail",
+    "fool": "Cactus"
+  },
+  {
+    "id": 30,
+    "category": "Nature",
+    "lang": "en",
+    "villager": "Waterfall",
+    "undercover": "Geyser",
+    "fool": "Swamp"
+  },
+  {
+    "id": 31,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Guitar",
+    "undercover": "Ukulele",
+    "fool": "Table"
+  },
+  {
+    "id": 32,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Smartphone",
+    "undercover": "Tablet",
+    "fool": "Bicycle"
+  },
+  {
+    "id": 33,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Laptop",
+    "undercover": "Desktop",
+    "fool": "Umbrella"
+  },
+  {
+    "id": 34,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Helicopter",
+    "undercover": "Airplane",
+    "fool": "Submarine"
+  },
+  {
+    "id": 35,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Pencil",
+    "undercover": "Pen",
+    "fool": "Backpack"
+  },
+  {
+    "id": 36,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Clock",
+    "undercover": "Watch",
+    "fool": "Lamp"
+  },
+  {
+    "id": 37,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Car",
+    "undercover": "Truck",
+    "fool": "Boat"
+  },
+  {
+    "id": 38,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Chair",
+    "undercover": "Stool",
+    "fool": "Mirror"
+  },
+  {
+    "id": 39,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Headphones",
+    "undercover": "Earbuds",
+    "fool": "Keyboard"
+  },
+  {
+    "id": 40,
+    "category": "Objects",
+    "lang": "en",
+    "villager": "Jacket",
+    "undercover": "Coat",
+    "fool": "Sunglasses"
+  }
+]

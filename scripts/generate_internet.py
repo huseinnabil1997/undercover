@@ -44,6 +44,11 @@ LABEL_SUMBER = {
     "nidroz": "Nidroz/undercover (MIT)",
     "zhengyi": "zhengyi-yang/WhoIsTheSpy (MIT)",
     "xuqssq": "xuqssq/whois-undercover-game (MIT)",
+    "atomgenie": "atomgenie/open-undercover (MIT)",
+    "fireemblem": "FireEmblem59/Undercover (MIT)",
+    "eikins": "Eikins/Undercover-Bot (MIT)",
+    "qixuan": "Qixuan112/WordSpy-Undercover (MIT)",
+    "llmons": "llmons/who-is-the-undercover (Apache-2.0)",
 }
 
 POLA_PASANGAN = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\]')
@@ -186,6 +191,24 @@ def muat_sumber(nama):
     elif jenis == "xuqssq":
         for p in json_asli("xuqssq-words.json"):
             hasil.add(kunci(p["common"], p["undercover"]))
+    elif jenis == "atomgenie":
+        for item in json_asli("atomgenie-words-i18n.json"):
+            en = item.get("en") or []
+            if len(en) >= 2:
+                hasil.add(kunci(en[0], en[1]))
+    elif jenis == "fireemblem":
+        for p in json_asli("fireemblem59-words-en.json"):
+            hasil.add(kunci(p["villager"], p["undercover"]))
+    elif jenis == "eikins":
+        for a, b in json_asli("eikins-anime.json"):
+            hasil.add(kunci(a, b))
+    elif jenis == "qixuan":
+        for p in json_asli("qixuan-word_pairs.json")["pairs"]:
+            hasil.add(kunci(p["word_a"], p["word_b"]))
+    elif jenis == "llmons":
+        teks = baca_asli("llmons-init.sql.txt")
+        for a, b in re.findall(r"\('([^']+)',\s*'([^']+)',", teks):
+            hasil.add(kunci(a, b))
     else:
         raise SystemExit(f"Sumber tidak dikenal: {nama}")
     return hasil

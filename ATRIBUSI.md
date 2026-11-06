@@ -20,6 +20,11 @@ Game ini punya dua sumber kata yang bisa dipilih di layar pengaturan:
 | [Nidroz/undercover](https://github.com/Nidroz/undercover) (commit f93c9fd) | MIT, Copyright (c) 2026 Nadir SIDHOUM | `data/internet/asli/LICENSE-Nidroz-MIT.txt` | Blok `en` di `src/lib/words.js` (`nidroz-words.js.txt`) |
 | [zhengyi-yang/WhoIsTheSpy](https://github.com/zhengyi-yang/WhoIsTheSpy) (commit b476c6c) | MIT (berkas LICENSE menunjuk https://zhengyi.mit-license.org/@2017) | `data/internet/asli/LICENSE-zhengyi-yang-MIT.txt` | `corpora/words-500.txt` bahasa Mandarin (`zhengyi-words-500.txt`) |
 | [xuqssq/whois-undercover-game](https://github.com/xuqssq/whois-undercover-game) (commit 265c24f) | MIT, Copyright (c) 2026 whois-undercover-game | `data/internet/asli/LICENSE-xuqssq-MIT.txt` | `words.json` bahasa Mandarin (`xuqssq-words.json`) |
+| [atomgenie/open-undercover](https://github.com/atomgenie/open-undercover) | MIT | `data/internet/asli/LICENSE-atomgenie-MIT.txt` | `front/helpers/words/words-i18n.json` (blok `en`) |
+| [FireEmblem59/Undercover](https://github.com/FireEmblem59/Undercover) | MIT | `data/internet/asli/LICENSE-FireEmblem59-MIT.txt` | `words-en.json` |
+| [Eikins/Undercover-Bot](https://github.com/Eikins/Undercover-Bot) | MIT | `data/internet/asli/LICENSE-Eikins-MIT.txt` | `words/anime.json` |
+| [Qixuan112/WordSpy-Undercover](https://github.com/Qixuan112/WordSpy-Undercover) | MIT | `data/internet/asli/LICENSE-Qixuan112-MIT.txt` | `server/word_pairs.json` |
+| [llmons/who-is-the-undercover](https://github.com/llmons/who-is-the-undercover) | Apache-2.0 | `data/internet/asli/LICENSE-llmons-Apache-2.0.txt` | `docs/init.sql` (pasangan kata) |
 
 ### Repo publik tanpa berkas lisensi
 
@@ -43,7 +48,7 @@ Pemilik repo bisa meminta pasangannya dihapus lewat issue di repo ini.
 
 ### Jumlah pasangan per sumber
 
-Setelah buang duplikat (huruf besar, diakritik, dan urutan diabaikan) dan kurasi, data Internet berisi 3766 pasangan di 32 kategori:
+Setelah buang duplikat (huruf besar, diakritik, dan urutan diabaikan) dan kurasi, data Internet berisi 4147 pasangan di 32 kategori:
 
 | Sumber | Pasangan |
 | --- | ---: |
@@ -54,10 +59,12 @@ Setelah buang duplikat (huruf besar, diakritik, dan urutan diabaikan) dan kurasi
 | chud-lori/ethok | 331 |
 | Bipash2002/undercover | 310 |
 | ChairGamertag87/undercover | 283 |
+| atomgenie/open-undercover | 270 |
 | antebrl/undercover-word-game | 181 |
 | CK-Arena | 154 |
 | srinath987/Undercover-clone | 142 |
 | Deepak-Ajay-Dubey/word-spy | 124 |
+| Eikins/Undercover-Bot | 74 |
 | zhengyi-yang/WhoIsTheSpy | 59 |
 | sqiprasanna/mr-white-undercover | 55 |
 | Egi-Pebriyawan/game-undercover-indonesia | 52 |
@@ -66,6 +73,9 @@ Setelah buang duplikat (huruf besar, diakritik, dan urutan diabaikan) dan kurasi
 | trk78/undercover-plus | 25 |
 | arisandi95/undercover-game-indonesia | 24 |
 | AmazinAmazon/Undercover | 20 |
+| llmons/who-is-the-undercover | 16 |
+| Qixuan112/WordSpy-Undercover | 13 |
+| FireEmblem59/Undercover | 8 |
 | xuqssq/whois-undercover-game | 7 |
 | VM1235/undercover-word-game | 6 |
 | jishnurajendran/undercover | 2 |

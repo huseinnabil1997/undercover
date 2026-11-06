@@ -35,7 +35,7 @@ import { TombolSuara } from './PanelSuara';
 import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk, type PemainRiwayat } from './Petunjuk';
 import { useDialog } from './Modal';
 import { menangDengan } from '@/lib/akun';
-import { KartuCariMatch, LayarAntrean } from './Antrean';
+import { KartuCariMatch, KartuDaftarRoom, LayarAntrean } from './Antrean';
 import { alasanMulaiOtomatis, campurAwalMatch, pakaiCampur, DETAK_MATCH_MS, formatTunggu, MIN_MULAI_MATCH, sisaHitungMundur, type StatusMatch } from '@/lib/online/antrean';
 import { detakMatch, keluarMatch, keluarMatchSaatTutup, mulaiMatch } from '@/lib/supabase/antrean';
 import { useLihatProfil } from './Akun';
@@ -48,6 +48,7 @@ import {
   ambilAlihHost, barisHasilRoom, galatDitolakServer, PESAN_GAGAL_CATAT, PESAN_ROOM_TAK_TERDAFTAR, bukaSnapshot, buatRoom, catatHasilRoom, detakHost, gabungRoom, hasilTercatat, roomSupabase, sandikanSnapshot,
   lepasKursiRoom, tinggalkanRoom, verifikasiPemain, type RoomSupabase,
 } from '@/lib/supabase/room';
+import { metaRoomPublik, publikDariPengaturan } from '@/lib/online/metaPublik';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -63,6 +64,7 @@ function pengaturanMatch(jumlah: number): Pengaturan {
     sumberCampur: campur,
     panjangKata: rapikanPanjangKata(null),
     batasWaktu: { petunjuk: 45, vote: 60 },
+    publik: true,
   };
 }
 
@@ -289,6 +291,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
           kategori: kategoriTersimpan(sumberTersimpan()),
           panjangKata: rapikanPanjangKata(baca<unknown>(KUNCI.panjangKata, null)),
           batasWaktu: batasTersimpan(),
+          publik: baca<unknown>(KUNCI.publikRoom, false) === true,
         }, Date.now());
       const awal: StateHost = { ...awalMentah, pemain: awalMentah.pemain.map((p) => (p.id === sesi.id ? { ...p, uid: userId } : p)) };
       simpanStateHost(awal);
@@ -322,7 +325,12 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
             terakhir = t;
             seqKirim = st.seq;
             try {
-              const masih = await detakHost(room.hex, await sandikanSnapshot(room, st));
+              const publik = publikDariPengaturan(st.pengaturan, sesi.match);
+              const masih = await detakHost(room.hex, await sandikanSnapshot(room, st), {
+                publik,
+                kode: st.kode,
+                meta: metaRoomPublik(st, sesi.nama),
+              });
               if (batal) return;
               if (!masih) {
                 // Pemain lain sudah mengambil alih host (mis. HP ini sempat putus): lanjut sebagai pemain.
@@ -836,6 +844,20 @@ function LayarMasuk({ kodeAwal, username, galat, onBeranda, onMasuk, onCari }: {
           <button className={kodeAwal ? 'kedua' : 'utama'} disabled={!namaBersih} onClick={() => masuk(true)}>Buat</button>
           <p className="catatan">HP kamu jadi host. Biarkan halaman tetap terbuka.</p>
         </div>
+        <KartuDaftarRoom
+          nonaktif={!namaBersih}
+          onGabung={(k) => {
+            if (!namaBersih || !kodeValid(k)) return;
+            onMasuk({
+              kode: k,
+              id: buatIdPemain(),
+              token: buatToken(),
+              nama: namaBersih,
+              host: false,
+              waktu: 0,
+            });
+          }}
+        />
         <KartuCariMatch onCari={onCari} />
         <div className="aksi-bawah" />
       </section>
@@ -994,6 +1016,36 @@ function Lobby({ view, host, hexRoom, hadir, match, infoMatch, aksi, mulaiGame, 
       )}
       <PilihPanjangKata nilai={panjangKata} onUbah={aturPanjangKata} nonaktif={!host} />
       <PilihBatasWaktu nilai={batasWaktu} onUbah={aturBatasWaktu} nonaktif={!host} mode="online" />
+      <div className="kartu" id="visibilitas-room">
+        <div className="baris-judul">
+          <h2>Visibilitas</h2>
+        </div>
+        <div className="segmen" role="group" aria-label="Visibilitas room">
+          {([[true, 'Publik'], [false, 'Privat']] as const).map(([nilai, nama]) => (
+            <button
+              key={nama}
+              type="button"
+              aria-pressed={(!!view.pengaturan.publik || !!match) === nilai}
+              disabled={!host || !!match}
+              onClick={() => {
+                if (match) return;
+                simpan(KUNCI.publikRoom, nilai);
+                atur({ publik: nilai });
+              }}
+            >
+              {nama}
+            </button>
+          ))}
+        </div>
+        <p className="catatan">
+          {match
+            ? 'Room match selalu tampil di daftar room publik.'
+            : view.pengaturan.publik
+              ? 'Room tampil di daftar Online. Siapa pun yang login bisa gabung sekali tap.'
+              : 'Hanya pemain dengan kode/undangan yang bisa gabung.'}
+          {host || match ? '' : ' Diatur oleh host.'}
+        </p>
+      </div>
       {galat.length > 0 && (
         <ul className="galat" role="alert">
           {galat.map((x) => <li key={x}>{x}</li>)}
@@ -1619,7 +1671,7 @@ function InfoMatch({ maks, online, host, info }: { maks: number; online: number;
       ) : acak ? (
         <p className="catatan" data-uji="host-memulai">Room Acak: host yang memulai. Tidak ada mulai otomatis.</p>
       ) : (
-        <p className="catatan">Room match terbuka. Pemain lain bisa masuk sampai penuh atau sampai game dimulai. Minimal {MIN_MULAI_MATCH} pemain untuk mulai.</p>
+        <p className="catatan">Room match terbuka. Pemain lain bisa masuk sampai game dimulai. Minimal {MIN_MULAI_MATCH} pemain untuk mulai.</p>
       )}
       <p className="catatan">{host ? (acak ? `Tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH} pemain.` : `Mulai otomatis saat ${maks} pemain, atau tekan Mulai bila sudah minimal ${MIN_MULAI_MATCH}.`) : 'Host memulai permainan.'}</p>
     </div>

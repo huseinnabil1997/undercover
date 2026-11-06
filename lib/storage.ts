@@ -27,6 +27,8 @@ export const KUNCI = {
   cacheKamusPemain: 'kamusPemain.cache',
   /** Snapshot top 3 musim berjalan milik sendiri (notifikasi). */
   top3Musim: 'top3Musim',
+  /** Room buat sendiri: tampil di daftar publik (true) atau privat. */
+  publikRoom: 'publikRoom',
 } as const;
 
 /** Kunci lama yang sudah tidak dipakai (pilihan kategori versi 1 dan skor). */

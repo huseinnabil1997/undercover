@@ -64,7 +64,7 @@ describe('kode room', () => {
 });
 
 describe('lobby', () => {
-  it('pemain bergabung, nama kembar ditolak, room penuh ditolak', () => {
+  it('pemain bergabung, nama kembar ditolak; gabung di atas MAX tidak ditolak penuh', () => {
     let s = room(3);
     expect(s.pemain.map((p) => p.nama)).toEqual(['Host', 'Pemain 1', 'Pemain 2']);
     const r = reduceHost(s, { jenis: 'gabung', id: 'x', nama: '  pemain 1 ' }, ctx());
@@ -72,7 +72,9 @@ describe('lobby', () => {
     expect(r.state).toBe(s);
     for (let i = 3; i < 20; i++) s = jalan(s, { jenis: 'gabung', id: `p${i}`, nama: `P${i}` });
     expect(s.pemain).toHaveLength(20);
-    expect(reduceHost(s, { jenis: 'gabung', id: 'baru', nama: 'Baru' }, ctx()).tolak).toMatch(/penuh/);
+    const lebih = reduceHost(s, { jenis: 'gabung', id: 'baru', nama: 'Baru' }, ctx());
+    expect(lebih.tolak).toBeUndefined();
+    expect(lebih.state.pemain).toHaveLength(21);
   });
 
   it('hanya host yang bisa mengubah pengaturan dan memulai', () => {

@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-07-26",
+  "pairs": [
+    { "id": "wp_001", "word_a": "奶茶", "word_b": "果汁", "difficulty": 2, "tags": ["饮品", "生活"], "note": "同属甜饮，原料与口感不同" },
+    { "id": "wp_002", "word_a": "火锅", "word_b": "麻辣烫", "difficulty": 2, "tags": ["美食"], "note": "同属麻辣热食，形态与场景不同" },
+    { "id": "wp_003", "word_a": "咖啡", "word_b": "可可", "difficulty": 2, "tags": ["饮品"], "note": "同属热饮，提神 vs 甜香" },
+    { "id": "wp_004", "word_a": "蛋糕", "word_b": "面包", "difficulty": 2, "tags": ["美食"], "note": "同属烘焙，甜点 vs 主食" },
+    { "id": "wp_005", "word_a": "西瓜", "word_b": "哈密瓜", "difficulty": 3, "tags": ["水果"], "note": "同属瓜类，外形与口感高度近似" },
+    { "id": "wp_006", "word_a": "啤酒", "word_b": "红酒", "difficulty": 2, "tags": ["酒类"], "note": "同属酒类，气泡与场景不同" },
+    { "id": "wp_007", "word_a": "微信", "word_b": "QQ", "difficulty": 2, "tags": ["社交", "科技"], "note": "同属社交 App，年代与功能侧重不同" },
+    { "id": "wp_008", "word_a": "老师", "word_b": "教授", "difficulty": 2, "tags": ["职业"], "note": "同属教育职业，层级与场景不同" },
+    { "id": "wp_009", "word_a": "跑步", "word_b": "散步", "difficulty": 2, "tags": ["运动"], "note": "同属步行运动，强度不同" },
+    { "id": "wp_010", "word_a": "沙发", "word_b": "摇椅", "difficulty": 3, "tags": ["家具"], "note": "同属坐具，形态近似易混淆" },
+    { "id": "wp_011", "word_a": "蝴蝶", "word_b": "蜜蜂", "difficulty": 3, "tags": ["动物"], "note": "同属飞虫，传粉与形态近似" },
+    { "id": "wp_012", "word_a": "钢琴", "word_b": "手风琴", "difficulty": 3, "tags": ["乐器"], "note": "同属键盘类乐器，发声原理不同" },
+    { "id": "wp_013", "word_a": "雨伞", "word_b": "阳伞", "difficulty": 3, "tags": ["日用品"], "note": "同属伞具，用途高度重叠" },
+    { "id": "wp_014", "word_a": "猫", "word_b": "狗", "difficulty": 1, "tags": ["宠物"], "note": "常见宠物，差异大易区分" },
+    { "id": "wp_015", "word_a": "手机", "word_b": "平板", "difficulty": 1, "tags": ["科技"], "note": "同属移动设备，尺寸与通话不同" },
+    { "id": "wp_016", "word_a": "包子", "word_b": "饺子", "difficulty": 2, "tags": ["美食"], "note": "同属面食包馅，形态与做法不同" },
+    { "id": "wp_017", "word_a": "地铁", "word_b": "高铁", "difficulty": 2, "tags": ["交通"], "note": "同属轨道交通，场景与速度不同" },
+    { "id": "wp_018", "word_a": "口罩", "word_b": "围巾", "difficulty": 2, "tags": ["日用品"], "note": "同属面部/颈部遮蔽物，用途不同" },
+    { "id": "wp_019", "word_a": "台灯", "word_b": "蜡烛", "difficulty": 2, "tags": ["日用品"], "note": "同属照明，原理与场景不同" },
+    { "id": "wp_020", "word_a": "冰箱", "word_b": "空调", "difficulty": 2, "tags": ["家电"], "note": "同属制冷家电，用途与场景不同" }
+  ]
+}

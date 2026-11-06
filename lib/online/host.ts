@@ -1,7 +1,7 @@
 // Reducer murni untuk host mode online. Host memegang state lengkap (termasuk semua kata dan peran),
 // lalu mengirim view yang sudah difilter ke setiap pemain (lihat viewUntuk).
 import {
-  bagiPeran, cekPemenang, loversMenangTambahan, MAX_PEMAIN, tebakanBenar, urutanBicara, validasiSetup, type Rng,
+  bagiPeran, cekPemenang, loversMenangTambahan, tebakanBenar, urutanBicara, validasiSetup, type Rng,
 } from '../game';
 import { DETIK_LANJUT_HASIL, DETIK_SIAP_KATA, detikTebakan, rapikanBatasWaktu, TAMBAHAN_PULIH_MS, TEKS_WAKTU_HABIS } from '../batasWaktu';
 import { cekPetunjuk, MAKS_PETUNJUK, teksDipakai } from '../petunjuk';
@@ -174,7 +174,7 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
         return { state: ubahPemain(state, aksi.id, { online: true, terakhir: ctx.now }) };
       }
       if (!nama) return tetap('Nama tidak boleh kosong.');
-      if (state.pemain.length >= MAX_PEMAIN) return tetap(`Room penuh (maksimal ${MAX_PEMAIN} pemain).`);
+      // Tidak ada penolakan "penuh" di join: mid-game masuk sebagai penonton; batas komposisi saat Mulai.
       if (state.pemain.some((p) => p.nama.toLowerCase() === nama.toLowerCase())) {
         return tetap('Nama itu sudah dipakai di room ini. Pakai nama lain.');
       }

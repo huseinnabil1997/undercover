@@ -18,13 +18,13 @@ describe('reducer room: banyak pemain', () => {
     expect(s.pemain.map((p) => [p.id, p.online])).toEqual([['h', true], ['pA', true], ['pB', true], ['pC', true]]);
   });
 
-  it('bisa sampai MAX_PEMAIN, pemain berikutnya ditolak karena penuh', () => {
+  it('bisa lewat MAX_PEMAIN saat gabung (tanpa penolakan penuh); batas komposisi saat Mulai', () => {
     let s = awal();
     for (let i = 1; i < MAX_PEMAIN; i++) s = jalan(s, gabung(`p${i}`, `Pemain ${i}`));
     expect(s.pemain).toHaveLength(MAX_PEMAIN);
     const r = reduceHost(s, gabung('lebih', 'Kelebihan'), { now });
-    expect(r.tolak).toMatch(/penuh/);
-    expect(r.state.pemain).toHaveLength(MAX_PEMAIN);
+    expect(r.tolak).toBeUndefined();
+    expect(r.state.pemain).toHaveLength(MAX_PEMAIN + 1);
   });
 
   it('putus atau keluar satu pemain tidak menghapus pemain lain', () => {

@@ -36,6 +36,8 @@ export interface Pengaturan {
   sumberCampur?: boolean;
   /** Batas waktu giliran petunjuk dan vote pilihan host. Kosong (state lama) berarti tanpa batas. */
   batasWaktu?: BatasWaktu;
+  /** Room tampil di daftar publik Online. Kosong/false = privat. Room match selalu dipaksa publik. */
+  publik?: boolean;
 }
 
 /** Tenggat langkah yang sedang berjalan, dihitung dan dijaga host (jam host). */

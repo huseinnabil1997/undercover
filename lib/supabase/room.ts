@@ -48,8 +48,42 @@ export async function bukaSnapshot(r: RoomSupabase, t: string): Promise<unknown>
   return b ? bukaSandi(r.kunci.kunci, b) : null;
 }
 
+export interface MetaDetakPublik {
+  host: string;
+  jumlah: number;
+  status: 'lobby' | 'main';
+  sumber: string;
+  kategori: string;
+}
+
 /** false: kita bukan host lagi (host sudah dipindah ke pemain lain). */
-export const detakHost = (hex: string, snapshot: string | null) => rpc<boolean>('detak_host', { p_topik: hex, p_snapshot: snapshot });
+export const detakHost = (
+  hex: string,
+  snapshot: string | null,
+  opsi?: { publik: boolean; kode: string; meta: MetaDetakPublik },
+) => rpc<boolean>('detak_host', {
+  p_topik: hex,
+  p_snapshot: snapshot,
+  ...(opsi
+    ? {
+        p_publik: opsi.publik,
+        p_kode: opsi.publik ? opsi.kode : null,
+        p_meta: opsi.publik ? opsi.meta : null,
+      }
+    : {}),
+});
+
+export interface BarisRoomPublikRpc {
+  kode: string;
+  host: string;
+  jumlah: number;
+  status: string;
+  sumber: string;
+  kategori: string;
+}
+
+/** Daftar room publik aktif (meta aman saja; butuh login). */
+export const daftarRoomPublik = () => rpc<BarisRoomPublikRpc[]>('daftar_room_publik', {});
 export const tinggalkanRoom = (hex: string, snapshot: string | null) => rpc<null>('tinggalkan_room', { p_topik: hex, p_snapshot: snapshot });
 
 /** Pemain biasa keluar: lepas kursi di server. Room dihapus bila ia anggota terakhir dan host sudah pergi. */
