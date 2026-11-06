@@ -17,7 +17,7 @@ import { umpan } from '@/lib/umpan/mesin';
 import { useDialog } from './Modal';
 import { TombolSuara } from './PanelSuara';
 import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk } from './Petunjuk';
-import { AturPeran, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
+import { AturPeran, BannerLovers, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Stepper, TombolMenu, type Penjaga } from './ui';
 import { Hitungan } from './Hitungan';
 
 /** Jeda singkat setelah waktu petunjuk habis agar pemain sempat melihat tanda sebelum giliran pindah. */
@@ -356,11 +356,6 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
               <p className="sub">Oper ke</p>
               <h1 className="nama-besar">{p.nama}</h1>
               <p className="kategori-lobby">Kategori: {labelKategoriPasangan(game.pasangan.sumber)}</p>
-              {p.pasanganLovers != null && (
-                <p className="banner-lovers" role="status">
-                  💞 Kamu Lovers bersama {pemain[p.pasanganLovers].nama}. Kalian punya kata yang sama.
-                </p>
-              )}
               <p className="catatan">Jangan sampai terlihat pemain lain.</p>
               <button className="utama" onClick={() => setFase({ ...fase, terbuka: true })}>Lihat</button>
             </>
@@ -382,9 +377,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
               )}
               {p.pasanganLovers != null && (
                 <>
-                  <p className="banner-lovers" role="status">
-                    💞 Kamu Lovers bersama {pemain[p.pasanganLovers].nama}. Kalian punya kata yang sama.
-                  </p>
+                  <BannerLovers nama={pemain[p.pasanganLovers].nama} />
                   <p className="catatan">Lindungi pasangan; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.</p>
                 </>
               )}

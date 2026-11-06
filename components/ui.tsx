@@ -1,8 +1,8 @@
 'use client';
 
 // Komponen tampilan yang dipakai mode satu HP dan mode online.
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { maksPenyusup, rapikanKomposisi, type Komposisi } from '@/lib/game';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { maksPenyusup, rapikanKomposisi, teksLoversBersama, type Komposisi } from '@/lib/game';
 import { KREDIT_SUMBER_INTERNET, pilihanKategoriGabung, PILIHAN_SUMBER, totalGabung } from '@/lib/bankKata';
 import type { EntriKamus } from '@/lib/kamusPemain';
 import { kamusPublik } from '@/lib/supabase/kamus';
@@ -18,6 +18,47 @@ export const JUDUL_MENANG: Record<Pemenang, string> = {
   jester: 'Jester menang!',
   lovers: 'Lovers menang!',
 };
+
+export { teksLoversBersama };
+
+/** Banner penuh: hanya saat kata dibuka (layar rahasia). */
+export function BannerLovers({ nama }: { nama: string }) {
+  return (
+    <p className="banner-lovers" role="status">
+      {teksLoversBersama(nama)}
+    </p>
+  );
+}
+
+/**
+ * Ikon 💞 kecil selama game. Ketuk untuk tampilkan/sembunyikan nama pasangan (default tersembunyi).
+ * Hanya untuk pemain Lovers (nama tidak boleh bocor ke pemain lain).
+ */
+export function IkonPasanganLovers({ nama }: { nama: string }) {
+  const [buka, setBuka] = useState(false);
+  const idPanel = useId();
+  return (
+    <div className="pasangan-lovers-toggle">
+      <button
+        type="button"
+        className="ikon-lovers-toggle"
+        aria-expanded={buka}
+        aria-controls={idPanel}
+        aria-label={buka ? 'Sembunyikan nama pasangan Lovers' : 'Tampilkan nama pasangan Lovers'}
+        onClick={() => setBuka((v) => !v)}
+      >
+        <span aria-hidden>💞</span>
+      </button>
+      {buka ? (
+        <p id={idPanel} className="banner-lovers" role="status">
+          {teksLoversBersama(nama)}
+        </p>
+      ) : (
+        <span id={idPanel} className="sr-only">Nama pasangan tersembunyi. Ketuk ikon hati untuk menampilkan.</span>
+      )}
+    </div>
+  );
+}
 
 /** Tanda merek: sosok penyusup hijau bertopi fedora dan bertopeng, sama dengan ilustrasi beranda dan favicon. */
 export function Tanda({ ukuran = 28 }: { ukuran?: number }) {

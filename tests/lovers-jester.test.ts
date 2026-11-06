@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  bagiPeran, cekPemenang, eliminasiDenganLovers, loversMenangTambahan, validasiSetup,
+  bagiPeran, cekPemenang, eliminasiDenganLovers, loversMenangTambahan, teksLoversBersama, validasiSetup,
 } from '../lib/game';
 import { buatStateHost, reduceHost, viewUntuk } from '../lib/online/host';
 import { menangDengan } from '../lib/akun';
@@ -10,6 +10,15 @@ import type { Pemain } from '../lib/types';
 const nama = (n: number) => Array.from({ length: n }, (_, i) => `P${i + 1}`);
 const p = (peran: Pemain['peran'], hidup = true, pasanganLovers?: number): Pemain => ({
   nama: peran, peran, hidup, ...(pasanganLovers != null ? { pasanganLovers } : {}),
+});
+
+
+describe('teksLoversBersama', () => {
+  it('memuat nama pasangan dan teks tetap', () => {
+    expect(teksLoversBersama('raynerie')).toBe(
+      '💞 Kamu Lovers bersama raynerie. Kalian punya kata yang sama.',
+    );
+  });
 });
 
 describe('validasi Jester/Lovers', () => {

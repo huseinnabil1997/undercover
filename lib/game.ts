@@ -158,6 +158,11 @@ export function pasangkanLovers(pemain: readonly Pemain[], rng: Rng = Math.rando
   });
 }
 
+/** Teks banner pribadi Lovers (hanya ke anggota pasangan). */
+export function teksLoversBersama(nama: string): string {
+  return `💞 Kamu Lovers bersama ${nama}. Kalian punya kata yang sama.`;
+}
+
 /** Kata yang dilihat pemain. Mr. White dan Jester tidak mendapat kata (null). */
 export function kataUntuk(pemain: Pemain, pasangan: PasanganKata): string | null {
   if (pemain.peran === 'civilian') return pasangan.civilian;
