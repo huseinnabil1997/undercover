@@ -215,7 +215,12 @@ export function PilihSumberKata({ nilai, onUbah, nonaktif }: { nilai: SumberKata
         ))}
       </div>
       <p className="catatan">{pilihan.keterangan} Pasangan buatan pemain (menu Kamus) ikut digabung.{nonaktif ? ' Diatur oleh host.' : ''}</p>
-      {nilai === 'internet' && <p className="catatan">Sumber kata: {KREDIT_SUMBER_INTERNET}.</p>}
+      {nilai === 'internet' && (
+        <details className="atribusi-sumber">
+          <summary>Sumber kata</summary>
+          <p>{KREDIT_SUMBER_INTERNET}.</p>
+        </details>
+      )}
     </div>
   );
 }

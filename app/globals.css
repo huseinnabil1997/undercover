@@ -1479,3 +1479,49 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .balasan-isi { margin: 0; white-space: pre-wrap; overflow-wrap: break-word; font-size: .92rem; line-height: 1.35; }
 .form-balasan { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .form-balasan textarea { min-height: 56px; resize: vertical; }
+
+/* ---------- Atribusi sumber kata (MIT/Apache: tetap ada, terlipat) ---------- */
+.atribusi-sumber {
+  margin: 10px 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--redup);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+.atribusi-sumber > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--redup);
+  opacity: 0.85;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.atribusi-sumber > summary::-webkit-details-marker { display: none; }
+.atribusi-sumber > summary::before {
+  content: '›';
+  display: inline-block;
+  font-weight: 700;
+  transition: transform 0.15s ease;
+}
+.atribusi-sumber[open] > summary::before { transform: rotate(90deg); }
+.atribusi-sumber > p {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--permukaan-2) 80%, transparent);
+  color: var(--redup);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+@media (max-width: 420px) {
+  .atribusi-sumber, .atribusi-sumber > summary { font-size: 0.68rem; }
+  .atribusi-sumber > p { font-size: 0.66rem; padding: 7px 8px; }
+}
