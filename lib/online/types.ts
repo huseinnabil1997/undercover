@@ -81,12 +81,18 @@ export interface GameOnline {
   kandidat: string[];
   putaranVote: 1 | 2;
   hasilVote: HasilVote | null;
-  /** Pemain yang baru tereliminasi (null = tidak ada eliminasi pada voting ini). */
+  /** Pemain yang baru tereliminasi lewat vote (null = aman). */
   tereliminasi: string | null;
+  /** Pasangan Lovers yang ikut mati karena eliminasi berantai. */
+  tereliminasiIkut?: string | null;
   tebakan: 'tidakPerlu' | 'menunggu' | 'salah';
   tebakanSalah?: string;
   pemenang: Pemenang | null;
   tebakanMrWhite?: string;
+  /** Dua id pemain Lovers (null jika fitur off). */
+  lovers: [string, string] | null;
+  /** Kemenangan tambahan Lovers di akhir. */
+  loversMenang?: boolean;
   /** Tenggat langkah saat ini; null/kosong jika tanpa batas waktu. */
   tenggat?: TenggatHost | null;
 }
@@ -161,6 +167,9 @@ export interface GameView {
   /** Label kategori pasangan ronde ini (aman dibagikan ke semua pemain). */
   kategoriKata: string;
   mrWhite: boolean;
+  jester: boolean;
+  /** Nama pasangan Lovers (hanya untuk diri sendiri jika termasuk pasangan). */
+  namaLovers?: string | null;
   siap: string[];
   urutan: string[];
   giliran: number;
@@ -173,6 +182,7 @@ export interface GameView {
   putaranVote: 1 | 2;
   hasilVote: HasilVote | null;
   tereliminasi: string | null;
+  tereliminasiIkut?: string | null;
   tebakan: 'tidakPerlu' | 'menunggu' | 'salah';
   tebakanSalah?: string;
   /**
@@ -181,7 +191,15 @@ export interface GameView {
    */
   tenggat?: { kunci: string; sisaMs: number; totalMs: number; sampaiLokal?: number } | null;
   /** Diisi hanya saat permainan selesai. */
-  hasil?: { pemenang: Pemenang; pasangan: PasanganKata; tebakanMrWhite?: string; idMain?: string };
+  hasil?: {
+    pemenang: Pemenang;
+    pasangan: PasanganKata;
+    tebakanMrWhite?: string;
+    idMain?: string;
+    loversMenang?: boolean;
+    /** Nama kedua Lovers (jika ada). */
+    lovers?: [string, string];
+  };
 }
 
 export interface ViewPemain {

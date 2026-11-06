@@ -69,9 +69,17 @@ export function barisHasilRoom(s: StateHost): { idMain: string; baris: Record<st
   for (const id of g.peserta) {
     const uid = s.pemain.find((p) => p.id === id)?.uid;
     if (!uid) continue;
-    const h: HasilUntukDicatat = { idMain: g.idMain, peran: g.peran[id], pemenang: g.pemenang, pasangan: g.pasangan, jumlahPemain: g.peserta.length };
+    const adalahLovers = !!(g.lovers && (g.lovers[0] === id || g.lovers[1] === id));
+    const h: HasilUntukDicatat = {
+      idMain: g.idMain, peran: g.peran[id], pemenang: g.pemenang, pasangan: g.pasangan, jumlahPemain: g.peserta.length,
+      adalahLovers, loversMenang: !!g.loversMenang && adalahLovers,
+    };
     const b = barisRiwayat(h);
-    baris.push({ user_id: uid, peran: b.peran, menang: b.menang, pemenang: b.pemenang, kata_civilian: b.kata_civilian, kata_undercover: b.kata_undercover });
+    baris.push({
+      user_id: uid, peran: b.peran, menang: b.menang, pemenang: b.pemenang,
+      kata_civilian: b.kata_civilian, kata_undercover: b.kata_undercover,
+      adalah_lovers: b.adalah_lovers, lovers_menang: b.lovers_menang,
+    });
   }
   return baris.length >= 3 ? { idMain: g.idMain, baris } : null;
 }

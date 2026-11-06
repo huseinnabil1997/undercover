@@ -309,6 +309,8 @@ p.galat { padding-left: 16px; }
 .daftar-lobby .nama, .urutan .nama { flex: 1; font-weight: 700; word-break: break-word; }
 .daftar-lobby em, .urutan em, .riwayat-nama em { color: var(--redup); font-style: normal; font-weight: 500; }
 .kecil.mini { min-height: 36px; padding: 0 12px; font-size: 0.8rem; }
+.lencana.jester { background: color-mix(in srgb, #7c3aed 35%, transparent); color: #c4b5fd; }
+.lencana.lovers { background: color-mix(in srgb, #ec4899 35%, transparent); color: #f9a8d4; }
 .lencana.host { background: var(--permukaan-2); color: var(--teks); }
 .lencana.off { background: var(--permukaan-2); color: var(--merah); }
 
@@ -631,6 +633,40 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .nama-peringkat { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .angka-peringkat { text-align: right; font-size: 0.85rem; line-height: 1.3; flex: none; }
 .angka-peringkat small { opacity: 0.7; }
+
+/* Kotak baris peringkat = frame gelar in-game (HP-friendly) */
+.daftar-peringkat > li[class*="gelar-"] {
+  position: relative;
+  isolation: isolate;
+  border: 2.5px solid var(--warna-frame);
+  border-radius: 12px;
+  margin: 6px 0;
+  padding: 10px 8px;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warna-frame-3) 65%, #000),
+    0 0 10px color-mix(in srgb, var(--warna-frame) 35%, transparent);
+  overflow: visible;
+}
+.daftar-peringkat > li.gelar-p1 { border-width: 3px; }
+.daftar-peringkat > li.gelar-p2 { border-width: 2.5px; }
+.daftar-peringkat > li.gelar-p3 {
+  border-width: 2px;
+  animation: border-glow-pelan 2.8s ease-in-out infinite;
+}
+.daftar-peringkat > li.sendiri[class*="gelar-"] {
+  background: color-mix(in srgb, var(--warna-frame) 10%, rgba(34, 214, 104, 0.08));
+}
+.daftar-peringkat .nama-dengan-avatar { overflow: visible; }
+.daftar-peringkat .bingkai-avatar { flex-shrink: 0; }
+@media (max-width: 420px) {
+  .daftar-peringkat { padding: 6px 8px; }
+  .daftar-peringkat > li[class*="gelar-"] { padding: 8px 6px; gap: 8px; margin: 5px 0; }
+  .daftar-peringkat .nomor { width: 20px; font-size: 0.9rem; }
+  .daftar-peringkat .angka-peringkat { font-size: 0.75rem; max-width: 38%; }
+  .daftar-peringkat .nama-peringkat { font-size: 0.9rem; }
+  .kartu .chip { font-size: 0.78rem; padding: 6px 8px; }
+}
+
 .daftar-kamus { list-style: none; margin: 10px 0 0; padding: 0; }
 .daftar-kamus li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--garis, rgba(255,255,255,0.08)); }
 .daftar-kamus li.lebar { display: block; }
@@ -693,6 +729,8 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .frame-perak { --warna-frame: #f3f4f6; --warna-frame-2: #ffffff; --warna-frame-3: #9ca3af; }
 .frame-hijau { --warna-frame: #22c55e; --warna-frame-2: #86efac; --warna-frame-3: #15803d; }
 .frame-oranye { --warna-frame: #f97316; --warna-frame-2: #fdba74; --warna-frame-3: #c2410c; }
+.frame-pink { --warna-frame: #ec4899; --warna-frame-2: #f9a8d4; --warna-frame-3: #be185d; }
+.frame-jester { --warna-frame: #7c3aed; --warna-frame-2: #34d399; --warna-frame-3: #4c1d95; }
 
 /* Dasar tebal + glow — selalu jelas meski animasi mati */
 .frame-gelar .frame-dasar {
@@ -880,6 +918,71 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .frame-kat-main.frame-p2 .frame-efek { animation-duration: 0.8s; opacity: 0.75; }
 .frame-kat-main.frame-p3 .frame-efek { animation: none; opacity: 0.5; }
 
+
+/* ---- Lovers: aura pink + aksen hati ---- */
+.frame-kat-lovers .frame-dasar {
+  border-color: color-mix(in srgb, var(--warna-frame) 90%, #fff);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--warna-frame-3) 70%, #000),
+    0 0 14px 4px color-mix(in srgb, var(--warna-frame) 55%, transparent),
+    0 0 22px 6px color-mix(in srgb, var(--warna-frame-2) 35%, transparent);
+}
+.frame-kat-lovers .frame-efek {
+  inset: calc(var(--frame-pad) * -0.7);
+  background: radial-gradient(circle, color-mix(in srgb, var(--warna-frame-2) 45%, transparent) 0%, transparent 68%);
+  animation: frame-hantu 2.4s ease-in-out infinite;
+  filter: blur(1.5px);
+}
+.frame-kat-lovers.frame-p1 .frame-aksen-a,
+.frame-kat-lovers.frame-p1 .frame-aksen-b {
+  inset: auto; width: 8px; height: 8px; background: transparent;
+  box-shadow: none;
+}
+.frame-kat-lovers.frame-p1 .frame-aksen-a::before,
+.frame-kat-lovers.frame-p1 .frame-aksen-b::before {
+  content: "♥"; position: absolute; inset: -2px; font-size: 10px; line-height: 1;
+  color: var(--warna-frame-2); text-shadow: 0 0 6px var(--warna-frame);
+  animation: frame-sparkle 1.8s ease-in-out infinite;
+}
+.frame-kat-lovers.frame-p1 .frame-aksen-a { top: 2%; right: 8%; }
+.frame-kat-lovers.frame-p1 .frame-aksen-b { bottom: 4%; left: 10%; animation-delay: 0.5s; }
+.frame-kat-lovers.frame-p1 .frame-aksen-b::before { animation-delay: 0.5s; }
+.frame-kat-lovers.frame-p2 .frame-efek { animation-duration: 3s; opacity: 0.75; }
+.frame-kat-lovers.frame-p3 .frame-efek { animation: frame-glow-pelan 3s ease-in-out infinite; opacity: 0.5; }
+
+/* ---- Jester: ungu-hijau + aksen badut ---- */
+.frame-kat-jester .frame-dasar {
+  border-image: none;
+  border-color: var(--warna-frame);
+  box-shadow:
+    0 0 0 1.5px var(--warna-frame-2),
+    0 0 12px 3px color-mix(in srgb, var(--warna-frame) 55%, transparent),
+    0 0 18px 4px color-mix(in srgb, var(--warna-frame-2) 35%, transparent);
+}
+.frame-kat-jester .frame-efek {
+  inset: calc(var(--frame-pad) * -0.4);
+  background:
+    conic-gradient(from var(--sudut, 0deg),
+      var(--warna-frame), transparent 25%, var(--warna-frame-2), transparent 55%, var(--warna-frame), transparent 80%);
+  -webkit-mask: radial-gradient(farthest-side, transparent 62%, #000 78%);
+  mask: radial-gradient(farthest-side, transparent 62%, #000 78%);
+  animation: frame-putar 3.2s linear infinite;
+  opacity: 0.9;
+}
+.frame-kat-jester.frame-p1 .frame-aksen-a,
+.frame-kat-jester.frame-p1 .frame-aksen-b,
+.frame-kat-jester.frame-p1 .frame-aksen-c {
+  inset: auto; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--warna-frame-2);
+  box-shadow: 0 0 6px 2px var(--warna-frame);
+  animation: frame-sparkle 1.4s ease-in-out infinite;
+}
+.frame-kat-jester.frame-p1 .frame-aksen-a { top: 0; left: 50%; background: var(--warna-frame); }
+.frame-kat-jester.frame-p1 .frame-aksen-b { bottom: 6%; left: 12%; animation-delay: 0.35s; }
+.frame-kat-jester.frame-p1 .frame-aksen-c { bottom: 6%; right: 12%; background: #f472b6; animation-delay: 0.7s; }
+.frame-kat-jester.frame-p2 .frame-efek { animation-duration: 4.5s; opacity: 0.75; }
+.frame-kat-jester.frame-p3 .frame-efek { animation: none; opacity: 0.5; }
+
 /* Keyframes */
 @property --sudut { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 @keyframes frame-putar { to { --sudut: 360deg; } }
@@ -991,12 +1094,14 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
 /* Kotak giliran & bubble chat: animasi setara frame profil per kategori */
-.daftar-petunjuk > li.gelar-emas, .chat-pesan.gelar-emas { --warna-frame: #f5c518; --warna-frame-2: #ffe566; --warna-frame-3: #b8860b; }
-.daftar-petunjuk > li.gelar-biru, .chat-pesan.gelar-biru { --warna-frame: #3b82f6; --warna-frame-2: #93c5fd; --warna-frame-3: #1d4ed8; }
-.daftar-petunjuk > li.gelar-ungu, .chat-pesan.gelar-ungu { --warna-frame: #a855f7; --warna-frame-2: #d8b4fe; --warna-frame-3: #6d28d9; }
-.daftar-petunjuk > li.gelar-perak, .chat-pesan.gelar-perak { --warna-frame: #f3f4f6; --warna-frame-2: #ffffff; --warna-frame-3: #9ca3af; }
-.daftar-petunjuk > li.gelar-hijau, .chat-pesan.gelar-hijau { --warna-frame: #22c55e; --warna-frame-2: #86efac; --warna-frame-3: #15803d; }
-.daftar-petunjuk > li.gelar-oranye, .chat-pesan.gelar-oranye { --warna-frame: #f97316; --warna-frame-2: #fdba74; --warna-frame-3: #c2410c; }
+.daftar-petunjuk > li.gelar-emas, .chat-pesan.gelar-emas, .daftar-peringkat > li.gelar-emas { --warna-frame: #f5c518; --warna-frame-2: #ffe566; --warna-frame-3: #b8860b; }
+.daftar-petunjuk > li.gelar-biru, .chat-pesan.gelar-biru, .daftar-peringkat > li.gelar-biru { --warna-frame: #3b82f6; --warna-frame-2: #93c5fd; --warna-frame-3: #1d4ed8; }
+.daftar-petunjuk > li.gelar-ungu, .chat-pesan.gelar-ungu, .daftar-peringkat > li.gelar-ungu { --warna-frame: #a855f7; --warna-frame-2: #d8b4fe; --warna-frame-3: #6d28d9; }
+.daftar-petunjuk > li.gelar-perak, .chat-pesan.gelar-perak, .daftar-peringkat > li.gelar-perak { --warna-frame: #f3f4f6; --warna-frame-2: #ffffff; --warna-frame-3: #9ca3af; }
+.daftar-petunjuk > li.gelar-hijau, .chat-pesan.gelar-hijau, .daftar-peringkat > li.gelar-hijau { --warna-frame: #22c55e; --warna-frame-2: #86efac; --warna-frame-3: #15803d; }
+.daftar-petunjuk > li.gelar-oranye, .chat-pesan.gelar-oranye, .daftar-peringkat > li.gelar-oranye { --warna-frame: #f97316; --warna-frame-2: #fdba74; --warna-frame-3: #c2410c; }
+.daftar-petunjuk > li.gelar-pink, .chat-pesan.gelar-pink, .daftar-peringkat > li.gelar-pink { --warna-frame: #ec4899; --warna-frame-2: #f9a8d4; --warna-frame-3: #be185d; }
+.daftar-petunjuk > li.gelar-jester, .chat-pesan.gelar-jester, .daftar-peringkat > li.gelar-jester { --warna-frame: #7c3aed; --warna-frame-2: #34d399; --warna-frame-3: #4c1d95; }
 
 .daftar-petunjuk > li[class*="gelar-"],
 .chat-pesan[class*="gelar-"] {
@@ -1217,6 +1322,57 @@ button:active:not(:disabled) { transform: scale(0.97); }
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
+}
+
+
+/* ---- Lovers: denyut pink + hati ---- */
+.daftar-petunjuk > li.gelar-p1.gelar-pink::before,
+.chat-pesan.gelar-p1.gelar-pink::before {
+  inset: -3px;
+  border: 2px solid color-mix(in srgb, var(--warna-frame) 75%, #fff);
+  animation: border-pulse-gelombang 2s ease-out infinite;
+}
+.daftar-petunjuk > li.gelar-p1.gelar-pink::after,
+.chat-pesan.gelar-p1.gelar-pink::after {
+  inset: auto; top: -6px; right: 10px; width: auto; height: auto;
+  content: "♥"; font-size: 12px; color: var(--warna-frame-2);
+  text-shadow: 0 0 8px var(--warna-frame);
+  animation: border-sparkle 1.8s ease-in-out infinite;
+  border: none; background: none;
+}
+.daftar-petunjuk > li.gelar-p2.gelar-pink::before,
+.chat-pesan.gelar-p2.gelar-pink::before {
+  inset: -2px;
+  border: 2px solid color-mix(in srgb, var(--warna-frame) 55%, transparent);
+  animation: border-pulse-gelombang 2.6s ease-out infinite;
+}
+
+/* ---- Jester: ungu-hijau berganti + titik badut ---- */
+.daftar-petunjuk > li.gelar-p1.gelar-jester,
+.chat-pesan.gelar-p1.gelar-jester {
+  border-color: var(--warna-frame) !important;
+  box-shadow:
+    inset 3px 0 0 var(--warna-frame-2),
+    0 0 0 1.5px var(--warna-frame-2),
+    0 0 14px color-mix(in srgb, var(--warna-frame) 50%, transparent);
+  animation: border-jester-kedip 1.8s steps(2) infinite;
+}
+.daftar-petunjuk > li.gelar-p1.gelar-jester::after,
+.chat-pesan.gelar-p1.gelar-jester::after {
+  inset: auto; top: -5px; left: 12px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--warna-frame-2);
+  box-shadow: 14px 2px 0 #f472b6, 28px 0 0 var(--warna-frame);
+  animation: border-sparkle 1.4s ease-in-out infinite;
+}
+.daftar-petunjuk > li.gelar-p2.gelar-jester,
+.chat-pesan.gelar-p2.gelar-jester {
+  box-shadow:
+    inset 3px 0 0 var(--warna-frame-2),
+    0 0 10px color-mix(in srgb, var(--warna-frame) 40%, transparent);
+}
+@keyframes border-jester-kedip {
+  0%, 100% { border-color: var(--warna-frame); }
+  50% { border-color: var(--warna-frame-2); }
 }
 
 @keyframes border-emas-putar { to { --sudut: 360deg; } }

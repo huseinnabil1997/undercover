@@ -1,7 +1,7 @@
 // Reducer murni untuk host mode online. Host memegang state lengkap (termasuk semua kata dan peran),
 // lalu mengirim view yang sudah difilter ke setiap pemain (lihat viewUntuk).
 import {
-  bagiPeran, cekPemenang, MAX_PEMAIN, tebakanBenar, urutanBicara, validasiSetup, type Rng,
+  bagiPeran, cekPemenang, loversMenangTambahan, MAX_PEMAIN, tebakanBenar, urutanBicara, validasiSetup, type Rng,
 } from '../game';
 import { DETIK_LANJUT_HASIL, DETIK_SIAP_KATA, detikTebakan, rapikanBatasWaktu, TAMBAHAN_PULIH_MS, TEKS_WAKTU_HABIS } from '../batasWaktu';
 import { cekPetunjuk, MAKS_PETUNJUK, teksDipakai } from '../petunjuk';
@@ -50,7 +50,21 @@ export function rapikanNama(nama: string): string {
 export function pemainGame(state: StateHost): Pemain[] {
   const g = state.game;
   if (!g) return [];
-  return g.peserta.map((id) => ({ nama: namaDari(state, id), peran: g.peran[id], hidup: g.hidup[id] }));
+  return g.peserta.map((id) => {
+    let pasanganLovers: number | undefined;
+    if (g.lovers) {
+      const [a, b] = g.lovers;
+      if (id === a) pasanganLovers = g.peserta.indexOf(b);
+      else if (id === b) pasanganLovers = g.peserta.indexOf(a);
+      if (pasanganLovers != null && pasanganLovers < 0) pasanganLovers = undefined;
+    }
+    return {
+      nama: namaDari(state, id),
+      peran: g.peran[id],
+      hidup: g.hidup[id],
+      ...(pasanganLovers != null ? { pasanganLovers } : {}),
+    };
+  });
 }
 
 function namaDari(state: StateHost, id: string): string {
@@ -220,9 +234,16 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
       const galat = validasiSetup(peserta.map((p) => p.nama), state.pengaturan.komposisi);
       if (galat.length > 0) return tetap(galat[0]);
       const dibagi = bagiPeran(peserta.map((p) => p.nama), state.pengaturan.komposisi, rng);
+      const ids = peserta.map((p) => p.id);
+      let lovers: GameOnline['lovers'] = null;
+      const iLover = dibagi.findIndex((p) => p.pasanganLovers != null);
+      if (iLover >= 0) {
+        const j = dibagi[iLover].pasanganLovers as number;
+        lovers = [ids[iLover], ids[j]];
+      }
       const game: GameOnline = {
         ...(aksi.idMain ? { idMain: aksi.idMain } : {}),
-        peserta: peserta.map((p) => p.id),
+        peserta: ids,
         peran: Object.fromEntries(peserta.map((p, i) => [p.id, dibagi[i].peran])),
         hidup: Object.fromEntries(peserta.map((p) => [p.id, true])),
         pasangan: aksi.pasangan,
@@ -237,8 +258,10 @@ function langkah(state: StateHost, aksi: Aksi, ctx: Konteks): HasilReduce {
         putaranVote: 1,
         hasilVote: null,
         tereliminasi: null,
+        tereliminasiIkut: null,
         tebakan: 'tidakPerlu',
         pemenang: null,
+        lovers,
       };
       return { state: { ...state, game } };
     }
@@ -355,7 +378,7 @@ function keDiskusi(state: StateHost, ronde: number, rng: Rng): StateHost {
   const urutan = urutanBicara(pemain, rng).map((i) => g.peserta[i]);
   return {
     ...state,
-    game: { ...g, ronde, fase: 'diskusi', urutan, giliran: 0, suara: {}, kandidat: [], putaranVote: 1, hasilVote: null, tereliminasi: null, tebakan: 'tidakPerlu', tebakanSalah: undefined },
+    game: { ...g, ronde, fase: 'diskusi', urutan, giliran: 0, suara: {}, kandidat: [], putaranVote: 1, hasilVote: null, tereliminasi: null, tereliminasiIkut: null, tebakan: 'tidakPerlu', tebakanSalah: undefined },
   };
 }
 
@@ -398,23 +421,39 @@ function tutupVoting(state: StateHost): StateHost {
   }
   const maks = Math.max(...Object.values(hasilVote.hitung));
   const id = g.kandidat.find((k) => hasilVote.hitung[k] === maks) as string;
-  return {
+  const hidup = { ...g.hidup, [id]: false };
+  let ikut: string | null = null;
+  if (g.lovers) {
+    const [a, b] = g.lovers;
+    const partner = id === a ? b : id === b ? a : null;
+    if (partner && hidup[partner]) {
+      hidup[partner] = false;
+      ikut = partner;
+    }
+  }
+  const stElim: StateHost = {
     ...state,
     game: {
       ...g,
       fase: 'terungkap',
       hasilVote,
-      hidup: { ...g.hidup, [id]: false },
+      hidup,
       tereliminasi: id,
+      tereliminasiIkut: ikut,
       tebakan: g.peran[id] === 'mrwhite' ? 'menunggu' : 'tidakPerlu',
       tebakanSalah: undefined,
     },
   };
+  // Jester divote: menang sendiri, game selesai (pasangan Lovers sudah ikut mati jika ada).
+  if (g.peran[id] === 'jester') return selesai(stElim, 'jester');
+  return stElim;
 }
 
 function selesai(state: StateHost, pemenang: NonNullable<GameOnline['pemenang']>, tebakanMrWhite?: string): StateHost {
   const g = state.game as GameOnline;
-  return { ...state, game: { ...g, fase: 'hasil', pemenang, tebakanMrWhite } };
+  const st: StateHost = { ...state, game: { ...g, fase: 'hasil', pemenang, tebakanMrWhite } };
+  const lm = g.lovers ? loversMenangTambahan(pemainGame(st)) : false;
+  return { ...st, game: { ...(st.game as GameOnline), loversMenang: lm } };
 }
 
 /* ------------------------------- Filter view ------------------------------- */
@@ -437,9 +476,19 @@ export function viewUntuk(state: StateHost, id: string, now = Date.now()): ViewP
       host: p.id === state.hostId,
       ikut,
       hidup,
-      ...(terbuka ? { peran: g.peran[p.id] } : {}),
+      ...(terbuka ? { peran: g!.peran[p.id] } : {}),
     };
   });
+  const game = g ? gameView(g, id, now) : null;
+  if (game && g) {
+    if (game.namaLovers) {
+      game.namaLovers = namaDari(state, game.namaLovers) || game.namaLovers;
+    }
+    if (game.hasil && g.lovers) {
+      game.hasil.lovers = [namaDari(state, g.lovers[0]), namaDari(state, g.lovers[1])];
+      if (g.loversMenang) game.hasil.loversMenang = true;
+    }
+  }
   return {
     seq: state.seq,
     kode: state.kode,
@@ -447,7 +496,7 @@ export function viewUntuk(state: StateHost, id: string, now = Date.now()): ViewP
     hostId: state.hostId,
     pemain,
     pengaturan: state.pengaturan,
-    game: g ? gameView(g, id, now) : null,
+    game,
   };
 }
 
@@ -455,15 +504,25 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
   const ikut = g.peserta.includes(id);
   const peran = ikut ? g.peran[id] : undefined;
   const kata = peran === 'civilian' ? g.pasangan.civilian : peran === 'undercover' ? g.pasangan.undercover : null;
+  let namaLovers: string | null | undefined;
+  if (ikut && g.lovers) {
+    const [a, b] = g.lovers;
+    if (id === a || id === b) {
+      const partnerId = id === a ? b : a;
+      // Nama dari peserta tidak ada di GameOnline; diisi di viewUntuk lewat state. Di sini pakai id singkat — diperbaiki di viewUntuk.
+      namaLovers = partnerId;
+    }
+  }
   const v: GameView = {
     ronde: g.ronde,
     fase: g.fase,
     ikut,
     hidup: ikut ? g.hidup[id] : false,
     kata,
-    /** Nama kategori/sumber pasangan ronde ini (bukan kata rahasia). */
     kategoriKata: g.pasangan.sumber?.trim() || 'Kata pemain',
     mrWhite: peran === 'mrwhite',
+    jester: peran === 'jester',
+    ...(namaLovers !== undefined ? { namaLovers } : {}),
     siap: g.siap,
     urutan: g.urutan,
     giliran: g.giliran,
@@ -474,12 +533,19 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
     putaranVote: g.putaranVote,
     hasilVote: g.hasilVote,
     tereliminasi: g.tereliminasi,
+    ...(g.tereliminasiIkut ? { tereliminasiIkut: g.tereliminasiIkut } : {}),
     tebakan: g.tebakan,
     ...(g.tebakanSalah !== undefined ? { tebakanSalah: g.tebakanSalah } : {}),
     tenggat: g.tenggat ? { kunci: g.tenggat.kunci, sisaMs: Math.max(0, g.tenggat.sampai - now), totalMs: g.tenggat.total } : null,
   };
   if (g.fase === 'hasil' && g.pemenang) {
-    v.hasil = { pemenang: g.pemenang, pasangan: g.pasangan, ...(g.tebakanMrWhite ? { tebakanMrWhite: g.tebakanMrWhite } : {}), ...(g.idMain ? { idMain: g.idMain } : {}) };
+    v.hasil = {
+      pemenang: g.pemenang,
+      pasangan: g.pasangan,
+      ...(g.tebakanMrWhite ? { tebakanMrWhite: g.tebakanMrWhite } : {}),
+      ...(g.idMain ? { idMain: g.idMain } : {}),
+      ...(g.loversMenang ? { loversMenang: true } : {}),
+    };
   }
   return v;
 }

@@ -6,9 +6,16 @@ import { persen } from '@/lib/akun';
 import { KUNCI, simpan } from '@/lib/storage';
 import { KATEGORI_MUSIM, META_KATEGORI, bolehFrame, kodeMusim, labelMusim, musimSebelumnya } from '@/lib/peringkatMusim';
 import { ambilPeringkat, MIN_MAIN_WINRATE, PERAN_PERINGKAT as PERAN, pilihanPeringkat, URUT_PERINGKAT as URUT, type BarisPeringkat } from '@/lib/supabase/kamus';
-import { ambilTopMusim, finalisasiMusim, type BarisTopMusim, type KategoriMusim } from '@/lib/supabase/peringkatMusim';
+import { ambilGelarPemain, ambilTopMusim, finalisasiMusim, gelarTeksDari, type BarisTopMusim, type KategoriMusim, type SlotMusimApi } from '@/lib/supabase/peringkatMusim';
 import { Kepala, useLihatProfil } from './Akun';
 import { Avatar } from './Avatar';
+
+/** Kelas kotak baris = pola gelar in-game (warna + peringkat). */
+function kelasKotakGelar(slot: SlotMusimApi | null | undefined): string {
+  if (!slot) return '';
+  const meta = META_KATEGORI[slot.kategori];
+  return `gelar-${meta.warna} gelar-p${slot.peringkat}`;
+}
 
 type Mode = 'semua' | 'musim';
 
@@ -73,15 +80,31 @@ function PapanSemua({ akun }: { akun: { id: string } }) {
   const [data, setData] = useState<BarisPeringkat[] | 'galat' | null>(null);
   const [muat, setMuat] = useState(0);
   const [pilih, setPilih] = useState(pilihanPeringkat);
+  const [frame, setFrame] = useState<Map<string, SlotMusimApi | null>>(() => new Map());
   useEffect(() => {
     let hidup = true;
     ambilPeringkat(pilih.urut, pilih.peran).then((d) => hidup && setData(d), () => hidup && setData('galat'));
     return () => { hidup = false; };
   }, [muat, pilih]);
+  useEffect(() => {
+    if (!Array.isArray(data) || data.length === 0) return;
+    let hidup = true;
+    ambilGelarPemain(data.map((r) => r.id)).then(
+      (list) => {
+        if (!hidup) return;
+        const m = new Map<string, SlotMusimApi | null>();
+        for (const g of list) m.set(g.user_id, gelarTeksDari(g).frame);
+        setFrame(m);
+      },
+      () => { if (hidup) setFrame(new Map()); },
+    );
+    return () => { hidup = false; };
+  }, [data]);
   const ubah = (p: Partial<typeof pilih>) => {
     const n = { ...pilih, ...p };
     simpan(KUNCI.peringkatUrut, n.urut);
     simpan(KUNCI.peringkatPeran, n.peran);
+    setFrame(new Map());
     setData(null);
     setPilih(n);
   };
@@ -113,18 +136,22 @@ function PapanSemua({ akun }: { akun: { id: string } }) {
       {Array.isArray(data) && data.length === 0 && <p className="catatan tengah-teks">{pilih.urut === 'winrate' ? `Belum ada pemain dengan minimal ${MIN_MAIN_WINRATE} kali main.` : 'Belum ada permainan tercatat.'}</p>}
       {Array.isArray(data) && data.length > 0 && (
         <ol className="kartu daftar-peringkat">
-          {data.map((r, i) => (
-            <li key={r.id} className={r.id === akun.id ? 'sendiri' : undefined}>
+          {data.map((r, i) => {
+            const slot = frame.get(r.id) ?? null;
+            const kotak = kelasKotakGelar(slot);
+            return (
+            <li key={r.id} className={[r.id === akun.id ? 'sendiri' : '', kotak].filter(Boolean).join(' ') || undefined}>
               <span className="nomor">{i + 1}</span>
               <button type="button" className="tautan nama-dengan-avatar" aria-label={`Lihat profil ${r.username}`} onClick={() => lihat(r.username)}>
-                <Avatar username={r.username} id={r.id} versi={r.avatar_versi} ukuran={32} />
+                <Avatar username={r.username} id={r.id} versi={r.avatar_versi} ukuran={32} slot={slot} />
                 <span className="nama-peringkat nama-teks">{r.username}</span>{r.id === akun.id && <em className="label-kamu">(kamu)</em>}
               </button>
               {pilih.urut === 'winrate'
                 ? <span className="angka-peringkat"><strong>{persen(r.menang, r.main) ?? 0}%</strong><br /><small>{r.menang} menang, {r.main} main</small></span>
                 : <span className="angka-peringkat"><strong>{r.menang}</strong> menang<br /><small>{r.main} main, {persen(r.menang, r.main) ?? 0}%</small></span>}
             </li>
-          ))}
+            );
+          })}
         </ol>
       )}
     </>
@@ -183,8 +210,13 @@ function PapanMusim({ akun }: { akun: { id: string } }) {
       {Array.isArray(data) && baris.length === 0 && <p className="catatan tengah-teks">Belum ada top 3 untuk kategori ini.</p>}
       {baris.length > 0 && (
         <ol className="kartu daftar-peringkat">
-          {baris.map((r) => (
-            <li key={`${r.kategori}-${r.peringkat}-${r.user_id}`} className={r.user_id === akun.id ? 'sendiri' : undefined}>
+          {baris.map((r) => {
+            const slot = pakaiFrame
+              ? { kategori: r.kategori, peringkat: r.peringkat, main: r.main, menang: r.menang, metrik: r.metrik } satisfies SlotMusimApi
+              : null;
+            const kotak = kelasKotakGelar(slot);
+            return (
+            <li key={`${r.kategori}-${r.peringkat}-${r.user_id}`} className={[r.user_id === akun.id ? 'sendiri' : '', kotak].filter(Boolean).join(' ') || undefined}>
               <span className="nomor">{r.peringkat}</span>
               <button type="button" className="tautan nama-dengan-avatar" aria-label={`Lihat profil ${r.username}`} onClick={() => lihat(r.username)}>
                 <Avatar
@@ -192,7 +224,7 @@ function PapanMusim({ akun }: { akun: { id: string } }) {
                   id={r.user_id}
                   versi={r.avatar_versi}
                   ukuran={32}
-                  slot={pakaiFrame ? { kategori: r.kategori, peringkat: r.peringkat, main: r.main, menang: r.menang, metrik: r.metrik } : null}
+                  slot={slot}
                 />
                 <span className="nama-peringkat nama-teks">{r.username}</span>
                 {r.user_id === akun.id && <em className="label-kamu">(kamu)</em>}
@@ -203,7 +235,8 @@ function PapanMusim({ akun }: { akun: { id: string } }) {
                 <small>{r.menang} menang, {r.main} main</small>
               </span>
             </li>
-          ))}
+            );
+          })}
         </ol>
       )}
     </>

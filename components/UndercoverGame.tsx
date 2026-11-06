@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
-  bagiPeran, cekPemenang, eliminasi, kataUntuk, komposisiDefault,
-  MAX_PEMAIN, MIN_PEMAIN, namaDefault, tebakanBenar, urutanBicara,
+  bagiPeran, cekPemenang, eliminasiDenganLovers, kataUntuk, komposisiDefault,
+  loversMenangTambahan, MAX_PEMAIN, MIN_PEMAIN, namaDefault, rapikanKomposisi, tebakanBenar, urutanBicara,
   rapikanPanjangKata, validasiSetup, type Komposisi,
 } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan } from '@/lib/bankKata';
@@ -28,10 +28,10 @@ type Fase =
   | { jenis: 'diskusi'; ronde: number; urutan: number[]; giliran: number }
   /** pilih: indeks pemain, LEWATI_LOKAL untuk abstain, atau null jika belum memilih. */
   | { jenis: 'vote'; ronde: number; pilih: number | null }
-  | { jenis: 'terungkap'; ronde: number; idx: number; tebakan: 'belum' | 'salah'; habis?: boolean }
+  | { jenis: 'terungkap'; ronde: number; idx: number; ikut?: number | null; tebakan: 'belum' | 'salah'; habis?: boolean }
   /** Vote dilewati: tidak ada yang tereliminasi, lanjut ronde berikutnya. */
   | { jenis: 'aman'; ronde: number }
-  | { jenis: 'hasil'; pemenang: Pemenang; tebakanMrWhite?: string };
+  | { jenis: 'hasil'; pemenang: Pemenang; tebakanMrWhite?: string; loversMenang?: boolean };
 
 /** Pilihan vote untuk melewati eliminasi di mode satu HP. */
 const LEWATI_LOKAL = -1;
@@ -56,7 +56,8 @@ function namaAwal(): string[] {
 function komposisiAwal(jumlah: number): Komposisi {
   const k = baca<Komposisi | null>(KUNCI.komposisi, null);
   const nama = Array.from({ length: jumlah }, (_, i) => namaDefault(i));
-  return k && validasiSetup(nama, k).length === 0 ? k : komposisiDefault(jumlah);
+  const r = k ? rapikanKomposisi(k) : null;
+  return r && validasiSetup(nama, r).length === 0 ? r : komposisiDefault(jumlah);
 }
 
 export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda?: () => void; daftarPenjaga?: (p: Penjaga | null) => void }) {
@@ -139,7 +140,8 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
   }
 
   function selesai(pemain: Pemain[], pemenang: Pemenang, tebakanMrWhite?: string) {
-    setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'hasil', pemenang, tebakanMrWhite } } : g));
+    const lm = loversMenangTambahan(pemain);
+    setGame((g) => (g ? { ...g, pemain, fase: { jenis: 'hasil', pemenang, tebakanMrWhite, ...(lm ? { loversMenang: true } : {}) } } : g));
   }
 
   function lanjutSetelahEliminasi(pemain: Pemain[], ronde: number) {
@@ -267,7 +269,15 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
           batas={batas}
           setFase={(fase) => setGame((g) => (g ? { ...g, fase } : g))}
           onEliminasi={(idx, ronde) =>
-            setGame((g) => (g ? { ...g, pemain: eliminasi(g.pemain, idx), fase: { jenis: 'terungkap', ronde, idx, tebakan: 'belum' } } : g))
+            setGame((g) => {
+              if (!g) return g;
+              const { pemain, ikut } = eliminasiDenganLovers(g.pemain, idx);
+              if (g.pemain[idx].peran === 'jester') {
+                const lm = loversMenangTambahan(pemain);
+                return { ...g, pemain, fase: { jenis: 'hasil', pemenang: 'jester', ...(lm ? { loversMenang: true } : {}) } };
+              }
+              return { ...g, pemain, fase: { jenis: 'terungkap', ronde, idx, ikut, tebakan: 'belum' } };
+            })
           }
           onTebak={(teks) => {
             if (tebakanBenar(teks, game.pasangan.civilian)) selesai(game.pemain, 'mrwhite', teks.trim());
@@ -357,9 +367,18 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
                 <h1 className="kata">{kata}</h1>
               ) : (
                 <>
-                  <h1 className="kata">Mr. White</h1>
-                  <p className="catatan">Kamu tanpa kata. Berbaurlah.</p>
+                  <h1 className="kata">{p.peran === 'jester' ? 'Jester' : 'Mr. White'}</h1>
+                  <p className="catatan">
+                    {p.peran === 'jester'
+                      ? 'Tanpa kata. Beri petunjuk sedikit mencurigakan agar divote, jangan terlalu jelas.'
+                      : 'Kamu tanpa kata. Berbaurlah.'}
+                  </p>
                 </>
+              )}
+              {p.pasanganLovers != null && (
+                <p className="catatan">
+                  <strong>Lovers:</strong> pasanganmu {pemain[p.pasanganLovers].nama}. Lindungi dia; giring vote ke pemain lain.
+                </p>
               )}
               <button
                 className="utama"
@@ -448,6 +467,11 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
         <div className={`kartu besar peran-${p.peran}`}>
           <p className="sub">{p.nama} tereliminasi</p>
           <h1 className="kata ungkap">{NAMA_PERAN[p.peran]}</h1>
+          {fase.ikut != null && (
+            <p className="catatan">
+              Lovers: {pemain[fase.ikut].nama} ikut tereliminasi ({NAMA_PERAN[pemain[fase.ikut].peran]}).
+            </p>
+          )}
           {menebak ? (
             <TebakMrWhite nama={p.nama} onTebak={onTebak} />
           ) : (
@@ -467,6 +491,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
       <div className={`kartu besar menang-${fase.pemenang} muncul`}>
         <h1 className="kata ungkap">{JUDUL_MENANG[fase.pemenang]}</h1>
         {fase.pemenang === 'mrwhite' && <p className="catatan">Tebakan benar: “{fase.tebakanMrWhite}”</p>}
+        {fase.loversMenang && <p className="catatan">Lovers menang tambahan: keduanya bertahan sampai akhir.</p>}
         <div className="kata-hasil">
           <div><span>Civilian</span><strong>{pasangan.civilian}</strong></div>
           <div><span>Undercover</span><strong>{pasangan.undercover}</strong></div>
@@ -480,6 +505,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
             <li key={i} className={p.hidup ? '' : 'mati'}>
               <span>{p.nama}</span>
               <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>
+              {p.pasanganLovers != null && <span className="lencana lovers">Lovers</span>}
             </li>
           ))}
         </ul>
@@ -592,6 +618,8 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li><strong>Civilian</strong>: mayoritas, semua mendapat kata yang sama.</li>
           <li><strong>Undercover</strong>: mendapat kata yang mirip tapi berbeda. Undercover tidak tahu bahwa dirinya Undercover.</li>
           <li><strong>Mr. White</strong>: tidak mendapat kata sama sekali dan harus berpura-pura tahu.</li>
+          <li><strong>Jester</strong> (opsional, min 5 pemain): tanpa kata seperti Mr. White, tetapi tidak menebak. Tujuan: beri petunjuk sedikit mencurigakan agar divote. Menang sendiri jika tereliminasi lewat vote; kalah jika bertahan sampai akhir. Tidak dihitung sebagai Civilian.</li>
+          <li><strong>Lovers</strong> (opsional, min 5; bersama Jester min 6): dua pemain dipasangkan diam-diam, tetap punya peran biasa. Keduanya tahu pasangannya. Tujuan: lindungi pasangan dan giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</li>
         </ul>
         <h3>Alur</h3>
         <ol>
@@ -600,6 +628,8 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li>Petunjuk: sesuai urutan, setiap pemain mengetik satu petunjuk singkat (maksimal 30 karakter) tentang katanya tanpa menyebut kata itu. Petunjuk yang sama dengan kata rahasia atau yang sudah dipakai ditolak. Semua petunjuk tercatat di riwayat per pemain dan per ronde. Tombol Sudah bicara menyelesaikan giliran tanpa mencatat apa pun ke riwayat.</li>
           <li>Voting: baca riwayat petunjuk, lalu pilih satu pemain yang paling dicurigai. Perannya langsung dibuka. Pilih Lewati jika belum yakin: tidak ada yang keluar dan permainan lanjut ke ronde berikutnya.</li>
           <li>Jika Mr. White tereliminasi, dia boleh menebak kata Civilian. Tebakan benar berarti Mr. White menang.</li>
+          <li>Jika Jester tereliminasi lewat vote, Jester menang dan permainan selesai.</li>
+          <li>Jika salah satu Lovers tereliminasi, pasangannya ikut tereliminasi.</li>
         </ol>
         <h3>Batas waktu</h3>
         <ul>
@@ -611,8 +641,10 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
         </ul>
         <h3>Menang</h3>
         <ul>
-          <li>Civilian menang jika semua Undercover dan Mr. White tereliminasi.</li>
-          <li>Penyusup (Undercover dan Mr. White) menang jika jumlah mereka yang tersisa sama atau lebih banyak dari Civilian, termasuk saat tinggal 2 pemain.</li>
+          <li>Civilian menang jika semua Undercover dan Mr. White tereliminasi. Jester yang masih hidup tidak mencegah kemenangan Civilian dan tidak menang bersama mereka.</li>
+          <li>Penyusup (Undercover dan Mr. White) menang jika jumlah mereka yang tersisa sama atau lebih banyak dari Civilian (Jester diabaikan dari kedua sisi), termasuk saat non-Jester tersisa 2 pemain.</li>
+          <li>Jester menang hanya jika divote; bertahan sampai akhir berarti kalah.</li>
+          <li>Lovers mendapat kemenangan tambahan jika keduanya masih hidup di akhir permainan.</li>
         </ul>
         <h3>Online</h3>
         <ul>

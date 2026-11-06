@@ -32,6 +32,24 @@ export function namaDefault(i: number): string {
 export interface Komposisi {
   undercover: number;
   mrWhite: number;
+  /** 0 atau 1. Default 0 (mati). Butuh minimal 5 pemain. */
+  jester?: number;
+  /** Pasangkan 2 pemain non-Jester. Default false. Butuh minimal 5; bersama Jester minimal 6. */
+  lovers?: boolean;
+}
+
+/** Normalisasi komposisi lama (tanpa jester/lovers). */
+export function rapikanKomposisi(k: Komposisi): Komposisi {
+  return {
+    undercover: Math.max(0, Math.floor(Number(k.undercover) || 0)),
+    mrWhite: Math.max(0, Math.floor(Number(k.mrWhite) || 0)),
+    jester: k.jester ? 1 : 0,
+    lovers: !!k.lovers,
+  };
+}
+
+export function jumlahJester(k: Komposisi): number {
+  return k.jester ? 1 : 0;
 }
 
 /** Komposisi peran bawaan yang seimbang untuk jumlah pemain tertentu. */
@@ -40,7 +58,7 @@ export function komposisiDefault(jumlahPemain: number): Komposisi {
   const mrWhite = n >= 5 ? 1 : 0;
   let undercover = Math.max(1, Math.round(n / 4));
   while (undercover > 1 && n - undercover - mrWhite <= undercover + mrWhite) undercover--;
-  return { undercover, mrWhite };
+  return { undercover, mrWhite, jester: 0, lovers: false };
 }
 
 /** Jumlah penyusup (Undercover + Mr. White) terbesar yang masih valid. */
@@ -52,17 +70,25 @@ export function maksPenyusup(jumlahPemain: number): number {
 export function validasiSetup(nama: readonly string[], komposisi: Komposisi): string[] {
   const galat: string[] = [];
   const n = nama.length;
-  const { undercover, mrWhite } = komposisi;
+  const k = rapikanKomposisi(komposisi);
+  const { undercover, mrWhite } = k;
+  const jester = jumlahJester(k);
   if (n < MIN_PEMAIN) galat.push(`Minimal ${MIN_PEMAIN} pemain.`);
   if (n > MAX_PEMAIN) galat.push(`Maksimal ${MAX_PEMAIN} pemain.`);
   if (!Number.isInteger(undercover) || !Number.isInteger(mrWhite) || undercover < 0 || mrWhite < 0) {
     galat.push('Jumlah peran harus bilangan bulat tidak negatif.');
   }
+  if (jester > 1) galat.push('Jester maksimal 1.');
+  if (jester && n < 5) galat.push('Jester butuh minimal 5 pemain.');
+  if (k.lovers && n < 5) galat.push('Lovers butuh minimal 5 pemain.');
+  if (jester && k.lovers && n < 6) galat.push('Jester dan Lovers bersama butuh minimal 6 pemain.');
   if (undercover + mrWhite < 1) galat.push('Minimal ada 1 Undercover atau Mr. White.');
-  const civilian = n - undercover - mrWhite;
-  if (civilian <= undercover + mrWhite) {
+  const civilian = n - undercover - mrWhite - jester;
+  if (civilian < 0) galat.push('Jumlah peran melebihi jumlah pemain.');
+  else if (civilian <= undercover + mrWhite) {
     galat.push('Jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr. White.');
   }
+  if (k.lovers && n - jester < 2) galat.push('Lovers butuh minimal 2 pemain non-Jester.');
   const bersih = nama.map((x) => x.trim().toLowerCase());
   if (bersih.some((x) => x === '')) galat.push('Nama pemain tidak boleh kosong.');
   if (new Set(bersih).size !== bersih.length) galat.push('Nama pemain tidak boleh kembar.');
@@ -72,16 +98,38 @@ export function validasiSetup(nama: readonly string[], komposisi: Komposisi): st
 /* ---------------------------------- Peran --------------------------------- */
 
 export function bagiPeran(nama: readonly string[], komposisi: Komposisi, rng: Rng = Math.random): Pemain[] {
+  const k = rapikanKomposisi(komposisi);
+  const jester = jumlahJester(k);
   const peran: Peran[] = [
-    ...Array<Peran>(komposisi.undercover).fill('undercover'),
-    ...Array<Peran>(komposisi.mrWhite).fill('mrwhite'),
-    ...Array<Peran>(nama.length - komposisi.undercover - komposisi.mrWhite).fill('civilian'),
+    ...Array<Peran>(k.undercover).fill('undercover'),
+    ...Array<Peran>(k.mrWhite).fill('mrwhite'),
+    ...Array<Peran>(jester).fill('jester'),
+    ...Array<Peran>(nama.length - k.undercover - k.mrWhite - jester).fill('civilian'),
   ];
   const acak = acakUrutan(peran, rng);
-  return nama.map((n, i) => ({ nama: n.trim(), peran: acak[i], hidup: true }));
+  let pemain: Pemain[] = nama.map((n, i) => ({ nama: n.trim(), peran: acak[i], hidup: true }));
+  if (k.lovers) pemain = pasangkanLovers(pemain, rng);
+  return pemain;
 }
 
-/** Kata yang dilihat pemain. Mr. White tidak mendapat kata (null). */
+/** Pasangkan 2 pemain non-Jester secara acak (saling merujuk lewat pasanganLovers). */
+export function pasangkanLovers(pemain: readonly Pemain[], rng: Rng = Math.random): Pemain[] {
+  const kandidat = pemain.map((p, i) => i).filter((i) => pemain[i].peran !== 'jester');
+  if (kandidat.length < 2) return pemain.map((p) => ({ ...p }));
+  const acak = acakUrutan(kandidat, rng);
+  const a = acak[0];
+  const b = acak[1];
+  return pemain.map((p, i) => {
+    if (i === a) return { ...p, pasanganLovers: b };
+    if (i === b) return { ...p, pasanganLovers: a };
+    if (p.pasanganLovers == null) return { ...p };
+    const rest = { ...p };
+    delete rest.pasanganLovers;
+    return rest;
+  });
+}
+
+/** Kata yang dilihat pemain. Mr. White dan Jester tidak mendapat kata (null). */
 export function kataUntuk(pemain: Pemain, pasangan: PasanganKata): string | null {
   if (pemain.peran === 'civilian') return pasangan.civilian;
   if (pemain.peran === 'undercover') return pasangan.undercover;
@@ -92,7 +140,7 @@ export function kataUntuk(pemain: Pemain, pasangan: PasanganKata): string | null
 export function urutanBicara(pemain: readonly Pemain[], rng: Rng = Math.random): number[] {
   const hidup = pemain.map((p, i) => ({ p, i })).filter((x) => x.p.hidup);
   const urut = acakUrutan(hidup, rng);
-  const pertama = urut.findIndex((x) => x.p.peran !== 'mrwhite');
+  const pertama = urut.findIndex((x) => x.p.peran !== 'mrwhite' && x.p.peran !== 'jester');
   if (pertama > 0) {
     const [x] = urut.splice(pertama, 1);
     urut.unshift(x);
@@ -107,19 +155,57 @@ export function eliminasi(pemain: readonly Pemain[], indeks: number): Pemain[] {
 }
 
 /**
- * Cek pemenang.
- * - Civilian menang jika semua Undercover dan Mr. White tereliminasi.
- * - Penyusup menang jika penyusup tersisa >= Civilian tersisa
- *   (termasuk saat tinggal 2 pemain dan minimal satu penyusup).
+ * Cek pemenang tim (bukan Jester/Lovers).
+ * - Jester tidak dihitung sebagai Civilian maupun penyusup.
+ * - Civilian menang jika tidak ada Undercover/Mr. White tersisa (Jester yang bertahan tetap kalah).
+ * - Penyusup (Undercover + Mr. White) menang jika jumlah mereka >= Civilian tersisa
+ *   (termasuk saat non-Jester tersisa <= 2 dan ada penyusup).
+ * Jester menang hanya lewat eliminasi vote (ditangani di luar fungsi ini).
+ * Lovers adalah kemenangan tambahan jika keduanya masih hidup di akhir (lihat loversMenang).
  */
 export function cekPemenang(pemain: readonly Pemain[]): Pemenang | null {
   const hidup = pemain.filter((p) => p.hidup);
   const civilian = hidup.filter((p) => p.peran === 'civilian').length;
-  const penyusup = hidup.length - civilian;
+  const penyusup = hidup.filter((p) => p.peran === 'undercover' || p.peran === 'mrwhite').length;
+  const nonJester = hidup.filter((p) => p.peran !== 'jester').length;
   if (penyusup === 0) return 'civilian';
   if (penyusup >= civilian) return 'penyusup';
-  if (hidup.length <= 2 && penyusup >= 1) return 'penyusup';
+  if (nonJester <= 2 && penyusup >= 1) return 'penyusup';
   return null;
+}
+
+/** Kedua anggota Lovers masih hidup. */
+export function loversMasihHidup(pemain: readonly Pemain[]): boolean {
+  const pasangan = pemain
+    .map((p, i) => ({ p, i }))
+    .filter((x) => x.p.hidup && x.p.pasanganLovers != null);
+  if (pasangan.length < 2) return false;
+  return pasangan.every((x) => {
+    const j = x.p.pasanganLovers!;
+    return j >= 0 && j < pemain.length && pemain[j].hidup && pemain[j].pasanganLovers === x.i;
+  });
+}
+
+/**
+ * Eliminasi pemain + pasangan Lovers jika ada (eliminasi berantai).
+ * Mengembalikan daftar baru dan indeks pasangan yang ikut (null jika tidak ada).
+ */
+export function eliminasiDenganLovers(
+  pemain: readonly Pemain[],
+  indeks: number,
+): { pemain: Pemain[]; ikut: number | null } {
+  let hasil = eliminasi(pemain, indeks);
+  const pasangan = pemain[indeks]?.pasanganLovers;
+  if (pasangan == null || pasangan < 0 || pasangan >= hasil.length || !hasil[pasangan].hidup) {
+    return { pemain: hasil, ikut: null };
+  }
+  hasil = eliminasi(hasil, pasangan);
+  return { pemain: hasil, ikut: pasangan };
+}
+
+/** Lovers menang tambahan bila keduanya masih hidup saat game berakhir. */
+export function loversMenangTambahan(pemain: readonly Pemain[]): boolean {
+  return loversMasihHidup(pemain);
 }
 
 export function normalisasiTebakan(s: string): string {

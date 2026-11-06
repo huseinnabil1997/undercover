@@ -1,4 +1,4 @@
-export type Peran = 'civilian' | 'undercover' | 'mrwhite';
+export type Peran = 'civilian' | 'undercover' | 'mrwhite' | 'jester';
 
 export interface Subkategori {
   id: string;
@@ -61,6 +61,8 @@ export interface Pemain {
   nama: string;
   peran: Peran;
   hidup: boolean;
+  /** Indeks pasangan Lovers di array pemain (saling merujuk). */
+  pasanganLovers?: number;
 }
 
-export type Pemenang = 'civilian' | 'penyusup' | 'mrwhite';
+export type Pemenang = 'civilian' | 'penyusup' | 'mrwhite' | 'jester' | 'lovers';

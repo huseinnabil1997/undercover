@@ -2,19 +2,21 @@
 
 // Komponen tampilan yang dipakai mode satu HP dan mode online.
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { maksPenyusup, type Komposisi } from '@/lib/game';
+import { maksPenyusup, rapikanKomposisi, type Komposisi } from '@/lib/game';
 import { KREDIT_SUMBER_INTERNET, pilihanKategoriGabung, PILIHAN_SUMBER, totalGabung } from '@/lib/bankKata';
 import type { EntriKamus } from '@/lib/kamusPemain';
 import { kamusPublik } from '@/lib/supabase/kamus';
 import type { PanjangKata, Pemenang, Peran, SumberKata } from '@/lib/types';
 import { adaBatas, detikTebakan, labelDetik, PILIHAN_PETUNJUK, PILIHAN_VOTE, type BatasWaktu } from '@/lib/batasWaktu';
 
-export const NAMA_PERAN: Record<Peran, string> = { civilian: 'Civilian', undercover: 'Undercover', mrwhite: 'Mr. White' };
+export const NAMA_PERAN: Record<Peran, string> = { civilian: 'Civilian', undercover: 'Undercover', mrwhite: 'Mr. White', jester: 'Jester' };
 
 export const JUDUL_MENANG: Record<Pemenang, string> = {
   civilian: 'Civilian menang!',
   penyusup: 'Penyusup menang!',
   mrwhite: 'Mr. White menang!',
+  jester: 'Jester menang!',
+  lovers: 'Lovers menang!',
 };
 
 /** Tanda merek: sosok penyusup hijau bertopi fedora dan bertopeng, sama dengan ilustrasi beranda dan favicon. */
@@ -57,7 +59,7 @@ export function Stepper({ nilai, min, max, onUbah, label }: { nilai: number; min
   );
 }
 
-/** Kartu pengaturan jumlah peran. */
+/** Kartu pengaturan jumlah peran + toggle opsional Lovers/Jester. */
 export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
   jumlah: number;
   komposisi: Komposisi;
@@ -65,14 +67,22 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
   onOtomatis: () => void;
   nonaktif?: boolean;
 }) {
-  const ubah = (peran: keyof Komposisi, d: number) => onUbah({ ...komposisi, [peran]: Math.max(0, komposisi[peran] + d) });
+  const k = rapikanKomposisi(komposisi);
+  const ubah = (peran: 'undercover' | 'mrWhite', d: number) => onUbah({ ...k, [peran]: Math.max(0, k[peran] + d) });
   const maks = maksPenyusup(jumlah);
-  const nilai = (peran: keyof Komposisi, label: string) =>
+  const jester = k.jester ? 1 : 0;
+  const civilian = Math.max(0, jumlah - k.undercover - k.mrWhite - jester);
+  const nilai = (peran: 'undercover' | 'mrWhite', label: string) =>
     nonaktif ? (
-      <strong className="angka-besar">{komposisi[peran]}</strong>
+      <strong className="angka-besar">{k[peran]}</strong>
     ) : (
-      <Stepper nilai={komposisi[peran]} min={0} max={maks} onUbah={(d) => ubah(peran, d)} label={label} />
+      <Stepper nilai={k[peran]} min={0} max={maks} onUbah={(d) => ubah(peran, d)} label={label} />
     );
+  const toggle = (field: 'jester' | 'lovers', aktif: boolean) => {
+    if (nonaktif) return;
+    if (field === 'jester') onUbah({ ...k, jester: aktif ? 1 : 0 });
+    else onUbah({ ...k, lovers: aktif });
+  };
   return (
     <div className="kartu">
       <div className="baris-judul">
@@ -81,7 +91,7 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
       </div>
       <div className="peran-baris">
         <span>Civilian</span>
-        <strong className="angka-besar">{Math.max(0, jumlah - komposisi.undercover - komposisi.mrWhite)}</strong>
+        <strong className="angka-besar">{civilian}</strong>
       </div>
       <div className="peran-baris">
         <span>Undercover</span>
@@ -91,7 +101,41 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
         <span>Mr. White</span>
         {nilai('mrWhite', 'Mr. White')}
       </div>
-      <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White.</p>
+      <div className="peran-baris">
+        <span>Jester</span>
+        {nonaktif ? (
+          <strong className="angka-besar">{jester ? 'On' : 'Off'}</strong>
+        ) : (
+          <button
+            type="button"
+            className={`chip${jester ? ' pilih' : ''}`}
+            aria-pressed={!!jester}
+            disabled={jumlah < 5 && !jester}
+            onClick={() => toggle('jester', !jester)}
+          >
+            {jester ? 'On' : 'Off'}
+          </button>
+        )}
+      </div>
+      <div className="peran-baris">
+        <span>Lovers</span>
+        {nonaktif ? (
+          <strong className="angka-besar">{k.lovers ? 'On' : 'Off'}</strong>
+        ) : (
+          <button
+            type="button"
+            className={`chip${k.lovers ? ' pilih' : ''}`}
+            aria-pressed={!!k.lovers}
+            disabled={jumlah < 5 && !k.lovers}
+            onClick={() => toggle('lovers', !k.lovers)}
+          >
+            {k.lovers ? 'On' : 'Off'}
+          </button>
+        )}
+      </div>
+      <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White. Jester/Lovers opsional (min 5 pemain; keduanya min 6).</p>
+      <p className="catatan nol"><strong>Jester</strong>: tanpa kata. Menang jika divote; kalah jika bertahan sampai akhir. Bukan Civilian.</p>
+      <p className="catatan nol"><strong>Lovers</strong>: dua pemain dipasangkan diam-diam (tetap punya peran biasa). Lindungi pasangan; jika satu mati, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</p>
     </div>
   );
 }

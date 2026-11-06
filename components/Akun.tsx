@@ -243,7 +243,7 @@ export function GerbangAkun({ alasan, onBeranda, children }: {
 
 /* --------------------------------- Profil --------------------------------- */
 
-const URUTAN_PERAN: PeranDb[] = ['civilian', 'undercover', 'mrwhite'];
+const URUTAN_PERAN: PeranDb[] = ['civilian', 'undercover', 'mrwhite', 'jester'];
 const persenTeks = (p: number | null) => (p === null ? '-' : `${p}%`);
 
 export function KartuStatistik({ r }: { r: RingkasanStatistik }) {

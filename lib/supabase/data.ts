@@ -144,6 +144,8 @@ export interface HasilUntukDicatat {
   pemenang: Pemenang;
   pasangan: PasanganKata;
   jumlahPemain: number;
+  adalahLovers?: boolean;
+  loversMenang?: boolean;
 }
 
 /** Baris riwayat_main untuk hasil satu permainan online. */
@@ -152,11 +154,16 @@ export function barisRiwayat(h: HasilUntukDicatat) {
     id_main: h.idMain,
     mode: 'online' as const,
     peran: peranDb(h.peran),
-    menang: menangDengan(h.peran, h.pemenang),
-    pemenang: h.pemenang,
+    menang: menangDengan(h.peran, h.pemenang, {
+      loversMenang: h.loversMenang,
+      adalahLovers: h.adalahLovers,
+    }),
+    pemenang: h.pemenang === 'lovers' ? 'lovers' : h.pemenang,
     kata_civilian: h.pasangan.civilian.slice(0, 60),
     kata_undercover: h.pasangan.undercover.slice(0, 60),
     jumlah_pemain: h.jumlahPemain,
+    adalah_lovers: !!h.adalahLovers,
+    lovers_menang: !!h.loversMenang,
   };
 }
 

@@ -850,6 +850,8 @@ interface PropsRuang {
   host: boolean;
   /** Hex topik Supabase untuk kehadiran presence (null = pakai host.online saja). */
   hexRoom?: string | null;
+  /** Peta kehadiran presence-first (null = fallback host.online). */
+  hadir?: import('@/lib/online/kehadiran').PetaHadir | null;
   /** Jumlah pemain bila room ini hasil matchmaking. */
   match?: number;
   infoMatch?: { s: StatusMatch; t: number } | null;
@@ -862,17 +864,26 @@ interface PropsRuang {
 }
 
 function Ruang(props: PropsRuang) {
-  const { view } = props;
+  const { view, hexRoom } = props;
+  const ids = useMemo(() => view.pemain.map((x) => x.id), [view.pemain]);
+  const namaKeId = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const x of view.pemain) m.set(x.nama.toLowerCase(), x.id);
+    return m;
+  }, [view.pemain]);
+  const hostOnline = useMemo(() => new Map(view.pemain.map((x) => [x.id, x.online] as const)), [view.pemain]);
+  const hadir = useKehadiranRoom(hexRoom, view.saya, ids, namaKeId, hostOnline);
+  const propsHadir: PropsRuang = { ...props, hadir };
   const g = view.game;
   const kunci = !g ? 'lobby' : `${g.fase}-${g.ronde}-${g.putaranVote}-${g.ikut ? 1 : 0}`;
   let isi;
-  if (!g) isi = <Lobby {...props} />;
-  else if (g.fase === 'hasil') isi = <Hasil {...props} g={g} />;
-  else if (!g.ikut) isi = <Penonton {...props} g={g} />;
-  else if (g.fase === 'kata') isi = <FaseKata {...props} g={g} />;
-  else if (g.fase === 'diskusi') isi = <Diskusi {...props} g={g} />;
-  else if (g.fase === 'vote') isi = <Voting {...props} g={g} />;
-  else isi = <Terungkap {...props} g={g} />;
+  if (!g) isi = <Lobby {...propsHadir} />;
+  else if (g.fase === 'hasil') isi = <Hasil {...propsHadir} g={g} />;
+  else if (!g.ikut) isi = <Penonton {...propsHadir} g={g} />;
+  else if (g.fase === 'kata') isi = <FaseKata {...propsHadir} g={g} />;
+  else if (g.fase === 'diskusi') isi = <Diskusi {...propsHadir} g={g} />;
+  else if (g.fase === 'vote') isi = <Voting {...propsHadir} g={g} />;
+  else isi = <Terungkap {...propsHadir} g={g} />;
   return <div key={kunci} className="masuk">{isi}</div>;
 }
 
@@ -880,8 +891,8 @@ function namaDari(view: ViewPemain, id: string | null): string {
   return view.pemain.find((p) => p.id === id)?.nama ?? '?';
 }
 
-function Lobby({ view, host, hexRoom, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
-  const online = view.pemain.filter((p) => p.online);
+function Lobby({ view, host, hexRoom, hadir, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
+  const online = view.pemain.filter((p) => !offlineTampil(hadir, p));
   const [manual, setManual] = useState(false);
   const { komposisi, kategori } = view.pengaturan;
   const panjangKata = rapikanPanjangKata(view.pengaturan.panjangKata);
@@ -934,7 +945,7 @@ function Lobby({ view, host, hexRoom, match, infoMatch, aksi, mulaiGame, memuat,
       {match ? (
         <InfoMatch maks={match} online={jumlah} host={host} info={infoMatch ?? null} />
       ) : <KartuUndangan kode={view.kode} tampilkan={tampilkan} />}
-      <DaftarPemain view={view} host={host} aksi={aksi} hexRoom={hexRoom} />
+      <DaftarPemain view={view} host={host} aksi={aksi} hexRoom={hexRoom} hadir={hadir} />
       <AturPeran
         jumlah={jumlah}
         komposisi={komposisi}
@@ -1058,7 +1069,7 @@ function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: strin
   );
 }
 
-function DaftarPemain({ view, host, aksi, hexRoom }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void; hexRoom?: string | null }) {
+function DaftarPemain({ view, host, aksi, hexRoom, hadir: hadirProp }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void; hexRoom?: string | null; hadir?: import('@/lib/online/kehadiran').PetaHadir | null }) {
   const lihatProfil = useLihatProfil();
   const dialog = useDialog();
   const daftar = useDaftarKeluar(view.pemain, (p) => p.id);
@@ -1070,7 +1081,8 @@ function DaftarPemain({ view, host, aksi, hexRoom }: { view: ViewPemain; host: b
     return m;
   }, [view.pemain]);
   const hostOnline = useMemo(() => new Map(view.pemain.map((x) => [x.id, x.online] as const)), [view.pemain]);
-  const hadir = useKehadiranRoom(hexRoom, view.saya, ids, namaKeId, hostOnline);
+  const hadirHook = useKehadiranRoom(hadirProp === undefined ? hexRoom : null, view.saya, ids, namaKeId, hostOnline);
+  const hadir = hadirProp !== undefined ? hadirProp : hadirHook;
   const statusOf = (id: string, hostOn: boolean): StatusHadir => {
     if (!hadir) return hostOn ? 'online' : 'offline';
     return hadir.get(id) ?? (hostOn ? 'online' : 'offline');
@@ -1127,11 +1139,20 @@ type PropsFase = PropsRuang & { g: GameView };
 function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas?: boolean }) {
   const [lihat, setLihat] = useState(false);
   const saya = namaDari(view, view.saya);
+  const judulTanpaKata = g.jester ? 'Jester' : 'Mr. White';
+  const catatanTanpaKata = g.jester
+    ? 'Tanpa kata. Beri petunjuk sedikit mencurigakan agar divote, jangan terlalu jelas.'
+    : 'Kamu tanpa kata. Berbaurlah.';
   const belakang = (
     <>
       <p className="sub">{saya}</p>
-      {g.kata ? <h1 className="kata">{g.kata}</h1> : <h1 className="kata">Mr. White</h1>}
-      {!g.kata && <p className="catatan">Kamu tanpa kata. Berbaurlah.</p>}
+      {g.kata ? <h1 className="kata">{g.kata}</h1> : <h1 className="kata">{judulTanpaKata}</h1>}
+      {!g.kata && <p className="catatan">{catatanTanpaKata}</p>}
+      {g.namaLovers && (
+        <p className="catatan">
+          <strong>Lovers:</strong> pasanganmu {g.namaLovers}. Lindungi dia; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.
+        </p>
+      )}
       <button className="kedua" onClick={() => setLihat(false)}>Sembunyi</button>
     </>
   );
@@ -1174,11 +1195,16 @@ function pesertaDari(view: ViewPemain): PemainView[] {
   return view.pemain.filter((p) => p.ikut);
 }
 
+/** Indikator offline: presence-first; host.online hanya fallback. */
+function offlineTampil(hadir: import('@/lib/online/kehadiran').PetaHadir | null | undefined, p: { id: string; online: boolean }): boolean {
+  return !onlineDariHadir(hadir?.get(p.id), p.online);
+}
+
 /** Riwayat petunjuk yang terlihat semua pemain (petunjuk memang publik; tidak memuat kata rahasia siapa pun). */
 function propsRiwayat(view: ViewPemain, g: GameView) {
   const giliran = g.fase === 'diskusi' && g.giliran < g.urutan.length ? g.urutan[g.giliran] : null;
   const pemain: PemainRiwayat[] = pesertaDari(view).map((p) => ({
-    kunci: p.id, nama: p.nama, hidup: p.hidup, peran: p.peran, saya: p.id === view.saya, offline: !p.online,
+    kunci: p.id, nama: p.nama, hidup: p.hidup, peran: p.peran, saya: p.id === view.saya, offline: !p.online, // diisi ulang di Riwayat bila hadir ada
   }));
   return { pemain, entri: g.petunjuk, giliran, ronde: g.ronde, urutan: g.urutan };
 }
@@ -1187,7 +1213,7 @@ function Riwayat({ view, g }: { view: ViewPemain; g: GameView }) {
   return <RiwayatPetunjuk {...propsRiwayat(view, g)} />;
 }
 
-function FaseKata({ view, g, host, aksi }: PropsFase) {
+function FaseKata({ view, g, host, aksi, hadir }: PropsFase) {
   const peserta = pesertaDari(view);
   const sudah = g.siap.includes(view.saya);
   const ikut = g.ikut;
@@ -1200,7 +1226,7 @@ function FaseKata({ view, g, host, aksi }: PropsFase) {
         <Progres nilai={g.siap.length} total={peserta.length} label="Siap" />
         <ul className="chip-grup kecil-jarak">
           {peserta.map((p) => (
-            <li key={p.id} className={`chip-status ${g.siap.includes(p.id) ? 'ok' : ''} ${p.online ? '' : 'offline'}`}>
+            <li key={p.id} className={`chip-status ${g.siap.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.siap.includes(p.id) ? '✓ ' : ''}{p.nama}
             </li>
           ))}
@@ -1270,7 +1296,7 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
 
 const ATURAN_SERI = 'Lewati tidak menambah suara siapa pun. Lewati terbanyak: tidak ada yang keluar. Seri: vote ulang sekali. Masih seri: tidak ada yang keluar.';
 
-function Voting({ view, g, host, aksi }: PropsFase) {
+function Voting({ view, g, host, aksi, hadir }: PropsFase) {
   const hidup = pesertaDari(view).filter((p) => p.hidup);
   const pemilih = hidup.filter((p) => g.kandidat.some((k) => k !== p.id));
   const bisaVote = g.ikut && g.hidup && g.kandidat.some((k) => k !== view.saya);
@@ -1314,7 +1340,7 @@ function Voting({ view, g, host, aksi }: PropsFase) {
         <Progres nilai={g.sudahVote.filter((id) => pemilih.some((p) => p.id === id)).length} total={pemilih.length} label="Suara" />
         <ul className="chip-grup kecil-jarak">
           {pemilih.map((p) => (
-            <li key={p.id} className={`chip-status ${g.sudahVote.includes(p.id) ? 'ok' : ''} ${p.online ? '' : 'offline'}`}>
+            <li key={p.id} className={`chip-status ${g.sudahVote.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.sudahVote.includes(p.id) ? '✓ ' : ''}{p.nama}
             </li>
           ))}
@@ -1376,6 +1402,7 @@ function teksAman(view: ViewPemain, g: GameView): string {
 
 function Terungkap({ view, g, host, aksi }: PropsFase) {
   const korban = view.pemain.find((p) => p.id === g.tereliminasi);
+  const ikut = g.tereliminasiIkut ? view.pemain.find((p) => p.id === g.tereliminasiIkut) : undefined;
   const menungguTebak = g.tebakan === 'menunggu';
   return (
     <section className="tumpuk">
@@ -1397,6 +1424,11 @@ function Terungkap({ view, g, host, aksi }: PropsFase) {
         <div className={`kartu besar peran-${korban.peran ?? 'civilian'}`}>
           <p className="sub">{korban.id === view.saya ? 'Kamu tereliminasi' : `${korban.nama} tereliminasi`}</p>
           <h1 className="kata ungkap">{korban.peran ? NAMA_PERAN[korban.peran] : '?'}</h1>
+          {ikut && (
+            <p className="catatan">
+              Lovers: {ikut.nama} ikut tereliminasi{ikut.peran ? ` (${NAMA_PERAN[ikut.peran]})` : ''}.
+            </p>
+          )}
           {menungguTebak && (korban.id === view.saya ? (
             <TebakMrWhite onTebak={(teks) => aksi({ jenis: 'tebak', teks })} />
           ) : (
@@ -1448,7 +1480,7 @@ function TebakMrWhite({ onTebak }: { onTebak: (t: string) => void }) {
   );
 }
 
-function Penonton({ view, g }: PropsFase) {
+function Penonton({ view, g, hadir, hexRoom }: PropsFase) {
   const fase: Record<string, string> = { kata: 'membaca kata', diskusi: 'diskusi', vote: 'voting', terungkap: 'membuka peran' };
   return (
     <section className="tumpuk tengah">
@@ -1458,7 +1490,7 @@ function Penonton({ view, g }: PropsFase) {
         <p className="catatan">Kamu ikut di permainan berikutnya.</p>
       </div>
       {g.petunjuk.length > 0 && <Riwayat view={view} g={g} />}
-      <DaftarPemain view={view} host={false} aksi={() => undefined} />
+      <DaftarPemain view={view} host={false} aksi={() => undefined} hexRoom={hexRoom} hadir={hadir} />
     </section>
   );
 }
@@ -1504,7 +1536,10 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
   if (!h) return null;
   const peserta = pesertaDari(view);
   const perananSaya = peserta.find((x) => x.id === view.saya)?.peran;
-  const sayaMenang = perananSaya ? menangDengan(perananSaya, h.pemenang) : false;
+  const sayaLovers = !!(h.lovers && h.lovers.includes(namaDari(view, view.saya)));
+  const sayaMenang = perananSaya
+    ? menangDengan(perananSaya, h.pemenang, { loversMenang: h.loversMenang, adalahLovers: sayaLovers })
+    : false;
   return (
     <section className="tumpuk">
       {g.ikut && perananSaya && h.idMain && (
@@ -1515,6 +1550,9 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
         {g.ikut && <p className="sub">{sayaMenang ? 'Menang' : 'Kalah'}</p>}
         <h1 className="kata ungkap">{JUDUL_MENANG[h.pemenang]}</h1>
         {h.pemenang === 'mrwhite' && <p className="catatan">Tebakan benar: “{h.tebakanMrWhite}”</p>}
+        {h.loversMenang && h.lovers && (
+          <p className="catatan">Lovers menang tambahan: {h.lovers[0]} dan {h.lovers[1]} bertahan sampai akhir.</p>
+        )}
         <div className="kata-hasil">
           <div><span>Civilian</span><strong>{h.pasangan.civilian}</strong></div>
           <div><span>Undercover</span><strong>{h.pasangan.undercover}</strong></div>
@@ -1528,6 +1566,7 @@ function Hasil({ view, g, host, aksi, mulaiGame, memuat }: PropsFase) {
             <li key={p.id} className={`${p.hidup ? '' : 'mati'} muncul`} style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
               <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} slot={gelarNama(peta, p.nama).frame} /><span className="nama-teks">{p.nama}</span></button>
               {p.peran && <span className={`lencana ${p.peran}`}>{NAMA_PERAN[p.peran]}</span>}
+              {h.lovers && h.lovers.includes(p.nama) && <span className="lencana lovers">Lovers</span>}
             </li>
           ))}
         </ul>

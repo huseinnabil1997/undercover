@@ -44,14 +44,32 @@ export function pesanGalatAuth(e: { message?: string; code?: string } | null | u
 }
 
 /** Peran untuk statistik (nama di database). */
-export type PeranDb = 'civilian' | 'undercover' | 'mrwhite';
+export type PeranDb = 'civilian' | 'undercover' | 'mrwhite' | 'jester';
 
 export function peranDb(p: Peran): PeranDb {
-  return p === 'mrwhite' ? 'mrwhite' : p === 'undercover' ? 'undercover' : 'civilian';
+  if (p === 'mrwhite') return 'mrwhite';
+  if (p === 'undercover') return 'undercover';
+  if (p === 'jester') return 'jester';
+  return 'civilian';
 }
 
-export function menangDengan(peran: Peran, pemenang: Pemenang): boolean {
-  return pemenang === 'civilian' ? peran === 'civilian' : pemenang === 'mrwhite' ? peran === 'mrwhite' : peran !== 'civilian';
+/**
+ * Menang untuk statistik.
+ * - Tim: civilian / penyusup (UC+MW saja, bukan Jester) / mrwhite / jester / lovers.
+ * - Lovers tambahan: anggota pasangan Lovers menang juga jika loversMenang.
+ */
+export function menangDengan(
+  peran: Peran,
+  pemenang: Pemenang,
+  opsi?: { loversMenang?: boolean; adalahLovers?: boolean },
+): boolean {
+  if (opsi?.loversMenang && opsi.adalahLovers && peran !== 'jester') return true;
+  if (pemenang === 'civilian') return peran === 'civilian';
+  if (pemenang === 'mrwhite') return peran === 'mrwhite';
+  if (pemenang === 'jester') return peran === 'jester';
+  if (pemenang === 'lovers') return !!opsi?.adalahLovers && peran !== 'jester';
+  // penyusup
+  return peran === 'undercover' || peran === 'mrwhite';
 }
 
 export interface BarisStatistik { peran: PeranDb; main: number; menang: number }
@@ -70,7 +88,7 @@ export function persen(menang: number, main: number): number | null {
 
 export function ringkasStatistik(baris: BarisStatistik[]): RingkasanStatistik {
   const perPeran = {} as RingkasanStatistik['perPeran'];
-  for (const p of ['civilian', 'undercover', 'mrwhite'] as const) {
+  for (const p of ['civilian', 'undercover', 'mrwhite', 'jester'] as const) {
     const b = baris.find((x) => x.peran === p);
     const main = b?.main ?? 0;
     const menang = b?.menang ?? 0;

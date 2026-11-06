@@ -6,6 +6,8 @@ export const KATEGORI_MUSIM = [
   'civilian',
   'undercover',
   'mrwhite',
+  'jester',
+  'lovers',
   'winrate',
   'main',
 ] as const;
@@ -16,13 +18,18 @@ export const META_KATEGORI: Record<KategoriMusim, { nama: string; ikon: string; 
   civilian: { nama: 'Best Civilian', ikon: '🛡️', warna: 'biru', labelSingkat: 'Civilian' },
   undercover: { nama: 'Best Undercover', ikon: '🎭', warna: 'ungu', labelSingkat: 'Undercover' },
   mrwhite: { nama: 'Best Mr. White', ikon: '👻', warna: 'perak', labelSingkat: 'Mr. White' },
+  jester: { nama: 'Best Jester', ikon: '🤡', warna: 'jester', labelSingkat: 'Jester' },
+  lovers: { nama: 'Best Lovers', ikon: '💞', warna: 'pink', labelSingkat: 'Lovers' },
   winrate: { nama: 'Winrate tertinggi', ikon: '🎯', warna: 'hijau', labelSingkat: 'Winrate' },
   main: { nama: 'Match terbanyak', ikon: '🔥', warna: 'oranye', labelSingkat: 'Match' },
 };
 
-/** Prioritas default gelar: peringkat terkecil; seri -> Keseluruhan, Winrate, Civilian, Undercover, Mr. White, Match. */
+/**
+ * Prioritas default gelar/frame: peringkat terkecil dulu;
+ * seri -> peran utama (Civilian/UC/MW) didahulukan dari Lovers/Jester, lalu Winrate/Match.
+ */
 export const URUT_KATEGORI_DEFAULT: KategoriMusim[] = [
-  'keseluruhan', 'winrate', 'civilian', 'undercover', 'mrwhite', 'main',
+  'keseluruhan', 'winrate', 'civilian', 'undercover', 'mrwhite', 'lovers', 'jester', 'main',
 ];
 
 export const MIN_MAIN_WINRATE_MUSIM = 10;
@@ -30,16 +37,21 @@ export const MIN_MAIN_PERAN_MUSIM = 5;
 
 export interface BarisMain {
   userId: string;
-  peran: 'civilian' | 'undercover' | 'mrwhite';
+  peran: 'civilian' | 'undercover' | 'mrwhite' | 'jester';
   menang: boolean;
   waktu: Date | string | number;
+  /** Pemain ini pasangan Lovers di game tersebut. */
+  adalahLovers?: boolean;
+  /** Lovers menang tambahan (keduanya bertahan sampai akhir). */
+  loversMenang?: boolean;
 }
 
 export interface AgregatPemain {
   userId: string;
   main: number;
   menang: number;
-  peran: Record<'civilian' | 'undercover' | 'mrwhite', { main: number; menang: number }>;
+  peran: Record<'civilian' | 'undercover' | 'mrwhite' | 'jester', { main: number; menang: number }>;
+  lovers: { main: number; menang: number };
 }
 
 export interface SlotPeringkat {
@@ -119,7 +131,9 @@ export function agregatMusim(baris: readonly BarisMain[], musim: string): Agrega
           civilian: { main: 0, menang: 0 },
           undercover: { main: 0, menang: 0 },
           mrwhite: { main: 0, menang: 0 },
+          jester: { main: 0, menang: 0 },
         },
+        lovers: { main: 0, menang: 0 },
       };
       map.set(b.userId, a);
     }
@@ -127,6 +141,10 @@ export function agregatMusim(baris: readonly BarisMain[], musim: string): Agrega
     if (b.menang) a.menang += 1;
     a.peran[b.peran].main += 1;
     if (b.menang) a.peran[b.peran].menang += 1;
+    if (b.adalahLovers) {
+      a.lovers.main += 1;
+      if (b.loversMenang) a.lovers.menang += 1;
+    }
   }
   return [...map.values()];
 }
@@ -138,7 +156,7 @@ function bandingUsername(a: string, b: string): number {
 /**
  * Top 3 satu kategori. Definisi:
  * - keseluruhan: menang terbanyak; seri -> main lebih sedikit; lalu userId.
- * - civilian/undercover/mrwhite: menang peran itu (min 5 main peran); seri -> winrate peran lebih tinggi; lalu main peran lebih sedikit; lalu userId.
+ * - civilian/undercover/mrwhite/jester/lovers: menang peran itu (min 5 main); seri -> winrate peran; lalu main lebih sedikit; lalu userId. Lovers = menang tambahan keduanya bertahan sampai akhir.
  * - winrate: winrate keseluruhan (min 10 main); seri -> menang lebih banyak; lalu main lebih banyak; lalu userId.
  * - main: main terbanyak; seri -> menang lebih banyak; lalu userId.
  */
@@ -149,8 +167,13 @@ export function top3Kategori(agregat: readonly AgregatPemain[], kategori: Katego
     if (kategori === 'keseluruhan') {
       if (a.menang <= 0) continue;
       calon.push({ a, metrik: a.menang, main: a.main, menang: a.menang, winrate: a.main ? a.menang / a.main : null, kunci: [a.menang, -a.main] });
-    } else if (kategori === 'civilian' || kategori === 'undercover' || kategori === 'mrwhite') {
+    } else if (kategori === 'civilian' || kategori === 'undercover' || kategori === 'mrwhite' || kategori === 'jester') {
       const p = a.peran[kategori];
+      if (p.main < MIN_MAIN_PERAN_MUSIM || p.menang <= 0) continue;
+      const wr = p.menang / p.main;
+      calon.push({ a, metrik: p.menang, main: p.main, menang: p.menang, winrate: wr, kunci: [p.menang, wr, -p.main] });
+    } else if (kategori === 'lovers') {
+      const p = a.lovers;
       if (p.main < MIN_MAIN_PERAN_MUSIM || p.menang <= 0) continue;
       const wr = p.menang / p.main;
       calon.push({ a, metrik: p.menang, main: p.main, menang: p.menang, winrate: wr, kunci: [p.menang, wr, -p.main] });
