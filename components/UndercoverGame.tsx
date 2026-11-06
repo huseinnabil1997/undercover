@@ -377,7 +377,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
               )}
               {p.pasanganLovers != null && (
                 <p className="catatan">
-                  <strong>Lovers:</strong> pasanganmu {pemain[p.pasanganLovers].nama}. Lindungi dia; giring vote ke pemain lain.
+                  <strong>Lovers:</strong> pasanganmu {pemain[p.pasanganLovers].nama} (peran sama denganmu). Lindungi dia; giring vote ke pemain lain.
                 </p>
               )}
               <button
@@ -619,7 +619,7 @@ function CaraMain({ onTutup }: { onTutup: () => void }) {
           <li><strong>Undercover</strong>: mendapat kata yang mirip tapi berbeda. Undercover tidak tahu bahwa dirinya Undercover.</li>
           <li><strong>Mr. White</strong>: tidak mendapat kata sama sekali dan harus berpura-pura tahu.</li>
           <li><strong>Jester</strong> (opsional, min 5 pemain): tanpa kata seperti Mr. White, tetapi tidak menebak. Tujuan: beri petunjuk sedikit mencurigakan agar divote. Menang sendiri jika tereliminasi lewat vote; kalah jika bertahan sampai akhir. Tidak dihitung sebagai Civilian.</li>
-          <li><strong>Lovers</strong> (opsional, min 5; bersama Jester min 6): dua pemain dipasangkan diam-diam, tetap punya peran biasa. Keduanya tahu pasangannya. Tujuan: lindungi pasangan dan giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</li>
+          <li><strong>Lovers</strong> (opsional, min 5; bersama Jester min 6): dua pemain dengan peran sama (Civilian atau Undercover) dipasangkan diam-diam. Pasanganmu punya peran yang sama denganmu. Tujuan: lindungi pasangan dan giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</li>
         </ul>
         <h3>Alur</h3>
         <ol>

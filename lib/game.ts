@@ -34,7 +34,7 @@ export interface Komposisi {
   mrWhite: number;
   /** 0 atau 1. Default 0 (mati). Butuh minimal 5 pemain. */
   jester?: number;
-  /** Pasangkan 2 pemain non-Jester. Default false. Butuh minimal 5; bersama Jester minimal 6. */
+  /** Pasangkan 2 pemain peran sama (Civilian atau Undercover). Default false. Butuh minimal 5; bersama Jester minimal 6. */
   lovers?: boolean;
 }
 
@@ -55,7 +55,8 @@ export function jumlahJester(k: Komposisi): number {
 /** Komposisi peran bawaan yang seimbang untuk jumlah pemain tertentu. */
 export function komposisiDefault(jumlahPemain: number): Komposisi {
   const n = Math.max(MIN_PEMAIN, Math.min(MAX_PEMAIN, Math.floor(jumlahPemain)));
-  // Auto: Jester dari 6 pemain, Lovers dari 7; host tetap bisa mematikan. Syarat manual tetap 5/5/6.
+  // Auto: Jester dari 6, Lovers dari 7 (pasangan selalu Civilian-Civilian atau Undercover-Undercover).
+  // Host bisa mematikan. Syarat manual tetap 5/5/6.
   const jester = n >= 6 ? 1 : 0;
   const lovers = n >= 7;
   const mrWhite = n >= 5 ? 1 : 0;
@@ -91,7 +92,10 @@ export function validasiSetup(nama: readonly string[], komposisi: Komposisi): st
   else if (civilian <= undercover + mrWhite) {
     galat.push('Jumlah Civilian harus lebih banyak dari gabungan Undercover dan Mr. White.');
   }
-  if (k.lovers && n - jester < 2) galat.push('Lovers butuh minimal 2 pemain non-Jester.');
+  // Lovers = 2 Civilian atau 2 Undercover. Civilian hampir selalu >=2 bila komposisi valid.
+  if (k.lovers && civilian >= 0 && civilian < 2 && undercover < 2) {
+    galat.push('Lovers butuh minimal 2 Civilian atau 2 Undercover.');
+  }
   const bersih = nama.map((x) => x.trim().toLowerCase());
   if (bersih.some((x) => x === '')) galat.push('Nama pemain tidak boleh kosong.');
   if (new Set(bersih).size !== bersih.length) galat.push('Nama pemain tidak boleh kembar.');
@@ -115,11 +119,20 @@ export function bagiPeran(nama: readonly string[], komposisi: Komposisi, rng: Rn
   return pemain;
 }
 
-/** Pasangkan 2 pemain non-Jester secara acak (saling merujuk lewat pasanganLovers). */
+/**
+ * Pasangkan 2 pemain dengan peran SAMA: dua Civilian atau dua Undercover.
+ * Pilih acak di antara grup yang punya >=2 anggota. Mr. White dan Jester tidak pernah jadi Lovers.
+ */
 export function pasangkanLovers(pemain: readonly Pemain[], rng: Rng = Math.random): Pemain[] {
-  const kandidat = pemain.map((p, i) => i).filter((i) => pemain[i].peran !== 'jester');
-  if (kandidat.length < 2) return pemain.map((p) => ({ ...p }));
-  const acak = acakUrutan(kandidat, rng);
+  const indeksPeran = (peran: Peran) => pemain.map((p, i) => i).filter((i) => pemain[i].peran === peran);
+  const grup: number[][] = [];
+  const civilian = indeksPeran('civilian');
+  const undercover = indeksPeran('undercover');
+  if (civilian.length >= 2) grup.push(civilian);
+  if (undercover.length >= 2) grup.push(undercover);
+  if (grup.length === 0) return pemain.map((p) => ({ ...p }));
+  const pilih = grup[acakIndeks(grup.length, rng)];
+  const acak = acakUrutan(pilih, rng);
   const a = acak[0];
   const b = acak[1];
   return pemain.map((p, i) => {

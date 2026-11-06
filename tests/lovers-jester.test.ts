@@ -35,8 +35,8 @@ describe('eliminasi berantai Lovers', () => {
   it('pasangan ikut mati', () => {
     const pemain: Pemain[] = [
       p('civilian', true, 1),
-      p('undercover', true, 0),
-      p('civilian'),
+      p('civilian', true, 0),
+      p('undercover'),
       p('mrwhite'),
       p('civilian'),
     ];
@@ -48,7 +48,7 @@ describe('eliminasi berantai Lovers', () => {
   });
 
   it('loversMenangTambahan hanya jika keduanya hidup', () => {
-    const hidup: Pemain[] = [p('civilian', true, 1), p('undercover', true, 0), p('civilian')];
+    const hidup: Pemain[] = [p('civilian', true, 1), p('civilian', true, 0), p('undercover')];
     expect(loversMenangTambahan(hidup)).toBe(true);
     const mati = eliminasiDenganLovers(hidup, 0).pemain;
     expect(loversMenangTambahan(mati)).toBe(false);
@@ -56,14 +56,51 @@ describe('eliminasi berantai Lovers', () => {
 });
 
 describe('bagiPeran jester + lovers', () => {
-  it('satu jester dan dua lovers saling merujuk', () => {
+  it('satu jester dan dua lovers saling merujuk dengan peran sama', () => {
     const pemain = bagiPeran(nama(6), { undercover: 1, mrWhite: 1, jester: 1, lovers: true }, () => 0.1);
     expect(pemain.filter((x) => x.peran === 'jester')).toHaveLength(1);
     const lovers = pemain.filter((x) => x.pasanganLovers != null);
     expect(lovers).toHaveLength(2);
     expect(pemain.every((x) => x.peran !== 'jester' || x.pasanganLovers == null)).toBe(true);
+    expect(pemain.every((x) => x.peran !== 'mrwhite' || x.pasanganLovers == null)).toBe(true);
     const [a] = lovers;
-    expect(pemain[a.pasanganLovers!].pasanganLovers).toBe(pemain.indexOf(a));
+    const b = pemain[a.pasanganLovers!];
+    expect(b.pasanganLovers).toBe(pemain.indexOf(a));
+    expect(a.peran).toBe(b.peran);
+    expect(a.peran === 'civilian' || a.peran === 'undercover').toBe(true);
+  });
+
+  it('ratusan seed: Lovers selalu peran sama, bukan mrwhite/jester', () => {
+    const seeded = (seed: number) => {
+      let s = seed >>> 0;
+      return () => {
+        s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+        return s / 0x100000000;
+      };
+    };
+    const setups = [
+      { n: 5, k: { undercover: 1, mrWhite: 0, lovers: true } },
+      { n: 6, k: { undercover: 1, mrWhite: 1, jester: 1, lovers: true } },
+      { n: 7, k: { undercover: 2, mrWhite: 1, lovers: true } },
+      { n: 8, k: { undercover: 2, mrWhite: 1, jester: 1, lovers: true } },
+      { n: 10, k: { undercover: 2, mrWhite: 1, jester: 1, lovers: true } },
+      { n: 12, k: { undercover: 3, mrWhite: 1, lovers: true } },
+    ] as const;
+    for (const { n, k } of setups) {
+      expect(validasiSetup(nama(n), k)).toEqual([]);
+      for (let seed = 0; seed < 200; seed++) {
+        const pemain = bagiPeran(nama(n), k, seeded(seed));
+        const idx = pemain.map((x, i) => (x.pasanganLovers != null ? i : -1)).filter((i) => i >= 0);
+        expect(idx).toHaveLength(2);
+        const [i, j] = idx;
+        expect(pemain[i].pasanganLovers).toBe(j);
+        expect(pemain[j].pasanganLovers).toBe(i);
+        expect(pemain[i].peran).toBe(pemain[j].peran);
+        expect(['civilian', 'undercover']).toContain(pemain[i].peran);
+        expect(pemain[i].peran).not.toBe('mrwhite');
+        expect(pemain[i].peran).not.toBe('jester');
+      }
+    }
   });
 });
 

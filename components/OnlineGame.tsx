@@ -1202,7 +1202,7 @@ function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas
       {!g.kata && <p className="catatan">{catatanTanpaKata}</p>}
       {g.namaLovers && (
         <p className="catatan">
-          <strong>Lovers:</strong> pasanganmu {g.namaLovers}. Lindungi dia; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.
+          <strong>Lovers:</strong> pasanganmu {g.namaLovers} (peran sama denganmu). Lindungi dia; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.
         </p>
       )}
       <button className="kedua" onClick={() => setLihat(false)}>Sembunyi</button>
