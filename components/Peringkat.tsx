@@ -22,21 +22,49 @@ function daftarArsip(n = 6): string[] {
   return out;
 }
 
-export function LayarPeringkat({ akun, onBeranda }: { akun: { id: string; username: string }; onBeranda: () => void }) {
+/** Isi papan peringkat (tab semua/musim) untuk layar penuh atau overlay room. */
+export function IsiPeringkat({ akun }: { akun: { id: string; username: string } }) {
   const [mode, setMode] = useState<Mode>('semua');
+  return (
+    <>
+      <div className="kartu tab-musim" role="tablist" aria-label="Mode peringkat">
+        <button type="button" className={`chip${mode === 'semua' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'semua'} onClick={() => setMode('semua')}>Semua waktu</button>
+        <button type="button" className={`chip${mode === 'musim' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'musim'} onClick={() => setMode('musim')}>Musim</button>
+      </div>
+      {mode === 'semua' ? <PapanSemua akun={akun} /> : <PapanMusim akun={akun} />}
+    </>
+  );
+}
+
+export function LayarPeringkat({ akun, onBeranda }: { akun: { id: string; username: string }; onBeranda: () => void }) {
   return (
     <main className="wadah">
       <Kepala onBeranda={onBeranda} />
       <section className="tumpuk masuk">
         <div className="kepala-fase"><h2>Peringkat</h2></div>
-        <div className="kartu tab-musim" role="tablist" aria-label="Mode peringkat">
-          <button type="button" className={`chip${mode === 'semua' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'semua'} onClick={() => setMode('semua')}>Semua waktu</button>
-          <button type="button" className={`chip${mode === 'musim' ? ' pilih' : ''}`} role="tab" aria-selected={mode === 'musim'} onClick={() => setMode('musim')}>Musim</button>
-        </div>
-        {mode === 'semua' ? <PapanSemua akun={akun} /> : <PapanMusim akun={akun} />}
+        <IsiPeringkat akun={akun} />
         <div className="aksi-bawah" />
       </section>
     </main>
+  );
+}
+
+/** Overlay peringkat di dalam room: tutup tanpa keluar room / reset state. */
+export function LapisanPeringkat({ akun, onTutup }: { akun: { id: string; username: string }; onTutup: () => void }) {
+  return (
+    <div className="lapisan-profil" role="dialog" aria-modal="true" aria-label="Papan peringkat">
+      <main className="wadah">
+        <header className="kepala">
+          <button type="button" className="kecil" onClick={onTutup} aria-label="Tutup peringkat">Tutup</button>
+          <span className="logo">Peringkat</span>
+          <span aria-hidden style={{ width: 48 }} />
+        </header>
+        <section className="tumpuk masuk">
+          <IsiPeringkat akun={akun} />
+          <div className="aksi-bawah" />
+        </section>
+      </main>
+    </div>
   );
 }
 

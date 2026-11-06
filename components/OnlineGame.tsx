@@ -36,6 +36,7 @@ import { KartuCariMatch, LayarAntrean } from './Antrean';
 import { alasanMulaiOtomatis, campurAwalMatch, pakaiCampur, DETAK_MATCH_MS, formatTunggu, MIN_MULAI_MATCH, sisaHitungMundur, type StatusMatch } from '@/lib/online/antrean';
 import { detakMatch, keluarMatch, keluarMatchSaatTutup, mulaiMatch } from '@/lib/supabase/antrean';
 import { useLihatProfil } from './Akun';
+import { LapisanPeringkat } from './Peringkat';
 import { Avatar } from './Avatar';
 import type { HasilUntukDicatat } from '@/lib/supabase/data';
 import { supabase } from '@/lib/supabase/klien';
@@ -106,6 +107,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
   const [chat, setChat] = useState<PesanChat[]>([]);
   const [galatChat, setGalatChat] = useState<string | null>(null);
   const [draftChat, setDraftChat] = useState('');
+  const [bukaPeringkat, setBukaPeringkat] = useState(false);
   const [galatPetunjuk, setGalatPetunjuk] = useState<string | null>(null);
   const hostRef = useRef<HostRoom | null>(null);
   const klienRef = useRef<KlienRoom | null>(null);
@@ -712,12 +714,27 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
       )}
       {view && (
         // Dok bawah: tetap di tempat saat digulir, di bawah tombol aksi (tidak menutupinya).
-        <nav className="dok" aria-label="Petunjuk dan chat">
+        <nav className="dok" aria-label="Petunjuk, peringkat, dan chat">
           <div className="dok-isi">
             {lembar && gDok && <LembarPetunjuk {...propsRiwayat(view, gDok)} />}
+            <button
+              type="button"
+              className="kecil tombol-dok tombol-peringkat"
+              onClick={() => setBukaPeringkat(true)}
+              aria-haspopup="dialog"
+              aria-expanded={bukaPeringkat}
+            >
+              Peringkat
+            </button>
             <ChatRoom pesan={chat} saya={sesi.id} kirim={kirimChat} galat={galatChat} teks={draftChat} ubahTeks={setDraftChat} />
           </div>
         </nav>
+      )}
+      {bukaPeringkat && (
+        <LapisanPeringkat
+          akun={{ id: userId, username }}
+          onTutup={() => setBukaPeringkat(false)}
+        />
       )}
     </main>
   );
