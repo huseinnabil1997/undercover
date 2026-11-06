@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
+  MAKS_ISI_BALASAN,
   MAKS_ISI_MASUKAN,
+  pesanMasukan,
   terapkanToggleVote,
   urutBarisMasukan,
+  validasiIsiBalasan,
   validasiIsiMasukan,
   type BarisMasukan,
 } from '../lib/supabase/masukan';
@@ -17,6 +20,7 @@ function baris(p: Partial<BarisMasukan> & Pick<BarisMasukan, 'id'>): BarisMasuka
     dibuat: '2026-11-06T00:00:00Z',
     jumlah_vote: 0,
     saya_vote: false,
+    jumlah_balasan: 0,
     ...p,
   };
 }
@@ -50,5 +54,20 @@ describe('urutBarisMasukan', () => {
     ];
     expect(urutBarisMasukan(d, 'vote').map((x) => x.id)).toEqual([3, 2, 1]);
     expect(urutBarisMasukan(d, 'baru').map((x) => x.id)).toEqual([3, 1, 2]);
+  });
+});
+
+describe('validasiIsiBalasan', () => {
+  it('menolak kosong dan terlalu panjang', () => {
+    expect(validasiIsiBalasan('   ')).toMatch(/Tulis/);
+    expect(validasiIsiBalasan('ok')).toBeNull();
+    expect(validasiIsiBalasan('x'.repeat(MAKS_ISI_BALASAN + 1))).toMatch(/Maksimal/);
+  });
+});
+
+describe('pesanMasukan balasan', () => {
+  it('membedakan batas balasan dan masukan', () => {
+    expect(pesanMasukan({ code: 'P0001', message: 'batas 20 balasan per hari' })).toMatch(/20 balasan/);
+    expect(pesanMasukan({ code: 'P0001', message: 'batas 5 masukan per hari' })).toMatch(/5 masukan/);
   });
 });

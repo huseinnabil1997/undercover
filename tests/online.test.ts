@@ -136,7 +136,8 @@ describe('filter view per pemain (tidak ada kebocoran kata/peran)', () => {
           expect(json).not.toContain(KATA_C);
           expect(json).not.toContain(KATA_U);
         }
-        expect(json).not.toContain('SumberRahasia');
+        // Kategori/sumber pasangan memang dikirim (bukan rahasia); kata lawan tetap disaring di atas.
+        expect(JSON.parse(json).game.kategoriKata).toBe('Uji / SumberRahasia');
         // Tidak ada peran yang bocor untuk pemain yang masih hidup.
         expect(json).not.toMatch(/"peran"/);
         expect(json).not.toMatch(/"suara"/);
@@ -318,13 +319,15 @@ describe('koneksi, reconnect, dan host refresh', () => {
     expect(s.game!.peserta).toContain('p3');
   });
 
-  it('host refresh: state dipulihkan dari JSON, pemain lain offline sampai tersambung', () => {
+  it('host refresh: state dipulihkan dari JSON, online snapshot dipertahankan (grace)', () => {
     let s = mulai(5);
     s = jalan(s, { jenis: 'mulaiDiskusi', dari: 'h' });
     const raw = JSON.parse(JSON.stringify(s));
     const p = pulihkanStateHost(raw, now + 5)!;
     expect(p.game).toEqual(s.game);
-    expect(p.pemain.filter((x) => x.online).map((x) => x.id)).toEqual(['h']);
+    // Tidak memaksa semua offline: presence/detak yang menampilkan status nyata.
+    expect(p.pemain.every((x) => x.online)).toBe(true);
+    expect(p.pemain.every((x) => x.terakhir === now + 5)).toBe(true);
     expect(p.seq).toBeGreaterThan(s.seq);
     expect(pulihkanStateHost({ foo: 1 }, now)).toBeNull();
     expect(pulihkanStateHost(null, now)).toBeNull();

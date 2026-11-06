@@ -33,11 +33,14 @@ export function Tanda({ ukuran = 28 }: { ukuran?: number }) {
 }
 
 /** Judul fase: satu kata besar dan nomor ronde di kanan. */
-export function KepalaFase({ judul, ronde }: { judul: string; ronde?: number }) {
+export function KepalaFase({ judul, ronde, kategori }: { judul: string; ronde?: number; kategori?: string }) {
   return (
     <div className="kepala-fase">
       <h2>{judul}</h2>
-      {ronde !== undefined && <span className="ronde">Ronde {ronde}</span>}
+      <div className="kepala-fase-meta">
+        {ronde !== undefined && <span className="ronde">Ronde {ronde}</span>}
+        {kategori ? <span className="kategori-main" title={kategori}>Kategori: {kategori}</span> : null}
+      </div>
     </div>
   );
 }

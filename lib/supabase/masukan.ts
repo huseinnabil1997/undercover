@@ -1,4 +1,4 @@
-// Akses fitur Masukan (saran/feedback) + upvote. Semua lewat RLS / RPC.
+// Akses fitur Masukan (saran/feedback) + upvote + balasan. Semua lewat RLS / RPC.
 import { supabase } from './klien';
 
 export type KategoriMasukan = 'bug' | 'fitur' | 'lainnya';
@@ -15,9 +15,20 @@ export interface BarisMasukan {
   dibuat: string;
   jumlah_vote: number;
   saya_vote: boolean;
+  jumlah_balasan: number;
+}
+
+export interface BarisBalasan {
+  id: number;
+  masukan_id: number;
+  user_id: string;
+  username: string;
+  isi: string;
+  dibuat: string;
 }
 
 export const MAKS_ISI_MASUKAN = 500;
+export const MAKS_ISI_BALASAN = 300;
 export const KATEGORI_MASUKAN: { id: KategoriMasukan; nama: string }[] = [
   { id: 'bug', nama: 'Bug' },
   { id: 'fitur', nama: 'Fitur' },
@@ -51,6 +62,13 @@ export function validasiIsiMasukan(isi: string): string | null {
   return null;
 }
 
+export function validasiIsiBalasan(isi: string): string | null {
+  const t = isi.trim();
+  if (!t) return 'Tulis balasan dulu.';
+  if ([...t].length > MAKS_ISI_BALASAN) return `Maksimal ${MAKS_ISI_BALASAN} karakter.`;
+  return null;
+}
+
 /** Optimistic toggle lokal (untuk UI); server tetap sumber kebenaran. */
 export function terapkanToggleVote(b: BarisMasukan, aktif: boolean): BarisMasukan {
   if (b.saya_vote === aktif) return b;
@@ -71,10 +89,8 @@ export function urutBarisMasukan(daftar: BarisMasukan[], urut: UrutMasukan): Bar
   return salin;
 }
 
-export async function ambilMasukan(urut: UrutMasukan = 'vote'): Promise<BarisMasukan[]> {
-  const { data, error } = await supabase().rpc('daftar_masukan', { p_urut: urut });
-  if (error) throw error;
-  return (data ?? []).map((r: Record<string, unknown>) => ({
+function mapMasukan(r: Record<string, unknown>): BarisMasukan {
+  return {
     id: Number(r.id),
     user_id: String(r.user_id),
     username: String(r.username),
@@ -84,7 +100,14 @@ export async function ambilMasukan(urut: UrutMasukan = 'vote'): Promise<BarisMas
     dibuat: String(r.dibuat),
     jumlah_vote: Number(r.jumlah_vote ?? 0),
     saya_vote: !!r.saya_vote,
-  }));
+    jumlah_balasan: Number(r.jumlah_balasan ?? 0),
+  };
+}
+
+export async function ambilMasukan(urut: UrutMasukan = 'vote'): Promise<BarisMasukan[]> {
+  const { data, error } = await supabase().rpc('daftar_masukan', { p_urut: urut });
+  if (error) throw error;
+  return (data ?? []).map((r: Record<string, unknown>) => mapMasukan(r));
 }
 
 export async function kirimMasukan(isi: string, kategori: KategoriMasukan): Promise<void> {
@@ -101,8 +124,36 @@ export async function toggleVoteMasukan(id: number): Promise<boolean> {
   return !!data;
 }
 
+export async function ambilBalasanMasukan(masukanId: number): Promise<BarisBalasan[]> {
+  const { data, error } = await supabase().rpc('daftar_balasan_masukan', { p_masukan_id: masukanId });
+  if (error) throw error;
+  return (data ?? []).map((r: Record<string, unknown>) => ({
+    id: Number(r.id),
+    masukan_id: Number(r.masukan_id),
+    user_id: String(r.user_id),
+    username: String(r.username),
+    isi: String(r.isi),
+    dibuat: String(r.dibuat),
+  }));
+}
+
+export async function kirimBalasanMasukan(masukanId: number, isi: string): Promise<void> {
+  const err = validasiIsiBalasan(isi);
+  if (err) throw new Error(err);
+  const { error } = await supabase().from('balasan_masukan').insert({ masukan_id: masukanId, isi: isi.trim() });
+  if (error) throw Object.assign(new Error(pesanMasukan(error)), { code: error.code });
+}
+
+export async function hapusBalasanMasukan(id: number): Promise<void> {
+  const { error } = await supabase().from('balasan_masukan').delete().eq('id', id);
+  if (error) throw Object.assign(new Error(pesanMasukan(error)), { code: error.code });
+}
+
 export function pesanMasukan(e: { code?: string; message?: string }): string {
-  if (e.code === 'P0001' || /batas 5 masukan/i.test(e.message ?? '')) return 'Batas 5 masukan per hari. Coba lagi besok.';
+  const msg = e.message ?? '';
+  if (/batas 20 balasan/i.test(msg)) return 'Batas 20 balasan per hari. Coba lagi besok.';
+  if (e.code === 'P0001' || /batas 5 masukan/i.test(msg)) return 'Batas 5 masukan per hari. Coba lagi besok.';
+  if (e.code === '22023' && /balasan/i.test(msg)) return 'Isi balasan 1-300 karakter.';
   if (e.code === '22023') return 'Isi masukan 1-500 karakter.';
   if (e.code === '42501') return 'Harus masuk dulu.';
   if (e.code === 'P0002') return 'Masukan tidak ditemukan.';

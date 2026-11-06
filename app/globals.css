@@ -1302,3 +1302,24 @@ button:active:not(:disabled) { transform: scale(0.97); }
 .status-masukan.status-selesai { background: var(--aksen); color: var(--dasar); }
 .status-masukan.status-ditolak { background: var(--merah); color: #fff; }
 .tombol-peringkat { flex: 0.85; }
+
+/* ---------- Kategori kata (lobby / in-game) ---------- */
+.kepala-fase-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; justify-content: flex-end; }
+.kategori-main, .kategori-lobby {
+  color: var(--redup); font-size: .8rem; font-weight: 600; max-width: min(70vw, 280px);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.kategori-lobby { display: block; margin: 4px 0 0; max-width: 100%; white-space: normal; }
+
+/* ---------- Kehadiran: menyambung (bukan offline) ---------- */
+.titik.sync { background: #fbbf24; animation: 1s ease-in-out infinite alternate kedip; }
+.lencana.sync { background: var(--permukaan-2); color: #fbbf24; }
+
+/* ---------- Balasan masukan ---------- */
+.masukan-balasan { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--garis); }
+.daftar-balasan { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.daftar-balasan li { background: var(--permukaan-2); border-radius: var(--r-dalam); padding: 8px 10px; }
+.balasan-meta { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: baseline; font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+.balasan-isi { margin: 0; white-space: pre-wrap; overflow-wrap: break-word; font-size: .92rem; line-height: 1.35; }
+.form-balasan { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.form-balasan textarea { min-height: 56px; resize: vertical; }

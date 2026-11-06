@@ -60,6 +60,14 @@ export function lupakanGelar(userId?: string): void {
   else cacheGelar.delete(userId);
 }
 
+/** Hapus cache lalu minta UI (room/profil) memuat ulang frame/gelar. */
+export function mintaSegarGelar(userId?: string): void {
+  lupakanGelar(userId);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent(EVENT_GELAR_BERUBAH, { detail: { userId } }));
+  }
+}
+
 /** Tulis cache lokal lalu beri tahu UI room/profil agar frame ikut. */
 export function tulisCacheGelar(g: GelarPemainApi): void {
   cacheGelar.set(g.user_id, { waktu: Date.now(), data: g });

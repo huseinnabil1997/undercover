@@ -461,6 +461,8 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
     ikut,
     hidup: ikut ? g.hidup[id] : false,
     kata,
+    /** Nama kategori/sumber pasangan ronde ini (bukan kata rahasia). */
+    kategoriKata: g.pasangan.sumber?.trim() || 'Kata pemain',
     mrWhite: peran === 'mrwhite',
     siap: g.siap,
     urutan: g.urutan,
@@ -485,8 +487,10 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
 /* ------------------------------ Simpan/pulihkan ----------------------------- */
 
 /**
- * Pulihkan state host dari penyimpanan (mis. setelah host refresh). Semua pemain lain ditandai
- * offline sampai mereka tersambung ulang. Mengembalikan null jika data tidak valid.
+ * Pulihkan state host dari penyimpanan (mis. setelah host refresh).
+ * Status online pemain dipertahankan dari snapshot + `terakhir` di-refresh (grace sebelum tick);
+ * tampilan online di UI mengutamakan presence/detak Supabase (lihat lib/online/kehadiran.ts),
+ * jadi host refresh tidak membuat semua pemain terlihat offline.
  */
 export function pulihkanStateHost(raw: unknown, now: number): StateHost | null {
   if (!raw || typeof raw !== 'object') return null;
@@ -503,7 +507,11 @@ export function pulihkanStateHost(raw: unknown, now: number): StateHost | null {
         ...(s.game.tenggat ? { tenggat: { ...s.game.tenggat, sampai: Math.max(s.game.tenggat.sampai, now + TAMBAHAN_PULIH_MS) } } : {}),
       }
       : null,
-    pemain: s.pemain.map((p) => ({ ...p, online: p.id === s.hostId, terakhir: now })),
+    pemain: s.pemain.map((p) => ({
+      ...p,
+      online: p.id === s.hostId ? true : !!p.online,
+      terakhir: now,
+    })),
     seq: s.seq + 1,
   };
 }

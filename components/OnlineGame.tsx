@@ -28,6 +28,9 @@ import { kunciGiliran, peristiwaOnline, pilihUtama } from '@/lib/umpan/peristiwa
 import { tutupNotifikasiGiliran, umpan } from '@/lib/umpan/mesin';
 import { ChatRoom } from './ChatRoom';
 import { gelarNama, usePetaGelar } from '@/lib/online/gelarRoom';
+import { onlineDariHadir, useKehadiranRoom, type StatusHadir } from '@/lib/online/kehadiran';
+import { labelKategoriLobby } from '@/lib/labelKategori';
+import { mintaSegarGelar } from '@/lib/supabase/peringkatMusim';
 import { TombolSuara } from './PanelSuara';
 import { DaftarPetunjuk, FormPetunjuk, KartuVote, LembarPetunjuk, petunjukMilik, RiwayatPetunjuk, type PemainRiwayat } from './Petunjuk';
 import { useDialog } from './Modal';
@@ -98,6 +101,8 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     return s && s.nama === rapikanNama(username) && !sesiDipakaiHalamanLain(s.id) ? s : null;
   });
   const [view, setView] = useState<ViewPemain | null>(null);
+  /** Hex topik Supabase room (kehadiran presence); null = room tanpa login/Supabase. */
+  const [hexRoom, setHexRoom] = useState<string | null>(null);
   // `sejak`: kapan status terakhir berpindah antara tersambung dan belum (atau percobaan baru dimulai).
   const [status, setStatus] = useState<{ s: StatusJaringan; info?: string; sejak: number }>({ s: 'menyambung', sejak: 0 });
   const [sekarang, setSekarang] = useState(0);
@@ -169,6 +174,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     hapusSesi(hanyaTab);
     setSesi(null);
     setView(null);
+    setHexRoom(null);
     setChat([]);
     setGalatChat(null);
     setGalatMasuk(alasan ?? null);
@@ -272,6 +278,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
     }
     if (batal) return;
     roomRef.current = room;
+    if (room) setHexRoom(room.hex);
     const utama = room ? { utama: pembuatRealtime(supabase) } : {};
     if (sesi.host) {
       const awalMentah: StateHost = dipulihkan
@@ -331,7 +338,9 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
           const hasil = barisHasilRoom(st);
           if (hasil && !tercatat.has(hasil.idMain)) {
             tercatat.add(hasil.idMain);
-            catatHasilRoom(room.hex, hasil.idMain, hasil.baris).catch(() => {
+            catatHasilRoom(room.hex, hasil.idMain, hasil.baris).then(() => {
+              mintaSegarGelar();
+            }).catch(() => {
               tercatat.delete(hasil.idMain);
               if (!gagalDiumumkan.has(hasil.idMain)) {
                 gagalDiumumkan.add(hasil.idMain);
@@ -708,7 +717,7 @@ export default function OnlineGame({ kodeAwal, username, userId, onBeranda, daft
         </section>
       ) : (
         <Ruang
-          view={view} host={sesi.host} match={sesi.match} infoMatch={infoMatch} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan}
+          view={view} host={sesi.host} hexRoom={hexRoom} match={sesi.match} infoMatch={infoMatch} aksi={aksi} mulaiGame={mulaiGame} memuat={memuat} tampilkan={tampilkan}
           galatPetunjuk={galatPetunjuk} hapusGalatPetunjuk={() => setGalatPetunjuk(null)}
         />
       )}
@@ -839,6 +848,8 @@ function LayarMasuk({ kodeAwal, username, galat, onBeranda, onMasuk, onCari }: {
 interface PropsRuang {
   view: ViewPemain;
   host: boolean;
+  /** Hex topik Supabase untuk kehadiran presence (null = pakai host.online saja). */
+  hexRoom?: string | null;
   /** Jumlah pemain bila room ini hasil matchmaking. */
   match?: number;
   infoMatch?: { s: StatusMatch; t: number } | null;
@@ -869,7 +880,7 @@ function namaDari(view: ViewPemain, id: string | null): string {
   return view.pemain.find((p) => p.id === id)?.nama ?? '?';
 }
 
-function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
+function Lobby({ view, host, hexRoom, match, infoMatch, aksi, mulaiGame, memuat, tampilkan }: PropsRuang) {
   const online = view.pemain.filter((p) => p.online);
   const [manual, setManual] = useState(false);
   const { komposisi, kategori } = view.pengaturan;
@@ -923,7 +934,7 @@ function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilka
       {match ? (
         <InfoMatch maks={match} online={jumlah} host={host} info={infoMatch ?? null} />
       ) : <KartuUndangan kode={view.kode} tampilkan={tampilkan} />}
-      <DaftarPemain view={view} host={host} aksi={aksi} />
+      <DaftarPemain view={view} host={host} aksi={aksi} hexRoom={hexRoom} />
       <AturPeran
         jumlah={jumlah}
         komposisi={komposisi}
@@ -967,6 +978,7 @@ function Lobby({ view, host, match, infoMatch, aksi, mulaiGame, memuat, tampilka
         <>
           <PilihSumberKata nilai={sumberKata} onUbah={aturSumber} nonaktif={!host} />
           <PilihKategori kategori={kategori} onUbah={aturKategori} nonaktif={!host} panjangKata={panjangKata} sumber={sumberKata} />
+      <p className="kategori-lobby" aria-live="polite">Kategori: {campur ? 'Campur (acak tiap game)' : labelKategoriLobby({ kategori, sumberKata, sumberCampur: campur })}</p>
         </>
       )}
       <PilihPanjangKata nilai={panjangKata} onUbah={aturPanjangKata} nonaktif={!host} />
@@ -1046,46 +1058,63 @@ function KartuUndangan({ kode, tampilkan }: { kode: string; tampilkan: (t: strin
   );
 }
 
-function DaftarPemain({ view, host, aksi }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void }) {
+function DaftarPemain({ view, host, aksi, hexRoom }: { view: ViewPemain; host: boolean; aksi: (a: AksiUi) => void; hexRoom?: string | null }) {
   const lihatProfil = useLihatProfil();
   const dialog = useDialog();
   const daftar = useDaftarKeluar(view.pemain, (p) => p.id);
-  const peta = usePetaGelar(view.pemain.map((p) => p.nama));
+  const peta = usePetaGelar(view.pemain.map((x) => x.nama));
+  const ids = view.pemain.map((x) => x.id);
+  const namaKeId = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const x of view.pemain) m.set(x.nama.toLowerCase(), x.id);
+    return m;
+  }, [view.pemain]);
+  const hostOnline = useMemo(() => new Map(view.pemain.map((x) => [x.id, x.online] as const)), [view.pemain]);
+  const hadir = useKehadiranRoom(hexRoom, view.saya, ids, namaKeId, hostOnline);
+  const statusOf = (id: string, hostOn: boolean): StatusHadir => {
+    if (!hadir) return hostOn ? 'online' : 'offline';
+    return hadir.get(id) ?? (hostOn ? 'online' : 'offline');
+  };
+  const jumlahOnline = view.pemain.filter((x) => onlineDariHadir(statusOf(x.id, x.online), x.online)).length;
   return (
     <div className="kartu">
       <div className="baris-judul">
         <h2>Pemain</h2>
-        <span className="catatan nol">{view.pemain.filter((p) => p.online).length} online</span>
+        <span className="catatan nol">{jumlahOnline} online</span>
       </div>
       <ul className="daftar-lobby">
-        {daftar.map(({ item: p, keluar }) => (
-          <li key={p.id} className={`${keluar ? 'keluar' : ''} ${p.online ? '' : 'offline'}`}>
-            <span className={`titik ${p.online ? 'on' : 'off'}`} aria-hidden />
+        {daftar.map(({ item: pem, keluar }) => {
+          const st = statusOf(pem.id, pem.online);
+          const on = st === 'online' || st === 'menyambung';
+          return (
+          <li key={pem.id} className={`${keluar ? 'keluar' : ''} ${on ? '' : 'offline'}`}>
+            <span className={`titik ${st === 'online' ? 'on' : st === 'menyambung' ? 'sync' : 'off'}`} aria-hidden />
             <span className="nama">
-              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${p.nama}`} onClick={() => lihatProfil(p.nama)}><Avatar username={p.nama} cari ukuran={28} slot={gelarNama(peta, p.nama).frame} /><span className="nama-teks">{p.nama}</span></button>
-              {p.id === view.saya && <em className="label-kamu">(kamu)</em>}
+              <button type="button" className="tautan nama-profil nama-dengan-avatar" aria-label={`Lihat profil ${pem.nama}`} onClick={() => lihatProfil(pem.nama)}><Avatar username={pem.nama} cari ukuran={28} slot={gelarNama(peta, pem.nama).frame} /><span className="nama-teks">{pem.nama}</span></button>
+              {pem.id === view.saya && <em className="label-kamu">(kamu)</em>}
             </span>
-            {p.host && <span className="lencana host">Host</span>}
-            {!p.online && <span className="lencana off">Offline</span>}
-            {host && !p.host && !keluar && (
+            {pem.host && <span className="lencana host">Host</span>}
+            {st === 'menyambung' && <span className="lencana sync">Menyambung</span>}
+            {st === 'offline' && <span className="lencana off">Offline</span>}
+            {host && !pem.host && !keluar && (
               <button
                 className="kecil mini"
                 onClick={async () => {
                   const ya = await dialog.konfirmasi({
-                    judul: `Keluarkan ${p.nama}?`,
-                    pesan: `${p.nama} akan dikeluarkan dari room ini.`,
+                    judul: `Keluarkan ${pem.nama}?`,
+                    pesan: `${pem.nama} akan dikeluarkan dari room ini.`,
                     ok: 'Keluarkan',
                     bahaya: true,
                   });
-                  if (ya) aksi({ jenis: 'keluarkan', id: p.id });
+                  if (ya) aksi({ jenis: 'keluarkan', id: pem.id });
                 }}
-                aria-label={`Keluarkan ${p.nama}`}
               >
                 Keluarkan
               </button>
             )}
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   );
@@ -1165,6 +1194,7 @@ function FaseKata({ view, g, host, aksi }: PropsFase) {
   return (
     <section className="tumpuk">
       <WaktuOnline g={g} awalan="kata|" label="Diskusi otomatis dalam" bunyi={false} />
+      <p className="kategori-lobby" aria-live="polite">Kategori: {g.kategoriKata}</p>
       <KataSaya view={view} g={g} />
       <div className="kartu">
         <Progres nilai={g.siap.length} total={peserta.length} label="Siap" />
@@ -1220,7 +1250,7 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
       )}
       {/* Urutan giliran sekaligus semua petunjuk: satu baris per pemain, tanpa kartu riwayat terpisah. */}
       <div className="kartu">
-        <KepalaFase judul="Diskusi" ronde={g.ronde} />
+        <KepalaFase judul="Diskusi" ronde={g.ronde} kategori={g.kategoriKata} />
         <DaftarPetunjuk {...propsRiwayat(view, g)} giliranKe={g.giliran} petaGelar={peta} />
       </div>
       {g.hidup ? <KataSaya view={view} g={g} ringkas /> : <p className="catatan tengah-teks">Tereliminasi</p>}
@@ -1248,7 +1278,7 @@ function Voting({ view, g, host, aksi }: PropsFase) {
     <section className="tumpuk">
       <WaktuOnline g={g} awalan="vote|" label="Waktu vote" bunyi={bisaVote && !g.pilihanSaya} />
       <div className="kartu">
-        <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} />
+        <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} kategori={g.kategoriKata} />
         {g.putaranVote === 2 ? (
           <p className="catatan">
             Seri: {[...g.kandidat.map((id) => namaDari(view, id)), ...(g.kandidat.length === 1 ? ['Lewati'] : [])].join(' dan ')}. Masih seri berarti tidak ada yang keluar.
@@ -1445,6 +1475,7 @@ function CatatHasil({ idMain }: Pick<HasilUntukDicatat, 'idMain'>) {
         const { data } = await supabase().auth.getSession();
         const uid = data.session?.user.id;
         if (uid && (await hasilTercatat(idMain, uid))) {
+          mintaSegarGelar();
           if (hidup) setStatus('ok');
           return;
         }

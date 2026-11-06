@@ -7,6 +7,7 @@ import {
   rapikanPanjangKata, validasiSetup, type Komposisi,
 } from '@/lib/game';
 import { kategoriTersimpan, kunciKategori, PESAN_TANPA_SATU_KATA, siapkanPasangan, sumberTersimpan } from '@/lib/bankKata';
+import { labelKategoriLobby, labelKategoriPasangan } from '@/lib/labelKategori';
 import { baca, KUNCI, simpan } from '@/lib/storage';
 import type { PanjangKata, PasanganKata, Pemain, Pemenang, SumberKata } from '@/lib/types';
 import { cekPetunjuk, teksDipakai, type EntriPetunjuk } from '@/lib/petunjuk';
@@ -232,6 +233,7 @@ export default function UndercoverGame({ onBeranda, daftarPenjaga }: { onBeranda
           <PilihSumberKata nilai={sumber} onUbah={setSumber} />
 
           <PilihKategori kategori={kategori} onUbah={setKategori} panjangKata={panjangKata} sumber={sumber} />
+          <p className="kategori-lobby" aria-live="polite">Kategori: {labelKategoriLobby({ kategori, sumberKata: sumber })}</p>
 
           <PilihPanjangKata nilai={panjangKata} onUbah={setPanjangKata} />
 
@@ -343,6 +345,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
             <>
               <p className="sub">Oper ke</p>
               <h1 className="nama-besar">{p.nama}</h1>
+              <p className="kategori-lobby">Kategori: {labelKategoriPasangan(game.pasangan.sumber)}</p>
               <p className="catatan">Jangan sampai terlihat pemain lain.</p>
               <button className="utama" onClick={() => setFase({ ...fase, terbuka: true })}>Lihat</button>
             </>
@@ -387,7 +390,7 @@ function LayarMain({ game, batas, setFase, onEliminasi, onTebak, onTebakHabis, o
           <Hitungan key={`vote-${fase.ronde}`} awalMs={batas.vote * 1000} totalMs={batas.vote * 1000} label="Waktu diskusi dan vote" bunyi />
         )}
         <div className="kartu">
-          <KepalaFase judul="Vote" ronde={fase.ronde} />
+          <KepalaFase judul="Vote" ronde={fase.ronde} kategori={labelKategoriPasangan(game.pasangan.sumber)} />
           <div className="pilih-pemain">
             {pemain.map((p, i) =>
               p.hidup ? (
@@ -548,7 +551,7 @@ function GiliranPetunjuk({ game, fase, detik, onGiliran, onVote, daftar }: {
         onSudahBicara={() => onGiliran(null)}
       />
       <div className="kartu">
-        <KepalaFase judul="Diskusi" ronde={fase.ronde} />
+        <KepalaFase judul="Diskusi" ronde={fase.ronde} kategori={labelKategoriPasangan(game.pasangan.sumber)} />
         {daftar}
       </div>
       <div className="aksi-bawah">

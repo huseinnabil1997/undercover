@@ -1,20 +1,26 @@
 'use client';
 
-// Halaman Masukan: kirim saran/feedback, upvote, urut vote/terbaru.
+// Halaman Masukan: kirim saran/feedback, upvote, balasan thread, urut vote/terbaru.
 import { useCallback, useEffect, useId, useState, type FormEvent } from 'react';
 import {
+  ambilBalasanMasukan,
   ambilMasukan,
+  hapusBalasanMasukan,
   KATEGORI_MASUKAN,
+  kirimBalasanMasukan,
   kirimMasukan,
   labelKategori,
   labelStatus,
+  MAKS_ISI_BALASAN,
   MAKS_ISI_MASUKAN,
   pesanMasukan,
   terapkanToggleVote,
   toggleVoteMasukan,
   URUT_MASUKAN,
   urutBarisMasukan,
+  validasiIsiBalasan,
   validasiIsiMasukan,
+  type BarisBalasan,
   type BarisMasukan,
   type KategoriMasukan,
   type UrutMasukan,
@@ -44,6 +50,7 @@ export function IsiMasukan({ akun }: { akun: { id: string; username: string } })
   const [kirim, setKirim] = useState(false);
   const [pesan, setPesan] = useState<string | null>(null);
   const [galatForm, setGalatForm] = useState<string | null>(null);
+  const [buka, setBuka] = useState<number | null>(null);
   const formId = useId();
 
   const muatUlang = useCallback(() => {
@@ -165,13 +172,127 @@ export function IsiMasukan({ akun }: { akun: { id: string; username: string } })
                 >
                   {b.saya_vote ? 'Batal upvote' : 'Upvote'} · {b.jumlah_vote}
                 </button>
+                <button
+                  type="button"
+                  className="kecil"
+                  aria-expanded={buka === b.id}
+                  onClick={() => setBuka((x) => (x === b.id ? null : b.id))}
+                >
+                  Balasan · {b.jumlah_balasan}
+                </button>
                 <time className="catatan nol" dateTime={b.dibuat}>{formatWaktu(b.dibuat)}</time>
               </div>
+              {buka === b.id && (
+                <ThreadBalasan
+                  masukan={b}
+                  akun={akun}
+                  onUbahJumlah={(n) => setData((lama) => Array.isArray(lama) ? lama.map((x) => x.id === b.id ? { ...x, jumlah_balasan: n } : x) : lama)}
+                />
+              )}
             </li>
           ))}
         </ul>
       )}
     </>
+  );
+}
+
+function ThreadBalasan({
+  masukan, akun, onUbahJumlah,
+}: {
+  masukan: BarisMasukan;
+  akun: { id: string; username: string };
+  onUbahJumlah: (n: number) => void;
+}) {
+  const lihat = useLihatProfil();
+  const [list, setList] = useState<BarisBalasan[] | 'galat' | null>(null);
+  const [teks, setTeks] = useState('');
+  const [kirim, setKirim] = useState(false);
+  const [galat, setGalat] = useState<string | null>(null);
+
+  const muat = useCallback(() => {
+    ambilBalasanMasukan(masukan.id).then(
+      (d) => { setList(d); onUbahJumlah(d.length); },
+      () => setList('galat'),
+    );
+  }, [masukan.id, onUbahJumlah]);
+
+  useEffect(() => {
+    let hidup = true;
+    ambilBalasanMasukan(masukan.id).then(
+      (d) => { if (hidup) { setList(d); onUbahJumlah(d.length); } },
+      () => { if (hidup) setList('galat'); },
+    );
+    return () => { hidup = false; };
+  }, [masukan.id, onUbahJumlah]);
+
+  async function onKirim(e: FormEvent) {
+    e.preventDefault();
+    const v = validasiIsiBalasan(teks);
+    if (v) { setGalat(v); return; }
+    setKirim(true);
+    setGalat(null);
+    try {
+      await kirimBalasanMasukan(masukan.id, teks);
+      setTeks('');
+      muat();
+    } catch (err) {
+      setGalat(pesanMasukan(err as { code?: string; message?: string }));
+    } finally {
+      setKirim(false);
+    }
+  }
+
+  async function onHapus(id: number) {
+    try {
+      await hapusBalasanMasukan(id);
+      muat();
+    } catch (err) {
+      setGalat(pesanMasukan(err as { code?: string; message?: string }));
+    }
+  }
+
+  const sisa = MAKS_ISI_BALASAN - [...teks].length;
+
+  return (
+    <div className="masukan-balasan">
+      {list === null && <p className="catatan nol" role="status">Memuat balasan...</p>}
+      {list === 'galat' && <p className="galat" role="alert">Gagal memuat balasan.</p>}
+      {Array.isArray(list) && list.length === 0 && <p className="catatan nol">Belum ada balasan.</p>}
+      {Array.isArray(list) && list.length > 0 && (
+        <ul className="daftar-balasan">
+          {list.map((b) => (
+            <li key={b.id}>
+              <div className="balasan-meta">
+                <button type="button" className="tautan" onClick={() => lihat(b.username)}>{b.username}</button>
+                {b.user_id === akun.id && <em className="label-kamu">(kamu)</em>}
+                <time className="catatan nol" dateTime={b.dibuat}>{formatWaktu(b.dibuat)}</time>
+                {b.user_id === akun.id && (
+                  <button type="button" className="kecil bahaya" onClick={() => void onHapus(b.id)}>Hapus</button>
+                )}
+              </div>
+              <p className="balasan-isi">{b.isi}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <form className="form-balasan" onSubmit={(e) => void onKirim(e)}>
+        <label className="dialog-label">
+          Tulis balasan
+          <textarea
+            className="dialog-input"
+            value={teks}
+            maxLength={MAKS_ISI_BALASAN}
+            rows={2}
+            placeholder="Balasan singkat..."
+            onChange={(e) => setTeks(e.target.value)}
+          />
+        </label>
+        <p className={`catatan nol${sisa < 40 ? ' galat' : ''}`}>{sisa} karakter tersisa · maks 20 balasan/hari</p>
+        {galat && <p className="galat" role="alert">{galat}</p>}
+        <button type="submit" className="kedua" disabled={kirim || !teks.trim()}>{kirim ? 'Mengirim...' : 'Kirim balasan'}</button>
+      </form>
+    </div>
   );
 }
 

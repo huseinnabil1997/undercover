@@ -158,6 +158,8 @@ export interface GameView {
   hidup: boolean;
   /** Kata milik pemain ini. null untuk Mr. White atau penonton. */
   kata: string | null;
+  /** Label kategori pasangan ronde ini (aman dibagikan ke semua pemain). */
+  kategoriKata: string;
   mrWhite: boolean;
   siap: string[];
   urutan: string[];
