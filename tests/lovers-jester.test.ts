@@ -166,7 +166,7 @@ describe('view online Lovers', () => {
   const now = 1000;
   const PASANGAN = { civilian: 'Kopi', undercover: 'Teh', sumber: 'Klasik' };
 
-  it('viewUntuk memberi namaLovers + idLovers hanya ke anggota pasangan; kata identik', () => {
+  it('viewUntuk memberi namaLovers hanya ke anggota pasangan; kata identik', () => {
     let s = buatStateHost('ABCDE', 'h', 'Host', {
       komposisi: { undercover: 2, mrWhite: 0, lovers: true },
       kategori: ['klasik'],
@@ -179,16 +179,13 @@ describe('view online Lovers', () => {
     const [a, b] = s.game!.lovers!;
     const va = viewUntuk(s, a, now);
     const vb = viewUntuk(s, b, now);
-    expect(va.game?.idLovers).toBe(b);
-    expect(vb.game?.idLovers).toBe(a);
     expect(va.game?.namaLovers).toBe(s.pemain.find((p) => p.id === b)!.nama);
     expect(vb.game?.namaLovers).toBe(s.pemain.find((p) => p.id === a)!.nama);
     expect(va.game?.kata).toBe(vb.game?.kata);
     expect(va.game?.kata).toBeTruthy();
-    // Pemain non-Lovers tidak mendapat nama/id pasangan.
+    // Pemain non-Lovers tidak mendapat nama pasangan.
     const lain = s.game!.peserta.find((id) => id !== a && id !== b)!;
     const vl = viewUntuk(s, lain, now);
     expect(vl.game?.namaLovers).toBeUndefined();
-    expect(vl.game?.idLovers).toBeUndefined();
   });
 });

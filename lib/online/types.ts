@@ -172,8 +172,6 @@ export interface GameView {
   jester: boolean;
   /** Nama pasangan Lovers (hanya untuk diri sendiri jika termasuk pasangan). */
   namaLovers?: string | null;
-  /** Id pasangan Lovers (hanya untuk diri sendiri; untuk indikator UI tanpa bocorkan ke pemain lain). */
-  idLovers?: string | null;
   siap: string[];
   urutan: string[];
   giliran: number;

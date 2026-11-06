@@ -20,7 +20,7 @@ import {
 } from '@/lib/online/sesi';
 import { SUARA_LEWATI, type Aksi, type AksiKhususHost, type AksiPemain, type GameView, type PemainView, type Pengaturan, type StateHost, type ViewPemain } from '@/lib/online/types';
 import {
-  AturPeran, BannerLovers, IkonPasanganLovers, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
+  AturPeran, BannerLovers, JUDUL_MENANG, KartuBalik, KepalaFase, Konfeti, NAMA_PERAN, PilihBatasWaktu, PilihKategori, PilihPanjangKata, PilihSumberKata, Tanda, TombolMenu, useDaftarKeluar, type Penjaga,
 } from './ui';
 import { Hitungan } from './Hitungan';
 import { batasTersimpan, rapikanBatasWaktu, TEKS_WAKTU_HABIS } from '@/lib/batasWaktu';
@@ -1235,12 +1235,6 @@ function DaftarPemain({ view, host, aksi, hexRoom, hadir: hadirProp }: { view: V
 
 type PropsFase = PropsRuang & { g: GameView };
 
-/** Badge kecil hanya untuk diri sendiri dan pasangan (namaLovers hanya ada di view Lovers). */
-function TandaLovers({ aktif }: { aktif?: boolean }) {
-  if (!aktif) return null;
-  return <span className="tanda-lovers" title="Pasangan Lovers" aria-label="Pasangan Lovers">💞</span>;
-}
-
 function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas?: boolean }) {
   const [lihat, setLihat] = useState(false);
   const saya = namaDari(view, view.saya);
@@ -1334,7 +1328,6 @@ function FaseKata({ view, g, host, aksi, hadir }: PropsFase) {
           {peserta.map((p) => (
             <li key={p.id} className={`chip-status ${g.siap.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.siap.includes(p.id) ? '✓ ' : ''}{p.nama}
-              <TandaLovers aktif={!!g.idLovers && (p.id === g.idLovers || p.id === view.saya)} />
             </li>
           ))}
         </ul>
@@ -1365,7 +1358,6 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
   const peta = usePetaGelar(view.pemain.map((x) => x.nama));
   return (
     <section className="tumpuk">
-      {g.namaLovers && <IkonPasanganLovers nama={g.namaLovers} />}
       {giliranId && (
         <WaktuOnline g={g} awalan="diskusi|" label={sayaGiliran ? 'Waktu petunjukmu' : `Waktu ${namaDari(view, giliranId)}`} bunyi={sayaGiliran} />
       )}
@@ -1410,7 +1402,6 @@ function Voting({ view, g, host, aksi, hadir }: PropsFase) {
   const bisaVote = g.ikut && g.hidup && g.kandidat.some((k) => k !== view.saya);
   return (
     <section className="tumpuk">
-      {g.namaLovers && <IkonPasanganLovers nama={g.namaLovers} />}
       <WaktuOnline g={g} awalan="vote|" label="Waktu vote" bunyi={bisaVote && !g.pilihanSaya} />
       <div className="kartu">
         <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} kategori={g.kategoriKata} />
@@ -1451,7 +1442,6 @@ function Voting({ view, g, host, aksi, hadir }: PropsFase) {
           {pemilih.map((p) => (
             <li key={p.id} className={`chip-status ${g.sudahVote.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.sudahVote.includes(p.id) ? '✓ ' : ''}{p.nama}
-              <TandaLovers aktif={!!g.idLovers && (p.id === g.idLovers || p.id === view.saya)} />
             </li>
           ))}
         </ul>

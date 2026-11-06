@@ -509,10 +509,8 @@ export function viewUntuk(state: StateHost, id: string, now = Date.now()): ViewP
   });
   const game = g ? gameView(g, id, now) : null;
   if (game && g) {
-    // idLovers diisi gameView; nama selalu diresolusi di sini agar UI mendapat username, bukan id peer.
-    if (game.idLovers) {
-      game.namaLovers = namaDari(state, game.idLovers);
-    } else if (game.namaLovers) {
+    // gameView mengisi namaLovers sementara dengan id pasangan; resolve ke username di sini.
+    if (game.namaLovers) {
       const nama = namaDari(state, game.namaLovers);
       if (nama !== '?') game.namaLovers = nama;
     }
@@ -536,12 +534,12 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
   const ikut = g.peserta.includes(id);
   const peran = ikut ? g.peran[id] : undefined;
   const kata = peran === 'civilian' ? g.pasangan.civilian : peran === 'undercover' ? g.pasangan.undercover : null;
-  let idLovers: string | null | undefined;
+  let namaLovers: string | undefined;
   if (ikut && g.lovers) {
     const [a, b] = g.lovers;
     if (id === a || id === b) {
-      // Hanya dikirim ke view pemain Lovers itu sendiri (bukan ke pemain lain).
-      idLovers = id === a ? b : a;
+      // Hanya ke view pemain Lovers itu sendiri; nilai sementara = id pasangan, di-resolve di viewUntuk.
+      namaLovers = id === a ? b : a;
     }
   }
   const v: GameView = {
@@ -553,7 +551,7 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
     kategoriKata: g.pasangan.sumber?.trim() || 'Kata pemain',
     mrWhite: peran === 'mrwhite',
     jester: peran === 'jester',
-    ...(idLovers !== undefined ? { idLovers, namaLovers: idLovers } : {}),
+    ...(namaLovers !== undefined ? { namaLovers } : {}),
     siap: g.siap,
     urutan: g.urutan,
     giliran: g.giliran,
