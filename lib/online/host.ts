@@ -481,8 +481,12 @@ export function viewUntuk(state: StateHost, id: string, now = Date.now()): ViewP
   });
   const game = g ? gameView(g, id, now) : null;
   if (game && g) {
-    if (game.namaLovers) {
-      game.namaLovers = namaDari(state, game.namaLovers) || game.namaLovers;
+    // idLovers diisi gameView; nama selalu diresolusi di sini agar UI mendapat username, bukan id peer.
+    if (game.idLovers) {
+      game.namaLovers = namaDari(state, game.idLovers);
+    } else if (game.namaLovers) {
+      const nama = namaDari(state, game.namaLovers);
+      if (nama !== '?') game.namaLovers = nama;
     }
     if (game.hasil && g.lovers) {
       game.hasil.lovers = [namaDari(state, g.lovers[0]), namaDari(state, g.lovers[1])];
@@ -504,13 +508,12 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
   const ikut = g.peserta.includes(id);
   const peran = ikut ? g.peran[id] : undefined;
   const kata = peran === 'civilian' ? g.pasangan.civilian : peran === 'undercover' ? g.pasangan.undercover : null;
-  let namaLovers: string | null | undefined;
+  let idLovers: string | null | undefined;
   if (ikut && g.lovers) {
     const [a, b] = g.lovers;
     if (id === a || id === b) {
-      const partnerId = id === a ? b : a;
-      // Nama dari peserta tidak ada di GameOnline; diisi di viewUntuk lewat state. Di sini pakai id singkat — diperbaiki di viewUntuk.
-      namaLovers = partnerId;
+      // Hanya dikirim ke view pemain Lovers itu sendiri (bukan ke pemain lain).
+      idLovers = id === a ? b : a;
     }
   }
   const v: GameView = {
@@ -522,7 +525,7 @@ function gameView(g: GameOnline, id: string, now: number): GameView {
     kategoriKata: g.pasangan.sumber?.trim() || 'Kata pemain',
     mrWhite: peran === 'mrwhite',
     jester: peran === 'jester',
-    ...(namaLovers !== undefined ? { namaLovers } : {}),
+    ...(idLovers !== undefined ? { idLovers, namaLovers: idLovers } : {}),
     siap: g.siap,
     urutan: g.urutan,
     giliran: g.giliran,

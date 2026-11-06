@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   bagiPeran, cekPemenang, eliminasiDenganLovers, loversMenangTambahan, validasiSetup,
 } from '../lib/game';
+import { buatStateHost, reduceHost, viewUntuk } from '../lib/online/host';
 import { menangDengan } from '../lib/akun';
 import { agregatMusim, top3Kategori, pilihGelarDefault, type BarisMain } from '../lib/peringkatMusim';
 import type { Pemain } from '../lib/types';
@@ -143,5 +144,36 @@ describe('peringkat musim lovers/jester', () => {
     ];
     const g = pilihGelarDefault(slot, '2026-11');
     expect(g?.kategori).toBe('civilian');
+  });
+});
+
+describe('view online Lovers', () => {
+  const now = 1000;
+  const PASANGAN = { civilian: 'Kopi', undercover: 'Teh', sumber: 'Klasik' };
+
+  it('viewUntuk memberi namaLovers + idLovers hanya ke anggota pasangan; kata identik', () => {
+    let s = buatStateHost('ABCDE', 'h', 'Host', {
+      komposisi: { undercover: 2, mrWhite: 0, lovers: true },
+      kategori: ['klasik'],
+    }, now);
+    for (const [id, nama] of [['p1', 'Budi'], ['p2', 'Caca'], ['p3', 'Dedi'], ['p4', 'Eka']] as const) {
+      s = reduceHost(s, { jenis: 'gabung', id, nama }, { now, rng: () => 0.5 }).state;
+    }
+    s = reduceHost(s, { jenis: 'mulai', dari: 'h', pasangan: PASANGAN }, { now, rng: () => 0.3 }).state;
+    expect(s.game?.lovers).toBeTruthy();
+    const [a, b] = s.game!.lovers!;
+    const va = viewUntuk(s, a, now);
+    const vb = viewUntuk(s, b, now);
+    expect(va.game?.idLovers).toBe(b);
+    expect(vb.game?.idLovers).toBe(a);
+    expect(va.game?.namaLovers).toBe(s.pemain.find((p) => p.id === b)!.nama);
+    expect(vb.game?.namaLovers).toBe(s.pemain.find((p) => p.id === a)!.nama);
+    expect(va.game?.kata).toBe(vb.game?.kata);
+    expect(va.game?.kata).toBeTruthy();
+    // Pemain non-Lovers tidak mendapat nama/id pasangan.
+    const lain = s.game!.peserta.find((id) => id !== a && id !== b)!;
+    const vl = viewUntuk(s, lain, now);
+    expect(vl.game?.namaLovers).toBeUndefined();
+    expect(vl.game?.idLovers).toBeUndefined();
   });
 });

@@ -135,7 +135,7 @@ export function AturPeran({ jumlah, komposisi, onUbah, onOtomatis, nonaktif }: {
       </div>
       <p className="catatan">Civilian harus lebih banyak dari Undercover + Mr. White. Jester/Lovers opsional (min 5 pemain; keduanya min 6).</p>
       <p className="catatan nol"><strong>Jester</strong>: tanpa kata. Menang jika divote; kalah jika bertahan sampai akhir. Bukan Civilian.</p>
-      <p className="catatan nol"><strong>Lovers</strong>: dua pemain peran sama (Civilian atau Undercover) dipasangkan diam-diam. Pasanganmu punya peran yang sama denganmu. Lindungi pasangan; jika satu mati, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</p>
+      <p className="catatan nol"><strong>Lovers</strong>: dua pemain peran sama (Civilian atau Undercover) dipasangkan diam-diam. Kamu diberi tahu siapa pasanganmu dan kalian punya kata yang sama. Lindungi pasangan; jika satu mati, pasangan ikut. Menang tambahan jika keduanya bertahan sampai akhir.</p>
     </div>
   );
 }

@@ -1188,6 +1188,24 @@ function DaftarPemain({ view, host, aksi, hexRoom, hadir: hadirProp }: { view: V
 
 type PropsFase = PropsRuang & { g: GameView };
 
+function teksLoversBersama(nama: string): string {
+  return `💞 Kamu Lovers bersama ${nama}. Kalian punya kata yang sama.`;
+}
+
+/** Badge kecil hanya untuk diri sendiri dan pasangan (namaLovers hanya ada di view Lovers). */
+function TandaLovers({ aktif }: { aktif?: boolean }) {
+  if (!aktif) return null;
+  return <span className="tanda-lovers" title="Pasangan Lovers" aria-label="Pasangan Lovers">💞</span>;
+}
+
+function BannerLovers({ nama }: { nama: string }) {
+  return (
+    <p className="banner-lovers" role="status">
+      {teksLoversBersama(nama)}
+    </p>
+  );
+}
+
 function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas?: boolean }) {
   const [lihat, setLihat] = useState(false);
   const saya = namaDari(view, view.saya);
@@ -1195,24 +1213,29 @@ function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas
   const catatanTanpaKata = g.jester
     ? 'Tanpa kata. Beri petunjuk sedikit mencurigakan agar divote, jangan terlalu jelas.'
     : 'Kamu tanpa kata. Berbaurlah.';
+  const lovers = g.namaLovers ? <BannerLovers nama={g.namaLovers} /> : null;
   const belakang = (
     <>
       <p className="sub">{saya}</p>
       {g.kata ? <h1 className="kata">{g.kata}</h1> : <h1 className="kata">{judulTanpaKata}</h1>}
       {!g.kata && <p className="catatan">{catatanTanpaKata}</p>}
+      {lovers}
       {g.namaLovers && (
-        <p className="catatan">
-          <strong>Lovers:</strong> pasanganmu {g.namaLovers} (peran sama denganmu). Lindungi dia; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.
-        </p>
+        <p className="catatan">Lindungi pasangan; giring vote ke pemain lain. Jika satu tereliminasi, pasangan ikut.</p>
       )}
       <button className="kedua" onClick={() => setLihat(false)}>Sembunyi</button>
     </>
   );
   if (ringkas) {
-    return lihat ? (
-      <div className="kartu besar rahasia muncul">{belakang}</div>
-    ) : (
-      <button className="kedua" onClick={() => setLihat(true)}>Intip</button>
+    return (
+      <>
+        {g.namaLovers && !lihat && lovers}
+        {lihat ? (
+          <div className="kartu besar rahasia muncul">{belakang}</div>
+        ) : (
+          <button className="kedua" onClick={() => setLihat(true)}>Intip</button>
+        )}
+      </>
     );
   }
   return (
@@ -1222,6 +1245,7 @@ function KataSaya({ view, g, ringkas }: { view: ViewPemain; g: GameView; ringkas
         <>
           <p className="sub">Ronde {g.ronde}</p>
           <h1 className="nama-besar">{saya}</h1>
+          {lovers}
           <p className="catatan">Jangan sampai terlihat orang lain.</p>
           <button className="utama" onClick={() => setLihat(true)}>Lihat</button>
         </>
@@ -1280,6 +1304,7 @@ function FaseKata({ view, g, host, aksi, hadir }: PropsFase) {
           {peserta.map((p) => (
             <li key={p.id} className={`chip-status ${g.siap.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.siap.includes(p.id) ? '✓ ' : ''}{p.nama}
+              <TandaLovers aktif={!!g.idLovers && (p.id === g.idLovers || p.id === view.saya)} />
             </li>
           ))}
         </ul>
@@ -1310,6 +1335,7 @@ function Diskusi({ view, g, host, aksi, galatPetunjuk, hapusGalatPetunjuk }: Pro
   const peta = usePetaGelar(view.pemain.map((x) => x.nama));
   return (
     <section className="tumpuk">
+      {g.namaLovers && <BannerLovers nama={g.namaLovers} />}
       {giliranId && (
         <WaktuOnline g={g} awalan="diskusi|" label={sayaGiliran ? 'Waktu petunjukmu' : `Waktu ${namaDari(view, giliranId)}`} bunyi={sayaGiliran} />
       )}
@@ -1354,6 +1380,7 @@ function Voting({ view, g, host, aksi, hadir }: PropsFase) {
   const bisaVote = g.ikut && g.hidup && g.kandidat.some((k) => k !== view.saya);
   return (
     <section className="tumpuk">
+      {g.namaLovers && <BannerLovers nama={g.namaLovers} />}
       <WaktuOnline g={g} awalan="vote|" label="Waktu vote" bunyi={bisaVote && !g.pilihanSaya} />
       <div className="kartu">
         <KepalaFase judul={g.putaranVote === 2 ? 'Vote ulang' : 'Vote'} ronde={g.ronde} kategori={g.kategoriKata} />
@@ -1394,6 +1421,7 @@ function Voting({ view, g, host, aksi, hadir }: PropsFase) {
           {pemilih.map((p) => (
             <li key={p.id} className={`chip-status ${g.sudahVote.includes(p.id) ? 'ok' : ''} ${offlineTampil(hadir, p) ? 'offline' : ''}`}>
               {g.sudahVote.includes(p.id) ? '✓ ' : ''}{p.nama}
+              <TandaLovers aktif={!!g.idLovers && (p.id === g.idLovers || p.id === view.saya)} />
             </li>
           ))}
         </ul>

@@ -1596,3 +1596,24 @@ button:active:not(:disabled) { transform: scale(0.97); }
   .daftar-room .item-room { padding: 11px 12px; }
   .room-host { font-size: 0.9rem; }
 }
+
+/* Lovers: banner pribadi + tanda kecil (hanya di view Lovers) */
+.banner-lovers {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, #ec4899 22%, transparent);
+  color: #f9a8d4;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+.tanda-lovers {
+  margin-left: 4px;
+  font-size: 0.85em;
+  vertical-align: 1px;
+}
+@media (max-width: 420px) {
+  .banner-lovers { font-size: 0.82rem; padding: 9px 10px; }
+}
